@@ -1,0 +1,279 @@
+begin class "lego_area_le015", "gs_lego_area"
+	property "launcherpickup"
+
+	begin method "lego_area_le015"
+		; address: 0xa3453
+		; source: 188 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_room.vbo" 27:27
+		MemberFunctionArgumentCheck 2
+		LineNumber                  7345, 4
+		LineNumberAlt1              27, 188
+		GetVariableValue            0              ; local
+		PushConstantStringString    "le01"
+		GetVariableValue            1              ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xa3472
+		; source: 188 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_room.vbo" 35:51
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    7353, 4
+		LineNumberAlt1                35, 188
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicLewaDrumAndBass"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7354, 4
+		LineNumberAlt1                36, 188
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7356, 4
+		LineNumberAlt1                38, 188
+		PushConstantStringString      "vlgr"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    7356, 4
+		LineNumberAlt1                38, 188
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    7356, 4
+		LineNumberAlt1                38, 188
+		SetVariableValue              1                                            ; local
+		LineNumber                    7357, 4
+		LineNumberAlt1                39, 188
+		GetVariableValue              1                                            ; local
+		CallGameFunctionString        "gccharacter", "setkapura", 1
+		Pop
+		LineNumber                    7358, 4
+		LineNumberAlt1                40, 188
+		PushConstanti8                7
+		CallGameFunctionString        "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                    7359, 4
+		LineNumberAlt1                41, 188
+		PushConstanti8                7
+		CallGameFunctionString        "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                    7360, 4
+		LineNumberAlt1                42, 188
+		PushConstanti32               -10381892
+		PushConstant0
+		PushConstantf32               5
+		Subtract
+		PushConstant0
+		PushConstantf32               600
+		Subtract
+		PushConstantf32               0.009999999776482582
+		CallGameFunctionString        "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                    7361, 4
+		LineNumberAlt1                43, 188
+		PushConstant0
+		CallGameFunctionString        "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		PushConstantStringString      "volu"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		SetVariableValue              2                                            ; local
+		LineNumber                    7364, 4
+		LineNumberAlt1                46, 188
+		GetVariableValue              2                                            ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    7365, 4
+		LineNumberAlt1                47, 188
+		CreateObjectString            "lego_pickup"
+		Dup
+		PushConstantStringString      "volu"
+		PushConstant0
+		PushConstanti8                5
+		PushConstantStringString      "item"
+		PushConstanti8                6
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "lego_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    7365, 4
+		LineNumberAlt1                47, 188
+		SetThisMemberValueString      "launcherpickup"
+		LineNumber                    7366, 4
+		LineNumberAlt1                48, 188
+		GetThisMemberValueString      "launcherpickup"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7367, 4
+		LineNumberAlt1                49, 188
+		GetThisMemberValueString      "launcherpickup"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7368, 4
+		LineNumberAlt1                50, 188
+		GetThisMemberValueString      "launcherpickup"
+		PushConstanti32               32768
+		Pull                          2
+		GetMemberFunctionString       "setcondition"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7369, 4
+		LineNumberAlt1                51, 188
+		GetThisMemberValueString      "launcherpickup"
+		PushConstanti8                2
+		Pull                          2
+		GetMemberFunctionString       "setquest"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xa361b
+		; source: 188 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_room.vbo" 57:59
+		MemberFunctionArgumentCheck   1
+		LineNumber                    7375, 4
+		LineNumberAlt1                57, 188
+		GetThisMemberValueString      "launcherpickup"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    7376, 4
+		LineNumberAlt1                58, 188
+		GetThisMemberValueString      "launcherpickup"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7377, 4
+		LineNumberAlt1                59, 188
+		PushNothing
+		SetThisMemberValueString      "launcherpickup"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xa3654
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xa3658
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xa365c
+		; source: 188 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_room.vbo" 76:83
+		MemberFunctionArgumentCheck   2
+		LineNumber                    7394, 4
+		LineNumberAlt1                76, 188
+		GetVariableValue              1                                        ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    7396, 4
+		LineNumberAlt1                78, 188
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                7
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7397, 4
+		LineNumberAlt1                79, 188
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    7399, 4
+		LineNumberAlt1                81, 188
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7400, 4
+		LineNumberAlt1                82, 188
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "enterstartid"
+		GetThisMemberValueString      "enterlookid"
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    7401, 4
+		LineNumberAlt1                83, 188
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xa370a
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+end ; class

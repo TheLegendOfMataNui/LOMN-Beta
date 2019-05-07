@@ -1,0 +1,255 @@
+begin class "legomp3player"
+	property "handle"
+
+	begin method "legomp3player"
+		; address: 0x30809
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 22:22
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2906, 4
+		LineNumberAlt1              22, 18
+		CallGameFunctionString      "gcgame", "getmp3player", 0
+		LineNumber                  2906, 4
+		LineNumberAlt1              22, 18
+		SetThisMemberValueString    "handle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setupforplay"
+		; address: 0x3082a
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 29:30
+		MemberFunctionArgumentCheck   2
+		LineNumber                    2913, 4
+		LineNumberAlt1                29, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2914, 4
+		LineNumberAlt1                30, 18
+		GetThisMemberValueString      "handle"
+		GetVariableValue              1                                ; local
+		CallGameFunctionString        "gcmp3player", "setupforplay", 2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfordestroy"
+		; address: 0x30858
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "play"
+		; address: 0x3085c
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 41:45
+		MemberFunctionArgumentCheck   2
+		LineNumber                    2925, 4
+		LineNumberAlt1                41, 18
+		GetVariableValue              1                        ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2926, 4
+		LineNumberAlt1                42, 18
+		PushConstanti8                1
+		SetVariableValue              1                        ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    2928, 4
+		LineNumberAlt1                44, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    2929, 4
+		LineNumberAlt1                45, 18
+		GetThisMemberValueString      "handle"
+		GetVariableValue              1                        ; local
+		CallGameFunctionString        "gcmp3player", "play", 2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "isplaying"
+		; address: 0x308ab
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 52:53
+		MemberFunctionArgumentCheck   1
+		LineNumber                    2936, 4
+		LineNumberAlt1                52, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2937, 4
+		LineNumberAlt1                53, 18
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gcmp3player", "isplaying", 1
+		LineNumber                    2937, 4
+		LineNumberAlt1                53, 18
+		Return
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "pause"
+		; address: 0x308e0
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 59:60
+		MemberFunctionArgumentCheck   1
+		LineNumber                    2943, 4
+		LineNumberAlt1                59, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2944, 4
+		LineNumberAlt1                60, 18
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gcmp3player", "pause", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stop"
+		; address: 0x3090b
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 66:67
+		MemberFunctionArgumentCheck   1
+		LineNumber                    2950, 4
+		LineNumberAlt1                66, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2951, 4
+		LineNumberAlt1                67, 18
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gcmp3player", "stop", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setvolume"
+		; address: 0x30936
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 74:75
+		MemberFunctionArgumentCheck   2
+		LineNumber                    2958, 4
+		LineNumberAlt1                74, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2959, 4
+		LineNumberAlt1                75, 18
+		GetThisMemberValueString      "handle"
+		GetVariableValue              1                             ; local
+		CallGameFunctionString        "gcmp3player", "setvolume", 2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setbalance"
+		; address: 0x30964
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 88:89
+		MemberFunctionArgumentCheck   2
+		LineNumber                    2972, 4
+		LineNumberAlt1                88, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2973, 4
+		LineNumberAlt1                89, 18
+		GetThisMemberValueString      "handle"
+		GetVariableValue              1                              ; local
+		CallGameFunctionString        "gcmp3player", "setbalance", 2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "changefilename"
+		; address: 0x30992
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 98:99
+		MemberFunctionArgumentCheck   2
+		LineNumber                    2982, 4
+		LineNumberAlt1                98, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2983, 4
+		LineNumberAlt1                99, 18
+		GetThisMemberValueString      "handle"
+		GetVariableValue              1                                  ; local
+		CallGameFunctionString        "gcmp3player", "changefilename", 2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x309c0
+		; source: 18 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_MP3Player.vbo" 105:107
+		MemberFunctionArgumentCheck   1
+		LineNumber                    2989, 4
+		LineNumberAlt1                105, 18
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2990, 4
+		LineNumberAlt1                106, 18
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gcmp3player", "stop", 1
+		Pop
+		LineNumber                    2991, 4
+		LineNumberAlt1                107, 18
+		PushNothing
+		SetThisMemberValueString      "handle"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,2054 @@
+begin class "element"
+	property "powerdrainrate"
+	property "elementname"
+	property "selectable"
+	property "funballspritepath"
+	property "setup"
+	property "active"
+	property "kboulder1"
+	property "kboulder2"
+	property "kboulder3"
+
+	begin method "element"
+		; address: 0x4bd05
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 363:369
+		MemberFunctionArgumentCheck 3
+		LineNumber                  24920, 4
+		LineNumberAlt1              363, 65
+		GetVariableValue            1                   ; local
+		SetThisMemberValueString    "elementname"
+		LineNumber                  24921, 4
+		LineNumberAlt1              364, 65
+		PushConstant0
+		SetThisMemberValueString    "active"
+		LineNumber                  24922, 4
+		LineNumberAlt1              365, 65
+		PushNothing
+		SetThisMemberValueString    "funballspritepath"
+		LineNumber                  24923, 4
+		LineNumberAlt1              366, 65
+		PushNothing
+		SetThisMemberValueString    "kboulder1"
+		LineNumber                  24924, 4
+		LineNumberAlt1              367, 65
+		PushNothing
+		SetThisMemberValueString    "kboulder2"
+		LineNumber                  24925, 4
+		LineNumberAlt1              368, 65
+		PushNothing
+		SetThisMemberValueString    "kboulder3"
+		LineNumber                  24926, 4
+		LineNumberAlt1              369, 65
+		GetVariableValue            0                   ; local
+		GetThisMemberFunctionString "setup"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x4bd72
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 373:390
+		MemberFunctionArgumentCheck   1
+		LineNumber                    24930, 4
+		LineNumberAlt1                373, 65
+		PushNothing
+		SetThisMemberValueString      "powerdrainrate"
+		LineNumber                    24931, 4
+		LineNumberAlt1                374, 65
+		PushNothing
+		SetThisMemberValueString      "elementname"
+		LineNumber                    24932, 4
+		LineNumberAlt1                375, 65
+		PushNothing
+		SetThisMemberValueString      "selectable"
+		LineNumber                    24933, 4
+		LineNumberAlt1                376, 65
+		PushNothing
+		SetThisMemberValueString      "funballspritepath"
+		LineNumber                    24935, 4
+		LineNumberAlt1                378, 65
+		PushNothing
+		SetThisMemberValueString      "setup"
+		LineNumber                    24936, 4
+		LineNumberAlt1                379, 65
+		PushNothing
+		SetThisMemberValueString      "active"
+		LineNumber                    24937, 4
+		LineNumberAlt1                380, 65
+		GetThisMemberValueString      "kboulder1"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24938, 4
+		LineNumberAlt1                381, 65
+		GetThisMemberValueString      "kboulder1"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    24939, 4
+		LineNumberAlt1                382, 65
+		PushNothing
+		SetThisMemberValueString      "kboulder1"
+		; <-
+		BranchTarget                  0
+		LineNumber                    24941, 4
+		LineNumberAlt1                384, 65
+		GetThisMemberValueString      "kboulder2"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24942, 4
+		LineNumberAlt1                385, 65
+		GetThisMemberValueString      "kboulder2"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    24943, 4
+		LineNumberAlt1                386, 65
+		PushNothing
+		SetThisMemberValueString      "kboulder2"
+		; <-
+		BranchTarget                  1
+		LineNumber                    24945, 4
+		LineNumberAlt1                388, 65
+		GetThisMemberValueString      "kboulder3"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24946, 4
+		LineNumberAlt1                389, 65
+		GetThisMemberValueString      "kboulder3"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    24947, 4
+		LineNumberAlt1                390, 65
+		PushNothing
+		SetThisMemberValueString      "kboulder3"
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setup"
+		; address: 0x4be69
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 399:530
+		MemberFunctionArgumentCheck   1
+		LineNumber                    24956, 4
+		LineNumberAlt1                399, 65
+		GetThisMemberValueString      "elementname"
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    24958, 4
+		LineNumberAlt1                401, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "charname"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24958, 4
+		LineNumberAlt1                401, 65
+		Dup
+		PushConstantStringString      "onua"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24960, 4
+		LineNumberAlt1                403, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24962, 4
+		LineNumberAlt1                405, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    24963, 4
+		LineNumberAlt1                406, 65
+		PushConstantStringString      "Root/data/Art/hud/elemrotate/genhfbonua"
+		SetThisMemberValueString      "funballspritepath"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstantStringString      "gali"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24965, 4
+		LineNumberAlt1                408, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24966, 4
+		LineNumberAlt1                409, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    24967, 4
+		LineNumberAlt1                410, 65
+		PushConstantStringString      "Root/data/Art/hud/elemrotate/genhfbonua"
+		SetThisMemberValueString      "funballspritepath"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstantStringString      "poha"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24969, 4
+		LineNumberAlt1                412, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24970, 4
+		LineNumberAlt1                413, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    24971, 4
+		LineNumberAlt1                414, 65
+		PushConstantStringString      "Root/data/Art/hud/elemrotate/genhfbpohatu"
+		SetThisMemberValueString      "funballspritepath"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstantStringString      "kopa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24973, 4
+		LineNumberAlt1                416, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    24974, 4
+		LineNumberAlt1                417, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    24975, 4
+		LineNumberAlt1                418, 65
+		PushConstantStringString      "Root/data/Art/hud/elemrotate/genhfbkopaka"
+		SetThisMemberValueString      "funballspritepath"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstantStringString      "lewa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24977, 4
+		LineNumberAlt1                420, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    24978, 4
+		LineNumberAlt1                421, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    24979, 4
+		LineNumberAlt1                422, 65
+		PushConstantStringString      "Root/data/Art/hud/elemrotate/genhfbonua"
+		SetThisMemberValueString      "funballspritepath"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstantStringString      "tahu"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24981, 4
+		LineNumberAlt1                424, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    24982, 4
+		LineNumberAlt1                425, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    24983, 4
+		LineNumberAlt1                426, 65
+		PushConstantStringString      "Root/data/Art/hud/elemrotate/genhfbtahu"
+		SetThisMemberValueString      "funballspritepath"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Dup
+		PushConstantStringString      "akam"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24985, 4
+		LineNumberAlt1                428, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    24986, 4
+		LineNumberAlt1                429, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    24987, 4
+		LineNumberAlt1                430, 65
+		PushConstantStringString      "Root/data/Art/hud/elemrotate/genhfbtahu"
+		SetThisMemberValueString      "funballspritepath"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstantStringString      "wair"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24989, 4
+		LineNumberAlt1                432, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    24990, 4
+		LineNumberAlt1                433, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    24991, 4
+		LineNumberAlt1                434, 65
+		PushConstantStringString      "Root/data/Art/hud/elemrotate/genhfbgali"
+		SetThisMemberValueString      "funballspritepath"
+		; <-
+		BranchTarget                  7
+		Pop
+		LineNumber                    24994, 4
+		LineNumberAlt1                437, 65
+		PushConstant0
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    24999, 4
+		LineNumberAlt1                442, 65
+		PushConstanti8                5
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		Dup
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    25002, 4
+		LineNumberAlt1                445, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    25003, 4
+		LineNumberAlt1                446, 65
+		PushConstanti8                5
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 11, 0
+		; ->
+		LineNumber                    25006, 4
+		LineNumberAlt1                449, 65
+		PushConstanti8                60
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  11
+		Dup
+		PushConstanti8                5
+		EqualTo
+		CompareAndBranchIfFalseTarget 12, 0
+		; ->
+		LineNumber                    25010, 4
+		LineNumberAlt1                453, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    25011, 4
+		LineNumberAlt1                454, 65
+		PushConstanti8                2
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  12
+		Dup
+		PushConstanti8                6
+		EqualTo
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    25014, 4
+		LineNumberAlt1                457, 65
+		PushConstanti8                5
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  13
+		Dup
+		PushConstanti8                7
+		EqualTo
+		CompareAndBranchIfFalseTarget 14, 0
+		; ->
+		LineNumber                    25017, 4
+		LineNumberAlt1                460, 65
+		PushConstanti8                60
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  14
+		Dup
+		PushConstanti8                8
+		EqualTo
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    25022, 4
+		LineNumberAlt1                465, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    25023, 4
+		LineNumberAlt1                466, 65
+		PushConstanti8                1
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  15
+		Dup
+		PushConstanti8                9
+		EqualTo
+		CompareAndBranchIfFalseTarget 16, 0
+		; ->
+		LineNumber                    25026, 4
+		LineNumberAlt1                469, 65
+		PushConstanti8                2
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  16
+		Dup
+		PushConstanti8                10
+		EqualTo
+		CompareAndBranchIfFalseTarget 17, 0
+		; ->
+		LineNumber                    25029, 4
+		LineNumberAlt1                472, 65
+		CreateObjectString            "lego_projectileobject"
+		Dup
+		PushConstantStringString      "abld"
+		PushConstantStringString      "valv"
+		Pull                          3
+		GetMemberFunctionString       "lego_projectileobject"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    25029, 4
+		LineNumberAlt1                472, 65
+		SetThisMemberValueString      "kboulder1"
+		LineNumber                    25030, 4
+		LineNumberAlt1                473, 65
+		CreateObjectString            "lego_projectileobject"
+		Dup
+		PushConstantStringString      "bbld"
+		PushConstantStringString      "valv"
+		Pull                          3
+		GetMemberFunctionString       "lego_projectileobject"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    25030, 4
+		LineNumberAlt1                473, 65
+		SetThisMemberValueString      "kboulder2"
+		LineNumber                    25031, 4
+		LineNumberAlt1                474, 65
+		CreateObjectString            "lego_projectileobject"
+		Dup
+		PushConstantStringString      "cbld"
+		PushConstantStringString      "valv"
+		Pull                          3
+		GetMemberFunctionString       "lego_projectileobject"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    25031, 4
+		LineNumberAlt1                474, 65
+		SetThisMemberValueString      "kboulder3"
+		LineNumber                    25032, 4
+		LineNumberAlt1                475, 65
+		GetThisMemberValueString      "kboulder1"
+		PushConstantf32               0.5
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstantf32               1.2999999523162842
+		PushConstantStringString      "pbld"
+		PushConstantStringString      "Root/data/characters/poha"
+		PushConstanti8                60
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstantf32               0.5
+		PushConstantf32               0.5
+		PushConstantf32               0.5
+		PushConstanti16               1024
+		Pull                          17
+		GetMemberFunctionString       "init"
+		JumpAbsolute                  17
+		Pop
+		LineNumber                    25033, 4
+		LineNumberAlt1                476, 65
+		GetThisMemberValueString      "kboulder2"
+		PushConstantf32               0.5
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstantf32               1.2999999523162842
+		PushConstantStringString      "pbld"
+		PushConstantStringString      "Root/data/characters/poha"
+		PushConstanti8                60
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstantf32               0.5
+		PushConstantf32               0.5
+		PushConstantf32               0.5
+		PushConstanti16               1024
+		Pull                          17
+		GetMemberFunctionString       "init"
+		JumpAbsolute                  17
+		Pop
+		LineNumber                    25034, 4
+		LineNumberAlt1                477, 65
+		GetThisMemberValueString      "kboulder3"
+		PushConstantf32               0.5
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstantf32               1.2999999523162842
+		PushConstantStringString      "pbld"
+		PushConstantStringString      "Root/data/characters/poha"
+		PushConstanti8                60
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstant0
+		PushConstantf32               0.5
+		Subtract
+		PushConstantf32               0.5
+		PushConstantf32               0.5
+		PushConstantf32               0.5
+		PushConstanti16               1024
+		Pull                          17
+		GetMemberFunctionString       "init"
+		JumpAbsolute                  17
+		Pop
+		LineNumber                    25035, 4
+		LineNumberAlt1                478, 65
+		GetThisMemberValueString      "kboulder1"
+		PushConstanti8                6
+		PushConstant0
+		PushConstanti8                6
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    25036, 4
+		LineNumberAlt1                479, 65
+		GetThisMemberValueString      "kboulder2"
+		PushConstanti8                6
+		PushConstant0
+		PushConstanti8                6
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    25037, 4
+		LineNumberAlt1                480, 65
+		GetThisMemberValueString      "kboulder3"
+		PushConstanti8                6
+		PushConstant0
+		PushConstanti8                6
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    25038, 4
+		LineNumberAlt1                481, 65
+		GetThisMemberValueString      "kboulder1"
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "setposition"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    25039, 4
+		LineNumberAlt1                482, 65
+		GetThisMemberValueString      "kboulder2"
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "setposition"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    25040, 4
+		LineNumberAlt1                483, 65
+		GetThisMemberValueString      "kboulder3"
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "setposition"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    25041, 4
+		LineNumberAlt1                484, 65
+		GetThisMemberValueString      "kboulder1"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    25042, 4
+		LineNumberAlt1                485, 65
+		GetThisMemberValueString      "kboulder2"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    25043, 4
+		LineNumberAlt1                486, 65
+		GetThisMemberValueString      "kboulder3"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    25044, 4
+		LineNumberAlt1                487, 65
+		GetThisMemberValueString      "kboulder1"
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    25045, 4
+		LineNumberAlt1                488, 65
+		GetThisMemberValueString      "kboulder2"
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    25046, 4
+		LineNumberAlt1                489, 65
+		GetThisMemberValueString      "kboulder3"
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    25048, 4
+		LineNumberAlt1                491, 65
+		PushConstanti8                60
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  17
+		Dup
+		PushConstanti8                11
+		EqualTo
+		CompareAndBranchIfFalseTarget 18, 0
+		; ->
+		LineNumber                    25053, 4
+		LineNumberAlt1                496, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    25054, 4
+		LineNumberAlt1                497, 65
+		PushConstanti8                2
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  18
+		Dup
+		PushConstanti8                12
+		EqualTo
+		CompareAndBranchIfFalseTarget 19, 0
+		; ->
+		LineNumber                    25057, 4
+		LineNumberAlt1                500, 65
+		PushConstanti8                2
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  19
+		Dup
+		PushConstanti8                13
+		EqualTo
+		CompareAndBranchIfFalseTarget 20, 0
+		; ->
+		LineNumber                    25060, 4
+		LineNumberAlt1                503, 65
+		PushConstanti8                60
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  20
+		Dup
+		PushConstanti8                14
+		EqualTo
+		CompareAndBranchIfFalseTarget 21, 0
+		; ->
+		LineNumber                    25065, 4
+		LineNumberAlt1                508, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    25066, 4
+		LineNumberAlt1                509, 65
+		PushConstanti8                2
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  21
+		Dup
+		PushConstanti8                15
+		EqualTo
+		CompareAndBranchIfFalseTarget 22, 0
+		; ->
+		LineNumber                    25069, 4
+		LineNumberAlt1                512, 65
+		PushConstanti8                2
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  22
+		Dup
+		PushConstanti8                16
+		EqualTo
+		CompareAndBranchIfFalseTarget 23, 0
+		; ->
+		LineNumber                    25072, 4
+		LineNumberAlt1                515, 65
+		PushConstanti8                60
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  23
+		Dup
+		PushConstanti8                17
+		EqualTo
+		CompareAndBranchIfFalseTarget 24, 0
+		; ->
+		LineNumber                    25077, 4
+		LineNumberAlt1                520, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               50
+		PushConstantf32               1
+		PushConstantf32               4
+		PushConstantf32               0
+		PushConstanti8                22
+		Pull                          6
+		GetMemberFunctionString       "setupelementalpower"
+		JumpAbsolute                  6
+		Pop
+		LineNumber                    25078, 4
+		LineNumberAlt1                521, 65
+		PushConstanti8                2
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  24
+		Dup
+		PushConstanti8                18
+		EqualTo
+		CompareAndBranchIfFalseTarget 25, 0
+		; ->
+		LineNumber                    25081, 4
+		LineNumberAlt1                524, 65
+		PushConstanti8                5
+		SetThisMemberValueString      "powerdrainrate"
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  25
+		Dup
+		PushConstanti8                19
+		EqualTo
+		CompareAndBranchIfFalseTarget 26, 0
+		; ->
+		LineNumber                    25084, 4
+		LineNumberAlt1                527, 65
+		PushConstanti8                60
+		SetThisMemberValueString      "powerdrainrate"
+		; <-
+		BranchTarget                  26
+		Pop
+		LineNumber                    25087, 4
+		LineNumberAlt1                530, 65
+		PushConstanti8                1
+		SetThisMemberValueString      "setup"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x4c70a
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 537:636
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    25094, 4
+		LineNumberAlt1                537, 65
+		PushConstanti8                1
+		SetVariableValue              1                                            ; local
+		LineNumber                    25096, 4
+		LineNumberAlt1                539, 65
+		GetThisMemberValueString      "elementname"
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    25099, 4
+		LineNumberAlt1                542, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "charname"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25099, 4
+		LineNumberAlt1                542, 65
+		Dup
+		PushConstantStringString      "onua"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25101, 4
+		LineNumberAlt1                544, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    25102, 4
+		LineNumberAlt1                545, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbonua"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25102, 4
+		LineNumberAlt1                545, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstantStringString      "gali"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25104, 4
+		LineNumberAlt1                547, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    25105, 4
+		LineNumberAlt1                548, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbgali"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25105, 4
+		LineNumberAlt1                548, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstantStringString      "poha"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25107, 4
+		LineNumberAlt1                550, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    25108, 4
+		LineNumberAlt1                551, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbpohatu"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25108, 4
+		LineNumberAlt1                551, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstantStringString      "kopa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25110, 4
+		LineNumberAlt1                553, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    25111, 4
+		LineNumberAlt1                554, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbkopaka"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25111, 4
+		LineNumberAlt1                554, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstantStringString      "lewa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25113, 4
+		LineNumberAlt1                556, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    25114, 4
+		LineNumberAlt1                557, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbonua"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25114, 4
+		LineNumberAlt1                557, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstantStringString      "tahu"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25116, 4
+		LineNumberAlt1                559, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    25117, 4
+		LineNumberAlt1                560, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbtahu"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25117, 4
+		LineNumberAlt1                560, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Dup
+		PushConstantStringString      "akam"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25119, 4
+		LineNumberAlt1                562, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    25120, 4
+		LineNumberAlt1                563, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbtahu"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25120, 4
+		LineNumberAlt1                563, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstantStringString      "wair"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    25122, 4
+		LineNumberAlt1                565, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    25123, 4
+		LineNumberAlt1                566, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbgali"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25123, 4
+		LineNumberAlt1                566, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  7
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		Dup
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    25132, 4
+		LineNumberAlt1                575, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpybllonua"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25132, 4
+		LineNumberAlt1                575, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    25135, 4
+		LineNumberAlt1                578, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/shldonua"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25135, 4
+		LineNumberAlt1                578, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 11, 0
+		; ->
+		LineNumber                    25138, 4
+		LineNumberAlt1                581, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/erthqk"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25138, 4
+		LineNumberAlt1                581, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  11
+		Dup
+		PushConstanti8                5
+		EqualTo
+		CompareAndBranchIfFalseTarget 12, 0
+		; ->
+		LineNumber                    25142, 4
+		LineNumberAlt1                585, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpybllgali"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25142, 4
+		LineNumberAlt1                585, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  12
+		Dup
+		PushConstanti8                6
+		EqualTo
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    25145, 4
+		LineNumberAlt1                588, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/shldgali"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25145, 4
+		LineNumberAlt1                588, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  13
+		Dup
+		PushConstanti8                7
+		EqualTo
+		CompareAndBranchIfFalseTarget 14, 0
+		; ->
+		LineNumber                    25148, 4
+		LineNumberAlt1                591, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/typhoon"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25148, 4
+		LineNumberAlt1                591, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  14
+		Dup
+		PushConstanti8                8
+		EqualTo
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    25154, 4
+		LineNumberAlt1                597, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hppybllpohatu"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25154, 4
+		LineNumberAlt1                597, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  15
+		Dup
+		PushConstanti8                9
+		EqualTo
+		CompareAndBranchIfFalseTarget 16, 0
+		; ->
+		LineNumber                    25157, 4
+		LineNumberAlt1                600, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/shldpohatu"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25157, 4
+		LineNumberAlt1                600, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  16
+		Dup
+		PushConstanti8                10
+		EqualTo
+		CompareAndBranchIfFalseTarget 17, 0
+		; ->
+		LineNumber                    25160, 4
+		LineNumberAlt1                603, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/stonerain"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25160, 4
+		LineNumberAlt1                603, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  17
+		Dup
+		PushConstanti8                11
+		EqualTo
+		CompareAndBranchIfFalseTarget 18, 0
+		; ->
+		LineNumber                    25165, 4
+		LineNumberAlt1                608, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hppybllkopaka"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25165, 4
+		LineNumberAlt1                608, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  18
+		Dup
+		PushConstanti8                12
+		EqualTo
+		CompareAndBranchIfFalseTarget 19, 0
+		; ->
+		LineNumber                    25168, 4
+		LineNumberAlt1                611, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/shldkopaka"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25168, 4
+		LineNumberAlt1                611, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  19
+		Dup
+		PushConstanti8                13
+		EqualTo
+		CompareAndBranchIfFalseTarget 20, 0
+		; ->
+		LineNumber                    25171, 4
+		LineNumberAlt1                614, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hailstorm"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25171, 4
+		LineNumberAlt1                614, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  20
+		Dup
+		PushConstanti8                14
+		EqualTo
+		CompareAndBranchIfFalseTarget 21, 0
+		; ->
+		LineNumber                    25176, 4
+		LineNumberAlt1                619, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hppyblllewa"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25176, 4
+		LineNumberAlt1                619, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  21
+		Dup
+		PushConstanti8                15
+		EqualTo
+		CompareAndBranchIfFalseTarget 22, 0
+		; ->
+		LineNumber                    25179, 4
+		LineNumberAlt1                622, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/shldonua"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25179, 4
+		LineNumberAlt1                622, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  22
+		Dup
+		PushConstanti8                16
+		EqualTo
+		CompareAndBranchIfFalseTarget 23, 0
+		; ->
+		LineNumber                    25182, 4
+		LineNumberAlt1                625, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/windlewa"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25182, 4
+		LineNumberAlt1                625, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  23
+		Dup
+		PushConstanti8                17
+		EqualTo
+		CompareAndBranchIfFalseTarget 24, 0
+		; ->
+		LineNumber                    25187, 4
+		LineNumberAlt1                630, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hppyblltahu"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25187, 4
+		LineNumberAlt1                630, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  24
+		Dup
+		PushConstanti8                18
+		EqualTo
+		CompareAndBranchIfFalseTarget 25, 0
+		; ->
+		LineNumber                    25190, 4
+		LineNumberAlt1                633, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/shldtahu"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25190, 4
+		LineNumberAlt1                633, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  25
+		Dup
+		PushConstanti8                19
+		EqualTo
+		CompareAndBranchIfFalseTarget 26, 0
+		; ->
+		LineNumber                    25193, 4
+		LineNumberAlt1                636, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		CreateObjectString            "gs_lego_animatesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/elemrotate/brimstone"
+		PushConstant0
+		PushConstanti8                23
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_lego_animatesprite"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    25193, 4
+		LineNumberAlt1                636, 65
+		Pull                          2
+		GetMemberFunctionString       "addelement"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  26
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "activate"
+		; address: 0x4cf4a
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 647:650
+		MemberFunctionArgumentCheck   1
+		LineNumber                    25204, 4
+		LineNumberAlt1                647, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "toahandle"
+		CallGameFunctionString        "gctoa", "glyphdone", 1
+		LineNumber                    25204, 4
+		LineNumberAlt1                647, 65
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    25205, 4
+		LineNumberAlt1                648, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "energy"
+		GetThisMemberValueString      "powerdrainrate"
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    25206, 4
+		LineNumberAlt1                649, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetThisMemberValueString      "powerdrainrate"
+		Pull                          2
+		GetMemberFunctionString       "removeenergy"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    25207, 4
+		LineNumberAlt1                650, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "toahandle"
+		CallGameFunctionString        "gctoa", "startglyph", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "deactivate"
+		; address: 0x4cfcc
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 957:961
+		MemberFunctionArgumentCheck   1
+		LineNumber                    25514, 4
+		LineNumberAlt1                957, 65
+		GetThisMemberValueString      "active"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    25515, 4
+		LineNumberAlt1                958, 65
+		PushConstanti16               1083
+		CallGameFunctionString        "gcstaticsoundsptrarray", "stoptablesound", 1
+		Pop
+		LineNumber                    25516, 4
+		LineNumberAlt1                959, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		Dup
+		GetMemberFunctionString       "deactivateshield"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    25518, 4
+		LineNumberAlt1                961, 65
+		PushConstant0
+		SetThisMemberValueString      "active"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setselectable"
+		; address: 0x4d01f
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 968:968
+		MemberFunctionArgumentCheck 2
+		LineNumber                  25525, 4
+		LineNumberAlt1              968, 65
+		GetVariableValue            1            ; local
+		SetThisMemberValueString    "selectable"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "isactive"
+		; address: 0x4d033
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 976:976
+		MemberFunctionArgumentCheck 1
+		LineNumber                  25533, 4
+		LineNumberAlt1              976, 65
+		GetThisMemberValueString    "active"
+		Return
+	end ; method
+
+	begin method "isselectable"
+		; address: 0x4d043
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 985:985
+		MemberFunctionArgumentCheck 1
+		LineNumber                  25542, 4
+		LineNumberAlt1              985, 65
+		GetThisMemberValueString    "selectable"
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x4d053
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+end ; class

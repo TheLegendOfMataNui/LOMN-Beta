@@ -1,0 +1,78 @@
+begin class "scriptevent"
+	property "eventid"
+	property "args"
+
+	begin method "scriptevent"
+		; address: 0x54aaf
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 863:872
+		MemberFunctionArgumentCheck   3
+		LineNumber                    29498, 4
+		LineNumberAlt1                863, 48
+		GetVariableValue              1         ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    29499, 4
+		LineNumberAlt1                864, 48
+		PushConstanti8                -1
+		SetThisMemberValueString      "eventid"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    29501, 4
+		LineNumberAlt1                866, 48
+		GetVariableValue              1         ; local
+		SetThisMemberValueString      "eventid"
+		; <-
+		BranchTarget                  1
+		LineNumber                    29504, 4
+		LineNumberAlt1                869, 48
+		GetVariableValue              2         ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29505, 4
+		LineNumberAlt1                870, 48
+		CreateArray
+		SetThisMemberValueString      "args"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    29507, 4
+		LineNumberAlt1                872, 48
+		GetVariableValue              2         ; local
+		SetThisMemberValueString      "args"
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "send"
+		; address: 0x54b1a
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 883:884
+		MemberFunctionArgumentCheck  1
+		LineNumber                   29518, 4
+		LineNumberAlt1               883, 48
+		GetVariableValueGlobalString "globalclass"
+		GetVariableValue             0             ; local
+		Pull                         2
+		GetMemberFunctionString      "onevent"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   29519, 4
+		LineNumberAlt1               884, 48
+		GetVariableValueGlobalString "screenlist"
+		GetVariableValue             0             ; local
+		Pull                         2
+		GetMemberFunctionString      "onevent"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

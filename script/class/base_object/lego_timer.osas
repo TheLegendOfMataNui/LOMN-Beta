@@ -1,0 +1,236 @@
+begin class "lego_timer", "base_object"
+	property "handle"
+	property "id"
+	property "duration"
+	property "startnow"
+
+	begin method "lego_timer"
+		; address: 0x4b267
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 23:25
+		MemberFunctionArgumentCheck 4
+		LineNumber                  24026, 4
+		LineNumberAlt1              23, 64
+		GetVariableValue            1                                            ; local
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  24026, 4
+		LineNumberAlt1              23, 64
+		SetThisMemberValueString    "id"
+		LineNumber                  24027, 4
+		LineNumberAlt1              24, 64
+		GetVariableValue            3                                            ; local
+		SetThisMemberValueString    "startnow"
+		LineNumber                  24028, 4
+		LineNumberAlt1              25, 64
+		GetVariableValue            2                                            ; local
+		SetThisMemberValueString    "duration"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x4b2ab
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 31:36
+		MemberFunctionArgumentCheck   1
+		LineNumber                    24034, 4
+		LineNumberAlt1                31, 64
+		GetThisMemberValueString      "startnow"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24035, 4
+		LineNumberAlt1                32, 64
+		PushConstant0
+		SetThisMemberValueString      "startnow"
+		; <-
+		BranchTarget                  0
+		LineNumber                    24037, 4
+		LineNumberAlt1                34, 64
+		GetThisMemberValueString      "id"
+		GetThisMemberValueString      "startnow"
+		GetThisMemberValueString      "duration"
+		CallGameFunctionString        "gctimer", "create", 3
+		LineNumber                    24037, 4
+		LineNumberAlt1                34, 64
+		SetThisMemberValueString      "handle"
+		LineNumber                    24038, 4
+		LineNumberAlt1                35, 64
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24039, 4
+		LineNumberAlt1                36, 64
+		PushConstantStringString      "Tried to create a timer "
+		GetThisMemberValueString      "id"
+		CallGameFunctionString        "scslosifoundation", "identifiertostring", 1
+		LineNumber                    24039, 4
+		LineNumberAlt1                36, 64
+		Add
+		PushConstantStringString      " and it didn't work!!!!"
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x4b333
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 42:43
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24045, 4
+		LineNumberAlt1              42, 64
+		GetVariableValue            0        ; local
+		GetThisMemberFunctionString "stop"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  24046, 4
+		LineNumberAlt1              43, 64
+		PushNothing
+		SetThisMemberValueString    "handle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "start"
+		; address: 0x4b358
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 48:48
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24051, 4
+		LineNumberAlt1              48, 64
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gctimer", "start", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stop"
+		; address: 0x4b370
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 53:53
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24056, 4
+		LineNumberAlt1              53, 64
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gctimer", "stop", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "reset"
+		; address: 0x4b388
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 60:66
+		MemberFunctionArgumentCheck   2
+		LineNumber                    24063, 4
+		LineNumberAlt1                60, 64
+		GetVariableValue              1                     ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24064, 4
+		LineNumberAlt1                61, 64
+		PushConstant0
+		SetThisMemberValueString      "startnow"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    24066, 4
+		LineNumberAlt1                63, 64
+		GetVariableValue              1                     ; local
+		SetThisMemberValueString      "startnow"
+		; <-
+		BranchTarget                  1
+		LineNumber                    24069, 4
+		LineNumberAlt1                66, 64
+		GetThisMemberValueString      "handle"
+		GetThisMemberValueString      "startnow"
+		CallGameFunctionString        "gctimer", "reset", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "deactivate"
+		; address: 0x4b3d6
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 71:71
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24074, 4
+		LineNumberAlt1              71, 64
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gctimer", "deactivate", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setduration"
+		; address: 0x4b3ee
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 76:77
+		MemberFunctionArgumentCheck 2
+		LineNumber                  24079, 4
+		LineNumberAlt1              76, 64
+		GetVariableValue            1                             ; local
+		SetThisMemberValueString    "duration"
+		LineNumber                  24080, 4
+		LineNumberAlt1              77, 64
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                             ; local
+		CallGameFunctionString      "gctimer", "settargettime", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getduration"
+		; address: 0x4b419
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 82:82
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24085, 4
+		LineNumberAlt1              82, 64
+		GetThisMemberValueString    "duration"
+		Return
+	end ; method
+
+	begin method "durationpeek"
+		; address: 0x4b429
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 87:87
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24090, 4
+		LineNumberAlt1              87, 64
+		CallGameFunctionString      "gctimer", "durationpeek", 0
+		LineNumber                  24090, 4
+		LineNumberAlt1              87, 64
+		Return
+	end ; method
+
+	begin method "durationlast"
+		; address: 0x4b446
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 92:92
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24095, 4
+		LineNumberAlt1              92, 64
+		CallGameFunctionString      "gctimer", "durationpeek", 0
+		LineNumber                  24095, 4
+		LineNumberAlt1              92, 64
+		Return
+	end ; method
+
+	begin method "durationaverage"
+		; address: 0x4b463
+		; source: 64 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_timer.vbo" 97:97
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24100, 4
+		LineNumberAlt1              97, 64
+		CallGameFunctionString      "gctimer", "durationaverage", 0
+		LineNumber                  24100, 4
+		LineNumberAlt1              97, 64
+		Return
+	end ; method
+end ; class

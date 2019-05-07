@@ -1,0 +1,167 @@
+begin class "lego_area_snbd4", "gs_lego_area"
+	property "puzzle"
+	property "parent"
+
+	begin method "lego_area_snbd4"
+		; address: 0x9b0ee
+		; source: 178 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_snfl.vbo" 26:29
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3735, 4
+		LineNumberAlt1              26, 178
+		GetVariableValue            1                    ; local
+		SetThisMemberValueString    "parent"
+		LineNumber                  3736, 4
+		LineNumberAlt1              27, 178
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "snbd"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  3737, 4
+		LineNumberAlt1              28, 178
+		CreateObjectString          "snbd_puzzle"
+		Dup
+		GetVariableValue            0                    ; local
+		Pull                        2
+		GetMemberFunctionString     "snbd_puzzle"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  3737, 4
+		LineNumberAlt1              28, 178
+		SetThisMemberValueString    "puzzle"
+		LineNumber                  3738, 4
+		LineNumberAlt1              29, 178
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x9b156
+		; source: 178 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_snfl.vbo" 38:44
+		MemberFunctionArgumentCheck  1
+		LineNumber                   3747, 4
+		LineNumberAlt1               38, 178
+		GetVariableValue             0                                        ; local
+		GetThisMemberFunctionString  "lego_area_show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   3749, 4
+		LineNumberAlt1               40, 178
+		GetThisMemberValueString     "puzzle"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   3750, 4
+		LineNumberAlt1               41, 178
+		GetThisMemberValueString     "puzzle"
+		Dup
+		GetMemberFunctionString      "show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   3752, 4
+		LineNumberAlt1               43, 178
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MusicSurfAndSnowboard"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   3753, 4
+		LineNumberAlt1               44, 178
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x9b1ca
+		; source: 178 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_snfl.vbo" 50:53
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3759, 4
+		LineNumberAlt1              50, 178
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  3761, 4
+		LineNumberAlt1              52, 178
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  3762, 4
+		LineNumberAlt1              53, 178
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x9b209
+		; source: 178 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_snfl.vbo" 64:64
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3773, 4
+		LineNumberAlt1              64, 178
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x9b225
+		; source: 178 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_snfl.vbo" 74:78
+		MemberFunctionArgumentCheck   1
+		LineNumber                    3783, 4
+		LineNumberAlt1                74, 178
+		GetThisMemberValueString      "puzzle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3784, 4
+		LineNumberAlt1                75, 178
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "exit"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3785, 4
+		LineNumberAlt1                76, 178
+		PushNothing
+		SetThisMemberValueString      "puzzle"
+		; <-
+		BranchTarget                  0
+		LineNumber                    3787, 4
+		LineNumberAlt1                78, 178
+		PushNothing
+		SetThisMemberValueString      "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

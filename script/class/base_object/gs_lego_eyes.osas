@@ -1,0 +1,162 @@
+begin class "gs_lego_eyes", "base_object"
+	property "handle"
+	property "eyecolor"
+	property "eyetexture"
+
+	begin method "gs_lego_eyes"
+		; address: 0x384ac
+		; source: 39 "C:\\projects\\lego\\Scripting\\VBO\\lego_eyes.vbo" 23:26
+		MemberFunctionArgumentCheck 4
+		CreateStackVariables        1
+		LineNumber                  9883, 4
+		LineNumberAlt1              23, 39
+		GetVariableValue            1                                            ; local
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  9883, 4
+		LineNumberAlt1              23, 39
+		SetVariableValue            4                                            ; local
+		LineNumber                  9884, 4
+		LineNumberAlt1              24, 39
+		GetVariableValue            4                                            ; local
+		Dup
+		CallGameFunctionString      "gcmodeldirector", "getcharacter", 2
+		LineNumber                  9884, 4
+		LineNumberAlt1              24, 39
+		SetThisMemberValueString    "handle"
+		LineNumber                  9885, 4
+		LineNumberAlt1              25, 39
+		GetVariableValue            2                                            ; local
+		SetThisMemberValueString    "eyecolor"
+		LineNumber                  9886, 4
+		LineNumberAlt1              26, 39
+		GetVariableValue            3                                            ; local
+		SetThisMemberValueString    "eyetexture"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x38513
+		; source: 39 "C:\\projects\\lego\\Scripting\\VBO\\lego_eyes.vbo" 31:31
+		MemberFunctionArgumentCheck 1
+		LineNumber                  9891, 4
+		LineNumberAlt1              31, 39
+		GetThisMemberValueString    "handle"
+		GetThisMemberValueString    "eyetexture"
+		GetThisMemberValueString    "eyecolor"
+		CallGameFunctionString      "gccharacter", "seteyecolor", 3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setcolor"
+		; address: 0x38531
+		; source: 39 "C:\\projects\\lego\\Scripting\\VBO\\lego_eyes.vbo" 35:36
+		MemberFunctionArgumentCheck 2
+		LineNumber                  9895, 4
+		LineNumberAlt1              35, 39
+		GetVariableValue            1                               ; local
+		SetThisMemberValueString    "eyecolor"
+		LineNumber                  9896, 4
+		LineNumberAlt1              36, 39
+		GetThisMemberValueString    "handle"
+		GetThisMemberValueString    "eyetexture"
+		GetThisMemberValueString    "eyecolor"
+		CallGameFunctionString      "gccharacter", "seteyecolor", 3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x3855f
+		; source: 39 "C:\\projects\\lego\\Scripting\\VBO\\lego_eyes.vbo" 40:48
+		MemberFunctionArgumentCheck   2
+		LineNumber                    9900, 4
+		LineNumberAlt1                40, 39
+		GetVariableValue              1          ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    9901, 4
+		LineNumberAlt1                41, 39
+		GetVariableValue              1          ; local
+		GetMemberValueString          "button"
+		PushConstanti8                82
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9902, 4
+		LineNumberAlt1                42, 39
+		GetVariableValue              0          ; local
+		PushConstantColor8888         0xffffffff
+		PushConstanti16               255
+		SetRedValue
+		PushConstanti8                1
+		SetGreenValue
+		PushConstanti8                1
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		GetThisMemberFunctionString   "setcolor"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    9904, 4
+		LineNumberAlt1                44, 39
+		GetVariableValue              1          ; local
+		GetMemberValueString          "button"
+		PushConstanti8                71
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    9905, 4
+		LineNumberAlt1                45, 39
+		GetVariableValue              0          ; local
+		PushConstantColor8888         0xffffffff
+		PushConstanti8                1
+		SetRedValue
+		PushConstanti16               255
+		SetGreenValue
+		PushConstanti8                1
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		GetThisMemberFunctionString   "setcolor"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    9907, 4
+		LineNumberAlt1                47, 39
+		GetVariableValue              1          ; local
+		GetMemberValueString          "button"
+		PushConstanti8                66
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    9908, 4
+		LineNumberAlt1                48, 39
+		GetVariableValue              0          ; local
+		PushConstantColor8888         0xffffffff
+		PushConstanti8                1
+		SetRedValue
+		PushConstanti8                1
+		SetGreenValue
+		PushConstanti16               255
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		GetThisMemberFunctionString   "setcolor"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+end ; class

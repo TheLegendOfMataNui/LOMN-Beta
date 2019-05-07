@@ -1,0 +1,209 @@
+begin class "ss_transitionbasesprite", "ss_basesprite"
+	begin method "ss_transitionbasesprite"
+		; address: 0x3206e
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 293:305
+		MemberFunctionArgumentCheck   8
+		LineNumber                    4199, 4
+		LineNumberAlt1                293, 21
+		GetVariableValue              1          ; local
+		SetThisMemberValueString      "filename"
+		LineNumber                    4201, 4
+		LineNumberAlt1                295, 21
+		GetVariableValue              2          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4201, 4
+		LineNumberAlt1                295, 21
+		GetVariableValue              2          ; local
+		SetThisMemberValueString      "x1"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    4202, 4
+		LineNumberAlt1                296, 21
+		PushConstant0
+		SetThisMemberValueString      "x1"
+		; <-
+		BranchTarget                  1
+		LineNumber                    4203, 4
+		LineNumberAlt1                297, 21
+		GetVariableValue              3          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    4203, 4
+		LineNumberAlt1                297, 21
+		GetVariableValue              3          ; local
+		SetThisMemberValueString      "y1"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    4204, 4
+		LineNumberAlt1                298, 21
+		PushConstant0
+		SetThisMemberValueString      "y1"
+		; <-
+		BranchTarget                  3
+		LineNumber                    4205, 4
+		LineNumberAlt1                299, 21
+		GetVariableValue              5          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    4205, 4
+		LineNumberAlt1                299, 21
+		GetVariableValue              5          ; local
+		SetThisMemberValueString      "x2"
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    4206, 4
+		LineNumberAlt1                300, 21
+		PushConstant0
+		SetThisMemberValueString      "x2"
+		; <-
+		BranchTarget                  5
+		LineNumber                    4207, 4
+		LineNumberAlt1                301, 21
+		GetVariableValue              6          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    4207, 4
+		LineNumberAlt1                301, 21
+		GetVariableValue              6          ; local
+		SetThisMemberValueString      "y2"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		LineNumber                    4208, 4
+		LineNumberAlt1                302, 21
+		PushConstant0
+		SetThisMemberValueString      "y2"
+		; <-
+		BranchTarget                  7
+		LineNumber                    4210, 4
+		LineNumberAlt1                304, 21
+		GetVariableValue              7          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    4210, 4
+		LineNumberAlt1                304, 21
+		GetVariableValue              7          ; local
+		SetThisMemberValueString      "transval"
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    4211, 4
+		LineNumberAlt1                305, 21
+		PushConstanti16               255
+		SetThisMemberValueString      "transval"
+		; <-
+		BranchTarget                  9
+		PushNothing
+		Return
+	end ; method
+
+	begin method "transitionin"
+		; address: 0x32188
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 312:316
+		MemberFunctionArgumentCheck   2
+		LineNumber                    4218, 4
+		LineNumberAlt1                312, 21
+		GetThisMemberValueString      "x1"
+		PushConstanti16               300
+		LessThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4219, 4
+		LineNumberAlt1                313, 21
+		GetVariableValue              0           ; local
+		GetVariableValue              1           ; local
+		GetMemberValueString          "deltatime"
+		PushConstantf32               500
+		Multiply
+		ConvertToInteger
+		PushConstant0
+		GetThisMemberFunctionString   "changexy"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    4220, 4
+		LineNumberAlt1                314, 21
+		PushConstant0
+		Return
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    4222, 4
+		LineNumberAlt1                316, 21
+		PushConstanti8                1
+		Return
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "transitionout"
+		; address: 0x321dd
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 321:325
+		MemberFunctionArgumentCheck   2
+		LineNumber                    4227, 4
+		LineNumberAlt1                321, 21
+		GetThisMemberValueString      "x1"
+		PushConstanti8                -20
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4228, 4
+		LineNumberAlt1                322, 21
+		GetVariableValue              0           ; local
+		PushConstant0
+		PushConstanti8                1
+		GetVariableValue              1           ; local
+		GetMemberValueString          "deltatime"
+		PushConstantf32               500
+		Multiply
+		ConvertToInteger
+		Multiply
+		Subtract
+		PushConstant0
+		GetThisMemberFunctionString   "changexy"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    4229, 4
+		LineNumberAlt1                323, 21
+		PushConstant0
+		Return
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    4231, 4
+		LineNumberAlt1                325, 21
+		PushConstanti8                1
+		Return
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+end ; class

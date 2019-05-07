@@ -1,0 +1,610 @@
+begin class "gs_lego_printscreenmenu", "base_object"
+	property "items"
+	property "pointer"
+	property "bgart"
+	property "startx"
+	property "starty"
+	property "xchange"
+	property "ychange"
+	property "maxlines"
+	property "lineposition"
+
+	begin method "gs_lego_printscreenmenu"
+		; address: 0x3e6f3
+		; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 75:75
+		MemberFunctionArgumentCheck 2
+		LineNumber                  14223, 4
+		LineNumberAlt1              75, 44
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "items"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x3e707
+		; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 85:116
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          6
+		LineNumber                    14233, 4
+		LineNumberAlt1                85, 44
+		GetVariableValueGlobalString  "screenx"
+		PushConstantf32               0.25
+		Multiply
+		SetThisMemberValueString      "startx"
+		LineNumber                    14234, 4
+		LineNumberAlt1                86, 44
+		GetVariableValueGlobalString  "screeny"
+		PushConstantf32               0.15000000596046448
+		Multiply
+		SetThisMemberValueString      "starty"
+		LineNumber                    14235, 4
+		LineNumberAlt1                87, 44
+		GetThisMemberValueString      "startx"
+		SetVariableValue              1                                    ; local
+		LineNumber                    14236, 4
+		LineNumberAlt1                88, 44
+		GetThisMemberValueString      "starty"
+		SetVariableValue              2                                    ; local
+		LineNumber                    14237, 4
+		LineNumberAlt1                89, 44
+		PushConstant0
+		SetThisMemberValueString      "xchange"
+		LineNumber                    14238, 4
+		LineNumberAlt1                90, 44
+		PushConstanti8                40
+		SetThisMemberValueString      "ychange"
+		LineNumber                    14239, 4
+		LineNumberAlt1                91, 44
+		PushConstanti8                10
+		SetThisMemberValueString      "maxlines"
+		LineNumber                    14241, 4
+		LineNumberAlt1                93, 44
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3                                    ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              3                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    14242, 4
+		LineNumberAlt1                94, 44
+		CreateObjectString            "gs_legoactivetext"
+		Dup
+		PushConstantStringString      "Root/Data/Art/Fonts/BionicleFont"
+		PushConstantStringString      "Root/Data/Art/Fonts/BionicleFontHi"
+		GetThisMemberValueString      "items"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		GetVariableValue              1                                    ; local
+		GetVariableValue              2                                    ; local
+		PushConstanti8                1
+		PushConstantf32               2
+		PushConstant0
+		PushConstanti8                4
+		PushConstant0
+		Pull                          11
+		GetMemberFunctionString       "gs_legoactivetext"
+		JumpAbsolute                  11
+		Pop
+		LineNumber                    14242, 4
+		LineNumberAlt1                94, 44
+		SetVariableValue              4                                    ; local
+		LineNumber                    14243, 4
+		LineNumberAlt1                95, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              3                                    ; local
+		GetVariableValue              4                                    ; local
+		SetArrayValue
+		LineNumber                    14245, 4
+		LineNumberAlt1                97, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    14246, 4
+		LineNumberAlt1                98, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    14247, 4
+		LineNumberAlt1                99, 44
+		GetVariableValue              1                                    ; local
+		GetThisMemberValueString      "xchange"
+		Add
+		SetVariableValue              1                                    ; local
+		LineNumber                    14248, 4
+		LineNumberAlt1                100, 44
+		GetVariableValue              2                                    ; local
+		GetThisMemberValueString      "ychange"
+		Add
+		SetVariableValue              2                                    ; local
+		IncrementVariable             3
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    14251, 4
+		LineNumberAlt1                103, 44
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		GetThisMemberValueString      "maxlines"
+		LessThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    14252, 4
+		LineNumberAlt1                104, 44
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		SetThisMemberValueString      "maxlines"
+		; <-
+		BranchTarget                  2
+		LineNumber                    14255, 4
+		LineNumberAlt1                107, 44
+		GetThisMemberValueString      "maxlines"
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3                                    ; local
+		; <-
+		BranchTarget                  3
+		Dup
+		GetVariableValue              3                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    14257, 4
+		LineNumberAlt1                109, 44
+		GetVariableValue              3                                    ; local
+		SetVariableValue              5                                    ; local
+		LineNumber                    14258, 4
+		LineNumberAlt1                110, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              5                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             3
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Pop
+		LineNumber                    14261, 4
+		LineNumberAlt1                113, 44
+		PushConstanti8                0
+		SetThisMemberValueString      "pointer"
+		LineNumber                    14262, 4
+		LineNumberAlt1                114, 44
+		PushConstant0
+		SetThisMemberValueString      "lineposition"
+		LineNumber                    14263, 4
+		LineNumberAlt1                115, 44
+		GetThisMemberValueString      "items"
+		GetThisMemberValueString      "pointer"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "setactive"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    14264, 4
+		LineNumberAlt1                116, 44
+		PushConstanti8                1
+		SetVariableValue              6                                    ; local
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x3e90b
+		; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 123:123
+		MemberFunctionArgumentCheck 1
+		LineNumber                  14271, 4
+		LineNumberAlt1              123, 44
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x3e922
+		; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 130:136
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    14278, 4
+		LineNumberAlt1                130, 44
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    14279, 4
+		LineNumberAlt1                131, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    14280, 4
+		LineNumberAlt1                132, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    14281, 4
+		LineNumberAlt1                133, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    14282, 4
+		LineNumberAlt1                134, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              1             ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    14284, 4
+		LineNumberAlt1                136, 44
+		PushNothing
+		SetThisMemberValueString      "items"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x3e9b4
+		; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 141:141
+		MemberFunctionArgumentCheck 1
+		LineNumber                  14289, 4
+		LineNumberAlt1              141, 44
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x3e9cb
+		; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 148:153
+		MemberFunctionArgumentCheck   2
+		LineNumber                    14296, 4
+		LineNumberAlt1                148, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                9
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    14296, 4
+		LineNumberAlt1                148, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    14296, 4
+		LineNumberAlt1                148, 44
+		GetVariableValue              0            ; local
+		PushConstanti8                -1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    14297, 4
+		LineNumberAlt1                149, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                12
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    14297, 4
+		LineNumberAlt1                149, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    14297, 4
+		LineNumberAlt1                149, 44
+		GetVariableValue              0            ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    14298, 4
+		LineNumberAlt1                150, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                37
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    14298, 4
+		LineNumberAlt1                150, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    14298, 4
+		LineNumberAlt1                150, 44
+		GetVariableValue              0            ; local
+		PushConstanti8                -1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    14299, 4
+		LineNumberAlt1                151, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                38
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    14299, 4
+		LineNumberAlt1                151, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    14299, 4
+		LineNumberAlt1                151, 44
+		GetVariableValue              0            ; local
+		PushConstanti8                -1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		LineNumber                    14300, 4
+		LineNumberAlt1                152, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                39
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    14300, 4
+		LineNumberAlt1                152, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    14300, 4
+		LineNumberAlt1                152, 44
+		GetVariableValue              0            ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  4
+		LineNumber                    14301, 4
+		LineNumberAlt1                153, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                40
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    14301, 4
+		LineNumberAlt1                153, 44
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    14301, 4
+		LineNumberAlt1                153, 44
+		GetVariableValue              0            ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setpointer"
+		; address: 0x3eb55
+		; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 162:180
+		MemberFunctionArgumentCheck   2
+		LineNumber                    14310, 4
+		LineNumberAlt1                162, 44
+		GetThisMemberValueString      "items"
+		GetThisMemberValueString      "pointer"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "setinactive"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    14312, 4
+		LineNumberAlt1                164, 44
+		GetVariableValue              1                                             ; local
+		Dup
+		PushConstanti8                -1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    14314, 4
+		LineNumberAlt1                166, 44
+		GetThisMemberValueString      "pointer"
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                0
+		LessThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    14315, 4
+		LineNumberAlt1                167, 44
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetThisMemberValueString      "pointer"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    14317, 4
+		LineNumberAlt1                169, 44
+		GetThisMemberValueString      "pointer"
+		PushConstanti8                1
+		Subtract
+		SetThisMemberValueString      "pointer"
+		; <-
+		BranchTarget                  1
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    14320, 4
+		LineNumberAlt1                172, 44
+		GetThisMemberValueString      "pointer"
+		PushConstanti8                1
+		Add
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    14321, 4
+		LineNumberAlt1                173, 44
+		PushConstanti8                0
+		SetThisMemberValueString      "pointer"
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    14323, 4
+		LineNumberAlt1                175, 44
+		GetThisMemberValueString      "pointer"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "pointer"
+		; <-
+		BranchTarget                  4
+		Pop
+		LineNumber                    14327, 4
+		LineNumberAlt1                179, 44
+		GetThisMemberValueString      "items"
+		GetThisMemberValueString      "pointer"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "setactive"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    14328, 4
+		LineNumberAlt1                180, 44
+		PushConstanti16               1072
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hideall"
+		; address: 0x3ec3c
+		; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 275:276
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    14423, 4
+		LineNumberAlt1                275, 44
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1        ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1        ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    14424, 4
+		LineNumberAlt1                276, 44
+		GetThisMemberValueString      "items"
+		GetVariableValue              1        ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

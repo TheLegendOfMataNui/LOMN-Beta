@@ -1,0 +1,102 @@
+begin class "ss_aicamera", "ss_basecamera"
+	property "splinefilename"
+	property "spline"
+	property "minzoom"
+	property "maxzoom"
+
+	begin method "ss_aicamera"
+		; address: 0x34781
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 342:346
+		MemberFunctionArgumentCheck 10
+		LineNumber                  5750, 4
+		LineNumberAlt1              342, 25
+		GetVariableValue            0                ; local
+		GetVariableValue            1                ; local
+		GetVariableValue            2                ; local
+		GetVariableValue            3                ; local
+		GetVariableValue            4                ; local
+		GetVariableValue            5                ; local
+		GetVariableValue            6                ; local
+		GetThisMemberFunctionString "ss_basecamera"
+		JumpAbsolute                7
+		Pop
+		LineNumber                  5751, 4
+		LineNumberAlt1              343, 25
+		GetVariableValue            7                ; local
+		SetThisMemberValueString    "splinefilename"
+		LineNumber                  5752, 4
+		LineNumberAlt1              344, 25
+		CreateObjectString          "ss_pointspline"
+		Dup
+		GetThisMemberValueString    "splinefilename"
+		Pull                        2
+		GetMemberFunctionString     "ss_pointspline"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  5752, 4
+		LineNumberAlt1              344, 25
+		SetThisMemberValueString    "spline"
+		LineNumber                  5753, 4
+		LineNumberAlt1              345, 25
+		GetVariableValue            8                ; local
+		SetThisMemberValueString    "minzoom"
+		LineNumber                  5754, 4
+		LineNumberAlt1              346, 25
+		GetVariableValue            9                ; local
+		SetThisMemberValueString    "maxzoom"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x34800
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 351:355
+		MemberFunctionArgumentCheck 1
+		LineNumber                  5759, 4
+		LineNumberAlt1              351, 25
+		CallGameFunctionString      "gcgame", "getcurrentcamera", 0
+		LineNumber                  5759, 4
+		LineNumberAlt1              351, 25
+		SetThisMemberValueString    "handle"
+		LineNumber                  5760, 4
+		LineNumberAlt1              352, 25
+		GetThisMemberValueString    "handle"
+		GetThisMemberValueString    "tx"
+		GetThisMemberValueString    "ty"
+		GetThisMemberValueString    "tz"
+		CallGameFunctionString      "gclegocamera", "settargpos", 4
+		Pop
+		LineNumber                  5761, 4
+		LineNumberAlt1              353, 25
+		GetThisMemberValueString    "spline"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  5762, 4
+		LineNumberAlt1              354, 25
+		GetThisMemberValueString    "handle"
+		GetThisMemberValueString    "spline"
+		GetMemberValueString        "object"
+		PushConstant0
+		GetThisMemberValueString    "minzoom"
+		GetThisMemberValueString    "maxzoom"
+		CallGameFunctionString      "gclegocamera", "setcameraaispline", 5
+		Pop
+		LineNumber                  5763, 4
+		LineNumberAlt1              355, 25
+		GetThisMemberValueString    "handle"
+		PushConstanti8              2
+		CallGameFunctionString      "gclegocamera", "setcameraaimode", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setzoomfactor"
+		; address: 0x34889
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,2049 @@
+begin class "lego_moveableobject", "base_object"
+	property "name"
+	property "id"
+	property "handle"
+	property "area"
+	property "areaid"
+	property "anims"
+	property "currentanim"
+	property "defaultanim"
+	property "onscreen"
+	property "collide"
+	property "collidetimer"
+	property "madeonthefly"
+
+	begin method "lego_moveableobject"
+		; address: 0x41d97
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 80:94
+		MemberFunctionArgumentCheck   4
+		CreateStackVariables          1
+		LineNumber                    18716, 4
+		LineNumberAlt1                80, 52
+		GetVariableValue              1                                            ; local
+		SetThisMemberValueString      "name"
+		LineNumber                    18717, 4
+		LineNumberAlt1                81, 52
+		GetThisMemberValueString      "name"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18717, 4
+		LineNumberAlt1                81, 52
+		SetThisMemberValueString      "id"
+		LineNumber                    18718, 4
+		LineNumberAlt1                82, 52
+		GetVariableValue              2                                            ; local
+		SetThisMemberValueString      "area"
+		LineNumber                    18719, 4
+		LineNumberAlt1                83, 52
+		PushConstant0
+		SetThisMemberValueString      "madeonthefly"
+		LineNumber                    18721, 4
+		LineNumberAlt1                85, 52
+		GetThisMemberValueString      "area"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18722, 4
+		LineNumberAlt1                86, 52
+		PushConstantStringString      "fake"
+		SetThisMemberValueString      "area"
+		; <-
+		BranchTarget                  0
+		LineNumber                    18725, 4
+		LineNumberAlt1                89, 52
+		GetThisMemberValueString      "area"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18725, 4
+		LineNumberAlt1                89, 52
+		SetThisMemberValueString      "areaid"
+		LineNumber                    18727, 4
+		LineNumberAlt1                91, 52
+		GetVariableValue              3                                            ; local
+		SetThisMemberValueString      "anims"
+		LineNumber                    18728, 4
+		LineNumberAlt1                92, 52
+		GetThisMemberValueString      "anims"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    18729, 4
+		LineNumberAlt1                93, 52
+		GetThisMemberValueString      "anims"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              4                                            ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              4                                            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18730, 4
+		LineNumberAlt1                94, 52
+		GetThisMemberValueString      "anims"
+		GetVariableValue              4                                            ; local
+		GetThisMemberValueString      "anims"
+		GetVariableValue              4                                            ; local
+		GetArrayValue
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18730, 4
+		LineNumberAlt1                94, 52
+		SetArrayValue
+		IncrementVariable             4
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x41e9c
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 105:121
+		MemberFunctionArgumentCheck   10
+		CreateStackVariables          1
+		LineNumber                    18741, 4
+		LineNumberAlt1                105, 52
+		GetVariableValue              9                                   ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18742, 4
+		LineNumberAlt1                106, 52
+		PushConstanti8                2
+		SetVariableValue              9                                   ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    18744, 4
+		LineNumberAlt1                108, 52
+		GetVariableValue              1                                   ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    18745, 4
+		LineNumberAlt1                109, 52
+		PushConstanti8                1
+		SetThisMemberValueString      "madeonthefly"
+		LineNumber                    18746, 4
+		LineNumberAlt1                110, 52
+		PushConstantStringString      "dumy"
+		PushConstantStringString      "dummy"
+		PushConstantStringString      "dummy"
+		PushConstant0
+		CallGameFunctionString        "gcmoveableobj", "create", 4
+		LineNumber                    18746, 4
+		LineNumberAlt1                110, 52
+		SetVariableValue              10                                  ; local
+		LineNumber                    18748, 4
+		LineNumberAlt1                112, 52
+		GetVariableValue              3                                   ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18749, 4
+		LineNumberAlt1                113, 52
+		GetVariableValue              10                                  ; local
+		PushConstanti8                -2
+		PushConstanti8                -2
+		PushConstanti8                -2
+		PushConstanti8                2
+		PushConstanti8                2
+		PushConstanti8                2
+		CallGameFunctionString        "gcmoveableobj", "setdefaultbox", 7
+		Pop
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    18751, 4
+		LineNumberAlt1                115, 52
+		GetVariableValue              10                                  ; local
+		GetVariableValue              3                                   ; local
+		GetVariableValue              4                                   ; local
+		GetVariableValue              5                                   ; local
+		GetVariableValue              6                                   ; local
+		GetVariableValue              7                                   ; local
+		GetVariableValue              8                                   ; local
+		CallGameFunctionString        "gcmoveableobj", "setdefaultbox", 7
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    18754, 4
+		LineNumberAlt1                118, 52
+		GetThisMemberValueString      "name"
+		GetVariableValue              2                                   ; local
+		GetVariableValue              1                                   ; local
+		GetVariableValue              9                                   ; local
+		CallGameFunctionString        "gcmoveableobj", "create", 4
+		LineNumber                    18754, 4
+		LineNumberAlt1                118, 52
+		SetThisMemberValueString      "handle"
+		; <-
+		BranchTarget                  3
+		LineNumber                    18757, 4
+		LineNumberAlt1                121, 52
+		GetVariableValue              0                                   ; local
+		GetThisMemberFunctionString   "moveable_initfull"
+		JumpAbsolute                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "moveable_initfull"
+		; address: 0x41fa3
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 127:144
+		MemberFunctionArgumentCheck   1
+		LineNumber                    18763, 4
+		LineNumberAlt1                127, 52
+		GetThisMemberValueString      "id"
+		GetThisMemberValueString      "areaid"
+		CallGameFunctionString        "gcareadirector", "getmoveableobj", 2
+		LineNumber                    18763, 4
+		LineNumberAlt1                127, 52
+		SetThisMemberValueString      "handle"
+		LineNumber                    18764, 4
+		LineNumberAlt1                128, 52
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18765, 4
+		LineNumberAlt1                129, 52
+		PushConstantStringString      "Object "
+		GetThisMemberValueString      "name"
+		Add
+		PushConstantStringString      " returned no handle from SAGE.. this obj may not be in your .slk"
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    18768, 4
+		LineNumberAlt1                132, 52
+		PushConstanti8                -1
+		SetThisMemberValueString      "currentanim"
+		LineNumber                    18769, 4
+		LineNumberAlt1                133, 52
+		PushConstant0
+		SetThisMemberValueString      "collide"
+		LineNumber                    18770, 4
+		LineNumberAlt1                134, 52
+		PushConstanti8                5
+		SetThisMemberValueString      "collidetimer"
+		LineNumber                    18772, 4
+		LineNumberAlt1                136, 52
+		PushConstanti8                1
+		SetThisMemberValueString      "onscreen"
+		LineNumber                    18776, 4
+		LineNumberAlt1                140, 52
+		GetVariableValue              0                                                                  ; local
+		PushConstantStringString      "NDef"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18776, 4
+		LineNumberAlt1                140, 52
+		GetThisMemberFunctionString   "setdefault"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    18779, 4
+		LineNumberAlt1                143, 52
+		GetVariableValue              0                                                                  ; local
+		PushConstanti8                3
+		PushConstanti8                3
+		PushConstanti8                3
+		GetThisMemberFunctionString   "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    18780, 4
+		LineNumberAlt1                144, 52
+		GetVariableValue              0                                                                  ; local
+		GetThisMemberFunctionString   "setcollisionflags"
+		JumpAbsolute                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x42085
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 151:163
+		MemberFunctionArgumentCheck   1
+		LineNumber                    18787, 4
+		LineNumberAlt1                151, 52
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gcmoveableobj", "killanimtexture", 1
+		Pop
+		LineNumber                    18789, 4
+		LineNumberAlt1                153, 52
+		GetThisMemberValueString      "madeonthefly"
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18791, 4
+		LineNumberAlt1                155, 52
+		GetVariableValue              0                                     ; local
+		GetThisMemberFunctionString   "remove"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    18794, 4
+		LineNumberAlt1                158, 52
+		PushNothing
+		SetThisMemberValueString      "name"
+		LineNumber                    18795, 4
+		LineNumberAlt1                159, 52
+		PushNothing
+		SetThisMemberValueString      "id"
+		LineNumber                    18796, 4
+		LineNumberAlt1                160, 52
+		PushNothing
+		SetThisMemberValueString      "handle"
+		LineNumber                    18797, 4
+		LineNumberAlt1                161, 52
+		PushNothing
+		SetThisMemberValueString      "anims"
+		LineNumber                    18798, 4
+		LineNumberAlt1                162, 52
+		PushNothing
+		SetThisMemberValueString      "currentanim"
+		LineNumber                    18799, 4
+		LineNumberAlt1                163, 52
+		PushNothing
+		SetThisMemberValueString      "defaultanim"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "remove"
+		; address: 0x42114
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 169:169
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18805, 4
+		LineNumberAlt1              169, 52
+		GetThisMemberValueString    "id"
+		GetThisMemberValueString    "areaid"
+		CallGameFunctionString      "gcareadirector", "remove", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setposition"
+		; address: 0x4212f
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 176:185
+		MemberFunctionArgumentCheck   4
+		CreateStackVariables          3
+		LineNumber                    18812, 4
+		LineNumberAlt1                176, 52
+		GetVariableValue              2                                 ; local
+		PushNothing
+		EqualTo
+		GetVariableValue              3                                 ; local
+		PushNothing
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18813, 4
+		LineNumberAlt1                177, 52
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "z"
+		SetVariableValue              4                                 ; local
+		LineNumber                    18814, 4
+		LineNumberAlt1                178, 52
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "y"
+		SetVariableValue              5                                 ; local
+		LineNumber                    18815, 4
+		LineNumberAlt1                179, 52
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "x"
+		SetVariableValue              6                                 ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    18817, 4
+		LineNumberAlt1                181, 52
+		GetVariableValue              1                                 ; local
+		SetVariableValue              6                                 ; local
+		LineNumber                    18818, 4
+		LineNumberAlt1                182, 52
+		GetVariableValue              2                                 ; local
+		SetVariableValue              5                                 ; local
+		LineNumber                    18819, 4
+		LineNumberAlt1                183, 52
+		GetVariableValue              3                                 ; local
+		SetVariableValue              4                                 ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    18821, 4
+		LineNumberAlt1                185, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              6                                 ; local
+		GetVariableValue              5                                 ; local
+		GetVariableValue              4                                 ; local
+		CallGameFunctionString        "gcmoveableobj", "setposition", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setpos"
+		; address: 0x421d6
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 192:202
+		MemberFunctionArgumentCheck   4
+		CreateStackVariables          3
+		LineNumber                    18828, 4
+		LineNumberAlt1                192, 52
+		GetVariableValue              3                                 ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18829, 4
+		LineNumberAlt1                193, 52
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "z"
+		SetVariableValue              4                                 ; local
+		LineNumber                    18830, 4
+		LineNumberAlt1                194, 52
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "y"
+		SetVariableValue              5                                 ; local
+		LineNumber                    18831, 4
+		LineNumberAlt1                195, 52
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "x"
+		SetVariableValue              6                                 ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    18833, 4
+		LineNumberAlt1                197, 52
+		GetVariableValue              1                                 ; local
+		SetVariableValue              6                                 ; local
+		LineNumber                    18834, 4
+		LineNumberAlt1                198, 52
+		GetVariableValue              2                                 ; local
+		SetVariableValue              5                                 ; local
+		LineNumber                    18835, 4
+		LineNumberAlt1                199, 52
+		GetVariableValue              3                                 ; local
+		SetVariableValue              4                                 ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    18838, 4
+		LineNumberAlt1                202, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              6                                 ; local
+		GetVariableValue              5                                 ; local
+		GetVariableValue              4                                 ; local
+		CallGameFunctionString        "gcmoveableobj", "setposition", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setlocalpos"
+		; address: 0x42277
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 210:211
+		MemberFunctionArgumentCheck 4
+		LineNumber                  18846, 4
+		LineNumberAlt1              210, 52
+		GetVariableValue            0                                     ; local
+		Dup
+		GetThisMemberFunctionString "getx"
+		JumpAbsolute                1
+		LineNumber                  18846, 4
+		LineNumberAlt1              210, 52
+		GetVariableValue            0                                     ; local
+		GetThisMemberFunctionString "gety"
+		JumpAbsolute                1
+		LineNumber                  18846, 4
+		LineNumberAlt1              210, 52
+		GetVariableValue            2                                     ; local
+		Add
+		GetVariableValue            0                                     ; local
+		GetThisMemberFunctionString "getz"
+		JumpAbsolute                1
+		LineNumber                  18846, 4
+		LineNumberAlt1              210, 52
+		GetThisMemberFunctionString "setpos"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  18847, 4
+		LineNumberAlt1              211, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                     ; local
+		GetVariableValue            3                                     ; local
+		CallGameFunctionString      "gcmoveableobj", "slidelocalcoord", 3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setslidetimer"
+		; address: 0x422e0
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 225:225
+		MemberFunctionArgumentCheck 7
+		LineNumber                  18861, 4
+		LineNumberAlt1              225, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                   ; local
+		GetVariableValue            2                                   ; local
+		GetVariableValue            3                                   ; local
+		GetVariableValue            4                                   ; local
+		GetVariableValue            5                                   ; local
+		GetVariableValue            6                                   ; local
+		CallGameFunctionString      "gcmoveableobj", "setslidetimer", 7
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stopslidetimer"
+		; address: 0x4230a
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 230:230
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18866, 4
+		LineNumberAlt1              230, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "stopslidetimer", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setorientation"
+		; address: 0x42322
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 236:236
+		MemberFunctionArgumentCheck 4
+		LineNumber                  18872, 4
+		LineNumberAlt1              236, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                    ; local
+		GetVariableValue            2                                    ; local
+		GetVariableValue            3                                    ; local
+		CallGameFunctionString      "gcmoveableobj", "setorientation", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getorientationx"
+		; address: 0x42343
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 241:241
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18877, 4
+		LineNumberAlt1              241, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "getorientationx", 1
+		LineNumber                  18877, 4
+		LineNumberAlt1              241, 52
+		Return
+	end ; method
+
+	begin method "getorientationy"
+		; address: 0x42363
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 246:246
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18882, 4
+		LineNumberAlt1              246, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "getorientationy", 1
+		LineNumber                  18882, 4
+		LineNumberAlt1              246, 52
+		Return
+	end ; method
+
+	begin method "getorientationz"
+		; address: 0x42383
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 251:251
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18887, 4
+		LineNumberAlt1              251, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "getorientationz", 1
+		LineNumber                  18887, 4
+		LineNumberAlt1              251, 52
+		Return
+	end ; method
+
+	begin method "changeposition"
+		; address: 0x423a3
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 258:268
+		MemberFunctionArgumentCheck   5
+		CreateStackVariables          3
+		LineNumber                    18894, 4
+		LineNumberAlt1                258, 52
+		GetVariableValue              0             ; local
+		GetThisMemberFunctionString   "getx"
+		JumpAbsolute                  1
+		LineNumber                    18894, 4
+		LineNumberAlt1                258, 52
+		GetVariableValue              1             ; local
+		Add
+		SetVariableValue              5             ; local
+		LineNumber                    18895, 4
+		LineNumberAlt1                259, 52
+		GetVariableValue              0             ; local
+		GetThisMemberFunctionString   "gety"
+		JumpAbsolute                  1
+		LineNumber                    18895, 4
+		LineNumberAlt1                259, 52
+		GetVariableValue              2             ; local
+		Add
+		SetVariableValue              6             ; local
+		LineNumber                    18896, 4
+		LineNumberAlt1                260, 52
+		GetVariableValue              0             ; local
+		GetThisMemberFunctionString   "getz"
+		JumpAbsolute                  1
+		LineNumber                    18896, 4
+		LineNumberAlt1                260, 52
+		GetVariableValue              3             ; local
+		Add
+		SetVariableValue              7             ; local
+		LineNumber                    18898, 4
+		LineNumberAlt1                262, 52
+		GetVariableValue              4             ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18899, 4
+		LineNumberAlt1                263, 52
+		GetVariableValue              0             ; local
+		GetVariableValue              5             ; local
+		GetVariableValue              6             ; local
+		GetVariableValue              7             ; local
+		GetThisMemberFunctionString   "setposition"
+		JumpAbsolute                  4
+		Pop
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    18901, 4
+		LineNumberAlt1                265, 52
+		GetVariableValue              4             ; local
+		PushConstant0
+		LessOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18902, 4
+		LineNumberAlt1                266, 52
+		GetVariableValue              0             ; local
+		GetVariableValue              5             ; local
+		GetVariableValue              6             ; local
+		GetVariableValue              7             ; local
+		GetThisMemberFunctionString   "setposition"
+		JumpAbsolute                  4
+		Pop
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    18904, 4
+		LineNumberAlt1                268, 52
+		GetVariableValue              0             ; local
+		GetVariableValue              5             ; local
+		GetVariableValue              6             ; local
+		GetVariableValue              7             ; local
+		GetVariableValue              4             ; local
+		GetThisMemberFunctionString   "interpolate"
+		JumpAbsolute                  5
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "changemainsystem"
+		; address: 0x42493
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 278:278
+		MemberFunctionArgumentCheck 2
+		LineNumber                  18914, 4
+		LineNumberAlt1              278, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                      ; local
+		CallGameFunctionString      "gcmoveableobj", "changemainsystem", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getx"
+		; address: 0x424ae
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 285:285
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18921, 4
+		LineNumberAlt1              285, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "getx", 1
+		LineNumber                  18921, 4
+		LineNumberAlt1              285, 52
+		Return
+	end ; method
+
+	begin method "gety"
+		; address: 0x424ce
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 291:291
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18927, 4
+		LineNumberAlt1              291, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "gety", 1
+		LineNumber                  18927, 4
+		LineNumberAlt1              291, 52
+		Return
+	end ; method
+
+	begin method "getz"
+		; address: 0x424ee
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 297:297
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18933, 4
+		LineNumberAlt1              297, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "getz", 1
+		LineNumber                  18933, 4
+		LineNumberAlt1              297, 52
+		Return
+	end ; method
+
+	begin method "setx"
+		; address: 0x4250e
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 302:302
+		MemberFunctionArgumentCheck 2
+		LineNumber                  18938, 4
+		LineNumberAlt1              302, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                 ; local
+		GetVariableValue            0                                 ; local
+		GetThisMemberFunctionString "gety"
+		JumpAbsolute                1
+		LineNumber                  18938, 4
+		LineNumberAlt1              302, 52
+		GetVariableValue            0                                 ; local
+		GetThisMemberFunctionString "getz"
+		JumpAbsolute                1
+		LineNumber                  18938, 4
+		LineNumberAlt1              302, 52
+		CallGameFunctionString      "gcmoveableobj", "setposition", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "sety"
+		; address: 0x4254d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 307:307
+		MemberFunctionArgumentCheck 2
+		LineNumber                  18943, 4
+		LineNumberAlt1              307, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            0                                 ; local
+		GetThisMemberFunctionString "getx"
+		JumpAbsolute                1
+		LineNumber                  18943, 4
+		LineNumberAlt1              307, 52
+		GetVariableValue            1                                 ; local
+		GetVariableValue            0                                 ; local
+		GetThisMemberFunctionString "getz"
+		JumpAbsolute                1
+		LineNumber                  18943, 4
+		LineNumberAlt1              307, 52
+		CallGameFunctionString      "gcmoveableobj", "setposition", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setz"
+		; address: 0x4258c
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 312:312
+		MemberFunctionArgumentCheck 2
+		LineNumber                  18948, 4
+		LineNumberAlt1              312, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            0                                 ; local
+		GetThisMemberFunctionString "getx"
+		JumpAbsolute                1
+		LineNumber                  18948, 4
+		LineNumberAlt1              312, 52
+		GetVariableValue            0                                 ; local
+		GetThisMemberFunctionString "gety"
+		JumpAbsolute                1
+		LineNumber                  18948, 4
+		LineNumberAlt1              312, 52
+		GetVariableValue            1                                 ; local
+		CallGameFunctionString      "gcmoveableobj", "setposition", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getpoint"
+		; address: 0x425cb
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 319:319
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18955, 4
+		LineNumberAlt1              319, 52
+		CreateObjectString          "basicpoint"
+		Dup
+		GetVariableValue            0            ; local
+		GetThisMemberFunctionString "getx"
+		JumpAbsolute                1
+		LineNumber                  18955, 4
+		LineNumberAlt1              319, 52
+		GetVariableValue            0            ; local
+		GetThisMemberFunctionString "gety"
+		JumpAbsolute                1
+		LineNumber                  18955, 4
+		LineNumberAlt1              319, 52
+		GetVariableValue            0            ; local
+		GetThisMemberFunctionString "getz"
+		JumpAbsolute                1
+		LineNumber                  18955, 4
+		LineNumberAlt1              319, 52
+		Pull                        4
+		GetMemberFunctionString     "basicpoint"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  18955, 4
+		LineNumberAlt1              319, 52
+		Return
+	end ; method
+
+	begin method "interpolate"
+		; address: 0x42624
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 325:325
+		MemberFunctionArgumentCheck 5
+		LineNumber                  18961, 4
+		LineNumberAlt1              325, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                 ; local
+		GetVariableValue            2                                 ; local
+		GetVariableValue            3                                 ; local
+		GetVariableValue            4                                 ; local
+		CallGameFunctionString      "gcmoveableobj", "interpolate", 5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stopinterpolate"
+		; address: 0x42648
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 331:331
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18967, 4
+		LineNumberAlt1              331, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "stopinterpolate", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "resetinterpolate"
+		; address: 0x42660
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 336:336
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18972, 4
+		LineNumberAlt1              336, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "cancelinterpolate", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x42678
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 342:343
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18978, 4
+		LineNumberAlt1              342, 52
+		GetThisMemberValueString    "id"
+		GetThisMemberValueString    "areaid"
+		CallGameFunctionString      "gcareadirector", "show", 2
+		Pop
+		LineNumber                  18979, 4
+		LineNumberAlt1              343, 52
+		PushConstanti8              1
+		SetThisMemberValueString    "onscreen"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x426a2
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 351:352
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18987, 4
+		LineNumberAlt1              351, 52
+		GetThisMemberValueString    "id"
+		GetThisMemberValueString    "areaid"
+		CallGameFunctionString      "gcareadirector", "hide", 2
+		Pop
+		LineNumber                  18988, 4
+		LineNumberAlt1              352, 52
+		PushConstant0
+		SetThisMemberValueString    "onscreen"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "toggle"
+		; address: 0x426cb
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 358:361
+		MemberFunctionArgumentCheck   1
+		LineNumber                    18994, 4
+		LineNumberAlt1                358, 52
+		GetThisMemberValueString      "onscreen"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18995, 4
+		LineNumberAlt1                359, 52
+		GetVariableValue              0          ; local
+		GetThisMemberFunctionString   "hide"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    18997, 4
+		LineNumberAlt1                361, 52
+		GetVariableValue              0          ; local
+		GetThisMemberFunctionString   "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setshrinkable"
+		; address: 0x4270b
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 367:367
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19003, 4
+		LineNumberAlt1              367, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                   ; local
+		CallGameFunctionString      "gcmoveableobj", "setshrinkable", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setdefault"
+		; address: 0x42726
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 374:387
+		MemberFunctionArgumentCheck   2
+		LineNumber                    19010, 4
+		LineNumberAlt1                374, 52
+		GetVariableValue              1                                            ; local
+		PushConstantStringString      "NDef"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19010, 4
+		LineNumberAlt1                374, 52
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    19011, 4
+		LineNumberAlt1                375, 52
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19012, 4
+		LineNumberAlt1                376, 52
+		PushConstantStringString      "ERROR -- the handle to < "
+		GetThisMemberValueString      "name"
+		Add
+		PushConstantStringString      " > is nothing!!"
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    19013, 4
+		LineNumberAlt1                377, 52
+		PushConstantStringString      "      -- is < "
+		GetThisMemberValueString      "name"
+		Add
+		PushConstantStringString      " > in the slk ??"
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    19016, 4
+		LineNumberAlt1                380, 52
+		GetThisMemberValueString      "handle"
+		PushConstantStringString      "NDef"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19016, 4
+		LineNumberAlt1                380, 52
+		CallGameFunctionString        "gcmoveableobj", "setdefault", 2
+		Pop
+		LineNumber                    19017, 4
+		LineNumberAlt1                381, 52
+		PushConstanti8                -1
+		SetThisMemberValueString      "defaultanim"
+		LineNumber                    19018, 4
+		LineNumberAlt1                382, 52
+		PushNothing
+		Return
+		; <-
+		BranchTarget                  1
+		LineNumber                    19021, 4
+		LineNumberAlt1                385, 52
+		GetVariableValue              1                                            ; local
+		GetThisMemberValueString      "anims"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    19022, 4
+		LineNumberAlt1                386, 52
+		GetVariableValue              1                                            ; local
+		SetThisMemberValueString      "defaultanim"
+		LineNumber                    19023, 4
+		LineNumberAlt1                387, 52
+		GetThisMemberValueString      "handle"
+		GetThisMemberValueString      "anims"
+		GetThisMemberValueString      "defaultanim"
+		GetArrayValue
+		CallGameFunctionString        "gcmoveableobj", "setdefault", 2
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setresponse"
+		; address: 0x4281d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 405:405
+		MemberFunctionArgumentCheck 4
+		LineNumber                  19041, 4
+		LineNumberAlt1              405, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                           ; local
+		GetVariableValue            2                                           ; local
+		GetVariableValue            3                                           ; local
+		CallGameFunctionString      "gcmoveableobj", "setcharacterresponses", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setprojectileoffset"
+		; address: 0x4283e
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 410:410
+		MemberFunctionArgumentCheck 4
+		LineNumber                  19046, 4
+		LineNumberAlt1              410, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                         ; local
+		GetVariableValue            2                                         ; local
+		GetVariableValue            3                                         ; local
+		CallGameFunctionString      "gcmoveableobj", "setprojectileoffset", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "play"
+		; address: 0x4285f
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 418:429
+		MemberFunctionArgumentCheck   3
+		LineNumber                    19054, 4
+		LineNumberAlt1                418, 52
+		GetVariableValue              2                          ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19055, 4
+		LineNumberAlt1                419, 52
+		PushConstant0
+		SetVariableValue              2                          ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    19059, 4
+		LineNumberAlt1                423, 52
+		GetVariableValue              1                          ; local
+		PushConstanti8                -1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    19060, 4
+		LineNumberAlt1                424, 52
+		GetThisMemberValueString      "handle"
+		GetThisMemberValueString      "anims"
+		GetThisMemberValueString      "currentanim"
+		GetArrayValue
+		GetVariableValue              2                          ; local
+		CallGameFunctionString        "gcmoveableobj", "play", 3
+		Pop
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    19063, 4
+		LineNumberAlt1                427, 52
+		GetVariableValue              1                          ; local
+		GetThisMemberValueString      "anims"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    19064, 4
+		LineNumberAlt1                428, 52
+		GetVariableValue              1                          ; local
+		SetThisMemberValueString      "currentanim"
+		LineNumber                    19065, 4
+		LineNumberAlt1                429, 52
+		GetThisMemberValueString      "handle"
+		GetThisMemberValueString      "anims"
+		GetThisMemberValueString      "currentanim"
+		GetArrayValue
+		GetVariableValue              2                          ; local
+		CallGameFunctionString        "gcmoveableobj", "play", 3
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stop"
+		; address: 0x428fd
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 440:440
+		MemberFunctionArgumentCheck 1
+		LineNumber                  19076, 4
+		LineNumberAlt1              440, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "stop", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "isplaying"
+		; address: 0x42915
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 447:448
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  19083, 4
+		LineNumberAlt1              447, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "isplaying", 1
+		LineNumber                  19083, 4
+		LineNumberAlt1              447, 52
+		SetVariableValue            1                               ; local
+		LineNumber                  19084, 4
+		LineNumberAlt1              448, 52
+		GetVariableValue            1                               ; local
+		Return
+	end ; method
+
+	begin method "setcollide"
+		; address: 0x42947
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 453:453
+		MemberFunctionArgumentCheck 1
+		LineNumber                  19089, 4
+		LineNumberAlt1              453, 52
+		GetThisMemberValueString    "collidetimer"
+		SetThisMemberValueString    "collide"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x4295b
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 459:468
+		MemberFunctionArgumentCheck   2
+		LineNumber                    19095, 4
+		LineNumberAlt1                459, 52
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19102, 4
+		LineNumberAlt1                466, 52
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "cnt1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19102, 4
+		LineNumberAlt1                466, 52
+		EqualTo
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		GetThisMemberValueString      "id"
+		EqualTo
+		And
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstanti8                2
+		GetArrayValue
+		PushConstant0
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19104, 4
+		LineNumberAlt1                468, 52
+		PushConstanti8                5
+		SetThisMemberValueString      "collide"
+		; <-
+		BranchTarget                  0
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x429c9
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 479:484
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    19115, 4
+		LineNumberAlt1                479, 52
+		GetThisMemberValueString      "collide"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19116, 4
+		LineNumberAlt1                480, 52
+		GetThisMemberValueString      "collide"
+		PushConstant0
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19117, 4
+		LineNumberAlt1                481, 52
+		GetThisMemberValueString      "collide"
+		PushConstanti8                1
+		Subtract
+		SetThisMemberValueString      "collide"
+		LineNumber                    19118, 4
+		LineNumberAlt1                482, 52
+		GetThisMemberValueString      "collide"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19119, 4
+		LineNumberAlt1                483, 52
+		CreateObjectString            "scriptevent"
+		Dup
+		PushConstanti8                1
+		CreateArray
+		Dup
+		PushConstantStringString      "cnt1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19119, 4
+		LineNumberAlt1                483, 52
+		AppendToArray
+		Dup
+		GetThisMemberValueString      "id"
+		AppendToArray
+		Dup
+		PushConstanti8                1
+		AppendToArray
+		Pull                          3
+		GetMemberFunctionString       "scriptevent"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    19119, 4
+		LineNumberAlt1                483, 52
+		SetVariableValue              2                                            ; local
+		LineNumber                    19120, 4
+		LineNumberAlt1                484, 52
+		GetVariableValue              2                                            ; local
+		Dup
+		GetMemberFunctionString       "send"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "addanim"
+		; address: 0x42a72
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 495:495
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19131, 4
+		LineNumberAlt1              495, 52
+		GetThisMemberValueString    "anims"
+		GetVariableValue            1                                            ; local
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  19131, 4
+		LineNumberAlt1              495, 52
+		AppendToArray
+		PushNothing
+		Return
+	end ; method
+
+	begin method "settweakable"
+		; address: 0x42a97
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 502:502
+		MemberFunctionArgumentCheck  1
+		LineNumber                   19138, 4
+		LineNumberAlt1               502, 52
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "tweak"
+		GetVariableValue             0                           ; local
+		Pull                         2
+		GetMemberFunctionString      "add_moveableobj_tweakable"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "disablecollisions"
+		; address: 0x42ab6
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 509:509
+		MemberFunctionArgumentCheck 1
+		LineNumber                  19145, 4
+		LineNumberAlt1              509, 52
+		GetThisMemberValueString    "handle"
+		PushConstanti16             255
+		CallGameFunctionString      "gcmoveableobj", "disablecollisions", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "enablecollisions"
+		; address: 0x42ad1
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 514:514
+		MemberFunctionArgumentCheck 1
+		LineNumber                  19150, 4
+		LineNumberAlt1              514, 52
+		GetThisMemberValueString    "handle"
+		PushConstanti16             255
+		CallGameFunctionString      "gcmoveableobj", "enablecollisions", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "ignorecollisionswith"
+		; address: 0x42aec
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 520:520
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19156, 4
+		LineNumberAlt1              520, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                             ; local
+		CallGameFunctionString      "gcmoveableobj", "addignorecollisionswith", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setignoreallcollisions"
+		; address: 0x42b07
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 526:526
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19162, 4
+		LineNumberAlt1              526, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                            ; local
+		CallGameFunctionString      "gcmoveableobj", "setignoreallcollisions", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "ignoreignorecollisionswith"
+		; address: 0x42b22
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 532:532
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19168, 4
+		LineNumberAlt1              532, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                                   ; local
+		CallGameFunctionString      "gcmoveableobj", "addignoreignorecollisionswith", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setcollisionflags"
+		; address: 0x42b3d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 539:539
+		MemberFunctionArgumentCheck 1
+		LineNumber                  19175, 4
+		LineNumberAlt1              539, 52
+		GetThisMemberValueString    "handle"
+		PushConstanti16             128
+		CallGameFunctionString      "gcmoveableobj", "setcollisionflags", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setconvergetarget"
+		; address: 0x42b58
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 545:545
+		MemberFunctionArgumentCheck 5
+		LineNumber                  19181, 4
+		LineNumberAlt1              545, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                       ; local
+		GetVariableValue            2                                       ; local
+		GetVariableValue            3                                       ; local
+		CallGameFunctionString      "gcmoveableobj", "setconvergetarget", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setnudgetarget"
+		; address: 0x42b79
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 550:550
+		MemberFunctionArgumentCheck 4
+		LineNumber                  19186, 4
+		LineNumberAlt1              550, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                    ; local
+		GetVariableValue            2                                    ; local
+		GetVariableValue            3                                    ; local
+		CallGameFunctionString      "gcmoveableobj", "setnudgetarget", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setbouncefactor"
+		; address: 0x42b9a
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 555:555
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19191, 4
+		LineNumberAlt1              555, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                     ; local
+		CallGameFunctionString      "gcmoveableobj", "setbouncefactor", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setfriction"
+		; address: 0x42bb5
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 560:560
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19196, 4
+		LineNumberAlt1              560, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                 ; local
+		CallGameFunctionString      "gcmoveableobj", "setfriction", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setgroundoffset"
+		; address: 0x42bd0
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 565:565
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19201, 4
+		LineNumberAlt1              565, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                     ; local
+		CallGameFunctionString      "gcmoveableobj", "setgroundoffset", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setbounceeventrepoert"
+		; address: 0x42beb
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 570:575
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    19206, 4
+		LineNumberAlt1                570, 52
+		GetVariableValue              1                                     ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19207, 4
+		LineNumberAlt1                571, 52
+		GetVariableValue              1                                     ; local
+		SetVariableValue              2                                     ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    19209, 4
+		LineNumberAlt1                573, 52
+		PushConstanti8                1
+		SetVariableValue              2                                     ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    19211, 4
+		LineNumberAlt1                575, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              2                                     ; local
+		CallGameFunctionString        "gcmoveableobj", "setbouncereport", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setobjscale"
+		; address: 0x42c3d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 580:580
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19216, 4
+		LineNumberAlt1              580, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                              ; local
+		CallGameFunctionString      "gcmoveableobj", "setscale", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setscale"
+		; address: 0x42c58
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 585:585
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19221, 4
+		LineNumberAlt1              585, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                              ; local
+		CallGameFunctionString      "gcmoveableobj", "setscale", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setmoveable"
+		; address: 0x42c73
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 590:627
+		MemberFunctionArgumentCheck   7
+		CreateStackVariables          6
+		LineNumber                    19226, 4
+		LineNumberAlt1                590, 52
+		GetVariableValue              1                                   ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19227, 4
+		LineNumberAlt1                591, 52
+		PushConstantf32               5
+		SetVariableValue              7                                   ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    19229, 4
+		LineNumberAlt1                593, 52
+		GetVariableValue              1                                   ; local
+		SetVariableValue              7                                   ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    19232, 4
+		LineNumberAlt1                596, 52
+		GetVariableValue              2                                   ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    19233, 4
+		LineNumberAlt1                597, 52
+		PushConstantf32               0
+		SetVariableValue              8                                   ; local
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    19235, 4
+		LineNumberAlt1                599, 52
+		GetVariableValue              2                                   ; local
+		SetVariableValue              8                                   ; local
+		; <-
+		BranchTarget                  3
+		LineNumber                    19238, 4
+		LineNumberAlt1                602, 52
+		GetVariableValue              3                                   ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    19239, 4
+		LineNumberAlt1                603, 52
+		PushConstanti8                1
+		SetVariableValue              9                                   ; local
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    19241, 4
+		LineNumberAlt1                605, 52
+		GetVariableValue              3                                   ; local
+		SetVariableValue              9                                   ; local
+		; <-
+		BranchTarget                  5
+		LineNumber                    19244, 4
+		LineNumberAlt1                608, 52
+		GetVariableValue              4                                   ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    19245, 4
+		LineNumberAlt1                609, 52
+		PushConstant0
+		SetVariableValue              10                                  ; local
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		LineNumber                    19247, 4
+		LineNumberAlt1                611, 52
+		GetVariableValue              4                                   ; local
+		SetVariableValue              10                                  ; local
+		; <-
+		BranchTarget                  7
+		LineNumber                    19250, 4
+		LineNumberAlt1                614, 52
+		GetVariableValue              5                                   ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    19251, 4
+		LineNumberAlt1                615, 52
+		PushConstant0
+		SetVariableValue              11                                  ; local
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    19253, 4
+		LineNumberAlt1                617, 52
+		GetVariableValue              5                                   ; local
+		SetVariableValue              11                                  ; local
+		; <-
+		BranchTarget                  9
+		LineNumber                    19256, 4
+		LineNumberAlt1                620, 52
+		GetVariableValue              6                                   ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    19257, 4
+		LineNumberAlt1                621, 52
+		PushConstanti8                1
+		SetVariableValue              12                                  ; local
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		LineNumber                    19259, 4
+		LineNumberAlt1                623, 52
+		GetVariableValue              6                                   ; local
+		SetVariableValue              12                                  ; local
+		; <-
+		BranchTarget                  11
+		LineNumber                    19262, 4
+		LineNumberAlt1                626, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              7                                   ; local
+		GetVariableValue              8                                   ; local
+		GetVariableValue              9                                   ; local
+		GetVariableValue              10                                  ; local
+		GetVariableValue              11                                  ; local
+		CallGameFunctionString        "gcmoveableobj", "setupmoveable", 6
+		Pop
+		LineNumber                    19263, 4
+		LineNumberAlt1                627, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              12                                  ; local
+		CallGameFunctionString        "gcmoveableobj", "setbounce", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setmoveableflags"
+		; address: 0x42def
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 633:633
+		MemberFunctionArgumentCheck 5
+		LineNumber                  19269, 4
+		LineNumberAlt1              633, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                      ; local
+		GetVariableValue            2                                      ; local
+		GetVariableValue            3                                      ; local
+		GetVariableValue            4                                      ; local
+		CallGameFunctionString      "gcmoveableobj", "setmoveableflags", 5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setstationary"
+		; address: 0x42e13
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 638:638
+		MemberFunctionArgumentCheck 1
+		LineNumber                  19274, 4
+		LineNumberAlt1              638, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "setupstationary", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setrollangle"
+		; address: 0x42e2b
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 643:643
+		MemberFunctionArgumentCheck 4
+		LineNumber                  19279, 4
+		LineNumberAlt1              643, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                  ; local
+		GetVariableValue            2                                  ; local
+		GetVariableValue            3                                  ; local
+		CallGameFunctionString      "gcmoveableobj", "setrollangle", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setmytargetingflags"
+		; address: 0x42e4c
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 648:648
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19284, 4
+		LineNumberAlt1              648, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                         ; local
+		CallGameFunctionString      "gcmoveableobj", "setmytargetingflags", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setfallreset"
+		; address: 0x42e67
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 653:653
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19289, 4
+		LineNumberAlt1              653, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                  ; local
+		CallGameFunctionString      "gcmoveableobj", "setfallreset", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setfalllimit"
+		; address: 0x42e82
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 658:658
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19294, 4
+		LineNumberAlt1              658, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                  ; local
+		CallGameFunctionString      "gcmoveableobj", "setfalllimit", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setfallresetpos"
+		; address: 0x42e9d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 663:663
+		MemberFunctionArgumentCheck 4
+		LineNumber                  19299, 4
+		LineNumberAlt1              663, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                     ; local
+		GetVariableValue            2                                     ; local
+		GetVariableValue            3                                     ; local
+		CallGameFunctionString      "gcmoveableobj", "setfallresetpos", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setvelocity"
+		; address: 0x42ebe
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 668:668
+		MemberFunctionArgumentCheck 4
+		LineNumber                  19304, 4
+		LineNumberAlt1              668, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                 ; local
+		GetVariableValue            2                                 ; local
+		GetVariableValue            3                                 ; local
+		CallGameFunctionString      "gcmoveableobj", "setvelocity", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "fadein"
+		; address: 0x42edf
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 673:676
+		MemberFunctionArgumentCheck   2
+		LineNumber                    19309, 4
+		LineNumberAlt1                673, 52
+		GetVariableValue              1                            ; local
+		PushConstant0
+		EqualTo
+		GetVariableValue              1                            ; local
+		PushNothing
+		EqualTo
+		Or
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19310, 4
+		LineNumberAlt1                674, 52
+		GetVariableValue              0                            ; local
+		PushConstantf32               1
+		GetThisMemberFunctionString   "setalpha"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    19312, 4
+		LineNumberAlt1                676, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              1                            ; local
+		CallGameFunctionString        "gcmoveableobj", "fadein", 2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "fadeout"
+		; address: 0x42f2d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 682:685
+		MemberFunctionArgumentCheck   2
+		LineNumber                    19318, 4
+		LineNumberAlt1                682, 52
+		GetVariableValue              1                             ; local
+		PushConstant0
+		EqualTo
+		GetVariableValue              1                             ; local
+		PushNothing
+		EqualTo
+		Or
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19319, 4
+		LineNumberAlt1                683, 52
+		GetVariableValue              0                             ; local
+		PushConstantf32               0
+		GetThisMemberFunctionString   "setalpha"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    19321, 4
+		LineNumberAlt1                685, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              1                             ; local
+		CallGameFunctionString        "gcmoveableobj", "fadeout", 2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setalpha"
+		; address: 0x42f7b
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 694:697
+		MemberFunctionArgumentCheck   2
+		LineNumber                    19330, 4
+		LineNumberAlt1                694, 52
+		GetVariableValue              1                                     ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19331, 4
+		LineNumberAlt1                695, 52
+		PushConstanti8                1
+		SetVariableValue              1                                     ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    19333, 4
+		LineNumberAlt1                697, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              1                                     ; local
+		CallGameFunctionString        "gcmoveableobj", "settransparency", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getalpha"
+		; address: 0x42fb7
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 702:702
+		MemberFunctionArgumentCheck 1
+		LineNumber                  19338, 4
+		LineNumberAlt1              702, 52
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcmoveableobj", "gettransparency", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "chasetoa"
+		; address: 0x42fcf
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 708:708
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19344, 4
+		LineNumberAlt1              708, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                              ; local
+		CallGameFunctionString      "gcmoveableobj", "chasetoa", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "settargettoa"
+		; address: 0x42fea
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 716:716
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19352, 4
+		LineNumberAlt1              716, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                  ; local
+		CallGameFunctionString      "gcmoveableobj", "settargettoa", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setobjgravity"
+		; address: 0x43005
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 721:721
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19357, 4
+		LineNumberAlt1              721, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                     ; local
+		CallGameFunctionString      "gcmoveableobj", "setlocalgravity", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setanimtexture"
+		; address: 0x43020
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 726:726
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19362, 4
+		LineNumberAlt1              726, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                    ; local
+		CallGameFunctionString      "gcmoveableobj", "setanimtexture", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setcrushflags"
+		; address: 0x4303b
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 734:734
+		MemberFunctionArgumentCheck 7
+		LineNumber                  19370, 4
+		LineNumberAlt1              734, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                   ; local
+		GetVariableValue            2                                   ; local
+		GetVariableValue            3                                   ; local
+		GetVariableValue            4                                   ; local
+		GetVariableValue            5                                   ; local
+		GetVariableValue            6                                   ; local
+		CallGameFunctionString      "gcmoveableobj", "setcrushflags", 7
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "movebboxsides"
+		; address: 0x43065
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 739:739
+		MemberFunctionArgumentCheck 7
+		LineNumber                  19375, 4
+		LineNumberAlt1              739, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                   ; local
+		GetVariableValue            2                                   ; local
+		GetVariableValue            3                                   ; local
+		GetVariableValue            4                                   ; local
+		GetVariableValue            5                                   ; local
+		GetVariableValue            6                                   ; local
+		CallGameFunctionString      "gcmoveableobj", "movebboxsides", 7
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

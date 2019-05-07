@@ -1,0 +1,69 @@
+begin class "ss_scriptedcamera", "ss_aicamera"
+	begin method "ss_scriptedcamera"
+		; address: 0x3488d
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 377:377
+		MemberFunctionArgumentCheck 8
+		LineNumber                  5785, 4
+		LineNumberAlt1              377, 25
+		GetVariableValue            0             ; local
+		GetVariableValue            1             ; local
+		GetVariableValue            2             ; local
+		GetVariableValue            3             ; local
+		GetVariableValue            4             ; local
+		GetVariableValue            5             ; local
+		GetVariableValue            6             ; local
+		GetVariableValue            7             ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "ss_aicamera"
+		JumpAbsolute                10
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x348bb
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 382:386
+		MemberFunctionArgumentCheck 1
+		LineNumber                  5790, 4
+		LineNumberAlt1              382, 25
+		CallGameFunctionString      "gcgame", "getcurrentcamera", 0
+		LineNumber                  5790, 4
+		LineNumberAlt1              382, 25
+		SetThisMemberValueString    "handle"
+		LineNumber                  5791, 4
+		LineNumberAlt1              383, 25
+		GetThisMemberValueString    "handle"
+		GetThisMemberValueString    "tx"
+		GetThisMemberValueString    "ty"
+		GetThisMemberValueString    "tz"
+		CallGameFunctionString      "gclegocamera", "settargpos", 4
+		Pop
+		LineNumber                  5792, 4
+		LineNumberAlt1              384, 25
+		GetThisMemberValueString    "spline"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  5793, 4
+		LineNumberAlt1              385, 25
+		GetThisMemberValueString    "handle"
+		GetThisMemberValueString    "spline"
+		GetMemberValueString        "object"
+		PushConstant0
+		GetThisMemberValueString    "minzoom"
+		GetThisMemberValueString    "maxzoom"
+		CallGameFunctionString      "gclegocamera", "setcameraaispline", 5
+		Pop
+		LineNumber                  5794, 4
+		LineNumberAlt1              386, 25
+		GetThisMemberValueString    "handle"
+		PushConstanti8              1
+		CallGameFunctionString      "gclegocamera", "setcameraaimode", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,2382 @@
+begin class "ta136_puzzle"
+	property "parent"
+	property "g1array"
+	property "g1timer"
+	property "g1incrementor"
+	property "g1stopincrementing"
+	property "g2array"
+	property "g2timer"
+	property "g2incrementor"
+	property "g2stopincrementing"
+	property "g3array"
+	property "g3timer"
+	property "g3incrementor"
+	property "g3stopincrementing"
+	property "g4array"
+	property "g4timer"
+	property "g4incrementor"
+	property "g4stopincrementing"
+	property "hookarray"
+	property "resetpoint"
+	property "resetorent"
+	property "music"
+
+	begin method "ta136_puzzle"
+		; address: 0xb4a94
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 118:120
+		MemberFunctionArgumentCheck 2
+		LineNumber                  15656, 4
+		LineNumberAlt1              118, 218
+		GetVariableValue            1                 ; local
+		SetThisMemberValueString    "parent"
+		LineNumber                  15657, 4
+		LineNumberAlt1              119, 218
+		CreateObjectString          "basicpoint"
+		Dup
+		PushConstant0
+		PushConstantf32             228.1999969482422
+		Subtract
+		PushConstantf32             18
+		PushConstantf32             21.5
+		Pull                        4
+		GetMemberFunctionString     "basicpoint"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  15657, 4
+		LineNumberAlt1              119, 218
+		SetThisMemberValueString    "resetpoint"
+		LineNumber                  15658, 4
+		LineNumberAlt1              120, 218
+		PushConstantf32             8
+		SetThisMemberValueString    "resetorent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "maininitfull"
+		; address: 0xb4aee
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 126:130
+		MemberFunctionArgumentCheck 1
+		LineNumber                  15664, 4
+		LineNumberAlt1              126, 218
+		GetVariableValue            0                                   ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  15666, 4
+		LineNumberAlt1              128, 218
+		CreateObjectString          "legomp3player"
+		Dup
+		Dup
+		GetMemberFunctionString     "legomp3player"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  15666, 4
+		LineNumberAlt1              128, 218
+		SetThisMemberValueString    "music"
+		LineNumber                  15667, 4
+		LineNumberAlt1              129, 218
+		GetThisMemberValueString    "music"
+		PushConstantStringString    "Root/Data/sounds/MusicMakutaTheme"
+		Pull                        2
+		GetMemberFunctionString     "setupforplay"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  15668, 4
+		LineNumberAlt1              130, 218
+		GetThisMemberValueString    "music"
+		PushConstanti8              1
+		Pull                        2
+		GetMemberFunctionString     "play"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xb4b56
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 136:241
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    15674, 4
+		LineNumberAlt1                136, 218
+		PushConstanti8                15
+		CallGameFunctionString        "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                    15677, 4
+		LineNumberAlt1                139, 218
+		CreateArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl00"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15678, 4
+		LineNumberAlt1                140, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl01"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15679, 4
+		LineNumberAlt1                141, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl02"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15680, 4
+		LineNumberAlt1                142, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl03"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15681, 4
+		LineNumberAlt1                143, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl09"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15683, 4
+		LineNumberAlt1                145, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl10"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15684, 4
+		LineNumberAlt1                146, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl11"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15685, 4
+		LineNumberAlt1                147, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl12"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15686, 4
+		LineNumberAlt1                148, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl13"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15687, 4
+		LineNumberAlt1                149, 218
+		AppendToArray
+		SetThisMemberValueString      "g1array"
+		LineNumber                    15689, 4
+		LineNumberAlt1                151, 218
+		CreateObjectString            "lego_timer"
+		Dup
+		PushConstantStringString      "tim1"
+		PushConstantf32               0.5
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "lego_timer"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15689, 4
+		LineNumberAlt1                151, 218
+		SetThisMemberValueString      "g1timer"
+		LineNumber                    15690, 4
+		LineNumberAlt1                152, 218
+		GetThisMemberValueString      "g1timer"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15691, 4
+		LineNumberAlt1                153, 218
+		PushConstant0
+		SetThisMemberValueString      "g1incrementor"
+		LineNumber                    15692, 4
+		LineNumberAlt1                154, 218
+		PushConstant0
+		SetThisMemberValueString      "g1stopincrementing"
+		LineNumber                    15693, 4
+		LineNumberAlt1                155, 218
+		GetThisMemberValueString      "g1array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                                    ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    15694, 4
+		LineNumberAlt1                156, 218
+		GetThisMemberValueString      "g1array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15695, 4
+		LineNumberAlt1                157, 218
+		GetThisMemberValueString      "g1array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		PushConstanti8                3
+		PushConstant0
+		PushConstanti8                3
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15696, 4
+		LineNumberAlt1                158, 218
+		GetThisMemberValueString      "g1array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    15700, 4
+		LineNumberAlt1                162, 218
+		CreateArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl14"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15701, 4
+		LineNumberAlt1                163, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl15"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15702, 4
+		LineNumberAlt1                164, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl16"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15703, 4
+		LineNumberAlt1                165, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl17"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15705, 4
+		LineNumberAlt1                167, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl18"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15706, 4
+		LineNumberAlt1                168, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl19"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15707, 4
+		LineNumberAlt1                169, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl20"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15708, 4
+		LineNumberAlt1                170, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl21"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15709, 4
+		LineNumberAlt1                171, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl22"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15710, 4
+		LineNumberAlt1                172, 218
+		AppendToArray
+		SetThisMemberValueString      "g2array"
+		LineNumber                    15712, 4
+		LineNumberAlt1                174, 218
+		CreateObjectString            "lego_timer"
+		Dup
+		PushConstantStringString      "tim2"
+		PushConstantf32               0.5
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "lego_timer"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15712, 4
+		LineNumberAlt1                174, 218
+		SetThisMemberValueString      "g2timer"
+		LineNumber                    15713, 4
+		LineNumberAlt1                175, 218
+		GetThisMemberValueString      "g2timer"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15714, 4
+		LineNumberAlt1                176, 218
+		PushConstant0
+		SetThisMemberValueString      "g2incrementor"
+		LineNumber                    15715, 4
+		LineNumberAlt1                177, 218
+		PushConstant0
+		SetThisMemberValueString      "g2stopincrementing"
+		LineNumber                    15716, 4
+		LineNumberAlt1                178, 218
+		GetThisMemberValueString      "g2array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                                    ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              1                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    15717, 4
+		LineNumberAlt1                179, 218
+		GetThisMemberValueString      "g2array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15718, 4
+		LineNumberAlt1                180, 218
+		GetThisMemberValueString      "g2array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		PushConstanti8                3
+		PushConstant0
+		PushConstanti8                3
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15719, 4
+		LineNumberAlt1                181, 218
+		GetThisMemberValueString      "g2array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    15723, 4
+		LineNumberAlt1                185, 218
+		CreateArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl31"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15724, 4
+		LineNumberAlt1                186, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl32"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15725, 4
+		LineNumberAlt1                187, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl33"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15726, 4
+		LineNumberAlt1                188, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl34"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15727, 4
+		LineNumberAlt1                189, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl35"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15729, 4
+		LineNumberAlt1                191, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl36"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15730, 4
+		LineNumberAlt1                192, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl37"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15731, 4
+		LineNumberAlt1                193, 218
+		AppendToArray
+		SetThisMemberValueString      "g3array"
+		LineNumber                    15733, 4
+		LineNumberAlt1                195, 218
+		CreateObjectString            "lego_timer"
+		Dup
+		PushConstantStringString      "tim3"
+		PushConstantf32               0.5
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "lego_timer"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15733, 4
+		LineNumberAlt1                195, 218
+		SetThisMemberValueString      "g3timer"
+		LineNumber                    15734, 4
+		LineNumberAlt1                196, 218
+		GetThisMemberValueString      "g3timer"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15735, 4
+		LineNumberAlt1                197, 218
+		PushConstant0
+		SetThisMemberValueString      "g3incrementor"
+		LineNumber                    15736, 4
+		LineNumberAlt1                198, 218
+		PushConstant0
+		SetThisMemberValueString      "g3stopincrementing"
+		LineNumber                    15737, 4
+		LineNumberAlt1                199, 218
+		GetThisMemberValueString      "g3array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                                    ; local
+		; <-
+		BranchTarget                  4
+		Dup
+		GetVariableValue              1                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    15738, 4
+		LineNumberAlt1                200, 218
+		GetThisMemberValueString      "g3array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15739, 4
+		LineNumberAlt1                201, 218
+		GetThisMemberValueString      "g3array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		PushConstanti8                3
+		PushConstant0
+		PushConstanti8                3
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15740, 4
+		LineNumberAlt1                202, 218
+		GetThisMemberValueString      "g3array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    15744, 4
+		LineNumberAlt1                206, 218
+		CreateArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl38"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15745, 4
+		LineNumberAlt1                207, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl39"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15746, 4
+		LineNumberAlt1                208, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl40"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15747, 4
+		LineNumberAlt1                209, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl41"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15748, 4
+		LineNumberAlt1                210, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl42"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15749, 4
+		LineNumberAlt1                211, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl43"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15750, 4
+		LineNumberAlt1                212, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl44"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15751, 4
+		LineNumberAlt1                213, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl45"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15752, 4
+		LineNumberAlt1                214, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl46"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15753, 4
+		LineNumberAlt1                215, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "pl47"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15754, 4
+		LineNumberAlt1                216, 218
+		AppendToArray
+		SetThisMemberValueString      "g4array"
+		LineNumber                    15756, 4
+		LineNumberAlt1                218, 218
+		CreateObjectString            "lego_timer"
+		Dup
+		PushConstantStringString      "tim4"
+		PushConstantf32               0.5
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "lego_timer"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15756, 4
+		LineNumberAlt1                218, 218
+		SetThisMemberValueString      "g4timer"
+		LineNumber                    15757, 4
+		LineNumberAlt1                219, 218
+		GetThisMemberValueString      "g4timer"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15758, 4
+		LineNumberAlt1                220, 218
+		PushConstant0
+		SetThisMemberValueString      "g4incrementor"
+		LineNumber                    15759, 4
+		LineNumberAlt1                221, 218
+		PushConstant0
+		SetThisMemberValueString      "g4stopincrementing"
+		LineNumber                    15760, 4
+		LineNumberAlt1                222, 218
+		GetThisMemberValueString      "g4array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                                    ; local
+		; <-
+		BranchTarget                  6
+		Dup
+		GetVariableValue              1                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    15761, 4
+		LineNumberAlt1                223, 218
+		GetThisMemberValueString      "g4array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15762, 4
+		LineNumberAlt1                224, 218
+		GetThisMemberValueString      "g4array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		PushConstanti8                3
+		PushConstant0
+		PushConstanti8                3
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15763, 4
+		LineNumberAlt1                225, 218
+		GetThisMemberValueString      "g4array"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Pop
+		LineNumber                    15767, 4
+		LineNumberAlt1                229, 218
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstanti8                100
+		Pull                          2
+		GetMemberFunctionString       "setgrapplinghookdistance"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15768, 4
+		LineNumberAlt1                230, 218
+		CreateArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "hot0"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15769, 4
+		LineNumberAlt1                231, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "hot1"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15770, 4
+		LineNumberAlt1                232, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "hot2"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15771, 4
+		LineNumberAlt1                233, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "hot3"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15772, 4
+		LineNumberAlt1                234, 218
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "hot4"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15773, 4
+		LineNumberAlt1                235, 218
+		AppendToArray
+		SetThisMemberValueString      "hookarray"
+		LineNumber                    15775, 4
+		LineNumberAlt1                237, 218
+		GetThisMemberValueString      "hookarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                                    ; local
+		; <-
+		BranchTarget                  8
+		Dup
+		GetVariableValue              1                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    15776, 4
+		LineNumberAlt1                238, 218
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15777, 4
+		LineNumberAlt1                239, 218
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "setmytargetingflags"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15778, 4
+		LineNumberAlt1                240, 218
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		PushConstanti8                1
+		PushConstanti8                1
+		PushConstanti8                1
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15779, 4
+		LineNumberAlt1                241, 218
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0xb53cd
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 252:285
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    15790, 4
+		LineNumberAlt1                252, 218
+		GetThisMemberValueString      "g1array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                   ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                   ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    15791, 4
+		LineNumberAlt1                253, 218
+		GetThisMemberValueString      "g1array"
+		GetVariableValue              1                   ; local
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               3.799999952316284
+		Subtract
+		Pull                          2
+		GetMemberFunctionString       "sety"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    15793, 4
+		LineNumberAlt1                255, 218
+		GetThisMemberValueString      "g1array"
+		PushConstant0
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               13.399999618530273
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    15794, 4
+		LineNumberAlt1                256, 218
+		PushConstanti8                1
+		SetThisMemberValueString      "g1incrementor"
+		LineNumber                    15795, 4
+		LineNumberAlt1                257, 218
+		GetThisMemberValueString      "g1timer"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15796, 4
+		LineNumberAlt1                258, 218
+		GetThisMemberValueString      "g1timer"
+		Dup
+		GetMemberFunctionString       "start"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15799, 4
+		LineNumberAlt1                261, 218
+		GetThisMemberValueString      "g2array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                   ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              1                   ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    15800, 4
+		LineNumberAlt1                262, 218
+		GetThisMemberValueString      "g2array"
+		GetVariableValue              1                   ; local
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               3.799999952316284
+		Subtract
+		Pull                          2
+		GetMemberFunctionString       "sety"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    15802, 4
+		LineNumberAlt1                264, 218
+		GetThisMemberValueString      "g2array"
+		PushConstant0
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               13.399999618530273
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    15803, 4
+		LineNumberAlt1                265, 218
+		PushConstanti8                1
+		SetThisMemberValueString      "g2incrementor"
+		LineNumber                    15804, 4
+		LineNumberAlt1                266, 218
+		GetThisMemberValueString      "g2timer"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15805, 4
+		LineNumberAlt1                267, 218
+		GetThisMemberValueString      "g2timer"
+		Dup
+		GetMemberFunctionString       "start"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15808, 4
+		LineNumberAlt1                270, 218
+		GetThisMemberValueString      "g3array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                   ; local
+		; <-
+		BranchTarget                  4
+		Dup
+		GetVariableValue              1                   ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    15809, 4
+		LineNumberAlt1                271, 218
+		GetThisMemberValueString      "g3array"
+		GetVariableValue              1                   ; local
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               3.799999952316284
+		Subtract
+		Pull                          2
+		GetMemberFunctionString       "sety"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    15811, 4
+		LineNumberAlt1                273, 218
+		GetThisMemberValueString      "g3array"
+		PushConstant0
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               13.399999618530273
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    15812, 4
+		LineNumberAlt1                274, 218
+		PushConstanti8                1
+		SetThisMemberValueString      "g3incrementor"
+		LineNumber                    15813, 4
+		LineNumberAlt1                275, 218
+		GetThisMemberValueString      "g3timer"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15814, 4
+		LineNumberAlt1                276, 218
+		GetThisMemberValueString      "g3timer"
+		Dup
+		GetMemberFunctionString       "start"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15817, 4
+		LineNumberAlt1                279, 218
+		GetThisMemberValueString      "g4array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                   ; local
+		; <-
+		BranchTarget                  6
+		Dup
+		GetVariableValue              1                   ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    15818, 4
+		LineNumberAlt1                280, 218
+		GetThisMemberValueString      "g4array"
+		GetVariableValue              1                   ; local
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               3.799999952316284
+		Subtract
+		Pull                          2
+		GetMemberFunctionString       "sety"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Pop
+		LineNumber                    15820, 4
+		LineNumberAlt1                282, 218
+		GetThisMemberValueString      "g4array"
+		PushConstant0
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               13.399999618530273
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    15821, 4
+		LineNumberAlt1                283, 218
+		PushConstanti8                1
+		SetThisMemberValueString      "g4incrementor"
+		LineNumber                    15822, 4
+		LineNumberAlt1                284, 218
+		GetThisMemberValueString      "g4timer"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15823, 4
+		LineNumberAlt1                285, 218
+		GetThisMemberValueString      "g4timer"
+		Dup
+		GetMemberFunctionString       "start"
+		JumpAbsolute                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0xb566f
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 292:350
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    15830, 4
+		LineNumberAlt1                292, 218
+		GetThisMemberValueString      "g1array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                          ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                          ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    15831, 4
+		LineNumberAlt1                293, 218
+		GetThisMemberValueString      "g1array"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "stopslidetimer"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15832, 4
+		LineNumberAlt1                294, 218
+		GetThisMemberValueString      "g1array"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15833, 4
+		LineNumberAlt1                295, 218
+		GetThisMemberValueString      "g1array"
+		GetVariableValue              1                          ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    15835, 4
+		LineNumberAlt1                297, 218
+		PushNothing
+		SetThisMemberValueString      "g1array"
+		LineNumber                    15837, 4
+		LineNumberAlt1                299, 218
+		GetThisMemberValueString      "g1timer"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15838, 4
+		LineNumberAlt1                300, 218
+		PushNothing
+		SetThisMemberValueString      "g1timer"
+		LineNumber                    15839, 4
+		LineNumberAlt1                301, 218
+		PushNothing
+		SetThisMemberValueString      "g1incrementor"
+		LineNumber                    15840, 4
+		LineNumberAlt1                302, 218
+		PushNothing
+		SetThisMemberValueString      "g1stopincrementing"
+		LineNumber                    15843, 4
+		LineNumberAlt1                305, 218
+		GetThisMemberValueString      "g2array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                          ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              1                          ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    15844, 4
+		LineNumberAlt1                306, 218
+		GetThisMemberValueString      "g2array"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "stopslidetimer"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15845, 4
+		LineNumberAlt1                307, 218
+		GetThisMemberValueString      "g2array"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15846, 4
+		LineNumberAlt1                308, 218
+		GetThisMemberValueString      "g2array"
+		GetVariableValue              1                          ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    15848, 4
+		LineNumberAlt1                310, 218
+		PushNothing
+		SetThisMemberValueString      "g2array"
+		LineNumber                    15850, 4
+		LineNumberAlt1                312, 218
+		GetThisMemberValueString      "g2timer"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15851, 4
+		LineNumberAlt1                313, 218
+		PushNothing
+		SetThisMemberValueString      "g2timer"
+		LineNumber                    15852, 4
+		LineNumberAlt1                314, 218
+		PushNothing
+		SetThisMemberValueString      "g2incrementor"
+		LineNumber                    15853, 4
+		LineNumberAlt1                315, 218
+		PushNothing
+		SetThisMemberValueString      "g2stopincrementing"
+		LineNumber                    15856, 4
+		LineNumberAlt1                318, 218
+		GetThisMemberValueString      "g3array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                          ; local
+		; <-
+		BranchTarget                  4
+		Dup
+		GetVariableValue              1                          ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    15857, 4
+		LineNumberAlt1                319, 218
+		GetThisMemberValueString      "g3array"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "stopslidetimer"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15858, 4
+		LineNumberAlt1                320, 218
+		GetThisMemberValueString      "g3array"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15859, 4
+		LineNumberAlt1                321, 218
+		GetThisMemberValueString      "g3array"
+		GetVariableValue              1                          ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    15861, 4
+		LineNumberAlt1                323, 218
+		PushNothing
+		SetThisMemberValueString      "g3array"
+		LineNumber                    15863, 4
+		LineNumberAlt1                325, 218
+		GetThisMemberValueString      "g3timer"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15864, 4
+		LineNumberAlt1                326, 218
+		PushNothing
+		SetThisMemberValueString      "g3timer"
+		LineNumber                    15865, 4
+		LineNumberAlt1                327, 218
+		PushNothing
+		SetThisMemberValueString      "g3incrementor"
+		LineNumber                    15866, 4
+		LineNumberAlt1                328, 218
+		PushNothing
+		SetThisMemberValueString      "g3stopincrementing"
+		LineNumber                    15869, 4
+		LineNumberAlt1                331, 218
+		GetThisMemberValueString      "g4array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                          ; local
+		; <-
+		BranchTarget                  6
+		Dup
+		GetVariableValue              1                          ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    15870, 4
+		LineNumberAlt1                332, 218
+		GetThisMemberValueString      "g4array"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "stopslidetimer"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15871, 4
+		LineNumberAlt1                333, 218
+		GetThisMemberValueString      "g4array"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15872, 4
+		LineNumberAlt1                334, 218
+		GetThisMemberValueString      "g4array"
+		GetVariableValue              1                          ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Pop
+		LineNumber                    15874, 4
+		LineNumberAlt1                336, 218
+		PushNothing
+		SetThisMemberValueString      "g4array"
+		LineNumber                    15876, 4
+		LineNumberAlt1                338, 218
+		GetThisMemberValueString      "g4timer"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15877, 4
+		LineNumberAlt1                339, 218
+		PushNothing
+		SetThisMemberValueString      "g4timer"
+		LineNumber                    15878, 4
+		LineNumberAlt1                340, 218
+		PushNothing
+		SetThisMemberValueString      "g4incrementor"
+		LineNumber                    15879, 4
+		LineNumberAlt1                341, 218
+		PushNothing
+		SetThisMemberValueString      "g4stopincrementing"
+		LineNumber                    15882, 4
+		LineNumberAlt1                344, 218
+		GetThisMemberValueString      "hookarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                          ; local
+		; <-
+		BranchTarget                  8
+		Dup
+		GetVariableValue              1                          ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    15883, 4
+		LineNumberAlt1                345, 218
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15884, 4
+		LineNumberAlt1                346, 218
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                          ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		Pop
+		LineNumber                    15886, 4
+		LineNumberAlt1                348, 218
+		PushNothing
+		SetThisMemberValueString      "hookarray"
+		LineNumber                    15888, 4
+		LineNumberAlt1                350, 218
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstanti8                45
+		Pull                          2
+		GetMemberFunctionString       "setgrapplinghookdistance"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "mainhide"
+		; address: 0xb59b3
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 359:363
+		MemberFunctionArgumentCheck 1
+		LineNumber                  15897, 4
+		LineNumberAlt1              359, 218
+		GetThisMemberValueString    "music"
+		Dup
+		GetMemberFunctionString     "stop"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  15901, 4
+		LineNumberAlt1              363, 218
+		GetVariableValue            0        ; local
+		GetThisMemberFunctionString "hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xb59de
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 370:370
+		MemberFunctionArgumentCheck 1
+		LineNumber                  15908, 4
+		LineNumberAlt1              370, 218
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xb59f0
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xb59f4
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 380:513
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    15918, 4
+		LineNumberAlt1                380, 218
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    15922, 4
+		LineNumberAlt1                384, 218
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            29, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    15931, 4
+		LineNumberAlt1                393, 218
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15932, 4
+		LineNumberAlt1                394, 218
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15933, 4
+		LineNumberAlt1                395, 218
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15935, 4
+		LineNumberAlt1                397, 218
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    15937, 4
+		LineNumberAlt1                399, 218
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "resetpoint"
+		GetMemberValueString          "x"
+		GetThisMemberValueString      "resetpoint"
+		GetMemberValueString          "y"
+		GetThisMemberValueString      "resetpoint"
+		GetMemberValueString          "z"
+		Pull                          4
+		GetMemberFunctionString       "setpos"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15938, 4
+		LineNumberAlt1                400, 218
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "resetorent"
+		Pull                          2
+		GetMemberFunctionString       "setorientation"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15939, 4
+		LineNumberAlt1                401, 218
+		PushConstantStringString      "** set to X:"
+		GetThisMemberValueString      "resetpoint"
+		GetMemberValueString          "x"
+		ConvertToString
+		Add
+		PushConstantStringString      " Y:"
+		Add
+		GetThisMemberValueString      "resetpoint"
+		GetMemberValueString          "y"
+		ConvertToString
+		Add
+		PushConstantStringString      " Z:"
+		Add
+		GetThisMemberValueString      "resetpoint"
+		GetMemberValueString          "z"
+		ConvertToString
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    15940, 4
+		LineNumberAlt1                402, 218
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            29, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    15945, 4
+		LineNumberAlt1                407, 218
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		Dup
+		PushConstantStringString      "tp02"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15947, 4
+		LineNumberAlt1                409, 218
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    15949, 4
+		LineNumberAlt1                411, 218
+		GetThisMemberValueString      "resetpoint"
+		PushConstantf32               373.5
+		PushConstantf32               38.900001525878906
+		PushConstantf32               724.5999755859375
+		Pull                          4
+		GetMemberFunctionString       "setto"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15950, 4
+		LineNumberAlt1                412, 218
+		PushConstantf32               119.69999694824219
+		SetVariableValue              2                                            ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstantStringString      "tp03"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15957, 4
+		LineNumberAlt1                419, 218
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    15959, 4
+		LineNumberAlt1                421, 218
+		GetThisMemberValueString      "resetpoint"
+		PushConstant0
+		PushConstantf32               232.89999389648438
+		Subtract
+		PushConstantf32               38.900001525878906
+		PushConstantf32               582.2000122070312
+		Pull                          4
+		GetMemberFunctionString       "setto"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15960, 4
+		LineNumberAlt1                422, 218
+		PushConstant0
+		PushConstantf32               16.899999618530273
+		Subtract
+		SetVariableValue              2                                            ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstantStringString      "tp04"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15962, 4
+		LineNumberAlt1                424, 218
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstantStringString      "tp05"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15964, 4
+		LineNumberAlt1                426, 218
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    15966, 4
+		LineNumberAlt1                428, 218
+		GetThisMemberValueString      "resetpoint"
+		PushConstantf32               49
+		PushConstantf32               1.899999976158142
+		PushConstantf32               447.79998779296875
+		Pull                          4
+		GetMemberFunctionString       "setto"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15967, 4
+		LineNumberAlt1                429, 218
+		PushConstant0
+		PushConstantf32               45.79999923706055
+		Subtract
+		SetVariableValue              2                                            ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Dup
+		PushConstantStringString      "tp06"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15969, 4
+		LineNumberAlt1                431, 218
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstantStringString      "tp07"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15971, 4
+		LineNumberAlt1                433, 218
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    15973, 4
+		LineNumberAlt1                435, 218
+		GetThisMemberValueString      "resetpoint"
+		PushConstant0
+		PushConstantf32               23.100000381469727
+		Subtract
+		PushConstantf32               18
+		PushConstantf32               209.39999389648438
+		Pull                          4
+		GetMemberFunctionString       "setto"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    15974, 4
+		LineNumberAlt1                436, 218
+		PushConstantf32               13.699999809265137
+		SetVariableValue              2                                            ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Dup
+		PushConstantStringString      "tp08"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15976, 4
+		LineNumberAlt1                438, 218
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		Pop
+		BranchAlwaysTarget            29, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		Dup
+		PushConstanti8                8
+		EqualTo
+		CompareAndBranchIfFalseTarget 28, 0
+		; ->
+		LineNumber                    15982, 4
+		LineNumberAlt1                444, 218
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		Dup
+		GetThisMemberValueString      "g1timer"
+		GetMemberValueString          "id"
+		EqualTo
+		CompareAndBranchIfFalseTarget 12, 0
+		; ->
+		LineNumber                    15986, 4
+		LineNumberAlt1                448, 218
+		GetThisMemberValueString      "g1stopincrementing"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 11, 0
+		; ->
+		LineNumber                    15987, 4
+		LineNumberAlt1                449, 218
+		GetThisMemberValueString      "g1array"
+		GetThisMemberValueString      "g1incrementor"
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               13.399999618530273
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    15988, 4
+		LineNumberAlt1                450, 218
+		GetThisMemberValueString      "g1incrementor"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "g1incrementor"
+		LineNumber                    15989, 4
+		LineNumberAlt1                451, 218
+		GetThisMemberValueString      "g1incrementor"
+		GetThisMemberValueString      "g1array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    15990, 4
+		LineNumberAlt1                452, 218
+		PushConstant0
+		SetThisMemberValueString      "g1incrementor"
+		LineNumber                    15991, 4
+		LineNumberAlt1                453, 218
+		PushConstanti8                1
+		SetThisMemberValueString      "g1stopincrementing"
+		; <-
+		BranchTarget                  10
+		LineNumber                    15993, 4
+		LineNumberAlt1                455, 218
+		GetThisMemberValueString      "g1timer"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    15994, 4
+		LineNumberAlt1                456, 218
+		GetThisMemberValueString      "g1timer"
+		Dup
+		GetMemberFunctionString       "start"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  11
+		BranchAlwaysTarget            27, 0
+		; ->
+		; <-
+		BranchTarget                  12
+		Dup
+		GetThisMemberValueString      "g2timer"
+		GetMemberValueString          "id"
+		EqualTo
+		CompareAndBranchIfFalseTarget 17, 0
+		; ->
+		LineNumber                    15998, 4
+		LineNumberAlt1                460, 218
+		GetThisMemberValueString      "g2stopincrementing"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 16, 0
+		; ->
+		LineNumber                    15999, 4
+		LineNumberAlt1                461, 218
+		GetThisMemberValueString      "g2incrementor"
+		Dup
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    16001, 4
+		LineNumberAlt1                463, 218
+		GetThisMemberValueString      "g2array"
+		GetThisMemberValueString      "g2incrementor"
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               32.400001525878906
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		BranchAlwaysTarget            14, 0
+		; ->
+		; <-
+		BranchTarget                  13
+		LineNumber                    16003, 4
+		LineNumberAlt1                465, 218
+		GetThisMemberValueString      "g2array"
+		GetThisMemberValueString      "g2incrementor"
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               13.399999618530273
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		; <-
+		BranchTarget                  14
+		Pop
+		LineNumber                    16005, 4
+		LineNumberAlt1                467, 218
+		GetThisMemberValueString      "g2incrementor"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "g2incrementor"
+		LineNumber                    16006, 4
+		LineNumberAlt1                468, 218
+		GetThisMemberValueString      "g2incrementor"
+		GetThisMemberValueString      "g2array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    16007, 4
+		LineNumberAlt1                469, 218
+		PushConstant0
+		SetThisMemberValueString      "g2incrementor"
+		LineNumber                    16008, 4
+		LineNumberAlt1                470, 218
+		PushConstanti8                1
+		SetThisMemberValueString      "g2stopincrementing"
+		; <-
+		BranchTarget                  15
+		LineNumber                    16010, 4
+		LineNumberAlt1                472, 218
+		GetThisMemberValueString      "g2timer"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    16011, 4
+		LineNumberAlt1                473, 218
+		GetThisMemberValueString      "g2timer"
+		Dup
+		GetMemberFunctionString       "start"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  16
+		BranchAlwaysTarget            27, 0
+		; ->
+		; <-
+		BranchTarget                  17
+		Dup
+		GetThisMemberValueString      "g3timer"
+		GetMemberValueString          "id"
+		EqualTo
+		CompareAndBranchIfFalseTarget 23, 0
+		; ->
+		LineNumber                    16016, 4
+		LineNumberAlt1                478, 218
+		GetThisMemberValueString      "g4stopincrementing"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 22, 0
+		; ->
+		LineNumber                    16017, 4
+		LineNumberAlt1                479, 218
+		GetThisMemberValueString      "g4incrementor"
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 18, 0
+		; ->
+		LineNumber                    16019, 4
+		LineNumberAlt1                481, 218
+		GetThisMemberValueString      "g3array"
+		GetThisMemberValueString      "g3incrementor"
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               32.400001525878906
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		BranchAlwaysTarget            20, 0
+		; ->
+		; <-
+		BranchTarget                  18
+		Dup
+		PushConstanti8                6
+		EqualTo
+		CompareAndBranchIfFalseTarget 19, 0
+		; ->
+		LineNumber                    16021, 4
+		LineNumberAlt1                483, 218
+		GetThisMemberValueString      "g3array"
+		GetThisMemberValueString      "g3incrementor"
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               32.400001525878906
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		BranchAlwaysTarget            20, 0
+		; ->
+		; <-
+		BranchTarget                  19
+		LineNumber                    16023, 4
+		LineNumberAlt1                485, 218
+		GetThisMemberValueString      "g3array"
+		GetThisMemberValueString      "g3incrementor"
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               13.399999618530273
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		; <-
+		BranchTarget                  20
+		Pop
+		LineNumber                    16025, 4
+		LineNumberAlt1                487, 218
+		GetThisMemberValueString      "g3incrementor"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "g3incrementor"
+		LineNumber                    16026, 4
+		LineNumberAlt1                488, 218
+		GetThisMemberValueString      "g3incrementor"
+		GetThisMemberValueString      "g3array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 21, 0
+		; ->
+		LineNumber                    16027, 4
+		LineNumberAlt1                489, 218
+		PushConstant0
+		SetThisMemberValueString      "g3incrementor"
+		LineNumber                    16028, 4
+		LineNumberAlt1                490, 218
+		PushConstanti8                1
+		SetThisMemberValueString      "g3stopincrementing"
+		; <-
+		BranchTarget                  21
+		LineNumber                    16030, 4
+		LineNumberAlt1                492, 218
+		GetThisMemberValueString      "g3timer"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    16031, 4
+		LineNumberAlt1                493, 218
+		GetThisMemberValueString      "g3timer"
+		Dup
+		GetMemberFunctionString       "start"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  22
+		BranchAlwaysTarget            27, 0
+		; ->
+		; <-
+		BranchTarget                  23
+		Dup
+		GetThisMemberValueString      "g4timer"
+		GetMemberValueString          "id"
+		EqualTo
+		CompareAndBranchIfFalseTarget 27, 0
+		; ->
+		LineNumber                    16037, 4
+		LineNumberAlt1                499, 218
+		GetThisMemberValueString      "g4stopincrementing"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 27, 0
+		; ->
+		LineNumber                    16038, 4
+		LineNumberAlt1                500, 218
+		GetThisMemberValueString      "g4incrementor"
+		Dup
+		PushConstanti8                9
+		EqualTo
+		CompareAndBranchIfFalseTarget 24, 0
+		; ->
+		LineNumber                    16040, 4
+		LineNumberAlt1                502, 218
+		GetThisMemberValueString      "g4array"
+		GetThisMemberValueString      "g4incrementor"
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               32.400001525878906
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		BranchAlwaysTarget            25, 0
+		; ->
+		; <-
+		BranchTarget                  24
+		LineNumber                    16042, 4
+		LineNumberAlt1                504, 218
+		GetThisMemberValueString      "g4array"
+		GetThisMemberValueString      "g4incrementor"
+		GetArrayValue
+		PushConstant0
+		PushConstantf32               13.399999618530273
+		PushConstant0
+		PushConstantf32               1
+		PushConstanti8                -1
+		PushConstantf32               0.30000001192092896
+		Pull                          7
+		GetMemberFunctionString       "setslidetimer"
+		JumpAbsolute                  7
+		Pop
+		; <-
+		BranchTarget                  25
+		Pop
+		LineNumber                    16045, 4
+		LineNumberAlt1                507, 218
+		GetThisMemberValueString      "g4incrementor"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "g4incrementor"
+		LineNumber                    16046, 4
+		LineNumberAlt1                508, 218
+		GetThisMemberValueString      "g4incrementor"
+		GetThisMemberValueString      "g4array"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 26, 0
+		; ->
+		LineNumber                    16047, 4
+		LineNumberAlt1                509, 218
+		PushConstant0
+		SetThisMemberValueString      "g4incrementor"
+		LineNumber                    16048, 4
+		LineNumberAlt1                510, 218
+		PushConstanti8                1
+		SetThisMemberValueString      "g4stopincrementing"
+		; <-
+		BranchTarget                  26
+		LineNumber                    16050, 4
+		LineNumberAlt1                512, 218
+		GetThisMemberValueString      "g4timer"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    16051, 4
+		LineNumberAlt1                513, 218
+		GetThisMemberValueString      "g4timer"
+		Dup
+		GetMemberFunctionString       "start"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  27
+		Pop
+		BranchAlwaysTarget            29, 0
+		; ->
+		; <-
+		BranchTarget                  28
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 29, 0
+		; ->
+		; <-
+		BranchTarget                  29
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xb60f3
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 524:524
+		MemberFunctionArgumentCheck   2
+		LineNumber                    16062, 4
+		LineNumberAlt1                524, 218
+		GetVariableValue              1        ; local
+		GetMemberValueString          "button"
+		PushConstanti8                89
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    16062, 4
+		LineNumberAlt1                524, 218
+		GetVariableValue              1        ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    16062, 4
+		LineNumberAlt1                524, 218
+		GetVariableValue              0        ; local
+		GetThisMemberFunctionString   "cheat"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cheat"
+		; address: 0xb6148
+		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_vllg.vbo" 536:537
+		MemberFunctionArgumentCheck  1
+		LineNumber                   16074, 4
+		LineNumberAlt1               536, 218
+		PushConstantStringString     "*****SWITCHING NEXT DOOR IN SHRN TO OPEN"
+		CallGameFunctionString       "debug", "print", 1
+		Pop
+		LineNumber                   16075, 4
+		LineNumberAlt1               537, 218
+		GetVariableValueGlobalString "screenlist"
+		GetMemberValueString         "screens"
+		PushConstanti8               9
+		GetArrayValue
+		GetMemberValueString         "screen"
+		GetMemberValueString         "areas"
+		PushConstanti8               12
+		GetArrayValue
+		GetMemberValueString         "puzzle"
+		PushConstant0
+		Pull                         2
+		GetMemberFunctionString      "switchit"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

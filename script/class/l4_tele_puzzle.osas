@@ -1,0 +1,758 @@
+begin class "l4_tele_puzzle"
+	property "parent"
+	property "switch1"
+	property "teleblock"
+	property "mask"
+	property "exitdoor"
+	property "switchuppos"
+	property "switchdownpos"
+	property "collide"
+	property "hitswitch"
+	property "shakeonce"
+	property "hittrigerbox"
+
+	begin method "l4_tele_puzzle"
+		; address: 0x99cda
+		; source: 176 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd4.vbo" 113:113
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3114, 4
+		LineNumberAlt1              113, 176
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x99cee
+		; source: 176 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd4.vbo" 121:166
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    3122, 4
+		LineNumberAlt1                121, 176
+		PushConstanti8                50
+		CallGameFunctionString        "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                    3126, 4
+		LineNumberAlt1                125, 176
+		PushConstantStringString      "mtel"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    3126, 4
+		LineNumberAlt1                125, 176
+		CallGameFunctionString        "gcsaver", "findmask", 1
+		LineNumber                    3126, 4
+		LineNumberAlt1                125, 176
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3127, 4
+		LineNumberAlt1                126, 176
+		CreateObjectString            "lego_pickup"
+		Dup
+		PushConstantStringString      "mtel"
+		PushConstanti8                11
+		PushConstanti8                1
+		PushConstantStringString      "item"
+		PushConstanti8                2
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "lego_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    3127, 4
+		LineNumberAlt1                126, 176
+		SetThisMemberValueString      "mask"
+		LineNumber                    3128, 4
+		LineNumberAlt1                127, 176
+		GetThisMemberValueString      "mask"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3129, 4
+		LineNumberAlt1                128, 176
+		GetThisMemberValueString      "mask"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    3133, 4
+		LineNumberAlt1                132, 176
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "sw00"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3133, 4
+		LineNumberAlt1                132, 176
+		SetThisMemberValueString      "switch1"
+		LineNumber                    3134, 4
+		LineNumberAlt1                133, 176
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3135, 4
+		LineNumberAlt1                134, 176
+		CreateObjectString            "basicpoint"
+		Dup
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "getx"
+		JumpAbsolute                  1
+		LineNumber                    3135, 4
+		LineNumberAlt1                134, 176
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "gety"
+		JumpAbsolute                  1
+		LineNumber                    3135, 4
+		LineNumberAlt1                134, 176
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "getz"
+		JumpAbsolute                  1
+		LineNumber                    3135, 4
+		LineNumberAlt1                134, 176
+		Pull                          4
+		GetMemberFunctionString       "basicpoint"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    3135, 4
+		LineNumberAlt1                134, 176
+		SetThisMemberValueString      "switchuppos"
+		LineNumber                    3136, 4
+		LineNumberAlt1                135, 176
+		CreateObjectString            "basicpoint"
+		Dup
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "getx"
+		JumpAbsolute                  1
+		LineNumber                    3136, 4
+		LineNumberAlt1                135, 176
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "gety"
+		JumpAbsolute                  1
+		LineNumber                    3136, 4
+		LineNumberAlt1                135, 176
+		PushConstantf32               0.800000011920929
+		Subtract
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "getz"
+		JumpAbsolute                  1
+		LineNumber                    3136, 4
+		LineNumberAlt1                135, 176
+		Pull                          4
+		GetMemberFunctionString       "basicpoint"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    3136, 4
+		LineNumberAlt1                135, 176
+		SetThisMemberValueString      "switchdownpos"
+		LineNumber                    3137, 4
+		LineNumberAlt1                136, 176
+		GetThisMemberValueString      "switch1"
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    3138, 4
+		LineNumberAlt1                137, 176
+		GetThisMemberValueString      "switch1"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "setignoreallcollisions"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3141, 4
+		LineNumberAlt1                140, 176
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "tblk"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3141, 4
+		LineNumberAlt1                140, 176
+		SetThisMemberValueString      "teleblock"
+		LineNumber                    3142, 4
+		LineNumberAlt1                141, 176
+		GetThisMemberValueString      "teleblock"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3143, 4
+		LineNumberAlt1                142, 176
+		GetThisMemberValueString      "teleblock"
+		PushConstanti8                4
+		Pull                          2
+		GetMemberFunctionString       "setmytargetingflags"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3144, 4
+		LineNumberAlt1                143, 176
+		GetThisMemberValueString      "teleblock"
+		PushConstantf32               1
+		PushConstantf32               0.800000011920929
+		PushConstanti8                1
+		PushConstant0
+		PushConstanti8                1
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "setmoveable"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    3145, 4
+		LineNumberAlt1                144, 176
+		GetThisMemberValueString      "teleblock"
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3146, 4
+		LineNumberAlt1                145, 176
+		GetThisMemberValueString      "teleblock"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "setignoreallcollisions"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3149, 4
+		LineNumberAlt1                148, 176
+		CreateObjectString            "teledoor"
+		Dup
+		Dup
+		GetMemberFunctionString       "teledoor"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3149, 4
+		LineNumberAlt1                148, 176
+		SetThisMemberValueString      "exitdoor"
+		LineNumber                    3150, 4
+		LineNumberAlt1                149, 176
+		GetThisMemberValueString      "exitdoor"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3155, 4
+		LineNumberAlt1                154, 176
+		PushConstantStringString      "vlgr"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    3155, 4
+		LineNumberAlt1                154, 176
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    3155, 4
+		LineNumberAlt1                154, 176
+		SetVariableValue              1                                            ; local
+		LineNumber                    3156, 4
+		LineNumberAlt1                155, 176
+		GetVariableValue              1                                            ; local
+		CallGameFunctionString        "gccharacter", "setkapura", 1
+		Pop
+		LineNumber                    3158, 4
+		LineNumberAlt1                157, 176
+		PushConstantStringString      "ghv0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    3158, 4
+		LineNumberAlt1                157, 176
+		CallGameFunctionString        "gcareadirector", "gethive", 1
+		LineNumber                    3158, 4
+		LineNumberAlt1                157, 176
+		SetVariableValue              2                                            ; local
+		LineNumber                    3159, 4
+		LineNumberAlt1                158, 176
+		GetVariableValue              2                                            ; local
+		PushConstanti8                2
+		CallGameFunctionString        "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                    3160, 4
+		LineNumberAlt1                159, 176
+		GetVariableValue              2                                            ; local
+		PushConstantStringString      "lsrp"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    3160, 4
+		LineNumberAlt1                159, 176
+		CallGameFunctionString        "gchive", "setcreaturetype", 2
+		Pop
+		LineNumber                    3161, 4
+		LineNumberAlt1                160, 176
+		GetVariableValue              2                                            ; local
+		PushConstanti8                4
+		CallGameFunctionString        "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                    3164, 4
+		LineNumberAlt1                163, 176
+		PushConstant0
+		SetThisMemberValueString      "hitswitch"
+		LineNumber                    3165, 4
+		LineNumberAlt1                164, 176
+		PushConstanti8                1
+		SetThisMemberValueString      "shakeonce"
+		LineNumber                    3166, 4
+		LineNumberAlt1                165, 176
+		PushConstant0
+		SetThisMemberValueString      "collide"
+		LineNumber                    3167, 4
+		LineNumberAlt1                166, 176
+		PushConstant0
+		SetThisMemberValueString      "hittrigerbox"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x9a090
+		; source: 176 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd4.vbo" 173:180
+		MemberFunctionArgumentCheck   1
+		LineNumber                    3174, 4
+		LineNumberAlt1                173, 176
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3176, 4
+		LineNumberAlt1                175, 176
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterstartid"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterlookid"
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    3178, 4
+		LineNumberAlt1                177, 176
+		GetThisMemberValueString      "hittrigerbox"
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3179, 4
+		LineNumberAlt1                178, 176
+		PushConstantStringString      "tb00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    3179, 4
+		LineNumberAlt1                178, 176
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
+		Pop
+		LineNumber                    3180, 4
+		LineNumberAlt1                179, 176
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3181, 4
+		LineNumberAlt1                180, 176
+		PushConstant0
+		SetThisMemberValueString      "hittrigerbox"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x9a132
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x9a136
+		; source: 176 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd4.vbo" 194:207
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    3195, 4
+		LineNumberAlt1                194, 176
+		PushNothing
+		SetVariableValue              1             ; local
+		LineNumber                    3197, 4
+		LineNumberAlt1                196, 176
+		GetThisMemberValueString      "mask"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3198, 4
+		LineNumberAlt1                197, 176
+		GetThisMemberValueString      "mask"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3199, 4
+		LineNumberAlt1                198, 176
+		PushNothing
+		SetThisMemberValueString      "mask"
+		; <-
+		BranchTarget                  0
+		LineNumber                    3203, 4
+		LineNumberAlt1                202, 176
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3204, 4
+		LineNumberAlt1                203, 176
+		PushNothing
+		SetThisMemberValueString      "switch1"
+		LineNumber                    3205, 4
+		LineNumberAlt1                204, 176
+		GetThisMemberValueString      "teleblock"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3206, 4
+		LineNumberAlt1                205, 176
+		PushNothing
+		SetThisMemberValueString      "teleblock"
+		LineNumber                    3207, 4
+		LineNumberAlt1                206, 176
+		GetThisMemberValueString      "exitdoor"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3208, 4
+		LineNumberAlt1                207, 176
+		PushNothing
+		SetThisMemberValueString      "exitdoor"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x9a1e5
+		; source: 176 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd4.vbo" 216:288
+		MemberFunctionArgumentCheck   2
+		LineNumber                    3217, 4
+		LineNumberAlt1                216, 176
+		GetThisMemberValueString      "switch1"
+		GetVariableValue              1                                             ; local
+		Pull                          2
+		GetMemberFunctionString       "onevent"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3218, 4
+		LineNumberAlt1                217, 176
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    3223, 4
+		LineNumberAlt1                222, 176
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		Dup
+		PushConstantStringString      "sw00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    3224, 4
+		LineNumberAlt1                223, 176
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    3227, 4
+		LineNumberAlt1                226, 176
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "args"
+		PushConstanti8                2
+		GetArrayValue
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3229, 4
+		LineNumberAlt1                228, 176
+		GetVariableValue              0                                             ; local
+		PushConstant0
+		GetThisMemberFunctionString   "hitswitch"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    3232, 4
+		LineNumberAlt1                231, 176
+		GetVariableValue              0                                             ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "hitswitch"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		Pop
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    3240, 4
+		LineNumberAlt1                239, 176
+		PushConstanti8                1
+		SetThisMemberValueString      "hittrigerbox"
+		LineNumber                    3241, 4
+		LineNumberAlt1                240, 176
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                7
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3242, 4
+		LineNumberAlt1                241, 176
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    3247, 4
+		LineNumberAlt1                246, 176
+		GetThisMemberValueString      "hittrigerbox"
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    3248, 4
+		LineNumberAlt1                247, 176
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "kill"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    3250, 4
+		LineNumberAlt1                249, 176
+		GetVariableValue              0                                             ; local
+		GetThisMemberFunctionString   "initshort"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  5
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    3256, 4
+		LineNumberAlt1                255, 176
+		GetThisMemberValueString      "hittrigerbox"
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    3257, 4
+		LineNumberAlt1                256, 176
+		GetVariableValue              0                                             ; local
+		GetThisMemberFunctionString   "initshort"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		LineNumber                    3259, 4
+		LineNumberAlt1                258, 176
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		; <-
+		BranchTarget                  8
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		Dup
+		PushConstanti8                7
+		EqualTo
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    3287, 4
+		LineNumberAlt1                286, 176
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "args"
+		PushConstanti8                2
+		GetArrayValue
+		PushConstantStringString      "Ecut"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    3287, 4
+		LineNumberAlt1                286, 176
+		EqualTo
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    3289, 4
+		LineNumberAlt1                288, 176
+		PushConstanti16               149
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		; <-
+		BranchTarget                  10
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hitswitch"
+		; address: 0x9a3a8
+		; source: 176 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd4.vbo" 295:304
+		MemberFunctionArgumentCheck   2
+		LineNumber                    3296, 4
+		LineNumberAlt1                295, 176
+		GetThisMemberValueString      "hitswitch"
+		GetVariableValue              1               ; local
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    3297, 4
+		LineNumberAlt1                296, 176
+		GetVariableValue              1               ; local
+		SetThisMemberValueString      "hitswitch"
+		LineNumber                    3298, 4
+		LineNumberAlt1                297, 176
+		GetVariableValue              1               ; local
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3300, 4
+		LineNumberAlt1                299, 176
+		GetThisMemberValueString      "switch1"
+		GetThisMemberValueString      "switchdownpos"
+		Pull                          2
+		GetMemberFunctionString       "setpos"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3301, 4
+		LineNumberAlt1                300, 176
+		GetThisMemberValueString      "exitdoor"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "open"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    3304, 4
+		LineNumberAlt1                303, 176
+		GetThisMemberValueString      "switch1"
+		GetThisMemberValueString      "switchuppos"
+		Pull                          2
+		GetMemberFunctionString       "setpos"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3305, 4
+		LineNumberAlt1                304, 176
+		GetThisMemberValueString      "exitdoor"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "open"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x9a441
+		; source: 176 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd4.vbo" 314:316
+		MemberFunctionArgumentCheck   2
+		LineNumber                    3315, 4
+		LineNumberAlt1                314, 176
+		GetThisMemberValueString      "switch1"
+		Dup
+		GetMemberFunctionString       "process"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    3316, 4
+		LineNumberAlt1                315, 176
+		GetThisMemberValueString      "teleblock"
+		Dup
+		GetMemberFunctionString       "gety"
+		JumpAbsolute                  1
+		LineNumber                    3316, 4
+		LineNumberAlt1                315, 176
+		PushConstanti16               -200
+		LessThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3317, 4
+		LineNumberAlt1                316, 176
+		GetThisMemberValueString      "teleblock"
+		PushConstantf32               319.20001220703125
+		PushConstantf32               8.300000190734863
+		PushConstant0
+		PushConstantf32               887.5999755859375
+		Subtract
+		Pull                          4
+		GetMemberFunctionString       "setpos"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x9a4a3
+		; source: 176 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd4.vbo" 323:323
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3324, 4
+		LineNumberAlt1              323, 176
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

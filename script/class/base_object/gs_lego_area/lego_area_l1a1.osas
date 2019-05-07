@@ -1,0 +1,236 @@
+begin class "lego_area_l1a1", "gs_lego_area"
+	property "puzzle"
+
+	begin method "lego_area_l1a1"
+		; address: 0x6bdc8
+		; source: 115 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_volatilePlatform.vbo" 25:27
+		MemberFunctionArgumentCheck 2
+		LineNumber                  45061, 4
+		LineNumberAlt1              25, 115
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "l1a1"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  45062, 4
+		LineNumberAlt1              26, 115
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  45063, 4
+		LineNumberAlt1              27, 115
+		CreateObjectString          "l1a1_puzzle"
+		Dup
+		GetVariableValue            0                    ; local
+		Pull                        2
+		GetMemberFunctionString     "l1a1_puzzle"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  45063, 4
+		LineNumberAlt1              27, 115
+		SetThisMemberValueString    "puzzle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x6be20
+		; source: 115 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_volatilePlatform.vbo" 33:43
+		MemberFunctionArgumentCheck  1
+		LineNumber                   45069, 4
+		LineNumberAlt1               33, 115
+		GetVariableValue             0                                       ; local
+		GetThisMemberFunctionString  "lego_area_show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   45071, 4
+		LineNumberAlt1               35, 115
+		PushConstanti8               5
+		CallGameFunctionString       "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                   45072, 4
+		LineNumberAlt1               36, 115
+		PushConstanti8               8
+		CallGameFunctionString       "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                   45073, 4
+		LineNumberAlt1               37, 115
+		PushConstanti32              -14803426
+		PushConstant0
+		PushConstantf32              85
+		Subtract
+		PushConstant0
+		PushConstantf32              200
+		Subtract
+		PushConstantf32              0.05000000074505806
+		CallGameFunctionString       "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                   45074, 4
+		LineNumberAlt1               38, 115
+		PushConstanti8               1
+		CallGameFunctionString       "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                   45076, 4
+		LineNumberAlt1               40, 115
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MUSICLEGOUNDERGROUND"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   45077, 4
+		LineNumberAlt1               41, 115
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   45079, 4
+		LineNumberAlt1               43, 115
+		GetThisMemberValueString     "puzzle"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x6bee2
+		; source: 115 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_volatilePlatform.vbo" 49:58
+		MemberFunctionArgumentCheck   2
+		LineNumber                    45085, 4
+		LineNumberAlt1                49, 115
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    45087, 4
+		LineNumberAlt1                51, 115
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    45090, 4
+		LineNumberAlt1                54, 115
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "enterstartid"
+		GetThisMemberValueString      "enterlookid"
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    45091, 4
+		LineNumberAlt1                55, 115
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    45092, 4
+		LineNumberAlt1                56, 115
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "o000"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    45092, 4
+		LineNumberAlt1                56, 115
+		Pull                          2
+		GetMemberFunctionString       "switchanimation"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    45093, 4
+		LineNumberAlt1                57, 115
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "ninp"
+		Pull                          2
+		GetMemberFunctionString       "setinputstate"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    45094, 4
+		LineNumberAlt1                58, 115
+		GetThisMemberValueString      "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x6bfbc
+		; source: 115 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_volatilePlatform.vbo" 65:66
+		MemberFunctionArgumentCheck 1
+		LineNumber                  45101, 4
+		LineNumberAlt1              65, 115
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  45102, 4
+		LineNumberAlt1              66, 115
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x6bfe7
+		; source: 115 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_volatilePlatform.vbo" 71:73
+		MemberFunctionArgumentCheck 1
+		LineNumber                  45107, 4
+		LineNumberAlt1              71, 115
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  45108, 4
+		LineNumberAlt1              72, 115
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "exit"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  45109, 4
+		LineNumberAlt1              73, 115
+		PushNothing
+		SetThisMemberValueString    "puzzle"
+		PushNothing
+		Return
+	end ; method
+end ; class

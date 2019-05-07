@@ -1,0 +1,160 @@
+begin class "puzzle_gali7"
+	property "targetarray"
+
+	begin method "puzzle_gali7"
+		; address: 0xb9aa8
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xb9aac
+		; source: 230 "C:\\projects\\lego\\Scripting\\VBO\\CinematicViewer.vbo" 113:122
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    18126, 4
+		LineNumberAlt1                113, 230
+		CreateArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "tg01"
+		GetVariableValue              1                     ; local
+		Pull                          3
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18127, 4
+		LineNumberAlt1                114, 230
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "tg02"
+		GetVariableValue              1                     ; local
+		Pull                          3
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18128, 4
+		LineNumberAlt1                115, 230
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "tg03"
+		GetVariableValue              1                     ; local
+		Pull                          3
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18129, 4
+		LineNumberAlt1                116, 230
+		AppendToArray
+		SetThisMemberValueString      "targetarray"
+		LineNumber                    18132, 4
+		LineNumberAlt1                119, 230
+		GetThisMemberValueString      "targetarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                     ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                     ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18133, 4
+		LineNumberAlt1                120, 230
+		GetThisMemberValueString      "targetarray"
+		GetVariableValue              2                     ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    18134, 4
+		LineNumberAlt1                121, 230
+		GetThisMemberValueString      "targetarray"
+		GetVariableValue              2                     ; local
+		GetArrayValue
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "setmytargetingflags"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    18135, 4
+		LineNumberAlt1                122, 230
+		GetThisMemberValueString      "targetarray"
+		GetVariableValue              2                     ; local
+		GetArrayValue
+		PushConstanti8                1
+		PushConstanti8                1
+		PushConstanti8                1
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xb9b90
+		; source: 230 "C:\\projects\\lego\\Scripting\\VBO\\CinematicViewer.vbo" 129:133
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    18142, 4
+		LineNumberAlt1                129, 230
+		GetThisMemberValueString      "targetarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18143, 4
+		LineNumberAlt1                130, 230
+		GetThisMemberValueString      "targetarray"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    18144, 4
+		LineNumberAlt1                131, 230
+		GetThisMemberValueString      "targetarray"
+		GetVariableValue              1             ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    18146, 4
+		LineNumberAlt1                133, 230
+		PushNothing
+		SetThisMemberValueString      "targetarray"
+		PushNothing
+		Return
+	end ; method
+end ; class

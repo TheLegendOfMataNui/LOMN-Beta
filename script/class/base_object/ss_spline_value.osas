@@ -1,0 +1,210 @@
+begin class "ss_spline_value", "base_object"
+	property "object"
+	property "count"
+	property "filename"
+	property "value"
+	property "time"
+	property "splinestep"
+	property "maxtime"
+	property "mintime"
+
+	begin method "ss_spline_value"
+		; address: 0x309f9
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 53:53
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3118, 4
+		LineNumberAlt1              53, 20
+		GetVariableValue            1          ; local
+		SetThisMemberValueString    "filename"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x30a0d
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 58:58
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3123, 4
+		LineNumberAlt1              58, 20
+		GetThisMemberValueString    "filename"
+		CallGameFunctionString      "scslosislkcubicspline", "create", 1
+		LineNumber                  3123, 4
+		LineNumberAlt1              58, 20
+		SetThisMemberValueString    "object"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x30a31
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 62:62
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3127, 4
+		LineNumberAlt1              62, 20
+		PushNothing
+		SetThisMemberValueString    "object"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getcount"
+		; address: 0x30a43
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 66:67
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3131, 4
+		LineNumberAlt1              66, 20
+		GetThisMemberValueString    "object"
+		CallGameFunctionString      "scslosislkcubicspline", "getcount", 1
+		LineNumber                  3131, 4
+		LineNumberAlt1              66, 20
+		SetThisMemberValueString    "count"
+		LineNumber                  3132, 4
+		LineNumberAlt1              67, 20
+		GetThisMemberValueString    "count"
+		Return
+	end ; method
+
+	begin method "gettime"
+		; address: 0x30a73
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 77:78
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3142, 4
+		LineNumberAlt1              77, 20
+		GetThisMemberValueString    "object"
+		GetVariableValue            1                                        ; local
+		CallGameFunctionString      "scslosislkcubicspline", "getmintime", 2
+		LineNumber                  3142, 4
+		LineNumberAlt1              77, 20
+		SetThisMemberValueString    "time"
+		LineNumber                  3143, 4
+		LineNumberAlt1              78, 20
+		GetThisMemberValueString    "time"
+		Return
+	end ; method
+
+	begin method "getmaxtime"
+		; address: 0x30aa6
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 88:89
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3153, 4
+		LineNumberAlt1              88, 20
+		GetThisMemberValueString    "object"
+		GetVariableValue            1                                        ; local
+		CallGameFunctionString      "scslosislkcubicspline", "getmaxtime", 2
+		LineNumber                  3153, 4
+		LineNumberAlt1              88, 20
+		SetThisMemberValueString    "maxtime"
+		LineNumber                  3154, 4
+		LineNumberAlt1              89, 20
+		GetThisMemberValueString    "maxtime"
+		Return
+	end ; method
+
+	begin method "getmintime"
+		; address: 0x30ad9
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 99:100
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3164, 4
+		LineNumberAlt1              99, 20
+		GetThisMemberValueString    "object"
+		GetVariableValue            1                                        ; local
+		CallGameFunctionString      "scslosislkcubicspline", "getmintime", 2
+		LineNumber                  3164, 4
+		LineNumberAlt1              99, 20
+		SetThisMemberValueString    "mintime"
+		LineNumber                  3165, 4
+		LineNumberAlt1              100, 20
+		GetThisMemberValueString    "mintime"
+		Return
+	end ; method
+
+	begin method "getstep"
+		; address: 0x30b0c
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 104:105
+		MemberFunctionArgumentCheck 3
+		LineNumber                  3169, 4
+		LineNumberAlt1              104, 20
+		GetThisMemberValueString    "object"
+		GetVariableValue            1                                        ; local
+		CallGameFunctionString      "scslosislkcubicspline", "getmaxtime", 2
+		LineNumber                  3169, 4
+		LineNumberAlt1              104, 20
+		GetThisMemberValueString    "object"
+		GetVariableValue            1                                        ; local
+		CallGameFunctionString      "scslosislkcubicspline", "getmintime", 2
+		LineNumber                  3169, 4
+		LineNumberAlt1              104, 20
+		Subtract
+		GetVariableValue            2                                        ; local
+		Divide
+		SetThisMemberValueString    "splinestep"
+		LineNumber                  3170, 4
+		LineNumberAlt1              105, 20
+		GetThisMemberValueString    "splinestep"
+		Return
+	end ; method
+
+	begin method "getvalue"
+		; address: 0x30b5a
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 109:110
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3174, 4
+		LineNumberAlt1              109, 20
+		GetThisMemberValueString    "object"
+		GetVariableValue            1                                         ; local
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3174, 4
+		LineNumberAlt1              109, 20
+		SetThisMemberValueString    "value"
+		LineNumber                  3175, 4
+		LineNumberAlt1              110, 20
+		GetThisMemberValueString    "value"
+		Return
+	end ; method
+
+	begin method "checkprogress"
+		; address: 0x30b90
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 114:120
+		MemberFunctionArgumentCheck   1
+		LineNumber                    3179, 4
+		LineNumberAlt1                114, 20
+		GetThisMemberValueString      "maxtime"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3180, 4
+		LineNumberAlt1                115, 20
+		GetVariableValue              0            ; local
+		PushConstant0
+		GetThisMemberFunctionString   "getmaxtime"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    3182, 4
+		LineNumberAlt1                117, 20
+		GetThisMemberValueString      "time"
+		GetThisMemberValueString      "maxtime"
+		LessThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    3183, 4
+		LineNumberAlt1                118, 20
+		PushConstant0
+		Return
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    3185, 4
+		LineNumberAlt1                120, 20
+		PushConstanti8                1
+		Return
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+end ; class

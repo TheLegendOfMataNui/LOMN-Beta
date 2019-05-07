@@ -1,0 +1,205 @@
+begin class "kopaka7_target"
+	property "obj"
+	property "x"
+	property "y"
+	property "z"
+	property "shot"
+	property "ring"
+	property "button"
+
+	begin method "kopaka7_target"
+		; address: 0xbb352
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 262:264
+		MemberFunctionArgumentCheck 5
+		LineNumber                  18785, 4
+		LineNumberAlt1              262, 232
+		CreateObjectString          "lego_moveableobject"
+		Dup
+		GetVariableValue            1                     ; local
+		GetVariableValue            2                     ; local
+		Pull                        3
+		GetMemberFunctionString     "lego_moveableobject"
+		JumpAbsolute                3
+		Pop
+		LineNumber                  18785, 4
+		LineNumberAlt1              262, 232
+		SetThisMemberValueString    "obj"
+		LineNumber                  18786, 4
+		LineNumberAlt1              263, 232
+		GetVariableValue            3                     ; local
+		SetThisMemberValueString    "ring"
+		LineNumber                  18787, 4
+		LineNumberAlt1              264, 232
+		GetVariableValue            4                     ; local
+		SetThisMemberValueString    "button"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xbb39f
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 269:273
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18792, 4
+		LineNumberAlt1              269, 232
+		GetThisMemberValueString    "obj"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  18793, 4
+		LineNumberAlt1              270, 232
+		GetThisMemberValueString    "obj"
+		GetMemberValueString        "handle"
+		CallGameFunctionString      "gcmoveableobj", "getx", 1
+		LineNumber                  18793, 4
+		LineNumberAlt1              270, 232
+		SetThisMemberValueString    "x"
+		LineNumber                  18794, 4
+		LineNumberAlt1              271, 232
+		GetThisMemberValueString    "obj"
+		GetMemberValueString        "handle"
+		CallGameFunctionString      "gcmoveableobj", "gety", 1
+		LineNumber                  18794, 4
+		LineNumberAlt1              271, 232
+		SetThisMemberValueString    "y"
+		LineNumber                  18795, 4
+		LineNumberAlt1              272, 232
+		GetThisMemberValueString    "obj"
+		GetMemberValueString        "handle"
+		CallGameFunctionString      "gcmoveableobj", "getz", 1
+		LineNumber                  18795, 4
+		LineNumberAlt1              272, 232
+		SetThisMemberValueString    "z"
+		LineNumber                  18796, 4
+		LineNumberAlt1              273, 232
+		PushConstant0
+		SetThisMemberValueString    "shot"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xbb42e
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 278:281
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18801, 4
+		LineNumberAlt1              278, 232
+		GetThisMemberValueString    "obj"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  18802, 4
+		LineNumberAlt1              279, 232
+		PushNothing
+		SetThisMemberValueString    "obj"
+		LineNumber                  18803, 4
+		LineNumberAlt1              280, 232
+		PushNothing
+		SetThisMemberValueString    "ring"
+		LineNumber                  18804, 4
+		LineNumberAlt1              281, 232
+		PushNothing
+		SetThisMemberValueString    "button"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xbb470
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 286:295
+		MemberFunctionArgumentCheck   2
+		LineNumber                    18809, 4
+		LineNumberAlt1                286, 232
+		GetVariableValue              1                                   ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                19
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18814, 4
+		LineNumberAlt1                291, 232
+		GetVariableValue              1                                   ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		GetThisMemberValueString      "obj"
+		GetMemberValueString          "id"
+		EqualTo
+		GetThisMemberValueString      "shot"
+		PushConstant0
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18815, 4
+		LineNumberAlt1                292, 232
+		GetThisMemberValueString      "obj"
+		GetMemberValueString          "handle"
+		PushConstantf32               1
+		PushConstantf32               0
+		PushConstantf32               0
+		PushConstantf32               1
+		PushConstanti8                1
+		PushConstantf32               0
+		CallGameFunctionString        "gcmoveableobj", "setslidetimer", 7
+		Pop
+		LineNumber                    18816, 4
+		LineNumberAlt1                293, 232
+		PushConstanti8                1
+		SetThisMemberValueString      "shot"
+		LineNumber                    18817, 4
+		LineNumberAlt1                294, 232
+		GetThisMemberValueString      "ring"
+		PushConstantf32               20
+		Pull                          2
+		GetMemberFunctionString       "offsety"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    18818, 4
+		LineNumberAlt1                295, 232
+		GetThisMemberValueString      "button"
+		PushConstant0
+		PushConstanti8                20
+		PushConstant0
+		PushConstantf32               1
+		Pull                          5
+		GetMemberFunctionString       "changeposition"
+		JumpAbsolute                  5
+		Pop
+		; <-
+		BranchTarget                  0
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "reset"
+		; address: 0xbb527
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 303:305
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18826, 4
+		LineNumberAlt1              303, 232
+		GetThisMemberValueString    "obj"
+		GetMemberValueString        "handle"
+		CallGameFunctionString      "gcmoveableobj", "stopslidetimer", 1
+		Pop
+		LineNumber                  18827, 4
+		LineNumberAlt1              304, 232
+		GetThisMemberValueString    "obj"
+		GetMemberValueString        "handle"
+		GetThisMemberValueString    "x"
+		GetThisMemberValueString    "y"
+		GetThisMemberValueString    "z"
+		CallGameFunctionString      "gcmoveableobj", "setposition", 4
+		Pop
+		LineNumber                  18828, 4
+		LineNumberAlt1              305, 232
+		PushConstant0
+		SetThisMemberValueString    "shot"
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,85 @@
+begin class "gs_tweakobject", "base_object"
+	property "value"
+	property "desc"
+	property "obj"
+	property "func"
+	property "stepamount"
+
+	begin method "gs_tweakobject"
+		; address: 0x37f68
+		; source: 38 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_tweak.vbo" 568:572
+		MemberFunctionArgumentCheck 6
+		LineNumber                  9587, 4
+		LineNumberAlt1              568, 38
+		GetVariableValue            1            ; local
+		SetThisMemberValueString    "value"
+		LineNumber                  9588, 4
+		LineNumberAlt1              569, 38
+		GetVariableValue            2            ; local
+		SetThisMemberValueString    "desc"
+		LineNumber                  9589, 4
+		LineNumberAlt1              570, 38
+		GetVariableValue            3            ; local
+		SetThisMemberValueString    "obj"
+		LineNumber                  9590, 4
+		LineNumberAlt1              571, 38
+		GetVariableValue            4            ; local
+		SetThisMemberValueString    "func"
+		LineNumber                  9591, 4
+		LineNumberAlt1              572, 38
+		GetVariableValue            5            ; local
+		SetThisMemberValueString    "stepamount"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "incvalue"
+		; address: 0x37fbc
+		; source: 38 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_tweak.vbo" 578:580
+		MemberFunctionArgumentCheck 1
+		LineNumber                  9597, 4
+		LineNumberAlt1              578, 38
+		GetThisMemberValueString    "value"
+		GetThisMemberValueString    "stepamount"
+		Add
+		SetThisMemberValueString    "value"
+		LineNumber                  9598, 4
+		LineNumberAlt1              579, 38
+		GetThisMemberValueString    "obj"
+		GetThisMemberValueString    "value"
+		Pull                        2
+		GetThisMemberValueString    "func"
+		GetMemberFunctionFromString
+		JumpAbsolute                2
+		Pop
+		LineNumber                  9599, 4
+		LineNumberAlt1              580, 38
+		GetThisMemberValueString    "value"
+		Return
+	end ; method
+
+	begin method "decvalue"
+		; address: 0x37ff9
+		; source: 38 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_tweak.vbo" 584:586
+		MemberFunctionArgumentCheck 1
+		LineNumber                  9603, 4
+		LineNumberAlt1              584, 38
+		GetThisMemberValueString    "value"
+		GetThisMemberValueString    "stepamount"
+		Subtract
+		SetThisMemberValueString    "value"
+		LineNumber                  9604, 4
+		LineNumberAlt1              585, 38
+		GetThisMemberValueString    "obj"
+		GetThisMemberValueString    "value"
+		Pull                        2
+		GetThisMemberValueString    "func"
+		GetMemberFunctionFromString
+		JumpAbsolute                2
+		Pop
+		LineNumber                  9605, 4
+		LineNumberAlt1              586, 38
+		GetThisMemberValueString    "value"
+		Return
+	end ; method
+end ; class

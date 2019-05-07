@@ -1,0 +1,1085 @@
+begin class "bugpitpuzzle_class"
+	property "parent"
+	property "trapdoortimer"
+	property "deadhives"
+	property "door_trap"
+	property "door_goal_a"
+	property "door_goal_b"
+	property "trapdoorshut"
+	property "door_trap_original"
+	property "door_goal_a_original"
+	property "door_goal_b_original"
+	property "hive1handle"
+	property "hive2handle"
+	property "hive3handle"
+	property "hive4handle"
+
+	begin method "bugpitpuzzle_class"
+		; address: 0x678a4
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 124:124
+		MemberFunctionArgumentCheck 2
+		LineNumber                  41893, 4
+		LineNumberAlt1              124, 107
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x678b8
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 132:179
+		MemberFunctionArgumentCheck 1
+		LineNumber                  41901, 4
+		LineNumberAlt1              132, 107
+		CreateObjectString          "lego_timer"
+		Dup
+		PushConstantStringString    "trap"
+		PushConstantf32             2
+		PushConstant0
+		Pull                        4
+		GetMemberFunctionString     "lego_timer"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  41901, 4
+		LineNumberAlt1              132, 107
+		SetThisMemberValueString    "trapdoortimer"
+		LineNumber                  41903, 4
+		LineNumberAlt1              134, 107
+		PushConstantStringString    "ghv1"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  41903, 4
+		LineNumberAlt1              134, 107
+		CallGameFunctionString      "gcareadirector", "gethive", 1
+		LineNumber                  41903, 4
+		LineNumberAlt1              134, 107
+		SetThisMemberValueString    "hive1handle"
+		LineNumber                  41904, 4
+		LineNumberAlt1              135, 107
+		GetThisMemberValueString    "hive1handle"
+		PushConstant0
+		CallGameFunctionString      "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                  41905, 4
+		LineNumberAlt1              136, 107
+		GetThisMemberValueString    "hive1handle"
+		PushConstantStringString    "bugz"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  41905, 4
+		LineNumberAlt1              136, 107
+		CallGameFunctionString      "gchive", "setcreaturetype", 2
+		Pop
+		LineNumber                  41906, 4
+		LineNumberAlt1              137, 107
+		GetThisMemberValueString    "hive1handle"
+		PushConstanti8              30
+		CallGameFunctionString      "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                  41908, 4
+		LineNumberAlt1              139, 107
+		PushConstantStringString    "ghv2"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  41908, 4
+		LineNumberAlt1              139, 107
+		CallGameFunctionString      "gcareadirector", "gethive", 1
+		LineNumber                  41908, 4
+		LineNumberAlt1              139, 107
+		SetThisMemberValueString    "hive2handle"
+		LineNumber                  41909, 4
+		LineNumberAlt1              140, 107
+		GetThisMemberValueString    "hive2handle"
+		PushConstant0
+		CallGameFunctionString      "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                  41910, 4
+		LineNumberAlt1              141, 107
+		GetThisMemberValueString    "hive2handle"
+		PushConstantStringString    "bugz"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  41910, 4
+		LineNumberAlt1              141, 107
+		CallGameFunctionString      "gchive", "setcreaturetype", 2
+		Pop
+		LineNumber                  41911, 4
+		LineNumberAlt1              142, 107
+		GetThisMemberValueString    "hive2handle"
+		PushConstanti8              30
+		CallGameFunctionString      "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                  41913, 4
+		LineNumberAlt1              144, 107
+		PushConstantStringString    "ghv3"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  41913, 4
+		LineNumberAlt1              144, 107
+		CallGameFunctionString      "gcareadirector", "gethive", 1
+		LineNumber                  41913, 4
+		LineNumberAlt1              144, 107
+		SetThisMemberValueString    "hive3handle"
+		LineNumber                  41914, 4
+		LineNumberAlt1              145, 107
+		GetThisMemberValueString    "hive3handle"
+		PushConstant0
+		CallGameFunctionString      "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                  41915, 4
+		LineNumberAlt1              146, 107
+		GetThisMemberValueString    "hive3handle"
+		PushConstantStringString    "bugz"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  41915, 4
+		LineNumberAlt1              146, 107
+		CallGameFunctionString      "gchive", "setcreaturetype", 2
+		Pop
+		LineNumber                  41916, 4
+		LineNumberAlt1              147, 107
+		GetThisMemberValueString    "hive3handle"
+		PushConstanti8              30
+		CallGameFunctionString      "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                  41918, 4
+		LineNumberAlt1              149, 107
+		PushConstantStringString    "ghv4"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  41918, 4
+		LineNumberAlt1              149, 107
+		CallGameFunctionString      "gcareadirector", "gethive", 1
+		LineNumber                  41918, 4
+		LineNumberAlt1              149, 107
+		SetThisMemberValueString    "hive4handle"
+		LineNumber                  41919, 4
+		LineNumberAlt1              150, 107
+		GetThisMemberValueString    "hive4handle"
+		PushConstant0
+		CallGameFunctionString      "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                  41920, 4
+		LineNumberAlt1              151, 107
+		GetThisMemberValueString    "hive4handle"
+		PushConstantStringString    "bugz"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  41920, 4
+		LineNumberAlt1              151, 107
+		CallGameFunctionString      "gchive", "setcreaturetype", 2
+		Pop
+		LineNumber                  41921, 4
+		LineNumberAlt1              152, 107
+		GetThisMemberValueString    "hive4handle"
+		PushConstanti8              30
+		CallGameFunctionString      "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                  41923, 4
+		LineNumberAlt1              154, 107
+		PushConstant0
+		SetThisMemberValueString    "deadhives"
+		LineNumber                  41925, 4
+		LineNumberAlt1              156, 107
+		CreateObjectString          "lego_moveableobject"
+		Dup
+		PushConstantStringString    "dor3"
+		GetThisMemberValueString    "parent"
+		GetMemberValueString        "name"
+		Pull                        3
+		GetMemberFunctionString     "lego_moveableobject"
+		JumpAbsolute                3
+		Pop
+		LineNumber                  41925, 4
+		LineNumberAlt1              156, 107
+		SetThisMemberValueString    "door_trap"
+		LineNumber                  41926, 4
+		LineNumberAlt1              157, 107
+		CreateObjectString          "lego_moveableobject"
+		Dup
+		PushConstantStringString    "dor7"
+		GetThisMemberValueString    "parent"
+		GetMemberValueString        "name"
+		Pull                        3
+		GetMemberFunctionString     "lego_moveableobject"
+		JumpAbsolute                3
+		Pop
+		LineNumber                  41926, 4
+		LineNumberAlt1              157, 107
+		SetThisMemberValueString    "door_goal_a"
+		LineNumber                  41927, 4
+		LineNumberAlt1              158, 107
+		CreateObjectString          "lego_moveableobject"
+		Dup
+		PushConstantStringString    "dor8"
+		GetThisMemberValueString    "parent"
+		GetMemberValueString        "name"
+		Pull                        3
+		GetMemberFunctionString     "lego_moveableobject"
+		JumpAbsolute                3
+		Pop
+		LineNumber                  41927, 4
+		LineNumberAlt1              158, 107
+		SetThisMemberValueString    "door_goal_b"
+		LineNumber                  41929, 4
+		LineNumberAlt1              160, 107
+		PushConstant0
+		SetThisMemberValueString    "trapdoorshut"
+		LineNumber                  41931, 4
+		LineNumberAlt1              162, 107
+		GetThisMemberValueString    "trapdoortimer"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  41933, 4
+		LineNumberAlt1              164, 107
+		GetThisMemberValueString    "door_trap"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  41934, 4
+		LineNumberAlt1              165, 107
+		GetThisMemberValueString    "door_goal_a"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  41935, 4
+		LineNumberAlt1              166, 107
+		GetThisMemberValueString    "door_goal_b"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  41936, 4
+		LineNumberAlt1              167, 107
+		CreateObjectString          "basicpoint"
+		Dup
+		GetThisMemberValueString    "door_trap"
+		Dup
+		GetMemberFunctionString     "getx"
+		JumpAbsolute                1
+		LineNumber                  41936, 4
+		LineNumberAlt1              167, 107
+		GetThisMemberValueString    "door_trap"
+		Dup
+		GetMemberFunctionString     "gety"
+		JumpAbsolute                1
+		LineNumber                  41936, 4
+		LineNumberAlt1              167, 107
+		GetThisMemberValueString    "door_trap"
+		Dup
+		GetMemberFunctionString     "getz"
+		JumpAbsolute                1
+		LineNumber                  41936, 4
+		LineNumberAlt1              167, 107
+		Pull                        4
+		GetMemberFunctionString     "basicpoint"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  41936, 4
+		LineNumberAlt1              167, 107
+		SetThisMemberValueString    "door_trap_original"
+		LineNumber                  41937, 4
+		LineNumberAlt1              168, 107
+		CreateObjectString          "basicpoint"
+		Dup
+		GetThisMemberValueString    "door_goal_a"
+		Dup
+		GetMemberFunctionString     "getx"
+		JumpAbsolute                1
+		LineNumber                  41937, 4
+		LineNumberAlt1              168, 107
+		GetThisMemberValueString    "door_goal_a"
+		Dup
+		GetMemberFunctionString     "gety"
+		JumpAbsolute                1
+		LineNumber                  41937, 4
+		LineNumberAlt1              168, 107
+		GetThisMemberValueString    "door_goal_a"
+		Dup
+		GetMemberFunctionString     "getz"
+		JumpAbsolute                1
+		LineNumber                  41937, 4
+		LineNumberAlt1              168, 107
+		Pull                        4
+		GetMemberFunctionString     "basicpoint"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  41937, 4
+		LineNumberAlt1              168, 107
+		SetThisMemberValueString    "door_goal_a_original"
+		LineNumber                  41938, 4
+		LineNumberAlt1              169, 107
+		CreateObjectString          "basicpoint"
+		Dup
+		GetThisMemberValueString    "door_goal_b"
+		Dup
+		GetMemberFunctionString     "getx"
+		JumpAbsolute                1
+		LineNumber                  41938, 4
+		LineNumberAlt1              169, 107
+		GetThisMemberValueString    "door_goal_b"
+		Dup
+		GetMemberFunctionString     "gety"
+		JumpAbsolute                1
+		LineNumber                  41938, 4
+		LineNumberAlt1              169, 107
+		GetThisMemberValueString    "door_goal_b"
+		Dup
+		GetMemberFunctionString     "getz"
+		JumpAbsolute                1
+		LineNumber                  41938, 4
+		LineNumberAlt1              169, 107
+		Pull                        4
+		GetMemberFunctionString     "basicpoint"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  41938, 4
+		LineNumberAlt1              169, 107
+		SetThisMemberValueString    "door_goal_b_original"
+		LineNumber                  41940, 4
+		LineNumberAlt1              171, 107
+		GetThisMemberValueString    "door_goal_a"
+		GetThisMemberValueString    "door_goal_b"
+		GetMemberValueString        "id"
+		Pull                        2
+		GetMemberFunctionString     "ignorecollisionswith"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  41941, 4
+		LineNumberAlt1              172, 107
+		GetThisMemberValueString    "door_goal_b"
+		GetThisMemberValueString    "door_goal_a"
+		GetMemberValueString        "id"
+		Pull                        2
+		GetMemberFunctionString     "ignorecollisionswith"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  41943, 4
+		LineNumberAlt1              174, 107
+		GetThisMemberValueString    "door_trap"
+		PushConstanti8              3
+		PushConstanti8              3
+		PushConstanti8              3
+		Pull                        4
+		GetMemberFunctionString     "setresponse"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  41944, 4
+		LineNumberAlt1              175, 107
+		GetThisMemberValueString    "door_goal_a"
+		PushConstanti8              3
+		PushConstanti8              3
+		PushConstanti8              3
+		Pull                        4
+		GetMemberFunctionString     "setresponse"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  41945, 4
+		LineNumberAlt1              176, 107
+		GetThisMemberValueString    "door_goal_b"
+		PushConstanti8              3
+		PushConstanti8              3
+		PushConstanti8              3
+		Pull                        4
+		GetMemberFunctionString     "setresponse"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  41947, 4
+		LineNumberAlt1              178, 107
+		PushConstanti16             1042
+		CallGameFunctionString      "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                  41948, 4
+		LineNumberAlt1              179, 107
+		PushConstanti32             33554432
+		PushConstanti8              1
+		CallGameFunctionString      "gcsaver", "setcondition", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x67da7
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 185:185
+		MemberFunctionArgumentCheck 1
+		LineNumber                  41954, 4
+		LineNumberAlt1              185, 107
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x67dbe
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 190:213
+		MemberFunctionArgumentCheck   1
+		LineNumber                    41959, 4
+		LineNumberAlt1                190, 107
+		GetThisMemberValueString      "door_trap"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    41960, 4
+		LineNumberAlt1                191, 107
+		GetThisMemberValueString      "door_trap"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    41961, 4
+		LineNumberAlt1                192, 107
+		PushNothing
+		SetThisMemberValueString      "door_trap"
+		; <-
+		BranchTarget                  0
+		LineNumber                    41964, 4
+		LineNumberAlt1                195, 107
+		GetThisMemberValueString      "door_goal_a"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    41965, 4
+		LineNumberAlt1                196, 107
+		GetThisMemberValueString      "door_goal_a"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    41966, 4
+		LineNumberAlt1                197, 107
+		PushNothing
+		SetThisMemberValueString      "door_goal_a"
+		; <-
+		BranchTarget                  1
+		LineNumber                    41969, 4
+		LineNumberAlt1                200, 107
+		GetThisMemberValueString      "door_goal_b"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    41970, 4
+		LineNumberAlt1                201, 107
+		GetThisMemberValueString      "door_goal_b"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    41971, 4
+		LineNumberAlt1                202, 107
+		PushNothing
+		SetThisMemberValueString      "door_goal_b"
+		; <-
+		BranchTarget                  2
+		LineNumber                    41974, 4
+		LineNumberAlt1                205, 107
+		GetThisMemberValueString      "trapdoortimer"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    41975, 4
+		LineNumberAlt1                206, 107
+		GetThisMemberValueString      "trapdoortimer"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    41976, 4
+		LineNumberAlt1                207, 107
+		PushNothing
+		SetThisMemberValueString      "trapdoortimer"
+		; <-
+		BranchTarget                  3
+		LineNumber                    41979, 4
+		LineNumberAlt1                210, 107
+		PushNothing
+		SetThisMemberValueString      "hive1handle"
+		LineNumber                    41980, 4
+		LineNumberAlt1                211, 107
+		PushNothing
+		SetThisMemberValueString      "hive2handle"
+		LineNumber                    41981, 4
+		LineNumberAlt1                212, 107
+		PushNothing
+		SetThisMemberValueString      "hive3handle"
+		LineNumber                    41982, 4
+		LineNumberAlt1                213, 107
+		PushNothing
+		SetThisMemberValueString      "hive4handle"
+		PushNothing
+		SetThisMemberValueString      "deadhives"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x67ece
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 218:218
+		MemberFunctionArgumentCheck 1
+		LineNumber                  41987, 4
+		LineNumberAlt1              218, 107
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x67ee0
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 224:232
+		MemberFunctionArgumentCheck 1
+		LineNumber                  41993, 4
+		LineNumberAlt1              224, 107
+		GetThisMemberValueString    "door_trap"
+		GetThisMemberValueString    "door_trap_original"
+		Pull                        2
+		GetMemberFunctionString     "setpos"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  41994, 4
+		LineNumberAlt1              225, 107
+		GetThisMemberValueString    "door_goal_a"
+		GetThisMemberValueString    "door_goal_a_original"
+		Pull                        2
+		GetMemberFunctionString     "setpos"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  41995, 4
+		LineNumberAlt1              226, 107
+		GetThisMemberValueString    "door_goal_b"
+		GetThisMemberValueString    "door_goal_b_original"
+		Pull                        2
+		GetMemberFunctionString     "setpos"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  41997, 4
+		LineNumberAlt1              228, 107
+		GetThisMemberValueString    "trapdoortimer"
+		Dup
+		GetMemberFunctionString     "reset"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  41998, 4
+		LineNumberAlt1              229, 107
+		GetThisMemberValueString    "trapdoortimer"
+		Dup
+		GetMemberFunctionString     "stop"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  42001, 4
+		LineNumberAlt1              232, 107
+		PushConstant0
+		SetThisMemberValueString    "trapdoorshut"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x67f62
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x67f66
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x67f6a
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 252:304
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          2
+		LineNumber                    42021, 4
+		LineNumberAlt1                252, 107
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    42025, 4
+		LineNumberAlt1                256, 107
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		SetVariableValue              2                                            ; local
+		LineNumber                    42029, 4
+		LineNumberAlt1                260, 107
+		GetVariableValue              2                                            ; local
+		PushConstantStringString      "tp00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    42029, 4
+		LineNumberAlt1                260, 107
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    42030, 4
+		LineNumberAlt1                261, 107
+		GetThisMemberValueString      "trapdoorshut"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    42032, 4
+		LineNumberAlt1                263, 107
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "trapdooraction"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstanti8                8
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    42038, 4
+		LineNumberAlt1                269, 107
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		SetVariableValue              3                                            ; local
+		LineNumber                    42041, 4
+		LineNumberAlt1                272, 107
+		GetVariableValue              3                                            ; local
+		PushConstantStringString      "trap"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    42041, 4
+		LineNumberAlt1                272, 107
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    42043, 4
+		LineNumberAlt1                274, 107
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "parent"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    42045, 4
+		LineNumberAlt1                276, 107
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "ninp"
+		Pull                          2
+		GetMemberFunctionString       "setinputstate"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    42046, 4
+		LineNumberAlt1                277, 107
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		Dup
+		GetMemberFunctionString       "idle"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    42048, 4
+		LineNumberAlt1                279, 107
+		PushConstant0
+		CallGameFunctionString        "scprocessmanager", "pausecreatures", 1
+		Pop
+		LineNumber                    42050, 4
+		LineNumberAlt1                281, 107
+		GetThisMemberValueString      "hive1handle"
+		PushConstanti8                3
+		CallGameFunctionString        "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                    42051, 4
+		LineNumberAlt1                282, 107
+		GetThisMemberValueString      "hive1handle"
+		PushConstanti8                3
+		CallGameFunctionString        "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                    42052, 4
+		LineNumberAlt1                283, 107
+		GetThisMemberValueString      "hive2handle"
+		PushConstanti8                3
+		CallGameFunctionString        "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                    42053, 4
+		LineNumberAlt1                284, 107
+		GetThisMemberValueString      "hive2handle"
+		PushConstanti8                3
+		CallGameFunctionString        "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                    42054, 4
+		LineNumberAlt1                285, 107
+		GetThisMemberValueString      "hive3handle"
+		PushConstanti8                3
+		CallGameFunctionString        "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                    42055, 4
+		LineNumberAlt1                286, 107
+		GetThisMemberValueString      "hive3handle"
+		PushConstanti8                3
+		CallGameFunctionString        "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                    42056, 4
+		LineNumberAlt1                287, 107
+		GetThisMemberValueString      "hive4handle"
+		PushConstanti8                3
+		CallGameFunctionString        "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                    42057, 4
+		LineNumberAlt1                288, 107
+		GetThisMemberValueString      "hive4handle"
+		PushConstanti8                3
+		CallGameFunctionString        "gchive", "setspawnrate", 2
+		Pop
+		; <-
+		BranchTarget                  2
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    42063, 4
+		LineNumberAlt1                294, 107
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "reseta"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    42067, 4
+		LineNumberAlt1                298, 107
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "resetb"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Dup
+		PushConstanti8                51
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    42071, 4
+		LineNumberAlt1                302, 107
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    42073, 4
+		LineNumberAlt1                304, 107
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "killedahive"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  6
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x681b0
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "trapdooraction"
+		; address: 0x681b4
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 321:335
+		MemberFunctionArgumentCheck  1
+		LineNumber                   42090, 4
+		LineNumberAlt1               321, 107
+		PushConstanti8               1
+		CallGameFunctionString       "scprocessmanager", "pausecreatures", 1
+		Pop
+		LineNumber                   42091, 4
+		LineNumberAlt1               322, 107
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MUSICONUATHEME"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   42092, 4
+		LineNumberAlt1               323, 107
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   42093, 4
+		LineNumberAlt1               324, 107
+		GetThisMemberValueString     "trapdoortimer"
+		Dup
+		GetMemberFunctionString      "start"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   42094, 4
+		LineNumberAlt1               325, 107
+		PushConstanti16              1105
+		CallGameFunctionString       "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                   42095, 4
+		LineNumberAlt1               326, 107
+		GetThisMemberValueString     "door_trap"
+		PushConstantf32              0
+		PushConstant0
+		PushConstantf32              15
+		Subtract
+		PushConstantf32              0
+		PushConstantf32              0.5
+		Pull                         5
+		GetMemberFunctionString      "changeposition"
+		JumpAbsolute                 5
+		Pop
+		LineNumber                   42096, 4
+		LineNumberAlt1               327, 107
+		PushConstanti8               1
+		SetThisMemberValueString     "trapdoorshut"
+		LineNumber                   42098, 4
+		LineNumberAlt1               329, 107
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "parent"
+		GetMemberValueString         "cam"
+		PushConstant0
+		Pull                         2
+		GetMemberFunctionString      "setaimode"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   42099, 4
+		LineNumberAlt1               330, 107
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "parent"
+		GetMemberValueString         "cam"
+		PushConstantf32              888.2999877929688
+		PushConstantf32              9.399999618530273
+		PushConstantf32              126.5
+		Pull                         4
+		GetMemberFunctionString      "settargetpos"
+		JumpAbsolute                 4
+		Pop
+		LineNumber                   42100, 4
+		LineNumberAlt1               331, 107
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "parent"
+		GetMemberValueString         "cam"
+		PushConstantf32              886.5999755859375
+		PushConstantf32              7
+		PushConstantf32              117.80000305175781
+		Pull                         4
+		GetMemberFunctionString      "setpos"
+		JumpAbsolute                 4
+		Pop
+		LineNumber                   42101, 4
+		LineNumberAlt1               332, 107
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "parent"
+		GetMemberValueString         "cam"
+		PushConstantf32              1.5
+		PushConstantf32              0.15000000596046448
+		Pull                         3
+		GetMemberFunctionString      "shakecamera"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   42103, 4
+		LineNumberAlt1               334, 107
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstantStringString     "none"
+		Pull                         2
+		GetMemberFunctionString      "setinputstate"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   42104, 4
+		LineNumberAlt1               335, 107
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstantStringString     "o000"
+		CallGameFunctionString       "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                   42104, 4
+		LineNumberAlt1               335, 107
+		Pull                         2
+		GetMemberFunctionString      "switchanimation"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "killedahive"
+		; address: 0x68343
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 346:360
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    42115, 4
+		LineNumberAlt1                346, 107
+		GetThisMemberValueString      "deadhives"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "deadhives"
+		LineNumber                    42117, 4
+		LineNumberAlt1                348, 107
+		GetThisMemberValueString      "deadhives"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    42119, 4
+		LineNumberAlt1                350, 107
+		PushConstantf32               5.5
+		SetVariableValue              1                                       ; local
+		LineNumber                    42121, 4
+		LineNumberAlt1                352, 107
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MUSICLEGOUNDERGROUND"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    42122, 4
+		LineNumberAlt1                353, 107
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    42124, 4
+		LineNumberAlt1                355, 107
+		GetThisMemberValueString      "deadhives"
+		PushConstantf32               0.5
+		Multiply
+		SetVariableValue              1                                       ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    42128, 4
+		LineNumberAlt1                359, 107
+		GetThisMemberValueString      "door_goal_a"
+		PushConstant0
+		GetVariableValue              1                                       ; local
+		Subtract
+		PushConstantf32               0
+		GetVariableValue              1                                       ; local
+		PushConstantf32               0
+		Pull                          5
+		GetMemberFunctionString       "changeposition"
+		JumpAbsolute                  5
+		Pop
+		LineNumber                    42129, 4
+		LineNumberAlt1                360, 107
+		GetThisMemberValueString      "door_goal_b"
+		GetVariableValue              1                                       ; local
+		PushConstantf32               0
+		PushConstant0
+		GetVariableValue              1                                       ; local
+		Subtract
+		PushConstantf32               0
+		Pull                          5
+		GetMemberFunctionString       "changeposition"
+		JumpAbsolute                  5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "reseta"
+		; address: 0x6841d
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 366:366
+		MemberFunctionArgumentCheck 1
+		LineNumber                  42135, 4
+		LineNumberAlt1              366, 107
+		PushConstantf32             1.2000000476837158
+		CallGameFunctionString      "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "resetb"
+		; address: 0x68437
+		; source: 107 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bugs.vbo" 375:377
+		MemberFunctionArgumentCheck  1
+		LineNumber                   42144, 4
+		LineNumberAlt1               375, 107
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstantStringString     "str0"
+		CallGameFunctionString       "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                   42144, 4
+		LineNumberAlt1               375, 107
+		PushConstantStringString     "lok0"
+		CallGameFunctionString       "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                   42144, 4
+		LineNumberAlt1               375, 107
+		Pull                         3
+		GetMemberFunctionString      "gotostartpos"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   42145, 4
+		LineNumberAlt1               376, 107
+		GetVariableValue             0                                            ; local
+		GetThisMemberFunctionString  "cleanupshort"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   42146, 4
+		LineNumberAlt1               377, 107
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		Dup
+		GetMemberFunctionString      "unkill"
+		JumpAbsolute                 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

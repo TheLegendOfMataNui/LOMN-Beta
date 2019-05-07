@@ -1,0 +1,175 @@
+begin class "lego_area_evac2", "gs_lego_area"
+	property "puzzle"
+
+	begin method "lego_area_evac2"
+		; address: 0x7fbea
+		; source: 143 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_gly3.vbo" 26:28
+		MemberFunctionArgumentCheck 2
+		LineNumber                  54782, 4
+		LineNumberAlt1              26, 143
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "evac"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  54783, 4
+		LineNumberAlt1              27, 143
+		CreateObjectString          "lego_puzzle_evac2"
+		Dup
+		GetVariableValue            0                    ; local
+		Pull                        2
+		GetMemberFunctionString     "lego_puzzle_evac2"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  54783, 4
+		LineNumberAlt1              27, 143
+		SetThisMemberValueString    "puzzle"
+		LineNumber                  54784, 4
+		LineNumberAlt1              28, 143
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x7fc42
+		; source: 143 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_gly3.vbo" 35:40
+		MemberFunctionArgumentCheck 1
+		LineNumber                  54791, 4
+		LineNumberAlt1              35, 143
+		GetVariableValue            0                                       ; local
+		GetThisMemberFunctionString "lego_area_show"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  54792, 4
+		LineNumberAlt1              36, 143
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  54793, 4
+		LineNumberAlt1              37, 143
+		PushConstanti8              7
+		CallGameFunctionString      "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                  54794, 4
+		LineNumberAlt1              38, 143
+		PushConstanti8              7
+		CallGameFunctionString      "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                  54795, 4
+		LineNumberAlt1              39, 143
+		PushConstanti32             -9143565
+		PushConstant0
+		PushConstantf32             1000
+		Subtract
+		PushConstant0
+		PushConstantf32             2400
+		Subtract
+		PushConstantf32             0.009999999776482582
+		CallGameFunctionString      "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                  54796, 4
+		LineNumberAlt1              40, 143
+		PushConstanti8              1
+		CallGameFunctionString      "gclightdirector", "setcavelighting", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x7fccf
+		; source: 143 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_gly3.vbo" 45:46
+		MemberFunctionArgumentCheck 1
+		LineNumber                  54801, 4
+		LineNumberAlt1              45, 143
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  54802, 4
+		LineNumberAlt1              46, 143
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x7fcfa
+		; source: 143 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_gly3.vbo" 51:51
+		MemberFunctionArgumentCheck 2
+		LineNumber                  54807, 4
+		LineNumberAlt1              51, 143
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "process"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x7fd16
+		; source: 143 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_gly3.vbo" 56:56
+		MemberFunctionArgumentCheck 2
+		LineNumber                  54812, 4
+		LineNumberAlt1              56, 143
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x7fd32
+		; source: 143 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_gly3.vbo" 61:61
+		MemberFunctionArgumentCheck 2
+		LineNumber                  54817, 4
+		LineNumberAlt1              61, 143
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1        ; local
+		Pull                        2
+		GetMemberFunctionString     "input"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x7fd4e
+		; source: 143 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_gly3.vbo" 66:67
+		MemberFunctionArgumentCheck 1
+		LineNumber                  54822, 4
+		LineNumberAlt1              66, 143
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "exit"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  54823, 4
+		LineNumberAlt1              67, 143
+		PushNothing
+		SetThisMemberValueString    "puzzle"
+		PushNothing
+		Return
+	end ; method
+end ; class

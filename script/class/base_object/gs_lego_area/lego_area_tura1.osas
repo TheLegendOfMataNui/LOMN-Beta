@@ -1,0 +1,151 @@
+begin class "lego_area_tura1", "gs_lego_area"
+	begin method "lego_area_tura1"
+		; address: 0x6f9d3
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 29:30
+		MemberFunctionArgumentCheck 2
+		LineNumber                  47217, 4
+		LineNumberAlt1              29, 123
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "tura"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  47218, 4
+		LineNumberAlt1              30, 123
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x6fa05
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 36:57
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    47224, 4
+		LineNumberAlt1                36, 123
+		GetVariableValue              0                                                     ; local
+		GetThisMemberFunctionString   "lego_area_show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    47225, 4
+		LineNumberAlt1                37, 123
+		PushConstanti32               -402183
+		PushConstant0
+		PushConstantf32               40
+		Subtract
+		PushConstant0
+		PushConstantf32               1200
+		Subtract
+		PushConstantf32               0.05000000074505806
+		CallGameFunctionString        "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                    47226, 4
+		LineNumberAlt1                38, 123
+		PushConstanti8                1
+		CallGameFunctionString        "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                    47227, 4
+		LineNumberAlt1                39, 123
+		PushConstanti8                3
+		CallGameFunctionString        "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                    47228, 4
+		LineNumberAlt1                40, 123
+		PushConstanti8                3
+		CallGameFunctionString        "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                    47236, 4
+		LineNumberAlt1                48, 123
+		PushConstantStringString      "tps9"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    47236, 4
+		LineNumberAlt1                48, 123
+		SetVariableValue              1                                                     ; local
+		LineNumber                    47237, 4
+		LineNumberAlt1                49, 123
+		CallGameFunctionString        "gcsaver", "portalactive", 0
+		LineNumber                    47237, 4
+		LineNumberAlt1                49, 123
+		SetVariableValue              2                                                     ; local
+		LineNumber                    47238, 4
+		LineNumberAlt1                50, 123
+		GetVariableValue              2                                                     ; local
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    47239, 4
+		LineNumberAlt1                51, 123
+		GetVariableValue              1                                                     ; local
+		PushConstantStringString      "root/data/art/portals/onua/shrine_ripple/o_shrn_ptl"
+		PushConstanti8                1
+		CallGameFunctionString        "gccollisionphysicsgroup", "setportal", 3
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    47241, 4
+		LineNumberAlt1                53, 123
+		GetVariableValue              1                                                     ; local
+		CallGameFunctionString        "gccollisionphysicsgroup", "turnoffnextarea", 1
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    47244, 4
+		LineNumberAlt1                56, 123
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicVillage"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    47245, 4
+		LineNumberAlt1                57, 123
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x6fb5a
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 62:63
+		MemberFunctionArgumentCheck 1
+		LineNumber                  47250, 4
+		LineNumberAlt1              62, 123
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x6fb7f
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 68:68
+		MemberFunctionArgumentCheck 1
+		LineNumber                  47256, 4
+		LineNumberAlt1              68, 123
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

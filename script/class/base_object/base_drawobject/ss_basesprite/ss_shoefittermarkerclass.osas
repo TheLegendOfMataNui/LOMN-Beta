@@ -1,0 +1,289 @@
+begin class "ss_shoefittermarkerclass", "ss_basesprite"
+	property "startspot"
+	property "markername"
+	property "transparencyincr"
+	property "eventtype"
+	property "arg_name_array"
+	property "arg_value_array"
+	property "moveamount"
+
+	begin method "ss_shoefittermarkerclass"
+		; address: 0x73fbb
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 990:994
+		MemberFunctionArgumentCheck 10
+		LineNumber                  49417, 4
+		LineNumberAlt1              990, 124
+		GetVariableValue            0                  ; local
+		GetVariableValue            1                  ; local
+		GetVariableValue            2                  ; local
+		GetVariableValue            3                  ; local
+		GetVariableValue            4                  ; local
+		GetVariableValue            5                  ; local
+		GetVariableValue            6                  ; local
+		GetThisMemberFunctionString "ss_basesprite"
+		JumpAbsolute                7
+		Pop
+		LineNumber                  49418, 4
+		LineNumberAlt1              991, 124
+		GetVariableValue            7                  ; local
+		SetThisMemberValueString    "startspot"
+		LineNumber                  49419, 4
+		LineNumberAlt1              992, 124
+		GetVariableValue            8                  ; local
+		SetThisMemberValueString    "markername"
+		LineNumber                  49420, 4
+		LineNumberAlt1              993, 124
+		PushConstanti8              25
+		SetThisMemberValueString    "transparencyincr"
+		LineNumber                  49421, 4
+		LineNumberAlt1              994, 124
+		GetVariableValue            9                  ; local
+		SetThisMemberValueString    "eventtype"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "markerinitfull"
+		; address: 0x74023
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 999:1008
+		MemberFunctionArgumentCheck 2
+		LineNumber                  49426, 4
+		LineNumberAlt1              999, 124
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  49427, 4
+		LineNumberAlt1              1000, 124
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "add"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  49428, 4
+		LineNumberAlt1              1001, 124
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "show"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  49429, 4
+		LineNumberAlt1              1002, 124
+		GetVariableValue            0                    ; local
+		PushConstanti8              1
+		GetThisMemberFunctionString "enablealphachannel"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  49430, 4
+		LineNumberAlt1              1003, 124
+		GetVariableValue            0                    ; local
+		PushConstanti8              1
+		GetThisMemberFunctionString "enabletransparency"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  49432, 4
+		LineNumberAlt1              1005, 124
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "createargarrays"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  49433, 4
+		LineNumberAlt1              1006, 124
+		GetVariableValue            0                    ; local
+		PushConstanti16             150
+		GetThisMemberFunctionString "settransparency"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  49435, 4
+		LineNumberAlt1              1008, 124
+		PushConstanti16             534
+		GetVariableValue            1                    ; local
+		PushConstanti8              100
+		Multiply
+		Divide
+		SetThisMemberValueString    "moveamount"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "markercleanupfull"
+		; address: 0x740ca
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1013:1015
+		MemberFunctionArgumentCheck 1
+		LineNumber                  49440, 4
+		LineNumberAlt1              1013, 124
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  49441, 4
+		LineNumberAlt1              1014, 124
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "remove"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  49442, 4
+		LineNumberAlt1              1015, 124
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x74107
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1020:1020
+		MemberFunctionArgumentCheck 2
+		LineNumber                  49447, 4
+		LineNumberAlt1              1020, 124
+		GetVariableValue            0         ; local
+		GetThisMemberFunctionString "pulsate"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "pulsate"
+		; address: 0x7411e
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1025:1028
+		MemberFunctionArgumentCheck   1
+		LineNumber                    49452, 4
+		LineNumberAlt1                1025, 124
+		GetThisMemberValueString      "transval"
+		GetThisMemberValueString      "transparencyincr"
+		Add
+		SetThisMemberValueString      "transval"
+		LineNumber                    49453, 4
+		LineNumberAlt1                1026, 124
+		GetVariableValue              0                  ; local
+		GetThisMemberValueString      "transval"
+		GetThisMemberFunctionString   "settransparency"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    49454, 4
+		LineNumberAlt1                1027, 124
+		GetThisMemberValueString      "transval"
+		PushConstanti16               250
+		GreaterOrEqual
+		GetThisMemberValueString      "transval"
+		PushConstanti16               150
+		LessOrEqual
+		Or
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    49455, 4
+		LineNumberAlt1                1028, 124
+		PushConstant0
+		GetThisMemberValueString      "transparencyincr"
+		Subtract
+		SetThisMemberValueString      "transparencyincr"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "moveflag"
+		; address: 0x7417a
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1034:1035
+		MemberFunctionArgumentCheck 2
+		LineNumber                  49461, 4
+		LineNumberAlt1              1034, 124
+		GetVariableValue            0                    ; local
+		GetThisMemberValueString    "moveamount"
+		GetVariableValue            1                    ; local
+		Multiply
+		GetThisMemberFunctionString "changepos"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  49462, 4
+		LineNumberAlt1              1035, 124
+		GetThisMemberValueString    "startspot"
+		GetVariableValue            1                    ; local
+		PushConstantf32             0.009999999776482582
+		Multiply
+		Add
+		SetThisMemberValueString    "startspot"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "createargarrays"
+		; address: 0x741b2
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1040:1044
+		MemberFunctionArgumentCheck   1
+		LineNumber                    49467, 4
+		LineNumberAlt1                1040, 124
+		GetThisMemberValueString      "arg_name_array"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    49468, 4
+		LineNumberAlt1                1041, 124
+		CreateArray
+		Dup
+		PushConstantStringString      "User0"
+		AppendToArray
+		Dup
+		PushConstantStringString      "User1"
+		AppendToArray
+		Dup
+		PushConstantStringString      "User2"
+		AppendToArray
+		Dup
+		PushConstantStringString      "User3"
+		AppendToArray
+		Dup
+		PushConstantStringString      "User4"
+		AppendToArray
+		SetThisMemberValueString      "arg_name_array"
+		; <-
+		BranchTarget                  0
+		LineNumber                    49470, 4
+		LineNumberAlt1                1043, 124
+		GetThisMemberValueString      "arg_value_array"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    49471, 4
+		LineNumberAlt1                1044, 124
+		CreateArray
+		Dup
+		PushConstant0
+		AppendToArray
+		Dup
+		PushConstant0
+		AppendToArray
+		Dup
+		PushConstant0
+		AppendToArray
+		Dup
+		PushConstant0
+		AppendToArray
+		Dup
+		PushConstant0
+		AppendToArray
+		SetThisMemberValueString      "arg_value_array"
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setargvalues"
+		; address: 0x7421e
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1050:1050
+		MemberFunctionArgumentCheck 3
+		LineNumber                  49477, 4
+		LineNumberAlt1              1050, 124
+		GetThisMemberValueString    "arg_value_array"
+		GetVariableValue            2                 ; local
+		GetVariableValue            1                 ; local
+		SetArrayValue
+		PushNothing
+		Return
+	end ; method
+end ; class

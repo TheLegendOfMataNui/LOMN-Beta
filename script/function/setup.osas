@@ -1,0 +1,102 @@
+begin function "setup", 0
+	; address: 0x2c852
+	; source: 2 "C:\\projects\\lego\\Scripting\\VBO\\base.vbo" 35:58
+	LineNumber                    19942, 4
+	LineNumberAlt1                35, 2
+	CallGameFunctionString        "gcgame", "getresolutionwidth", 0
+	LineNumber                    19942, 4
+	LineNumberAlt1                35, 2
+	SetVariableValueGlobalString  "screenx"
+	LineNumber                    19943, 4
+	LineNumberAlt1                36, 2
+	CallGameFunctionString        "gcgame", "getresolutionheight", 0
+	LineNumber                    19943, 4
+	LineNumberAlt1                36, 2
+	SetVariableValueGlobalString  "screeny"
+	LineNumber                    19944, 4
+	LineNumberAlt1                37, 2
+	GetVariableValueGlobalString  "screenx"
+	PushConstanti16               640
+	Divide
+	SetVariableValueGlobalString  "screenratio"
+	LineNumber                    19946, 4
+	LineNumberAlt1                39, 2
+	CreateObjectString            "global_class"
+	Dup
+	Dup
+	GetMemberFunctionString       "global_class"
+	JumpAbsolute                  1
+	Pop
+	LineNumber                    19946, 4
+	LineNumberAlt1                39, 2
+	SetVariableValueGlobalString  "globalclass"
+	LineNumber                    19947, 4
+	LineNumberAlt1                40, 2
+	GetVariableValueGlobalString  "globalclass"
+	Dup
+	GetMemberFunctionString       "initfull"
+	JumpAbsolute                  1
+	Pop
+	LineNumber                    19949, 4
+	LineNumberAlt1                42, 2
+	CreateObjectString            "base_screenlist"
+	Dup
+	Dup
+	GetMemberFunctionString       "base_screenlist"
+	JumpAbsolute                  1
+	Pop
+	LineNumber                    19949, 4
+	LineNumberAlt1                42, 2
+	SetVariableValueGlobalString  "screenlist"
+	LineNumber                    19950, 4
+	LineNumberAlt1                43, 2
+	PushConstanti32JumpTarget     14, 0
+	JumpRelative                  0
+	Pop
+	LineNumber                    19956, 4
+	LineNumberAlt1                49, 2
+	CallGameFunctionString        "gcsaver", "cheatmenu", 0
+	LineNumber                    19956, 4
+	LineNumberAlt1                49, 2
+	CompareAndBranchIfFalseTarget 0, 0
+	; ->
+	LineNumber                    19957, 4
+	LineNumberAlt1                50, 2
+	GetVariableValueGlobalString  "screenlist"
+	PushConstanti8                1
+	Pull                          2
+	GetMemberFunctionString       "setactive"
+	JumpAbsolute                  2
+	Pop
+	LineNumber                    19958, 4
+	LineNumberAlt1                51, 2
+	PushConstant0
+	SetVariableValueGlobalString  "newfrontend"
+	BranchAlwaysTarget            1, 0
+	; ->
+	; <-
+	BranchTarget                  0
+	LineNumber                    19960, 4
+	LineNumberAlt1                53, 2
+	GetVariableValueGlobalString  "screenlist"
+	PushConstanti8                21
+	Pull                          2
+	GetMemberFunctionString       "setactive"
+	JumpAbsolute                  2
+	Pop
+	LineNumber                    19961, 4
+	LineNumberAlt1                54, 2
+	PushConstanti8                1
+	SetVariableValueGlobalString  "newfrontend"
+	; <-
+	BranchTarget                  1
+	LineNumber                    19965, 4
+	LineNumberAlt1                58, 2
+	GetVariableValueGlobalString  "screenlist"
+	Dup
+	GetMemberFunctionString       "initfull"
+	JumpAbsolute                  1
+	Pop
+	PushNothing
+	Return
+end ; function

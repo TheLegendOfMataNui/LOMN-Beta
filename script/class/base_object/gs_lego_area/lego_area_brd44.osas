@@ -1,0 +1,167 @@
+begin class "lego_area_brd44", "gs_lego_area"
+	property "puzzle"
+	property "parent"
+
+	begin method "lego_area_brd44"
+		; address: 0x9d1f5
+		; source: 181 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_tura.vbo" 29:32
+		MemberFunctionArgumentCheck 2
+		LineNumber                  4617, 4
+		LineNumberAlt1              29, 181
+		GetVariableValue            1                    ; local
+		SetThisMemberValueString    "parent"
+		LineNumber                  4618, 4
+		LineNumberAlt1              30, 181
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "brd4"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  4619, 4
+		LineNumberAlt1              31, 181
+		CreateObjectString          "brd4_puzzle"
+		Dup
+		GetVariableValue            0                    ; local
+		Pull                        2
+		GetMemberFunctionString     "brd4_puzzle"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  4619, 4
+		LineNumberAlt1              31, 181
+		SetThisMemberValueString    "puzzle"
+		LineNumber                  4620, 4
+		LineNumberAlt1              32, 181
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x9d25d
+		; source: 181 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_tura.vbo" 40:46
+		MemberFunctionArgumentCheck  1
+		LineNumber                   4628, 4
+		LineNumberAlt1               40, 181
+		GetVariableValue             0                                        ; local
+		GetThisMemberFunctionString  "lego_area_show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   4629, 4
+		LineNumberAlt1               41, 181
+		GetThisMemberValueString     "puzzle"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   4630, 4
+		LineNumberAlt1               42, 181
+		GetThisMemberValueString     "puzzle"
+		Dup
+		GetMemberFunctionString      "show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   4633, 4
+		LineNumberAlt1               45, 181
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MusicSurfAndSnowboard"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   4634, 4
+		LineNumberAlt1               46, 181
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x9d2d1
+		; source: 181 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_tura.vbo" 52:55
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4640, 4
+		LineNumberAlt1              52, 181
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  4642, 4
+		LineNumberAlt1              54, 181
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  4643, 4
+		LineNumberAlt1              55, 181
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x9d310
+		; source: 181 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_tura.vbo" 66:66
+		MemberFunctionArgumentCheck 2
+		LineNumber                  4654, 4
+		LineNumberAlt1              66, 181
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x9d32c
+		; source: 181 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_tura.vbo" 76:80
+		MemberFunctionArgumentCheck   1
+		LineNumber                    4664, 4
+		LineNumberAlt1                76, 181
+		GetThisMemberValueString      "puzzle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4665, 4
+		LineNumberAlt1                77, 181
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "exit"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    4666, 4
+		LineNumberAlt1                78, 181
+		PushNothing
+		SetThisMemberValueString      "puzzle"
+		; <-
+		BranchTarget                  0
+		LineNumber                    4668, 4
+		LineNumberAlt1                80, 181
+		PushNothing
+		SetThisMemberValueString      "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

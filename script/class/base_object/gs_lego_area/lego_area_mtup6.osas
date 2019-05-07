@@ -1,0 +1,200 @@
+begin class "lego_area_mtup6", "gs_lego_area"
+	property "cinema"
+
+	begin method "lego_area_mtup6"
+		; address: 0xb834f
+		; source: 226 "C:\\projects\\lego\\Scripting\\VBO\\lev7/Lev7_kopa.vbo" 31:31
+		MemberFunctionArgumentCheck 2
+		LineNumber                  17428, 4
+		LineNumberAlt1              31, 226
+		GetVariableValue            0              ; local
+		PushConstantStringString    "mtup"
+		GetVariableValue            1              ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xb836e
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 103:103
+		; source: 226 "C:\\projects\\lego\\Scripting\\VBO\\lev7/Lev7_kopa.vbo" 39:43
+		; source: 95 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_vllg.vbo" 313:314
+		MemberFunctionArgumentCheck   1
+		LineNumber                    63403, 4
+		LineNumberAlt1                103, 162
+		PushConstantStringString      "cin1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    63403, 4
+		LineNumberAlt1                103, 162
+		CallGameFunctionString        "gcsaver", "findcinema", 1
+		LineNumber                    63403, 4
+		LineNumberAlt1                103, 162
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    17436, 4
+		LineNumberAlt1                39, 226
+		CallGameFunctionString        "gccinemaengine", "create", 0
+		LineNumber                    17436, 4
+		LineNumberAlt1                39, 226
+		SetThisMemberValueString      "cinema"
+		LineNumber                    17437, 4
+		LineNumberAlt1                40, 226
+		GetThisMemberValueString      "cinema"
+		PushConstantStringString      "cin1"
+		CallGameFunctionString        "gccinemaengine", "load", 2
+		Pop
+		LineNumber                    17439, 4
+		LineNumberAlt1                42, 226
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    17440, 4
+		LineNumberAlt1                43, 226
+		GetThisMemberValueString      "cinema"
+		CallGameFunctionString        "gccinemaengine", "play", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    37481, 4
+		LineNumberAlt1                313, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/spiderwebambience"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    37482, 4
+		LineNumberAlt1                314, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xb8438
+		; source: 226 "C:\\projects\\lego\\Scripting\\VBO\\lev7/Lev7_kopa.vbo" 48:48
+		MemberFunctionArgumentCheck 1
+		LineNumber                  17445, 4
+		LineNumberAlt1              48, 226
+		PushNothing
+		SetThisMemberValueString    "cinema"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xb844a
+		; source: 226 "C:\\projects\\lego\\Scripting\\VBO\\lev7/Lev7_kopa.vbo" 53:57
+		MemberFunctionArgumentCheck   2
+		LineNumber                    17450, 4
+		LineNumberAlt1                53, 226
+		GetVariableValue              1                           ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    17451, 4
+		LineNumberAlt1                54, 226
+		GetVariableValue              1                           ; local
+		GetMemberValueString          "button"
+		Dup
+		PushConstanti16               251
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    17453, 4
+		LineNumberAlt1                56, 226
+		GetThisMemberValueString      "cinema"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    17454, 4
+		LineNumberAlt1                57, 226
+		GetThisMemberValueString      "cinema"
+		CallGameFunctionString        "gccinemaengine", "stop", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xb84a4
+		; source: 226 "C:\\projects\\lego\\Scripting\\VBO\\lev7/Lev7_kopa.vbo" 66:68
+		; source: 95 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_vllg.vbo" 313:314
+		MemberFunctionArgumentCheck   2
+		LineNumber                    17463, 4
+		LineNumberAlt1                66, 226
+		GetVariableValue              1                                    ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                30
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37481, 4
+		LineNumberAlt1                313, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/spiderwebambience"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    37482, 4
+		LineNumberAlt1                314, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    17465, 4
+		LineNumberAlt1                68, 226
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "maskcontrol"
+		PushConstanti8                4
+		Pull                          2
+		GetMemberFunctionString       "changemask"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xb8512
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+end ; class

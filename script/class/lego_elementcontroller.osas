@@ -1,0 +1,986 @@
+begin class "lego_elementcontroller"
+	property "elements"
+	property "currentelement"
+	property "currentidx"
+	property "active"
+
+	begin method "lego_elementcontroller"
+		; address: 0x4b480
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x4b484
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 57:60
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24614, 4
+		LineNumberAlt1              57, 65
+		PushNothing
+		SetThisMemberValueString    "elements"
+		LineNumber                  24615, 4
+		LineNumberAlt1              58, 65
+		PushConstant0
+		SetThisMemberValueString    "active"
+		LineNumber                  24616, 4
+		LineNumberAlt1              59, 65
+		PushNothing
+		SetThisMemberValueString    "currentelement"
+		LineNumber                  24617, 4
+		LineNumberAlt1              60, 65
+		PushNothing
+		SetThisMemberValueString    "currentidx"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x4b4c0
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 65:74
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    24622, 4
+		LineNumberAlt1                65, 65
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24623, 4
+		LineNumberAlt1                66, 65
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1                ; local
+		LineNumber                    24624, 4
+		LineNumberAlt1                67, 65
+		GetVariableValue              1                ; local
+		PushConstant0
+		SetVariableValue              2                ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24625, 4
+		LineNumberAlt1                68, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              1                ; local
+		GetVariableValue              2                ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    24626, 4
+		LineNumberAlt1                69, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              1                ; local
+		GetVariableValue              2                ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    24629, 4
+		LineNumberAlt1                72, 65
+		PushNothing
+		SetThisMemberValueString      "currentelement"
+		LineNumber                    24630, 4
+		LineNumberAlt1                73, 65
+		PushNothing
+		SetThisMemberValueString      "currentidx"
+		LineNumber                    24631, 4
+		LineNumberAlt1                74, 65
+		PushNothing
+		SetThisMemberValueString      "active"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x4b569
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x4b56d
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 84:91
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    24641, 4
+		LineNumberAlt1                84, 65
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24642, 4
+		LineNumberAlt1                85, 65
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24643, 4
+		LineNumberAlt1                86, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              1                ; local
+		GetArrayValue
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "setselectable"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    24646, 4
+		LineNumberAlt1                89, 65
+		PushNothing
+		SetThisMemberValueString      "currentelement"
+		LineNumber                    24647, 4
+		LineNumberAlt1                90, 65
+		PushNothing
+		SetThisMemberValueString      "currentidx"
+		LineNumber                    24648, 4
+		LineNumberAlt1                91, 65
+		PushConstant0
+		SetThisMemberValueString      "active"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "addallelements"
+		; address: 0x4b5ee
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 102:142
+		MemberFunctionArgumentCheck   1
+		LineNumber                    24659, 4
+		LineNumberAlt1                102, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "toahandle"
+		CallGameFunctionString        "gctoa", "findglyph", 1
+		Pop
+		LineNumber                    24661, 4
+		LineNumberAlt1                104, 65
+		CreateArray
+		SetThisMemberValueString      "elements"
+		LineNumber                    24663, 4
+		LineNumberAlt1                106, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "charname"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24663, 4
+		LineNumberAlt1                106, 65
+		Dup
+		PushConstantStringString      "onua"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24664, 4
+		LineNumberAlt1                107, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24667, 4
+		LineNumberAlt1                110, 65
+		GetThisMemberValueString      "elements"
+		CreateObjectString            "element"
+		Dup
+		PushConstanti8                4
+		Pull                          2
+		GetMemberFunctionString       "element"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    24667, 4
+		LineNumberAlt1                110, 65
+		AppendToArray
+		LineNumber                    24668, 4
+		LineNumberAlt1                111, 65
+		GetVariableValue              0                                            ; local
+		PushConstanti8                4
+		PushConstanti8                1
+		GetThisMemberFunctionString   "setselectable"
+		JumpAbsolute                  3
+		Pop
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstantStringString      "gali"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24670, 4
+		LineNumberAlt1                113, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24673, 4
+		LineNumberAlt1                116, 65
+		GetThisMemberValueString      "elements"
+		CreateObjectString            "element"
+		Dup
+		PushConstanti8                7
+		Pull                          2
+		GetMemberFunctionString       "element"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    24673, 4
+		LineNumberAlt1                116, 65
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstantStringString      "poha"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24675, 4
+		LineNumberAlt1                118, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24678, 4
+		LineNumberAlt1                121, 65
+		GetThisMemberValueString      "elements"
+		CreateObjectString            "element"
+		Dup
+		PushConstanti8                10
+		Pull                          2
+		GetMemberFunctionString       "element"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    24678, 4
+		LineNumberAlt1                121, 65
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstantStringString      "kopa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24680, 4
+		LineNumberAlt1                123, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    24683, 4
+		LineNumberAlt1                126, 65
+		GetThisMemberValueString      "elements"
+		CreateObjectString            "element"
+		Dup
+		PushConstanti8                13
+		Pull                          2
+		GetMemberFunctionString       "element"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    24683, 4
+		LineNumberAlt1                126, 65
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstantStringString      "lewa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24685, 4
+		LineNumberAlt1                128, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    24689, 4
+		LineNumberAlt1                132, 65
+		GetThisMemberValueString      "elements"
+		CreateObjectString            "element"
+		Dup
+		PushConstanti8                16
+		Pull                          2
+		GetMemberFunctionString       "element"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    24689, 4
+		LineNumberAlt1                132, 65
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstantStringString      "tahu"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    24691, 4
+		LineNumberAlt1                134, 65
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    24695, 4
+		LineNumberAlt1                138, 65
+		GetThisMemberValueString      "elements"
+		CreateObjectString            "element"
+		Dup
+		PushConstanti8                19
+		Pull                          2
+		GetMemberFunctionString       "element"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    24695, 4
+		LineNumberAlt1                138, 65
+		AppendToArray
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    24699, 4
+		LineNumberAlt1                142, 65
+		GetThisMemberValueString      "elements"
+		PushConstant0
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x4b7f4
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getelement"
+		; address: 0x4b7f8
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 155:155
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24712, 4
+		LineNumberAlt1              155, 65
+		GetThisMemberValueString    "currentelement"
+		Return
+	end ; method
+
+	begin method "getcurrentidx"
+		; address: 0x4b808
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 160:160
+		MemberFunctionArgumentCheck 1
+		LineNumber                  24717, 4
+		LineNumberAlt1              160, 65
+		GetThisMemberValueString    "currentidx"
+		Return
+	end ; method
+
+	begin method "getdrainrate"
+		; address: 0x4b818
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 165:168
+		MemberFunctionArgumentCheck   1
+		LineNumber                    24722, 4
+		LineNumberAlt1                165, 65
+		GetThisMemberValueString      "currentelement"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24723, 4
+		LineNumberAlt1                166, 65
+		GetThisMemberValueString      "elements"
+		GetThisMemberValueString      "currentidx"
+		GetArrayValue
+		GetMemberValueString          "powerdrainrate"
+		Return
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    24725, 4
+		LineNumberAlt1                168, 65
+		PushConstant0
+		Return
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "isactive"
+		; address: 0x4b853
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 178:184
+		MemberFunctionArgumentCheck   2
+		LineNumber                    24735, 4
+		LineNumberAlt1                178, 65
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24736, 4
+		LineNumberAlt1                179, 65
+		PushConstant0
+		Return
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    24738, 4
+		LineNumberAlt1                181, 65
+		GetVariableValue              1          ; local
+		PushNothing
+		EqualTo
+		GetVariableValue              1          ; local
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		Or
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24739, 4
+		LineNumberAlt1                182, 65
+		PushConstant0
+		Return
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    24741, 4
+		LineNumberAlt1                184, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              1          ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "isactive"
+		JumpAbsolute                  1
+		LineNumber                    24741, 4
+		LineNumberAlt1                184, 65
+		Return
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "isselectable"
+		; address: 0x4b8c7
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 195:205
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          2
+		LineNumber                    24752, 4
+		LineNumberAlt1                195, 65
+		PushConstant0
+		SetVariableValue              2             ; local
+		LineNumber                    24753, 4
+		LineNumberAlt1                196, 65
+		GetVariableValue              1             ; local
+		PushNothing
+		EqualTo
+		Not
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		Not
+		And
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    24755, 4
+		LineNumberAlt1                198, 65
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              3             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24756, 4
+		LineNumberAlt1                199, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              3             ; local
+		GetArrayValue
+		GetMemberValueString          "elementname"
+		GetVariableValue              1             ; local
+		EqualTo
+		GetThisMemberValueString      "elements"
+		GetVariableValue              3             ; local
+		GetArrayValue
+		GetMemberValueString          "selectable"
+		PushConstanti8                1
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24757, 4
+		LineNumberAlt1                200, 65
+		PushConstanti8                1
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  1
+		IncrementVariable             3
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		LineNumber                    24762, 4
+		LineNumberAlt1                205, 65
+		GetVariableValue              2             ; local
+		Return
+	end ; method
+
+	begin method "setselectable"
+		; address: 0x4b95d
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 212:220
+		MemberFunctionArgumentCheck   3
+		CreateStackVariables          1
+		LineNumber                    24769, 4
+		LineNumberAlt1                212, 65
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    24770, 4
+		LineNumberAlt1                213, 65
+		GetVariableValue              2                ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24771, 4
+		LineNumberAlt1                214, 65
+		PushConstanti8                1
+		SetVariableValue              2                ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    24773, 4
+		LineNumberAlt1                216, 65
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3                ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              3                ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    24774, 4
+		LineNumberAlt1                217, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              3                ; local
+		GetArrayValue
+		GetMemberValueString          "elementname"
+		GetVariableValue              1                ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24775, 4
+		LineNumberAlt1                218, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              3                ; local
+		GetArrayValue
+		GetVariableValue              2                ; local
+		Pull                          2
+		GetMemberFunctionString       "setselectable"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    24776, 4
+		LineNumberAlt1                219, 65
+		GetThisMemberValueString      "currentelement"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24777, 4
+		LineNumberAlt1                220, 65
+		GetVariableValue              0                ; local
+		GetVariableValue              1                ; local
+		GetThisMemberFunctionString   "changeelement"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		IncrementVariable             3
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		; <-
+		BranchTarget                  4
+		PushNothing
+		Return
+	end ; method
+
+	begin method "changeelement"
+		; address: 0x4ba1a
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 235:275
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    24792, 4
+		LineNumberAlt1                235, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		Dup
+		GetMemberFunctionString       "touch"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    24793, 4
+		LineNumberAlt1                236, 65
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    24794, 4
+		LineNumberAlt1                237, 65
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                                                    ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    24795, 4
+		LineNumberAlt1                238, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              2                                                    ; local
+		GetArrayValue
+		GetMemberValueString          "elementname"
+		GetVariableValue              1                                                    ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    24796, 4
+		LineNumberAlt1                239, 65
+		GetThisMemberValueString      "elements"
+		GetVariableValue              2                                                    ; local
+		GetArrayValue
+		GetMemberValueString          "selectable"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    24799, 4
+		LineNumberAlt1                242, 65
+		GetVariableValue              2                                                    ; local
+		SetThisMemberValueString      "currentidx"
+		LineNumber                    24800, 4
+		LineNumberAlt1                243, 65
+		GetVariableValue              1                                                    ; local
+		SetThisMemberValueString      "currentelement"
+		LineNumber                    24801, 4
+		LineNumberAlt1                244, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		GetThisMemberValueString      "currentidx"
+		Pull                          2
+		GetMemberFunctionString       "selectelement"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    24803, 4
+		LineNumberAlt1                246, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "energy"
+		GetThisMemberValueString      "elements"
+		GetThisMemberValueString      "currentidx"
+		GetArrayValue
+		GetMemberValueString          "powerdrainrate"
+		GreaterThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    24821, 4
+		LineNumberAlt1                264, 65
+		PushConstantStringString      "Not enough energy. Setting glyph anim to nothing\n"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    24825, 4
+		LineNumberAlt1                268, 65
+		PushConstanti8                1
+		Return
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    24827, 4
+		LineNumberAlt1                270, 65
+		PushConstant0
+		Return
+		; <-
+		BranchTarget                  4
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		; <-
+		BranchTarget                  6
+		LineNumber                    24832, 4
+		LineNumberAlt1                275, 65
+		PushConstant0
+		Return
+	end ; method
+
+	begin method "nextelement"
+		; address: 0x4bb42
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 285:305
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          2
+		LineNumber                    24842, 4
+		LineNumberAlt1                285, 65
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    24843, 4
+		LineNumberAlt1                286, 65
+		GetVariableValue              1               ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24844, 4
+		LineNumberAlt1                287, 65
+		PushConstanti8                1
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    24848, 4
+		LineNumberAlt1                291, 65
+		GetThisMemberValueString      "currentidx"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    24849, 4
+		LineNumberAlt1                292, 65
+		GetThisMemberValueString      "currentidx"
+		SetVariableValue              3               ; local
+		LineNumber                    24851, 4
+		LineNumberAlt1                294, 65
+		; <-
+		BranchTarget                  1
+		LineNumber                    24851, 4
+		LineNumberAlt1                294, 65
+		GetVariableValue              1               ; local
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    24852, 4
+		LineNumberAlt1                295, 65
+		GetVariableValue              3               ; local
+		PushConstanti8                1
+		Add
+		SetVariableValue              3               ; local
+		LineNumber                    24853, 4
+		LineNumberAlt1                296, 65
+		GetVariableValue              3               ; local
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    24854, 4
+		LineNumberAlt1                297, 65
+		PushConstant0
+		SetVariableValue              3               ; local
+		; <-
+		BranchTarget                  2
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    24857, 4
+		LineNumberAlt1                300, 65
+		GetVariableValue              3               ; local
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              3               ; local
+		LineNumber                    24858, 4
+		LineNumberAlt1                301, 65
+		GetVariableValue              3               ; local
+		PushConstant0
+		LessThan
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    24859, 4
+		LineNumberAlt1                302, 65
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              3               ; local
+		; <-
+		BranchTarget                  4
+		LineNumber                    24862, 4
+		LineNumberAlt1                305, 65
+		GetVariableValue              0               ; local
+		GetThisMemberValueString      "elements"
+		GetVariableValue              3               ; local
+		GetArrayValue
+		GetMemberValueString          "elementname"
+		GetThisMemberFunctionString   "changeelement"
+		JumpAbsolute                  2
+		LineNumber                    24862, 4
+		LineNumberAlt1                305, 65
+		PushConstant0
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+
+	begin method "activate"
+		; address: 0x4bc5d
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 316:318
+		MemberFunctionArgumentCheck   1
+		LineNumber                    24873, 4
+		LineNumberAlt1                316, 65
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24874, 4
+		LineNumberAlt1                317, 65
+		GetThisMemberValueString      "elements"
+		GetThisMemberValueString      "currentidx"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "activate"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    24875, 4
+		LineNumberAlt1                318, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		Dup
+		GetMemberFunctionString       "touch"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "deactivate"
+		; address: 0x4bca6
+		; source: 65 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_elements.vbo" 328:332
+		MemberFunctionArgumentCheck   1
+		LineNumber                    24885, 4
+		LineNumberAlt1                328, 65
+		GetThisMemberValueString      "elements"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    24886, 4
+		LineNumberAlt1                329, 65
+		GetThisMemberValueString      "elements"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                2
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    24887, 4
+		LineNumberAlt1                330, 65
+		GetThisMemberValueString      "elements"
+		PushConstanti8                2
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "deactivate"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    24889, 4
+		LineNumberAlt1                332, 65
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "element"
+		Dup
+		GetMemberFunctionString       "touch"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+end ; class

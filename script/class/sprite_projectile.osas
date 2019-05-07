@@ -1,0 +1,269 @@
+begin class "sprite_projectile"
+	property "handle"
+	property "id"
+	property "name"
+	property "path"
+	property "speed"
+	property "spritesize"
+	property "lifespan"
+	property "detonateradius"
+
+	begin method "sprite_projectile"
+		; address: 0x52d34
+		; source: 70 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_SpriteProjectile.vbo" 31:63
+		MemberFunctionArgumentCheck   9
+		LineNumber                    28232, 4
+		LineNumberAlt1                31, 70
+		GetVariableValue              1                                            ; local
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    28232, 4
+		LineNumberAlt1                31, 70
+		SetThisMemberValueString      "id"
+		LineNumber                    28233, 4
+		LineNumberAlt1                32, 70
+		GetVariableValue              1                                            ; local
+		SetThisMemberValueString      "name"
+		LineNumber                    28234, 4
+		LineNumberAlt1                33, 70
+		GetVariableValue              3                                            ; local
+		SetThisMemberValueString      "path"
+		LineNumber                    28235, 4
+		LineNumberAlt1                34, 70
+		PushNothing
+		SetThisMemberValueString      "handle"
+		LineNumber                    28237, 4
+		LineNumberAlt1                36, 70
+		GetVariableValue              4                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    28238, 4
+		LineNumberAlt1                37, 70
+		PushConstanti8                50
+		SetThisMemberValueString      "speed"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    28240, 4
+		LineNumberAlt1                39, 70
+		GetVariableValue              4                                            ; local
+		SetThisMemberValueString      "speed"
+		; <-
+		BranchTarget                  1
+		LineNumber                    28243, 4
+		LineNumberAlt1                42, 70
+		GetVariableValue              5                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    28244, 4
+		LineNumberAlt1                43, 70
+		PushConstanti8                2
+		SetThisMemberValueString      "spritesize"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    28246, 4
+		LineNumberAlt1                45, 70
+		GetVariableValue              5                                            ; local
+		SetThisMemberValueString      "spritesize"
+		; <-
+		BranchTarget                  3
+		LineNumber                    28249, 4
+		LineNumberAlt1                48, 70
+		GetVariableValue              6                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    28250, 4
+		LineNumberAlt1                49, 70
+		PushConstanti8                3
+		SetThisMemberValueString      "lifespan"
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    28252, 4
+		LineNumberAlt1                51, 70
+		GetVariableValue              6                                            ; local
+		SetThisMemberValueString      "lifespan"
+		; <-
+		BranchTarget                  5
+		LineNumber                    28255, 4
+		LineNumberAlt1                54, 70
+		GetVariableValue              8                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    28256, 4
+		LineNumberAlt1                55, 70
+		PushConstant0
+		SetVariableValue              8                                            ; local
+		; <-
+		BranchTarget                  6
+		LineNumber                    28259, 4
+		LineNumberAlt1                58, 70
+		GetThisMemberValueString      "spritesize"
+		SetThisMemberValueString      "detonateradius"
+		LineNumber                    28261, 4
+		LineNumberAlt1                60, 70
+		GetThisMemberValueString      "id"
+		GetThisMemberValueString      "path"
+		GetVariableValue              2                                            ; local
+		GetThisMemberValueString      "speed"
+		GetThisMemberValueString      "spritesize"
+		GetThisMemberValueString      "lifespan"
+		GetThisMemberValueString      "detonateradius"
+		GetVariableValue              7                                            ; local
+		GetVariableValue              8                                            ; local
+		CallGameFunctionString        "gcvectorprojectile", "create", 9
+		LineNumber                    28261, 4
+		LineNumberAlt1                60, 70
+		SetThisMemberValueString      "handle"
+		LineNumber                    28263, 4
+		LineNumberAlt1                62, 70
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    28264, 4
+		LineNumberAlt1                63, 70
+		PushConstantStringString      "ERROR --- handle of Sprite_Projectile "
+		GetThisMemberValueString      "name"
+		Add
+		PushConstantStringString      " is nothing."
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  7
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x52eb8
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x52ebc
+		; source: 70 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_SpriteProjectile.vbo" 75:82
+		MemberFunctionArgumentCheck 1
+		LineNumber                  28276, 4
+		LineNumberAlt1              75, 70
+		PushNothing
+		SetThisMemberValueString    "handle"
+		LineNumber                  28277, 4
+		LineNumberAlt1              76, 70
+		PushNothing
+		SetThisMemberValueString    "id"
+		LineNumber                  28278, 4
+		LineNumberAlt1              77, 70
+		PushNothing
+		SetThisMemberValueString    "name"
+		LineNumber                  28279, 4
+		LineNumberAlt1              78, 70
+		PushNothing
+		SetThisMemberValueString    "path"
+		LineNumber                  28280, 4
+		LineNumberAlt1              79, 70
+		PushNothing
+		SetThisMemberValueString    "speed"
+		LineNumber                  28281, 4
+		LineNumberAlt1              80, 70
+		PushNothing
+		SetThisMemberValueString    "spritesize"
+		LineNumber                  28282, 4
+		LineNumberAlt1              81, 70
+		PushNothing
+		SetThisMemberValueString    "lifespan"
+		LineNumber                  28283, 4
+		LineNumberAlt1              82, 70
+		PushNothing
+		SetThisMemberValueString    "detonateradius"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "launch"
+		; address: 0x52f30
+		; source: 70 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_SpriteProjectile.vbo" 90:95
+		MemberFunctionArgumentCheck   3
+		LineNumber                    28291, 4
+		LineNumberAlt1                90, 70
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    28292, 4
+		LineNumberAlt1                91, 70
+		PushConstantStringString      "*** handle is nothing"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    28296, 4
+		LineNumberAlt1                95, 70
+		GetThisMemberValueString      "handle"
+		GetVariableValue              2                                 ; local
+		GetMemberValueString          "x"
+		GetVariableValue              2                                 ; local
+		GetMemberValueString          "y"
+		GetVariableValue              2                                 ; local
+		GetMemberValueString          "z"
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "x"
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "y"
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "z"
+		CallGameFunctionString        "gcvectorprojectile", "launch", 7
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hasdied"
+		; address: 0x52f92
+		; source: 70 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_SpriteProjectile.vbo" 103:103
+		MemberFunctionArgumentCheck 1
+		LineNumber                  28304, 4
+		LineNumberAlt1              103, 70
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcvectorprojectile", "hasdied", 1
+		LineNumber                  28304, 4
+		LineNumberAlt1              103, 70
+		Return
+	end ; method
+
+	begin method "detonate"
+		; address: 0x52fb2
+		; source: 70 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_SpriteProjectile.vbo" 108:108
+		MemberFunctionArgumentCheck 1
+		LineNumber                  28309, 4
+		LineNumberAlt1              108, 70
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gcvectorprojectile", "detonate", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x52fca
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+end ; class

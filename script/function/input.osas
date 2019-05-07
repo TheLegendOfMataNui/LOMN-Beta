@@ -1,0 +1,114 @@
+begin function "input", 5
+	; address: 0x2c98b
+	; source: 2 "C:\\projects\\lego\\Scripting\\VBO\\base.vbo" 66:85
+	CreateStackVariables          3
+	LineNumber                    19973, 4
+	LineNumberAlt1                66, 2
+	GetVariableValueGlobalString  "screenlist"
+	PushNothing
+	EqualTo
+	Not
+	CompareAndBranchIfFalseTarget 1, 0
+	; ->
+	LineNumber                    19974, 4
+	LineNumberAlt1                67, 2
+	PushConstanti8                1
+	SetVariableValue              5                    ; local
+	LineNumber                    19976, 4
+	LineNumberAlt1                69, 2
+	GetVariableValueGlobalString  "globalclass"
+	PushNothing
+	EqualTo
+	Not
+	CompareAndBranchIfFalseTarget 0, 0
+	; ->
+	LineNumber                    19977, 4
+	LineNumberAlt1                70, 2
+	GetVariableValueGlobalString  "globalclass"
+	GetMemberValueString          "level"
+	PushNothing
+	EqualTo
+	Not
+	CompareAndBranchIfFalseTarget 0, 0
+	; ->
+	LineNumber                    19978, 4
+	LineNumberAlt1                71, 2
+	GetVariableValueGlobalString  "globalclass"
+	GetMemberValueString          "level"
+	GetMemberValueString          "cam"
+	PushNothing
+	EqualTo
+	Not
+	GetVariableValue              1                    ; local
+	PushConstanti16               251
+	EqualTo
+	Not
+	And
+	CompareAndBranchIfFalseTarget 0, 0
+	; ->
+	LineNumber                    19979, 4
+	LineNumberAlt1                72, 2
+	GetVariableValueGlobalString  "globalclass"
+	GetMemberValueString          "level"
+	GetMemberValueString          "cam"
+	Dup
+	GetMemberFunctionString       "getaimode"
+	JumpAbsolute                  1
+	LineNumber                    19979, 4
+	LineNumberAlt1                72, 2
+	SetVariableValue              6                    ; local
+	LineNumber                    19980, 4
+	LineNumberAlt1                73, 2
+	GetVariableValue              6                    ; local
+	PushConstanti8                9
+	EqualTo
+	CompareAndBranchIfFalseTarget 0, 0
+	; ->
+	LineNumber                    19981, 4
+	LineNumberAlt1                74, 2
+	PushConstant0
+	SetVariableValue              5                    ; local
+	; <-
+	BranchTarget                  0
+	LineNumber                    19987, 4
+	LineNumberAlt1                80, 2
+	GetVariableValue              5                    ; local
+	CompareAndBranchIfFalseTarget 1, 0
+	; ->
+	LineNumber                    19988, 4
+	LineNumberAlt1                81, 2
+	CreateObjectString            "base_standardinput"
+	Dup
+	GetVariableValue              0                    ; local
+	GetVariableValue              1                    ; local
+	GetVariableValue              2                    ; local
+	GetVariableValue              3                    ; local
+	GetVariableValue              4                    ; local
+	Pull                          6
+	GetMemberFunctionString       "base_standardinput"
+	JumpAbsolute                  6
+	Pop
+	LineNumber                    19988, 4
+	LineNumberAlt1                81, 2
+	SetVariableValue              7                    ; local
+	LineNumber                    19991, 4
+	LineNumberAlt1                84, 2
+	GetVariableValueGlobalString  "globalclass"
+	GetVariableValue              7                    ; local
+	Pull                          2
+	GetMemberFunctionString       "input"
+	JumpAbsolute                  2
+	Pop
+	LineNumber                    19992, 4
+	LineNumberAlt1                85, 2
+	GetVariableValueGlobalString  "screenlist"
+	GetVariableValue              7                    ; local
+	Pull                          2
+	GetMemberFunctionString       "input"
+	JumpAbsolute                  2
+	Pop
+	; <-
+	BranchTarget                  1
+	PushNothing
+	Return
+end ; function

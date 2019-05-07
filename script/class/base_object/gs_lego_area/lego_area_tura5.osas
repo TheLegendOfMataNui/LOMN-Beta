@@ -1,0 +1,130 @@
+begin class "lego_area_tura5", "gs_lego_area"
+	begin method "lego_area_tura5"
+		; address: 0xaa184
+		; source: 204 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta03.vbo" 26:27
+		MemberFunctionArgumentCheck 2
+		LineNumber                  10541, 4
+		LineNumberAlt1              26, 204
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "tura"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  10542, 4
+		LineNumberAlt1              27, 204
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xaa1b6
+		; source: 204 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta03.vbo" 32:49
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 56:57
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          3
+		LineNumber                    10547, 4
+		LineNumberAlt1                32, 204
+		GetVariableValue              0                                                     ; local
+		GetThisMemberFunctionString   "lego_area_show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    10548, 4
+		LineNumberAlt1                33, 204
+		GetVariableValue              0                                                     ; local
+		GetThisMemberFunctionString   "lego_area_initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    10559, 4
+		LineNumberAlt1                44, 204
+		PushConstantStringString      "tps9"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    10559, 4
+		LineNumberAlt1                44, 204
+		SetVariableValue              2                                                     ; local
+		LineNumber                    10560, 4
+		LineNumberAlt1                45, 204
+		CallGameFunctionString        "gcsaver", "portalactive", 0
+		LineNumber                    10560, 4
+		LineNumberAlt1                45, 204
+		SetVariableValue              3                                                     ; local
+		LineNumber                    10561, 4
+		LineNumberAlt1                46, 204
+		GetVariableValue              3                                                     ; local
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    10562, 4
+		LineNumberAlt1                47, 204
+		GetVariableValue              2                                                     ; local
+		PushConstantStringString      "root/data/art/portals/lewa/shrine_ripple/l_shrn_ptl"
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "setportal", 3
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    10564, 4
+		LineNumberAlt1                49, 204
+		GetVariableValue              2                                                     ; local
+		CallGameFunctionString        "gccollisionphysicsgroup", "turnoffnextarea", 1
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    47244, 4
+		LineNumberAlt1                56, 123
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicVillage"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    47245, 4
+		LineNumberAlt1                57, 123
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xaa2bb
+		; source: 204 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta03.vbo" 55:56
+		MemberFunctionArgumentCheck 1
+		LineNumber                  10570, 4
+		LineNumberAlt1              55, 204
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  10571, 4
+		LineNumberAlt1              56, 204
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xaa2f1
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,280 @@
+begin class "lego_area_maz14", "gs_lego_area"
+	property "puzzle"
+	property "parent"
+	property "discpickup"
+
+	begin method "lego_area_maz14"
+		; address: 0x985ca
+		; source: 174 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd2.vbo" 29:32
+		MemberFunctionArgumentCheck 2
+		LineNumber                  2365, 4
+		LineNumberAlt1              29, 174
+		GetVariableValue            1                    ; local
+		SetThisMemberValueString    "parent"
+		LineNumber                  2366, 4
+		LineNumberAlt1              30, 174
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "maz1"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  2367, 4
+		LineNumberAlt1              31, 174
+		CreateObjectString          "l4_maz1_puzzle"
+		Dup
+		GetVariableValue            0                    ; local
+		Pull                        2
+		GetMemberFunctionString     "l4_maz1_puzzle"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  2367, 4
+		LineNumberAlt1              31, 174
+		SetThisMemberValueString    "puzzle"
+		LineNumber                  2368, 4
+		LineNumberAlt1              32, 174
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x98632
+		; source: 174 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd2.vbo" 41:54
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    2377, 4
+		LineNumberAlt1                41, 174
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "lego_area_show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2378, 4
+		LineNumberAlt1                42, 174
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2379, 4
+		LineNumberAlt1                43, 174
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2381, 4
+		LineNumberAlt1                45, 174
+		PushConstantStringString      "disc"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    2381, 4
+		LineNumberAlt1                45, 174
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    2381, 4
+		LineNumberAlt1                45, 174
+		SetVariableValue              1                                            ; local
+		LineNumber                    2382, 4
+		LineNumberAlt1                46, 174
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2383, 4
+		LineNumberAlt1                47, 174
+		CreateObjectString            "lego_pickup"
+		Dup
+		PushConstantStringString      "disc"
+		PushConstant0
+		PushConstanti8                5
+		PushConstantStringString      "item"
+		PushConstanti8                7
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "lego_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    2383, 4
+		LineNumberAlt1                47, 174
+		SetThisMemberValueString      "discpickup"
+		LineNumber                    2384, 4
+		LineNumberAlt1                48, 174
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2385, 4
+		LineNumberAlt1                49, 174
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2386, 4
+		LineNumberAlt1                50, 174
+		GetThisMemberValueString      "discpickup"
+		PushConstanti32               32768
+		Pull                          2
+		GetMemberFunctionString       "setcondition"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    2389, 4
+		LineNumberAlt1                53, 174
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MUSICLEGOUNDERGROUND"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    2390, 4
+		LineNumberAlt1                54, 174
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x9875c
+		; source: 174 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd2.vbo" 60:66
+		MemberFunctionArgumentCheck   1
+		LineNumber                    2396, 4
+		LineNumberAlt1                60, 174
+		GetVariableValue              0                ; local
+		GetThisMemberFunctionString   "lego_area_hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2397, 4
+		LineNumberAlt1                61, 174
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2398, 4
+		LineNumberAlt1                62, 174
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2400, 4
+		LineNumberAlt1                64, 174
+		GetThisMemberValueString      "discpickup"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2401, 4
+		LineNumberAlt1                65, 174
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2402, 4
+		LineNumberAlt1                66, 174
+		PushNothing
+		SetThisMemberValueString      "discpickup"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x987d0
+		; source: 174 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd2.vbo" 74:74
+		MemberFunctionArgumentCheck 2
+		LineNumber                  2410, 4
+		LineNumberAlt1              74, 174
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x987ec
+		; source: 174 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd2.vbo" 79:79
+		MemberFunctionArgumentCheck 2
+		LineNumber                  2415, 4
+		LineNumberAlt1              79, 174
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1        ; local
+		Pull                        2
+		GetMemberFunctionString     "input"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x98808
+		; source: 174 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd2.vbo" 84:84
+		MemberFunctionArgumentCheck 2
+		LineNumber                  2420, 4
+		LineNumberAlt1              84, 174
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "process"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x98824
+		; source: 174 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd2.vbo" 89:93
+		MemberFunctionArgumentCheck   1
+		LineNumber                    2425, 4
+		LineNumberAlt1                89, 174
+		GetThisMemberValueString      "puzzle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2426, 4
+		LineNumberAlt1                90, 174
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "exit"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    2427, 4
+		LineNumberAlt1                91, 174
+		PushNothing
+		SetThisMemberValueString      "puzzle"
+		; <-
+		BranchTarget                  0
+		LineNumber                    2429, 4
+		LineNumberAlt1                93, 174
+		PushNothing
+		SetThisMemberValueString      "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

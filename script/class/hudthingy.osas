@@ -1,0 +1,2681 @@
+begin class "hudthingy"
+	property "partsarray"
+	property "headrotate"
+	property "glowyeyes"
+	property "lifebar"
+	property "energybar"
+	property "redlites"
+	property "greenlites"
+	property "movement"
+	property "onscreen"
+	property "offx"
+	property "timeonscreen"
+
+	begin method "hudthingy"
+		; address: 0x3ab30
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x3ab34
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1216:1339
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          7
+		LineNumber                    12475, 4
+		LineNumberAlt1                1216, 28
+		CreateArray
+		SetThisMemberValueString      "partsarray"
+		LineNumber                    12476, 4
+		LineNumberAlt1                1217, 28
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/turnhead"
+		PushConstanti8                10
+		PushConstanti8                20
+		PushConstant0
+		PushConstanti8                74
+		PushConstanti8                84
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12481, 4
+		LineNumberAlt1                1222, 28
+		SetThisMemberValueString      "headrotate"
+		LineNumber                    12482, 4
+		LineNumberAlt1                1223, 28
+		GetThisMemberValueString      "partsarray"
+		GetThisMemberValueString      "headrotate"
+		AppendToArray
+		LineNumber                    12484, 4
+		LineNumberAlt1                1225, 28
+		CreateArray
+		Dup
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/greeneyesoff"
+		PushConstanti8                9
+		PushConstanti8                21
+		PushConstant0
+		PushConstanti8                73
+		PushConstanti8                85
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12489, 4
+		LineNumberAlt1                1230, 28
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/greeneyeson"
+		PushConstanti8                9
+		PushConstanti8                21
+		PushConstant0
+		PushConstanti8                73
+		PushConstanti8                85
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12495, 4
+		LineNumberAlt1                1236, 28
+		AppendToArray
+		SetThisMemberValueString      "glowyeyes"
+		LineNumber                    12497, 4
+		LineNumberAlt1                1238, 28
+		GetThisMemberValueString      "partsarray"
+		GetThisMemberValueString      "glowyeyes"
+		AppendToArray
+		LineNumber                    12501, 4
+		LineNumberAlt1                1242, 28
+		CreateArray
+		Dup
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/16x16frntend__clr"
+		PushConstanti8                74
+		PushConstanti8                36
+		PushConstant0
+		PushConstanti8                90
+		PushConstanti8                52
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12506, 4
+		LineNumberAlt1                1247, 28
+		AppendToArray
+		SetThisMemberValueString      "lifebar"
+		LineNumber                    12509, 4
+		LineNumberAlt1                1250, 28
+		PushConstanti8                3
+		ConvertToInteger
+		SetVariableValue              1                                     ; local
+		LineNumber                    12510, 4
+		LineNumberAlt1                1251, 28
+		GetVariableValue              1                                     ; local
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                                     ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                                     ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12511, 4
+		LineNumberAlt1                1252, 28
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/16x16circle__clr"
+		PushConstanti8                90
+		PushConstanti8                16
+		GetVariableValue              2                                     ; local
+		Multiply
+		Add
+		PushConstanti8                36
+		PushConstant0
+		PushConstanti8                106
+		PushConstanti8                16
+		GetVariableValue              2                                     ; local
+		Multiply
+		Add
+		PushConstanti8                52
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12516, 4
+		LineNumberAlt1                1257, 28
+		SetVariableValue              3                                     ; local
+		LineNumber                    12517, 4
+		LineNumberAlt1                1258, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              3                                     ; local
+		AppendToArray
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    12519, 4
+		LineNumberAlt1                1260, 28
+		GetThisMemberValueString      "lifebar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                     ; local
+		LineNumber                    12520, 4
+		LineNumberAlt1                1261, 28
+		GetThisMemberValueString      "lifebar"
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/16x16end__clr"
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                     ; local
+		GetArrayValue
+		GetMemberValueString          "x1"
+		PushConstanti8                15
+		Add
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                     ; local
+		GetArrayValue
+		GetMemberValueString          "y1"
+		PushConstant0
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                     ; local
+		GetArrayValue
+		GetMemberValueString          "x2"
+		PushConstanti8                15
+		Add
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                     ; local
+		GetArrayValue
+		GetMemberValueString          "y2"
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12525, 4
+		LineNumberAlt1                1266, 28
+		AppendToArray
+		LineNumber                    12527, 4
+		LineNumberAlt1                1268, 28
+		GetThisMemberValueString      "partsarray"
+		GetThisMemberValueString      "lifebar"
+		AppendToArray
+		LineNumber                    12528, 4
+		LineNumberAlt1                1269, 28
+		GetThisMemberValueString      "lifebar"
+		ElementsInArray
+		SetVariableValue              5                                     ; local
+		LineNumber                    12532, 4
+		LineNumberAlt1                1273, 28
+		CreateArray
+		Dup
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/16x16frntend__clr"
+		PushConstanti8                74
+		PushConstanti8                64
+		PushConstant0
+		PushConstanti8                90
+		PushConstanti8                80
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12537, 4
+		LineNumberAlt1                1278, 28
+		AppendToArray
+		SetThisMemberValueString      "energybar"
+		LineNumber                    12540, 4
+		LineNumberAlt1                1281, 28
+		PushConstanti8                3
+		ConvertToInteger
+		SetVariableValue              1                                     ; local
+		LineNumber                    12541, 4
+		LineNumberAlt1                1282, 28
+		GetVariableValue              1                                     ; local
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                                     ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              2                                     ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    12542, 4
+		LineNumberAlt1                1283, 28
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/16x16circle__clr"
+		PushConstanti8                90
+		PushConstanti8                16
+		GetVariableValue              2                                     ; local
+		Multiply
+		Add
+		PushConstanti8                64
+		PushConstant0
+		PushConstanti8                106
+		PushConstanti8                16
+		GetVariableValue              2                                     ; local
+		Multiply
+		Add
+		PushConstanti8                80
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12547, 4
+		LineNumberAlt1                1288, 28
+		SetVariableValue              3                                     ; local
+		LineNumber                    12548, 4
+		LineNumberAlt1                1289, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              3                                     ; local
+		AppendToArray
+		IncrementVariable             2
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    12550, 4
+		LineNumberAlt1                1291, 28
+		GetThisMemberValueString      "energybar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                     ; local
+		LineNumber                    12551, 4
+		LineNumberAlt1                1292, 28
+		GetThisMemberValueString      "energybar"
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/16x16end__clr"
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                     ; local
+		GetArrayValue
+		GetMemberValueString          "x1"
+		PushConstanti8                15
+		Add
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                     ; local
+		GetArrayValue
+		GetMemberValueString          "y1"
+		PushConstant0
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                     ; local
+		GetArrayValue
+		GetMemberValueString          "x2"
+		PushConstanti8                15
+		Add
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                     ; local
+		GetArrayValue
+		GetMemberValueString          "y2"
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12556, 4
+		LineNumberAlt1                1297, 28
+		AppendToArray
+		LineNumber                    12558, 4
+		LineNumberAlt1                1299, 28
+		GetThisMemberValueString      "partsarray"
+		GetThisMemberValueString      "energybar"
+		AppendToArray
+		LineNumber                    12562, 4
+		LineNumberAlt1                1303, 28
+		CreateArray
+		SetThisMemberValueString      "redlites"
+		LineNumber                    12563, 4
+		LineNumberAlt1                1304, 28
+		GetThisMemberValueString      "lifebar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                     ; local
+		LineNumber                    12564, 4
+		LineNumberAlt1                1305, 28
+		GetVariableValue              4                                     ; local
+		PushConstanti8                2
+		Subtract
+		PushConstant0
+		SetVariableValue              2                                     ; local
+		; <-
+		BranchTarget                  4
+		Dup
+		GetVariableValue              2                                     ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    12565, 4
+		LineNumberAlt1                1306, 28
+		GetThisMemberValueString      "redlites"
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/littleWhiteLight"
+		PushConstanti8                90
+		PushConstanti8                16
+		GetVariableValue              2                                     ; local
+		Multiply
+		Add
+		PushConstanti8                36
+		PushConstant0
+		PushConstanti8                106
+		PushConstanti8                16
+		GetVariableValue              2                                     ; local
+		Multiply
+		Add
+		PushConstanti8                52
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12570, 4
+		LineNumberAlt1                1311, 28
+		AppendToArray
+		IncrementVariable             2
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    12572, 4
+		LineNumberAlt1                1313, 28
+		GetThisMemberValueString      "partsarray"
+		GetThisMemberValueString      "redlites"
+		AppendToArray
+		LineNumber                    12576, 4
+		LineNumberAlt1                1317, 28
+		CreateArray
+		SetThisMemberValueString      "greenlites"
+		LineNumber                    12577, 4
+		LineNumberAlt1                1318, 28
+		GetThisMemberValueString      "energybar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                     ; local
+		LineNumber                    12578, 4
+		LineNumberAlt1                1319, 28
+		GetVariableValue              4                                     ; local
+		PushConstanti8                2
+		Subtract
+		PushConstant0
+		SetVariableValue              2                                     ; local
+		; <-
+		BranchTarget                  6
+		Dup
+		GetVariableValue              2                                     ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    12579, 4
+		LineNumberAlt1                1320, 28
+		GetThisMemberValueString      "greenlites"
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/littleWhiteLight"
+		PushConstanti8                90
+		PushConstanti8                16
+		GetVariableValue              2                                     ; local
+		Multiply
+		Add
+		PushConstanti8                64
+		PushConstant0
+		PushConstanti8                106
+		PushConstanti8                16
+		GetVariableValue              2                                     ; local
+		Multiply
+		Add
+		PushConstanti8                80
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12584, 4
+		LineNumberAlt1                1325, 28
+		AppendToArray
+		IncrementVariable             2
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Pop
+		LineNumber                    12586, 4
+		LineNumberAlt1                1327, 28
+		GetThisMemberValueString      "partsarray"
+		GetThisMemberValueString      "greenlites"
+		AppendToArray
+		LineNumber                    12589, 4
+		LineNumberAlt1                1330, 28
+		GetThisMemberValueString      "partsarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                                     ; local
+		; <-
+		BranchTarget                  8
+		Dup
+		GetVariableValue              2                                     ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    12590, 4
+		LineNumberAlt1                1331, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              2                                     ; local
+		GetArrayValue
+		IsArray
+		CompareAndBranchIfFalseTarget 11, 0
+		; ->
+		LineNumber                    12591, 4
+		LineNumberAlt1                1332, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              2                                     ; local
+		GetArrayValue
+		SetVariableValue              6                                     ; local
+		LineNumber                    12592, 4
+		LineNumberAlt1                1333, 28
+		GetVariableValue              6                                     ; local
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              7                                     ; local
+		; <-
+		BranchTarget                  9
+		Dup
+		GetVariableValue              7                                     ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    12593, 4
+		LineNumberAlt1                1334, 28
+		GetVariableValue              6                                     ; local
+		GetVariableValue              7                                     ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12594, 4
+		LineNumberAlt1                1335, 28
+		GetVariableValue              6                                     ; local
+		GetVariableValue              7                                     ; local
+		GetArrayValue
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             7
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		Pop
+		BranchAlwaysTarget            12, 0
+		; ->
+		; <-
+		BranchTarget                  11
+		LineNumber                    12597, 4
+		LineNumberAlt1                1338, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              2                                     ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12598, 4
+		LineNumberAlt1                1339, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              2                                     ; local
+		GetArrayValue
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  12
+		IncrementVariable             2
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  13
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x3b05e
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1347:1413
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    12606, 4
+		LineNumberAlt1                1347, 28
+		GetThisMemberValueString      "greenlites"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    12607, 4
+		LineNumberAlt1                1348, 28
+		GetThisMemberValueString      "greenlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1             ; local
+		LineNumber                    12608, 4
+		LineNumberAlt1                1349, 28
+		GetVariableValue              1             ; local
+		PushConstant0
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12609, 4
+		LineNumberAlt1                1350, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12610, 4
+		LineNumberAlt1                1351, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12611, 4
+		LineNumberAlt1                1352, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12612, 4
+		LineNumberAlt1                1353, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    12614, 4
+		LineNumberAlt1                1355, 28
+		PushNothing
+		SetThisMemberValueString      "greenlites"
+		; <-
+		BranchTarget                  2
+		LineNumber                    12617, 4
+		LineNumberAlt1                1358, 28
+		GetThisMemberValueString      "redlites"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    12618, 4
+		LineNumberAlt1                1359, 28
+		GetThisMemberValueString      "redlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1             ; local
+		LineNumber                    12619, 4
+		LineNumberAlt1                1360, 28
+		GetVariableValue              1             ; local
+		PushConstant0
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  3
+		Dup
+		GetVariableValue              2             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    12620, 4
+		LineNumberAlt1                1361, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12621, 4
+		LineNumberAlt1                1362, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12622, 4
+		LineNumberAlt1                1363, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12623, 4
+		LineNumberAlt1                1364, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Pop
+		LineNumber                    12625, 4
+		LineNumberAlt1                1366, 28
+		PushNothing
+		SetThisMemberValueString      "redlites"
+		; <-
+		BranchTarget                  5
+		LineNumber                    12628, 4
+		LineNumberAlt1                1369, 28
+		GetThisMemberValueString      "energybar"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    12629, 4
+		LineNumberAlt1                1370, 28
+		GetThisMemberValueString      "energybar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1             ; local
+		LineNumber                    12630, 4
+		LineNumberAlt1                1371, 28
+		GetVariableValue              1             ; local
+		PushConstant0
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  6
+		Dup
+		GetVariableValue              2             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    12631, 4
+		LineNumberAlt1                1372, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12632, 4
+		LineNumberAlt1                1373, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12633, 4
+		LineNumberAlt1                1374, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Pop
+		LineNumber                    12635, 4
+		LineNumberAlt1                1376, 28
+		PushNothing
+		SetThisMemberValueString      "energybar"
+		; <-
+		BranchTarget                  8
+		LineNumber                    12638, 4
+		LineNumberAlt1                1379, 28
+		GetThisMemberValueString      "lifebar"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 11, 0
+		; ->
+		LineNumber                    12639, 4
+		LineNumberAlt1                1380, 28
+		GetThisMemberValueString      "lifebar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1             ; local
+		LineNumber                    12640, 4
+		LineNumberAlt1                1381, 28
+		GetVariableValue              1             ; local
+		PushConstant0
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  9
+		Dup
+		GetVariableValue              2             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    12641, 4
+		LineNumberAlt1                1382, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12642, 4
+		LineNumberAlt1                1383, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12643, 4
+		LineNumberAlt1                1384, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12644, 4
+		LineNumberAlt1                1385, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		Pop
+		LineNumber                    12646, 4
+		LineNumberAlt1                1387, 28
+		PushNothing
+		SetThisMemberValueString      "lifebar"
+		; <-
+		BranchTarget                  11
+		LineNumber                    12649, 4
+		LineNumberAlt1                1390, 28
+		GetThisMemberValueString      "glowyeyes"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 14, 0
+		; ->
+		LineNumber                    12650, 4
+		LineNumberAlt1                1391, 28
+		GetThisMemberValueString      "glowyeyes"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1             ; local
+		LineNumber                    12651, 4
+		LineNumberAlt1                1392, 28
+		GetVariableValue              1             ; local
+		PushConstant0
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  12
+		Dup
+		GetVariableValue              2             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    12652, 4
+		LineNumberAlt1                1393, 28
+		GetThisMemberValueString      "glowyeyes"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12653, 4
+		LineNumberAlt1                1394, 28
+		GetThisMemberValueString      "glowyeyes"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12654, 4
+		LineNumberAlt1                1395, 28
+		GetThisMemberValueString      "glowyeyes"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12655, 4
+		LineNumberAlt1                1396, 28
+		GetThisMemberValueString      "glowyeyes"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            12, 0
+		; ->
+		; <-
+		BranchTarget                  13
+		Pop
+		LineNumber                    12657, 4
+		LineNumberAlt1                1398, 28
+		PushNothing
+		SetThisMemberValueString      "glowyeyes"
+		; <-
+		BranchTarget                  14
+		LineNumber                    12660, 4
+		LineNumberAlt1                1401, 28
+		GetThisMemberValueString      "headrotate"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    12661, 4
+		LineNumberAlt1                1402, 28
+		GetThisMemberValueString      "headrotate"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12662, 4
+		LineNumberAlt1                1403, 28
+		GetThisMemberValueString      "headrotate"
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12663, 4
+		LineNumberAlt1                1404, 28
+		GetThisMemberValueString      "headrotate"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12664, 4
+		LineNumberAlt1                1405, 28
+		PushNothing
+		SetThisMemberValueString      "headrotate"
+		; <-
+		BranchTarget                  15
+		LineNumber                    12667, 4
+		LineNumberAlt1                1408, 28
+		GetThisMemberValueString      "partsarray"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 18, 0
+		; ->
+		LineNumber                    12668, 4
+		LineNumberAlt1                1409, 28
+		GetThisMemberValueString      "partsarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1             ; local
+		LineNumber                    12669, 4
+		LineNumberAlt1                1410, 28
+		GetVariableValue              1             ; local
+		PushConstant0
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  16
+		Dup
+		GetVariableValue              2             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 17, 0
+		; ->
+		LineNumber                    12670, 4
+		LineNumberAlt1                1411, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            16, 0
+		; ->
+		; <-
+		BranchTarget                  17
+		Pop
+		LineNumber                    12672, 4
+		LineNumberAlt1                1413, 28
+		PushNothing
+		SetThisMemberValueString      "partsarray"
+		; <-
+		BranchTarget                  18
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x3b4cb
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x3b4cf
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1424:1424
+		MemberFunctionArgumentCheck 1
+		LineNumber                  12683, 4
+		LineNumberAlt1              1424, 28
+		GetVariableValue            0        ; local
+		GetThisMemberFunctionString "hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x3b4e6
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1430:1437
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          3
+		LineNumber                    12689, 4
+		LineNumberAlt1                1430, 28
+		GetThisMemberValueString      "partsarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1            ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    12690, 4
+		LineNumberAlt1                1431, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1            ; local
+		GetArrayValue
+		IsArray
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    12691, 4
+		LineNumberAlt1                1432, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1            ; local
+		GetArrayValue
+		SetVariableValue              2            ; local
+		LineNumber                    12692, 4
+		LineNumberAlt1                1433, 28
+		GetVariableValue              2            ; local
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3            ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              3            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    12693, 4
+		LineNumberAlt1                1434, 28
+		GetVariableValue              2            ; local
+		GetVariableValue              3            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             3
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    12696, 4
+		LineNumberAlt1                1437, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  4
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x3b590
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1445:1458
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          3
+		LineNumber                    12704, 4
+		LineNumberAlt1                1445, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "hidden"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    12705, 4
+		LineNumberAlt1                1446, 28
+		GetThisMemberValueString      "partsarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1              ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    12706, 4
+		LineNumberAlt1                1447, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1              ; local
+		GetArrayValue
+		IsArray
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    12707, 4
+		LineNumberAlt1                1448, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1              ; local
+		GetArrayValue
+		SetVariableValue              2              ; local
+		LineNumber                    12708, 4
+		LineNumberAlt1                1449, 28
+		GetVariableValue              2              ; local
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3              ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              3              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    12709, 4
+		LineNumberAlt1                1450, 28
+		GetVariableValue              2              ; local
+		GetVariableValue              3              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             3
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    12712, 4
+		LineNumberAlt1                1453, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  4
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    12715, 4
+		LineNumberAlt1                1456, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "removelife"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    12716, 4
+		LineNumberAlt1                1457, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "removeenergy"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    12717, 4
+		LineNumberAlt1                1458, 28
+		GetThisMemberValueString      "glowyeyes"
+		PushConstant0
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  6
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x3b69a
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1464:1472
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          3
+		LineNumber                    12723, 4
+		LineNumberAlt1                1464, 28
+		GetVariableValue              0            ; local
+		PushConstant0
+		GetThisMemberFunctionString   "fadeeyes"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    12724, 4
+		LineNumberAlt1                1465, 28
+		GetThisMemberValueString      "partsarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1            ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    12725, 4
+		LineNumberAlt1                1466, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1            ; local
+		GetArrayValue
+		IsArray
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    12726, 4
+		LineNumberAlt1                1467, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1            ; local
+		GetArrayValue
+		SetVariableValue              2            ; local
+		LineNumber                    12727, 4
+		LineNumberAlt1                1468, 28
+		GetVariableValue              2            ; local
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3            ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              3            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    12728, 4
+		LineNumberAlt1                1469, 28
+		GetVariableValue              2            ; local
+		GetVariableValue              3            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             3
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    12731, 4
+		LineNumberAlt1                1472, 28
+		GetThisMemberValueString      "partsarray"
+		GetVariableValue              1            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  4
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "changepos"
+		; address: 0x3b758
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setxpos"
+		; address: 0x3b75c
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x3b760
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x3b764
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "slide"
+		; address: 0x3b768
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "fadeeyes"
+		; address: 0x3b76c
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1525:1531
+		MemberFunctionArgumentCheck   2
+		LineNumber                    12784, 4
+		LineNumberAlt1                1525, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "hidden"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12785, 4
+		LineNumberAlt1                1526, 28
+		GetVariableValue              1             ; local
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12786, 4
+		LineNumberAlt1                1527, 28
+		GetThisMemberValueString      "glowyeyes"
+		PushConstant0
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    12789, 4
+		LineNumberAlt1                1530, 28
+		GetThisMemberValueString      "glowyeyes"
+		PushConstant0
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12790, 4
+		LineNumberAlt1                1531, 28
+		GetThisMemberValueString      "glowyeyes"
+		PushConstanti8                1
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setlife"
+		; address: 0x3b7e1
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1542:1609
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          5
+		LineNumber                    12801, 4
+		LineNumberAlt1                1542, 28
+		GetVariableValue              1                                    ; local
+		ConvertToFloat
+		PushConstanti8                20
+		Divide
+		SetVariableValue              2                                    ; local
+		LineNumber                    12802, 4
+		LineNumberAlt1                1543, 28
+		PushConstantStringString      "[][][] Life = "
+		GetVariableValue              1                                    ; local
+		ConvertToString
+		Add
+		PushConstantStringString      " Num = "
+		Add
+		GetVariableValue              2                                    ; local
+		ConvertToString
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    12803, 4
+		LineNumberAlt1                1544, 28
+		GetVariableValue              2                                    ; local
+		GetThisMemberValueString      "redlites"
+		ElementsInArray
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    12805, 4
+		LineNumberAlt1                1546, 28
+		GetVariableValue              2                                    ; local
+		GetThisMemberValueString      "redlites"
+		ElementsInArray
+		GreaterThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12807, 4
+		LineNumberAlt1                1548, 28
+		GetThisMemberValueString      "redlites"
+		ElementsInArray
+		SetVariableValue              3                                    ; local
+		LineNumber                    12809, 4
+		LineNumberAlt1                1550, 28
+		GetThisMemberValueString      "redlites"
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/littleWhiteLight"
+		PushConstanti8                90
+		PushConstanti8                16
+		GetVariableValue              3                                    ; local
+		Multiply
+		Add
+		PushConstanti8                36
+		PushConstant0
+		PushConstanti8                106
+		PushConstanti8                16
+		GetVariableValue              3                                    ; local
+		Multiply
+		Add
+		PushConstanti8                52
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12814, 4
+		LineNumberAlt1                1555, 28
+		AppendToArray
+		LineNumber                    12817, 4
+		LineNumberAlt1                1558, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12819, 4
+		LineNumberAlt1                1560, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12820, 4
+		LineNumberAlt1                1561, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    12824, 4
+		LineNumberAlt1                1565, 28
+		GetVariableValue              2                                    ; local
+		GetThisMemberValueString      "redlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessThan
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    12825, 4
+		LineNumberAlt1                1566, 28
+		GetThisMemberValueString      "redlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                    ; local
+		LineNumber                    12826, 4
+		LineNumberAlt1                1567, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12827, 4
+		LineNumberAlt1                1568, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12828, 4
+		LineNumberAlt1                1569, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              4                                    ; local
+		RemoveFromArray
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    12832, 4
+		LineNumberAlt1                1573, 28
+		GetThisMemberValueString      "redlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                    ; local
+		LineNumber                    12834, 4
+		LineNumberAlt1                1575, 28
+		GetVariableValue              4                                    ; local
+		PushConstant0
+		SetVariableValue              5                                    ; local
+		; <-
+		BranchTarget                  4
+		Dup
+		GetVariableValue              5                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    12836, 4
+		LineNumberAlt1                1577, 28
+		GetVariableValue              5                                    ; local
+		GetVariableValue              4                                    ; local
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    12838, 4
+		LineNumberAlt1                1579, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              5                                    ; local
+		GetArrayValue
+		PushConstanti16               255
+		PushConstant0
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		; <-
+		BranchTarget                  5
+		IncrementVariable             5
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Pop
+		LineNumber                    12843, 4
+		LineNumberAlt1                1584, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              4                                    ; local
+		Subtract
+		SetVariableValue              2                                    ; local
+		LineNumber                    12844, 4
+		LineNumberAlt1                1585, 28
+		PushConstantStringString      "[][][] num = "
+		GetVariableValue              2                                    ; local
+		ConvertToString
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    12845, 4
+		LineNumberAlt1                1586, 28
+		PushConstanti8                1
+		SetVariableValue              6                                    ; local
+		LineNumber                    12846, 4
+		LineNumberAlt1                1587, 28
+		GetVariableValue              2                                    ; local
+		PushConstanti8                1
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    12847, 4
+		LineNumberAlt1                1588, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		PushConstanti16               255
+		PushConstant0
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		LineNumber                    12849, 4
+		LineNumberAlt1                1590, 28
+		GetVariableValue              2                                    ; local
+		PushConstantf32               0.75
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    12850, 4
+		LineNumberAlt1                1591, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		PushConstanti16               180
+		PushConstant0
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    12852, 4
+		LineNumberAlt1                1593, 28
+		GetVariableValue              2                                    ; local
+		PushConstantf32               0.5
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    12853, 4
+		LineNumberAlt1                1594, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		PushConstanti8                120
+		PushConstant0
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		LineNumber                    12855, 4
+		LineNumberAlt1                1596, 28
+		GetVariableValue              2                                    ; local
+		PushConstantf32               0.25
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    12856, 4
+		LineNumberAlt1                1597, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		PushConstanti8                60
+		PushConstant0
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		LineNumber                    12859, 4
+		LineNumberAlt1                1600, 28
+		PushConstant0
+		SetVariableValue              6                                    ; local
+		; <-
+		BranchTarget                  11
+		LineNumber                    12864, 4
+		LineNumberAlt1                1605, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "hidden"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    12865, 4
+		LineNumberAlt1                1606, 28
+		GetThisMemberValueString      "redlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              5                                    ; local
+		; <-
+		BranchTarget                  12
+		Dup
+		GetVariableValue              5                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 14, 0
+		; ->
+		LineNumber                    12866, 4
+		LineNumberAlt1                1607, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              5                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12867, 4
+		LineNumberAlt1                1608, 28
+		GetVariableValue              6                                    ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    12868, 4
+		LineNumberAlt1                1609, 28
+		GetThisMemberValueString      "redlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  13
+		IncrementVariable             5
+		BranchAlwaysTarget            12, 0
+		; ->
+		; <-
+		BranchTarget                  14
+		Pop
+		; <-
+		BranchTarget                  15
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setenergy"
+		; address: 0x3bb6c
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1622:1679
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          5
+		LineNumber                    12881, 4
+		LineNumberAlt1                1622, 28
+		GetVariableValue              1                                    ; local
+		ConvertToFloat
+		PushConstanti8                20
+		Divide
+		SetVariableValue              2                                    ; local
+		LineNumber                    12882, 4
+		LineNumberAlt1                1623, 28
+		PushConstantStringString      "[][][] set Energy = "
+		GetVariableValue              1                                    ; local
+		ConvertToString
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    12883, 4
+		LineNumberAlt1                1624, 28
+		GetVariableValue              2                                    ; local
+		GetThisMemberValueString      "greenlites"
+		ElementsInArray
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    12884, 4
+		LineNumberAlt1                1625, 28
+		GetVariableValue              2                                    ; local
+		GetThisMemberValueString      "greenlites"
+		ElementsInArray
+		GreaterThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12885, 4
+		LineNumberAlt1                1626, 28
+		GetThisMemberValueString      "greenlites"
+		ElementsInArray
+		SetVariableValue              3                                    ; local
+		LineNumber                    12886, 4
+		LineNumberAlt1                1627, 28
+		GetThisMemberValueString      "greenlites"
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/littleWhiteLight"
+		PushConstanti8                90
+		PushConstanti8                16
+		GetVariableValue              3                                    ; local
+		Multiply
+		Add
+		PushConstanti8                64
+		PushConstant0
+		PushConstanti8                106
+		PushConstanti8                16
+		GetVariableValue              3                                    ; local
+		Multiply
+		Add
+		PushConstanti8                80
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12891, 4
+		LineNumberAlt1                1632, 28
+		AppendToArray
+		LineNumber                    12893, 4
+		LineNumberAlt1                1634, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12894, 4
+		LineNumberAlt1                1635, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12895, 4
+		LineNumberAlt1                1636, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              3                                    ; local
+		GetArrayValue
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    12898, 4
+		LineNumberAlt1                1639, 28
+		GetVariableValue              2                                    ; local
+		GetThisMemberValueString      "greenlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessThan
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    12899, 4
+		LineNumberAlt1                1640, 28
+		GetThisMemberValueString      "greenlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                    ; local
+		LineNumber                    12900, 4
+		LineNumberAlt1                1641, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12901, 4
+		LineNumberAlt1                1642, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12902, 4
+		LineNumberAlt1                1643, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              4                                    ; local
+		RemoveFromArray
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    12905, 4
+		LineNumberAlt1                1646, 28
+		GetThisMemberValueString      "greenlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                    ; local
+		LineNumber                    12906, 4
+		LineNumberAlt1                1647, 28
+		GetVariableValue              4                                    ; local
+		PushConstant0
+		SetVariableValue              5                                    ; local
+		; <-
+		BranchTarget                  4
+		Dup
+		GetVariableValue              5                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    12908, 4
+		LineNumberAlt1                1649, 28
+		GetVariableValue              5                                    ; local
+		GetVariableValue              4                                    ; local
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    12909, 4
+		LineNumberAlt1                1650, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              5                                    ; local
+		GetArrayValue
+		PushConstant0
+		PushConstanti16               255
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		; <-
+		BranchTarget                  5
+		IncrementVariable             5
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Pop
+		LineNumber                    12913, 4
+		LineNumberAlt1                1654, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              4                                    ; local
+		Subtract
+		SetVariableValue              2                                    ; local
+		LineNumber                    12914, 4
+		LineNumberAlt1                1655, 28
+		PushConstantStringString      "[][][] num = "
+		GetVariableValue              2                                    ; local
+		ConvertToString
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    12915, 4
+		LineNumberAlt1                1656, 28
+		PushConstanti8                1
+		SetVariableValue              6                                    ; local
+		LineNumber                    12916, 4
+		LineNumberAlt1                1657, 28
+		GetVariableValue              2                                    ; local
+		PushConstanti8                1
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    12917, 4
+		LineNumberAlt1                1658, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		PushConstant0
+		PushConstanti16               255
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		LineNumber                    12919, 4
+		LineNumberAlt1                1660, 28
+		GetVariableValue              2                                    ; local
+		PushConstantf32               0.75
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    12920, 4
+		LineNumberAlt1                1661, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		PushConstant0
+		PushConstanti16               180
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    12922, 4
+		LineNumberAlt1                1663, 28
+		GetVariableValue              2                                    ; local
+		PushConstantf32               0.5
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    12923, 4
+		LineNumberAlt1                1664, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		PushConstant0
+		PushConstanti8                120
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		LineNumber                    12925, 4
+		LineNumberAlt1                1666, 28
+		GetVariableValue              2                                    ; local
+		PushConstantf32               0.25
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    12926, 4
+		LineNumberAlt1                1667, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		PushConstant0
+		PushConstanti8                60
+		PushConstant0
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		LineNumber                    12929, 4
+		LineNumberAlt1                1670, 28
+		PushConstant0
+		SetVariableValue              6                                    ; local
+		; <-
+		BranchTarget                  11
+		LineNumber                    12934, 4
+		LineNumberAlt1                1675, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "hidden"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    12935, 4
+		LineNumberAlt1                1676, 28
+		GetThisMemberValueString      "greenlites"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              5                                    ; local
+		; <-
+		BranchTarget                  12
+		Dup
+		GetVariableValue              5                                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 14, 0
+		; ->
+		LineNumber                    12936, 4
+		LineNumberAlt1                1677, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              5                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12937, 4
+		LineNumberAlt1                1678, 28
+		GetVariableValue              6                                    ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    12938, 4
+		LineNumberAlt1                1679, 28
+		GetThisMemberValueString      "greenlites"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  13
+		IncrementVariable             5
+		BranchAlwaysTarget            12, 0
+		; ->
+		; <-
+		BranchTarget                  14
+		Pop
+		; <-
+		BranchTarget                  15
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setmaxlife"
+		; address: 0x3beee
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1692:1726
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          5
+		LineNumber                    12951, 4
+		LineNumberAlt1                1692, 28
+		GetVariableValue              1                                    ; local
+		ConvertToFloat
+		PushConstanti8                20
+		Divide
+		SetVariableValue              2                                    ; local
+		LineNumber                    12952, 4
+		LineNumberAlt1                1693, 28
+		GetThisMemberValueString      "lifebar"
+		ElementsInArray
+		PushConstanti8                2
+		Subtract
+		SetVariableValue              3                                    ; local
+		LineNumber                    12953, 4
+		LineNumberAlt1                1694, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		GreaterThan
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    12955, 4
+		LineNumberAlt1                1696, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		GreaterThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    12958, 4
+		LineNumberAlt1                1699, 28
+		GetThisMemberValueString      "lifebar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                    ; local
+		LineNumber                    12959, 4
+		LineNumberAlt1                1700, 28
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/16x16circle__clr"
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		GetMemberValueString          "x1"
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		GetMemberValueString          "y1"
+		PushConstant0
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		GetMemberValueString          "x2"
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		GetMemberValueString          "y2"
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    12959, 4
+		LineNumberAlt1                1700, 28
+		SetVariableValue              5                                    ; local
+		LineNumber                    12960, 4
+		LineNumberAlt1                1701, 28
+		GetVariableValue              5                                    ; local
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12961, 4
+		LineNumberAlt1                1702, 28
+		GetVariableValue              5                                    ; local
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    12962, 4
+		LineNumberAlt1                1703, 28
+		GetVariableValue              5                                    ; local
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12963, 4
+		LineNumberAlt1                1704, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "hidden"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12964, 4
+		LineNumberAlt1                1705, 28
+		GetVariableValue              5                                    ; local
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    12966, 4
+		LineNumberAlt1                1707, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                    ; local
+		GetVariableValue              5                                    ; local
+		InsertIntoArray
+		LineNumber                    12969, 4
+		LineNumberAlt1                1710, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              4                                    ; local
+		PushConstanti8                1
+		Add
+		GetArrayValue
+		PushConstanti8                16
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "changepos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    12970, 4
+		LineNumberAlt1                1711, 28
+		GetVariableValue              3                                    ; local
+		PushConstanti8                1
+		Add
+		SetVariableValue              3                                    ; local
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    12973, 4
+		LineNumberAlt1                1714, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		LessThan
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    12975, 4
+		LineNumberAlt1                1716, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		LessThan
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    12978, 4
+		LineNumberAlt1                1719, 28
+		GetThisMemberValueString      "lifebar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              6                                    ; local
+		LineNumber                    12979, 4
+		LineNumberAlt1                1720, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              6                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12980, 4
+		LineNumberAlt1                1721, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              6                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12981, 4
+		LineNumberAlt1                1722, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              6                                    ; local
+		RemoveFromArray
+		LineNumber                    12984, 4
+		LineNumberAlt1                1725, 28
+		GetThisMemberValueString      "lifebar"
+		GetVariableValue              6                                    ; local
+		GetArrayValue
+		PushConstanti8                -16
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "changepos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    12985, 4
+		LineNumberAlt1                1726, 28
+		GetVariableValue              3                                    ; local
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              3                                    ; local
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setmaxenergy"
+		; address: 0x3c110
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1738:1772
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          5
+		LineNumber                    12997, 4
+		LineNumberAlt1                1738, 28
+		GetVariableValue              1                                    ; local
+		ConvertToFloat
+		PushConstanti8                20
+		Divide
+		SetVariableValue              2                                    ; local
+		LineNumber                    12998, 4
+		LineNumberAlt1                1739, 28
+		GetThisMemberValueString      "energybar"
+		ElementsInArray
+		PushConstanti8                2
+		Subtract
+		SetVariableValue              3                                    ; local
+		LineNumber                    12999, 4
+		LineNumberAlt1                1740, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		GreaterThan
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    13001, 4
+		LineNumberAlt1                1742, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		GreaterThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    13002, 4
+		LineNumberAlt1                1743, 28
+		PushConstantStringString      "[][][] add max energy"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    13004, 4
+		LineNumberAlt1                1745, 28
+		GetThisMemberValueString      "energybar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              4                                    ; local
+		LineNumber                    13005, 4
+		LineNumberAlt1                1746, 28
+		CreateObjectString            "ss_basesprite"
+		Dup
+		PushConstantStringString      "Root/data/art/hud/16x16circle__clr"
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		GetMemberValueString          "x1"
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		GetMemberValueString          "y1"
+		PushConstant0
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		GetMemberValueString          "x2"
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                    ; local
+		GetArrayValue
+		GetMemberValueString          "y2"
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    13005, 4
+		LineNumberAlt1                1746, 28
+		SetVariableValue              5                                    ; local
+		LineNumber                    13006, 4
+		LineNumberAlt1                1747, 28
+		GetVariableValue              5                                    ; local
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    13007, 4
+		LineNumberAlt1                1748, 28
+		GetVariableValue              5                                    ; local
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    13008, 4
+		LineNumberAlt1                1749, 28
+		GetVariableValue              5                                    ; local
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    13009, 4
+		LineNumberAlt1                1750, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "hidden"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    13010, 4
+		LineNumberAlt1                1751, 28
+		GetVariableValue              5                                    ; local
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    13012, 4
+		LineNumberAlt1                1753, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                    ; local
+		GetVariableValue              5                                    ; local
+		InsertIntoArray
+		LineNumber                    13015, 4
+		LineNumberAlt1                1756, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              4                                    ; local
+		PushConstanti8                1
+		Add
+		GetArrayValue
+		PushConstanti8                16
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "changepos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    13016, 4
+		LineNumberAlt1                1757, 28
+		GetVariableValue              3                                    ; local
+		PushConstanti8                1
+		Add
+		SetVariableValue              3                                    ; local
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    13019, 4
+		LineNumberAlt1                1760, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		LessThan
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    13021, 4
+		LineNumberAlt1                1762, 28
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		LessThan
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    13022, 4
+		LineNumberAlt1                1763, 28
+		PushConstantStringString      "[][][] remove max energy"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    13024, 4
+		LineNumberAlt1                1765, 28
+		GetThisMemberValueString      "energybar"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              6                                    ; local
+		LineNumber                    13025, 4
+		LineNumberAlt1                1766, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              6                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    13026, 4
+		LineNumberAlt1                1767, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              6                                    ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    13027, 4
+		LineNumberAlt1                1768, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              6                                    ; local
+		RemoveFromArray
+		LineNumber                    13030, 4
+		LineNumberAlt1                1771, 28
+		GetThisMemberValueString      "energybar"
+		GetVariableValue              6                                    ; local
+		GetArrayValue
+		PushConstanti8                -16
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "changepos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    13031, 4
+		LineNumberAlt1                1772, 28
+		GetVariableValue              3                                    ; local
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              3                                    ; local
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+end ; class

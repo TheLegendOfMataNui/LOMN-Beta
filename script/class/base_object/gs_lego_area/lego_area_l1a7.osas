@@ -1,0 +1,167 @@
+begin class "lego_area_l1a7", "gs_lego_area"
+	property "puzzle"
+
+	begin method "lego_area_l1a7"
+		; address: 0x6d515
+		; source: 120 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseshapes.vbo" 37:39
+		MemberFunctionArgumentCheck 2
+		LineNumber                  46382, 4
+		LineNumberAlt1              37, 120
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "l1a7"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  46383, 4
+		LineNumberAlt1              38, 120
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  46384, 4
+		LineNumberAlt1              39, 120
+		CreateObjectString          "l1a7_puzzlep"
+		Dup
+		GetVariableValue            0                    ; local
+		Pull                        2
+		GetMemberFunctionString     "l1a7_puzzlep"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  46384, 4
+		LineNumberAlt1              39, 120
+		SetThisMemberValueString    "puzzle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x6d56d
+		; source: 120 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseshapes.vbo" 45:53
+		MemberFunctionArgumentCheck  1
+		LineNumber                   46390, 4
+		LineNumberAlt1               45, 120
+		GetVariableValue             0                                       ; local
+		GetThisMemberFunctionString  "lego_area_show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   46391, 4
+		LineNumberAlt1               46, 120
+		GetThisMemberValueString     "puzzle"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   46392, 4
+		LineNumberAlt1               47, 120
+		PushConstanti32              -16777216
+		PushConstant0
+		PushConstantf32              75
+		Subtract
+		PushConstant0
+		PushConstantf32              200
+		Subtract
+		PushConstantf32              0.05000000074505806
+		CallGameFunctionString       "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                   46393, 4
+		LineNumberAlt1               48, 120
+		PushConstanti8               30
+		CallGameFunctionString       "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                   46394, 4
+		LineNumberAlt1               49, 120
+		PushConstanti8               6
+		CallGameFunctionString       "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                   46395, 4
+		LineNumberAlt1               50, 120
+		PushConstant0
+		CallGameFunctionString       "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                   46397, 4
+		LineNumberAlt1               52, 120
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MUSICLEGOUNDERGROUND"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   46398, 4
+		LineNumberAlt1               53, 120
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x6d666
+		; source: 120 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseshapes.vbo" 66:66
+		MemberFunctionArgumentCheck 2
+		LineNumber                  46411, 4
+		LineNumberAlt1              66, 120
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x6d682
+		; source: 120 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseshapes.vbo" 71:72
+		MemberFunctionArgumentCheck 1
+		LineNumber                  46416, 4
+		LineNumberAlt1              71, 120
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  46417, 4
+		LineNumberAlt1              72, 120
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x6d6ad
+		; source: 120 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseshapes.vbo" 77:79
+		MemberFunctionArgumentCheck 1
+		LineNumber                  46422, 4
+		LineNumberAlt1              77, 120
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  46423, 4
+		LineNumberAlt1              78, 120
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "exit"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  46424, 4
+		LineNumberAlt1              79, 120
+		PushNothing
+		SetThisMemberValueString    "puzzle"
+		PushNothing
+		Return
+	end ; method
+end ; class

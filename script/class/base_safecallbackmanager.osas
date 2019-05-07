@@ -1,0 +1,84 @@
+begin class "base_safecallbackmanager"
+	property "actionitems"
+
+	begin method "base_safecallbackmanager"
+		; address: 0x2cec9
+		; source: 3 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\base/base.vbo" 163:163
+		MemberFunctionArgumentCheck 1
+		LineNumber                  175, 4
+		LineNumberAlt1              163, 3
+		CreateArray
+		SetThisMemberValueString    "actionitems"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "execute"
+		; address: 0x2cedb
+		; source: 3 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\base/base.vbo" 169:175
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    181, 4
+		LineNumberAlt1                169, 3
+		GetThisMemberValueString      "actionitems"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                  ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                  ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    185, 4
+		LineNumberAlt1                173, 3
+		GetThisMemberValueString      "actionitems"
+		GetVariableValue              1                  ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "executearguments"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    187, 4
+		LineNumberAlt1                175, 3
+		CreateArray
+		SetThisMemberValueString      "actionitems"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x2cf2b
+		; source: 3 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\base/base.vbo" 180:180
+		MemberFunctionArgumentCheck 2
+		LineNumber                  192, 4
+		LineNumberAlt1              180, 3
+		GetThisMemberValueString    "actionitems"
+		GetVariableValue            1             ; local
+		AppendToArray
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getstate"
+		; address: 0x2cf40
+		; source: 3 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\base/base.vbo" 185:185
+		MemberFunctionArgumentCheck 1
+		LineNumber                  197, 4
+		LineNumberAlt1              185, 3
+		GetThisMemberValueString    "actionitems"
+		ElementsInArray
+		PushConstant0
+		EqualTo
+		Return
+	end ; method
+end ; class

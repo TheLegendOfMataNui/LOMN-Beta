@@ -1,0 +1,368 @@
+begin class "gs_lego_set_lites", "base_object"
+	property "handle_lite"
+	property "active_lite"
+	property "pulsate_color"
+
+	begin method "gs_lego_set_lites"
+		; address: 0x3c86d
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x3c871
+		; source: 42 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_lites.vbo" 29:32
+		MemberFunctionArgumentCheck 1
+		LineNumber                  13245, 4
+		LineNumberAlt1              29, 42
+		CallGameFunctionString      "gclegolite", "create", 0
+		LineNumber                  13245, 4
+		LineNumberAlt1              29, 42
+		SetThisMemberValueString    "handle_lite"
+		LineNumber                  13246, 4
+		LineNumberAlt1              30, 42
+		GetVariableValue            0                         ; local
+		GetThisMemberFunctionString "createnewlite"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  13247, 4
+		LineNumberAlt1              31, 42
+		PushConstant0
+		SetThisMemberValueString    "active_lite"
+		LineNumber                  13248, 4
+		LineNumberAlt1              32, 42
+		PushConstantColor8888       0xffffffff
+		PushConstanti16             250
+		SetRedValue
+		PushConstanti8              10
+		SetGreenValue
+		PushConstanti8              10
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		SetThisMemberValueString    "pulsate_color"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "createnewlite"
+		; address: 0x3c8d1
+		; source: 42 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_lites.vbo" 37:50
+		MemberFunctionArgumentCheck 1
+		LineNumber                  13253, 4
+		LineNumberAlt1              37, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstantColor8888       0xffffffff
+		PushConstanti16             178
+		SetRedValue
+		PushConstanti8              76
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888       0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantf32             2.799999952316284
+		PushConstantf32             0
+		PushConstantf32             0
+		PushConstantf32             0
+		PushConstantf32             10
+		CallGameFunctionString      "gclegolite", "createlight", 8
+		Pop
+		LineNumber                  13255, 4
+		LineNumberAlt1              39, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstantColor8888       0xffffffff
+		PushConstanti16             178
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888       0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantf32             2.799999952316284
+		PushConstant0
+		PushConstantf32             150
+		Subtract
+		PushConstantf32             50
+		PushConstantf32             300
+		PushConstantf32             500
+		CallGameFunctionString      "gclegolite", "createlight", 8
+		Pop
+		LineNumber                  13257, 4
+		LineNumberAlt1              41, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstantColor8888       0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstanti8              100
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888       0xffffffff
+		PushConstanti8              10
+		SetRedValue
+		PushConstanti8              20
+		SetGreenValue
+		PushConstanti8              10
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantf32             2.799999952316284
+		PushConstant0
+		PushConstantf32             150
+		Subtract
+		PushConstantf32             80
+		PushConstant0
+		PushConstantf32             300
+		Subtract
+		PushConstanti8              5
+		CallGameFunctionString      "gclegolite", "createlight", 8
+		Pop
+		LineNumber                  13259, 4
+		LineNumberAlt1              43, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstantColor8888       0xffffffff
+		PushConstanti8              51
+		SetRedValue
+		PushConstanti8              51
+		SetGreenValue
+		PushConstanti8              51
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888       0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantf32             2.799999952316284
+		PushConstantf32             0
+		PushConstantf32             0
+		PushConstantf32             0
+		PushConstanti16             300
+		CallGameFunctionString      "gclegolite", "createlight", 8
+		Pop
+		LineNumber                  13262, 4
+		LineNumberAlt1              46, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstantColor8888       0xffffffff
+		PushConstanti8              80
+		SetRedValue
+		PushConstanti8              80
+		SetGreenValue
+		PushConstanti8              80
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		CallGameFunctionString      "gclegolite", "setglobalambient", 2
+		Pop
+		LineNumber                  13264, 4
+		LineNumberAlt1              48, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstanti8              1
+		CallGameFunctionString      "gclegolite", "lightoff", 2
+		Pop
+		LineNumber                  13265, 4
+		LineNumberAlt1              49, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstanti8              2
+		CallGameFunctionString      "gclegolite", "lightoff", 2
+		Pop
+		LineNumber                  13266, 4
+		LineNumberAlt1              50, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstanti8              3
+		CallGameFunctionString      "gclegolite", "lightoff", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "togglelite"
+		; address: 0x3ca64
+		; source: 42 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_lites.vbo" 54:54
+		MemberFunctionArgumentCheck 2
+		LineNumber                  13270, 4
+		LineNumberAlt1              54, 42
+		GetThisMemberValueString    "handle_lite"
+		GetVariableValue            1                              ; local
+		CallGameFunctionString      "gclegolite", "togglelight", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "toggleactivelite"
+		; address: 0x3ca7f
+		; source: 42 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_lites.vbo" 58:58
+		MemberFunctionArgumentCheck 1
+		LineNumber                  13274, 4
+		LineNumberAlt1              58, 42
+		GetThisMemberValueString    "handle_lite"
+		GetThisMemberValueString    "active_lite"
+		CallGameFunctionString      "gclegolite", "togglelite", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x3ca9a
+		; source: 42 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_lites.vbo" 62:77
+		MemberFunctionArgumentCheck   2
+		LineNumber                    13278, 4
+		LineNumberAlt1                62, 42
+		GetVariableValue              1             ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    13279, 4
+		LineNumberAlt1                63, 42
+		GetVariableValue              1             ; local
+		GetMemberValueString          "button"
+		PushConstanti8                86
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    13280, 4
+		LineNumberAlt1                64, 42
+		PushConstant0
+		SetThisMemberValueString      "active_lite"
+		LineNumber                    13281, 4
+		LineNumberAlt1                65, 42
+		GetVariableValue              0             ; local
+		PushConstant0
+		GetThisMemberFunctionString   "togglelite"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    13283, 4
+		LineNumberAlt1                67, 42
+		GetVariableValue              1             ; local
+		GetMemberValueString          "button"
+		PushConstanti8                66
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    13284, 4
+		LineNumberAlt1                68, 42
+		PushConstanti8                1
+		SetThisMemberValueString      "active_lite"
+		LineNumber                    13285, 4
+		LineNumberAlt1                69, 42
+		GetVariableValue              0             ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "togglelite"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    13287, 4
+		LineNumberAlt1                71, 42
+		GetVariableValue              1             ; local
+		GetMemberValueString          "button"
+		PushConstanti8                78
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    13288, 4
+		LineNumberAlt1                72, 42
+		PushConstanti8                2
+		SetThisMemberValueString      "active_lite"
+		LineNumber                    13289, 4
+		LineNumberAlt1                73, 42
+		GetVariableValue              0             ; local
+		PushConstanti8                2
+		GetThisMemberFunctionString   "togglelite"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    13291, 4
+		LineNumberAlt1                75, 42
+		GetVariableValue              1             ; local
+		GetMemberValueString          "button"
+		PushConstanti8                77
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    13292, 4
+		LineNumberAlt1                76, 42
+		PushConstanti8                3
+		SetThisMemberValueString      "active_lite"
+		LineNumber                    13293, 4
+		LineNumberAlt1                77, 42
+		GetVariableValue              0             ; local
+		PushConstanti8                3
+		GetThisMemberFunctionString   "togglelite"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x3cb9a
+		; source: 42 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_lites.vbo" 84:87
+		MemberFunctionArgumentCheck 2
+		LineNumber                  13300, 4
+		LineNumberAlt1              84, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstant0
+		CallGameFunctionString      "gclegolite", "fire", 2
+		Pop
+		LineNumber                  13301, 4
+		LineNumberAlt1              85, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstanti8              1
+		CallGameFunctionString      "gclegolite", "lightning", 2
+		Pop
+		LineNumber                  13302, 4
+		LineNumberAlt1              86, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstanti8              2
+		CallGameFunctionString      "gclegolite", "orbit", 2
+		Pop
+		LineNumber                  13303, 4
+		LineNumberAlt1              87, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstanti8              3
+		GetThisMemberValueString    "pulsate_color"
+		PushConstantf32             0.05000000074505806
+		CallGameFunctionString      "gclegolite", "pulsate", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

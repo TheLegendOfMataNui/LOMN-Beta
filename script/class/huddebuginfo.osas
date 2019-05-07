@@ -1,0 +1,553 @@
+begin class "huddebuginfo"
+	property "framecount"
+	property "frametime"
+	property "starttime"
+	property "firstpass"
+	property "text"
+	property "textfps"
+	property "textarea"
+
+	begin method "huddebuginfo"
+		; address: 0x38dee
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x38df2
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 322:333
+		MemberFunctionArgumentCheck  1
+		LineNumber                   11581, 4
+		LineNumberAlt1               322, 28
+		PushConstant0
+		SetThisMemberValueString     "framecount"
+		LineNumber                   11582, 4
+		LineNumberAlt1               323, 28
+		PushConstantf32              0
+		SetThisMemberValueString     "frametime"
+		LineNumber                   11583, 4
+		LineNumberAlt1               324, 28
+		PushConstanti8               1
+		SetThisMemberValueString     "firstpass"
+		LineNumber                   11584, 4
+		LineNumberAlt1               325, 28
+		CreateObjectString           "gs_legotext"
+		Dup
+		PushConstantStringString     "Root/Data/Art/Fonts/BionicleFont"
+		PushConstantStringString     "clock"
+		GetVariableValueGlobalString "screenx"
+		PushConstantf32              0.5
+		Multiply
+		GetVariableValueGlobalString "screeny"
+		PushConstanti8               40
+		Subtract
+		PushConstant0
+		PushConstantf32              1
+		PushConstanti16              256
+		PushConstanti8               4
+		PushConstant0
+		Pull                         10
+		GetMemberFunctionString      "gs_legotext"
+		JumpAbsolute                 10
+		Pop
+		LineNumber                   11584, 4
+		LineNumberAlt1               325, 28
+		SetThisMemberValueString     "text"
+		LineNumber                   11585, 4
+		LineNumberAlt1               326, 28
+		CreateObjectString           "gs_legotext"
+		Dup
+		PushConstantStringString     "Root/Data/Art/Fonts/BionicleFontHi"
+		PushConstantStringString     "fps"
+		GetVariableValueGlobalString "screenx"
+		PushConstantf32              0.5
+		Multiply
+		GetVariableValueGlobalString "screeny"
+		PushConstanti8               25
+		Subtract
+		PushConstant0
+		PushConstantf32              1
+		PushConstanti16              256
+		PushConstanti8               4
+		PushConstant0
+		Pull                         10
+		GetMemberFunctionString      "gs_legotext"
+		JumpAbsolute                 10
+		Pop
+		LineNumber                   11585, 4
+		LineNumberAlt1               326, 28
+		SetThisMemberValueString     "textfps"
+		LineNumber                   11586, 4
+		LineNumberAlt1               327, 28
+		CreateObjectString           "gs_legotext"
+		Dup
+		PushConstantStringString     "Root/Data/Art/Fonts/BionicleFont"
+		PushConstantStringString     "area"
+		GetVariableValueGlobalString "screenx"
+		PushConstantf32              0.5
+		Multiply
+		GetVariableValueGlobalString "screeny"
+		PushConstanti8               10
+		Subtract
+		PushConstant0
+		PushConstantf32              1
+		PushConstanti16              256
+		PushConstanti8               4
+		PushConstant0
+		Pull                         10
+		GetMemberFunctionString      "gs_legotext"
+		JumpAbsolute                 10
+		Pop
+		LineNumber                   11586, 4
+		LineNumberAlt1               327, 28
+		SetThisMemberValueString     "textarea"
+		LineNumber                   11587, 4
+		LineNumberAlt1               328, 28
+		GetThisMemberValueString     "text"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   11588, 4
+		LineNumberAlt1               329, 28
+		GetThisMemberValueString     "textfps"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   11589, 4
+		LineNumberAlt1               330, 28
+		GetThisMemberValueString     "textarea"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   11590, 4
+		LineNumberAlt1               331, 28
+		GetThisMemberValueString     "text"
+		Dup
+		GetMemberFunctionString      "add"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   11591, 4
+		LineNumberAlt1               332, 28
+		GetThisMemberValueString     "textfps"
+		Dup
+		GetMemberFunctionString      "add"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   11592, 4
+		LineNumberAlt1               333, 28
+		GetThisMemberValueString     "textarea"
+		Dup
+		GetMemberFunctionString      "add"
+		JumpAbsolute                 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x38f69
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 338:338
+		MemberFunctionArgumentCheck 1
+		LineNumber                  11597, 4
+		LineNumberAlt1              338, 28
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x38f80
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 343:353
+		MemberFunctionArgumentCheck   1
+		LineNumber                    11602, 4
+		LineNumberAlt1                343, 28
+		GetThisMemberValueString      "text"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    11603, 4
+		LineNumberAlt1                344, 28
+		GetThisMemberValueString      "text"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    11604, 4
+		LineNumberAlt1                345, 28
+		PushNothing
+		SetThisMemberValueString      "text"
+		; <-
+		BranchTarget                  0
+		LineNumber                    11606, 4
+		LineNumberAlt1                347, 28
+		GetThisMemberValueString      "textfps"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    11607, 4
+		LineNumberAlt1                348, 28
+		GetThisMemberValueString      "textfps"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    11608, 4
+		LineNumberAlt1                349, 28
+		PushNothing
+		SetThisMemberValueString      "textfps"
+		; <-
+		BranchTarget                  1
+		LineNumber                    11610, 4
+		LineNumberAlt1                351, 28
+		GetThisMemberValueString      "textarea"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    11611, 4
+		LineNumberAlt1                352, 28
+		GetThisMemberValueString      "textarea"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    11612, 4
+		LineNumberAlt1                353, 28
+		PushNothing
+		SetThisMemberValueString      "textarea"
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x39023
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 359:359
+		MemberFunctionArgumentCheck 1
+		LineNumber                  11618, 4
+		LineNumberAlt1              359, 28
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x3903a
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 364:366
+		MemberFunctionArgumentCheck 1
+		LineNumber                  11623, 4
+		LineNumberAlt1              364, 28
+		GetThisMemberValueString    "text"
+		Dup
+		GetMemberFunctionString     "show"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  11624, 4
+		LineNumberAlt1              365, 28
+		GetThisMemberValueString    "textfps"
+		Dup
+		GetMemberFunctionString     "show"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  11625, 4
+		LineNumberAlt1              366, 28
+		GetThisMemberValueString    "textarea"
+		Dup
+		GetMemberFunctionString     "show"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x3907a
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 371:373
+		MemberFunctionArgumentCheck 1
+		LineNumber                  11630, 4
+		LineNumberAlt1              371, 28
+		GetThisMemberValueString    "text"
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  11631, 4
+		LineNumberAlt1              372, 28
+		GetThisMemberValueString    "textfps"
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  11632, 4
+		LineNumberAlt1              373, 28
+		GetThisMemberValueString    "textarea"
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x390ba
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 379:419
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          11
+		LineNumber                    11638, 4
+		LineNumberAlt1                379, 28
+		GetThisMemberValueString      "firstpass"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    11639, 4
+		LineNumberAlt1                380, 28
+		PushConstant0
+		SetThisMemberValueString      "firstpass"
+		LineNumber                    11640, 4
+		LineNumberAlt1                381, 28
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "currenttime"
+		SetThisMemberValueString      "starttime"
+		; <-
+		BranchTarget                  0
+		LineNumber                    11642, 4
+		LineNumberAlt1                383, 28
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "currenttime"
+		GetThisMemberValueString      "starttime"
+		Subtract
+		SetVariableValue              2                                            ; local
+		LineNumber                    11643, 4
+		LineNumberAlt1                384, 28
+		GetVariableValue              2                                            ; local
+		PushConstantf32               60
+		Divide
+		SetVariableValue              3                                            ; local
+		LineNumber                    11644, 4
+		LineNumberAlt1                385, 28
+		GetVariableValue              3                                            ; local
+		CallGameFunctionString        "scslosimath", "floor", 1
+		LineNumber                    11644, 4
+		LineNumberAlt1                385, 28
+		SetVariableValue              3                                            ; local
+		LineNumber                    11645, 4
+		LineNumberAlt1                386, 28
+		GetVariableValue              3                                            ; local
+		ConvertToString
+		SetVariableValue              4                                            ; local
+		LineNumber                    11646, 4
+		LineNumberAlt1                387, 28
+		GetVariableValue              4                                            ; local
+		PushConstantStringString      "."
+		CallGameFunctionString        "scslosistringfuncs", "find", 2
+		LineNumber                    11646, 4
+		LineNumberAlt1                387, 28
+		SetVariableValue              5                                            ; local
+		LineNumber                    11647, 4
+		LineNumberAlt1                388, 28
+		GetVariableValue              4                                            ; local
+		GetVariableValue              5                                            ; local
+		CallGameFunctionString        "scslosistringfuncs", "left", 2
+		LineNumber                    11647, 4
+		LineNumberAlt1                388, 28
+		SetVariableValue              4                                            ; local
+		LineNumber                    11649, 4
+		LineNumberAlt1                390, 28
+		GetVariableValue              2                                            ; local
+		PushConstantf32               60
+		GetVariableValue              3                                            ; local
+		Multiply
+		Subtract
+		SetVariableValue              6                                            ; local
+		LineNumber                    11650, 4
+		LineNumberAlt1                391, 28
+		GetVariableValue              6                                            ; local
+		CallGameFunctionString        "scslosimath", "floor", 1
+		LineNumber                    11650, 4
+		LineNumberAlt1                391, 28
+		SetVariableValue              6                                            ; local
+		LineNumber                    11651, 4
+		LineNumberAlt1                392, 28
+		GetVariableValue              6                                            ; local
+		ConvertToString
+		SetVariableValue              7                                            ; local
+		LineNumber                    11652, 4
+		LineNumberAlt1                393, 28
+		GetVariableValue              7                                            ; local
+		PushConstantStringString      "."
+		CallGameFunctionString        "scslosistringfuncs", "find", 2
+		LineNumber                    11652, 4
+		LineNumberAlt1                393, 28
+		SetVariableValue              5                                            ; local
+		LineNumber                    11653, 4
+		LineNumberAlt1                394, 28
+		GetVariableValue              7                                            ; local
+		GetVariableValue              5                                            ; local
+		CallGameFunctionString        "scslosistringfuncs", "left", 2
+		LineNumber                    11653, 4
+		LineNumberAlt1                394, 28
+		SetVariableValue              7                                            ; local
+		LineNumber                    11654, 4
+		LineNumberAlt1                395, 28
+		GetVariableValue              6                                            ; local
+		PushConstantf32               10
+		LessThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    11655, 4
+		LineNumberAlt1                396, 28
+		PushConstantStringString      "0"
+		GetVariableValue              7                                            ; local
+		Add
+		SetVariableValue              7                                            ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    11658, 4
+		LineNumberAlt1                399, 28
+		GetVariableValue              4                                            ; local
+		PushConstantStringString      ":"
+		Add
+		GetVariableValue              7                                            ; local
+		Add
+		SetVariableValue              8                                            ; local
+		LineNumber                    11659, 4
+		LineNumberAlt1                400, 28
+		GetThisMemberValueString      "text"
+		GetVariableValue              8                                            ; local
+		Pull                          2
+		GetMemberFunctionString       "setstring"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    11662, 4
+		LineNumberAlt1                403, 28
+		CallGameFunctionString        "scprocessmanager", "getrealdeltatime", 0
+		LineNumber                    11662, 4
+		LineNumberAlt1                403, 28
+		SetVariableValue              9                                            ; local
+		LineNumber                    11663, 4
+		LineNumberAlt1                404, 28
+		GetThisMemberValueString      "frametime"
+		GetVariableValue              9                                            ; local
+		Add
+		SetThisMemberValueString      "frametime"
+		LineNumber                    11664, 4
+		LineNumberAlt1                405, 28
+		GetThisMemberValueString      "framecount"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "framecount"
+		LineNumber                    11665, 4
+		LineNumberAlt1                406, 28
+		GetThisMemberValueString      "frametime"
+		PushConstantf32               3
+		GreaterThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    11666, 4
+		LineNumberAlt1                407, 28
+		GetThisMemberValueString      "framecount"
+		GetThisMemberValueString      "frametime"
+		Divide
+		SetVariableValue              10                                           ; local
+		LineNumber                    11667, 4
+		LineNumberAlt1                408, 28
+		GetVariableValue              10                                           ; local
+		ConvertToString
+		SetVariableValue              11                                           ; local
+		LineNumber                    11668, 4
+		LineNumberAlt1                409, 28
+		GetVariableValue              11                                           ; local
+		PushConstantStringString      "."
+		CallGameFunctionString        "scslosistringfuncs", "find", 2
+		LineNumber                    11668, 4
+		LineNumberAlt1                409, 28
+		SetVariableValue              5                                            ; local
+		LineNumber                    11669, 4
+		LineNumberAlt1                410, 28
+		GetVariableValue              11                                           ; local
+		GetVariableValue              5                                            ; local
+		CallGameFunctionString        "scslosistringfuncs", "left", 2
+		LineNumber                    11669, 4
+		LineNumberAlt1                410, 28
+		SetVariableValue              11                                           ; local
+		LineNumber                    11670, 4
+		LineNumberAlt1                411, 28
+		GetThisMemberValueString      "textfps"
+		GetVariableValue              11                                           ; local
+		Pull                          2
+		GetMemberFunctionString       "setstring"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    11671, 4
+		LineNumberAlt1                412, 28
+		PushConstant0
+		SetThisMemberValueString      "frametime"
+		LineNumber                    11672, 4
+		LineNumberAlt1                413, 28
+		PushConstant0
+		SetThisMemberValueString      "framecount"
+		; <-
+		BranchTarget                  2
+		LineNumber                    11676, 4
+		LineNumberAlt1                417, 28
+		CallGameFunctionString        "gcareadirector", "getcurrentarea", 0
+		LineNumber                    11676, 4
+		LineNumberAlt1                417, 28
+		SetVariableValue              12                                           ; local
+		LineNumber                    11677, 4
+		LineNumberAlt1                418, 28
+		GetVariableValue              12                                           ; local
+		PushConstanti32               1061109567
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    11678, 4
+		LineNumberAlt1                419, 28
+		GetThisMemberValueString      "textarea"
+		GetVariableValue              12                                           ; local
+		CallGameFunctionString        "scslosifoundation", "identifiertostring", 1
+		LineNumber                    11678, 4
+		LineNumberAlt1                419, 28
+		Pull                          2
+		GetMemberFunctionString       "setstring"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x393d8
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x393dc
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+end ; class

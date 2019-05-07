@@ -1,0 +1,218 @@
+begin class "lego_area_front", "gs_lego_area"
+	property "frontendmenu"
+
+	begin method "lego_area_front"
+		; address: 0x5d1e2
+		; source: 46 "C:\\projects\\lego\\Scripting\\VBO\\lego_frontend.vbo" 83:86
+		MemberFunctionArgumentCheck 2
+		LineNumber                  35298, 4
+		LineNumberAlt1              83, 46
+		GetVariableValue            0                        ; local
+		PushConstantStringString    "frnt"
+		GetVariableValue            1                        ; local
+		PushConstanti8              1
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  35300, 4
+		LineNumberAlt1              85, 46
+		CreateObjectString          "gs_lego_screenfrontend"
+		Dup
+		GetVariableValue            0                        ; local
+		Pull                        2
+		GetMemberFunctionString     "gs_lego_screenfrontend"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  35300, 4
+		LineNumberAlt1              85, 46
+		SetThisMemberValueString    "frontendmenu"
+		LineNumber                  35301, 4
+		LineNumberAlt1              86, 46
+		GetVariableValue            0                        ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x5d23b
+		; source: 46 "C:\\projects\\lego\\Scripting\\VBO\\lego_frontend.vbo" 92:101
+		MemberFunctionArgumentCheck  1
+		LineNumber                   35307, 4
+		LineNumberAlt1               92, 46
+		GetVariableValue             0                                       ; local
+		GetThisMemberFunctionString  "lego_area_show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   35308, 4
+		LineNumberAlt1               93, 46
+		GetThisMemberValueString     "frontendmenu"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   35310, 4
+		LineNumberAlt1               95, 46
+		PushConstanti32              -402183
+		PushConstant0
+		PushConstantf32              40
+		Subtract
+		PushConstant0
+		PushConstantf32              1200
+		Subtract
+		PushConstantf32              0.05000000074505806
+		CallGameFunctionString       "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                   35311, 4
+		LineNumberAlt1               96, 46
+		PushConstanti8               10
+		CallGameFunctionString       "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                   35312, 4
+		LineNumberAlt1               97, 46
+		PushConstanti8               10
+		CallGameFunctionString       "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                   35313, 4
+		LineNumberAlt1               98, 46
+		PushConstant0
+		CallGameFunctionString       "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                   35315, 4
+		LineNumberAlt1               100, 46
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MusicGaliAmbience"
+		Pull                         2
+		GetMemberFunctionString      "setupforplay"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   35316, 4
+		LineNumberAlt1               101, 46
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x5d2fc
+		; source: 46 "C:\\projects\\lego\\Scripting\\VBO\\lego_frontend.vbo" 105:106
+		MemberFunctionArgumentCheck 1
+		LineNumber                  35320, 4
+		LineNumberAlt1              105, 46
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  35321, 4
+		LineNumberAlt1              106, 46
+		GetThisMemberValueString    "frontendmenu"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x5d327
+		; source: 46 "C:\\projects\\lego\\Scripting\\VBO\\lego_frontend.vbo" 111:113
+		MemberFunctionArgumentCheck 1
+		LineNumber                  35326, 4
+		LineNumberAlt1              111, 46
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  35327, 4
+		LineNumberAlt1              112, 46
+		GetThisMemberValueString    "frontendmenu"
+		Dup
+		GetMemberFunctionString     "exit"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  35328, 4
+		LineNumberAlt1              113, 46
+		PushNothing
+		SetThisMemberValueString    "frontendmenu"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x5d360
+		; source: 46 "C:\\projects\\lego\\Scripting\\VBO\\lego_frontend.vbo" 118:118
+		MemberFunctionArgumentCheck 2
+		LineNumber                  35333, 4
+		LineNumberAlt1              118, 46
+		GetThisMemberValueString    "frontendmenu"
+		GetVariableValue            1              ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x5d37c
+		; source: 46 "C:\\projects\\lego\\Scripting\\VBO\\lego_frontend.vbo" 124:128
+		MemberFunctionArgumentCheck   2
+		LineNumber                    35339, 4
+		LineNumberAlt1                124, 46
+		GetThisMemberValueString      "frontendmenu"
+		GetVariableValue              1              ; local
+		Pull                          2
+		GetMemberFunctionString       "process"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    35342, 4
+		LineNumberAlt1                127, 46
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "hidden"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    35343, 4
+		LineNumberAlt1                128, 46
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x5d3c7
+		; source: 46 "C:\\projects\\lego\\Scripting\\VBO\\lego_frontend.vbo" 135:135
+		MemberFunctionArgumentCheck 2
+		LineNumber                  35350, 4
+		LineNumberAlt1              135, 46
+		GetThisMemberValueString    "frontendmenu"
+		GetVariableValue            1              ; local
+		Pull                        2
+		GetMemberFunctionString     "input"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,575 @@
+begin class "ss_basetext", "base_drawobject"
+	property "font"
+	property "fontname"
+	property "text"
+	property "string"
+	property "ident"
+	property "horizontal"
+	property "verticle"
+	property "scale"
+	property "padadjustment"
+
+	begin method "ss_basetext"
+		; address: 0x2e56d
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 85:96
+		MemberFunctionArgumentCheck   10
+		LineNumber                    1792, 4
+		LineNumberAlt1                85, 12
+		GetVariableValue              1               ; local
+		SetThisMemberValueString      "fontname"
+		LineNumber                    1793, 4
+		LineNumberAlt1                86, 12
+		GetVariableValue              2               ; local
+		SetThisMemberValueString      "string"
+		LineNumber                    1794, 4
+		LineNumberAlt1                87, 12
+		GetVariableValue              9               ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    1794, 4
+		LineNumberAlt1                87, 12
+		GetVariableValue              9               ; local
+		SetThisMemberValueString      "padadjustment"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    1794, 4
+		LineNumberAlt1                87, 12
+		PushConstant0
+		SetThisMemberValueString      "padadjustment"
+		; <-
+		BranchTarget                  1
+		LineNumber                    1796, 4
+		LineNumberAlt1                89, 12
+		GetVariableValue              3               ; local
+		SetThisMemberValueString      "x1"
+		LineNumber                    1797, 4
+		LineNumberAlt1                90, 12
+		GetVariableValue              4               ; local
+		GetThisMemberValueString      "padadjustment"
+		Add
+		SetThisMemberValueString      "y1"
+		LineNumber                    1798, 4
+		LineNumberAlt1                91, 12
+		GetVariableValue              5               ; local
+		SetThisMemberValueString      "z"
+		LineNumber                    1801, 4
+		LineNumberAlt1                94, 12
+		GetVariableValue              6               ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    1801, 4
+		LineNumberAlt1                94, 12
+		GetVariableValue              6               ; local
+		SetThisMemberValueString      "scale"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    1801, 4
+		LineNumberAlt1                94, 12
+		PushConstanti8                1
+		SetThisMemberValueString      "scale"
+		; <-
+		BranchTarget                  3
+		LineNumber                    1802, 4
+		LineNumberAlt1                95, 12
+		GetVariableValue              7               ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    1802, 4
+		LineNumberAlt1                95, 12
+		GetVariableValue              7               ; local
+		SetThisMemberValueString      "horizontal"
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    1802, 4
+		LineNumberAlt1                95, 12
+		PushConstant0
+		SetThisMemberValueString      "horizontal"
+		; <-
+		BranchTarget                  5
+		LineNumber                    1803, 4
+		LineNumberAlt1                96, 12
+		GetVariableValue              8               ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    1803, 4
+		LineNumberAlt1                96, 12
+		GetVariableValue              8               ; local
+		SetThisMemberValueString      "verticle"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		LineNumber                    1803, 4
+		LineNumberAlt1                96, 12
+		PushConstanti8                4
+		SetThisMemberValueString      "verticle"
+		; <-
+		BranchTarget                  7
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x2e697
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 101:107
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1808, 4
+		LineNumberAlt1              101, 12
+		GetThisMemberValueString    "fontname"
+		CallGameFunctionString      "sctilefont", "create", 1
+		LineNumber                  1808, 4
+		LineNumberAlt1              101, 12
+		SetThisMemberValueString    "font"
+		LineNumber                  1809, 4
+		LineNumberAlt1              102, 12
+		GetThisMemberValueString    "x1"
+		GetThisMemberValueString    "y1"
+		GetThisMemberValueString    "z"
+		GetThisMemberValueString    "font"
+		GetThisMemberValueString    "string"
+		CallGameFunctionString      "sctextobject", "create", 5
+		LineNumber                  1809, 4
+		LineNumberAlt1              102, 12
+		SetThisMemberValueString    "text"
+		LineNumber                  1811, 4
+		LineNumberAlt1              104, 12
+		GetThisMemberValueString    "text"
+		GetThisMemberValueString    "scale"
+		Dup
+		CallGameFunctionString      "sctextobject", "setscale", 3
+		Pop
+		LineNumber                  1812, 4
+		LineNumberAlt1              105, 12
+		GetThisMemberValueString    "font"
+		GetThisMemberValueString    "scale"
+		Dup
+		CallGameFunctionString      "sctilefont", "setscale", 3
+		Pop
+		LineNumber                  1813, 4
+		LineNumberAlt1              106, 12
+		GetThisMemberValueString    "text"
+		GetThisMemberValueString    "horizontal"
+		GetThisMemberValueString    "verticle"
+		BitwiseOr
+		CallGameFunctionString      "sctextobject", "setjustification", 2
+		Pop
+		LineNumber                  1814, 4
+		LineNumberAlt1              107, 12
+		GetThisMemberValueString    "text"
+		PushConstanti8              1
+		CallGameFunctionString      "sctextobject", "enablejustification", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x2e748
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 112:116
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1819, 4
+		LineNumberAlt1              112, 12
+		GetThisMemberValueString    "fontname"
+		CallGameFunctionString      "sctilefont", "create", 1
+		LineNumber                  1819, 4
+		LineNumberAlt1              112, 12
+		SetThisMemberValueString    "font"
+		LineNumber                  1820, 4
+		LineNumberAlt1              113, 12
+		GetThisMemberValueString    "x1"
+		GetThisMemberValueString    "y1"
+		GetThisMemberValueString    "z"
+		GetThisMemberValueString    "font"
+		GetThisMemberValueString    "string"
+		CallGameFunctionString      "sctextobject", "create", 5
+		LineNumber                  1820, 4
+		LineNumberAlt1              113, 12
+		SetThisMemberValueString    "text"
+		LineNumber                  1821, 4
+		LineNumberAlt1              114, 12
+		GetThisMemberValueString    "font"
+		GetThisMemberValueString    "scale"
+		Dup
+		CallGameFunctionString      "sctilefont", "setscale", 3
+		Pop
+		LineNumber                  1822, 4
+		LineNumberAlt1              115, 12
+		GetThisMemberValueString    "text"
+		GetThisMemberValueString    "horizontal"
+		GetThisMemberValueString    "verticle"
+		BitwiseOr
+		CallGameFunctionString      "sctextobject", "setjustification", 2
+		Pop
+		LineNumber                  1823, 4
+		LineNumberAlt1              116, 12
+		GetThisMemberValueString    "text"
+		PushConstanti8              1
+		CallGameFunctionString      "sctextobject", "enablejustification", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x2e7e1
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 120:121
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1827, 4
+		LineNumberAlt1              120, 12
+		PushNothing
+		SetThisMemberValueString    "font"
+		LineNumber                  1828, 4
+		LineNumberAlt1              121, 12
+		PushNothing
+		SetThisMemberValueString    "text"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x2e801
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 125:126
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1832, 4
+		LineNumberAlt1              125, 12
+		PushNothing
+		SetThisMemberValueString    "font"
+		LineNumber                  1833, 4
+		LineNumberAlt1              126, 12
+		PushNothing
+		SetThisMemberValueString    "text"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "enablealphachannel"
+		; address: 0x2e821
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x2e825
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 135:135
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1842, 4
+		LineNumberAlt1              135, 12
+		GetThisMemberValueString    "text"
+		CallGameFunctionString      "gchuddirector", "addtextobject", 1
+		LineNumber                  1842, 4
+		LineNumberAlt1              135, 12
+		SetThisMemberValueString    "ident"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x2e849
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 139:140
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1846, 4
+		LineNumberAlt1              139, 12
+		GetThisMemberValueString    "ident"
+		CallGameFunctionString      "gchuddirector", "show", 1
+		Pop
+		LineNumber                  1847, 4
+		LineNumberAlt1              140, 12
+		PushConstanti8              1
+		SetThisMemberValueString    "onscreen"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x2e870
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 144:145
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1851, 4
+		LineNumberAlt1              144, 12
+		GetThisMemberValueString    "ident"
+		CallGameFunctionString      "gchuddirector", "hide", 1
+		Pop
+		LineNumber                  1852, 4
+		LineNumberAlt1              145, 12
+		PushConstant0
+		SetThisMemberValueString    "onscreen"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "remove"
+		; address: 0x2e896
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 149:149
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1856, 4
+		LineNumberAlt1              149, 12
+		GetThisMemberValueString    "ident"
+		CallGameFunctionString      "gchuddirector", "remove", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setpos"
+		; address: 0x2e8ae
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 153:156
+		MemberFunctionArgumentCheck 4
+		LineNumber                  1860, 4
+		LineNumberAlt1              153, 12
+		GetVariableValue            1                                ; local
+		SetThisMemberValueString    "x1"
+		LineNumber                  1861, 4
+		LineNumberAlt1              154, 12
+		GetVariableValue            2                                ; local
+		GetThisMemberValueString    "padadjustment"
+		Add
+		SetThisMemberValueString    "y1"
+		LineNumber                  1862, 4
+		LineNumberAlt1              155, 12
+		GetVariableValue            3                                ; local
+		SetThisMemberValueString    "z"
+		LineNumber                  1863, 4
+		LineNumberAlt1              156, 12
+		GetThisMemberValueString    "text"
+		GetThisMemberValueString    "x1"
+		GetThisMemberValueString    "y1"
+		GetThisMemberValueString    "z"
+		CallGameFunctionString      "sctextobject", "setposition", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setjustification"
+		; address: 0x2e903
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 160:163
+		MemberFunctionArgumentCheck 3
+		LineNumber                  1867, 4
+		LineNumberAlt1              160, 12
+		GetVariableValue            1                                        ; local
+		SetThisMemberValueString    "horizontal"
+		LineNumber                  1868, 4
+		LineNumberAlt1              161, 12
+		GetVariableValue            2                                        ; local
+		SetThisMemberValueString    "verticle"
+		LineNumber                  1869, 4
+		LineNumberAlt1              162, 12
+		GetThisMemberValueString    "text"
+		GetThisMemberValueString    "horizontal"
+		GetThisMemberValueString    "verticle"
+		BitwiseOr
+		CallGameFunctionString      "sctextobject", "setjustification", 2
+		Pop
+		LineNumber                  1870, 4
+		LineNumberAlt1              163, 12
+		GetThisMemberValueString    "text"
+		PushConstanti8              1
+		CallGameFunctionString      "sctextobject", "enablejustification", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "changepos"
+		; address: 0x2e958
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 167:176
+		MemberFunctionArgumentCheck   4
+		LineNumber                    1874, 4
+		LineNumberAlt1                167, 12
+		GetVariableValue              1                                ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    1875, 4
+		LineNumberAlt1                168, 12
+		GetVariableValue              1                                ; local
+		GetThisMemberValueString      "x1"
+		Add
+		SetThisMemberValueString      "x1"
+		; <-
+		BranchTarget                  0
+		LineNumber                    1877, 4
+		LineNumberAlt1                170, 12
+		GetVariableValue              2                                ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    1878, 4
+		LineNumberAlt1                171, 12
+		GetVariableValue              2                                ; local
+		GetThisMemberValueString      "y1"
+		Add
+		SetThisMemberValueString      "y1"
+		; <-
+		BranchTarget                  1
+		LineNumber                    1880, 4
+		LineNumberAlt1                173, 12
+		GetVariableValue              3                                ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    1881, 4
+		LineNumberAlt1                174, 12
+		GetVariableValue              3                                ; local
+		GetThisMemberValueString      "z"
+		Add
+		SetThisMemberValueString      "z"
+		; <-
+		BranchTarget                  2
+		LineNumber                    1883, 4
+		LineNumberAlt1                176, 12
+		GetThisMemberValueString      "text"
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "z"
+		CallGameFunctionString        "sctextobject", "setposition", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setstring"
+		; address: 0x2e9ee
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 180:181
+		MemberFunctionArgumentCheck 2
+		LineNumber                  1887, 4
+		LineNumberAlt1              180, 12
+		GetVariableValue            1                              ; local
+		SetThisMemberValueString    "string"
+		LineNumber                  1888, 4
+		LineNumberAlt1              181, 12
+		GetThisMemberValueString    "text"
+		GetThisMemberValueString    "string"
+		CallGameFunctionString      "sctextobject", "setstring", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setfont"
+		; address: 0x2ea19
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 185:187
+		MemberFunctionArgumentCheck 2
+		LineNumber                  1892, 4
+		LineNumberAlt1              185, 12
+		GetVariableValue            1                            ; local
+		SetThisMemberValueString    "fontname"
+		LineNumber                  1893, 4
+		LineNumberAlt1              186, 12
+		GetThisMemberValueString    "fontname"
+		CallGameFunctionString      "sctilefont", "create", 1
+		Pop
+		LineNumber                  1894, 4
+		LineNumberAlt1              187, 12
+		GetThisMemberValueString    "text"
+		GetThisMemberValueString    "font"
+		CallGameFunctionString      "sctextobject", "setfont", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "scalefont"
+		; address: 0x2ea58
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 191:192
+		MemberFunctionArgumentCheck 2
+		LineNumber                  1898, 4
+		LineNumberAlt1              191, 12
+		GetVariableValue            1                           ; local
+		SetThisMemberValueString    "scale"
+		LineNumber                  1899, 4
+		LineNumberAlt1              192, 12
+		GetThisMemberValueString    "font"
+		GetThisMemberValueString    "scale"
+		Dup
+		CallGameFunctionString      "sctilefont", "setscale", 3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getheight"
+		; address: 0x2ea84
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 197:197
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1904, 4
+		LineNumberAlt1              197, 12
+		GetThisMemberValueString    "font"
+		CallGameFunctionString      "sctilefont", "getfontheight", 1
+		LineNumber                  1904, 4
+		LineNumberAlt1              197, 12
+		Return
+	end ; method
+
+	begin method "getwidth"
+		; address: 0x2eaa4
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 202:202
+		MemberFunctionArgumentCheck 1
+		LineNumber                  1909, 4
+		LineNumberAlt1              202, 12
+		GetThisMemberValueString    "font"
+		GetThisMemberValueString    "string"
+		CallGameFunctionString      "sctilefont", "getstrlen", 2
+		LineNumber                  1909, 4
+		LineNumberAlt1              202, 12
+		Return
+	end ; method
+
+	begin method "setkerning"
+		; address: 0x2eac7
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 207:208
+		MemberFunctionArgumentCheck 2
+		CreateStackVariables        1
+		LineNumber                  1914, 4
+		LineNumberAlt1              207, 12
+		GetVariableValue            1                             ; local
+		SetVariableValue            2                             ; local
+		LineNumber                  1915, 4
+		LineNumberAlt1              208, 12
+		GetThisMemberValueString    "font"
+		GetVariableValue            2                             ; local
+		CallGameFunctionString      "sctilefont", "setkerning", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "settransparency"
+		; address: 0x2eaf4
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 212:212
+		MemberFunctionArgumentCheck 2
+		LineNumber                  1919, 4
+		LineNumberAlt1              212, 12
+		GetThisMemberValueString    "text"
+		GetVariableValue            1                                    ; local
+		CallGameFunctionString      "sctextobject", "settransparency", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

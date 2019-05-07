@@ -1,0 +1,1474 @@
+begin class "runningobj", "lego_moveableobject"
+	property "maintimer"
+	property "frequency"
+	property "speed"
+	property "pathpoint"
+	property "patharray"
+	property "dataarray"
+	property "curentarrayposition"
+	property "haspath"
+	property "oneway"
+	property "paused"
+	property "running"
+	property "yoffset"
+	property "rollspeed"
+	property "curentrollorient"
+	property "processloop"
+
+	begin method "runningobj"
+		; address: 0x446d8
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1518:1521
+		MemberFunctionArgumentCheck 2
+		LineNumber                  20154, 4
+		LineNumberAlt1              1518, 52
+		GetVariableValue            0                     ; local
+		GetVariableValue            1                     ; local
+		GetThisMemberFunctionString "lego_moveableobject"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  20155, 4
+		LineNumberAlt1              1519, 52
+		CreateObjectString          "basicpoint"
+		Dup
+		Dup
+		GetMemberFunctionString     "basicpoint"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  20155, 4
+		LineNumberAlt1              1519, 52
+		SetThisMemberValueString    "pathpoint"
+		LineNumber                  20156, 4
+		LineNumberAlt1              1520, 52
+		CreateArray
+		SetThisMemberValueString    "patharray"
+		LineNumber                  20157, 4
+		LineNumberAlt1              1521, 52
+		CreateArray
+		SetThisMemberValueString    "dataarray"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "init"
+		; address: 0x44730
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1528:1542
+		MemberFunctionArgumentCheck 2
+		LineNumber                  20164, 4
+		LineNumberAlt1              1528, 52
+		PushConstantf32             0
+		SetThisMemberValueString    "maintimer"
+		LineNumber                  20165, 4
+		LineNumberAlt1              1529, 52
+		PushConstanti8              60
+		SetThisMemberValueString    "frequency"
+		LineNumber                  20166, 4
+		LineNumberAlt1              1530, 52
+		PushConstant0
+		SetThisMemberValueString    "curentarrayposition"
+		LineNumber                  20167, 4
+		LineNumberAlt1              1531, 52
+		PushConstant0
+		SetThisMemberValueString    "running"
+		LineNumber                  20168, 4
+		LineNumberAlt1              1532, 52
+		PushConstanti8              1
+		SetThisMemberValueString    "oneway"
+		LineNumber                  20169, 4
+		LineNumberAlt1              1533, 52
+		PushConstant0
+		SetThisMemberValueString    "paused"
+		LineNumber                  20170, 4
+		LineNumberAlt1              1534, 52
+		PushConstanti8              1
+		SetThisMemberValueString    "speed"
+		LineNumber                  20171, 4
+		LineNumberAlt1              1535, 52
+		CreateArray
+		SetThisMemberValueString    "dataarray"
+		LineNumber                  20172, 4
+		LineNumberAlt1              1536, 52
+		CreateArray
+		SetThisMemberValueString    "patharray"
+		LineNumber                  20173, 4
+		LineNumberAlt1              1537, 52
+		PushConstant0
+		SetThisMemberValueString    "yoffset"
+		LineNumber                  20174, 4
+		LineNumberAlt1              1538, 52
+		GetVariableValue            0                     ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  20175, 4
+		LineNumberAlt1              1539, 52
+		GetVariableValue            0                     ; local
+		GetVariableValue            1                     ; local
+		GetThisMemberFunctionString "fillarray"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  20176, 4
+		LineNumberAlt1              1540, 52
+		PushConstant0
+		SetThisMemberValueString    "rollspeed"
+		LineNumber                  20177, 4
+		LineNumberAlt1              1541, 52
+		PushConstanti16             360
+		SetThisMemberValueString    "curentrollorient"
+		LineNumber                  20178, 4
+		LineNumberAlt1              1542, 52
+		PushConstant0
+		SetThisMemberValueString    "processloop"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "clean_up_full"
+		; address: 0x4481c
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1548:1566
+		MemberFunctionArgumentCheck 1
+		LineNumber                  20184, 4
+		LineNumberAlt1              1548, 52
+		GetVariableValue            0                     ; local
+		GetThisMemberFunctionString "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  20186, 4
+		LineNumberAlt1              1550, 52
+		PushNothing
+		SetThisMemberValueString    "maintimer"
+		LineNumber                  20187, 4
+		LineNumberAlt1              1551, 52
+		PushNothing
+		SetThisMemberValueString    "frequency"
+		LineNumber                  20188, 4
+		LineNumberAlt1              1552, 52
+		PushNothing
+		SetThisMemberValueString    "speed"
+		LineNumber                  20189, 4
+		LineNumberAlt1              1553, 52
+		GetThisMemberValueString    "pathpoint"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  20190, 4
+		LineNumberAlt1              1554, 52
+		PushNothing
+		SetThisMemberValueString    "pathpoint"
+		LineNumber                  20191, 4
+		LineNumberAlt1              1555, 52
+		PushNothing
+		SetThisMemberValueString    "patharray"
+		LineNumber                  20192, 4
+		LineNumberAlt1              1556, 52
+		PushNothing
+		SetThisMemberValueString    "dataarray"
+		LineNumber                  20193, 4
+		LineNumberAlt1              1557, 52
+		PushNothing
+		SetThisMemberValueString    "curentarrayposition"
+		LineNumber                  20194, 4
+		LineNumberAlt1              1558, 52
+		PushNothing
+		SetThisMemberValueString    "processloop"
+		LineNumber                  20198, 4
+		LineNumberAlt1              1562, 52
+		PushNothing
+		SetThisMemberValueString    "haspath"
+		LineNumber                  20199, 4
+		LineNumberAlt1              1563, 52
+		PushNothing
+		SetThisMemberValueString    "oneway"
+		LineNumber                  20200, 4
+		LineNumberAlt1              1564, 52
+		PushNothing
+		SetThisMemberValueString    "paused"
+		LineNumber                  20201, 4
+		LineNumberAlt1              1565, 52
+		PushNothing
+		SetThisMemberValueString    "running"
+		LineNumber                  20202, 4
+		LineNumberAlt1              1566, 52
+		PushNothing
+		SetThisMemberValueString    "yoffset"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x448fd
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1574:1622
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          8
+		LineNumber                    20210, 4
+		LineNumberAlt1                1574, 52
+		GetVariableValue              1                             ; local
+		GetMemberValueString          "deltatime"
+		GetThisMemberValueString      "maintimer"
+		Add
+		SetThisMemberValueString      "maintimer"
+		LineNumber                    20211, 4
+		LineNumberAlt1                1575, 52
+		GetThisMemberValueString      "maintimer"
+		PushConstanti8                1
+		GetThisMemberValueString      "speed"
+		Divide
+		GetThisMemberValueString      "frequency"
+		Divide
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    20212, 4
+		LineNumberAlt1                1576, 52
+		PushConstantf32               0
+		SetThisMemberValueString      "maintimer"
+		LineNumber                    20213, 4
+		LineNumberAlt1                1577, 52
+		GetThisMemberValueString      "haspath"
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    20214, 4
+		LineNumberAlt1                1578, 52
+		GetThisMemberValueString      "running"
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    20215, 4
+		LineNumberAlt1                1579, 52
+		GetThisMemberValueString      "paused"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    20216, 4
+		LineNumberAlt1                1580, 52
+		GetThisMemberValueString      "speed"
+		PushConstanti8                1
+		LessThan
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    20222, 4
+		LineNumberAlt1                1586, 52
+		GetThisMemberValueString      "oneway"
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    20224, 4
+		LineNumberAlt1                1588, 52
+		PushConstanti8                1
+		SetVariableValue              2                             ; local
+		LineNumber                    20225, 4
+		LineNumberAlt1                1589, 52
+		GetVariableValue              0                             ; local
+		GetVariableValue              2                             ; local
+		GetThisMemberFunctionString   "doactionsskipped"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20226, 4
+		LineNumberAlt1                1590, 52
+		GetThisMemberValueString      "curentarrayposition"
+		GetVariableValue              2                             ; local
+		Add
+		GetThisMemberValueString      "patharray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20227, 4
+		LineNumberAlt1                1591, 52
+		GetThisMemberValueString      "patharray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              3                             ; local
+		LineNumber                    20228, 4
+		LineNumberAlt1                1592, 52
+		PushConstant0
+		SetThisMemberValueString      "running"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    20230, 4
+		LineNumberAlt1                1594, 52
+		GetThisMemberValueString      "curentarrayposition"
+		GetVariableValue              2                             ; local
+		Add
+		SetVariableValue              3                             ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    20232, 4
+		LineNumberAlt1                1596, 52
+		GetVariableValue              3                             ; local
+		SetThisMemberValueString      "curentarrayposition"
+		LineNumber                    20233, 4
+		LineNumberAlt1                1597, 52
+		GetThisMemberValueString      "patharray"
+		GetThisMemberValueString      "curentarrayposition"
+		GetArrayValue
+		SetVariableValue              4                             ; local
+		LineNumber                    20234, 4
+		LineNumberAlt1                1598, 52
+		GetVariableValue              4                             ; local
+		PushConstant0
+		GetArrayValue
+		SetThisMemberValueString      "pathpoint"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    20238, 4
+		LineNumberAlt1                1602, 52
+		GetThisMemberValueString      "maintimer"
+		GetThisMemberValueString      "frequency"
+		Multiply
+		GetThisMemberValueString      "speed"
+		Multiply
+		ConvertToInteger
+		SetVariableValue              2                             ; local
+		LineNumber                    20239, 4
+		LineNumberAlt1                1603, 52
+		GetVariableValue              0                             ; local
+		GetVariableValue              2                             ; local
+		GetThisMemberFunctionString   "doactionsskipped"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20240, 4
+		LineNumberAlt1                1604, 52
+		GetThisMemberValueString      "curentarrayposition"
+		GetVariableValue              2                             ; local
+		Add
+		GetThisMemberValueString      "patharray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		Modulus
+		SetThisMemberValueString      "curentarrayposition"
+		LineNumber                    20241, 4
+		LineNumberAlt1                1605, 52
+		GetThisMemberValueString      "patharray"
+		GetThisMemberValueString      "curentarrayposition"
+		GetArrayValue
+		SetVariableValue              4                             ; local
+		LineNumber                    20242, 4
+		LineNumberAlt1                1606, 52
+		GetVariableValue              4                             ; local
+		PushConstant0
+		GetArrayValue
+		SetThisMemberValueString      "pathpoint"
+		; <-
+		BranchTarget                  3
+		LineNumber                    20245, 4
+		LineNumberAlt1                1609, 52
+		GetThisMemberValueString      "curentarrayposition"
+		GetThisMemberValueString      "patharray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                5
+		Subtract
+		LessThan
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    20246, 4
+		LineNumberAlt1                1610, 52
+		GetThisMemberValueString      "patharray"
+		GetThisMemberValueString      "curentarrayposition"
+		PushConstanti8                5
+		Add
+		GetArrayValue
+		SetVariableValue              5                             ; local
+		LineNumber                    20247, 4
+		LineNumberAlt1                1611, 52
+		GetVariableValue              5                             ; local
+		PushConstant0
+		GetArrayValue
+		SetVariableValue              5                             ; local
+		LineNumber                    20248, 4
+		LineNumberAlt1                1612, 52
+		GetVariableValue              5                             ; local
+		GetMemberValueString          "x"
+		GetThisMemberValueString      "pathpoint"
+		GetMemberValueString          "x"
+		Subtract
+		SetVariableValue              6                             ; local
+		LineNumber                    20249, 4
+		LineNumberAlt1                1613, 52
+		GetVariableValue              5                             ; local
+		GetMemberValueString          "z"
+		GetThisMemberValueString      "pathpoint"
+		GetMemberValueString          "z"
+		Subtract
+		SetVariableValue              7                             ; local
+		LineNumber                    20250, 4
+		LineNumberAlt1                1614, 52
+		GetVariableValue              6                             ; local
+		GetVariableValue              7                             ; local
+		CallGameFunctionString        "gcscripttools", "arctan2", 2
+		LineNumber                    20250, 4
+		LineNumberAlt1                1614, 52
+		SetVariableValue              8                             ; local
+		LineNumber                    20252, 4
+		LineNumberAlt1                1616, 52
+		GetVariableValue              8                             ; local
+		PushConstantf32               57.295780181884766
+		Multiply
+		SetVariableValue              9                             ; local
+		; <-
+		BranchTarget                  4
+		LineNumber                    20257, 4
+		LineNumberAlt1                1621, 52
+		GetVariableValue              0                             ; local
+		PushConstant0
+		PushConstant0
+		GetVariableValue              0                             ; local
+		GetThisMemberFunctionString   "roll"
+		JumpAbsolute                  1
+		LineNumber                    20257, 4
+		LineNumberAlt1                1621, 52
+		GetThisMemberFunctionString   "setorientation"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    20258, 4
+		LineNumberAlt1                1622, 52
+		GetVariableValue              0                             ; local
+		GetThisMemberValueString      "pathpoint"
+		GetMemberValueString          "x"
+		GetThisMemberValueString      "yoffset"
+		GetThisMemberValueString      "pathpoint"
+		GetMemberValueString          "y"
+		Add
+		GetThisMemberValueString      "pathpoint"
+		GetMemberValueString          "z"
+		GetThisMemberFunctionString   "setpos"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+
+	begin method "roll"
+		; address: 0x44bc1
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1638:1643
+		MemberFunctionArgumentCheck   1
+		LineNumber                    20274, 4
+		LineNumberAlt1                1638, 52
+		GetThisMemberValueString      "curentrollorient"
+		GetThisMemberValueString      "rollspeed"
+		Subtract
+		SetThisMemberValueString      "curentrollorient"
+		LineNumber                    20275, 4
+		LineNumberAlt1                1639, 52
+		GetThisMemberValueString      "curentrollorient"
+		PushConstanti16               -180
+		LessOrEqual
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20277, 4
+		LineNumberAlt1                1641, 52
+		GetThisMemberValueString      "curentrollorient"
+		PushConstanti16               360
+		Add
+		SetThisMemberValueString      "curentrollorient"
+		; <-
+		BranchTarget                  0
+		LineNumber                    20279, 4
+		LineNumberAlt1                1643, 52
+		GetThisMemberValueString      "curentrollorient"
+		Return
+	end ; method
+
+	begin method "setrollspeed"
+		; address: 0x44c0d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1648:1648
+		MemberFunctionArgumentCheck 2
+		LineNumber                  20284, 4
+		LineNumberAlt1              1648, 52
+		GetVariableValue            1           ; local
+		SetThisMemberValueString    "rollspeed"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "doactionsskipped"
+		; address: 0x44c21
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1654:1658
+		MemberFunctionArgumentCheck   2
+		LineNumber                    20290, 4
+		LineNumberAlt1                1654, 52
+		GetThisMemberValueString      "curentarrayposition"
+		GetVariableValue              1                     ; local
+		Add
+		GetThisMemberValueString      "patharray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20291, 4
+		LineNumberAlt1                1655, 52
+		GetVariableValue              0                     ; local
+		GetThisMemberValueString      "curentarrayposition"
+		GetThisMemberValueString      "patharray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GetThisMemberFunctionString   "doactionsfromto"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    20292, 4
+		LineNumberAlt1                1656, 52
+		GetVariableValue              0                     ; local
+		PushConstant0
+		GetThisMemberValueString      "curentarrayposition"
+		GetVariableValue              1                     ; local
+		Add
+		GetThisMemberValueString      "patharray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		Modulus
+		GetThisMemberFunctionString   "doactionsfromto"
+		JumpAbsolute                  3
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    20294, 4
+		LineNumberAlt1                1658, 52
+		GetVariableValue              0                     ; local
+		GetThisMemberValueString      "curentarrayposition"
+		GetThisMemberValueString      "curentarrayposition"
+		GetVariableValue              1                     ; local
+		Add
+		GetThisMemberFunctionString   "doactionsfromto"
+		JumpAbsolute                  3
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "doactionsfromto"
+		; address: 0x44ca1
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1664:1676
+		MemberFunctionArgumentCheck   3
+		CreateStackVariables          4
+		LineNumber                    20300, 4
+		LineNumberAlt1                1664, 52
+		GetVariableValue              2             ; local
+		PushConstanti8                1
+		Subtract
+		GetVariableValue              1             ; local
+		SetVariableValue              3             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              3             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    20305, 4
+		LineNumberAlt1                1669, 52
+		GetThisMemberValueString      "patharray"
+		GetVariableValue              3             ; local
+		GetArrayValue
+		SetVariableValue              4             ; local
+		LineNumber                    20307, 4
+		LineNumberAlt1                1671, 52
+		GetVariableValue              4             ; local
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		GreaterThan
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    20308, 4
+		LineNumberAlt1                1672, 52
+		GetVariableValue              4             ; local
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                1
+		SetVariableValue              5             ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              5             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    20309, 4
+		LineNumberAlt1                1673, 52
+		GetVariableValue              4             ; local
+		GetVariableValue              5             ; local
+		GetArrayValue
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    20311, 4
+		LineNumberAlt1                1675, 52
+		CreateObjectString            "scriptevent"
+		Dup
+		PushConstanti16               1000
+		CreateArray
+		Dup
+		GetVariableValue              4             ; local
+		GetVariableValue              5             ; local
+		GetArrayValue
+		AppendToArray
+		Pull                          3
+		GetMemberFunctionString       "scriptevent"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    20311, 4
+		LineNumberAlt1                1675, 52
+		SetVariableValue              6             ; local
+		LineNumber                    20312, 4
+		LineNumberAlt1                1676, 52
+		GetVariableValue              6             ; local
+		Dup
+		GetMemberFunctionString       "send"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		IncrementVariable             5
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		; <-
+		BranchTarget                  4
+		IncrementVariable             3
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "startrunning"
+		; address: 0x44d76
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1685:1688
+		MemberFunctionArgumentCheck 2
+		LineNumber                  20321, 4
+		LineNumberAlt1              1685, 52
+		GetVariableValue            1                     ; local
+		SetThisMemberValueString    "speed"
+		LineNumber                  20322, 4
+		LineNumberAlt1              1686, 52
+		PushConstant0
+		SetThisMemberValueString    "curentarrayposition"
+		LineNumber                  20323, 4
+		LineNumberAlt1              1687, 52
+		PushConstantf32             0
+		SetThisMemberValueString    "maintimer"
+		LineNumber                  20324, 4
+		LineNumberAlt1              1688, 52
+		PushConstanti8              1
+		SetThisMemberValueString    "running"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "pauserun"
+		; address: 0x44db9
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1693:1693
+		MemberFunctionArgumentCheck 1
+		LineNumber                  20329, 4
+		LineNumberAlt1              1693, 52
+		PushConstanti8              1
+		SetThisMemberValueString    "paused"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "playrun"
+		; address: 0x44dcc
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1698:1699
+		MemberFunctionArgumentCheck 1
+		LineNumber                  20334, 4
+		LineNumberAlt1              1698, 52
+		PushConstantf32             0
+		SetThisMemberValueString    "maintimer"
+		LineNumber                  20335, 4
+		LineNumberAlt1              1699, 52
+		PushConstant0
+		SetThisMemberValueString    "paused"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "fillarray"
+		; address: 0x44df0
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1706:1798
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          20
+		LineNumber                    20342, 4
+		LineNumberAlt1                1706, 52
+		GetVariableValue              1                                         ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    20343, 4
+		LineNumberAlt1                1707, 52
+		CreateObjectString            "slosi_fileio"
+		Dup
+		GetVariableValue              1                                         ; local
+		Pull                          2
+		GetMemberFunctionString       "slosi_fileio"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20343, 4
+		LineNumberAlt1                1707, 52
+		SetVariableValue              2                                         ; local
+		LineNumber                    20344, 4
+		LineNumberAlt1                1708, 52
+		GetVariableValue              2                                         ; local
+		Dup
+		GetMemberFunctionString       "fileexist"
+		JumpAbsolute                  1
+		LineNumber                    20344, 4
+		LineNumberAlt1                1708, 52
+		SetVariableValue              3                                         ; local
+		LineNumber                    20346, 4
+		LineNumberAlt1                1710, 52
+		GetVariableValue              3                                         ; local
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    20347, 4
+		LineNumberAlt1                1711, 52
+		GetVariableValue              2                                         ; local
+		Dup
+		GetMemberFunctionString       "open"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    20350, 4
+		LineNumberAlt1                1714, 52
+		GetVariableValue              2                                         ; local
+		Dup
+		GetMemberFunctionString       "read"
+		JumpAbsolute                  1
+		LineNumber                    20350, 4
+		LineNumberAlt1                1714, 52
+		SetVariableValue              4                                         ; local
+		LineNumber                    20351, 4
+		LineNumberAlt1                1715, 52
+		GetVariableValue              4                                         ; local
+		CallGameFunctionString        "gcscripttools", "stringtolonginteger", 1
+		LineNumber                    20351, 4
+		LineNumberAlt1                1715, 52
+		SetVariableValue              5                                         ; local
+		LineNumber                    20353, 4
+		LineNumberAlt1                1717, 52
+		GetVariableValue              2                                         ; local
+		Dup
+		GetMemberFunctionString       "read"
+		JumpAbsolute                  1
+		LineNumber                    20353, 4
+		LineNumberAlt1                1717, 52
+		SetVariableValue              6                                         ; local
+		LineNumber                    20354, 4
+		LineNumberAlt1                1718, 52
+		CreateObjectString            "slosi_string"
+		Dup
+		GetVariableValue              6                                         ; local
+		Pull                          2
+		GetMemberFunctionString       "slosi_string"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20354, 4
+		LineNumberAlt1                1718, 52
+		SetVariableValue              6                                         ; local
+		LineNumber                    20355, 4
+		LineNumberAlt1                1719, 52
+		GetVariableValue              6                                         ; local
+		PushConstantStringString      " "
+		Pull                          2
+		GetMemberFunctionString       "findword"
+		JumpAbsolute                  2
+		LineNumber                    20355, 4
+		LineNumberAlt1                1719, 52
+		SetVariableValue              7                                         ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    20357, 4
+		LineNumberAlt1                1721, 52
+		GetVariableValue              2                                         ; local
+		Dup
+		GetMemberFunctionString       "iseof"
+		JumpAbsolute                  1
+		LineNumber                    20357, 4
+		LineNumberAlt1                1721, 52
+		PushConstanti8                1
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    20359, 4
+		LineNumberAlt1                1723, 52
+		CreateArray
+		SetVariableValue              8                                         ; local
+		LineNumber                    20360, 4
+		LineNumberAlt1                1724, 52
+		PushNothing
+		SetVariableValue              9                                         ; local
+		LineNumber                    20361, 4
+		LineNumberAlt1                1725, 52
+		PushNothing
+		SetVariableValue              10                                        ; local
+		LineNumber                    20366, 4
+		LineNumberAlt1                1730, 52
+		GetVariableValue              6                                         ; local
+		GetVariableValue              7                                         ; local
+		Pull                          2
+		GetMemberFunctionString       "gettruncateleft"
+		JumpAbsolute                  2
+		LineNumber                    20366, 4
+		LineNumberAlt1                1730, 52
+		SetVariableValue              11                                        ; local
+		LineNumber                    20367, 4
+		LineNumberAlt1                1731, 52
+		GetVariableValue              11                                        ; local
+		CallGameFunctionString        "gcscripttools", "stringtofloat", 1
+		LineNumber                    20367, 4
+		LineNumberAlt1                1731, 52
+		SetVariableValue              12                                        ; local
+		LineNumber                    20371, 4
+		LineNumberAlt1                1735, 52
+		GetVariableValue              6                                         ; local
+		Dup
+		Dup
+		GetMemberFunctionString       "getlength"
+		JumpAbsolute                  1
+		LineNumber                    20371, 4
+		LineNumberAlt1                1735, 52
+		GetVariableValue              7                                         ; local
+		PushConstanti8                1
+		Add
+		Subtract
+		Pull                          2
+		GetMemberFunctionString       "truncateright"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20372, 4
+		LineNumberAlt1                1736, 52
+		GetVariableValue              6                                         ; local
+		PushConstantStringString      " "
+		Pull                          2
+		GetMemberFunctionString       "findword"
+		JumpAbsolute                  2
+		LineNumber                    20372, 4
+		LineNumberAlt1                1736, 52
+		SetVariableValue              13                                        ; local
+		LineNumber                    20373, 4
+		LineNumberAlt1                1737, 52
+		GetVariableValue              6                                         ; local
+		GetVariableValue              13                                        ; local
+		Pull                          2
+		GetMemberFunctionString       "gettruncateleft"
+		JumpAbsolute                  2
+		LineNumber                    20373, 4
+		LineNumberAlt1                1737, 52
+		SetVariableValue              14                                        ; local
+		LineNumber                    20374, 4
+		LineNumberAlt1                1738, 52
+		GetVariableValue              14                                        ; local
+		CallGameFunctionString        "gcscripttools", "stringtofloat", 1
+		LineNumber                    20374, 4
+		LineNumberAlt1                1738, 52
+		SetVariableValue              15                                        ; local
+		LineNumber                    20378, 4
+		LineNumberAlt1                1742, 52
+		GetVariableValue              6                                         ; local
+		Dup
+		Dup
+		GetMemberFunctionString       "getlength"
+		JumpAbsolute                  1
+		LineNumber                    20378, 4
+		LineNumberAlt1                1742, 52
+		GetVariableValue              13                                        ; local
+		PushConstanti8                1
+		Add
+		Subtract
+		Pull                          2
+		GetMemberFunctionString       "truncateright"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20379, 4
+		LineNumberAlt1                1743, 52
+		GetVariableValue              6                                         ; local
+		PushConstantStringString      " "
+		Pull                          2
+		GetMemberFunctionString       "findword"
+		JumpAbsolute                  2
+		LineNumber                    20379, 4
+		LineNumberAlt1                1743, 52
+		SetVariableValue              16                                        ; local
+		LineNumber                    20380, 4
+		LineNumberAlt1                1744, 52
+		GetVariableValue              16                                        ; local
+		PushConstanti8                -1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    20381, 4
+		LineNumberAlt1                1745, 52
+		GetVariableValue              6                                         ; local
+		GetMemberValueString          "string"
+		SetVariableValue              17                                        ; local
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    20383, 4
+		LineNumberAlt1                1747, 52
+		GetVariableValue              6                                         ; local
+		GetVariableValue              16                                        ; local
+		Pull                          2
+		GetMemberFunctionString       "gettruncateleft"
+		JumpAbsolute                  2
+		LineNumber                    20383, 4
+		LineNumberAlt1                1747, 52
+		SetVariableValue              17                                        ; local
+		; <-
+		BranchTarget                  2
+		LineNumber                    20385, 4
+		LineNumberAlt1                1749, 52
+		GetVariableValue              6                                         ; local
+		GetMemberValueString          "string"
+		CallGameFunctionString        "gcscripttools", "stringtofloat", 1
+		LineNumber                    20385, 4
+		LineNumberAlt1                1749, 52
+		SetVariableValue              18                                        ; local
+		LineNumber                    20390, 4
+		LineNumberAlt1                1754, 52
+		GetVariableValue              16                                        ; local
+		PushConstanti8                -1
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    20392, 4
+		LineNumberAlt1                1756, 52
+		GetVariableValue              6                                         ; local
+		Dup
+		Dup
+		GetMemberFunctionString       "getlength"
+		JumpAbsolute                  1
+		LineNumber                    20392, 4
+		LineNumberAlt1                1756, 52
+		GetVariableValue              16                                        ; local
+		PushConstanti8                1
+		Add
+		Subtract
+		Pull                          2
+		GetMemberFunctionString       "truncateright"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20393, 4
+		LineNumberAlt1                1757, 52
+		GetVariableValue              6                                         ; local
+		PushConstantStringString      " "
+		Pull                          2
+		GetMemberFunctionString       "findword"
+		JumpAbsolute                  2
+		LineNumber                    20393, 4
+		LineNumberAlt1                1757, 52
+		SetVariableValue              19                                        ; local
+		LineNumber                    20394, 4
+		LineNumberAlt1                1758, 52
+		GetVariableValue              19                                        ; local
+		PushConstanti8                -1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    20395, 4
+		LineNumberAlt1                1759, 52
+		GetVariableValue              6                                         ; local
+		GetMemberValueString          "string"
+		SetVariableValue              9                                         ; local
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    20397, 4
+		LineNumberAlt1                1761, 52
+		GetVariableValue              6                                         ; local
+		GetVariableValue              19                                        ; local
+		Pull                          2
+		GetMemberFunctionString       "gettruncateleft"
+		JumpAbsolute                  2
+		LineNumber                    20397, 4
+		LineNumberAlt1                1761, 52
+		SetVariableValue              9                                         ; local
+		; <-
+		BranchTarget                  4
+		LineNumber                    20402, 4
+		LineNumberAlt1                1766, 52
+		GetVariableValue              19                                        ; local
+		PushConstanti8                -1
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    20403, 4
+		LineNumberAlt1                1767, 52
+		GetVariableValue              6                                         ; local
+		Dup
+		Dup
+		GetMemberFunctionString       "getlength"
+		JumpAbsolute                  1
+		LineNumber                    20403, 4
+		LineNumberAlt1                1767, 52
+		GetVariableValue              19                                        ; local
+		PushConstanti8                1
+		Add
+		Subtract
+		Pull                          2
+		GetMemberFunctionString       "truncateright"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20404, 4
+		LineNumberAlt1                1768, 52
+		GetVariableValue              6                                         ; local
+		PushConstantStringString      " "
+		Pull                          2
+		GetMemberFunctionString       "findword"
+		JumpAbsolute                  2
+		LineNumber                    20404, 4
+		LineNumberAlt1                1768, 52
+		SetVariableValue              20                                        ; local
+		LineNumber                    20405, 4
+		LineNumberAlt1                1769, 52
+		GetVariableValue              20                                        ; local
+		PushConstanti8                -1
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    20406, 4
+		LineNumberAlt1                1770, 52
+		GetVariableValue              6                                         ; local
+		GetMemberValueString          "string"
+		SetVariableValue              10                                        ; local
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		LineNumber                    20408, 4
+		LineNumberAlt1                1772, 52
+		GetVariableValue              6                                         ; local
+		GetVariableValue              20                                        ; local
+		Pull                          2
+		GetMemberFunctionString       "gettruncateleft"
+		JumpAbsolute                  2
+		LineNumber                    20408, 4
+		LineNumberAlt1                1772, 52
+		SetVariableValue              10                                        ; local
+		; <-
+		BranchTarget                  6
+		LineNumber                    20415, 4
+		LineNumberAlt1                1779, 52
+		CreateObjectString            "basicpoint"
+		Dup
+		GetVariableValue              12                                        ; local
+		GetVariableValue              15                                        ; local
+		GetVariableValue              18                                        ; local
+		Pull                          4
+		GetMemberFunctionString       "basicpoint"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    20415, 4
+		LineNumberAlt1                1779, 52
+		SetVariableValue              21                                        ; local
+		LineNumber                    20416, 4
+		LineNumberAlt1                1780, 52
+		GetVariableValue              8                                         ; local
+		GetVariableValue              21                                        ; local
+		AppendToArray
+		LineNumber                    20417, 4
+		LineNumberAlt1                1781, 52
+		GetVariableValue              8                                         ; local
+		GetVariableValue              9                                         ; local
+		AppendToArray
+		LineNumber                    20418, 4
+		LineNumberAlt1                1782, 52
+		GetVariableValue              8                                         ; local
+		GetVariableValue              10                                        ; local
+		AppendToArray
+		LineNumber                    20419, 4
+		LineNumberAlt1                1783, 52
+		GetThisMemberValueString      "dataarray"
+		GetVariableValue              8                                         ; local
+		AppendToArray
+		LineNumber                    20422, 4
+		LineNumberAlt1                1786, 52
+		GetVariableValue              2                                         ; local
+		Dup
+		GetMemberFunctionString       "read"
+		JumpAbsolute                  1
+		LineNumber                    20422, 4
+		LineNumberAlt1                1786, 52
+		SetVariableValue              6                                         ; local
+		LineNumber                    20423, 4
+		LineNumberAlt1                1787, 52
+		CreateObjectString            "slosi_string"
+		Dup
+		GetVariableValue              6                                         ; local
+		Pull                          2
+		GetMemberFunctionString       "slosi_string"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20423, 4
+		LineNumberAlt1                1787, 52
+		SetVariableValue              6                                         ; local
+		LineNumber                    20424, 4
+		LineNumberAlt1                1788, 52
+		GetVariableValue              6                                         ; local
+		PushConstantStringString      " "
+		Pull                          2
+		GetMemberFunctionString       "findword"
+		JumpAbsolute                  2
+		LineNumber                    20424, 4
+		LineNumberAlt1                1788, 52
+		SetVariableValue              7                                         ; local
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		LineNumber                    20428, 4
+		LineNumberAlt1                1792, 52
+		GetVariableValue              2                                         ; local
+		Dup
+		GetMemberFunctionString       "close"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    20429, 4
+		LineNumberAlt1                1793, 52
+		GetVariableValue              0                                         ; local
+		GetThisMemberFunctionString   "setuppath"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    20434, 4
+		LineNumberAlt1                1798, 52
+		PushConstantStringString      "NO DATA FILE LOADED FOR RunningObj "
+		GetThisMemberValueString      "name"
+		Add
+		PushConstantStringString      " !!!"
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  9
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setuppath"
+		; address: 0x4538c
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1807:1836
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          10
+		LineNumber                    20443, 4
+		LineNumberAlt1                1807, 52
+		PushConstanti8                1
+		SetThisMemberValueString      "speed"
+		LineNumber                    20444, 4
+		LineNumberAlt1                1808, 52
+		PushConstanti8                1
+		SetThisMemberValueString      "haspath"
+		LineNumber                    20445, 4
+		LineNumberAlt1                1809, 52
+		GetThisMemberValueString      "speed"
+		GetThisMemberValueString      "frequency"
+		Multiply
+		SetVariableValue              1                                             ; local
+		LineNumber                    20447, 4
+		LineNumberAlt1                1811, 52
+		GetThisMemberValueString      "dataarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                                             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                                             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    20448, 4
+		LineNumberAlt1                1812, 52
+		GetVariableValue              2                                             ; local
+		PushConstanti8                1
+		Add
+		SetVariableValue              3                                             ; local
+		LineNumber                    20449, 4
+		LineNumberAlt1                1813, 52
+		GetThisMemberValueString      "dataarray"
+		GetVariableValue              2                                             ; local
+		GetArrayValue
+		SetVariableValue              4                                             ; local
+		LineNumber                    20450, 4
+		LineNumberAlt1                1814, 52
+		GetThisMemberValueString      "dataarray"
+		GetVariableValue              3                                             ; local
+		GetArrayValue
+		SetVariableValue              5                                             ; local
+		LineNumber                    20452, 4
+		LineNumberAlt1                1816, 52
+		GetVariableValue              1                                             ; local
+		PushConstanti8                1
+		LessThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    20453, 4
+		LineNumberAlt1                1817, 52
+		PushConstanti8                1
+		SetVariableValue              1                                             ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    20455, 4
+		LineNumberAlt1                1819, 52
+		GetVariableValue              1                                             ; local
+		PushConstant0
+		SetVariableValue              6                                             ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              6                                             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    20457, 4
+		LineNumberAlt1                1821, 52
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "x"
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "y"
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "z"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "x"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "y"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "z"
+		GetVariableValue              1                                             ; local
+		GetVariableValue              6                                             ; local
+		CallGameFunctionString        "gcscripttools", "getxdivisionalong3dline", 8
+		LineNumber                    20457, 4
+		LineNumberAlt1                1821, 52
+		SetVariableValue              7                                             ; local
+		LineNumber                    20458, 4
+		LineNumberAlt1                1822, 52
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "x"
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "y"
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "z"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "x"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "y"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "z"
+		GetVariableValue              1                                             ; local
+		GetVariableValue              6                                             ; local
+		CallGameFunctionString        "gcscripttools", "getydivisionalong3dline", 8
+		LineNumber                    20458, 4
+		LineNumberAlt1                1822, 52
+		SetVariableValue              8                                             ; local
+		LineNumber                    20459, 4
+		LineNumberAlt1                1823, 52
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "x"
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "y"
+		GetVariableValue              4                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "z"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "x"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "y"
+		GetVariableValue              5                                             ; local
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "z"
+		GetVariableValue              1                                             ; local
+		GetVariableValue              6                                             ; local
+		CallGameFunctionString        "gcscripttools", "getzdivisionalong3dline", 8
+		LineNumber                    20459, 4
+		LineNumberAlt1                1823, 52
+		SetVariableValue              9                                             ; local
+		LineNumber                    20461, 4
+		LineNumberAlt1                1825, 52
+		CreateObjectString            "basicpoint"
+		Dup
+		GetVariableValue              7                                             ; local
+		GetVariableValue              8                                             ; local
+		GetThisMemberValueString      "yoffset"
+		Add
+		GetVariableValue              9                                             ; local
+		Pull                          4
+		GetMemberFunctionString       "basicpoint"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    20461, 4
+		LineNumberAlt1                1825, 52
+		SetVariableValue              10                                            ; local
+		LineNumber                    20463, 4
+		LineNumberAlt1                1827, 52
+		GetVariableValue              6                                             ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    20464, 4
+		LineNumberAlt1                1828, 52
+		GetThisMemberValueString      "patharray"
+		GetVariableValue              4                                             ; local
+		AppendToArray
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    20466, 4
+		LineNumberAlt1                1830, 52
+		GetThisMemberValueString      "patharray"
+		CreateArray
+		Dup
+		GetVariableValue              10                                            ; local
+		AppendToArray
+		AppendToArray
+		; <-
+		BranchTarget                  4
+		IncrementVariable             6
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    20470, 4
+		LineNumberAlt1                1834, 52
+		GetThisMemberValueString      "patharray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                1
+		LessThan
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    20472, 4
+		LineNumberAlt1                1836, 52
+		PushConstant0
+		SetThisMemberValueString      "haspath"
+		; <-
+		BranchTarget                  6
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "oneway"
+		; address: 0x455f0
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1844:1847
+		MemberFunctionArgumentCheck   2
+		LineNumber                    20480, 4
+		LineNumberAlt1                1844, 52
+		GetVariableValue              1        ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20481, 4
+		LineNumberAlt1                1845, 52
+		PushConstanti8                1
+		SetThisMemberValueString      "oneway"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    20483, 4
+		LineNumberAlt1                1847, 52
+		GetVariableValue              1        ; local
+		SetThisMemberValueString      "oneway"
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "set_yoffset"
+		; address: 0x45628
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1853:1853
+		MemberFunctionArgumentCheck 2
+		LineNumber                  20489, 4
+		LineNumberAlt1              1853, 52
+		GetVariableValue            1         ; local
+		SetThisMemberValueString    "yoffset"
+		PushNothing
+		Return
+	end ; method
+end ; class

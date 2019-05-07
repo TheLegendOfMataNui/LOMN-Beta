@@ -1,0 +1,28 @@
+begin function "setupprintscreen", 0
+	; address: 0x2b299
+	; source: 44 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_print_screen.vbo" 39:41
+	JumpTarget                   2
+	CreateStackVariables         1
+	LineNumber                   14187, 4
+	LineNumberAlt1               39, 44
+	CreateObjectString           "gs_lego_printscreen"
+	Dup
+	Dup
+	GetMemberFunctionString      "gs_lego_printscreen"
+	JumpAbsolute                 1
+	Pop
+	LineNumber                   14187, 4
+	LineNumberAlt1               39, 44
+	SetVariableValue             0                     ; local
+	LineNumber                   14189, 4
+	LineNumberAlt1               41, 44
+	GetVariableValueGlobalString "screenlist"
+	GetVariableValue             0                     ; local
+	PushConstanti8               44
+	Pull                         3
+	GetMemberFunctionString      "addscreen"
+	JumpAbsolute                 3
+	Pop
+	PushNothing
+	Return
+end ; function

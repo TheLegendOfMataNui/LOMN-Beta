@@ -1,0 +1,499 @@
+begin class "rockman"
+	property "parent"
+	property "rocks"
+	property "currentrock"
+	property "areaid"
+	property "rocky"
+	property "curstate"
+	property "setgravity"
+	property "boneindex"
+
+	begin method "rockman"
+		; address: 0x8b762
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 985:985
+		MemberFunctionArgumentCheck 2
+		LineNumber                  61854, 4
+		LineNumberAlt1              985, 158
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "areaid"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x8b776
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 995:1007
+		MemberFunctionArgumentCheck 1
+		LineNumber                  61864, 4
+		LineNumberAlt1              995, 158
+		CreateArray
+		Dup
+		CreateObjectString          "sprite_projectile"
+		Dup
+		PushConstantStringString    "rk01"
+		PushConstantStringString    "lbld"
+		PushConstantStringString    "Root/data/levels/lev3/boss"
+		PushConstanti8              45
+		PushConstanti8              3
+		PushConstanti8              100
+		PushConstant0
+		PushConstanti8              1
+		Pull                        9
+		GetMemberFunctionString     "sprite_projectile"
+		JumpAbsolute                9
+		Pop
+		LineNumber                  61864, 4
+		LineNumberAlt1              995, 158
+		AppendToArray
+		Dup
+		CreateObjectString          "sprite_projectile"
+		Dup
+		PushConstantStringString    "rk02"
+		PushConstantStringString    "lbld"
+		PushConstantStringString    "Root/data/levels/lev3/boss"
+		PushConstanti8              45
+		PushConstanti8              3
+		PushConstanti8              100
+		PushConstant0
+		PushConstanti8              1
+		Pull                        9
+		GetMemberFunctionString     "sprite_projectile"
+		JumpAbsolute                9
+		Pop
+		LineNumber                  61865, 4
+		LineNumberAlt1              996, 158
+		AppendToArray
+		Dup
+		CreateObjectString          "sprite_projectile"
+		Dup
+		PushConstantStringString    "rk03"
+		PushConstantStringString    "lbld"
+		PushConstantStringString    "Root/data/levels/lev3/boss"
+		PushConstanti8              45
+		PushConstanti8              3
+		PushConstanti8              100
+		PushConstant0
+		PushConstanti8              1
+		Pull                        9
+		GetMemberFunctionString     "sprite_projectile"
+		JumpAbsolute                9
+		Pop
+		LineNumber                  61866, 4
+		LineNumberAlt1              997, 158
+		AppendToArray
+		Dup
+		CreateObjectString          "sprite_projectile"
+		Dup
+		PushConstantStringString    "rk04"
+		PushConstantStringString    "lbld"
+		PushConstantStringString    "Root/data/levels/lev3/boss"
+		PushConstanti8              45
+		PushConstanti8              3
+		PushConstanti8              100
+		PushConstant0
+		PushConstanti8              1
+		Pull                        9
+		GetMemberFunctionString     "sprite_projectile"
+		JumpAbsolute                9
+		Pop
+		LineNumber                  61867, 4
+		LineNumberAlt1              998, 158
+		AppendToArray
+		SetThisMemberValueString    "rocks"
+		LineNumber                  61869, 4
+		LineNumberAlt1              1000, 158
+		PushConstantStringString    "rkmn"
+		PushConstanti32             1937010290
+		CallGameFunctionString      "gcrockboss", "createrockboss", 2
+		LineNumber                  61869, 4
+		LineNumberAlt1              1000, 158
+		SetThisMemberValueString    "rocky"
+		LineNumber                  61870, 4
+		LineNumberAlt1              1001, 158
+		GetThisMemberValueString    "rocky"
+		PushConstantf32             752
+		PushConstantf32             0.5
+		PushConstant0
+		PushConstantf32             429.510009765625
+		Subtract
+		PushConstant0
+		CallGameFunctionString      "gcrockboss", "setup", 5
+		Pop
+		LineNumber                  61871, 4
+		LineNumberAlt1              1002, 158
+		PushConstanti32             1937010290
+		PushConstant0
+		CallGameFunctionString      "gcmodeldirector", "show", 2
+		Pop
+		LineNumber                  61873, 4
+		LineNumberAlt1              1004, 158
+		GetThisMemberValueString    "rocky"
+		PushConstanti32             2063160632
+		CallGameFunctionString      "gcrockboss", "getboneindex", 2
+		LineNumber                  61873, 4
+		LineNumberAlt1              1004, 158
+		SetThisMemberValueString    "boneindex"
+		LineNumber                  61876, 4
+		LineNumberAlt1              1007, 158
+		PushConstant0
+		SetThisMemberValueString    "currentrock"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "reset"
+		; address: 0x8b8c5
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 1013:1016
+		MemberFunctionArgumentCheck 1
+		LineNumber                  61882, 4
+		LineNumberAlt1              1013, 158
+		PushConstantStringString    "Calling reset"
+		CallGameFunctionString      "debug", "print", 1
+		Pop
+		LineNumber                  61883, 4
+		LineNumberAlt1              1014, 158
+		GetThisMemberValueString    "rocky"
+		PushConstanti16             752
+		PushConstantf32             0.5
+		PushConstant0
+		PushConstantf32             429.510009765625
+		Subtract
+		PushConstant0
+		CallGameFunctionString      "gcrockboss", "reset", 5
+		Pop
+		LineNumber                  61884, 4
+		LineNumberAlt1              1015, 158
+		PushConstanti32             1937010290
+		PushConstant0
+		CallGameFunctionString      "gcmodeldirector", "show", 2
+		Pop
+		LineNumber                  61885, 4
+		LineNumberAlt1              1016, 158
+		PushConstanti8              3
+		SetThisMemberValueString    "curstate"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x8b927
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 1023:1023
+		MemberFunctionArgumentCheck 1
+		LineNumber                  61892, 4
+		LineNumberAlt1              1023, 158
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x8b93e
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 1029:1048
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    61898, 4
+		LineNumberAlt1                1029, 158
+		GetThisMemberValueString      "rocks"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    61899, 4
+		LineNumberAlt1                1030, 158
+		GetThisMemberValueString      "rocks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                              ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    61900, 4
+		LineNumberAlt1                1031, 158
+		GetThisMemberValueString      "rocks"
+		GetVariableValue              1                              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    61901, 4
+		LineNumberAlt1                1032, 158
+		GetThisMemberValueString      "rocks"
+		GetVariableValue              1                              ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    61903, 4
+		LineNumberAlt1                1034, 158
+		PushNothing
+		SetThisMemberValueString      "rocks"
+		; <-
+		BranchTarget                  2
+		LineNumber                    61907, 4
+		LineNumberAlt1                1038, 158
+		PushNothing
+		SetThisMemberValueString      "currentrock"
+		LineNumber                    61908, 4
+		LineNumberAlt1                1039, 158
+		PushNothing
+		SetThisMemberValueString      "areaid"
+		LineNumber                    61911, 4
+		LineNumberAlt1                1042, 158
+		GetThisMemberValueString      "rocky"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    61912, 4
+		LineNumberAlt1                1043, 158
+		PushConstanti32               1937010290
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "remove", 2
+		Pop
+		LineNumber                    61913, 4
+		LineNumberAlt1                1044, 158
+		PushNothing
+		SetThisMemberValueString      "rocky"
+		; <-
+		BranchTarget                  3
+		LineNumber                    61916, 4
+		LineNumberAlt1                1047, 158
+		PushNothing
+		SetThisMemberValueString      "curstate"
+		LineNumber                    61917, 4
+		LineNumberAlt1                1048, 158
+		PushNothing
+		SetThisMemberValueString      "setgravity"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x8ba23
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 1054:1054
+		MemberFunctionArgumentCheck 1
+		LineNumber                  61923, 4
+		LineNumberAlt1              1054, 158
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x8ba3a
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "throwrock"
+		; address: 0x8ba3e
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 1065:1070
+		MemberFunctionArgumentCheck   1
+		LineNumber                    61934, 4
+		LineNumberAlt1                1065, 158
+		GetThisMemberValueString      "rocky"
+		GetThisMemberValueString      "rocks"
+		GetThisMemberValueString      "currentrock"
+		GetArrayValue
+		GetMemberValueString          "handle"
+		GetThisMemberValueString      "boneindex"
+		CallGameFunctionString        "gcrockboss", "throwboulder", 3
+		Pop
+		LineNumber                    61935, 4
+		LineNumberAlt1                1066, 158
+		GetThisMemberValueString      "currentrock"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "currentrock"
+		LineNumber                    61937, 4
+		LineNumberAlt1                1068, 158
+		GetThisMemberValueString      "currentrock"
+		GetThisMemberValueString      "rocks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    61938, 4
+		LineNumberAlt1                1069, 158
+		PushConstantStringString      "Current rock was "
+		GetThisMemberValueString      "currentrock"
+		ConvertToString
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    61939, 4
+		LineNumberAlt1                1070, 158
+		PushConstant0
+		SetThisMemberValueString      "currentrock"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "morph"
+		; address: 0x8bab5
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 1079:1102
+		MemberFunctionArgumentCheck   2
+		LineNumber                    61948, 4
+		LineNumberAlt1                1079, 158
+		GetVariableValue              1                                             ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    61949, 4
+		LineNumberAlt1                1080, 158
+		GetThisMemberValueString      "curstate"
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    61951, 4
+		LineNumberAlt1                1082, 158
+		PushConstanti16               525
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    61952, 4
+		LineNumberAlt1                1083, 158
+		GetThisMemberValueString      "rocky"
+		PushConstanti8                4
+		PushConstanti8                1
+		PushConstanti8                2
+		PushConstantf32               1.5
+		PushConstanti8                1
+		CallGameFunctionString        "gcrockboss", "morphcharactermid", 6
+		Pop
+		LineNumber                    61953, 4
+		LineNumberAlt1                1084, 158
+		PushConstanti8                2
+		SetThisMemberValueString      "curstate"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    61956, 4
+		LineNumberAlt1                1087, 158
+		GetThisMemberValueString      "rocky"
+		PushConstanti8                2
+		PushConstanti8                3
+		PushConstantf32               0.75
+		PushConstanti8                1
+		CallGameFunctionString        "gcrockboss", "morphcharacter", 5
+		Pop
+		LineNumber                    61957, 4
+		LineNumberAlt1                1088, 158
+		PushConstant0
+		SetThisMemberValueString      "curstate"
+		; <-
+		BranchTarget                  1
+		Pop
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    61961, 4
+		LineNumberAlt1                1092, 158
+		GetVariableValue              1                                             ; local
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    61962, 4
+		LineNumberAlt1                1093, 158
+		GetThisMemberValueString      "curstate"
+		Dup
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    61965, 4
+		LineNumberAlt1                1096, 158
+		GetThisMemberValueString      "rocky"
+		PushConstanti8                3
+		PushConstanti8                2
+		PushConstantf32               1.25
+		PushConstanti8                1
+		CallGameFunctionString        "gcrockboss", "morphcharacter", 5
+		Pop
+		LineNumber                    61966, 4
+		LineNumberAlt1                1097, 158
+		PushConstanti8                1
+		SetThisMemberValueString      "curstate"
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    61969, 4
+		LineNumberAlt1                1100, 158
+		PushConstanti16               525
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    61970, 4
+		LineNumberAlt1                1101, 158
+		GetThisMemberValueString      "rocky"
+		PushConstanti8                2
+		PushConstanti8                1
+		PushConstanti8                4
+		PushConstantf32               0.25
+		PushConstanti8                1
+		CallGameFunctionString        "gcrockboss", "morphcharactermid", 6
+		Pop
+		LineNumber                    61971, 4
+		LineNumberAlt1                1102, 158
+		PushConstanti8                3
+		SetThisMemberValueString      "curstate"
+		; <-
+		BranchTarget                  4
+		Pop
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x8bc01
+		; source: 158 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 1111:1111
+		MemberFunctionArgumentCheck 1
+		LineNumber                  61980, 4
+		LineNumberAlt1              1111, 158
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

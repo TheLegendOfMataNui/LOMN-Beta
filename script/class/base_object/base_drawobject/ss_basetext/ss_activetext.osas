@@ -1,0 +1,381 @@
+begin class "ss_activetext", "ss_basetext"
+	property "fontname2"
+	property "font2"
+	property "curfont"
+	property "basex"
+	property "pad"
+
+	begin method "ss_activetext"
+		; address: 0x2ed43
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 279:285
+		MemberFunctionArgumentCheck   12
+		LineNumber                    1986, 4
+		LineNumberAlt1                279, 12
+		GetVariableValue              0             ; local
+		GetVariableValue              1             ; local
+		GetVariableValue              3             ; local
+		GetVariableValue              4             ; local
+		GetVariableValue              5             ; local
+		GetVariableValue              6             ; local
+		GetVariableValue              7             ; local
+		GetVariableValue              8             ; local
+		GetVariableValue              9             ; local
+		GetVariableValue              11            ; local
+		GetThisMemberFunctionString   "ss_basetext"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    1987, 4
+		LineNumberAlt1                280, 12
+		GetVariableValue              2             ; local
+		SetThisMemberValueString      "fontname2"
+		LineNumber                    1988, 4
+		LineNumberAlt1                281, 12
+		PushConstant0
+		SetThisMemberValueString      "curfont"
+		LineNumber                    1989, 4
+		LineNumberAlt1                282, 12
+		GetVariableValue              10            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    1990, 4
+		LineNumberAlt1                283, 12
+		PushConstanti8                -11
+		SetThisMemberValueString      "pad"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    1992, 4
+		LineNumberAlt1                285, 12
+		GetVariableValue              10            ; local
+		SetThisMemberValueString      "pad"
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x2edc7
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 291:301
+		MemberFunctionArgumentCheck   1
+		LineNumber                    1998, 4
+		LineNumberAlt1                291, 12
+		GetThisMemberValueString      "fontname"
+		CallGameFunctionString        "sctilefont", "create", 1
+		LineNumber                    1998, 4
+		LineNumberAlt1                291, 12
+		SetThisMemberValueString      "font"
+		LineNumber                    1999, 4
+		LineNumberAlt1                292, 12
+		GetThisMemberValueString      "fontname2"
+		CallGameFunctionString        "sctilefont", "create", 1
+		LineNumber                    1999, 4
+		LineNumberAlt1                292, 12
+		SetThisMemberValueString      "font2"
+		LineNumber                    2000, 4
+		LineNumberAlt1                293, 12
+		GetThisMemberValueString      "curfont"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2001, 4
+		LineNumberAlt1                294, 12
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "z"
+		GetThisMemberValueString      "font"
+		GetThisMemberValueString      "string"
+		CallGameFunctionString        "sctextobject", "create", 5
+		LineNumber                    2001, 4
+		LineNumberAlt1                294, 12
+		SetThisMemberValueString      "text"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    2003, 4
+		LineNumberAlt1                296, 12
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "z"
+		GetThisMemberValueString      "font2"
+		GetThisMemberValueString      "string"
+		CallGameFunctionString        "sctextobject", "create", 5
+		LineNumber                    2003, 4
+		LineNumberAlt1                296, 12
+		SetThisMemberValueString      "text"
+		; <-
+		BranchTarget                  1
+		LineNumber                    2005, 4
+		LineNumberAlt1                298, 12
+		GetThisMemberValueString      "text"
+		GetThisMemberValueString      "scale"
+		Dup
+		CallGameFunctionString        "sctextobject", "setscale", 3
+		Pop
+		LineNumber                    2006, 4
+		LineNumberAlt1                299, 12
+		GetVariableValue              0                                     ; local
+		GetThisMemberValueString      "scale"
+		GetThisMemberFunctionString   "scalefont"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    2007, 4
+		LineNumberAlt1                300, 12
+		GetVariableValue              0                                     ; local
+		GetThisMemberValueString      "horizontal"
+		GetThisMemberValueString      "verticle"
+		GetThisMemberFunctionString   "setjustification"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    2008, 4
+		LineNumberAlt1                301, 12
+		GetThisMemberValueString      "font"
+		PushConstanti8                1
+		CallGameFunctionString        "sctilefont", "enabletransparency", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x2eed5
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 305:315
+		MemberFunctionArgumentCheck   1
+		LineNumber                    2012, 4
+		LineNumberAlt1                305, 12
+		GetThisMemberValueString      "fontname"
+		CallGameFunctionString        "sctilefont", "create", 1
+		LineNumber                    2012, 4
+		LineNumberAlt1                305, 12
+		SetThisMemberValueString      "font"
+		LineNumber                    2013, 4
+		LineNumberAlt1                306, 12
+		GetThisMemberValueString      "fontname2"
+		CallGameFunctionString        "sctilefont", "create", 1
+		LineNumber                    2013, 4
+		LineNumberAlt1                306, 12
+		SetThisMemberValueString      "font2"
+		LineNumber                    2014, 4
+		LineNumberAlt1                307, 12
+		GetThisMemberValueString      "curfont"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2015, 4
+		LineNumberAlt1                308, 12
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "z"
+		GetThisMemberValueString      "font"
+		GetThisMemberValueString      "string"
+		CallGameFunctionString        "sctextobject", "create", 5
+		LineNumber                    2015, 4
+		LineNumberAlt1                308, 12
+		SetThisMemberValueString      "text"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    2017, 4
+		LineNumberAlt1                310, 12
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "z"
+		GetThisMemberValueString      "font2"
+		GetThisMemberValueString      "string"
+		CallGameFunctionString        "sctextobject", "create", 5
+		LineNumber                    2017, 4
+		LineNumberAlt1                310, 12
+		SetThisMemberValueString      "text"
+		; <-
+		BranchTarget                  1
+		LineNumber                    2019, 4
+		LineNumberAlt1                312, 12
+		GetThisMemberValueString      "text"
+		GetThisMemberValueString      "scale"
+		Dup
+		CallGameFunctionString        "sctextobject", "setscale", 3
+		Pop
+		LineNumber                    2020, 4
+		LineNumberAlt1                313, 12
+		GetVariableValue              0                                     ; local
+		GetThisMemberValueString      "scale"
+		GetThisMemberFunctionString   "scalefont"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    2021, 4
+		LineNumberAlt1                314, 12
+		GetVariableValue              0                                     ; local
+		GetThisMemberValueString      "horizontal"
+		GetThisMemberValueString      "verticle"
+		GetThisMemberFunctionString   "setjustification"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    2022, 4
+		LineNumberAlt1                315, 12
+		GetThisMemberValueString      "font"
+		PushConstanti8                1
+		CallGameFunctionString        "sctilefont", "enabletransparency", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x2efe3
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 319:321
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2026, 4
+		LineNumberAlt1              319, 12
+		PushNothing
+		SetThisMemberValueString    "font"
+		LineNumber                  2027, 4
+		LineNumberAlt1              320, 12
+		PushNothing
+		SetThisMemberValueString    "font2"
+		LineNumber                  2028, 4
+		LineNumberAlt1              321, 12
+		PushNothing
+		SetThisMemberValueString    "text"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x2f011
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 325:327
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2032, 4
+		LineNumberAlt1              325, 12
+		PushNothing
+		SetThisMemberValueString    "font"
+		LineNumber                  2033, 4
+		LineNumberAlt1              326, 12
+		PushNothing
+		SetThisMemberValueString    "font2"
+		LineNumber                  2034, 4
+		LineNumberAlt1              327, 12
+		PushNothing
+		SetThisMemberValueString    "text"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setactive"
+		; address: 0x2f03f
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 331:334
+		MemberFunctionArgumentCheck   2
+		LineNumber                    2038, 4
+		LineNumberAlt1                331, 12
+		GetThisMemberValueString      "curfont"
+		PushConstanti8                1
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2039, 4
+		LineNumberAlt1                332, 12
+		GetThisMemberValueString      "text"
+		GetThisMemberValueString      "font2"
+		CallGameFunctionString        "sctextobject", "setfont", 2
+		Pop
+		LineNumber                    2040, 4
+		LineNumberAlt1                333, 12
+		GetVariableValue              0                            ; local
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "pad"
+		GetThisMemberValueString      "scale"
+		Multiply
+		Add
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "padadjustment"
+		Subtract
+		GetThisMemberValueString      "z"
+		GetThisMemberFunctionString   "setpos"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    2041, 4
+		LineNumberAlt1                334, 12
+		PushConstanti8                1
+		SetThisMemberValueString      "curfont"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setinactive"
+		; address: 0x2f0a5
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 339:342
+		MemberFunctionArgumentCheck   1
+		LineNumber                    2046, 4
+		LineNumberAlt1                339, 12
+		GetThisMemberValueString      "curfont"
+		PushConstant0
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2047, 4
+		LineNumberAlt1                340, 12
+		GetThisMemberValueString      "text"
+		GetThisMemberValueString      "font"
+		CallGameFunctionString        "sctextobject", "setfont", 2
+		Pop
+		LineNumber                    2048, 4
+		LineNumberAlt1                341, 12
+		PushConstant0
+		SetThisMemberValueString      "curfont"
+		LineNumber                    2049, 4
+		LineNumberAlt1                342, 12
+		GetVariableValue              0                            ; local
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "pad"
+		GetThisMemberValueString      "scale"
+		Multiply
+		Subtract
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "padadjustment"
+		Subtract
+		GetThisMemberValueString      "z"
+		GetThisMemberFunctionString   "setpos"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "scalefont"
+		; address: 0x2f109
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 347:349
+		MemberFunctionArgumentCheck 2
+		LineNumber                  2054, 4
+		LineNumberAlt1              347, 12
+		GetVariableValue            1                           ; local
+		SetThisMemberValueString    "scale"
+		LineNumber                  2055, 4
+		LineNumberAlt1              348, 12
+		GetThisMemberValueString    "font2"
+		GetThisMemberValueString    "scale"
+		Dup
+		CallGameFunctionString      "sctilefont", "setscale", 3
+		Pop
+		LineNumber                  2056, 4
+		LineNumberAlt1              349, 12
+		GetThisMemberValueString    "font"
+		GetThisMemberValueString    "scale"
+		Dup
+		CallGameFunctionString      "sctilefont", "setscale", 3
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

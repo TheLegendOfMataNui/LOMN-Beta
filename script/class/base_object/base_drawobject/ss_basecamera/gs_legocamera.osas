@@ -1,0 +1,1630 @@
+begin class "gs_legocamera", "ss_basecamera"
+	property "ismanual"
+	property "ishead"
+	property "iswatch"
+	property "speedycam"
+	property "moveplayer"
+	property "cameraspline"
+	property "camsplineindex"
+	property "targetsplineindex"
+	property "splineduration"
+	property "popback"
+	property "viewport"
+	property "vx"
+	property "vy"
+	property "vh"
+	property "vw"
+	property "tvx"
+	property "tvy"
+	property "tvh"
+	property "tvw"
+	property "scaleview"
+	property "tvduration"
+	property "tvcurr"
+	property "aimode"
+
+	begin method "gs_legocamera"
+		; address: 0x34944
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 78:94
+		MemberFunctionArgumentCheck 8
+		LineNumber                  5946, 4
+		LineNumberAlt1              78, 24
+		GetVariableValue            0                                  ; local
+		GetVariableValue            1                                  ; local
+		GetVariableValue            2                                  ; local
+		GetVariableValue            3                                  ; local
+		GetVariableValue            4                                  ; local
+		GetVariableValue            5                                  ; local
+		GetVariableValue            6                                  ; local
+		GetVariableValue            7                                  ; local
+		GetThisMemberFunctionString "ss_basecamera"
+		JumpAbsolute                8
+		Pop
+		LineNumber                  5947, 4
+		LineNumberAlt1              79, 24
+		PushConstant0
+		SetThisMemberValueString    "ismanual"
+		LineNumber                  5948, 4
+		LineNumberAlt1              80, 24
+		PushConstant0
+		SetThisMemberValueString    "ishead"
+		LineNumber                  5949, 4
+		LineNumberAlt1              81, 24
+		PushConstanti8              1
+		SetThisMemberValueString    "speedycam"
+		LineNumber                  5950, 4
+		LineNumberAlt1              82, 24
+		PushConstant0
+		SetThisMemberValueString    "iswatch"
+		LineNumber                  5951, 4
+		LineNumberAlt1              83, 24
+		PushConstant0
+		SetThisMemberValueString    "moveplayer"
+		LineNumber                  5952, 4
+		LineNumberAlt1              84, 24
+		PushNothing
+		SetThisMemberValueString    "cameraspline"
+		LineNumber                  5953, 4
+		LineNumberAlt1              85, 24
+		PushConstant0
+		SetThisMemberValueString    "camsplineindex"
+		LineNumber                  5954, 4
+		LineNumberAlt1              86, 24
+		PushConstant0
+		SetThisMemberValueString    "targetsplineindex"
+		LineNumber                  5955, 4
+		LineNumberAlt1              87, 24
+		PushConstant0
+		SetThisMemberValueString    "splineduration"
+		LineNumber                  5956, 4
+		LineNumberAlt1              88, 24
+		PushConstanti8              1
+		SetThisMemberValueString    "popback"
+		LineNumber                  5958, 4
+		LineNumberAlt1              90, 24
+		PushConstant0
+		SetThisMemberValueString    "vx"
+		LineNumber                  5959, 4
+		LineNumberAlt1              91, 24
+		PushConstant0
+		SetThisMemberValueString    "vy"
+		LineNumber                  5960, 4
+		LineNumberAlt1              92, 24
+		CallGameFunctionString      "gcgame", "getresolutionheight", 0
+		LineNumber                  5960, 4
+		LineNumberAlt1              92, 24
+		SetThisMemberValueString    "vh"
+		LineNumber                  5961, 4
+		LineNumberAlt1              93, 24
+		CallGameFunctionString      "gcgame", "getresolutionwidth", 0
+		LineNumber                  5961, 4
+		LineNumberAlt1              93, 24
+		SetThisMemberValueString    "vw"
+		LineNumber                  5962, 4
+		LineNumberAlt1              94, 24
+		PushConstant0
+		SetThisMemberValueString    "scaleview"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x34a62
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 98:102
+		MemberFunctionArgumentCheck 1
+		LineNumber                  5966, 4
+		LineNumberAlt1              98, 24
+		CallGameFunctionString      "gcgame", "getmainview", 0
+		LineNumber                  5966, 4
+		LineNumberAlt1              98, 24
+		SetThisMemberValueString    "viewport"
+		LineNumber                  5967, 4
+		LineNumberAlt1              99, 24
+		GetThisMemberValueString    "viewport"
+		CallGameFunctionString      "gcviewport", "getcamera", 1
+		LineNumber                  5967, 4
+		LineNumberAlt1              99, 24
+		SetThisMemberValueString    "handle"
+		LineNumber                  5968, 4
+		LineNumberAlt1              100, 24
+		GetThisMemberValueString    "handle"
+		GetThisMemberValueString    "x1"
+		GetThisMemberValueString    "y1"
+		GetThisMemberValueString    "z"
+		CallGameFunctionString      "gclegocamera", "setcampos", 4
+		Pop
+		LineNumber                  5969, 4
+		LineNumberAlt1              101, 24
+		GetThisMemberValueString    "handle"
+		GetThisMemberValueString    "tx"
+		GetThisMemberValueString    "ty"
+		GetThisMemberValueString    "tz"
+		CallGameFunctionString      "gclegocamera", "settargpos", 4
+		Pop
+		LineNumber                  5970, 4
+		LineNumberAlt1              102, 24
+		CallGameFunctionString      "gc3dsound", "synclistenertocamera", 0
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x34aee
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 107:107
+		MemberFunctionArgumentCheck 1
+		LineNumber                  5975, 4
+		LineNumberAlt1              107, 24
+		PushNothing
+		SetThisMemberValueString    "handle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x34b00
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 114:198
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    5982, 4
+		LineNumberAlt1                114, 24
+		GetVariableValue              1                                 ; local
+		PushConstanti8                111
+		PushConstanti8                2
+		Pull                          3
+		GetMemberFunctionString       "check"
+		JumpAbsolute                  3
+		LineNumber                    5982, 4
+		LineNumberAlt1                114, 24
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    5983, 4
+		LineNumberAlt1                115, 24
+		GetVariableValue              0                                 ; local
+		GetThisMemberFunctionString   "togglemanualcamera"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5984, 4
+		LineNumberAlt1                116, 24
+		PushConstanti8                1
+		SetThisMemberValueString      "speedycam"
+		; <-
+		BranchTarget                  0
+		LineNumber                    5987, 4
+		LineNumberAlt1                119, 24
+		GetVariableValue              1                                 ; local
+		PushConstanti16               191
+		PushConstanti8                2
+		Pull                          3
+		GetMemberFunctionString       "check"
+		JumpAbsolute                  3
+		LineNumber                    5987, 4
+		LineNumberAlt1                119, 24
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    5989, 4
+		LineNumberAlt1                121, 24
+		GetThisMemberValueString      "ismanual"
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    5990, 4
+		LineNumberAlt1                122, 24
+		PushConstanti8                1
+		SetThisMemberValueString      "moveplayer"
+		; <-
+		BranchTarget                  1
+		LineNumber                    5994, 4
+		LineNumberAlt1                126, 24
+		GetThisMemberValueString      "ismanual"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 30, 0
+		; ->
+		LineNumber                    5996, 4
+		LineNumberAlt1                128, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    5997, 4
+		LineNumberAlt1                129, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                101
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    5998, 4
+		LineNumberAlt1                130, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstanti8                7
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    5999, 4
+		LineNumberAlt1                131, 24
+		PushConstanti8                1
+		SetThisMemberValueString      "speedycam"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    6001, 4
+		LineNumberAlt1                133, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstanti8                3
+		Add
+		SetThisMemberValueString      "speedycam"
+		; <-
+		BranchTarget                  3
+		LineNumber                    6003, 4
+		LineNumberAlt1                135, 24
+		GetVariableValueGlobalString  "globalclass"
+		PushConstantStringString      "speed "
+		GetThisMemberValueString      "speedycam"
+		ConvertToString
+		Add
+		Pull                          2
+		GetMemberFunctionString       "scriptmessage"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  4
+		LineNumber                    6007, 4
+		LineNumberAlt1                139, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		Or
+		CompareAndBranchIfFalseTarget 29, 0
+		; ->
+		LineNumber                    6008, 4
+		LineNumberAlt1                140, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                98
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    6009, 4
+		LineNumberAlt1                141, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  5
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    6010, 4
+		LineNumberAlt1                142, 24
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gclegocamera", "movebackward", 1
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Pop
+		; <-
+		BranchTarget                  7
+		LineNumber                    6013, 4
+		LineNumberAlt1                145, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                104
+		EqualTo
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    6014, 4
+		LineNumberAlt1                146, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  8
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    6015, 4
+		LineNumberAlt1                147, 24
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gclegocamera", "moveforward", 1
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		Pop
+		; <-
+		BranchTarget                  10
+		LineNumber                    6018, 4
+		LineNumberAlt1                150, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                100
+		EqualTo
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    6019, 4
+		LineNumberAlt1                151, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  11
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 12, 0
+		; ->
+		LineNumber                    6020, 4
+		LineNumberAlt1                152, 24
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gclegocamera", "yawleft", 1
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  12
+		Pop
+		; <-
+		BranchTarget                  13
+		LineNumber                    6023, 4
+		LineNumberAlt1                155, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                102
+		EqualTo
+		CompareAndBranchIfFalseTarget 16, 0
+		; ->
+		LineNumber                    6024, 4
+		LineNumberAlt1                156, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  14
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    6025, 4
+		LineNumberAlt1                157, 24
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gclegocamera", "yawright", 1
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            14, 0
+		; ->
+		; <-
+		BranchTarget                  15
+		Pop
+		; <-
+		BranchTarget                  16
+		LineNumber                    6028, 4
+		LineNumberAlt1                160, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                97
+		EqualTo
+		CompareAndBranchIfFalseTarget 19, 0
+		; ->
+		LineNumber                    6029, 4
+		LineNumberAlt1                161, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  17
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 18, 0
+		; ->
+		LineNumber                    6030, 4
+		LineNumberAlt1                162, 24
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gclegocamera", "moveleft", 1
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            17, 0
+		; ->
+		; <-
+		BranchTarget                  18
+		Pop
+		; <-
+		BranchTarget                  19
+		LineNumber                    6033, 4
+		LineNumberAlt1                165, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                99
+		EqualTo
+		CompareAndBranchIfFalseTarget 22, 0
+		; ->
+		LineNumber                    6034, 4
+		LineNumberAlt1                166, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  20
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 21, 0
+		; ->
+		LineNumber                    6035, 4
+		LineNumberAlt1                167, 24
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gclegocamera", "moveright", 1
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            20, 0
+		; ->
+		; <-
+		BranchTarget                  21
+		Pop
+		; <-
+		BranchTarget                  22
+		LineNumber                    6038, 4
+		LineNumberAlt1                170, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                109
+		EqualTo
+		CompareAndBranchIfFalseTarget 25, 0
+		; ->
+		LineNumber                    6039, 4
+		LineNumberAlt1                171, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  23
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 24, 0
+		; ->
+		LineNumber                    6040, 4
+		LineNumberAlt1                172, 24
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gclegocamera", "moveup", 1
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  24
+		Pop
+		; <-
+		BranchTarget                  25
+		LineNumber                    6043, 4
+		LineNumberAlt1                175, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                107
+		EqualTo
+		CompareAndBranchIfFalseTarget 28, 0
+		; ->
+		LineNumber                    6044, 4
+		LineNumberAlt1                176, 24
+		GetThisMemberValueString      "speedycam"
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  26
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 27, 0
+		; ->
+		LineNumber                    6045, 4
+		LineNumberAlt1                177, 24
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gclegocamera", "movedown", 1
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget                  27
+		Pop
+		; <-
+		BranchTarget                  28
+		LineNumber                    6049, 4
+		LineNumberAlt1                181, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                110
+		EqualTo
+		CompareAndBranchIfFalseTarget 29, 0
+		; ->
+		LineNumber                    6050, 4
+		LineNumberAlt1                182, 24
+		GetVariableValue              0                                 ; local
+		PushConstanti8                7
+		GetThisMemberFunctionString   "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    6051, 4
+		LineNumberAlt1                183, 24
+		PushConstant0
+		SetThisMemberValueString      "ismanual"
+		LineNumber                    6052, 4
+		LineNumberAlt1                184, 24
+		PushConstanti8                1
+		SetThisMemberValueString      "iswatch"
+		; <-
+		BranchTarget                  29
+		LineNumber                    6055, 4
+		LineNumberAlt1                187, 24
+		PushConstant0
+		Return
+		; <-
+		BranchTarget                  30
+		LineNumber                    6058, 4
+		LineNumberAlt1                190, 24
+		GetThisMemberValueString      "iswatch"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 32, 0
+		; ->
+		LineNumber                    6059, 4
+		LineNumberAlt1                191, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 31, 0
+		; ->
+		LineNumber                    6060, 4
+		LineNumberAlt1                192, 24
+		GetVariableValue              1                                 ; local
+		GetMemberValueString          "button"
+		PushConstanti8                106
+		EqualTo
+		CompareAndBranchIfFalseTarget 31, 0
+		; ->
+		LineNumber                    6061, 4
+		LineNumberAlt1                193, 24
+		PushConstant0
+		SetThisMemberValueString      "iswatch"
+		LineNumber                    6062, 4
+		LineNumberAlt1                194, 24
+		PushConstanti8                1
+		SetThisMemberValueString      "ismanual"
+		LineNumber                    6063, 4
+		LineNumberAlt1                195, 24
+		GetVariableValue              0                                 ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "setaimode"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  31
+		LineNumber                    6066, 4
+		LineNumberAlt1                198, 24
+		PushConstant0
+		Return
+		; <-
+		BranchTarget                  32
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x34f67
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 208:248
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          7
+		LineNumber                    6076, 4
+		LineNumberAlt1                208, 24
+		GetThisMemberValueString      "moveplayer"
+		PushConstant0
+		GreaterThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    6077, 4
+		LineNumberAlt1                209, 24
+		CallGameFunctionString        "gcgame", "maincharacterid", 0
+		LineNumber                    6077, 4
+		LineNumberAlt1                209, 24
+		SetVariableValue              2                                     ; local
+		LineNumber                    6078, 4
+		LineNumberAlt1                210, 24
+		GetVariableValue              2                                     ; local
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 1
+		LineNumber                    6078, 4
+		LineNumberAlt1                210, 24
+		SetVariableValue              3                                     ; local
+		LineNumber                    6080, 4
+		LineNumberAlt1                212, 24
+		GetThisMemberValueString      "moveplayer"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6082, 4
+		LineNumberAlt1                214, 24
+		GetVariableValue              3                                     ; local
+		CallGameFunctionString        "gccharacter", "disablecollisions", 1
+		Pop
+		LineNumber                    6085, 4
+		LineNumberAlt1                217, 24
+		GetVariableValue              3                                     ; local
+		GetVariableValue              0                                     ; local
+		GetThisMemberFunctionString   "getpositionx"
+		JumpAbsolute                  1
+		LineNumber                    6083, 4
+		LineNumberAlt1                215, 24
+		GetVariableValue              0                                     ; local
+		GetThisMemberFunctionString   "getpositiony"
+		JumpAbsolute                  1
+		LineNumber                    6084, 4
+		LineNumberAlt1                216, 24
+		GetVariableValue              0                                     ; local
+		GetThisMemberFunctionString   "getpositionz"
+		JumpAbsolute                  1
+		LineNumber                    6085, 4
+		LineNumberAlt1                217, 24
+		CallGameFunctionString        "gccharacter", "setposition", 4
+		Pop
+		LineNumber                    6091, 4
+		LineNumberAlt1                223, 24
+		PushConstanti8                2
+		SetThisMemberValueString      "moveplayer"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    6094, 4
+		LineNumberAlt1                226, 24
+		GetVariableValue              3                                     ; local
+		CallGameFunctionString        "gccharacter", "enablecollisions", 1
+		Pop
+		LineNumber                    6096, 4
+		LineNumberAlt1                228, 24
+		PushConstant0
+		SetThisMemberValueString      "moveplayer"
+		; <-
+		BranchTarget                  1
+		LineNumber                    6100, 4
+		LineNumberAlt1                232, 24
+		GetThisMemberValueString      "scaleview"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    6101, 4
+		LineNumberAlt1                233, 24
+		GetThisMemberValueString      "tvcurr"
+		GetVariableValue              1                                     ; local
+		GetMemberValueString          "deltatime"
+		Add
+		SetThisMemberValueString      "tvcurr"
+		LineNumber                    6102, 4
+		LineNumberAlt1                234, 24
+		GetThisMemberValueString      "tvcurr"
+		GetThisMemberValueString      "tvduration"
+		GreaterThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    6103, 4
+		LineNumberAlt1                235, 24
+		GetThisMemberValueString      "tvduration"
+		SetThisMemberValueString      "tvcurr"
+		LineNumber                    6104, 4
+		LineNumberAlt1                236, 24
+		GetThisMemberValueString      "vx"
+		GetThisMemberValueString      "tvx"
+		Add
+		SetThisMemberValueString      "vx"
+		LineNumber                    6105, 4
+		LineNumberAlt1                237, 24
+		GetThisMemberValueString      "vy"
+		GetThisMemberValueString      "tvy"
+		Add
+		SetThisMemberValueString      "vy"
+		LineNumber                    6106, 4
+		LineNumberAlt1                238, 24
+		GetThisMemberValueString      "vw"
+		GetThisMemberValueString      "tvw"
+		Add
+		SetThisMemberValueString      "vw"
+		LineNumber                    6107, 4
+		LineNumberAlt1                239, 24
+		GetThisMemberValueString      "vh"
+		GetThisMemberValueString      "tvh"
+		Add
+		SetThisMemberValueString      "vh"
+		LineNumber                    6108, 4
+		LineNumberAlt1                240, 24
+		GetThisMemberValueString      "viewport"
+		GetThisMemberValueString      "vx"
+		GetThisMemberValueString      "vy"
+		GetThisMemberValueString      "vw"
+		GetThisMemberValueString      "vh"
+		CallGameFunctionString        "gcviewport", "setboxsize", 5
+		Pop
+		LineNumber                    6109, 4
+		LineNumberAlt1                241, 24
+		PushConstant0
+		SetThisMemberValueString      "scaleview"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    6111, 4
+		LineNumberAlt1                243, 24
+		GetThisMemberValueString      "tvcurr"
+		GetThisMemberValueString      "tvduration"
+		Divide
+		SetVariableValue              4                                     ; local
+		LineNumber                    6112, 4
+		LineNumberAlt1                244, 24
+		GetThisMemberValueString      "vx"
+		GetThisMemberValueString      "tvx"
+		GetVariableValue              4                                     ; local
+		Multiply
+		Add
+		SetVariableValue              5                                     ; local
+		LineNumber                    6113, 4
+		LineNumberAlt1                245, 24
+		GetThisMemberValueString      "vy"
+		GetThisMemberValueString      "tvy"
+		GetVariableValue              4                                     ; local
+		Multiply
+		Add
+		SetVariableValue              6                                     ; local
+		LineNumber                    6114, 4
+		LineNumberAlt1                246, 24
+		GetThisMemberValueString      "vw"
+		GetThisMemberValueString      "tvw"
+		GetVariableValue              4                                     ; local
+		Multiply
+		Add
+		SetVariableValue              7                                     ; local
+		LineNumber                    6115, 4
+		LineNumberAlt1                247, 24
+		GetThisMemberValueString      "vh"
+		GetThisMemberValueString      "tvh"
+		GetVariableValue              4                                     ; local
+		Multiply
+		Add
+		SetVariableValue              8                                     ; local
+		LineNumber                    6116, 4
+		LineNumberAlt1                248, 24
+		GetThisMemberValueString      "viewport"
+		GetVariableValue              5                                     ; local
+		GetVariableValue              6                                     ; local
+		GetVariableValue              7                                     ; local
+		GetVariableValue              8                                     ; local
+		CallGameFunctionString        "gcviewport", "setboxsize", 5
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getforwardx"
+		; address: 0x351c4
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 255:255
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6123, 4
+		LineNumberAlt1              255, 24
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gclegocamera", "getforwardx", 1
+		LineNumber                  6123, 4
+		LineNumberAlt1              255, 24
+		Return
+	end ; method
+
+	begin method "getforwardy"
+		; address: 0x351e4
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 260:260
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6128, 4
+		LineNumberAlt1              260, 24
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gclegocamera", "getforwardy", 1
+		LineNumber                  6128, 4
+		LineNumberAlt1              260, 24
+		Return
+	end ; method
+
+	begin method "getforwardz"
+		; address: 0x35204
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 265:265
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6133, 4
+		LineNumberAlt1              265, 24
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gclegocamera", "getforwardz", 1
+		LineNumber                  6133, 4
+		LineNumberAlt1              265, 24
+		Return
+	end ; method
+
+	begin method "getpositionx"
+		; address: 0x35224
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 270:270
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6138, 4
+		LineNumberAlt1              270, 24
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gclegocamera", "getcamx", 1
+		LineNumber                  6138, 4
+		LineNumberAlt1              270, 24
+		Return
+	end ; method
+
+	begin method "getpositiony"
+		; address: 0x35244
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 275:275
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6143, 4
+		LineNumberAlt1              275, 24
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gclegocamera", "getcamy", 1
+		LineNumber                  6143, 4
+		LineNumberAlt1              275, 24
+		Return
+	end ; method
+
+	begin method "getpositionz"
+		; address: 0x35264
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 280:280
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6148, 4
+		LineNumberAlt1              280, 24
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gclegocamera", "getcamz", 1
+		LineNumber                  6148, 4
+		LineNumberAlt1              280, 24
+		Return
+	end ; method
+
+	begin method "setaimode"
+		; address: 0x35284
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 285:286
+		MemberFunctionArgumentCheck 2
+		LineNumber                  6153, 4
+		LineNumberAlt1              285, 24
+		GetVariableValue            1                                    ; local
+		SetThisMemberValueString    "aimode"
+		LineNumber                  6154, 4
+		LineNumberAlt1              286, 24
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                    ; local
+		CallGameFunctionString      "gclegocamera", "setcameraaimode", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "addyaw"
+		; address: 0x352af
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 290:290
+		MemberFunctionArgumentCheck 2
+		LineNumber                  6158, 4
+		LineNumberAlt1              290, 24
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                           ; local
+		CallGameFunctionString      "gclegocamera", "addyaw", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "settweakable"
+		; address: 0x352ca
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 296:296
+		MemberFunctionArgumentCheck  1
+		LineNumber                   6164, 4
+		LineNumberAlt1               296, 24
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "tweak"
+		GetVariableValue             0                      ; local
+		Pull                         2
+		GetMemberFunctionString      "add_camobj_tweakable"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "shakecamera"
+		; address: 0x352e9
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 300:300
+		MemberFunctionArgumentCheck 3
+		LineNumber                  6168, 4
+		LineNumberAlt1              300, 24
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                ; local
+		GetVariableValue            2                                ; local
+		CallGameFunctionString      "gclegocamera", "shakecamera", 3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getaimode"
+		; address: 0x35307
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 304:305
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6172, 4
+		LineNumberAlt1              304, 24
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gclegocamera", "getcameraaimode", 1
+		LineNumber                  6172, 4
+		LineNumberAlt1              304, 24
+		SetThisMemberValueString    "aimode"
+		LineNumber                  6173, 4
+		LineNumberAlt1              305, 24
+		GetThisMemberValueString    "aimode"
+		Return
+	end ; method
+
+	begin method "togglemanualcamera"
+		; address: 0x35337
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 309:312
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6177, 4
+		LineNumberAlt1              309, 24
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gclegocamera", "togglemanualcamera", 1
+		LineNumber                  6177, 4
+		LineNumberAlt1              309, 24
+		SetThisMemberValueString    "ismanual"
+		LineNumber                  6178, 4
+		LineNumberAlt1              310, 24
+		PushConstant0
+		SetThisMemberValueString    "iswatch"
+		LineNumber                  6179, 4
+		LineNumberAlt1              311, 24
+		PushConstant0
+		SetThisMemberValueString    "ishead"
+		LineNumber                  6180, 4
+		LineNumberAlt1              312, 24
+		GetThisMemberValueString    "ismanual"
+		Return
+	end ; method
+
+	begin method "togglewatchcamera"
+		; address: 0x35383
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 317:326
+		MemberFunctionArgumentCheck   1
+		LineNumber                    6185, 4
+		LineNumberAlt1                317, 24
+		GetThisMemberValueString      "iswatch"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6186, 4
+		LineNumberAlt1                318, 24
+		GetVariableValue              0           ; local
+		PushConstanti8                7
+		GetThisMemberFunctionString   "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    6187, 4
+		LineNumberAlt1                319, 24
+		PushConstant0
+		SetThisMemberValueString      "ismanual"
+		LineNumber                    6188, 4
+		LineNumberAlt1                320, 24
+		PushConstanti8                1
+		SetThisMemberValueString      "iswatch"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    6190, 4
+		LineNumberAlt1                322, 24
+		GetVariableValue              0           ; local
+		PushConstanti8                5
+		GetThisMemberFunctionString   "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    6191, 4
+		LineNumberAlt1                323, 24
+		PushConstant0
+		SetThisMemberValueString      "ismanual"
+		LineNumber                    6192, 4
+		LineNumberAlt1                324, 24
+		PushConstant0
+		SetThisMemberValueString      "iswatch"
+		; <-
+		BranchTarget                  1
+		LineNumber                    6194, 4
+		LineNumberAlt1                326, 24
+		GetThisMemberValueString      "iswatch"
+		Return
+	end ; method
+
+	begin method "lockpitch"
+		; address: 0x3540b
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 331:331
+		MemberFunctionArgumentCheck 3
+		LineNumber                  6199, 4
+		LineNumberAlt1              331, 24
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                              ; local
+		GetVariableValue            2                              ; local
+		CallGameFunctionString      "gclegocamera", "lockpitch", 3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "interpolate"
+		; address: 0x35429
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 340:340
+		MemberFunctionArgumentCheck 8
+		LineNumber                  6208, 4
+		LineNumberAlt1              340, 24
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                ; local
+		GetVariableValue            2                                ; local
+		GetVariableValue            3                                ; local
+		GetVariableValue            4                                ; local
+		GetVariableValue            5                                ; local
+		GetVariableValue            6                                ; local
+		GetVariableValue            7                                ; local
+		CallGameFunctionString      "gclegocamera", "interpolate", 8
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "makespline"
+		; address: 0x35456
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 346:346
+		MemberFunctionArgumentCheck 2
+		LineNumber                  6214, 4
+		LineNumberAlt1              346, 24
+		GetVariableValue            1                                    ; local
+		CallGameFunctionString      "scslosislkcubicspline", "create", 1
+		LineNumber                  6214, 4
+		LineNumberAlt1              346, 24
+		SetThisMemberValueString    "cameraspline"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setspline"
+		; address: 0x3547a
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 354:374
+		MemberFunctionArgumentCheck   5
+		LineNumber                    6222, 4
+		LineNumberAlt1                354, 24
+		GetThisMemberValueString      "cameraspline"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6224, 4
+		LineNumberAlt1                356, 24
+		PushConstanti8                1
+		Return
+		; <-
+		BranchTarget                  0
+		LineNumber                    6227, 4
+		LineNumberAlt1                359, 24
+		GetVariableValue              1                                    ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    6228, 4
+		LineNumberAlt1                360, 24
+		PushConstant0
+		SetVariableValue              1                                    ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    6231, 4
+		LineNumberAlt1                363, 24
+		GetVariableValue              2                                    ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    6232, 4
+		LineNumberAlt1                364, 24
+		PushConstantf32               1
+		SetVariableValue              2                                    ; local
+		; <-
+		BranchTarget                  2
+		LineNumber                    6235, 4
+		LineNumberAlt1                367, 24
+		GetVariableValue              4                                    ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    6236, 4
+		LineNumberAlt1                368, 24
+		PushConstanti8                1
+		SetVariableValue              4                                    ; local
+		; <-
+		BranchTarget                  3
+		LineNumber                    6239, 4
+		LineNumberAlt1                371, 24
+		GetVariableValue              1                                    ; local
+		SetThisMemberValueString      "camsplineindex"
+		LineNumber                    6240, 4
+		LineNumberAlt1                372, 24
+		GetVariableValue              2                                    ; local
+		SetThisMemberValueString      "splineduration"
+		LineNumber                    6242, 4
+		LineNumberAlt1                374, 24
+		GetThisMemberValueString      "handle"
+		GetThisMemberValueString      "cameraspline"
+		GetVariableValue              1                                    ; local
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		GetVariableValue              4                                    ; local
+		CallGameFunctionString        "gclegocamera", "setcameraspline", 6
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "settargetspline"
+		; address: 0x35545
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 383:394
+		MemberFunctionArgumentCheck   4
+		LineNumber                    6251, 4
+		LineNumberAlt1                383, 24
+		GetVariableValue              1                                    ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6252, 4
+		LineNumberAlt1                384, 24
+		PushConstant0
+		SetVariableValue              1                                    ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    6255, 4
+		LineNumberAlt1                387, 24
+		GetVariableValue              3                                    ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    6256, 4
+		LineNumberAlt1                388, 24
+		PushConstanti8                1
+		SetVariableValue              3                                    ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    6259, 4
+		LineNumberAlt1                391, 24
+		GetVariableValue              1                                    ; local
+		SetThisMemberValueString      "targetsplineindex"
+		LineNumber                    6262, 4
+		LineNumberAlt1                394, 24
+		GetThisMemberValueString      "handle"
+		GetThisMemberValueString      "cameraspline"
+		GetThisMemberValueString      "camsplineindex"
+		GetThisMemberValueString      "targetsplineindex"
+		GetThisMemberValueString      "splineduration"
+		GetVariableValue              2                                    ; local
+		GetVariableValue              3                                    ; local
+		CallGameFunctionString        "gclegocamera", "settargetspline", 7
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "togglepopback"
+		; address: 0x355c0
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 400:406
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    6268, 4
+		LineNumberAlt1                400, 24
+		GetThisMemberValueString      "popback"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6269, 4
+		LineNumberAlt1                401, 24
+		PushConstant0
+		SetVariableValue              1            ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    6271, 4
+		LineNumberAlt1                403, 24
+		PushConstanti8                1
+		SetVariableValue              1            ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    6274, 4
+		LineNumberAlt1                406, 24
+		GetVariableValue              0            ; local
+		GetVariableValue              1            ; local
+		GetThisMemberFunctionString   "setpopback"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setpopback"
+		; address: 0x3560f
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 411:417
+		MemberFunctionArgumentCheck   2
+		LineNumber                    6279, 4
+		LineNumberAlt1                411, 24
+		GetVariableValue              1                                  ; local
+		GetThisMemberValueString      "popback"
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6280, 4
+		LineNumberAlt1                412, 24
+		PushConstanti8                1
+		Return
+		; <-
+		BranchTarget                  0
+		LineNumber                    6283, 4
+		LineNumberAlt1                415, 24
+		GetVariableValue              1                                  ; local
+		SetThisMemberValueString      "popback"
+		LineNumber                    6285, 4
+		LineNumberAlt1                417, 24
+		GetThisMemberValueString      "handle"
+		GetThisMemberValueString      "popback"
+		CallGameFunctionString        "gclegocamera", "setusepopback", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setviewsize"
+		; address: 0x3565b
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 425:437
+		MemberFunctionArgumentCheck   5
+		LineNumber                    6293, 4
+		LineNumberAlt1                425, 24
+		GetVariableValue              1                             ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6294, 4
+		LineNumberAlt1                426, 24
+		GetVariableValue              1                             ; local
+		SetThisMemberValueString      "vx"
+		; <-
+		BranchTarget                  0
+		LineNumber                    6296, 4
+		LineNumberAlt1                428, 24
+		GetVariableValue              2                             ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    6297, 4
+		LineNumberAlt1                429, 24
+		GetVariableValue              2                             ; local
+		SetThisMemberValueString      "vy"
+		; <-
+		BranchTarget                  1
+		LineNumber                    6299, 4
+		LineNumberAlt1                431, 24
+		GetVariableValue              3                             ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    6300, 4
+		LineNumberAlt1                432, 24
+		GetVariableValue              3                             ; local
+		SetThisMemberValueString      "vw"
+		; <-
+		BranchTarget                  2
+		LineNumber                    6302, 4
+		LineNumberAlt1                434, 24
+		GetVariableValue              4                             ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    6303, 4
+		LineNumberAlt1                435, 24
+		GetVariableValue              4                             ; local
+		SetThisMemberValueString      "vh"
+		; <-
+		BranchTarget                  3
+		LineNumber                    6305, 4
+		LineNumberAlt1                437, 24
+		GetThisMemberValueString      "viewport"
+		GetThisMemberValueString      "vx"
+		GetThisMemberValueString      "vy"
+		GetThisMemberValueString      "vw"
+		GetThisMemberValueString      "vh"
+		CallGameFunctionString        "gcviewport", "setboxsize", 5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "resetviewport"
+		; address: 0x3570b
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 443:447
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6311, 4
+		LineNumberAlt1              443, 24
+		PushConstant0
+		SetThisMemberValueString    "vx"
+		LineNumber                  6312, 4
+		LineNumberAlt1              444, 24
+		PushConstant0
+		SetThisMemberValueString    "vy"
+		LineNumber                  6313, 4
+		LineNumberAlt1              445, 24
+		CallGameFunctionString      "gcgame", "getresolutionwidth", 0
+		LineNumber                  6313, 4
+		LineNumberAlt1              445, 24
+		SetThisMemberValueString    "vw"
+		LineNumber                  6314, 4
+		LineNumberAlt1              446, 24
+		CallGameFunctionString      "gcgame", "getresolutionheight", 0
+		LineNumber                  6314, 4
+		LineNumberAlt1              446, 24
+		SetThisMemberValueString    "vh"
+		LineNumber                  6315, 4
+		LineNumberAlt1              447, 24
+		GetThisMemberValueString    "viewport"
+		GetThisMemberValueString    "vx"
+		GetThisMemberValueString    "vy"
+		GetThisMemberValueString    "vw"
+		GetThisMemberValueString    "vh"
+		CallGameFunctionString      "gcviewport", "setboxsize", 5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "scaleviewport"
+		; address: 0x35785
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 455:488
+		MemberFunctionArgumentCheck   6
+		LineNumber                    6323, 4
+		LineNumberAlt1                455, 24
+		GetVariableValue              1            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6324, 4
+		LineNumberAlt1                456, 24
+		GetThisMemberValueString      "vx"
+		SetThisMemberValueString      "tvx"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    6326, 4
+		LineNumberAlt1                458, 24
+		GetVariableValue              1            ; local
+		SetThisMemberValueString      "tvx"
+		; <-
+		BranchTarget                  1
+		LineNumber                    6328, 4
+		LineNumberAlt1                460, 24
+		GetVariableValue              2            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    6329, 4
+		LineNumberAlt1                461, 24
+		GetThisMemberValueString      "vy"
+		SetThisMemberValueString      "tvy"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    6331, 4
+		LineNumberAlt1                463, 24
+		GetVariableValue              2            ; local
+		SetThisMemberValueString      "tvy"
+		; <-
+		BranchTarget                  3
+		LineNumber                    6333, 4
+		LineNumberAlt1                465, 24
+		GetVariableValue              3            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    6334, 4
+		LineNumberAlt1                466, 24
+		GetThisMemberValueString      "vw"
+		SetThisMemberValueString      "tvw"
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    6336, 4
+		LineNumberAlt1                468, 24
+		GetVariableValue              3            ; local
+		SetThisMemberValueString      "tvw"
+		; <-
+		BranchTarget                  5
+		LineNumber                    6338, 4
+		LineNumberAlt1                470, 24
+		GetVariableValue              4            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    6339, 4
+		LineNumberAlt1                471, 24
+		GetThisMemberValueString      "vh"
+		SetThisMemberValueString      "tvh"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		LineNumber                    6341, 4
+		LineNumberAlt1                473, 24
+		GetVariableValue              4            ; local
+		SetThisMemberValueString      "tvh"
+		; <-
+		BranchTarget                  7
+		LineNumber                    6343, 4
+		LineNumberAlt1                475, 24
+		GetVariableValue              5            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    6344, 4
+		LineNumberAlt1                476, 24
+		PushConstantf32               1
+		SetThisMemberValueString      "tvduration"
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    6346, 4
+		LineNumberAlt1                478, 24
+		GetVariableValue              5            ; local
+		SetThisMemberValueString      "tvduration"
+		; <-
+		BranchTarget                  9
+		LineNumber                    6348, 4
+		LineNumberAlt1                480, 24
+		PushConstantf32               0
+		SetThisMemberValueString      "tvcurr"
+		LineNumber                    6351, 4
+		LineNumberAlt1                483, 24
+		GetThisMemberValueString      "tvx"
+		GetThisMemberValueString      "vx"
+		Subtract
+		SetThisMemberValueString      "tvx"
+		LineNumber                    6352, 4
+		LineNumberAlt1                484, 24
+		GetThisMemberValueString      "tvy"
+		GetThisMemberValueString      "vy"
+		Subtract
+		SetThisMemberValueString      "tvy"
+		LineNumber                    6353, 4
+		LineNumberAlt1                485, 24
+		GetThisMemberValueString      "tvw"
+		GetThisMemberValueString      "vw"
+		Subtract
+		SetThisMemberValueString      "tvw"
+		LineNumber                    6354, 4
+		LineNumberAlt1                486, 24
+		GetThisMemberValueString      "tvh"
+		GetThisMemberValueString      "vh"
+		Subtract
+		SetThisMemberValueString      "tvh"
+		LineNumber                    6356, 4
+		LineNumberAlt1                488, 24
+		PushConstanti8                1
+		SetThisMemberValueString      "scaleview"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "scaletocutscene"
+		; address: 0x35905
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 494:498
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        4
+		LineNumber                  6362, 4
+		LineNumberAlt1              494, 24
+		CallGameFunctionString      "gcgame", "getresolutionwidth", 0
+		LineNumber                  6362, 4
+		LineNumberAlt1              494, 24
+		SetVariableValue            1                                  ; local
+		LineNumber                  6363, 4
+		LineNumberAlt1              495, 24
+		GetVariableValue            1                                  ; local
+		PushConstantf32             1.850000023841858
+		Divide
+		CallGameFunctionString      "scslosimath", "round", 1
+		LineNumber                  6363, 4
+		LineNumberAlt1              495, 24
+		SetVariableValue            2                                  ; local
+		LineNumber                  6364, 4
+		LineNumberAlt1              496, 24
+		CallGameFunctionString      "gcgame", "getresolutionheight", 0
+		LineNumber                  6364, 4
+		LineNumberAlt1              496, 24
+		SetVariableValue            3                                  ; local
+		LineNumber                  6365, 4
+		LineNumberAlt1              497, 24
+		GetVariableValue            3                                  ; local
+		GetVariableValue            2                                  ; local
+		Subtract
+		CallGameFunctionString      "scslosimath", "round", 1
+		LineNumber                  6365, 4
+		LineNumberAlt1              497, 24
+		SetVariableValue            4                                  ; local
+		LineNumber                  6366, 4
+		LineNumberAlt1              498, 24
+		GetVariableValue            0                                  ; local
+		PushConstant0
+		PushConstant0
+		GetVariableValue            1                                  ; local
+		GetVariableValue            3                                  ; local
+		GetVariableValue            4                                  ; local
+		Subtract
+		PushConstantf32             0.5
+		GetThisMemberFunctionString "scaleviewport"
+		JumpAbsolute                6
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "invertmouse"
+		; address: 0x359b3
+		; source: 24 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_camera.vbo" 503:503
+		MemberFunctionArgumentCheck 2
+		LineNumber                  6371, 4
+		LineNumberAlt1              503, 24
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                   ; local
+		CallGameFunctionString      "gclegocamera", "setinvertmouse", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

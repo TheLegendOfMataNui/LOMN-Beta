@@ -1,0 +1,561 @@
+begin class "hudmask"
+	property "allmasksarray"
+	property "currentmask"
+	property "showmask"
+	property "onscreen"
+	property "timeonscreen"
+	property "movement"
+	property "animating"
+	property "offx"
+	property "ydiff"
+
+	begin method "hudmask"
+		; address: 0x3a069
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x3a06d
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 868:872
+		MemberFunctionArgumentCheck  1
+		LineNumber                   12127, 4
+		LineNumberAlt1               868, 28
+		GetVariableValueGlobalString "screeny"
+		PushConstanti16              480
+		Subtract
+		SetThisMemberValueString     "ydiff"
+		LineNumber                   12128, 4
+		LineNumberAlt1               869, 28
+		PushNothing
+		SetThisMemberValueString     "currentmask"
+		LineNumber                   12129, 4
+		LineNumberAlt1               870, 28
+		CreateArray
+		SetThisMemberValueString     "allmasksarray"
+		LineNumber                   12130, 4
+		LineNumberAlt1               871, 28
+		PushConstant0
+		SetThisMemberValueString     "animating"
+		LineNumber                   12131, 4
+		LineNumberAlt1               872, 28
+		PushConstanti8               1
+		SetThisMemberValueString     "showmask"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x3a0be
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 877:887
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    12136, 4
+		LineNumberAlt1                877, 28
+		GetThisMemberValueString      "allmasksarray"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    12137, 4
+		LineNumberAlt1                878, 28
+		GetThisMemberValueString      "allmasksarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1               ; local
+		LineNumber                    12138, 4
+		LineNumberAlt1                879, 28
+		GetVariableValue              1               ; local
+		PushConstant0
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    12139, 4
+		LineNumberAlt1                880, 28
+		GetVariableValue              1               ; local
+		PushConstant0
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2               ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12140, 4
+		LineNumberAlt1                881, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetVariableValue              1               ; local
+		GetVariableValue              2               ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12141, 4
+		LineNumberAlt1                882, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetVariableValue              1               ; local
+		GetVariableValue              2               ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12142, 4
+		LineNumberAlt1                883, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetVariableValue              1               ; local
+		GetVariableValue              2               ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12143, 4
+		LineNumberAlt1                884, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetVariableValue              1               ; local
+		GetVariableValue              2               ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    12146, 4
+		LineNumberAlt1                887, 28
+		PushNothing
+		SetThisMemberValueString      "allmasksarray"
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x3a195
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 892:892
+		MemberFunctionArgumentCheck 1
+		LineNumber                  12151, 4
+		LineNumberAlt1              892, 28
+		PushNothing
+		SetThisMemberValueString    "currentmask"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x3a1a7
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 898:905
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    12157, 4
+		LineNumberAlt1                898, 28
+		GetVariableValue              0               ; local
+		GetThisMemberFunctionString   "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12158, 4
+		LineNumberAlt1                899, 28
+		GetThisMemberValueString      "allmasksarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1               ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    12159, 4
+		LineNumberAlt1                900, 28
+		GetVariableValue              1               ; local
+		PushConstant0
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12160, 4
+		LineNumberAlt1                901, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetVariableValue              1               ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12161, 4
+		LineNumberAlt1                902, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetVariableValue              1               ; local
+		PushNothing
+		SetArrayValue
+		LineNumber                    12162, 4
+		LineNumberAlt1                903, 28
+		GetVariableValue              1               ; local
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1               ; local
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    12164, 4
+		LineNumberAlt1                905, 28
+		PushNothing
+		SetThisMemberValueString      "currentmask"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setshow"
+		; address: 0x3a234
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 910:914
+		MemberFunctionArgumentCheck   2
+		LineNumber                    12169, 4
+		LineNumberAlt1                910, 28
+		GetVariableValue              1          ; local
+		SetThisMemberValueString      "showmask"
+		LineNumber                    12170, 4
+		LineNumberAlt1                911, 28
+		GetThisMemberValueString      "showmask"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12171, 4
+		LineNumberAlt1                912, 28
+		GetVariableValue              0          ; local
+		GetThisMemberFunctionString   "show"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    12173, 4
+		LineNumberAlt1                914, 28
+		GetVariableValue              0          ; local
+		GetThisMemberFunctionString   "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x3a284
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "addmask"
+		; address: 0x3a288
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 925:925
+		MemberFunctionArgumentCheck 2
+		LineNumber                  12184, 4
+		LineNumberAlt1              925, 28
+		GetVariableValue            0                    ; local
+		CreateObjectString          "gs_lego_iconrotate"
+		Dup
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstanti8              1
+		Pull                        4
+		GetMemberFunctionString     "gs_lego_iconrotate"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  12184, 4
+		LineNumberAlt1              925, 28
+		GetThisMemberFunctionString "addmasktoarray"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "removemask"
+		; address: 0x3a2bb
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "addmasktoarray"
+		; address: 0x3a2bf
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 935:939
+		MemberFunctionArgumentCheck 2
+		LineNumber                  12194, 4
+		LineNumberAlt1              935, 28
+		GetThisMemberValueString    "allmasksarray"
+		GetVariableValue            1               ; local
+		AppendToArray
+		LineNumber                  12195, 4
+		LineNumberAlt1              936, 28
+		GetVariableValue            1               ; local
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  12196, 4
+		LineNumberAlt1              937, 28
+		GetVariableValue            1               ; local
+		Dup
+		GetMemberFunctionString     "add"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  12197, 4
+		LineNumberAlt1              938, 28
+		GetVariableValue            1               ; local
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  12198, 4
+		LineNumberAlt1              939, 28
+		GetVariableValue            1               ; local
+		PushConstanti8              20
+		PushConstanti16             396
+		GetThisMemberValueString    "ydiff"
+		Add
+		PushConstanti8              84
+		PushConstanti16             460
+		GetThisMemberValueString    "ydiff"
+		Add
+		Pull                        5
+		GetMemberFunctionString     "setpos"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "selectmask"
+		; address: 0x3a337
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 944:950
+		MemberFunctionArgumentCheck   2
+		LineNumber                    12203, 4
+		LineNumberAlt1                944, 28
+		GetThisMemberValueString      "showmask"
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    12204, 4
+		LineNumberAlt1                945, 28
+		GetThisMemberValueString      "currentmask"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12205, 4
+		LineNumberAlt1                946, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetThisMemberValueString      "currentmask"
+		GetArrayValue
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "animate"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    12206, 4
+		LineNumberAlt1                947, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetThisMemberValueString      "currentmask"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    12208, 4
+		LineNumberAlt1                949, 28
+		GetVariableValue              1               ; local
+		SetThisMemberValueString      "currentmask"
+		LineNumber                    12209, 4
+		LineNumberAlt1                950, 28
+		GetVariableValue              0               ; local
+		GetThisMemberFunctionString   "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x3a3b3
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 957:961
+		MemberFunctionArgumentCheck   1
+		LineNumber                    12216, 4
+		LineNumberAlt1                957, 28
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "hidden"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12217, 4
+		LineNumberAlt1                958, 28
+		GetThisMemberValueString      "showmask"
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12218, 4
+		LineNumberAlt1                959, 28
+		GetThisMemberValueString      "currentmask"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12219, 4
+		LineNumberAlt1                960, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetThisMemberValueString      "currentmask"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    12220, 4
+		LineNumberAlt1                961, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetThisMemberValueString      "currentmask"
+		GetArrayValue
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x3a425
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 969:972
+		MemberFunctionArgumentCheck   1
+		LineNumber                    12228, 4
+		LineNumberAlt1                969, 28
+		GetThisMemberValueString      "currentmask"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12231, 4
+		LineNumberAlt1                972, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetThisMemberValueString      "currentmask"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "changepos"
+		; address: 0x3a454
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setxpos"
+		; address: 0x3a458
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "animate"
+		; address: 0x3a45c
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 997:999
+		MemberFunctionArgumentCheck   2
+		LineNumber                    12256, 4
+		LineNumberAlt1                997, 28
+		GetThisMemberValueString      "showmask"
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12257, 4
+		LineNumberAlt1                998, 28
+		GetVariableValue              1               ; local
+		SetThisMemberValueString      "animating"
+		LineNumber                    12258, 4
+		LineNumberAlt1                999, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetThisMemberValueString      "currentmask"
+		GetArrayValue
+		GetVariableValue              1               ; local
+		Pull                          2
+		GetMemberFunctionString       "animate"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x3a49c
+		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1005:1008
+		MemberFunctionArgumentCheck   2
+		LineNumber                    12264, 4
+		LineNumberAlt1                1005, 28
+		GetThisMemberValueString      "currentmask"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12266, 4
+		LineNumberAlt1                1007, 28
+		GetThisMemberValueString      "currentmask"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    12267, 4
+		LineNumberAlt1                1008, 28
+		GetThisMemberValueString      "allmasksarray"
+		GetThisMemberValueString      "currentmask"
+		GetArrayValue
+		GetVariableValue              1               ; local
+		Pull                          2
+		GetMemberFunctionString       "process"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "slide"
+		; address: 0x3a4e2
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+end ; class

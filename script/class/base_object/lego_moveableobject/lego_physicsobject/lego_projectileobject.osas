@@ -1,0 +1,146 @@
+begin class "lego_projectileobject", "lego_physicsobject"
+	begin method "lego_projectileobject"
+		; address: 0x43580
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 947:947
+		MemberFunctionArgumentCheck 3
+		LineNumber                  19583, 4
+		LineNumberAlt1              947, 52
+		GetVariableValue            0                    ; local
+		GetVariableValue            1                    ; local
+		GetVariableValue            2                    ; local
+		GetThisMemberFunctionString "lego_physicsobject"
+		JumpAbsolute                3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "init"
+		; address: 0x4359d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 954:954
+		MemberFunctionArgumentCheck 17
+		LineNumber                  19590, 4
+		LineNumberAlt1              954, 52
+		GetVariableValue            0          ; local
+		GetVariableValue            1          ; local
+		GetVariableValue            2          ; local
+		GetVariableValue            3          ; local
+		GetVariableValue            4          ; local
+		GetVariableValue            5          ; local
+		GetVariableValue            6          ; local
+		GetVariableValue            7          ; local
+		GetVariableValue            8          ; local
+		GetVariableValue            9          ; local
+		GetVariableValue            10         ; local
+		GetVariableValue            11         ; local
+		GetVariableValue            12         ; local
+		GetVariableValue            13         ; local
+		GetVariableValue            14         ; local
+		GetVariableValue            15         ; local
+		GetVariableValue            16         ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                17
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setduration"
+		; address: 0x435e4
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 960:960
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19596, 4
+		LineNumberAlt1              960, 52
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                ; local
+		CallGameFunctionString      "gcmoveableobj", "setprojdur", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "throwprojectile"
+		; address: 0x435ff
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 968:992
+		MemberFunctionArgumentCheck   5
+		LineNumber                    19604, 4
+		LineNumberAlt1                968, 52
+		GetVariableValue              1                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19605, 4
+		LineNumberAlt1                969, 52
+		PushConstanti8                10
+		SetVariableValue              1                                            ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    19609, 4
+		LineNumberAlt1                973, 52
+		GetVariableValue              2                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    19610, 4
+		LineNumberAlt1                974, 52
+		PushConstantf32               1
+		SetVariableValue              2                                            ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    19612, 4
+		LineNumberAlt1                976, 52
+		GetVariableValue              2                                            ; local
+		PushConstantf32               0.009999999776482582
+		LessThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    19613, 4
+		LineNumberAlt1                977, 52
+		PushConstantf32               1
+		SetVariableValue              2                                            ; local
+		; <-
+		BranchTarget                  2
+		LineNumber                    19617, 4
+		LineNumberAlt1                981, 52
+		GetVariableValue              3                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    19618, 4
+		LineNumberAlt1                982, 52
+		PushConstantStringString      "cnt1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19618, 4
+		LineNumberAlt1                982, 52
+		SetVariableValue              3                                            ; local
+		; <-
+		BranchTarget                  3
+		LineNumber                    19622, 4
+		LineNumberAlt1                986, 52
+		GetVariableValue              4                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    19623, 4
+		LineNumberAlt1                987, 52
+		PushConstant0
+		SetVariableValue              4                                            ; local
+		; <-
+		BranchTarget                  4
+		LineNumber                    19628, 4
+		LineNumberAlt1                992, 52
+		GetThisMemberValueString      "handle"
+		GetVariableValue              3                                            ; local
+		GetVariableValue              1                                            ; local
+		GetVariableValue              2                                            ; local
+		GetVariableValue              4                                            ; local
+		CallGameFunctionString        "gcmoveableobj", "throwprojectile", 5
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

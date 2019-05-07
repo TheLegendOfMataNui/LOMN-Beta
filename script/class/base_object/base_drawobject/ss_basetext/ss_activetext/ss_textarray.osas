@@ -1,0 +1,456 @@
+begin class "ss_textarray", "ss_activetext"
+	property "textarray"
+	property "chararray"
+	property "currentitem"
+
+	begin method "ss_textarray"
+		; address: 0x2f46d
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 439:441
+		MemberFunctionArgumentCheck 11
+		LineNumber                  2146, 4
+		LineNumberAlt1              439, 12
+		GetVariableValue            3               ; local
+		SetThisMemberValueString    "chararray"
+		LineNumber                  2148, 4
+		LineNumberAlt1              441, 12
+		GetVariableValue            0               ; local
+		GetVariableValue            1               ; local
+		GetVariableValue            2               ; local
+		GetVariableValue            3               ; local
+		PushConstant0
+		GetArrayValue
+		GetVariableValue            4               ; local
+		GetVariableValue            5               ; local
+		GetVariableValue            6               ; local
+		GetVariableValue            7               ; local
+		GetVariableValue            8               ; local
+		GetVariableValue            9               ; local
+		GetVariableValue            10              ; local
+		GetThisMemberFunctionString "ss_activetext"
+		JumpAbsolute                11
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x2f4b4
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 448:458
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    2155, 4
+		LineNumberAlt1                448, 12
+		CreateArray
+		SetThisMemberValueString      "textarray"
+		LineNumber                    2156, 4
+		LineNumberAlt1                449, 12
+		PushConstant0
+		SetThisMemberValueString      "currentitem"
+		LineNumber                    2158, 4
+		LineNumberAlt1                451, 12
+		GetThisMemberValueString      "chararray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1               ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1               ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    2159, 4
+		LineNumberAlt1                452, 12
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontname"
+		GetThisMemberValueString      "fontname2"
+		GetThisMemberValueString      "chararray"
+		PushConstant0
+		GetArrayValue
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "z"
+		GetThisMemberValueString      "scale"
+		GetThisMemberValueString      "horizontal"
+		GetThisMemberValueString      "verticle"
+		GetThisMemberValueString      "padadjustment"
+		Pull                          11
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  11
+		Pop
+		LineNumber                    2159, 4
+		LineNumberAlt1                452, 12
+		SetVariableValue              2               ; local
+		LineNumber                    2160, 4
+		LineNumberAlt1                453, 12
+		GetThisMemberValueString      "textarray"
+		GetVariableValue              2               ; local
+		AppendToArray
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    2164, 4
+		LineNumberAlt1                457, 12
+		GetThisMemberValueString      "textarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1               ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              1               ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    2165, 4
+		LineNumberAlt1                458, 12
+		GetThisMemberValueString      "textarray"
+		GetVariableValue              1               ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x2f58a
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 465:465
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2172, 4
+		LineNumberAlt1              465, 12
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x2f5a1
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 470:470
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2177, 4
+		LineNumberAlt1              470, 12
+		PushNothing
+		SetThisMemberValueString    "textarray"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x2f5b3
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 475:476
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    2182, 4
+		LineNumberAlt1                475, 12
+		GetThisMemberValueString      "textarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1           ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1           ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    2183, 4
+		LineNumberAlt1                476, 12
+		GetThisMemberValueString      "textarray"
+		GetVariableValue              1           ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x2f5f5
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 482:483
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    2189, 4
+		LineNumberAlt1                482, 12
+		GetThisMemberValueString      "textarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1           ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1           ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    2190, 4
+		LineNumberAlt1                483, 12
+		GetThisMemberValueString      "textarray"
+		GetVariableValue              1           ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "remove"
+		; address: 0x2f637
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 488:489
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    2195, 4
+		LineNumberAlt1                488, 12
+		GetThisMemberValueString      "textarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1           ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1           ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    2196, 4
+		LineNumberAlt1                489, 12
+		GetThisMemberValueString      "textarray"
+		GetVariableValue              1           ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "showcurrent"
+		; address: 0x2f679
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 495:495
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2202, 4
+		LineNumberAlt1              495, 12
+		GetThisMemberValueString    "textarray"
+		GetThisMemberValueString    "currentitem"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "show"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hidecurrent"
+		; address: 0x2f695
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 500:500
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2207, 4
+		LineNumberAlt1              500, 12
+		GetThisMemberValueString    "textarray"
+		GetThisMemberValueString    "currentitem"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "get"
+		; address: 0x2f6b1
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 505:508
+		MemberFunctionArgumentCheck   2
+		LineNumber                    2212, 4
+		LineNumberAlt1                505, 12
+		GetVariableValue              1             ; local
+		PushConstanti8                0
+		GreaterOrEqual
+		GetVariableValue              1             ; local
+		GetThisMemberValueString      "textarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessOrEqual
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2213, 4
+		LineNumberAlt1                506, 12
+		GetThisMemberValueString      "textarray"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Return
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    2215, 4
+		LineNumberAlt1                508, 12
+		GetThisMemberValueString      "textarray"
+		GetThisMemberValueString      "currentitem"
+		GetArrayValue
+		Return
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getcurrent"
+		; address: 0x2f6fb
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 514:514
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2221, 4
+		LineNumberAlt1              514, 12
+		GetThisMemberValueString    "currentitem"
+		Return
+	end ; method
+
+	begin method "setcurrent"
+		; address: 0x2f70b
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 519:520
+		MemberFunctionArgumentCheck   2
+		LineNumber                    2226, 4
+		LineNumberAlt1                519, 12
+		GetVariableValue              1             ; local
+		GetThisMemberValueString      "textarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessOrEqual
+		GetVariableValue              1             ; local
+		PushConstanti8                0
+		GreaterOrEqual
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2227, 4
+		LineNumberAlt1                520, 12
+		GetVariableValue              1             ; local
+		SetThisMemberValueString      "currentitem"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getsize"
+		; address: 0x2f73e
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 526:526
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2233, 4
+		LineNumberAlt1              526, 12
+		GetThisMemberValueString    "textarray"
+		ElementsInArray
+		Return
+	end ; method
+
+	begin method "getlbound"
+		; address: 0x2f74f
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 531:531
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2238, 4
+		LineNumberAlt1              531, 12
+		PushConstanti8              0
+		Return
+	end ; method
+
+	begin method "getubound"
+		; address: 0x2f75e
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 536:536
+		MemberFunctionArgumentCheck 1
+		LineNumber                  2243, 4
+		LineNumberAlt1              536, 12
+		GetThisMemberValueString    "textarray"
+		ElementsInArray
+		PushConstanti8              1
+		Subtract
+		Return
+	end ; method
+
+	begin method "setactive"
+		; address: 0x2f772
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 541:541
+		MemberFunctionArgumentCheck 2
+		LineNumber                  2248, 4
+		LineNumberAlt1              541, 12
+		GetThisMemberValueString    "textarray"
+		GetThisMemberValueString    "currentitem"
+		GetArrayValue
+		GetVariableValue            1             ; local
+		Pull                        2
+		GetMemberFunctionString     "setactive"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setinactive"
+		; address: 0x2f792
+		; source: 12 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase\\ss_basetext.vbo" 546:546
+		MemberFunctionArgumentCheck 2
+		LineNumber                  2253, 4
+		LineNumberAlt1              546, 12
+		GetThisMemberValueString    "textarray"
+		GetThisMemberValueString    "currentitem"
+		GetArrayValue
+		GetVariableValue            1             ; local
+		Pull                        2
+		GetMemberFunctionString     "setinactive"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

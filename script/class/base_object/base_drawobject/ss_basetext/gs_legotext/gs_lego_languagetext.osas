@@ -1,0 +1,97 @@
+begin class "gs_lego_languagetext", "gs_legotext"
+	property "stringtable"
+	property "stringindex"
+
+	begin method "gs_lego_languagetext"
+		; address: 0x302fb
+		; source: 11 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_text.vbo" 332:337
+		MemberFunctionArgumentCheck 12
+		CreateStackVariables        1
+		LineNumber                  2617, 4
+		LineNumberAlt1              332, 11
+		GetVariableValue            3                                  ; local
+		SetThisMemberValueString    "stringtable"
+		LineNumber                  2618, 4
+		LineNumberAlt1              333, 11
+		GetVariableValue            2                                  ; local
+		SetThisMemberValueString    "stringindex"
+		LineNumber                  2620, 4
+		LineNumberAlt1              335, 11
+		GetThisMemberValueString    "stringtable"
+		GetMemberValueString        "languagearray"
+		GetThisMemberValueString    "stringindex"
+		GetArrayValue
+		SetVariableValue            12                                 ; local
+		LineNumber                  2621, 4
+		LineNumberAlt1              336, 11
+		GetVariableValue            12                                 ; local
+		CallGameFunctionString      "scslosistringfuncs", "toupper", 1
+		LineNumber                  2621, 4
+		LineNumberAlt1              336, 11
+		SetVariableValue            12                                 ; local
+		LineNumber                  2622, 4
+		LineNumberAlt1              337, 11
+		GetVariableValue            0                                  ; local
+		GetVariableValue            1                                  ; local
+		GetVariableValue            12                                 ; local
+		GetVariableValue            4                                  ; local
+		GetVariableValue            5                                  ; local
+		GetVariableValue            6                                  ; local
+		GetVariableValue            7                                  ; local
+		GetVariableValue            8                                  ; local
+		GetVariableValue            9                                  ; local
+		GetVariableValue            10                                 ; local
+		GetVariableValue            11                                 ; local
+		GetThisMemberFunctionString "gs_legotext"
+		JumpAbsolute                11
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setstring"
+		; address: 0x30389
+		; source: 11 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_text.vbo" 344:350
+		MemberFunctionArgumentCheck   3
+		LineNumber                    2629, 4
+		LineNumberAlt1                344, 11
+		GetVariableValue              1                                  ; local
+		SetThisMemberValueString      "stringindex"
+		LineNumber                    2630, 4
+		LineNumberAlt1                345, 11
+		GetVariableValue              2                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    2631, 4
+		LineNumberAlt1                346, 11
+		GetVariableValue              2                                  ; local
+		SetThisMemberValueString      "stringtable"
+		; <-
+		BranchTarget                  0
+		LineNumber                    2633, 4
+		LineNumberAlt1                348, 11
+		GetThisMemberValueString      "stringtable"
+		GetMemberValueString          "languagearray"
+		GetThisMemberValueString      "stringindex"
+		GetArrayValue
+		SetThisMemberValueString      "string"
+		LineNumber                    2634, 4
+		LineNumberAlt1                349, 11
+		GetThisMemberValueString      "string"
+		CallGameFunctionString        "scslosistringfuncs", "toupper", 1
+		LineNumber                    2634, 4
+		LineNumberAlt1                349, 11
+		SetThisMemberValueString      "string"
+		LineNumber                    2635, 4
+		LineNumberAlt1                350, 11
+		GetThisMemberValueString      "text"
+		GetThisMemberValueString      "string"
+		CallGameFunctionString        "sctextobject", "setstring", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

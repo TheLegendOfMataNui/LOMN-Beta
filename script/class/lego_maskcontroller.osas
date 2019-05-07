@@ -1,0 +1,1710 @@
+begin class "lego_maskcontroller"
+	property "masks"
+	property "currentmask"
+	property "currentidx"
+	property "active"
+	property "resetflag"
+	property "disabled"
+
+	begin method "lego_maskcontroller"
+		; address: 0x3feb3
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x3feb7
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 94:99
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18007, 4
+		LineNumberAlt1              94, 53
+		CreateArray
+		SetThisMemberValueString    "masks"
+		LineNumber                  18008, 4
+		LineNumberAlt1              95, 53
+		PushConstant0
+		SetThisMemberValueString    "active"
+		LineNumber                  18009, 4
+		LineNumberAlt1              96, 53
+		PushNothing
+		SetThisMemberValueString    "currentmask"
+		LineNumber                  18010, 4
+		LineNumberAlt1              97, 53
+		PushNothing
+		SetThisMemberValueString    "currentidx"
+		LineNumber                  18011, 4
+		LineNumberAlt1              98, 53
+		PushConstant0
+		SetThisMemberValueString    "resetflag"
+		LineNumber                  18012, 4
+		LineNumberAlt1              99, 53
+		PushConstant0
+		SetThisMemberValueString    "disabled"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x3ff0f
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 104:114
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    18017, 4
+		LineNumberAlt1                104, 53
+		GetThisMemberValueString      "masks"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18018, 4
+		LineNumberAlt1                105, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1             ; local
+		LineNumber                    18019, 4
+		LineNumberAlt1                106, 53
+		GetVariableValue              1             ; local
+		PushConstant0
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18020, 4
+		LineNumberAlt1                107, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    18022, 4
+		LineNumberAlt1                109, 53
+		PushNothing
+		SetThisMemberValueString      "masks"
+		; <-
+		BranchTarget                  2
+		LineNumber                    18024, 4
+		LineNumberAlt1                111, 53
+		PushNothing
+		SetThisMemberValueString      "active"
+		LineNumber                    18025, 4
+		LineNumberAlt1                112, 53
+		PushNothing
+		SetThisMemberValueString      "currentmask"
+		LineNumber                    18026, 4
+		LineNumberAlt1                113, 53
+		PushNothing
+		SetThisMemberValueString      "currentidx"
+		LineNumber                    18027, 4
+		LineNumberAlt1                114, 53
+		PushNothing
+		SetThisMemberValueString      "resetflag"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x3ffb8
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x3ffbc
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 124:132
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    18037, 4
+		LineNumberAlt1                124, 53
+		GetThisMemberValueString      "masks"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18038, 4
+		LineNumberAlt1                125, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1               ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1               ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18039, 4
+		LineNumberAlt1                126, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              1               ; local
+		GetArrayValue
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "setselectable"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    18042, 4
+		LineNumberAlt1                129, 53
+		PushNothing
+		SetThisMemberValueString      "currentmask"
+		LineNumber                    18043, 4
+		LineNumberAlt1                130, 53
+		PushNothing
+		SetThisMemberValueString      "currentidx"
+		LineNumber                    18044, 4
+		LineNumberAlt1                131, 53
+		PushConstant0
+		SetThisMemberValueString      "active"
+		LineNumber                    18045, 4
+		LineNumberAlt1                132, 53
+		PushConstanti8                1
+		SetThisMemberValueString      "resetflag"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "usemasks"
+		; address: 0x4004c
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 137:140
+		MemberFunctionArgumentCheck   2
+		LineNumber                    18050, 4
+		LineNumberAlt1                137, 53
+		GetVariableValue              1          ; local
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18051, 4
+		LineNumberAlt1                138, 53
+		PushConstant0
+		SetThisMemberValueString      "disabled"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    18053, 4
+		LineNumberAlt1                140, 53
+		PushConstanti8                1
+		SetThisMemberValueString      "disabled"
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "addallmasks"
+		; address: 0x40080
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 150:215
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    18063, 4
+		LineNumberAlt1                150, 53
+		PushConstant0
+		SetThisMemberValueString      "resetflag"
+		LineNumber                    18064, 4
+		LineNumberAlt1                151, 53
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "charname"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18064, 4
+		LineNumberAlt1                151, 53
+		Dup
+		PushConstantStringString      "onua"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18065, 4
+		LineNumberAlt1                152, 53
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18066, 4
+		LineNumberAlt1                153, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk0a"
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18066, 4
+		LineNumberAlt1                153, 53
+		AppendToArray
+		LineNumber                    18067, 4
+		LineNumberAlt1                154, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk7a"
+		PushConstanti8                7
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18067, 4
+		LineNumberAlt1                154, 53
+		AppendToArray
+		LineNumber                    18068, 4
+		LineNumberAlt1                155, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk8a"
+		PushConstanti8                8
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18068, 4
+		LineNumberAlt1                155, 53
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstantStringString      "gali"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18070, 4
+		LineNumberAlt1                157, 53
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18071, 4
+		LineNumberAlt1                158, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk0a"
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18071, 4
+		LineNumberAlt1                158, 53
+		AppendToArray
+		LineNumber                    18072, 4
+		LineNumberAlt1                159, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk1a"
+		PushConstanti8                1
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18072, 4
+		LineNumberAlt1                159, 53
+		AppendToArray
+		LineNumber                    18073, 4
+		LineNumberAlt1                160, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk7a"
+		PushConstanti8                7
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18073, 4
+		LineNumberAlt1                160, 53
+		AppendToArray
+		LineNumber                    18074, 4
+		LineNumberAlt1                161, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk8a"
+		PushConstanti8                8
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18074, 4
+		LineNumberAlt1                161, 53
+		AppendToArray
+		LineNumber                    18075, 4
+		LineNumberAlt1                162, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk9a"
+		PushConstanti8                9
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18075, 4
+		LineNumberAlt1                162, 53
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstantStringString      "poha"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18077, 4
+		LineNumberAlt1                164, 53
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18078, 4
+		LineNumberAlt1                165, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk0a"
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18078, 4
+		LineNumberAlt1                165, 53
+		AppendToArray
+		LineNumber                    18079, 4
+		LineNumberAlt1                166, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk1a"
+		PushConstanti8                1
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18079, 4
+		LineNumberAlt1                166, 53
+		AppendToArray
+		LineNumber                    18080, 4
+		LineNumberAlt1                167, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk2a"
+		PushConstanti8                2
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18080, 4
+		LineNumberAlt1                167, 53
+		AppendToArray
+		LineNumber                    18081, 4
+		LineNumberAlt1                168, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk7a"
+		PushConstanti8                7
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18081, 4
+		LineNumberAlt1                168, 53
+		AppendToArray
+		LineNumber                    18082, 4
+		LineNumberAlt1                169, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk8a"
+		PushConstanti8                8
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18082, 4
+		LineNumberAlt1                169, 53
+		AppendToArray
+		LineNumber                    18083, 4
+		LineNumberAlt1                170, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk9a"
+		PushConstanti8                9
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18083, 4
+		LineNumberAlt1                170, 53
+		AppendToArray
+		LineNumber                    18084, 4
+		LineNumberAlt1                171, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkaa"
+		PushConstanti8                10
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18084, 4
+		LineNumberAlt1                171, 53
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstantStringString      "kopa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18086, 4
+		LineNumberAlt1                173, 53
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    18087, 4
+		LineNumberAlt1                174, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk0a"
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18087, 4
+		LineNumberAlt1                174, 53
+		AppendToArray
+		LineNumber                    18088, 4
+		LineNumberAlt1                175, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk1a"
+		PushConstanti8                1
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18088, 4
+		LineNumberAlt1                175, 53
+		AppendToArray
+		LineNumber                    18089, 4
+		LineNumberAlt1                176, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk2a"
+		PushConstanti8                2
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18089, 4
+		LineNumberAlt1                176, 53
+		AppendToArray
+		LineNumber                    18090, 4
+		LineNumberAlt1                177, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk3a"
+		PushConstanti8                3
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18090, 4
+		LineNumberAlt1                177, 53
+		AppendToArray
+		LineNumber                    18091, 4
+		LineNumberAlt1                178, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk7a"
+		PushConstanti8                7
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18091, 4
+		LineNumberAlt1                178, 53
+		AppendToArray
+		LineNumber                    18092, 4
+		LineNumberAlt1                179, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk8a"
+		PushConstanti8                8
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18092, 4
+		LineNumberAlt1                179, 53
+		AppendToArray
+		LineNumber                    18093, 4
+		LineNumberAlt1                180, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk9a"
+		PushConstanti8                9
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18093, 4
+		LineNumberAlt1                180, 53
+		AppendToArray
+		LineNumber                    18094, 4
+		LineNumberAlt1                181, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkaa"
+		PushConstanti8                10
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18094, 4
+		LineNumberAlt1                181, 53
+		AppendToArray
+		LineNumber                    18095, 4
+		LineNumberAlt1                182, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkba"
+		PushConstanti8                11
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18095, 4
+		LineNumberAlt1                182, 53
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstantStringString      "lewa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18097, 4
+		LineNumberAlt1                184, 53
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    18098, 4
+		LineNumberAlt1                185, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk0a"
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18098, 4
+		LineNumberAlt1                185, 53
+		AppendToArray
+		LineNumber                    18099, 4
+		LineNumberAlt1                186, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk1a"
+		PushConstanti8                1
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18099, 4
+		LineNumberAlt1                186, 53
+		AppendToArray
+		LineNumber                    18100, 4
+		LineNumberAlt1                187, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk2a"
+		PushConstanti8                2
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18100, 4
+		LineNumberAlt1                187, 53
+		AppendToArray
+		LineNumber                    18101, 4
+		LineNumberAlt1                188, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk3a"
+		PushConstanti8                3
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18101, 4
+		LineNumberAlt1                188, 53
+		AppendToArray
+		LineNumber                    18102, 4
+		LineNumberAlt1                189, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk4a"
+		PushConstanti8                4
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18102, 4
+		LineNumberAlt1                189, 53
+		AppendToArray
+		LineNumber                    18103, 4
+		LineNumberAlt1                190, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk7a"
+		PushConstanti8                7
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18103, 4
+		LineNumberAlt1                190, 53
+		AppendToArray
+		LineNumber                    18104, 4
+		LineNumberAlt1                191, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk8a"
+		PushConstanti8                8
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18104, 4
+		LineNumberAlt1                191, 53
+		AppendToArray
+		LineNumber                    18105, 4
+		LineNumberAlt1                192, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk9a"
+		PushConstanti8                9
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18105, 4
+		LineNumberAlt1                192, 53
+		AppendToArray
+		LineNumber                    18106, 4
+		LineNumberAlt1                193, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkaa"
+		PushConstanti8                10
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18106, 4
+		LineNumberAlt1                193, 53
+		AppendToArray
+		LineNumber                    18107, 4
+		LineNumberAlt1                194, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkba"
+		PushConstanti8                11
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18107, 4
+		LineNumberAlt1                194, 53
+		AppendToArray
+		LineNumber                    18108, 4
+		LineNumberAlt1                195, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkca"
+		PushConstanti8                12
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18108, 4
+		LineNumberAlt1                195, 53
+		AppendToArray
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstantStringString      "tahu"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18110, 4
+		LineNumberAlt1                197, 53
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    18111, 4
+		LineNumberAlt1                198, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk0a"
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18111, 4
+		LineNumberAlt1                198, 53
+		AppendToArray
+		LineNumber                    18112, 4
+		LineNumberAlt1                199, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk1a"
+		PushConstanti8                1
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18112, 4
+		LineNumberAlt1                199, 53
+		AppendToArray
+		LineNumber                    18113, 4
+		LineNumberAlt1                200, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk2a"
+		PushConstanti8                2
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18113, 4
+		LineNumberAlt1                200, 53
+		AppendToArray
+		LineNumber                    18114, 4
+		LineNumberAlt1                201, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk3a"
+		PushConstanti8                3
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18114, 4
+		LineNumberAlt1                201, 53
+		AppendToArray
+		LineNumber                    18115, 4
+		LineNumberAlt1                202, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk4a"
+		PushConstanti8                4
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18115, 4
+		LineNumberAlt1                202, 53
+		AppendToArray
+		LineNumber                    18116, 4
+		LineNumberAlt1                203, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk5a"
+		PushConstanti8                5
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18116, 4
+		LineNumberAlt1                203, 53
+		AppendToArray
+		LineNumber                    18117, 4
+		LineNumberAlt1                204, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk6a"
+		PushConstanti16               1011
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18117, 4
+		LineNumberAlt1                204, 53
+		AppendToArray
+		LineNumber                    18118, 4
+		LineNumberAlt1                205, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk7a"
+		PushConstanti8                7
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18118, 4
+		LineNumberAlt1                205, 53
+		AppendToArray
+		LineNumber                    18119, 4
+		LineNumberAlt1                206, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk8a"
+		PushConstanti8                8
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18119, 4
+		LineNumberAlt1                206, 53
+		AppendToArray
+		LineNumber                    18120, 4
+		LineNumberAlt1                207, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mk9a"
+		PushConstanti8                9
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18120, 4
+		LineNumberAlt1                207, 53
+		AppendToArray
+		LineNumber                    18121, 4
+		LineNumberAlt1                208, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkaa"
+		PushConstanti8                10
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18121, 4
+		LineNumberAlt1                208, 53
+		AppendToArray
+		LineNumber                    18122, 4
+		LineNumberAlt1                209, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkba"
+		PushConstanti8                11
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18122, 4
+		LineNumberAlt1                209, 53
+		AppendToArray
+		LineNumber                    18123, 4
+		LineNumberAlt1                210, 53
+		GetThisMemberValueString      "masks"
+		CreateObjectString            "mask"
+		Dup
+		PushConstantStringString      "mkca"
+		PushConstanti8                12
+		Pull                          3
+		GetMemberFunctionString       "mask"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    18123, 4
+		LineNumberAlt1                210, 53
+		AppendToArray
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    18127, 4
+		LineNumberAlt1                214, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                                            ; local
+		; <-
+		BranchTarget                  6
+		Dup
+		GetVariableValue              1                                            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    18128, 4
+		LineNumberAlt1                215, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              1                                            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x40941
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 223:233
+		MemberFunctionArgumentCheck   2
+		LineNumber                    18136, 4
+		LineNumberAlt1                223, 53
+		GetThisMemberValueString      "currentmask"
+		Dup
+		PushConstanti8                11
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18140, 4
+		LineNumberAlt1                227, 53
+		GetThisMemberValueString      "active"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18141, 4
+		LineNumberAlt1                228, 53
+		GetVariableValue              1                 ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18142, 4
+		LineNumberAlt1                229, 53
+		GetVariableValue              1                 ; local
+		GetMemberValueString          "button"
+		Dup
+		PushConstanti16               227
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18144, 4
+		LineNumberAlt1                231, 53
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               0.5
+		Pull                          2
+		GetMemberFunctionString       "telekineticpush"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti16               228
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18146, 4
+		LineNumberAlt1                233, 53
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               0.5
+		Pull                          2
+		GetMemberFunctionString       "telekineticpull"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getmask"
+		; address: 0x409e7
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 244:244
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18157, 4
+		LineNumberAlt1              244, 53
+		GetThisMemberValueString    "currentmask"
+		Return
+	end ; method
+
+	begin method "getdrainrate"
+		; address: 0x409f7
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 249:252
+		MemberFunctionArgumentCheck   1
+		LineNumber                    18162, 4
+		LineNumberAlt1                249, 53
+		GetThisMemberValueString      "currentmask"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18163, 4
+		LineNumberAlt1                250, 53
+		GetThisMemberValueString      "masks"
+		GetThisMemberValueString      "currentidx"
+		GetArrayValue
+		GetMemberValueString          "powerdrainrate"
+		Return
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    18165, 4
+		LineNumberAlt1                252, 53
+		PushConstant0
+		Return
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "isactive"
+		; address: 0x40a32
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 258:258
+		MemberFunctionArgumentCheck 1
+		LineNumber                  18171, 4
+		LineNumberAlt1              258, 53
+		GetThisMemberValueString    "active"
+		Return
+	end ; method
+
+	begin method "toggleactive"
+		; address: 0x40a42
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 267:275
+		MemberFunctionArgumentCheck   1
+		LineNumber                    18180, 4
+		LineNumberAlt1                267, 53
+		GetThisMemberValueString      "currentidx"
+		PushNothing
+		EqualTo
+		Not
+		GetThisMemberValueString      "disabled"
+		PushConstant0
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18181, 4
+		LineNumberAlt1                268, 53
+		GetThisMemberValueString      "active"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18182, 4
+		LineNumberAlt1                269, 53
+		GetThisMemberValueString      "masks"
+		GetThisMemberValueString      "currentidx"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "activate"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    18183, 4
+		LineNumberAlt1                270, 53
+		PushConstanti8                1
+		SetThisMemberValueString      "active"
+		LineNumber                    18184, 4
+		LineNumberAlt1                271, 53
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "mask"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "animate"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    18186, 4
+		LineNumberAlt1                273, 53
+		GetThisMemberValueString      "masks"
+		GetThisMemberValueString      "currentidx"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "deactivate"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    18187, 4
+		LineNumberAlt1                274, 53
+		PushConstant0
+		SetThisMemberValueString      "active"
+		LineNumber                    18188, 4
+		LineNumberAlt1                275, 53
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "mask"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "animate"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setselectable"
+		; address: 0x40afa
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 282:290
+		MemberFunctionArgumentCheck   3
+		CreateStackVariables          1
+		LineNumber                    18195, 4
+		LineNumberAlt1                282, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    18196, 4
+		LineNumberAlt1                283, 53
+		GetVariableValue              2               ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18197, 4
+		LineNumberAlt1                284, 53
+		PushConstanti8                1
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    18199, 4
+		LineNumberAlt1                286, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3               ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              3               ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    18200, 4
+		LineNumberAlt1                287, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              3               ; local
+		GetArrayValue
+		GetMemberValueString          "maskname"
+		GetVariableValue              1               ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18201, 4
+		LineNumberAlt1                288, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              3               ; local
+		GetArrayValue
+		GetVariableValue              2               ; local
+		Pull                          2
+		GetMemberFunctionString       "setselectable"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    18202, 4
+		LineNumberAlt1                289, 53
+		GetThisMemberValueString      "currentmask"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18203, 4
+		LineNumberAlt1                290, 53
+		GetVariableValue              0               ; local
+		GetVariableValue              1               ; local
+		GetThisMemberFunctionString   "changemask"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		IncrementVariable             3
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		; <-
+		BranchTarget                  4
+		PushNothing
+		Return
+	end ; method
+
+	begin method "isselectable"
+		; address: 0x40bba
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 299:306
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    18212, 4
+		LineNumberAlt1                299, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2            ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18213, 4
+		LineNumberAlt1                300, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              2            ; local
+		GetArrayValue
+		GetMemberValueString          "selectable"
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18214, 4
+		LineNumberAlt1                301, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              2            ; local
+		GetArrayValue
+		GetMemberValueString          "maskname"
+		GetVariableValue              1            ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18215, 4
+		LineNumberAlt1                302, 53
+		PushConstanti8                1
+		Return
+		; <-
+		BranchTarget                  1
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		LineNumber                    18219, 4
+		LineNumberAlt1                306, 53
+		PushConstant0
+		Return
+	end ; method
+
+	begin method "setdrainrateofmask"
+		; address: 0x40c2d
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 311:314
+		MemberFunctionArgumentCheck   3
+		CreateStackVariables          1
+		LineNumber                    18224, 4
+		LineNumberAlt1                311, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    18225, 4
+		LineNumberAlt1                312, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              3                    ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              3                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18226, 4
+		LineNumberAlt1                313, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              3                    ; local
+		GetArrayValue
+		GetMemberValueString          "maskname"
+		GetVariableValue              1                    ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18227, 4
+		LineNumberAlt1                314, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              3                    ; local
+		GetArrayValue
+		GetVariableValue              2                    ; local
+		Pull                          2
+		GetMemberFunctionString       "setdrainrateofmask"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		IncrementVariable             3
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "changemask"
+		; address: 0x40ca4
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 328:351
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    18241, 4
+		LineNumberAlt1                328, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    18242, 4
+		LineNumberAlt1                329, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                        ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                        ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    18243, 4
+		LineNumberAlt1                330, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              2                        ; local
+		GetArrayValue
+		GetMemberValueString          "maskname"
+		GetVariableValue              1                        ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    18244, 4
+		LineNumberAlt1                331, 53
+		GetThisMemberValueString      "masks"
+		GetVariableValue              2                        ; local
+		GetArrayValue
+		GetMemberValueString          "selectable"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    18245, 4
+		LineNumberAlt1                332, 53
+		GetThisMemberValueString      "currentidx"
+		PushNothing
+		EqualTo
+		Not
+		GetThisMemberValueString      "active"
+		PushConstanti8                1
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    18246, 4
+		LineNumberAlt1                333, 53
+		GetThisMemberValueString      "masks"
+		GetThisMemberValueString      "currentidx"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "deactivate"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    18248, 4
+		LineNumberAlt1                335, 53
+		PushConstant0
+		SetThisMemberValueString      "active"
+		LineNumber                    18249, 4
+		LineNumberAlt1                336, 53
+		GetVariableValue              2                        ; local
+		SetThisMemberValueString      "currentidx"
+		LineNumber                    18250, 4
+		LineNumberAlt1                337, 53
+		GetThisMemberValueString      "currentmask"
+		GetVariableValue              1                        ; local
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18252, 4
+		LineNumberAlt1                339, 53
+		GetVariableValue              1                        ; local
+		SetThisMemberValueString      "currentmask"
+		; <-
+		BranchTarget                  2
+		LineNumber                    18254, 4
+		LineNumberAlt1                341, 53
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "mask"
+		GetThisMemberValueString      "currentidx"
+		Pull                          2
+		GetMemberFunctionString       "selectmask"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    18255, 4
+		LineNumberAlt1                342, 53
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "toahandle"
+		GetThisMemberValueString      "masks"
+		GetThisMemberValueString      "currentidx"
+		GetArrayValue
+		GetMemberValueString          "maskid"
+		CallGameFunctionString        "gctoa", "switchmask", 2
+		Pop
+		LineNumber                    18256, 4
+		LineNumberAlt1                343, 53
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    18257, 4
+		LineNumberAlt1                344, 53
+		PushConstanti8                1
+		Return
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    18259, 4
+		LineNumberAlt1                346, 53
+		PushConstant0
+		Return
+		; <-
+		BranchTarget                  4
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		; <-
+		BranchTarget                  6
+		LineNumber                    18264, 4
+		LineNumberAlt1                351, 53
+		PushConstant0
+		Return
+	end ; method
+
+	begin method "nextmask"
+		; address: 0x40e10
+		; source: 53 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_masks.vbo" 361:383
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          3
+		LineNumber                    18274, 4
+		LineNumberAlt1                361, 53
+		GetVariableValue              1            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18275, 4
+		LineNumberAlt1                362, 53
+		PushConstanti8                1
+		SetVariableValue              2            ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    18280, 4
+		LineNumberAlt1                367, 53
+		GetThisMemberValueString      "currentidx"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    18281, 4
+		LineNumberAlt1                368, 53
+		GetThisMemberValueString      "currentidx"
+		SetVariableValue              3            ; local
+		LineNumber                    18282, 4
+		LineNumberAlt1                369, 53
+		PushConstant0
+		SetVariableValue              4            ; local
+		LineNumber                    18284, 4
+		LineNumberAlt1                371, 53
+		; <-
+		BranchTarget                  1
+		LineNumber                    18284, 4
+		LineNumberAlt1                371, 53
+		GetVariableValue              1            ; local
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    18285, 4
+		LineNumberAlt1                372, 53
+		GetVariableValue              3            ; local
+		PushConstanti8                1
+		Add
+		SetVariableValue              3            ; local
+		LineNumber                    18286, 4
+		LineNumberAlt1                373, 53
+		GetVariableValue              3            ; local
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    18287, 4
+		LineNumberAlt1                374, 53
+		PushConstant0
+		SetVariableValue              3            ; local
+		; <-
+		BranchTarget                  2
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    18290, 4
+		LineNumberAlt1                377, 53
+		GetVariableValue              3            ; local
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              3            ; local
+		LineNumber                    18291, 4
+		LineNumberAlt1                378, 53
+		GetVariableValue              3            ; local
+		PushConstant0
+		LessThan
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    18292, 4
+		LineNumberAlt1                379, 53
+		GetThisMemberValueString      "masks"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              3            ; local
+		; <-
+		BranchTarget                  4
+		LineNumber                    18295, 4
+		LineNumberAlt1                382, 53
+		GetVariableValue              4            ; local
+		PushConstanti8                1
+		Add
+		SetVariableValue              4            ; local
+		LineNumber                    18296, 4
+		LineNumberAlt1                383, 53
+		GetVariableValue              0            ; local
+		GetThisMemberValueString      "masks"
+		GetVariableValue              3            ; local
+		GetArrayValue
+		GetMemberValueString          "maskname"
+		GetThisMemberFunctionString   "changemask"
+		JumpAbsolute                  2
+		LineNumber                    18296, 4
+		LineNumberAlt1                383, 53
+		PushConstant0
+		EqualTo
+		GetVariableValue              4            ; local
+		PushConstanti8                20
+		LessThan
+		And
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+end ; class

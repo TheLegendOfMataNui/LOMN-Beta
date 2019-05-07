@@ -1,0 +1,225 @@
+begin class "lego_area_mtup2", "gs_lego_area"
+	property "cinema"
+
+	begin method "lego_area_mtup2"
+		; address: 0x7ae87
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 31:31
+		MemberFunctionArgumentCheck 2
+		LineNumber                  52882, 4
+		LineNumberAlt1              31, 135
+		GetVariableValue            0              ; local
+		PushConstantStringString    "mtup"
+		GetVariableValue            1              ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x7aea6
+		; source: 141 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_shrn.vbo" 99:100
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 40:49
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 103:103
+		MemberFunctionArgumentCheck   1
+		LineNumber                    54354, 4
+		LineNumberAlt1                99, 141
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicGaliAmbience"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    54355, 4
+		LineNumberAlt1                100, 141
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    52891, 4
+		LineNumberAlt1                40, 135
+		PushConstanti8                7
+		CallGameFunctionString        "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                    52892, 4
+		LineNumberAlt1                41, 135
+		PushConstanti8                7
+		CallGameFunctionString        "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                    52893, 4
+		LineNumberAlt1                42, 135
+		PushConstanti32               -9143565
+		PushConstant0
+		PushConstantf32               1000
+		Subtract
+		PushConstant0
+		PushConstantf32               2400
+		Subtract
+		PushConstantf32               0.009999999776482582
+		CallGameFunctionString        "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                    52894, 4
+		LineNumberAlt1                43, 135
+		PushConstant0
+		CallGameFunctionString        "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                    63403, 4
+		LineNumberAlt1                103, 162
+		PushConstantStringString      "cin1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    63403, 4
+		LineNumberAlt1                103, 162
+		CallGameFunctionString        "gcsaver", "findcinema", 1
+		LineNumber                    63403, 4
+		LineNumberAlt1                103, 162
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    52896, 4
+		LineNumberAlt1                45, 135
+		CallGameFunctionString        "gccinemaengine", "create", 0
+		LineNumber                    52896, 4
+		LineNumberAlt1                45, 135
+		SetThisMemberValueString      "cinema"
+		LineNumber                    52897, 4
+		LineNumberAlt1                46, 135
+		GetThisMemberValueString      "cinema"
+		PushConstantStringString      "cin1"
+		CallGameFunctionString        "gccinemaengine", "load", 2
+		Pop
+		LineNumber                    52899, 4
+		LineNumberAlt1                48, 135
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    52900, 4
+		LineNumberAlt1                49, 135
+		GetThisMemberValueString      "cinema"
+		CallGameFunctionString        "gccinemaengine", "play", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x7afce
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 54:54
+		MemberFunctionArgumentCheck 1
+		LineNumber                  52905, 4
+		LineNumberAlt1              54, 135
+		PushNothing
+		SetThisMemberValueString    "cinema"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x7afe0
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 59:63
+		MemberFunctionArgumentCheck   2
+		LineNumber                    52910, 4
+		LineNumberAlt1                59, 135
+		GetVariableValue              1                           ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    52911, 4
+		LineNumberAlt1                60, 135
+		GetVariableValue              1                           ; local
+		GetMemberValueString          "button"
+		Dup
+		PushConstanti16               251
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    52913, 4
+		LineNumberAlt1                62, 135
+		GetThisMemberValueString      "cinema"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    52914, 4
+		LineNumberAlt1                63, 135
+		GetThisMemberValueString      "cinema"
+		CallGameFunctionString        "gccinemaengine", "stop", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x7b03a
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 72:74
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 165:166
+		MemberFunctionArgumentCheck   2
+		LineNumber                    52923, 4
+		LineNumberAlt1                72, 135
+		GetVariableValue              1                                    ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                30
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    63465, 4
+		LineNumberAlt1                165, 162
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicGaliAmbience"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    63466, 4
+		LineNumberAlt1                166, 162
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    52925, 4
+		LineNumberAlt1                74, 135
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "maskcontrol"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "changemask"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x7b0a6
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,300 @@
+begin class "lego_testlevel", "base_screen"
+	property "cam"
+	property "hud"
+	property "rock"
+	property "level"
+	property "waterfallsound"
+	property "ambientsound"
+	property "sounddirector"
+	property "digpuzzle"
+
+	begin method "lego_testlevel"
+		; address: 0x7977e
+		; source: 133 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_tura.vbo" 42:43
+		MemberFunctionArgumentCheck 1
+		LineNumber                  52380, 4
+		LineNumberAlt1              42, 133
+		CreateObjectString          "level1arealoader"
+		Dup
+		Dup
+		GetMemberFunctionString     "level1arealoader"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  52380, 4
+		LineNumberAlt1              42, 133
+		SetThisMemberValueString    "level"
+		LineNumber                  52381, 4
+		LineNumberAlt1              43, 133
+		CreateObjectString          "cavedigging"
+		Dup
+		Dup
+		GetMemberFunctionString     "cavedigging"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  52381, 4
+		LineNumberAlt1              43, 133
+		SetThisMemberValueString    "digpuzzle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x797c6
+		; source: 133 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_tura.vbo" 52:88
+		MemberFunctionArgumentCheck  1
+		LineNumber                   52390, 4
+		LineNumberAlt1               52, 133
+		CreateObjectString           "gs_legocamera"
+		Dup
+		PushConstant0
+		PushConstantf32              1000
+		Subtract
+		PushConstantf32              1500
+		PushConstantf32              3000
+		PushConstant0
+		PushConstantf32              1000
+		Subtract
+		PushConstantf32              800
+		PushConstantf32              0
+		Pull                         7
+		GetMemberFunctionString      "gs_legocamera"
+		JumpAbsolute                 7
+		Pop
+		LineNumber                   52390, 4
+		LineNumberAlt1               52, 133
+		SetThisMemberValueString     "cam"
+		LineNumber                   52391, 4
+		LineNumberAlt1               53, 133
+		GetThisMemberValueString     "level"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   52394, 4
+		LineNumberAlt1               56, 133
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		PushConstantStringString     "cnt1"
+		PushConstantStringString     "onua"
+		PushConstanti16              180
+		PushConstanti16              -300
+		PushConstant0
+		PushConstantf32              50
+		Subtract
+		PushConstanti16              1200
+		PushConstantStringString     "ninp"
+		Pull                         8
+		GetMemberFunctionString      "setactor"
+		JumpAbsolute                 8
+		Pop
+		LineNumber                   52403, 4
+		LineNumberAlt1               65, 133
+		GetThisMemberValueString     "cam"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   52404, 4
+		LineNumberAlt1               66, 133
+		GetThisMemberValueString     "cam"
+		PushConstanti8               5
+		Pull                         2
+		GetMemberFunctionString      "setaimode"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   52406, 4
+		LineNumberAlt1               68, 133
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		Dup
+		GetMemberFunctionString      "add"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   52407, 4
+		LineNumberAlt1               69, 133
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		Dup
+		GetMemberFunctionString      "show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   52412, 4
+		LineNumberAlt1               74, 133
+		CreateObjectString           "lego_sounddirector"
+		Dup
+		Dup
+		GetMemberFunctionString      "lego_sounddirector"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   52412, 4
+		LineNumberAlt1               74, 133
+		SetThisMemberValueString     "sounddirector"
+		LineNumber                   52413, 4
+		LineNumberAlt1               75, 133
+		GetThisMemberValueString     "sounddirector"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   52415, 4
+		LineNumberAlt1               77, 133
+		GetThisMemberValueString     "sounddirector"
+		PushConstantStringString     "Root/data/sounds/waterfall"
+		PushConstanti8               3
+		Pull                         3
+		GetMemberFunctionString      "addsound"
+		JumpAbsolute                 3
+		LineNumber                   52415, 4
+		LineNumberAlt1               77, 133
+		SetThisMemberValueString     "waterfallsound"
+		LineNumber                   52416, 4
+		LineNumberAlt1               78, 133
+		GetThisMemberValueString     "sounddirector"
+		GetThisMemberValueString     "waterfallsound"
+		PushConstant0
+		PushConstantf32              385
+		Subtract
+		PushConstant0
+		PushConstantf32              47
+		Subtract
+		PushConstantf32              300
+		Pull                         5
+		GetMemberFunctionString      "setsoundposition"
+		JumpAbsolute                 5
+		Pop
+		LineNumber                   52417, 4
+		LineNumberAlt1               79, 133
+		GetThisMemberValueString     "sounddirector"
+		GetThisMemberValueString     "waterfallsound"
+		PushConstantf32              1
+		PushConstantf32              0
+		PushConstantf32              0
+		Pull                         5
+		GetMemberFunctionString      "setsoundconeorientation"
+		JumpAbsolute                 5
+		Pop
+		LineNumber                   52418, 4
+		LineNumberAlt1               80, 133
+		GetThisMemberValueString     "sounddirector"
+		GetThisMemberValueString     "waterfallsound"
+		PushConstanti8               30
+		PushConstanti16              200
+		Pull                         4
+		GetMemberFunctionString      "setsoundconeangles"
+		JumpAbsolute                 4
+		Pop
+		LineNumber                   52419, 4
+		LineNumberAlt1               81, 133
+		GetThisMemberValueString     "sounddirector"
+		GetThisMemberValueString     "waterfallsound"
+		PushConstanti16              -10000
+		Pull                         3
+		GetMemberFunctionString      "setsoundconeoutsidevolume"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   52420, 4
+		LineNumberAlt1               82, 133
+		GetThisMemberValueString     "sounddirector"
+		GetThisMemberValueString     "waterfallsound"
+		PushConstantf32              25
+		Pull                         3
+		GetMemberFunctionString      "setsoundmindistance"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   52421, 4
+		LineNumberAlt1               83, 133
+		GetThisMemberValueString     "sounddirector"
+		GetThisMemberValueString     "waterfallsound"
+		PushConstanti8               1
+		Pull                         3
+		GetMemberFunctionString      "playsound"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   52424, 4
+		LineNumberAlt1               86, 133
+		GetThisMemberValueString     "sounddirector"
+		PushConstantStringString     "Root/data/sounds/AMBTRAK"
+		PushConstanti8               1
+		Pull                         3
+		GetMemberFunctionString      "addsound"
+		JumpAbsolute                 3
+		LineNumber                   52424, 4
+		LineNumberAlt1               86, 133
+		SetThisMemberValueString     "ambientsound"
+		LineNumber                   52425, 4
+		LineNumberAlt1               87, 133
+		GetThisMemberValueString     "sounddirector"
+		GetThisMemberValueString     "ambientsound"
+		PushConstanti16              -1200
+		Pull                         3
+		GetMemberFunctionString      "setsoundvolume"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   52426, 4
+		LineNumberAlt1               88, 133
+		GetThisMemberValueString     "sounddirector"
+		GetThisMemberValueString     "ambientsound"
+		PushConstanti8               1
+		Pull                         3
+		GetMemberFunctionString      "playsound"
+		JumpAbsolute                 3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x79a25
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x79a29
+		; source: 133 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_tura.vbo" 97:98
+		MemberFunctionArgumentCheck 2
+		LineNumber                  52435, 4
+		LineNumberAlt1              97, 133
+		GetThisMemberValueString    "cam"
+		GetVariableValue            1           ; local
+		Pull                        2
+		GetMemberFunctionString     "input"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  52436, 4
+		LineNumberAlt1              98, 133
+		GetThisMemberValueString    "digpuzzle"
+		GetVariableValue            1           ; local
+		Pull                        2
+		GetMemberFunctionString     "input"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x79a5d
+		; source: 133 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_tura.vbo" 102:103
+		MemberFunctionArgumentCheck 2
+		LineNumber                  52440, 4
+		LineNumberAlt1              102, 133
+		GetThisMemberValueString    "level"
+		GetVariableValue            1           ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  52441, 4
+		LineNumberAlt1              103, 133
+		GetThisMemberValueString    "digpuzzle"
+		GetVariableValue            1           ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

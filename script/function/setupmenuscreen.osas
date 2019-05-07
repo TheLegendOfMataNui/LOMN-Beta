@@ -1,0 +1,32 @@
+begin function "setupmenuscreen", 0
+	; address: 0x2b247
+	; source: 10 "C:\\projects\\lego\\Scripting\\VBO\\lego_menuscreen.vbo" 86:89
+	JumpTarget                   1
+	CreateStackVariables         1
+	LineNumber                   13515, 4
+	LineNumberAlt1               86, 10
+	CreateObjectString           "gs_lego_menuscreen"
+	Dup
+	PushConstanti32JumpTarget    0, 0
+	JumpRelative                 0
+	LineNumber                   13515, 4
+	LineNumberAlt1               86, 10
+	Pull                         2
+	GetMemberFunctionString      "gs_lego_menuscreen"
+	JumpAbsolute                 2
+	Pop
+	LineNumber                   13515, 4
+	LineNumberAlt1               86, 10
+	SetVariableValue             0                    ; local
+	LineNumber                   13518, 4
+	LineNumberAlt1               89, 10
+	GetVariableValueGlobalString "screenlist"
+	GetVariableValue             0                    ; local
+	PushConstanti8               1
+	Pull                         3
+	GetMemberFunctionString      "addscreen"
+	JumpAbsolute                 3
+	Pop
+	PushNothing
+	Return
+end ; function

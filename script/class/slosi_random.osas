@@ -1,0 +1,113 @@
+begin class "slosi_random"
+	property "randid"
+	property "seed"
+
+	begin method "slosi_random"
+		; address: 0x52fce
+		; source: 71 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\slosi/slosi_random.vbo" 28:44
+		MemberFunctionArgumentCheck   3
+		LineNumber                    28355, 4
+		LineNumberAlt1                28, 71
+		GetVariableValue              1                                            ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    28355, 4
+		LineNumberAlt1                28, 71
+		PushConstantStringString      "dltr"
+		SetVariableValue              1                                            ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    28363, 4
+		LineNumberAlt1                36, 71
+		GetVariableValue              1                                            ; local
+		IsString
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    28364, 4
+		LineNumberAlt1                37, 71
+		GetVariableValue              1                                            ; local
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    28364, 4
+		LineNumberAlt1                37, 71
+		SetThisMemberValueString      "randid"
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    28366, 4
+		LineNumberAlt1                39, 71
+		GetVariableValue              1                                            ; local
+		SetThisMemberValueString      "randid"
+		; <-
+		BranchTarget                  2
+		LineNumber                    28369, 4
+		LineNumberAlt1                42, 71
+		GetVariableValue              2                                            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    28370, 4
+		LineNumberAlt1                43, 71
+		GetVariableValue              2                                            ; local
+		SetThisMemberValueString      "seed"
+		LineNumber                    28371, 4
+		LineNumberAlt1                44, 71
+		GetVariableValue              0                                            ; local
+		GetVariableValue              2                                            ; local
+		GetThisMemberFunctionString   "setseed"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getrandomnumber"
+		; address: 0x53071
+		; source: 71 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\slosi/slosi_random.vbo" 62:62
+		MemberFunctionArgumentCheck 3
+		LineNumber                  28389, 4
+		LineNumberAlt1              62, 71
+		GetVariableValue            1                                  ; local
+		GetVariableValue            2                                  ; local
+		GetThisMemberValueString    "randid"
+		CallGameFunctionString      "scslosirandom", "randomminmax", 3
+		LineNumber                  28389, 4
+		LineNumberAlt1              62, 71
+		Return
+	end ; method
+
+	begin method "setseed"
+		; address: 0x53097
+		; source: 71 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\slosi/slosi_random.vbo" 72:72
+		MemberFunctionArgumentCheck 2
+		LineNumber                  28399, 4
+		LineNumberAlt1              72, 71
+		GetVariableValue            1                                   ; local
+		GetThisMemberValueString    "randid"
+		CallGameFunctionString      "scslosirandom", "setrandomseed", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getrandomfloat"
+		; address: 0x530b2
+		; source: 71 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\slosi/slosi_random.vbo" 89:89
+		MemberFunctionArgumentCheck 3
+		LineNumber                  28416, 4
+		LineNumberAlt1              89, 71
+		GetVariableValue            1                                       ; local
+		GetVariableValue            2                                       ; local
+		GetThisMemberValueString    "randid"
+		CallGameFunctionString      "scslosirandom", "randomminmaxfloat", 3
+		LineNumber                  28416, 4
+		LineNumberAlt1              89, 71
+		Return
+	end ; method
+end ; class

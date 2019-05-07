@@ -1,0 +1,311 @@
+begin class "ss_basesound"
+	property "sound"
+	property "filename"
+	property "playtype"
+	property "length"
+	property "sndid"
+	property "restart"
+
+	begin method "ss_basesound"
+		; address: 0x359ce
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 57:63
+		MemberFunctionArgumentCheck   5
+		LineNumber                    8411, 4
+		LineNumberAlt1                57, 35
+		GetVariableValue              1                                            ; local
+		PushConstantStringString      ".PCSND"
+		Add
+		SetThisMemberValueString      "filename"
+		LineNumber                    8412, 4
+		LineNumberAlt1                58, 35
+		GetVariableValue              2                                            ; local
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    8412, 4
+		LineNumberAlt1                58, 35
+		SetThisMemberValueString      "sndid"
+		LineNumber                    8414, 4
+		LineNumberAlt1                60, 35
+		GetVariableValue              3                                            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    8414, 4
+		LineNumberAlt1                60, 35
+		GetVariableValue              3                                            ; local
+		SetThisMemberValueString      "playtype"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    8415, 4
+		LineNumberAlt1                61, 35
+		PushConstant0
+		SetThisMemberValueString      "playtype"
+		; <-
+		BranchTarget                  1
+		LineNumber                    8416, 4
+		LineNumberAlt1                62, 35
+		GetVariableValue              4                                            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    8416, 4
+		LineNumberAlt1                62, 35
+		GetVariableValue              4                                            ; local
+		SetThisMemberValueString      "restart"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    8417, 4
+		LineNumberAlt1                63, 35
+		PushConstant0
+		SetThisMemberValueString      "restart"
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x35a6e
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 69:71
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8423, 4
+		LineNumberAlt1              69, 35
+		CallGameFunctionString      "gcwavesound", "create", 0
+		LineNumber                  8423, 4
+		LineNumberAlt1              69, 35
+		SetThisMemberValueString    "sound"
+		LineNumber                  8424, 4
+		LineNumberAlt1              70, 35
+		GetVariableValue            0                          ; local
+		GetThisMemberFunctionString "opensound"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  8425, 4
+		LineNumberAlt1              71, 35
+		GetVariableValue            0                          ; local
+		GetThisMemberFunctionString "getlength"
+		JumpAbsolute                1
+		LineNumber                  8425, 4
+		LineNumberAlt1              71, 35
+		SetThisMemberValueString    "length"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x35ac1
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 75:75
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8429, 4
+		LineNumberAlt1              75, 35
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x35ad8
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 79:79
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8433, 4
+		LineNumberAlt1              79, 35
+		PushNothing
+		SetThisMemberValueString    "sound"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x35aea
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 83:83
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8437, 4
+		LineNumberAlt1              83, 35
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "opensound"
+		; address: 0x35b01
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 87:87
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8441, 4
+		LineNumberAlt1              87, 35
+		GetThisMemberValueString    "sound"
+		GetThisMemberValueString    "filename"
+		GetThisMemberValueString    "sndid"
+		PushConstant0
+		CallGameFunctionString      "gcwavesound", "openfile", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setplaytype"
+		; address: 0x35b20
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 91:91
+		MemberFunctionArgumentCheck 2
+		LineNumber                  8445, 4
+		LineNumberAlt1              91, 35
+		GetVariableValue            1          ; local
+		SetThisMemberValueString    "playtype"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "play"
+		; address: 0x35b34
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 95:99
+		MemberFunctionArgumentCheck   1
+		LineNumber                    8449, 4
+		LineNumberAlt1                95, 35
+		GetThisMemberValueString      "restart"
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    8450, 4
+		LineNumberAlt1                96, 35
+		GetThisMemberValueString      "sound"
+		GetThisMemberValueString      "playtype"
+		CallGameFunctionString        "gcwavesound", "play", 2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    8452, 4
+		LineNumberAlt1                98, 35
+		GetVariableValue              0                        ; local
+		GetThisMemberFunctionString   "isplaying"
+		JumpAbsolute                  1
+		LineNumber                    8452, 4
+		LineNumberAlt1                98, 35
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    8453, 4
+		LineNumberAlt1                99, 35
+		GetThisMemberValueString      "sound"
+		GetThisMemberValueString      "playtype"
+		CallGameFunctionString        "gcwavesound", "play", 2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "pause"
+		; address: 0x35b99
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 105:106
+		MemberFunctionArgumentCheck   1
+		LineNumber                    8459, 4
+		LineNumberAlt1                105, 35
+		GetVariableValue              0                         ; local
+		GetThisMemberFunctionString   "isplaying"
+		JumpAbsolute                  1
+		LineNumber                    8459, 4
+		LineNumberAlt1                105, 35
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    8460, 4
+		LineNumberAlt1                106, 35
+		GetThisMemberValueString      "sound"
+		CallGameFunctionString        "gcwavesound", "pause", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stop"
+		; address: 0x35bd0
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 111:112
+		MemberFunctionArgumentCheck   1
+		LineNumber                    8465, 4
+		LineNumberAlt1                111, 35
+		GetVariableValue              0                        ; local
+		GetThisMemberFunctionString   "isplaying"
+		JumpAbsolute                  1
+		LineNumber                    8465, 4
+		LineNumberAlt1                111, 35
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    8466, 4
+		LineNumberAlt1                112, 35
+		GetThisMemberValueString      "sound"
+		CallGameFunctionString        "gcwavesound", "stop", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getlength"
+		; address: 0x35c07
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 117:117
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8471, 4
+		LineNumberAlt1              117, 35
+		GetThisMemberValueString    "sound"
+		CallGameFunctionString      "gcwavesound", "getlength", 1
+		LineNumber                  8471, 4
+		LineNumberAlt1              117, 35
+		Return
+	end ; method
+
+	begin method "isplaying"
+		; address: 0x35c27
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 121:121
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8475, 4
+		LineNumberAlt1              121, 35
+		GetThisMemberValueString    "sound"
+		CallGameFunctionString      "gcwavesound", "isplaying", 1
+		LineNumber                  8475, 4
+		LineNumberAlt1              121, 35
+		Return
+	end ; method
+
+	begin method "getvolume"
+		; address: 0x35c47
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 126:126
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8480, 4
+		LineNumberAlt1              126, 35
+		GetThisMemberValueString    "sound"
+		CallGameFunctionString      "gcwavesound", "getvolume", 1
+		LineNumber                  8480, 4
+		LineNumberAlt1              126, 35
+		Return
+	end ; method
+
+	begin method "setvolume"
+		; address: 0x35c67
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 131:131
+		MemberFunctionArgumentCheck 2
+		LineNumber                  8485, 4
+		LineNumberAlt1              131, 35
+		GetThisMemberValueString    "sound"
+		GetVariableValue            1                             ; local
+		CallGameFunctionString      "gcwavesound", "setvolume", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,241 @@
+begin class "lego_area_mud0", "gs_lego_area"
+	property "mudpuzzle"
+
+	begin method "lego_area_mud0"
+		; address: 0x6950a
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 125:127
+		MemberFunctionArgumentCheck 2
+		LineNumber                  43410, 4
+		LineNumberAlt1              125, 111
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "mud0"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  43411, 4
+		LineNumberAlt1              126, 111
+		CreateObjectString          "mudmonster_puzzle"
+		Dup
+		GetVariableValue            0                    ; local
+		Pull                        2
+		GetMemberFunctionString     "mudmonster_puzzle"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  43411, 4
+		LineNumberAlt1              126, 111
+		SetThisMemberValueString    "mudpuzzle"
+		LineNumber                  43412, 4
+		LineNumberAlt1              127, 111
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x69562
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 133:146
+		MemberFunctionArgumentCheck  1
+		LineNumber                   43418, 4
+		LineNumberAlt1               133, 111
+		GetVariableValue             0                                       ; local
+		GetThisMemberFunctionString  "lego_area_show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   43420, 4
+		LineNumberAlt1               135, 111
+		PushConstanti8               1
+		CallGameFunctionString       "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                   43421, 4
+		LineNumberAlt1               136, 111
+		PushConstanti32              -14145496
+		PushConstant0
+		PushConstantf32              20
+		Subtract
+		PushConstant0
+		PushConstantf32              175
+		Subtract
+		PushConstantf32              0.05000000074505806
+		CallGameFunctionString       "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                   43422, 4
+		LineNumberAlt1               137, 111
+		PushConstanti8               15
+		CallGameFunctionString       "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                   43423, 4
+		LineNumberAlt1               138, 111
+		PushConstanti8               5
+		CallGameFunctionString       "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                   43425, 4
+		LineNumberAlt1               140, 111
+		GetThisMemberValueString     "mudpuzzle"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   43428, 4
+		LineNumberAlt1               143, 111
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		PushConstant0
+		Pull                         2
+		GetMemberFunctionString      "usemasks"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   43430, 4
+		LineNumberAlt1               145, 111
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MusicOnuaAmbience"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   43431, 4
+		LineNumberAlt1               146, 111
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x6963d
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 153:153
+		MemberFunctionArgumentCheck  1
+		LineNumber                   43438, 4
+		LineNumberAlt1               153, 111
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		Dup
+		GetMemberFunctionString      "stop"
+		JumpAbsolute                 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x69658
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 158:158
+		MemberFunctionArgumentCheck 2
+		LineNumber                  43443, 4
+		LineNumberAlt1              158, 111
+		GetThisMemberValueString    "mudpuzzle"
+		GetVariableValue            1           ; local
+		Pull                        2
+		GetMemberFunctionString     "process"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x69674
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 163:163
+		MemberFunctionArgumentCheck 2
+		LineNumber                  43448, 4
+		LineNumberAlt1              163, 111
+		GetThisMemberValueString    "mudpuzzle"
+		GetVariableValue            1           ; local
+		Pull                        2
+		GetMemberFunctionString     "input"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x69690
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 168:168
+		MemberFunctionArgumentCheck 2
+		LineNumber                  43453, 4
+		LineNumberAlt1              168, 111
+		GetThisMemberValueString    "mudpuzzle"
+		GetVariableValue            1           ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "endarea"
+		; address: 0x696ac
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 174:174
+		MemberFunctionArgumentCheck  1
+		LineNumber                   43459, 4
+		LineNumberAlt1               174, 111
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/Sounds/OnuaCompletionMusic"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x696cb
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 180:182
+		MemberFunctionArgumentCheck 1
+		LineNumber                  43465, 4
+		LineNumberAlt1              180, 111
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  43467, 4
+		LineNumberAlt1              182, 111
+		GetThisMemberValueString    "mudpuzzle"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x696f6
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_ptv1.vbo" 188:190
+		MemberFunctionArgumentCheck 1
+		LineNumber                  43473, 4
+		LineNumberAlt1              188, 111
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  43474, 4
+		LineNumberAlt1              189, 111
+		GetThisMemberValueString    "mudpuzzle"
+		Dup
+		GetMemberFunctionString     "exit"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  43475, 4
+		LineNumberAlt1              190, 111
+		PushNothing
+		SetThisMemberValueString    "mudpuzzle"
+		PushNothing
+		Return
+	end ; method
+end ; class

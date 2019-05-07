@@ -1,0 +1,268 @@
+begin class "ta146_puzzle"
+	property "parent"
+	property "discpickup"
+	property "glyph"
+
+	begin method "ta146_puzzle"
+		; address: 0xbd491
+		; source: 219 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta14.vbo" 81:81
+		MemberFunctionArgumentCheck 2
+		LineNumber                  16171, 4
+		LineNumberAlt1              81, 219
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xbd4a5
+		; source: 97 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_cave.vbo" 72:72
+		; source: 167 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 45:51
+		; source: 193 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_room.vbo" 136:144
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/Musiclowandcreepyambience"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		PushConstantStringString      "dsc6"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    65436, 4
+		LineNumberAlt1                45, 167
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    65436, 4
+		LineNumberAlt1                45, 167
+		SetVariableValue              1                                            ; local
+		LineNumber                    65437, 4
+		LineNumberAlt1                46, 167
+		GetVariableValue              1                                            ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    65438, 4
+		LineNumberAlt1                47, 167
+		CreateObjectString            "lego_pickup"
+		Dup
+		PushConstantStringString      "dsc6"
+		PushConstant0
+		PushConstanti8                5
+		PushConstantStringString      "item"
+		PushConstanti8                7
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "lego_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    65438, 4
+		LineNumberAlt1                47, 167
+		SetThisMemberValueString      "discpickup"
+		LineNumber                    65439, 4
+		LineNumberAlt1                48, 167
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    65440, 4
+		LineNumberAlt1                49, 167
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    65441, 4
+		LineNumberAlt1                50, 167
+		GetThisMemberValueString      "discpickup"
+		PushConstanti32               32768
+		Pull                          2
+		GetMemberFunctionString       "setcondition"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    65442, 4
+		LineNumberAlt1                51, 167
+		GetThisMemberValueString      "discpickup"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "setquest"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		PushConstantStringString      "glyp"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    8252, 4
+		LineNumberAlt1                136, 193
+		CallGameFunctionString        "gcsaver", "findglyph", 1
+		LineNumber                    8252, 4
+		LineNumberAlt1                136, 193
+		SetVariableValue              2                                            ; local
+		LineNumber                    8253, 4
+		LineNumberAlt1                137, 193
+		GetVariableValue              2                                            ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    8258, 4
+		LineNumberAlt1                142, 193
+		CreateObjectString            "lego_pickup"
+		Dup
+		PushConstantStringString      "glyp"
+		PushConstanti8                16
+		PushConstanti8                2
+		PushConstantStringString      "item"
+		PushConstanti8                3
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "lego_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    8258, 4
+		LineNumberAlt1                142, 193
+		SetThisMemberValueString      "glyph"
+		LineNumber                    8259, 4
+		LineNumberAlt1                143, 193
+		GetThisMemberValueString      "glyph"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    8260, 4
+		LineNumberAlt1                144, 193
+		GetThisMemberValueString      "glyph"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xa6c1f
+		MemberFunctionArgumentCheck 1
+		LineNumber                    65502, 4
+		LineNumberAlt1                111, 167
+		GetThisMemberValueString      "discpickup"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    65503, 4
+		LineNumberAlt1                112, 167
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    65504, 4
+		LineNumberAlt1                113, 167
+		PushNothing
+		SetThisMemberValueString      "discpickup"
+		; <-
+		BranchTarget                  0
+		GetThisMemberValueString      "glyph"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    8278, 4
+		LineNumberAlt1                162, 193
+		GetThisMemberValueString      "glyph"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    8279, 4
+		LineNumberAlt1                163, 193
+		PushNothing
+		SetThisMemberValueString      "glyph"
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xbd690
+		; source: 219 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta14.vbo" 131:131
+		MemberFunctionArgumentCheck 1
+		LineNumber                  16221, 4
+		LineNumberAlt1              131, 219
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xbd6a6
+		; source: 219 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta14.vbo" 143:149
+		MemberFunctionArgumentCheck   2
+		LineNumber                    16233, 4
+		LineNumberAlt1                143, 219
+		GetVariableValue              1                                        ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    16235, 4
+		LineNumberAlt1                145, 219
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    16238, 4
+		LineNumberAlt1                148, 219
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterstartid"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterlookid"
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    16239, 4
+		LineNumberAlt1                149, 219
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

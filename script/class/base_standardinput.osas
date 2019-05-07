@@ -1,0 +1,107 @@
+begin class "base_standardinput"
+	property "controller"
+	property "button"
+	property "event"
+	property "xposition"
+	property "yposition"
+
+	begin method "base_standardinput"
+		; address: 0x2cf53
+		; source: 5 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\base/base_input.vbo" 288:294
+		MemberFunctionArgumentCheck   6
+		LineNumber                    496, 4
+		LineNumberAlt1                288, 5
+		GetVariableValue              1            ; local
+		SetThisMemberValueString      "controller"
+		LineNumber                    497, 4
+		LineNumberAlt1                289, 5
+		GetVariableValue              2            ; local
+		SetThisMemberValueString      "button"
+		LineNumber                    498, 4
+		LineNumberAlt1                290, 5
+		GetVariableValue              3            ; local
+		SetThisMemberValueString      "event"
+		LineNumber                    499, 4
+		LineNumberAlt1                291, 5
+		GetVariableValue              4            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    499, 4
+		LineNumberAlt1                291, 5
+		GetVariableValue              4            ; local
+		SetThisMemberValueString      "xposition"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    500, 4
+		LineNumberAlt1                292, 5
+		PushConstant0
+		SetThisMemberValueString      "xposition"
+		; <-
+		BranchTarget                  1
+		LineNumber                    501, 4
+		LineNumberAlt1                293, 5
+		GetVariableValue              5            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    501, 4
+		LineNumberAlt1                293, 5
+		GetVariableValue              5            ; local
+		SetThisMemberValueString      "yposition"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    502, 4
+		LineNumberAlt1                294, 5
+		PushConstant0
+		SetThisMemberValueString      "yposition"
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "clearinput"
+		; address: 0x2cfef
+		; source: 5 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\base/base_input.vbo" 299:301
+		MemberFunctionArgumentCheck 1
+		LineNumber                  507, 4
+		LineNumberAlt1              299, 5
+		PushNothing
+		SetThisMemberValueString    "controller"
+		LineNumber                  508, 4
+		LineNumberAlt1              300, 5
+		PushNothing
+		SetThisMemberValueString    "button"
+		LineNumber                  509, 4
+		LineNumberAlt1              301, 5
+		PushNothing
+		SetThisMemberValueString    "event"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "check"
+		; address: 0x2d01d
+		; source: 5 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\base/base_input.vbo" 306:306
+		MemberFunctionArgumentCheck 3
+		LineNumber                  514, 4
+		LineNumberAlt1              306, 5
+		GetThisMemberValueString    "button"
+		GetVariableValue            1        ; local
+		EqualTo
+		GetThisMemberValueString    "event"
+		GetVariableValue            2        ; local
+		EqualTo
+		And
+		Return
+	end ; method
+end ; class

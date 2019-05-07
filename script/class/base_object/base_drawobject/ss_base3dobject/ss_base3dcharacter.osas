@@ -1,0 +1,575 @@
+begin class "ss_base3dcharacter", "ss_base3dobject"
+	property "numanimations"
+	property "gepetto"
+	property "currentanimation"
+
+	begin method "ss_base3dcharacter"
+		; address: 0x31380
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 225:251
+		MemberFunctionArgumentCheck   8
+		LineNumber                    3441, 4
+		LineNumberAlt1                225, 19
+		GetVariableValue              2                  ; local
+		SetThisMemberValueString      "charstring"
+		LineNumber                    3449, 4
+		LineNumberAlt1                233, 19
+		GetVariableValue              1                  ; local
+		SetThisMemberValueString      "contstring"
+		LineNumber                    3451, 4
+		LineNumberAlt1                235, 19
+		GetVariableValue              3                  ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3451, 4
+		LineNumberAlt1                235, 19
+		PushConstantf32               0
+		SetThisMemberValueString      "angle"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    3452, 4
+		LineNumberAlt1                236, 19
+		GetVariableValue              3                  ; local
+		SetThisMemberValueString      "angle"
+		; <-
+		BranchTarget                  1
+		LineNumber                    3454, 4
+		LineNumberAlt1                238, 19
+		GetVariableValue              4                  ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    3454, 4
+		LineNumberAlt1                238, 19
+		PushConstantf32               0
+		SetThisMemberValueString      "x1"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    3455, 4
+		LineNumberAlt1                239, 19
+		GetVariableValue              4                  ; local
+		SetThisMemberValueString      "x1"
+		; <-
+		BranchTarget                  3
+		LineNumber                    3456, 4
+		LineNumberAlt1                240, 19
+		GetVariableValue              5                  ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    3456, 4
+		LineNumberAlt1                240, 19
+		PushConstantf32               0
+		SetThisMemberValueString      "y1"
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    3457, 4
+		LineNumberAlt1                241, 19
+		GetVariableValue              5                  ; local
+		SetThisMemberValueString      "y1"
+		; <-
+		BranchTarget                  5
+		LineNumber                    3458, 4
+		LineNumberAlt1                242, 19
+		GetVariableValue              6                  ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    3458, 4
+		LineNumberAlt1                242, 19
+		PushConstantf32               0
+		SetThisMemberValueString      "z"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		LineNumber                    3459, 4
+		LineNumberAlt1                243, 19
+		GetVariableValue              6                  ; local
+		SetThisMemberValueString      "z"
+		; <-
+		BranchTarget                  7
+		LineNumber                    3461, 4
+		LineNumberAlt1                245, 19
+		GetVariableValue              7                  ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    3462, 4
+		LineNumberAlt1                246, 19
+		PushConstantStringString      "none"
+		SetThisMemberValueString      "inputstate"
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    3464, 4
+		LineNumberAlt1                248, 19
+		GetVariableValue              7                  ; local
+		SetThisMemberValueString      "inputstate"
+		; <-
+		BranchTarget                  9
+		LineNumber                    3467, 4
+		LineNumberAlt1                251, 19
+		PushConstant0
+		SetThisMemberValueString      "currentanimation"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x314c3
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 257:265
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    3473, 4
+		LineNumberAlt1                257, 19
+		GetThisMemberValueString      "charstring"
+		GetThisMemberValueString      "charname"
+		GetThisMemberValueString      "inputstate"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    3473, 4
+		LineNumberAlt1                257, 19
+		GetThisMemberValueString      "contid"
+		CallGameFunctionString        "gcmodeldirector", "addcharacter", 4
+		Pop
+		LineNumber                    3474, 4
+		LineNumberAlt1                258, 19
+		GetThisMemberValueString      "contid"
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 1
+		LineNumber                    3474, 4
+		LineNumberAlt1                258, 19
+		SetThisMemberValueString      "handle"
+		LineNumber                    3475, 4
+		LineNumberAlt1                259, 19
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "z"
+		GetThisMemberFunctionString   "setpos"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    3476, 4
+		LineNumberAlt1                260, 19
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "angle"
+		GetThisMemberFunctionString   "setorientation"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3477, 4
+		LineNumberAlt1                261, 19
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "inputstate"
+		GetThisMemberFunctionString   "setinputstate"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    3478, 4
+		LineNumberAlt1                262, 19
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gccharacter", "hasgepetto", 1
+		LineNumber                    3478, 4
+		LineNumberAlt1                262, 19
+		SetVariableValue              1                                            ; local
+		LineNumber                    3479, 4
+		LineNumberAlt1                263, 19
+		GetVariableValue              1                                            ; local
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3480, 4
+		LineNumberAlt1                264, 19
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gccharacter", "getgepetto", 1
+		LineNumber                    3480, 4
+		LineNumberAlt1                264, 19
+		SetThisMemberValueString      "gepetto"
+		LineNumber                    3481, 4
+		LineNumberAlt1                265, 19
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "getnumanimations"
+		JumpAbsolute                  1
+		LineNumber                    3481, 4
+		LineNumberAlt1                265, 19
+		SetThisMemberValueString      "numanimations"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setinputstate"
+		; address: 0x315d0
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 276:278
+		MemberFunctionArgumentCheck 2
+		CreateStackVariables        1
+		LineNumber                  3492, 4
+		LineNumberAlt1              276, 19
+		GetVariableValue            1                                            ; local
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  3492, 4
+		LineNumberAlt1              276, 19
+		SetVariableValue            2                                            ; local
+		LineNumber                  3494, 4
+		LineNumberAlt1              278, 19
+		GetThisMemberValueString    "contid"
+		GetVariableValue            2                                            ; local
+		CallGameFunctionString      "gcmodeldirector", "setinputstate", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getnumanimations"
+		; address: 0x3160d
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 282:283
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3498, 4
+		LineNumberAlt1              282, 19
+		GetThisMemberValueString    "gepetto"
+		CallGameFunctionString      "gclegogepetto", "getnumanims", 1
+		LineNumber                  3498, 4
+		LineNumberAlt1              282, 19
+		SetThisMemberValueString    "numanimations"
+		LineNumber                  3499, 4
+		LineNumberAlt1              283, 19
+		GetThisMemberValueString    "numanimations"
+		Return
+	end ; method
+
+	begin method "getanimid"
+		; address: 0x3163d
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 287:292
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    3503, 4
+		LineNumberAlt1                287, 19
+		GetVariableValue              1                                         ; local
+		GetThisMemberValueString      "numanimations"
+		LessThan
+		GetVariableValue              1                                         ; local
+		PushConstant0
+		GreaterOrEqual
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3504, 4
+		LineNumberAlt1                288, 19
+		GetThisMemberValueString      "gepetto"
+		GetVariableValue              1                                         ; local
+		CallGameFunctionString        "gclegogepetto", "getanimidfromnumber", 2
+		LineNumber                    3504, 4
+		LineNumberAlt1                288, 19
+		SetVariableValue              2                                         ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    3506, 4
+		LineNumberAlt1                290, 19
+		PushConstant0
+		SetVariableValue              2                                         ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    3508, 4
+		LineNumberAlt1                292, 19
+		GetVariableValue              2                                         ; local
+		Return
+	end ; method
+
+	begin method "switchanimation"
+		; address: 0x3169d
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 302:303
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3518, 4
+		LineNumberAlt1              302, 19
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                   ; local
+		CallGameFunctionString      "gccharacter", "switchanimation", 2
+		Pop
+		LineNumber                  3519, 4
+		LineNumberAlt1              303, 19
+		GetVariableValue            1                                   ; local
+		SetThisMemberValueString    "currentanimation"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "disableanimation"
+		; address: 0x316c8
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 313:314
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3529, 4
+		LineNumberAlt1              313, 19
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                             ; local
+		CallGameFunctionString      "gccharacter", "disablecharacteranimation", 2
+		Pop
+		LineNumber                  3530, 4
+		LineNumberAlt1              314, 19
+		GetVariableValue            1                                             ; local
+		SetThisMemberValueString    "currentanimation"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "enableanimation"
+		; address: 0x316f3
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 324:325
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3540, 4
+		LineNumberAlt1              324, 19
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                                            ; local
+		CallGameFunctionString      "gccharacter", "enablecharacteranimation", 2
+		Pop
+		LineNumber                  3541, 4
+		LineNumberAlt1              325, 19
+		GetVariableValue            1                                            ; local
+		SetThisMemberValueString    "currentanimation"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "play"
+		; address: 0x3171e
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 329:329
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3545, 4
+		LineNumberAlt1              329, 19
+		GetThisMemberValueString    "gepetto"
+		CallGameFunctionString      "gclegogepetto", "play", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stop"
+		; address: 0x31736
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 333:333
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3549, 4
+		LineNumberAlt1              333, 19
+		GetThisMemberValueString    "gepetto"
+		CallGameFunctionString      "gclegogepetto", "stop", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "pause"
+		; address: 0x3174e
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 337:337
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3553, 4
+		LineNumberAlt1              337, 19
+		GetThisMemberValueString    "gepetto"
+		CallGameFunctionString      "gclegogepetto", "pause", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "startattime"
+		; address: 0x31766
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 347:347
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3563, 4
+		LineNumberAlt1              347, 19
+		GetThisMemberValueString    "gepetto"
+		GetVariableValue            1                                 ; local
+		CallGameFunctionString      "gclegogepetto", "startattime", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "startatframe"
+		; address: 0x31781
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 357:357
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3573, 4
+		LineNumberAlt1              357, 19
+		GetThisMemberValueString    "gepetto"
+		GetVariableValue            1                                  ; local
+		CallGameFunctionString      "gclegogepetto", "startatframe", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "gettime"
+		; address: 0x3179c
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 361:362
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  3577, 4
+		LineNumberAlt1              361, 19
+		GetThisMemberValueString    "gepetto"
+		CallGameFunctionString      "gclegogepetto", "gettime", 1
+		LineNumber                  3577, 4
+		LineNumberAlt1              361, 19
+		SetVariableValue            1                             ; local
+		LineNumber                  3578, 4
+		LineNumberAlt1              362, 19
+		GetVariableValue            1                             ; local
+		Return
+	end ; method
+
+	begin method "getframe"
+		; address: 0x317ce
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 366:367
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  3582, 4
+		LineNumberAlt1              366, 19
+		GetThisMemberValueString    "gepetto"
+		CallGameFunctionString      "gclegogepetto", "getframe", 1
+		LineNumber                  3582, 4
+		LineNumberAlt1              366, 19
+		SetVariableValue            1                              ; local
+		LineNumber                  3583, 4
+		LineNumberAlt1              367, 19
+		GetVariableValue            1                              ; local
+		Return
+	end ; method
+
+	begin method "getduration"
+		; address: 0x31800
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 371:372
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  3587, 4
+		LineNumberAlt1              371, 19
+		GetThisMemberValueString    "gepetto"
+		CallGameFunctionString      "gclegogepetto", "getduration", 1
+		LineNumber                  3587, 4
+		LineNumberAlt1              371, 19
+		SetVariableValue            1                                 ; local
+		LineNumber                  3588, 4
+		LineNumberAlt1              372, 19
+		GetVariableValue            1                                 ; local
+		Return
+	end ; method
+
+	begin method "getnumframes"
+		; address: 0x31832
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 376:377
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  3592, 4
+		LineNumberAlt1              376, 19
+		GetThisMemberValueString    "gepetto"
+		CallGameFunctionString      "gclegogepetto", "getnumframes", 1
+		LineNumber                  3592, 4
+		LineNumberAlt1              376, 19
+		SetVariableValue            1                                  ; local
+		LineNumber                  3593, 4
+		LineNumberAlt1              377, 19
+		GetVariableValue            1                                  ; local
+		Return
+	end ; method
+
+	begin method "disablecollisions"
+		; address: 0x31864
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 381:381
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3597, 4
+		LineNumberAlt1              381, 19
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gccharacter", "disablecollisions", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getbonepos"
+		; address: 0x3187c
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 386:390
+		MemberFunctionArgumentCheck 2
+		CreateStackVariables        4
+		LineNumber                  3602, 4
+		LineNumberAlt1              386, 19
+		GetVariableValue            1                                    ; local
+		CallGameFunctionString      "scslosifoundation", "hashstring", 1
+		LineNumber                  3602, 4
+		LineNumberAlt1              386, 19
+		SetVariableValue            2                                    ; local
+		LineNumber                  3603, 4
+		LineNumberAlt1              387, 19
+		GetThisMemberValueString    "handle"
+		GetVariableValue            2                                    ; local
+		CallGameFunctionString      "gccharacter", "getbonex", 2
+		LineNumber                  3603, 4
+		LineNumberAlt1              387, 19
+		SetVariableValue            3                                    ; local
+		LineNumber                  3604, 4
+		LineNumberAlt1              388, 19
+		GetThisMemberValueString    "handle"
+		GetVariableValue            2                                    ; local
+		CallGameFunctionString      "gccharacter", "getboney", 2
+		LineNumber                  3604, 4
+		LineNumberAlt1              388, 19
+		SetVariableValue            4                                    ; local
+		LineNumber                  3605, 4
+		LineNumberAlt1              389, 19
+		GetThisMemberValueString    "handle"
+		GetVariableValue            2                                    ; local
+		CallGameFunctionString      "gccharacter", "getbonez", 2
+		LineNumber                  3605, 4
+		LineNumberAlt1              389, 19
+		SetVariableValue            5                                    ; local
+		LineNumber                  3606, 4
+		LineNumberAlt1              390, 19
+		CreateObjectString          "ss_point"
+		Dup
+		GetVariableValue            3                                    ; local
+		GetVariableValue            4                                    ; local
+		GetVariableValue            5                                    ; local
+		Pull                        4
+		GetMemberFunctionString     "ss_point"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  3606, 4
+		LineNumberAlt1              390, 19
+		Return
+	end ; method
+
+	begin method "setteamid"
+		; address: 0x31933
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 395:395
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3611, 4
+		LineNumberAlt1              395, 19
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                             ; local
+		CallGameFunctionString      "gccharacter", "setteamid", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getteamid"
+		; address: 0x3194e
+		; source: 19 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_base3d.vbo" 400:400
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3616, 4
+		LineNumberAlt1              400, 19
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gccharacter", "getteamid", 1
+		LineNumber                  3616, 4
+		LineNumberAlt1              400, 19
+		Return
+	end ; method
+end ; class

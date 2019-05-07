@@ -1,0 +1,1494 @@
+begin class "gs_lego_level", "lego_base_screen"
+	property "name"
+	property "id"
+	property "toa"
+	property "areas"
+	property "active_areas"
+	property "cam"
+	property "startingarea"
+	property "areasetactive_pause_counter"
+	property "temp_areaid"
+	property "temp_startid"
+	property "temp_lookid"
+
+	begin method "gs_lego_level"
+		; address: 0x54b8a
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 52:57
+		MemberFunctionArgumentCheck 4
+		LineNumber                  29603, 4
+		LineNumberAlt1              52, 47
+		GetVariableValue            1                                            ; local
+		SetThisMemberValueString    "name"
+		LineNumber                  29604, 4
+		LineNumberAlt1              53, 47
+		GetVariableValue            1                                            ; local
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  29604, 4
+		LineNumberAlt1              53, 47
+		SetThisMemberValueString    "id"
+		LineNumber                  29605, 4
+		LineNumberAlt1              54, 47
+		GetVariableValue            2                                            ; local
+		SetThisMemberValueString    "toa"
+		LineNumber                  29606, 4
+		LineNumberAlt1              55, 47
+		GetVariableValue            3                                            ; local
+		SetThisMemberValueString    "startingarea"
+		LineNumber                  29607, 4
+		LineNumberAlt1              56, 47
+		CreateArray
+		SetThisMemberValueString    "areas"
+		LineNumber                  29608, 4
+		LineNumberAlt1              57, 47
+		CreateArray
+		SetThisMemberValueString    "active_areas"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x54bfa
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 63:64
+		MemberFunctionArgumentCheck 1
+		LineNumber                  29614, 4
+		LineNumberAlt1              63, 47
+		PushConstantStringString    "[][][] wrong!"
+		CallGameFunctionString      "debug", "print", 1
+		Pop
+		LineNumber                  29615, 4
+		LineNumberAlt1              64, 47
+		GetVariableValue            0                     ; local
+		GetThisMemberFunctionString "lego_level_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "lego_level_initfull"
+		; address: 0x54c25
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 70:170
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          4
+		LineNumber                    29621, 4
+		LineNumberAlt1                70, 47
+		PushConstantStringString      "[][][] lego_level_initfull"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    29622, 4
+		LineNumberAlt1                71, 47
+		PushConstant0
+		SetThisMemberValueString      "areasetactive_pause_counter"
+		LineNumber                    29625, 4
+		LineNumberAlt1                74, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetVariableValue              0                                            ; local
+		Pull                          2
+		GetMemberFunctionString       "setcurrentlevel"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    29627, 4
+		LineNumberAlt1                76, 47
+		GetThisMemberValueString      "areas"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    29628, 4
+		LineNumberAlt1                77, 47
+		CreateArray
+		SetThisMemberValueString      "areas"
+		; <-
+		BranchTarget                  0
+		LineNumber                    29630, 4
+		LineNumberAlt1                79, 47
+		GetThisMemberValueString      "active_areas"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29631, 4
+		LineNumberAlt1                80, 47
+		CreateArray
+		SetThisMemberValueString      "active_areas"
+		; <-
+		BranchTarget                  1
+		LineNumber                    29635, 4
+		LineNumberAlt1                84, 47
+		GetThisMemberValueString      "name"
+		CallGameFunctionString        "gcareadirector", "setcurrentlevel", 1
+		Pop
+		LineNumber                    29637, 4
+		LineNumberAlt1                86, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "saverloaded"
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29639, 4
+		LineNumberAlt1                88, 47
+		CallGameFunctionString        "gcsaver", "getarea", 0
+		LineNumber                    29639, 4
+		LineNumberAlt1                88, 47
+		SetVariableValue              1                                            ; local
+		LineNumber                    29640, 4
+		LineNumberAlt1                89, 47
+		GetVariableValue              1                                            ; local
+		CallGameFunctionString        "scslosifoundation", "identifiertostring", 1
+		LineNumber                    29640, 4
+		LineNumberAlt1                89, 47
+		SetThisMemberValueString      "startingarea"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    29642, 4
+		LineNumberAlt1                91, 47
+		GetThisMemberValueString      "argarray"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    29643, 4
+		LineNumberAlt1                92, 47
+		GetThisMemberValueString      "argarray"
+		PushConstant0
+		GetArrayValue
+		SetThisMemberValueString      "startingarea"
+		; <-
+		BranchTarget                  3
+		LineNumber                    29649, 4
+		LineNumberAlt1                98, 47
+		PushConstantStringString      "[][][] init cam "
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    29650, 4
+		LineNumberAlt1                99, 47
+		CreateObjectString            "gs_legocamera"
+		Dup
+		PushConstant0
+		PushConstantf32               1000
+		Subtract
+		PushConstantf32               1500
+		PushConstantf32               3000
+		PushConstant0
+		PushConstantf32               1000
+		Subtract
+		PushConstantf32               800
+		PushConstantf32               0
+		Pull                          7
+		GetMemberFunctionString       "gs_legocamera"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    29650, 4
+		LineNumberAlt1                99, 47
+		SetThisMemberValueString      "cam"
+		LineNumber                    29651, 4
+		LineNumberAlt1                100, 47
+		GetThisMemberValueString      "cam"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29655, 4
+		LineNumberAlt1                104, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "saverloaded"
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    29656, 4
+		LineNumberAlt1                105, 47
+		CallGameFunctionString        "gcsaver", "gettoa", 0
+		LineNumber                    29656, 4
+		LineNumberAlt1                105, 47
+		CallGameFunctionString        "scslosifoundation", "identifiertostring", 1
+		LineNumber                    29656, 4
+		LineNumberAlt1                105, 47
+		SetThisMemberValueString      "toa"
+		; <-
+		BranchTarget                  4
+		LineNumber                    29659, 4
+		LineNumberAlt1                108, 47
+		GetThisMemberValueString      "toa"
+		PushConstantStringString      "none"
+		EqualTo
+		Not
+		GetThisMemberValueString      "toa"
+		PushNothing
+		EqualTo
+		Not
+		And
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    29660, 4
+		LineNumberAlt1                109, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstantStringString      "cnt1"
+		GetThisMemberValueString      "toa"
+		PushConstantf32               0
+		PushConstantf32               0
+		PushConstantf32               0
+		PushConstantf32               0
+		PushConstantStringString      "ninp"
+		Pull                          8
+		GetMemberFunctionString       "setactor"
+		JumpAbsolute                  8
+		Pop
+		; <-
+		BranchTarget                  5
+		LineNumber                    29665, 4
+		LineNumberAlt1                114, 47
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "startingarea"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29665, 4
+		LineNumberAlt1                114, 47
+		GetThisMemberFunctionString   "areasetcurrent"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    29669, 4
+		LineNumberAlt1                118, 47
+		GetThisMemberValueString      "toa"
+		PushConstantStringString      "none"
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    29670, 4
+		LineNumberAlt1                119, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "actorinitfull"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  6
+		LineNumber                    29673, 4
+		LineNumberAlt1                122, 47
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "startingarea"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29673, 4
+		LineNumberAlt1                122, 47
+		GetThisMemberFunctionString   "areasetactive"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    29682, 4
+		LineNumberAlt1                131, 47
+		CallGameFunctionString        "gclightdirector", "toggleconstantlights", 0
+		Pop
+		LineNumber                    29686, 4
+		LineNumberAlt1                135, 47
+		GetThisMemberValueString      "toa"
+		PushConstantStringString      "none"
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    29688, 4
+		LineNumberAlt1                137, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "saverloaded"
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    29689, 4
+		LineNumberAlt1                138, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		CallGameFunctionString        "gcsaver", "getstart", 0
+		LineNumber                    29689, 4
+		LineNumberAlt1                138, 47
+		CallGameFunctionString        "gcsaver", "getlook", 0
+		LineNumber                    29689, 4
+		LineNumberAlt1                138, 47
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		LineNumber                    29691, 4
+		LineNumberAlt1                140, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "str0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29691, 4
+		LineNumberAlt1                140, 47
+		PushConstantStringString      "lok0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29691, 4
+		LineNumberAlt1                140, 47
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		; <-
+		BranchTarget                  8
+		LineNumber                    29695, 4
+		LineNumberAlt1                144, 47
+		GetThisMemberValueString      "cam"
+		Dup
+		GetMemberFunctionString       "getaimode"
+		JumpAbsolute                  1
+		LineNumber                    29695, 4
+		LineNumberAlt1                144, 47
+		SetVariableValue              2                                            ; local
+		LineNumber                    29696, 4
+		LineNumberAlt1                145, 47
+		GetVariableValue              2                                            ; local
+		PushConstanti8                9
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    29697, 4
+		LineNumberAlt1                146, 47
+		GetThisMemberValueString      "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  9
+		LineNumber                    29700, 4
+		LineNumberAlt1                149, 47
+		GetThisMemberValueString      "cam"
+		Dup
+		GetMemberFunctionString       "settweakable"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29706, 4
+		LineNumberAlt1                155, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "saverloaded"
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    29707, 4
+		LineNumberAlt1                156, 47
+		CallGameFunctionString        "gcsaver", "gettokencount", 0
+		LineNumber                    29707, 4
+		LineNumberAlt1                156, 47
+		SetVariableValue              3                                            ; local
+		LineNumber                    29708, 4
+		LineNumberAlt1                157, 47
+		GetVariableValue              3                                            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    29709, 4
+		LineNumberAlt1                158, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetVariableValue              3                                            ; local
+		Pull                          2
+		GetMemberFunctionString       "settokens"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  10
+		LineNumber                    29715, 4
+		LineNumberAlt1                164, 47
+		GetThisMemberValueString      "areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              4                                            ; local
+		; <-
+		BranchTarget                  11
+		Dup
+		GetVariableValue              4                                            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 12, 0
+		; ->
+		LineNumber                    29716, 4
+		LineNumberAlt1                165, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "render"
+		GetThisMemberValueString      "areas"
+		GetVariableValue              4                                            ; local
+		GetArrayValue
+		GetMemberValueString          "id"
+		Pull                          2
+		GetMemberFunctionString       "addareatorender"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             4
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  12
+		Pop
+		LineNumber                    29720, 4
+		LineNumberAlt1                169, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "saverloaded"
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    29721, 4
+		LineNumberAlt1                170, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "initfromsaver"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  13
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x5508c
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 176:176
+		MemberFunctionArgumentCheck 1
+		LineNumber                  29727, 4
+		LineNumberAlt1              176, 47
+		GetVariableValue            0                      ; local
+		GetThisMemberFunctionString "lego_level_initshort"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "lego_level_initshort"
+		; address: 0x550a3
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 181:181
+		MemberFunctionArgumentCheck 1
+		LineNumber                  29732, 4
+		LineNumberAlt1              181, 47
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x550ba
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 208:208
+		MemberFunctionArgumentCheck 1
+		LineNumber                  29759, 4
+		LineNumberAlt1              208, 47
+		GetVariableValue            0                        ; local
+		GetThisMemberFunctionString "lego_level_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "lego_level_cleanupfull"
+		; address: 0x550d1
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 213:226
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    29764, 4
+		LineNumberAlt1                213, 47
+		PushConstantStringString      "[][][] Lego_Level_CleanupFull"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    29765, 4
+		LineNumberAlt1                214, 47
+		GetThisMemberValueString      "active_areas"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29766, 4
+		LineNumberAlt1                215, 47
+		GetThisMemberValueString      "active_areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1                                 ; local
+		LineNumber                    29767, 4
+		LineNumberAlt1                216, 47
+		GetVariableValue              1                                 ; local
+		PushConstant0
+		SetVariableValue              2                                 ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                                 ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29768, 4
+		LineNumberAlt1                217, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              1                                 ; local
+		GetVariableValue              2                                 ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29769, 4
+		LineNumberAlt1                218, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              1                                 ; local
+		GetVariableValue              2                                 ; local
+		Subtract
+		GetArrayValue
+		GetMemberValueString          "id"
+		CallGameFunctionString        "gcareadirector", "removearea", 1
+		Pop
+		LineNumber                    29770, 4
+		LineNumberAlt1                219, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              1                                 ; local
+		GetVariableValue              2                                 ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    29772, 4
+		LineNumberAlt1                221, 47
+		PushNothing
+		SetThisMemberValueString      "active_areas"
+		; <-
+		BranchTarget                  2
+		LineNumber                    29775, 4
+		LineNumberAlt1                224, 47
+		GetThisMemberValueString      "cam"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    29776, 4
+		LineNumberAlt1                225, 47
+		GetThisMemberValueString      "cam"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29777, 4
+		LineNumberAlt1                226, 47
+		PushNothing
+		SetThisMemberValueString      "cam"
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x551ce
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 233:243
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          3
+		LineNumber                    29784, 4
+		LineNumberAlt1                233, 47
+		GetVariableValue              0                       ; local
+		GetThisMemberFunctionString   "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29785, 4
+		LineNumberAlt1                234, 47
+		GetThisMemberValueString      "areas"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29786, 4
+		LineNumberAlt1                235, 47
+		GetThisMemberValueString      "areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1                       ; local
+		LineNumber                    29787, 4
+		LineNumberAlt1                236, 47
+		GetVariableValue              1                       ; local
+		PushConstant0
+		SetVariableValue              2                       ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                       ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29788, 4
+		LineNumberAlt1                237, 47
+		GetThisMemberValueString      "areas"
+		GetVariableValue              2                       ; local
+		GetArrayValue
+		GetMemberValueString          "id"
+		SetVariableValue              3                       ; local
+		LineNumber                    29789, 4
+		LineNumberAlt1                238, 47
+		GetThisMemberValueString      "areas"
+		GetVariableValue              2                       ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "lego_area_cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29790, 4
+		LineNumberAlt1                239, 47
+		GetThisMemberValueString      "areas"
+		GetVariableValue              2                       ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "exit"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29792, 4
+		LineNumberAlt1                241, 47
+		GetThisMemberValueString      "areas"
+		GetVariableValue              2                       ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    29794, 4
+		LineNumberAlt1                243, 47
+		PushNothing
+		SetThisMemberValueString      "areas"
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x55295
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 250:250
+		MemberFunctionArgumentCheck 2
+		LineNumber                  29801, 4
+		LineNumberAlt1              250, 47
+		GetVariableValue            0                    ; local
+		GetVariableValue            1                    ; local
+		GetThisMemberFunctionString "lego_level_process"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "lego_level_process"
+		; address: 0x552af
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 256:269
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    29807, 4
+		LineNumberAlt1                256, 47
+		GetThisMemberValueString      "cam"
+		PushNothing
+		EqualTo
+		Not
+		GetThisMemberValueString      "areas"
+		PushNothing
+		EqualTo
+		Not
+		And
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29808, 4
+		LineNumberAlt1                257, 47
+		GetThisMemberValueString      "active_areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29809, 4
+		LineNumberAlt1                258, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              2                             ; local
+		GetArrayValue
+		GetVariableValue              1                             ; local
+		Pull                          2
+		GetMemberFunctionString       "process"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    29811, 4
+		LineNumberAlt1                260, 47
+		GetThisMemberValueString      "cam"
+		GetVariableValue              1                             ; local
+		Pull                          2
+		GetMemberFunctionString       "process"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    29815, 4
+		LineNumberAlt1                264, 47
+		GetThisMemberValueString      "areasetactive_pause_counter"
+		PushConstant0
+		GreaterThan
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    29817, 4
+		LineNumberAlt1                266, 47
+		GetThisMemberValueString      "areasetactive_pause_counter"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    29818, 4
+		LineNumberAlt1                267, 47
+		GetVariableValue              0                             ; local
+		GetThisMemberFunctionString   "areasetactivenow"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  3
+		LineNumber                    29820, 4
+		LineNumberAlt1                269, 47
+		GetThisMemberValueString      "areasetactive_pause_counter"
+		PushConstanti8                1
+		Subtract
+		SetThisMemberValueString      "areasetactive_pause_counter"
+		; <-
+		BranchTarget                  4
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x55372
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 276:276
+		MemberFunctionArgumentCheck 2
+		LineNumber                  29827, 4
+		LineNumberAlt1              276, 47
+		GetVariableValue            0                    ; local
+		GetVariableValue            1                    ; local
+		GetThisMemberFunctionString "lego_level_onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "lego_level_onevent"
+		; address: 0x5538c
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 284:326
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          3
+		LineNumber                    29835, 4
+		LineNumberAlt1                284, 47
+		GetThisMemberValueString      "cam"
+		PushNothing
+		EqualTo
+		Not
+		GetThisMemberValueString      "areas"
+		PushNothing
+		EqualTo
+		Not
+		And
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    29836, 4
+		LineNumberAlt1                285, 47
+		GetVariableValue              1                         ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                20
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    29838, 4
+		LineNumberAlt1                287, 47
+		PushConstantStringString      "[][][] Clear Area Event"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    29839, 4
+		LineNumberAlt1                288, 47
+		GetVariableValue              1                         ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		SetVariableValue              2                         ; local
+		LineNumber                    29852, 4
+		LineNumberAlt1                301, 47
+		GetVariableValue              0                         ; local
+		GetVariableValue              2                         ; local
+		GetThisMemberFunctionString   "areasetinactive"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                21
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29857, 4
+		LineNumberAlt1                306, 47
+		GetVariableValue              1                         ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		SetVariableValue              2                         ; local
+		LineNumber                    29859, 4
+		LineNumberAlt1                308, 47
+		GetVariableValue              0                         ; local
+		GetVariableValue              2                         ; local
+		GetVariableValue              1                         ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		GetVariableValue              1                         ; local
+		GetMemberValueString          "args"
+		PushConstanti8                2
+		GetArrayValue
+		GetThisMemberFunctionString   "areasetactive"
+		JumpAbsolute                  4
+		Pop
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstanti8                28
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29865, 4
+		LineNumberAlt1                314, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti8                29
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    29868, 4
+		LineNumberAlt1                317, 47
+		GetThisMemberValueString      "cam"
+		Dup
+		GetMemberFunctionString       "getaimode"
+		JumpAbsolute                  1
+		LineNumber                    29868, 4
+		LineNumberAlt1                317, 47
+		SetVariableValue              3                         ; local
+		LineNumber                    29869, 4
+		LineNumberAlt1                318, 47
+		GetVariableValue              3                         ; local
+		PushConstanti8                9
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    29870, 4
+		LineNumberAlt1                319, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    29876, 4
+		LineNumberAlt1                325, 47
+		GetThisMemberValueString      "active_areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              4                         ; local
+		; <-
+		BranchTarget                  4
+		Dup
+		GetVariableValue              4                         ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    29877, 4
+		LineNumberAlt1                326, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              4                         ; local
+		GetArrayValue
+		GetVariableValue              1                         ; local
+		Pull                          2
+		GetMemberFunctionString       "onevent"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             4
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		; <-
+		BranchTarget                  6
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x55500
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 337:337
+		MemberFunctionArgumentCheck 2
+		LineNumber                  29888, 4
+		LineNumberAlt1              337, 47
+		GetVariableValue            0                  ; local
+		GetVariableValue            1                  ; local
+		GetThisMemberFunctionString "lego_level_input"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "lego_level_input"
+		; address: 0x5551a
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 342:348
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    29893, 4
+		LineNumberAlt1                342, 47
+		GetThisMemberValueString      "cam"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29894, 4
+		LineNumberAlt1                343, 47
+		GetThisMemberValueString      "active_areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2              ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29895, 4
+		LineNumberAlt1                344, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              2              ; local
+		GetArrayValue
+		GetVariableValue              1              ; local
+		Pull                          2
+		GetMemberFunctionString       "input"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    29897, 4
+		LineNumberAlt1                346, 47
+		GetThisMemberValueString      "cam"
+		GetVariableValue              1              ; local
+		Pull                          2
+		GetMemberFunctionString       "input"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    29899, 4
+		LineNumberAlt1                348, 47
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                8
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29899, 4
+		LineNumberAlt1                348, 47
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29899, 4
+		LineNumberAlt1                348, 47
+		GetVariableValue              0              ; local
+		GetThisMemberFunctionString   "backtomenu"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "areasetactive"
+		; address: 0x555ca
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 357:360
+		MemberFunctionArgumentCheck 4
+		LineNumber                  29908, 4
+		LineNumberAlt1              357, 47
+		GetVariableValue            1                             ; local
+		SetThisMemberValueString    "temp_areaid"
+		LineNumber                  29909, 4
+		LineNumberAlt1              358, 47
+		GetVariableValue            2                             ; local
+		SetThisMemberValueString    "temp_startid"
+		LineNumber                  29910, 4
+		LineNumberAlt1              359, 47
+		GetVariableValue            3                             ; local
+		SetThisMemberValueString    "temp_lookid"
+		LineNumber                  29911, 4
+		LineNumberAlt1              360, 47
+		PushConstanti8              4
+		SetThisMemberValueString    "areasetactive_pause_counter"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "areasetactivenow"
+		; address: 0x5560d
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 368:384
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    29919, 4
+		LineNumberAlt1                368, 47
+		PushConstantStringString      "[][][] AreaSetActiveNow"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    29920, 4
+		LineNumberAlt1                369, 47
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "temp_areaid"
+		GetThisMemberFunctionString   "getactive"
+		JumpAbsolute                  2
+		LineNumber                    29920, 4
+		LineNumberAlt1                369, 47
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    29921, 4
+		LineNumberAlt1                370, 47
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "temp_areaid"
+		GetThisMemberFunctionString   "getarea"
+		JumpAbsolute                  2
+		LineNumber                    29921, 4
+		LineNumberAlt1                370, 47
+		SetVariableValue              1                                            ; local
+		LineNumber                    29922, 4
+		LineNumberAlt1                371, 47
+		GetVariableValue              1                                            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    29923, 4
+		LineNumberAlt1                372, 47
+		GetThisMemberValueString      "areas"
+		GetVariableValue              1                                            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29924, 4
+		LineNumberAlt1                373, 47
+		GetThisMemberValueString      "active_areas"
+		GetThisMemberValueString      "areas"
+		GetVariableValue              1                                            ; local
+		GetArrayValue
+		AppendToArray
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    29926, 4
+		LineNumberAlt1                375, 47
+		PushConstantStringString      "Area '"
+		GetThisMemberValueString      "temp_areaid"
+		CallGameFunctionString        "scslosifoundation", "identifiertostring", 1
+		LineNumber                    29926, 4
+		LineNumberAlt1                375, 47
+		Add
+		PushConstantStringString      "' is not in the areas array!"
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    29930, 4
+		LineNumberAlt1                379, 47
+		GetThisMemberValueString      "temp_startid"
+		PushNothing
+		EqualTo
+		GetThisMemberValueString      "temp_lookid"
+		PushNothing
+		EqualTo
+		Or
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29932, 4
+		LineNumberAlt1                381, 47
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "temp_areaid"
+		PushConstantStringString      "str0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29932, 4
+		LineNumberAlt1                381, 47
+		PushConstantStringString      "lok0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29932, 4
+		LineNumberAlt1                381, 47
+		GetThisMemberFunctionString   "areasaveenterlocation"
+		JumpAbsolute                  4
+		Pop
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    29935, 4
+		LineNumberAlt1                384, 47
+		GetVariableValue              0                                            ; local
+		GetThisMemberValueString      "temp_areaid"
+		GetThisMemberValueString      "temp_startid"
+		GetThisMemberValueString      "temp_lookid"
+		GetThisMemberFunctionString   "areasaveenterlocation"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "areasetcurrent"
+		; address: 0x5574f
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 392:393
+		MemberFunctionArgumentCheck 2
+		CreateStackVariables        1
+		LineNumber                  29943, 4
+		LineNumberAlt1              392, 47
+		GetVariableValue            0            ; local
+		GetVariableValue            1            ; local
+		GetThisMemberFunctionString "getarea"
+		JumpAbsolute                2
+		LineNumber                  29943, 4
+		LineNumberAlt1              392, 47
+		SetVariableValue            2            ; local
+		LineNumber                  29944, 4
+		LineNumberAlt1              393, 47
+		GetThisMemberValueString    "areas"
+		GetVariableValue            2            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "setcurrent"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "areasetinactive"
+		; address: 0x5578f
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 401:409
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    29952, 4
+		LineNumberAlt1                401, 47
+		GetThisMemberValueString      "active_areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2              ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29953, 4
+		LineNumberAlt1                402, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              2              ; local
+		GetArrayValue
+		GetMemberValueString          "id"
+		GetVariableValue              1              ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29954, 4
+		LineNumberAlt1                403, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              2              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    29955, 4
+		LineNumberAlt1                404, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              2              ; local
+		RemoveFromArray
+		LineNumber                    29957, 4
+		LineNumberAlt1                406, 47
+		PushConstanti8                1
+		Return
+		; <-
+		BranchTarget                  1
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		LineNumber                    29960, 4
+		LineNumberAlt1                409, 47
+		PushConstant0
+		Return
+	end ; method
+
+	begin method "areasaveenterlocation"
+		; address: 0x55814
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 416:424
+		MemberFunctionArgumentCheck   4
+		CreateStackVariables          2
+		LineNumber                    29967, 4
+		LineNumberAlt1                416, 47
+		GetThisMemberValueString      "active_areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              4                                            ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              4                                            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29968, 4
+		LineNumberAlt1                417, 47
+		PushConstantStringString      "active area is "
+		GetThisMemberValueString      "active_areas"
+		PushConstant0
+		GetArrayValue
+		GetMemberValueString          "id"
+		CallGameFunctionString        "scslosifoundation", "identifiertostring", 1
+		LineNumber                    29968, 4
+		LineNumberAlt1                417, 47
+		Add
+		PushConstantStringString      " area is "
+		Add
+		GetVariableValue              1                                            ; local
+		CallGameFunctionString        "scslosifoundation", "identifiertostring", 1
+		LineNumber                    29968, 4
+		LineNumberAlt1                417, 47
+		Add
+		PushConstantStringString      " startPos is "
+		Add
+		GetVariableValue              2                                            ; local
+		CallGameFunctionString        "scslosifoundation", "identifiertostring", 1
+		LineNumber                    29968, 4
+		LineNumberAlt1                417, 47
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    29969, 4
+		LineNumberAlt1                418, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              4                                            ; local
+		GetArrayValue
+		GetMemberValueString          "id"
+		GetVariableValue              1                                            ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29970, 4
+		LineNumberAlt1                419, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              4                                            ; local
+		GetArrayValue
+		SetVariableValue              5                                            ; local
+		LineNumber                    29971, 4
+		LineNumberAlt1                420, 47
+		GetVariableValue              2                                            ; local
+		GetVariableValue              5                                            ; local
+		SetMemberValueString          "enterstartid"
+		LineNumber                    29972, 4
+		LineNumberAlt1                421, 47
+		GetVariableValue              3                                            ; local
+		GetVariableValue              5                                            ; local
+		SetMemberValueString          "enterlookid"
+		; <-
+		BranchTarget                  1
+		IncrementVariable             4
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		LineNumber                    29975, 4
+		LineNumberAlt1                424, 47
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "savetosaver"
+		JumpAbsolute                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getarea"
+		; address: 0x55907
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 430:435
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    29981, 4
+		LineNumberAlt1                430, 47
+		GetThisMemberValueString      "areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2        ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2        ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29982, 4
+		LineNumberAlt1                431, 47
+		GetThisMemberValueString      "areas"
+		GetVariableValue              2        ; local
+		GetArrayValue
+		GetMemberValueString          "id"
+		GetVariableValue              1        ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29983, 4
+		LineNumberAlt1                432, 47
+		GetVariableValue              2        ; local
+		Return
+		; <-
+		BranchTarget                  1
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		LineNumber                    29986, 4
+		LineNumberAlt1                435, 47
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getactive"
+		; address: 0x55964
+		; source: 47 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_level.vbo" 441:446
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    29992, 4
+		LineNumberAlt1                441, 47
+		GetThisMemberValueString      "active_areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2              ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29993, 4
+		LineNumberAlt1                442, 47
+		GetThisMemberValueString      "active_areas"
+		GetVariableValue              2              ; local
+		GetArrayValue
+		GetMemberValueString          "id"
+		GetVariableValue              1              ; local
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29994, 4
+		LineNumberAlt1                443, 47
+		GetVariableValue              2              ; local
+		Return
+		; <-
+		BranchTarget                  1
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		LineNumber                    29997, 4
+		LineNumberAlt1                446, 47
+		PushNothing
+		Return
+	end ; method
+
+	begin method "backtomenu"
+		; address: 0x559c1
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+end ; class

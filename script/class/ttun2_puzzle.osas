@@ -1,0 +1,257 @@
+begin class "ttun2_puzzle"
+	property "parent"
+	property "enteredbackdoor"
+	property "call_ev_safe_time_once"
+
+	begin method "ttun2_puzzle"
+		; address: 0x803be
+		; source: 144 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_takv.vbo" 80:80
+		MemberFunctionArgumentCheck 2
+		LineNumber                  55049, 4
+		LineNumberAlt1              80, 144
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x803d2
+		; source: 144 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_takv.vbo" 88:92
+		MemberFunctionArgumentCheck  1
+		LineNumber                   55057, 4
+		LineNumberAlt1               88, 144
+		PushConstanti8               1
+		SetThisMemberValueString     "call_ev_safe_time_once"
+		LineNumber                   55058, 4
+		LineNumberAlt1               89, 144
+		PushConstanti8               1
+		SetThisMemberValueString     "enteredbackdoor"
+		LineNumber                   55059, 4
+		LineNumberAlt1               90, 144
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MUSICPart2LegoUNDERGROUND"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   55060, 4
+		LineNumberAlt1               91, 144
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		Dup
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   55061, 4
+		LineNumberAlt1               92, 144
+		PushConstanti8               50
+		CallGameFunctionString       "gcareadirector", "setnearestmax", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x80439
+		; source: 144 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_takv.vbo" 98:123
+		MemberFunctionArgumentCheck   2
+		LineNumber                    55067, 4
+		LineNumberAlt1                98, 144
+		GetVariableValue              1                                               ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                44
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    55069, 4
+		LineNumberAlt1                100, 144
+		GetThisMemberValueString      "call_ev_safe_time_once"
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    55070, 4
+		LineNumberAlt1                101, 144
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterlookid"
+		PushConstantStringString      "str1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    55070, 4
+		LineNumberAlt1                101, 144
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    55071, 4
+		LineNumberAlt1                102, 144
+		PushConstanti8                1
+		SetThisMemberValueString      "enteredbackdoor"
+		LineNumber                    55072, 4
+		LineNumberAlt1                103, 144
+		PushConstantStringString      "*******************************1 OUT OF WATER"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    55073, 4
+		LineNumberAlt1                104, 144
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "setunderwater"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    55075, 4
+		LineNumberAlt1                106, 144
+		PushConstant0
+		SetThisMemberValueString      "enteredbackdoor"
+		LineNumber                    55076, 4
+		LineNumberAlt1                107, 144
+		PushConstantStringString      "*******************************1 IN WATER"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    55078, 4
+		LineNumberAlt1                109, 144
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstanti16               1000
+		Pull                          2
+		GetMemberFunctionString       "setwaterlevel"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    55080, 4
+		LineNumberAlt1                111, 144
+		PushConstant0
+		SetThisMemberValueString      "call_ev_safe_time_once"
+		; <-
+		BranchTarget                  2
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    55083, 4
+		LineNumberAlt1                114, 144
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    55085, 4
+		LineNumberAlt1                116, 144
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterstartid"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterlookid"
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    55086, 4
+		LineNumberAlt1                117, 144
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    55087, 4
+		LineNumberAlt1                118, 144
+		GetThisMemberValueString      "enteredbackdoor"
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    55088, 4
+		LineNumberAlt1                119, 144
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "setunderwater"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    55089, 4
+		LineNumberAlt1                120, 144
+		PushConstantStringString      "******************************** OUT OF WATER"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		LineNumber                    55091, 4
+		LineNumberAlt1                122, 144
+		PushConstantStringString      "******************************** IN WATER"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    55092, 4
+		LineNumberAlt1                123, 144
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstanti16               1000
+		Pull                          2
+		GetMemberFunctionString       "setwaterlevel"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  6
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x805f9
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x805fd
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cheat"
+		; address: 0x80601
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x80605
+		; source: 144 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_takv.vbo" 143:143
+		MemberFunctionArgumentCheck 1
+		LineNumber                  55112, 4
+		LineNumberAlt1              143, 144
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

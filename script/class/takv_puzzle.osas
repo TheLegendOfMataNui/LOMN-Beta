@@ -1,0 +1,594 @@
+begin class "takv_puzzle"
+	property "parent"
+	property "door1"
+	property "door2"
+	property "killedcharacters"
+	property "call_ev_safe_time_once"
+
+	begin method "takv_puzzle"
+		; address: 0x83a6b
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 100:100
+		MemberFunctionArgumentCheck 2
+		LineNumber                  56534, 4
+		LineNumberAlt1              100, 149
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x83a7f
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 109:121
+		MemberFunctionArgumentCheck  1
+		LineNumber                   56543, 4
+		LineNumberAlt1               109, 149
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MUSICLEGOUNDERGROUND"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   56544, 4
+		LineNumberAlt1               110, 149
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		Dup
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   56546, 4
+		LineNumberAlt1               112, 149
+		PushConstant0
+		SetThisMemberValueString     "killedcharacters"
+		LineNumber                   56547, 4
+		LineNumberAlt1               113, 149
+		PushConstanti8               1
+		SetThisMemberValueString     "call_ev_safe_time_once"
+		LineNumber                   56548, 4
+		LineNumberAlt1               114, 149
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "setunderwater"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   56549, 4
+		LineNumberAlt1               115, 149
+		CreateObjectString           "lego_moveableobject"
+		Dup
+		PushConstantStringString     "drs0"
+		Pull                         2
+		GetMemberFunctionString      "lego_moveableobject"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   56549, 4
+		LineNumberAlt1               115, 149
+		SetThisMemberValueString     "door1"
+		LineNumber                   56550, 4
+		LineNumberAlt1               116, 149
+		GetThisMemberValueString     "door1"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   56551, 4
+		LineNumberAlt1               117, 149
+		GetThisMemberValueString     "door1"
+		Dup
+		GetMemberFunctionString      "settweakable"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   56552, 4
+		LineNumberAlt1               118, 149
+		CreateObjectString           "lego_moveableobject"
+		Dup
+		PushConstantStringString     "drs1"
+		Pull                         2
+		GetMemberFunctionString      "lego_moveableobject"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   56552, 4
+		LineNumberAlt1               118, 149
+		SetThisMemberValueString     "door2"
+		LineNumber                   56553, 4
+		LineNumberAlt1               119, 149
+		GetThisMemberValueString     "door2"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   56554, 4
+		LineNumberAlt1               120, 149
+		GetThisMemberValueString     "door2"
+		Dup
+		GetMemberFunctionString      "settweakable"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   56555, 4
+		LineNumberAlt1               121, 149
+		GetVariableValue             0                                       ; local
+		GetThisMemberFunctionString  "opendoors"
+		JumpAbsolute                 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x83b9e
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 127:130
+		MemberFunctionArgumentCheck  1
+		LineNumber                   56561, 4
+		LineNumberAlt1               127, 149
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "enterstartid"
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "enterlookid"
+		Pull                         3
+		GetMemberFunctionString      "gotopos"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   56562, 4
+		LineNumberAlt1               128, 149
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		Dup
+		GetMemberFunctionString      "unkill"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   56563, 4
+		LineNumberAlt1               129, 149
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "setunderwater"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   56564, 4
+		LineNumberAlt1               130, 149
+		GetVariableValue             0               ; local
+		GetThisMemberFunctionString  "opendoors"
+		JumpAbsolute                 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x83c10
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 135:138
+		MemberFunctionArgumentCheck 1
+		LineNumber                  56569, 4
+		LineNumberAlt1              135, 149
+		GetThisMemberValueString    "door1"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  56570, 4
+		LineNumberAlt1              136, 149
+		PushNothing
+		SetThisMemberValueString    "door1"
+		LineNumber                  56571, 4
+		LineNumberAlt1              137, 149
+		GetThisMemberValueString    "door2"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  56572, 4
+		LineNumberAlt1              138, 149
+		PushNothing
+		SetThisMemberValueString    "door2"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x83c58
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x83c5c
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 149:175
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    56583, 4
+		LineNumberAlt1                149, 149
+		GetVariableValue              1                                                                  ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                44
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    56585, 4
+		LineNumberAlt1                151, 149
+		GetThisMemberValueString      "call_ev_safe_time_once"
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    56586, 4
+		LineNumberAlt1                152, 149
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterstartid"
+		PushConstantStringString      "str1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    56586, 4
+		LineNumberAlt1                152, 149
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    56587, 4
+		LineNumberAlt1                153, 149
+		GetVariableValue              0                                                                  ; local
+		GetThisMemberFunctionString   "closedoor1"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    56588, 4
+		LineNumberAlt1                154, 149
+		GetVariableValue              0                                                                  ; local
+		GetThisMemberFunctionString   "closedoor2"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    56589, 4
+		LineNumberAlt1                155, 149
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "setunderwater"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    56590, 4
+		LineNumberAlt1                156, 149
+		PushConstant0
+		SetVariableValue              2                                                                  ; local
+		; <-
+		BranchTarget                  0
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstanti8                43
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    56594, 4
+		LineNumberAlt1                160, 149
+		GetThisMemberValueString      "killedcharacters"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "killedcharacters"
+		LineNumber                    56595, 4
+		LineNumberAlt1                161, 149
+		PushConstantStringString      "****** The Number of characters you have killed in this area is "
+		GetThisMemberValueString      "killedcharacters"
+		ConvertToString
+		Add
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    56596, 4
+		LineNumberAlt1                162, 149
+		GetThisMemberValueString      "killedcharacters"
+		PushConstanti8                3
+		LessThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    56598, 4
+		LineNumberAlt1                164, 149
+		GetVariableValue              0                                                                  ; local
+		GetThisMemberFunctionString   "opendoor2"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  3
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    56601, 4
+		LineNumberAlt1                167, 149
+		GetVariableValue              1                                                                  ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		Dup
+		PushConstantStringString      "tp02"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    56602, 4
+		LineNumberAlt1                168, 149
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    56603, 4
+		LineNumberAlt1                169, 149
+		PushConstantStringString      "****** COLLIDING WITH TP02 CLOSING DOORS"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    56604, 4
+		LineNumberAlt1                170, 149
+		GetVariableValue              0                                                                  ; local
+		GetThisMemberFunctionString   "closedoors"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  5
+		Pop
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    56607, 4
+		LineNumberAlt1                173, 149
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    56609, 4
+		LineNumberAlt1                175, 149
+		GetVariableValue              0                                                                  ; local
+		GetThisMemberFunctionString   "initshort"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  8
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "opendoors"
+		; address: 0x83df9
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 181:182
+		MemberFunctionArgumentCheck 1
+		LineNumber                  56615, 4
+		LineNumberAlt1              181, 149
+		GetVariableValue            0           ; local
+		GetThisMemberFunctionString "opendoor1"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  56616, 4
+		LineNumberAlt1              182, 149
+		GetVariableValue            0           ; local
+		GetThisMemberFunctionString "opendoor2"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "closedoors"
+		; address: 0x83e23
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 187:188
+		MemberFunctionArgumentCheck 1
+		LineNumber                  56621, 4
+		LineNumberAlt1              187, 149
+		GetVariableValue            0            ; local
+		GetThisMemberFunctionString "closedoor1"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  56622, 4
+		LineNumberAlt1              188, 149
+		GetVariableValue            0            ; local
+		GetThisMemberFunctionString "closedoor2"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "opendoor1"
+		; address: 0x83e4d
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 193:194
+		MemberFunctionArgumentCheck 1
+		LineNumber                  56627, 4
+		LineNumberAlt1              193, 149
+		PushConstantStringString    "**** OPENING DOOR NUMBER 1"
+		CallGameFunctionString      "debug", "print", 1
+		Pop
+		LineNumber                  56628, 4
+		LineNumberAlt1              194, 149
+		GetThisMemberValueString    "door1"
+		PushConstantf32             0
+		PushConstantf32             12
+		PushConstantf32             88.0999984741211
+		PushConstantf32             1
+		Pull                        5
+		GetMemberFunctionString     "interpolate"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "opendoor2"
+		; address: 0x83e8e
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 199:200
+		MemberFunctionArgumentCheck 1
+		LineNumber                  56633, 4
+		LineNumberAlt1              199, 149
+		PushConstantStringString    "**** OPENING DOOR NUMBER 2"
+		CallGameFunctionString      "debug", "print", 1
+		Pop
+		LineNumber                  56634, 4
+		LineNumberAlt1              200, 149
+		GetThisMemberValueString    "door2"
+		PushConstantf32             0
+		PushConstantf32             12
+		PushConstant0
+		PushConstantf32             78
+		Subtract
+		PushConstantf32             1
+		Pull                        5
+		GetMemberFunctionString     "interpolate"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "closedoor1"
+		; address: 0x83ed1
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 205:206
+		MemberFunctionArgumentCheck 1
+		LineNumber                  56639, 4
+		LineNumberAlt1              205, 149
+		PushConstantStringString    "**** CLOSING DOOR NUMBER 1"
+		CallGameFunctionString      "debug", "print", 1
+		Pop
+		LineNumber                  56640, 4
+		LineNumberAlt1              206, 149
+		GetThisMemberValueString    "door1"
+		PushConstantf32             0
+		PushConstantf32             4.099999904632568
+		PushConstantf32             88.0999984741211
+		PushConstantf32             1
+		Pull                        5
+		GetMemberFunctionString     "interpolate"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "closedoor2"
+		; address: 0x83f12
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 211:212
+		MemberFunctionArgumentCheck 1
+		LineNumber                  56645, 4
+		LineNumberAlt1              211, 149
+		PushConstantStringString    "**** CLOSING DOOR NUMBER 2"
+		CallGameFunctionString      "debug", "print", 1
+		Pop
+		LineNumber                  56646, 4
+		LineNumberAlt1              212, 149
+		GetThisMemberValueString    "door2"
+		PushConstantf32             0
+		PushConstantf32             4.960000038146973
+		PushConstant0
+		PushConstantf32             78
+		Subtract
+		PushConstantf32             1
+		Pull                        5
+		GetMemberFunctionString     "interpolate"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x83f55
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 217:217
+		MemberFunctionArgumentCheck   2
+		LineNumber                    56651, 4
+		LineNumberAlt1                217, 149
+		GetVariableValue              1        ; local
+		GetMemberValueString          "button"
+		PushConstanti8                90
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    56651, 4
+		LineNumberAlt1                217, 149
+		GetVariableValue              1        ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    56651, 4
+		LineNumberAlt1                217, 149
+		GetVariableValue              0        ; local
+		GetThisMemberFunctionString   "cheat"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cheat"
+		; address: 0x83f98
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 222:223
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  56656, 4
+		LineNumberAlt1              222, 149
+		CreateObjectString          "scriptevent"
+		Dup
+		PushConstanti8              43
+		CreateArray
+		Dup
+		PushConstantStringString    "takv"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  56656, 4
+		LineNumberAlt1              222, 149
+		AppendToArray
+		Pull                        3
+		GetMemberFunctionString     "scriptevent"
+		JumpAbsolute                3
+		Pop
+		LineNumber                  56656, 4
+		LineNumberAlt1              222, 149
+		SetVariableValue            1                                            ; local
+		LineNumber                  56657, 4
+		LineNumberAlt1              223, 149
+		GetVariableValue            1                                            ; local
+		Dup
+		GetMemberFunctionString     "send"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x83fed
+		; source: 149 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blcv.vbo" 228:228
+		MemberFunctionArgumentCheck 1
+		LineNumber                  56662, 4
+		LineNumberAlt1              228, 149
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

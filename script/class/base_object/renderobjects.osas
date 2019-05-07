@@ -1,0 +1,376 @@
+begin class "renderobjects", "base_object"
+	property "octreestate"
+	property "raystate"
+	property "cylinderstate"
+	property "triggerstate"
+	property "areas"
+	property "actorhandle"
+
+	begin method "renderobjects"
+		; address: 0x54725
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 726:729
+		MemberFunctionArgumentCheck 1
+		LineNumber                  29361, 4
+		LineNumberAlt1              726, 48
+		PushConstant0
+		SetThisMemberValueString    "octreestate"
+		LineNumber                  29362, 4
+		LineNumberAlt1              727, 48
+		PushConstant0
+		SetThisMemberValueString    "raystate"
+		LineNumber                  29363, 4
+		LineNumberAlt1              728, 48
+		PushConstant0
+		SetThisMemberValueString    "cylinderstate"
+		LineNumber                  29364, 4
+		LineNumberAlt1              729, 48
+		PushConstant0
+		SetThisMemberValueString    "triggerstate"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x54761
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 735:735
+		MemberFunctionArgumentCheck 1
+		LineNumber                  29370, 4
+		LineNumberAlt1              735, 48
+		CreateArray
+		SetThisMemberValueString    "areas"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x54773
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 740:750
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    29375, 4
+		LineNumberAlt1                740, 48
+		PushNothing
+		SetThisMemberValueString      "octreestate"
+		LineNumber                    29376, 4
+		LineNumberAlt1                741, 48
+		PushNothing
+		SetThisMemberValueString      "raystate"
+		LineNumber                    29377, 4
+		LineNumberAlt1                742, 48
+		PushNothing
+		SetThisMemberValueString      "cylinderstate"
+		LineNumber                    29378, 4
+		LineNumberAlt1                743, 48
+		PushNothing
+		SetThisMemberValueString      "triggerstate"
+		LineNumber                    29379, 4
+		LineNumberAlt1                744, 48
+		PushNothing
+		SetThisMemberValueString      "actorhandle"
+		LineNumber                    29381, 4
+		LineNumberAlt1                746, 48
+		GetThisMemberValueString      "areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1               ; local
+		LineNumber                    29382, 4
+		LineNumberAlt1                747, 48
+		GetVariableValue              1               ; local
+		PushConstant0
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2               ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29383, 4
+		LineNumberAlt1                748, 48
+		GetThisMemberValueString      "areas"
+		GetVariableValue              1               ; local
+		GetVariableValue              2               ; local
+		Subtract
+		RemoveFromArray
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    29385, 4
+		LineNumberAlt1                750, 48
+		PushNothing
+		SetThisMemberValueString      "areas"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x54816
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "renderoctree"
+		; address: 0x5481a
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 765:777
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    29400, 4
+		LineNumberAlt1                765, 48
+		GetThisMemberValueString      "octreestate"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    29401, 4
+		LineNumberAlt1                766, 48
+		PushConstanti8                1
+		SetThisMemberValueString      "octreestate"
+		LineNumber                    29402, 4
+		LineNumberAlt1                767, 48
+		GetThisMemberValueString      "areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                           ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                           ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    29403, 4
+		LineNumberAlt1                768, 48
+		GetThisMemberValueString      "areas"
+		GetVariableValue              1                           ; local
+		GetArrayValue
+		PushConstanti8                1
+		CallGameFunctionString        "gcarea", "renderoctree", 2
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    29410, 4
+		LineNumberAlt1                775, 48
+		PushConstant0
+		SetThisMemberValueString      "octreestate"
+		LineNumber                    29411, 4
+		LineNumberAlt1                776, 48
+		GetThisMemberValueString      "areas"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                           ; local
+		; <-
+		BranchTarget                  3
+		Dup
+		GetVariableValue              1                           ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    29412, 4
+		LineNumberAlt1                777, 48
+		GetThisMemberValueString      "areas"
+		GetVariableValue              1                           ; local
+		GetArrayValue
+		PushConstant0
+		CallGameFunctionString        "gcarea", "renderoctree", 2
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Pop
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+
+	begin method "renderrays"
+		; address: 0x548cd
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 786:792
+		MemberFunctionArgumentCheck   1
+		LineNumber                    29421, 4
+		LineNumberAlt1                786, 48
+		PushConstantStringString      "cnt1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29421, 4
+		LineNumberAlt1                786, 48
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 1
+		LineNumber                    29421, 4
+		LineNumberAlt1                786, 48
+		SetThisMemberValueString      "actorhandle"
+		LineNumber                    29422, 4
+		LineNumberAlt1                787, 48
+		GetThisMemberValueString      "raystate"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    29423, 4
+		LineNumberAlt1                788, 48
+		PushConstanti8                1
+		SetThisMemberValueString      "raystate"
+		LineNumber                    29424, 4
+		LineNumberAlt1                789, 48
+		GetThisMemberValueString      "actorhandle"
+		PushConstanti8                1
+		CallGameFunctionString        "gccharacter", "renderrays", 2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    29426, 4
+		LineNumberAlt1                791, 48
+		PushConstant0
+		SetThisMemberValueString      "raystate"
+		LineNumber                    29427, 4
+		LineNumberAlt1                792, 48
+		GetThisMemberValueString      "actorhandle"
+		PushConstant0
+		CallGameFunctionString        "gccharacter", "renderrays", 2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "rendercylinder"
+		; address: 0x5495e
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 799:805
+		MemberFunctionArgumentCheck   1
+		LineNumber                    29434, 4
+		LineNumberAlt1                799, 48
+		PushConstantStringString      "cnt1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29434, 4
+		LineNumberAlt1                799, 48
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 1
+		LineNumber                    29434, 4
+		LineNumberAlt1                799, 48
+		SetThisMemberValueString      "actorhandle"
+		LineNumber                    29435, 4
+		LineNumberAlt1                800, 48
+		GetThisMemberValueString      "cylinderstate"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    29436, 4
+		LineNumberAlt1                801, 48
+		PushConstanti8                1
+		SetThisMemberValueString      "cylinderstate"
+		LineNumber                    29437, 4
+		LineNumberAlt1                802, 48
+		GetThisMemberValueString      "actorhandle"
+		PushConstanti8                1
+		CallGameFunctionString        "gccharacter", "rendercylinder", 2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    29439, 4
+		LineNumberAlt1                804, 48
+		PushConstant0
+		SetThisMemberValueString      "cylinderstate"
+		LineNumber                    29440, 4
+		LineNumberAlt1                805, 48
+		GetThisMemberValueString      "actorhandle"
+		PushConstant0
+		CallGameFunctionString        "gccharacter", "rendercylinder", 2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "rendertriggerboxes"
+		; address: 0x549ef
+		; source: 48 "C:\\projects\\lego\\Scripting\\VBO\\global.vbo" 812:820
+		MemberFunctionArgumentCheck   1
+		LineNumber                    29447, 4
+		LineNumberAlt1                812, 48
+		PushConstantStringString      "cnt1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    29447, 4
+		LineNumberAlt1                812, 48
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 1
+		LineNumber                    29447, 4
+		LineNumberAlt1                812, 48
+		SetThisMemberValueString      "actorhandle"
+		LineNumber                    29448, 4
+		LineNumberAlt1                813, 48
+		GetThisMemberValueString      "triggerstate"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    29449, 4
+		LineNumberAlt1                814, 48
+		PushConstanti8                1
+		SetThisMemberValueString      "triggerstate"
+		LineNumber                    29450, 4
+		LineNumberAlt1                815, 48
+		GetThisMemberValueString      "actorhandle"
+		PushConstanti8                1
+		CallGameFunctionString        "gccharacter", "rendertriggerboxes", 2
+		Pop
+		LineNumber                    29451, 4
+		LineNumberAlt1                816, 48
+		GetThisMemberValueString      "actorhandle"
+		PushConstanti8                1
+		CallGameFunctionString        "gccharacter", "rendertriggerplanes", 2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    29453, 4
+		LineNumberAlt1                818, 48
+		PushConstant0
+		SetThisMemberValueString      "triggerstate"
+		LineNumber                    29454, 4
+		LineNumberAlt1                819, 48
+		GetThisMemberValueString      "actorhandle"
+		PushConstant0
+		CallGameFunctionString        "gccharacter", "rendertriggerboxes", 2
+		Pop
+		LineNumber                    29455, 4
+		LineNumberAlt1                820, 48
+		GetThisMemberValueString      "actorhandle"
+		PushConstant0
+		CallGameFunctionString        "gccharacter", "rendertriggerplanes", 2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "addareatorender"
+		; address: 0x54aab
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+end ; class

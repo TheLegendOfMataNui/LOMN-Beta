@@ -1,0 +1,1168 @@
+begin class "ss_controlcamera", "ss_basecamera"
+	property "fontunactive"
+	property "fontactive"
+	property "oncam"
+	property "change"
+	property "camarray"
+	property "tararray"
+	property "helpcamarray"
+	property "helptararray"
+	property "target"
+	property "active"
+
+	begin method "ss_controlcamera"
+		; address: 0x33c7b
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 172:234
+		MemberFunctionArgumentCheck   10
+		CreateStackVariables          1
+		LineNumber                    5580, 4
+		LineNumberAlt1                172, 25
+		GetVariableValue              0                                              ; local
+		GetVariableValue              1                                              ; local
+		GetVariableValue              2                                              ; local
+		GetVariableValue              3                                              ; local
+		GetVariableValue              4                                              ; local
+		GetVariableValue              5                                              ; local
+		GetVariableValue              6                                              ; local
+		GetVariableValue              7                                              ; local
+		GetThisMemberFunctionString   "ss_basecamera"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5581, 4
+		LineNumberAlt1                173, 25
+		GetVariableValue              8                                              ; local
+		SetThisMemberValueString      "fontunactive"
+		LineNumber                    5582, 4
+		LineNumberAlt1                174, 25
+		GetVariableValue              9                                              ; local
+		SetThisMemberValueString      "fontactive"
+		LineNumber                    5583, 4
+		LineNumberAlt1                175, 25
+		PushConstanti8                1
+		SetThisMemberValueString      "oncam"
+		LineNumber                    5584, 4
+		LineNumberAlt1                176, 25
+		PushConstant0
+		SetThisMemberValueString      "active"
+		LineNumber                    5585, 4
+		LineNumberAlt1                177, 25
+		PushConstanti8                10
+		SetThisMemberValueString      "change"
+		LineNumber                    5587, 4
+		LineNumberAlt1                179, 25
+		CreateArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "CAMERA POSITION"
+		PushConstanti8                50
+		PushConstanti8                80
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5588, 4
+		LineNumberAlt1                180, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "CHANGE "
+		PushConstanti8                50
+		PushConstanti8                100
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5589, 4
+		LineNumberAlt1                181, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "X POS "
+		PushConstanti8                50
+		PushConstanti8                120
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5590, 4
+		LineNumberAlt1                182, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "Y POS "
+		PushConstanti8                50
+		PushConstanti16               140
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5591, 4
+		LineNumberAlt1                183, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "Z POS "
+		PushConstanti8                50
+		PushConstanti16               160
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5592, 4
+		LineNumberAlt1                184, 25
+		AppendToArray
+		SetThisMemberValueString      "helpcamarray"
+		LineNumber                    5595, 4
+		LineNumberAlt1                187, 25
+		CreateArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "TARGET POSITION"
+		PushConstanti16               300
+		PushConstanti8                80
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5596, 4
+		LineNumberAlt1                188, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "CHANGE "
+		PushConstanti16               300
+		PushConstanti8                100
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5597, 4
+		LineNumberAlt1                189, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "X POS "
+		PushConstanti16               300
+		PushConstanti8                120
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5598, 4
+		LineNumberAlt1                190, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "Y POS "
+		PushConstanti16               300
+		PushConstanti16               140
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5599, 4
+		LineNumberAlt1                191, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		PushConstantStringString      "Z POS "
+		PushConstanti16               300
+		PushConstanti16               160
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5600, 4
+		LineNumberAlt1                192, 25
+		AppendToArray
+		SetThisMemberValueString      "helptararray"
+		LineNumber                    5603, 4
+		LineNumberAlt1                195, 25
+		CreateArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		GetThisMemberValueString      "change"
+		PushConstanti16               150
+		PushConstanti8                100
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5604, 4
+		LineNumberAlt1                196, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		GetVariableValue              1                                              ; local
+		PushConstanti16               150
+		PushConstanti8                120
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5605, 4
+		LineNumberAlt1                197, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		GetVariableValue              2                                              ; local
+		PushConstanti16               150
+		PushConstanti16               140
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5606, 4
+		LineNumberAlt1                198, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		GetVariableValue              3                                              ; local
+		PushConstanti16               150
+		PushConstanti16               160
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5607, 4
+		LineNumberAlt1                199, 25
+		AppendToArray
+		SetThisMemberValueString      "camarray"
+		LineNumber                    5609, 4
+		LineNumberAlt1                201, 25
+		CreateArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		GetThisMemberValueString      "change"
+		PushConstanti16               400
+		PushConstanti8                100
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5610, 4
+		LineNumberAlt1                202, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		GetVariableValue              4                                              ; local
+		PushConstanti16               400
+		PushConstanti8                120
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5611, 4
+		LineNumberAlt1                203, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		GetVariableValue              5                                              ; local
+		PushConstanti16               400
+		PushConstanti16               140
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5612, 4
+		LineNumberAlt1                204, 25
+		AppendToArray
+		Dup
+		CreateObjectString            "ss_activetext"
+		Dup
+		GetThisMemberValueString      "fontunactive"
+		GetThisMemberValueString      "fontactive"
+		GetVariableValue              6                                              ; local
+		PushConstanti16               400
+		PushConstanti16               160
+		PushConstant0
+		PushConstantf32               0.5
+		Pull                          8
+		GetMemberFunctionString       "ss_activetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    5613, 4
+		LineNumberAlt1                205, 25
+		AppendToArray
+		SetThisMemberValueString      "tararray"
+		LineNumber                    5616, 4
+		LineNumberAlt1                208, 25
+		GetThisMemberValueString      "camarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              10                                             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              10                                             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    5617, 4
+		LineNumberAlt1                209, 25
+		GetThisMemberValueString      "camarray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5618, 4
+		LineNumberAlt1                210, 25
+		GetThisMemberValueString      "camarray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5619, 4
+		LineNumberAlt1                211, 25
+		GetThisMemberValueString      "camarray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             10
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    5622, 4
+		LineNumberAlt1                214, 25
+		GetThisMemberValueString      "tararray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              10                                             ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              10                                             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    5623, 4
+		LineNumberAlt1                215, 25
+		GetThisMemberValueString      "tararray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5624, 4
+		LineNumberAlt1                216, 25
+		GetThisMemberValueString      "tararray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5625, 4
+		LineNumberAlt1                217, 25
+		GetThisMemberValueString      "tararray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             10
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    5628, 4
+		LineNumberAlt1                220, 25
+		GetThisMemberValueString      "helpcamarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              10                                             ; local
+		; <-
+		BranchTarget                  4
+		Dup
+		GetVariableValue              10                                             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    5629, 4
+		LineNumberAlt1                221, 25
+		GetThisMemberValueString      "helpcamarray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5630, 4
+		LineNumberAlt1                222, 25
+		GetThisMemberValueString      "helpcamarray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "setactive"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5631, 4
+		LineNumberAlt1                223, 25
+		GetThisMemberValueString      "helpcamarray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5632, 4
+		LineNumberAlt1                224, 25
+		GetThisMemberValueString      "helpcamarray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             10
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		LineNumber                    5635, 4
+		LineNumberAlt1                227, 25
+		GetThisMemberValueString      "helptararray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              10                                             ; local
+		; <-
+		BranchTarget                  6
+		Dup
+		GetVariableValue              10                                             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    5636, 4
+		LineNumberAlt1                228, 25
+		GetThisMemberValueString      "helptararray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5637, 4
+		LineNumberAlt1                229, 25
+		GetThisMemberValueString      "helptararray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5638, 4
+		LineNumberAlt1                230, 25
+		GetThisMemberValueString      "helptararray"
+		GetVariableValue              10                                             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             10
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Pop
+		LineNumber                    5641, 4
+		LineNumberAlt1                233, 25
+		CreateObjectString            "ss_rotatablesprite"
+		Dup
+		PushConstantStringString      "Root/data/interface/basescreen/help_button_x"
+		PushConstanti8                100
+		PushConstanti8                100
+		GetVariableValue              4                                              ; local
+		GetVariableValue              5                                              ; local
+		GetVariableValue              6                                              ; local
+		Pull                          7
+		GetMemberFunctionString       "ss_rotatablesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    5641, 4
+		LineNumberAlt1                233, 25
+		SetThisMemberValueString      "target"
+		LineNumber                    5642, 4
+		LineNumberAlt1                234, 25
+		GetThisMemberValueString      "target"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "movecam"
+		; address: 0x34257
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 247:250
+		MemberFunctionArgumentCheck   4
+		LineNumber                    5655, 4
+		LineNumberAlt1                247, 25
+		GetThisMemberValueString      "oncam"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    5656, 4
+		LineNumberAlt1                248, 25
+		GetVariableValue              0           ; local
+		GetVariableValue              1           ; local
+		GetVariableValue              2           ; local
+		GetVariableValue              3           ; local
+		GetThisMemberFunctionString   "campos"
+		JumpAbsolute                  4
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    5658, 4
+		LineNumberAlt1                250, 25
+		GetVariableValue              0           ; local
+		GetVariableValue              1           ; local
+		GetVariableValue              2           ; local
+		GetVariableValue              3           ; local
+		GetThisMemberFunctionString   "targetpos"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "campos"
+		; address: 0x342a9
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 257:261
+		MemberFunctionArgumentCheck 4
+		LineNumber                  5665, 4
+		LineNumberAlt1              257, 25
+		GetVariableValue            0           ; local
+		GetVariableValue            1           ; local
+		GetVariableValue            2           ; local
+		GetVariableValue            3           ; local
+		GetThisMemberFunctionString "changepos"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  5666, 4
+		LineNumberAlt1              258, 25
+		GetThisMemberValueString    "camarray"
+		PushConstant0
+		GetArrayValue
+		GetThisMemberValueString    "change"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  5667, 4
+		LineNumberAlt1              259, 25
+		GetThisMemberValueString    "camarray"
+		PushConstanti8              1
+		GetArrayValue
+		GetThisMemberValueString    "x1"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  5668, 4
+		LineNumberAlt1              260, 25
+		GetThisMemberValueString    "camarray"
+		PushConstanti8              2
+		GetArrayValue
+		GetThisMemberValueString    "y1"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  5669, 4
+		LineNumberAlt1              261, 25
+		GetThisMemberValueString    "camarray"
+		PushConstanti8              3
+		GetArrayValue
+		GetThisMemberValueString    "z"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "targetpos"
+		; address: 0x34334
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 266:271
+		MemberFunctionArgumentCheck 4
+		LineNumber                  5674, 4
+		LineNumberAlt1              266, 25
+		GetVariableValue            0                 ; local
+		GetVariableValue            1                 ; local
+		GetVariableValue            2                 ; local
+		GetVariableValue            3                 ; local
+		GetThisMemberFunctionString "changetargetpos"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  5675, 4
+		LineNumberAlt1              267, 25
+		GetThisMemberValueString    "target"
+		GetVariableValue            1                 ; local
+		GetVariableValue            2                 ; local
+		GetVariableValue            3                 ; local
+		Pull                        4
+		GetMemberFunctionString     "changepos"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  5676, 4
+		LineNumberAlt1              268, 25
+		GetThisMemberValueString    "tararray"
+		PushConstant0
+		GetArrayValue
+		GetThisMemberValueString    "change"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  5677, 4
+		LineNumberAlt1              269, 25
+		GetThisMemberValueString    "tararray"
+		PushConstanti8              1
+		GetArrayValue
+		GetThisMemberValueString    "tx"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  5678, 4
+		LineNumberAlt1              270, 25
+		GetThisMemberValueString    "tararray"
+		PushConstanti8              2
+		GetArrayValue
+		GetThisMemberValueString    "ty"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  5679, 4
+		LineNumberAlt1              271, 25
+		GetThisMemberValueString    "tararray"
+		PushConstanti8              3
+		GetArrayValue
+		GetThisMemberValueString    "tz"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x343dd
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 277:288
+		MemberFunctionArgumentCheck   2
+		LineNumber                    5685, 4
+		LineNumberAlt1                277, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    5685, 4
+		LineNumberAlt1                277, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    5685, 4
+		LineNumberAlt1                277, 25
+		GetVariableValue              0              ; local
+		GetThisMemberFunctionString   "change_oncam"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    5687, 4
+		LineNumberAlt1                279, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                10
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    5687, 4
+		LineNumberAlt1                279, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    5687, 4
+		LineNumberAlt1                279, 25
+		GetVariableValue              0              ; local
+		PushConstant0
+		GetThisMemberValueString      "change"
+		Subtract
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString   "movecam"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    5688, 4
+		LineNumberAlt1                280, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                11
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    5688, 4
+		LineNumberAlt1                280, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    5688, 4
+		LineNumberAlt1                280, 25
+		GetVariableValue              0              ; local
+		GetThisMemberValueString      "change"
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString   "movecam"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    5689, 4
+		LineNumberAlt1                281, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                9
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    5689, 4
+		LineNumberAlt1                281, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    5689, 4
+		LineNumberAlt1                281, 25
+		GetVariableValue              0              ; local
+		PushConstant0
+		PushConstant0
+		PushConstant0
+		GetThisMemberValueString      "change"
+		Subtract
+		GetThisMemberFunctionString   "movecam"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  3
+		LineNumber                    5690, 4
+		LineNumberAlt1                282, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                12
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    5690, 4
+		LineNumberAlt1                282, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    5690, 4
+		LineNumberAlt1                282, 25
+		GetVariableValue              0              ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberValueString      "change"
+		GetThisMemberFunctionString   "movecam"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  4
+		LineNumber                    5692, 4
+		LineNumberAlt1                284, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                18
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    5692, 4
+		LineNumberAlt1                284, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    5692, 4
+		LineNumberAlt1                284, 25
+		GetVariableValue              0              ; local
+		PushConstanti8                10
+		GetThisMemberFunctionString   "change"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  5
+		LineNumber                    5693, 4
+		LineNumberAlt1                285, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                20
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    5693, 4
+		LineNumberAlt1                285, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    5693, 4
+		LineNumberAlt1                285, 25
+		GetVariableValue              0              ; local
+		PushConstanti8                -10
+		GetThisMemberFunctionString   "change"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  6
+		LineNumber                    5695, 4
+		LineNumberAlt1                287, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    5695, 4
+		LineNumberAlt1                287, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    5695, 4
+		LineNumberAlt1                287, 25
+		GetVariableValue              0              ; local
+		PushConstant0
+		GetThisMemberValueString      "change"
+		PushConstant0
+		GetThisMemberFunctionString   "movecam"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  7
+		LineNumber                    5696, 4
+		LineNumberAlt1                288, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "button"
+		PushConstanti8                6
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    5696, 4
+		LineNumberAlt1                288, 25
+		GetVariableValue              1              ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    5696, 4
+		LineNumberAlt1                288, 25
+		GetVariableValue              0              ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberValueString      "change"
+		Subtract
+		PushConstant0
+		GetThisMemberFunctionString   "movecam"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  8
+		PushNothing
+		Return
+	end ; method
+
+	begin method "active"
+		; address: 0x34640
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 294:294
+		MemberFunctionArgumentCheck 2
+		LineNumber                  5702, 4
+		LineNumberAlt1              294, 25
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "active"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "change"
+		; address: 0x34654
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 299:301
+		MemberFunctionArgumentCheck 2
+		LineNumber                  5707, 4
+		LineNumberAlt1              299, 25
+		GetThisMemberValueString    "change"
+		GetVariableValue            1           ; local
+		Add
+		SetThisMemberValueString    "change"
+		LineNumber                  5708, 4
+		LineNumberAlt1              300, 25
+		GetThisMemberValueString    "camarray"
+		PushConstant0
+		GetArrayValue
+		GetThisMemberValueString    "change"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  5709, 4
+		LineNumberAlt1              301, 25
+		GetThisMemberValueString    "tararray"
+		PushConstant0
+		GetArrayValue
+		GetThisMemberValueString    "change"
+		Pull                        2
+		GetMemberFunctionString     "setstring"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "change_oncam"
+		; address: 0x346a0
+		; source: 25 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basecamera.vbo" 306:316
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    5714, 4
+		LineNumberAlt1                306, 25
+		GetThisMemberValueString      "oncam"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    5715, 4
+		LineNumberAlt1                307, 25
+		PushConstant0
+		SetThisMemberValueString      "oncam"
+		LineNumber                    5716, 4
+		LineNumberAlt1                308, 25
+		GetThisMemberValueString      "helpcamarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1              ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    5717, 4
+		LineNumberAlt1                309, 25
+		GetThisMemberValueString      "helpcamarray"
+		GetVariableValue              1              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "setinactive"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5718, 4
+		LineNumberAlt1                310, 25
+		GetThisMemberValueString      "helptararray"
+		GetVariableValue              1              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "setactive"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    5721, 4
+		LineNumberAlt1                313, 25
+		PushConstanti8                1
+		SetThisMemberValueString      "oncam"
+		LineNumber                    5722, 4
+		LineNumberAlt1                314, 25
+		GetThisMemberValueString      "helpcamarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1              ; local
+		; <-
+		BranchTarget                  3
+		Dup
+		GetVariableValue              1              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    5723, 4
+		LineNumberAlt1                315, 25
+		GetThisMemberValueString      "helpcamarray"
+		GetVariableValue              1              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "setactive"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    5724, 4
+		LineNumberAlt1                316, 25
+		GetThisMemberValueString      "helptararray"
+		GetVariableValue              1              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "setinactive"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Pop
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+end ; class

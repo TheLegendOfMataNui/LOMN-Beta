@@ -1,0 +1,825 @@
+begin class "pausescreen"
+	property "menustrings"
+	property "activeidx"
+	property "inputidx"
+	property "ispaused"
+	property "hidden"
+	property "inputenabled"
+
+	begin method "pausescreen"
+		; address: 0x52579
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x5257d
+		; source: 69 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_pause_screen.vbo" 40:45
+		MemberFunctionArgumentCheck 1
+		LineNumber                  28015, 4
+		LineNumberAlt1              40, 69
+		PushNothing
+		SetThisMemberValueString    "menustrings"
+		LineNumber                  28016, 4
+		LineNumberAlt1              41, 69
+		PushConstant0
+		SetThisMemberValueString    "activeidx"
+		LineNumber                  28017, 4
+		LineNumberAlt1              42, 69
+		PushNothing
+		SetThisMemberValueString    "inputidx"
+		LineNumber                  28018, 4
+		LineNumberAlt1              43, 69
+		PushConstant0
+		SetThisMemberValueString    "ispaused"
+		LineNumber                  28019, 4
+		LineNumberAlt1              44, 69
+		PushConstant0
+		SetThisMemberValueString    "hidden"
+		LineNumber                  28020, 4
+		LineNumberAlt1              45, 69
+		PushConstanti8              1
+		SetThisMemberValueString    "inputenabled"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x525d6
+		; source: 69 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_pause_screen.vbo" 49:55
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    28024, 4
+		LineNumberAlt1                49, 69
+		GetThisMemberValueString      "menustrings"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    28025, 4
+		LineNumberAlt1                50, 69
+		GetThisMemberValueString      "menustrings"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetVariableValue              1             ; local
+		LineNumber                    28026, 4
+		LineNumberAlt1                51, 69
+		GetVariableValue              1             ; local
+		PushConstant0
+		SetVariableValue              2             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    28027, 4
+		LineNumberAlt1                52, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    28028, 4
+		LineNumberAlt1                53, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1             ; local
+		GetVariableValue              2             ; local
+		Subtract
+		PushNothing
+		SetArrayValue
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    28030, 4
+		LineNumberAlt1                55, 69
+		PushNothing
+		SetThisMemberValueString      "menustrings"
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "toggleinput"
+		; address: 0x52663
+		; source: 69 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_pause_screen.vbo" 61:67
+		MemberFunctionArgumentCheck   2
+		LineNumber                    28036, 4
+		LineNumberAlt1                61, 69
+		GetVariableValue              1              ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    28037, 4
+		LineNumberAlt1                62, 69
+		GetVariableValue              1              ; local
+		SetThisMemberValueString      "inputenabled"
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    28039, 4
+		LineNumberAlt1                64, 69
+		GetThisMemberValueString      "inputenabled"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    28040, 4
+		LineNumberAlt1                65, 69
+		PushConstant0
+		SetThisMemberValueString      "inputenabled"
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    28042, 4
+		LineNumberAlt1                67, 69
+		PushConstanti8                1
+		SetThisMemberValueString      "inputenabled"
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "pause"
+		; address: 0x526c0
+		; source: 69 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_pause_screen.vbo" 75:126
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    28050, 4
+		LineNumberAlt1                75, 69
+		CallGameFunctionString        "gcgame", "pausegame", 0
+		LineNumber                    28050, 4
+		LineNumberAlt1                75, 69
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    28052, 4
+		LineNumberAlt1                77, 69
+		CreateArray
+		Dup
+		CreateObjectString            "gs_legotext"
+		Dup
+		PushConstantStringString      "Root/Data/Art/Fonts/BionicleFont"
+		PushConstantStringString      "fend"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    28053, 4
+		LineNumberAlt1                78, 69
+		PushConstanti8                1
+		PushConstanti8                59
+		CallGameFunctionString        "gcareadirector", "getscriptfluffstring", 3
+		LineNumber                    28053, 4
+		LineNumberAlt1                78, 69
+		GetVariableValueGlobalString  "screenx"
+		PushConstantf32               0.5
+		Multiply
+		GetVariableValueGlobalString  "screeny"
+		PushConstantf32               0.5
+		Multiply
+		PushConstanti8                40
+		Subtract
+		PushConstanti8                5
+		PushConstantf32               2
+		PushConstanti16               256
+		PushConstanti8                4
+		PushConstant0
+		PushConstanti8                1
+		Pull                          11
+		GetMemberFunctionString       "gs_legotext"
+		JumpAbsolute                  11
+		Pop
+		LineNumber                    28062, 4
+		LineNumberAlt1                87, 69
+		AppendToArray
+		Dup
+		CreateObjectString            "gs_legotext"
+		Dup
+		PushConstantStringString      "Root/Data/Art/Fonts/BionicleFont"
+		PushConstantStringString      "fend"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    28064, 4
+		LineNumberAlt1                89, 69
+		PushConstanti8                1
+		PushConstanti8                23
+		CallGameFunctionString        "gcareadirector", "getscriptfluffstring", 3
+		LineNumber                    28064, 4
+		LineNumberAlt1                89, 69
+		GetVariableValueGlobalString  "screenx"
+		PushConstantf32               0.5
+		Multiply
+		GetVariableValueGlobalString  "screeny"
+		PushConstantf32               0.5
+		Multiply
+		PushConstanti8                5
+		PushConstantf32               2
+		PushConstanti16               256
+		PushConstanti8                4
+		PushConstant0
+		PushConstanti8                1
+		Pull                          11
+		GetMemberFunctionString       "gs_legotext"
+		JumpAbsolute                  11
+		Pop
+		LineNumber                    28073, 4
+		LineNumberAlt1                98, 69
+		AppendToArray
+		Dup
+		CreateObjectString            "gs_legotext"
+		Dup
+		PushConstantStringString      "Root/Data/Art/Fonts/BionicleFont"
+		PushConstantStringString      "fend"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    28075, 4
+		LineNumberAlt1                100, 69
+		PushConstanti8                1
+		PushConstanti8                42
+		CallGameFunctionString        "gcareadirector", "getscriptfluffstring", 3
+		LineNumber                    28075, 4
+		LineNumberAlt1                100, 69
+		GetVariableValueGlobalString  "screenx"
+		PushConstantf32               0.5
+		Multiply
+		GetVariableValueGlobalString  "screeny"
+		PushConstantf32               0.5
+		Multiply
+		PushConstanti8                40
+		Add
+		PushConstanti8                5
+		PushConstantf32               2
+		PushConstanti16               256
+		PushConstanti8                4
+		PushConstant0
+		PushConstanti8                1
+		Pull                          11
+		GetMemberFunctionString       "gs_legotext"
+		JumpAbsolute                  11
+		Pop
+		LineNumber                    28084, 4
+		LineNumberAlt1                109, 69
+		AppendToArray
+		SetThisMemberValueString      "menustrings"
+		LineNumber                    28087, 4
+		LineNumberAlt1                112, 69
+		GetThisMemberValueString      "menustrings"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                                            ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                                            ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    28088, 4
+		LineNumberAlt1                113, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1                                            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    28089, 4
+		LineNumberAlt1                114, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1                                            ; local
+		GetArrayValue
+		GetMemberValueString          "font"
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstanti16               255
+		CallGameFunctionString        "sctilefont", "setcolor", 5
+		Pop
+		LineNumber                    28090, 4
+		LineNumberAlt1                115, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1                                            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    28091, 4
+		LineNumberAlt1                116, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1                                            ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    28093, 4
+		LineNumberAlt1                118, 69
+		PushConstant0
+		SetThisMemberValueString      "activeidx"
+		LineNumber                    28094, 4
+		LineNumberAlt1                119, 69
+		GetThisMemberValueString      "menustrings"
+		GetThisMemberValueString      "activeidx"
+		GetArrayValue
+		GetMemberValueString          "font"
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstant0
+		PushConstanti16               255
+		CallGameFunctionString        "sctilefont", "setcolor", 5
+		Pop
+		LineNumber                    28095, 4
+		LineNumberAlt1                120, 69
+		PushConstanti8                1
+		SetThisMemberValueString      "ispaused"
+		LineNumber                    28096, 4
+		LineNumberAlt1                121, 69
+		PushConstant0
+		SetThisMemberValueString      "hidden"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    28099, 4
+		LineNumberAlt1                124, 69
+		GetThisMemberValueString      "ispaused"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    28100, 4
+		LineNumberAlt1                125, 69
+		PushConstant0
+		SetThisMemberValueString      "ispaused"
+		LineNumber                    28101, 4
+		LineNumberAlt1                126, 69
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "unpause"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "unpause"
+		; address: 0x5293d
+		; source: 69 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_pause_screen.vbo" 133:143
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    28108, 4
+		LineNumberAlt1                133, 69
+		GetThisMemberValueString      "ispaused"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    28109, 4
+		LineNumberAlt1                134, 69
+		CallGameFunctionString        "gcgame", "pausegame", 0
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    28112, 4
+		LineNumberAlt1                137, 69
+		GetThisMemberValueString      "menustrings"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                        ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              1                        ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    28113, 4
+		LineNumberAlt1                138, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1                        ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    28115, 4
+		LineNumberAlt1                140, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1                        ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		LineNumber                    28117, 4
+		LineNumberAlt1                142, 69
+		PushNothing
+		SetThisMemberValueString      "menustrings"
+		LineNumber                    28118, 4
+		LineNumberAlt1                143, 69
+		PushConstant0
+		SetThisMemberValueString      "ispaused"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x529d1
+		; source: 69 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_pause_screen.vbo" 150:153
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    28125, 4
+		LineNumberAlt1                150, 69
+		GetThisMemberValueString      "ispaused"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    28126, 4
+		LineNumberAlt1                151, 69
+		GetThisMemberValueString      "menustrings"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    28127, 4
+		LineNumberAlt1                152, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    28128, 4
+		LineNumberAlt1                153, 69
+		PushConstanti8                1
+		SetThisMemberValueString      "hidden"
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x52a35
+		; source: 69 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_pause_screen.vbo" 160:163
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    28135, 4
+		LineNumberAlt1                160, 69
+		GetThisMemberValueString      "ispaused"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    28136, 4
+		LineNumberAlt1                161, 69
+		GetThisMemberValueString      "menustrings"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    28137, 4
+		LineNumberAlt1                162, 69
+		PushConstant0
+		SetThisMemberValueString      "hidden"
+		LineNumber                    28138, 4
+		LineNumberAlt1                163, 69
+		GetThisMemberValueString      "menustrings"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x52a98
+		; source: 69 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_pause_screen.vbo" 171:210
+		MemberFunctionArgumentCheck   2
+		LineNumber                    28146, 4
+		LineNumberAlt1                171, 69
+		GetThisMemberValueString      "inputenabled"
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    28147, 4
+		LineNumberAlt1                172, 69
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "name"
+		PushConstantStringString      "lev0"
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    28148, 4
+		LineNumberAlt1                173, 69
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "button"
+		PushConstanti16               251
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    28148, 4
+		LineNumberAlt1                173, 69
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    28148, 4
+		LineNumberAlt1                173, 69
+		GetVariableValue              0                                             ; local
+		GetThisMemberFunctionString   "pause"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    28151, 4
+		LineNumberAlt1                176, 69
+		GetThisMemberValueString      "ispaused"
+		PushConstanti8                1
+		EqualTo
+		GetThisMemberValueString      "hidden"
+		PushConstant0
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    28152, 4
+		LineNumberAlt1                177, 69
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    28153, 4
+		LineNumberAlt1                178, 69
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "button"
+		Dup
+		PushConstanti8                38
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    28156, 4
+		LineNumberAlt1                181, 69
+		PushConstanti16               1072
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    28157, 4
+		LineNumberAlt1                182, 69
+		GetThisMemberValueString      "menustrings"
+		GetThisMemberValueString      "activeidx"
+		GetArrayValue
+		GetMemberValueString          "font"
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstanti16               255
+		CallGameFunctionString        "sctilefont", "setcolor", 5
+		Pop
+		LineNumber                    28158, 4
+		LineNumberAlt1                183, 69
+		GetThisMemberValueString      "activeidx"
+		PushConstanti8                1
+		Subtract
+		SetThisMemberValueString      "activeidx"
+		LineNumber                    28159, 4
+		LineNumberAlt1                184, 69
+		GetThisMemberValueString      "activeidx"
+		PushConstant0
+		LessThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    28160, 4
+		LineNumberAlt1                185, 69
+		GetThisMemberValueString      "menustrings"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		SetThisMemberValueString      "activeidx"
+		; <-
+		BranchTarget                  1
+		LineNumber                    28162, 4
+		LineNumberAlt1                187, 69
+		GetThisMemberValueString      "menustrings"
+		GetThisMemberValueString      "activeidx"
+		GetArrayValue
+		GetMemberValueString          "font"
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstant0
+		PushConstanti16               255
+		CallGameFunctionString        "sctilefont", "setcolor", 5
+		Pop
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti8                40
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    28165, 4
+		LineNumberAlt1                190, 69
+		PushConstanti16               1072
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    28166, 4
+		LineNumberAlt1                191, 69
+		GetThisMemberValueString      "menustrings"
+		GetThisMemberValueString      "activeidx"
+		GetArrayValue
+		GetMemberValueString          "font"
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstanti16               255
+		CallGameFunctionString        "sctilefont", "setcolor", 5
+		Pop
+		LineNumber                    28167, 4
+		LineNumberAlt1                192, 69
+		GetThisMemberValueString      "activeidx"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "activeidx"
+		LineNumber                    28168, 4
+		LineNumberAlt1                193, 69
+		GetThisMemberValueString      "activeidx"
+		GetThisMemberValueString      "menustrings"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    28169, 4
+		LineNumberAlt1                194, 69
+		PushConstant0
+		SetThisMemberValueString      "activeidx"
+		; <-
+		BranchTarget                  3
+		LineNumber                    28171, 4
+		LineNumberAlt1                196, 69
+		GetThisMemberValueString      "menustrings"
+		GetThisMemberValueString      "activeidx"
+		GetArrayValue
+		GetMemberValueString          "font"
+		PushConstanti16               255
+		PushConstanti16               255
+		PushConstant0
+		PushConstanti16               255
+		CallGameFunctionString        "sctilefont", "setcolor", 5
+		Pop
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstanti8                13
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    28174, 4
+		LineNumberAlt1                199, 69
+		PushConstanti16               1073
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    28175, 4
+		LineNumberAlt1                200, 69
+		GetThisMemberValueString      "activeidx"
+		Dup
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    28177, 4
+		LineNumberAlt1                202, 69
+		GetVariableValue              0                                             ; local
+		GetThisMemberFunctionString   "unpause"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    28179, 4
+		LineNumberAlt1                204, 69
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "helpscreen"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    28181, 4
+		LineNumberAlt1                206, 69
+		GetVariableValue              0                                             ; local
+		GetThisMemberFunctionString   "hide"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    28184, 4
+		LineNumberAlt1                209, 69
+		GetVariableValue              0                                             ; local
+		GetThisMemberFunctionString   "unpause"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    28185, 4
+		LineNumberAlt1                210, 69
+		GetVariableValueGlobalString  "globalclass"
+		Dup
+		GetMemberFunctionString       "setbackflag"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  7
+		Pop
+		; <-
+		BranchTarget                  8
+		Pop
+		; <-
+		BranchTarget                  9
+		PushNothing
+		Return
+	end ; method
+end ; class

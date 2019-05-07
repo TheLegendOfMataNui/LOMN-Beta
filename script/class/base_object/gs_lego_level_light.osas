@@ -1,0 +1,52 @@
+begin class "gs_lego_level_light", "base_object"
+	property "handle_lite"
+
+	begin method "gs_lego_level_light"
+		; address: 0x3cbfd
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x3cc01
+		; source: 42 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/Lego_lites.vbo" 110:114
+		MemberFunctionArgumentCheck 1
+		LineNumber                  13326, 4
+		LineNumberAlt1              110, 42
+		CallGameFunctionString      "gclegolite", "create", 0
+		LineNumber                  13326, 4
+		LineNumberAlt1              110, 42
+		SetThisMemberValueString    "handle_lite"
+		LineNumber                  13330, 4
+		LineNumberAlt1              114, 42
+		GetThisMemberValueString    "handle_lite"
+		PushConstantColor8888       0xffffffff
+		PushConstanti16             128
+		SetRedValue
+		PushConstanti8              125
+		SetGreenValue
+		PushConstanti8              65
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888       0xffffffff
+		PushConstanti8              6
+		SetRedValue
+		PushConstanti8              6
+		SetGreenValue
+		PushConstanti8              19
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantf32             2.799999952316284
+		PushConstant0
+		PushConstanti16             250
+		PushConstanti16             -150
+		PushConstantf32             10000
+		CallGameFunctionString      "gclegolite", "createlight", 8
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

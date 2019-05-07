@@ -1,0 +1,169 @@
+begin class "kopakaclass", "gs_lego_toa"
+	property "walkspeed"
+	property "runspeed"
+	property "standingjumpheight"
+	property "standingjumplength"
+	property "runningjumpheight"
+	property "runningjumplength"
+	property "swimingabilty"
+	property "bounce"
+
+	begin method "kopakaclass"
+		; address: 0x4acdc
+		; source: 60 "C:\\projects\\lego\\Scripting\\VBO\\Toa/Lego_Toa_Kopaka.vbo" 42:52
+		MemberFunctionArgumentCheck 6
+		LineNumber                  23518, 4
+		LineNumberAlt1              42, 60
+		GetVariableValue            0                    ; local
+		GetVariableValue            1                    ; local
+		GetVariableValue            2                    ; local
+		GetVariableValue            3                    ; local
+		GetVariableValue            4                    ; local
+		GetVariableValue            5                    ; local
+		GetThisMemberFunctionString "gs_lego_toa"
+		JumpAbsolute                6
+		Pop
+		LineNumber                  23520, 4
+		LineNumberAlt1              44, 60
+		PushConstanti8              4
+		SetThisMemberValueString    "walkspeed"
+		LineNumber                  23521, 4
+		LineNumberAlt1              45, 60
+		PushConstanti8              15
+		SetThisMemberValueString    "runspeed"
+		LineNumber                  23522, 4
+		LineNumberAlt1              46, 60
+		PushConstanti8              6
+		SetThisMemberValueString    "standingjumpheight"
+		LineNumber                  23523, 4
+		LineNumberAlt1              47, 60
+		PushConstanti8              6
+		SetThisMemberValueString    "standingjumplength"
+		LineNumber                  23524, 4
+		LineNumberAlt1              48, 60
+		PushConstanti8              4
+		SetThisMemberValueString    "runningjumpheight"
+		LineNumber                  23525, 4
+		LineNumberAlt1              49, 60
+		PushConstanti8              8
+		SetThisMemberValueString    "runningjumplength"
+		LineNumber                  23527, 4
+		LineNumberAlt1              51, 60
+		PushConstant0
+		SetThisMemberValueString    "swimingabilty"
+		LineNumber                  23528, 4
+		LineNumberAlt1              52, 60
+		PushConstant0
+		SetThisMemberValueString    "bounce"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setupgrapplinghook"
+		; address: 0x4ad78
+		; source: 60 "C:\\projects\\lego\\Scripting\\VBO\\Toa/Lego_Toa_Kopaka.vbo" 67:78
+		MemberFunctionArgumentCheck 4
+		LineNumber                  23543, 4
+		LineNumberAlt1              67, 60
+		GetVariableValue            0                                            ; local
+		PushConstant0
+		GetThisMemberFunctionString "setdraggerreaction"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  23544, 4
+		LineNumberAlt1              68, 60
+		GetVariableValue            0                                            ; local
+		PushConstantStringString    "k017"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  23544, 4
+		LineNumberAlt1              68, 60
+		GetThisMemberFunctionString "setmydraggerreactionanimation"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  23545, 4
+		LineNumberAlt1              69, 60
+		GetVariableValue            0                                            ; local
+		PushConstanti8              12
+		GetThisMemberFunctionString "restrictdraggercameramode"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  23546, 4
+		LineNumberAlt1              70, 60
+		GetVariableValue            0                                            ; local
+		PushConstantStringString    "Root/data/Art/SpriteAnims/kopakahook"
+		PushConstantStringString    "swrd"
+		PushConstantStringString    "hand"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  23546, 4
+		LineNumberAlt1              70, 60
+		PushConstantStringString    "cnt1"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  23546, 4
+		LineNumberAlt1              70, 60
+		GetThisMemberFunctionString "setupdraggertip"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  23547, 4
+		LineNumberAlt1              71, 60
+		GetVariableValue            0                                            ; local
+		PushConstanti8              45
+		GetThisMemberFunctionString "setupdraggermaxrange"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  23548, 4
+		LineNumberAlt1              72, 60
+		GetVariableValue            0                                            ; local
+		GetVariableValue            2                                            ; local
+		GetVariableValue            3                                            ; local
+		GetThisMemberFunctionString "setupdraggerspeeds"
+		JumpAbsolute                3
+		Pop
+		LineNumber                  23549, 4
+		LineNumberAlt1              73, 60
+		GetVariableValue            0                                            ; local
+		PushConstanti8              50
+		GetThisMemberFunctionString "settargeteermaxrange"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  23550, 4
+		LineNumberAlt1              74, 60
+		GetVariableValue            0                                            ; local
+		PushConstanti8              1
+		GetThisMemberFunctionString "settargeteerselectionmode"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  23551, 4
+		LineNumberAlt1              75, 60
+		GetVariableValue            0                                            ; local
+		GetVariableValue            1                                            ; local
+		GetThisMemberFunctionString "settargeteerconeangle"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  23553, 4
+		LineNumberAlt1              77, 60
+		PushConstantStringString    "GrapplingHook has been setUp."
+		CallGameFunctionString      "debug", "print", 1
+		Pop
+		LineNumber                  23554, 4
+		LineNumberAlt1              78, 60
+		PushConstanti8              1
+		SetThisMemberValueString    "ishookenabled"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setgrapplinghookdistance"
+		; address: 0x4ae9b
+		; source: 60 "C:\\projects\\lego\\Scripting\\VBO\\Toa/Lego_Toa_Kopaka.vbo" 83:83
+		MemberFunctionArgumentCheck 2
+		LineNumber                  23559, 4
+		LineNumberAlt1              83, 60
+		GetVariableValue            0                      ; local
+		GetVariableValue            1                      ; local
+		GetThisMemberFunctionString "setupdraggermaxrange"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

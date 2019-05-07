@@ -1,0 +1,246 @@
+begin class "lego_area_kopa", "gs_lego_area"
+	property "puzzle"
+
+	begin method "lego_area_kopa"
+		; address: 0xba920
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 20:20
+		MemberFunctionArgumentCheck 2
+		LineNumber                  18543, 4
+		LineNumberAlt1              20, 232
+		GetVariableValue            0              ; local
+		PushConstantStringString    "kpka"
+		GetVariableValue            1              ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xba93f
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 27:34
+		MemberFunctionArgumentCheck  1
+		LineNumber                   18550, 4
+		LineNumberAlt1               27, 232
+		PushConstanti8               10
+		CallGameFunctionString       "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                   18552, 4
+		LineNumberAlt1               29, 232
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		GetMemberValueString         "cdtimer"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   18553, 4
+		LineNumberAlt1               30, 232
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		GetMemberValueString         "cdtimer"
+		PushConstantf32              120
+		Pull                         2
+		GetMemberFunctionString      "settime"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   18554, 4
+		LineNumberAlt1               31, 232
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		GetMemberValueString         "cdtimer"
+		Dup
+		GetMemberFunctionString      "start"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   18556, 4
+		LineNumberAlt1               33, 232
+		CreateObjectString           "puzzle_kopa7"
+		Dup
+		Dup
+		GetMemberFunctionString      "puzzle_kopa7"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   18556, 4
+		LineNumberAlt1               33, 232
+		SetThisMemberValueString     "puzzle"
+		LineNumber                   18557, 4
+		LineNumberAlt1               34, 232
+		GetThisMemberValueString     "puzzle"
+		GetThisMemberValueString     "name"
+		Pull                         2
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xba9e4
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 40:42
+		MemberFunctionArgumentCheck  1
+		LineNumber                   18563, 4
+		LineNumberAlt1               40, 232
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		GetMemberValueString         "cdtimer"
+		Dup
+		GetMemberFunctionString      "cleanupfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   18564, 4
+		LineNumberAlt1               41, 232
+		GetThisMemberValueString     "puzzle"
+		Dup
+		GetMemberFunctionString      "cleanupfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   18565, 4
+		LineNumberAlt1               42, 232
+		PushNothing
+		SetThisMemberValueString     "puzzle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xbaa24
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 48:52
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    18571, 4
+		LineNumberAlt1                48, 232
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "cdtimer"
+		Dup
+		GetMemberFunctionString       "finished"
+		JumpAbsolute                  1
+		LineNumber                    18571, 4
+		LineNumberAlt1                48, 232
+		SetVariableValue              2                                              ; local
+		LineNumber                    18572, 4
+		LineNumberAlt1                49, 232
+		GetVariableValue              2                                              ; local
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18573, 4
+		LineNumberAlt1                50, 232
+		PushConstantStringString      "str0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18573, 4
+		LineNumberAlt1                50, 232
+		PushConstantStringString      "lok0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18573, 4
+		LineNumberAlt1                50, 232
+		CallGameFunctionString        "gccollisionphysicsgroup", "settoaposition", 2
+		Pop
+		LineNumber                    18574, 4
+		LineNumberAlt1                51, 232
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "cdtimer"
+		Dup
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    18575, 4
+		LineNumberAlt1                52, 232
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "resetpuzzle"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xbaac5
+		; source: 232 "C:\\projects\\lego\\Scripting\\VBO\\strings/InterfaceStrings.h" 60:67
+		; source: 198 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_boss.vbo" 98:98
+		MemberFunctionArgumentCheck   2
+		LineNumber                    18583, 4
+		LineNumberAlt1                60, 232
+		GetVariableValue              1                                              ; local
+		GetMemberValueString          "eventid"
+		PushConstanti8                44
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18584, 4
+		LineNumberAlt1                61, 232
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actorid"
+		PushConstantStringString      "kopa"
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    18585, 4
+		LineNumberAlt1                62, 232
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstantStringString      "kopa"
+		Pull                          2
+		GetMemberFunctionString       "changetoa"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9327, 4
+		LineNumberAlt1                98, 198
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "maskcontrol"
+		PushConstanti8                3
+		Pull                          2
+		GetMemberFunctionString       "changemask"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    18586, 4
+		LineNumberAlt1                63, 232
+		PushConstantStringString      "str0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18586, 4
+		LineNumberAlt1                63, 232
+		PushConstantStringString      "lok0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    18586, 4
+		LineNumberAlt1                63, 232
+		CallGameFunctionString        "gccollisionphysicsgroup", "settoaposition", 2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    18590, 4
+		LineNumberAlt1                67, 232
+		GetThisMemberValueString      "puzzle"
+		GetVariableValue              1                                              ; local
+		Pull                          2
+		GetMemberFunctionString       "onevent"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xbab81
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xbab85
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+end ; class

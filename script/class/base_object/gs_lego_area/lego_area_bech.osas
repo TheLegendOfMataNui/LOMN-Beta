@@ -1,0 +1,230 @@
+begin class "lego_area_bech", "gs_lego_area"
+	property "parent"
+
+	begin method "lego_area_bech"
+		; address: 0x607c2
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 27:29
+		MemberFunctionArgumentCheck 2
+		GetVariableValue            1                    ; local
+		SetThisMemberValueString    "parent"
+		LineNumber                  37050, 4
+		LineNumberAlt1              27, 92
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "bech"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  37052, 4
+		LineNumberAlt1              29, 92
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x607fa
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 37:52
+		MemberFunctionArgumentCheck  1
+		CreateStackVariables         2
+		LineNumber                   37060, 4
+		LineNumberAlt1               37, 92
+		GetVariableValue             0                                            ; local
+		GetThisMemberFunctionString  "lego_area_show"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   37063, 4
+		LineNumberAlt1               40, 92
+		PushConstanti8               3
+		CallGameFunctionString       "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                   37064, 4
+		LineNumberAlt1               41, 92
+		PushConstanti8               3
+		CallGameFunctionString       "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                   37065, 4
+		LineNumberAlt1               42, 92
+		PushConstant0
+		CallGameFunctionString       "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                   37066, 4
+		LineNumberAlt1               43, 92
+		PushConstanti32              -402183
+		PushConstant0
+		PushConstantf32              30
+		Subtract
+		PushConstant0
+		PushConstantf32              1200
+		Subtract
+		PushConstantf32              0.05000000074505806
+		CallGameFunctionString       "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                   37068, 4
+		LineNumberAlt1               45, 92
+		PushConstantStringString     "crb1"
+		CallGameFunctionString       "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                   37068, 4
+		LineNumberAlt1               45, 92
+		CallGameFunctionString       "gcmodeldirector", "getcharacter", 1
+		LineNumber                   37068, 4
+		LineNumberAlt1               45, 92
+		SetVariableValue             1                                            ; local
+		LineNumber                   37069, 4
+		LineNumberAlt1               46, 92
+		PushConstantStringString     "cr01"
+		CallGameFunctionString       "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                   37069, 4
+		LineNumberAlt1               46, 92
+		CallGameFunctionString       "gcmodeldirector", "getcharacter", 1
+		LineNumber                   37069, 4
+		LineNumberAlt1               46, 92
+		SetVariableValue             2                                            ; local
+		LineNumber                   37071, 4
+		LineNumberAlt1               48, 92
+		GetVariableValue             1                                            ; local
+		PushConstantf32              2
+		CallGameFunctionString       "gccharacter", "setscale", 2
+		Pop
+		LineNumber                   37072, 4
+		LineNumberAlt1               49, 92
+		GetVariableValue             2                                            ; local
+		PushConstantf32              2
+		CallGameFunctionString       "gccharacter", "setscale", 2
+		Pop
+		LineNumber                   37074, 4
+		LineNumberAlt1               51, 92
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstantStringString     "Root/Data/sounds/MusicOnuaAmbience"
+		Pull                         2
+		GetMemberFunctionString      "changefilename"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   37075, 4
+		LineNumberAlt1               52, 92
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "bgmusic"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x6093b
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 113:123
+		MemberFunctionArgumentCheck   2
+		LineNumber                    37136, 4
+		LineNumberAlt1                113, 92
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37139, 4
+		LineNumberAlt1                116, 92
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    37143, 4
+		LineNumberAlt1                120, 92
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "str0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    37143, 4
+		LineNumberAlt1                120, 92
+		PushConstantStringString      "lok0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    37143, 4
+		LineNumberAlt1                120, 92
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    37144, 4
+		LineNumberAlt1                121, 92
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37145, 4
+		LineNumberAlt1                122, 92
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "ninp"
+		Pull                          2
+		GetMemberFunctionString       "setinputstate"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    37146, 4
+		LineNumberAlt1                123, 92
+		GetVariableValue              0                                            ; local
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x60a0a
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 68:68
+		MemberFunctionArgumentCheck 1
+		LineNumber                  37091, 4
+		LineNumberAlt1              68, 92
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x60a21
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 74:74
+		MemberFunctionArgumentCheck 1
+		LineNumber                  37097, 4
+		LineNumberAlt1              74, 92
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

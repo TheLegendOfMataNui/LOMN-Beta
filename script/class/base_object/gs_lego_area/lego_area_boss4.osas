@@ -1,0 +1,208 @@
+begin class "lego_area_boss4", "gs_lego_area"
+	property "puzzle"
+	property "bgmusic"
+	property "parent"
+
+	begin method "lego_area_boss4"
+		; address: 0xa0af3
+		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le02.vbo" 28:30
+		MemberFunctionArgumentCheck 2
+		LineNumber                  6267, 4
+		LineNumberAlt1              28, 184
+		GetVariableValue            1                ; local
+		SetThisMemberValueString    "parent"
+		LineNumber                  6268, 4
+		LineNumberAlt1              29, 184
+		GetVariableValue            0                ; local
+		PushConstantStringString    "boss"
+		GetVariableValue            1                ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  6269, 4
+		LineNumberAlt1              30, 184
+		CreateObjectString          "snowman_puzzle"
+		Dup
+		GetVariableValue            0                ; local
+		Pull                        2
+		GetMemberFunctionString     "snowman_puzzle"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  6269, 4
+		LineNumberAlt1              30, 184
+		SetThisMemberValueString    "puzzle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xa0b48
+		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le02.vbo" 36:40
+		MemberFunctionArgumentCheck 1
+		LineNumber                  6275, 4
+		LineNumberAlt1              36, 184
+		CreateObjectString          "legomp3player"
+		Dup
+		Dup
+		GetMemberFunctionString     "legomp3player"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  6275, 4
+		LineNumberAlt1              36, 184
+		SetThisMemberValueString    "bgmusic"
+		LineNumber                  6276, 4
+		LineNumberAlt1              37, 184
+		GetThisMemberValueString    "bgmusic"
+		PushConstantStringString    "Root/Data/Sounds/MUSICKopakaTheme"
+		Pull                        2
+		GetMemberFunctionString     "setupforplay"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  6277, 4
+		LineNumberAlt1              38, 184
+		GetThisMemberValueString    "bgmusic"
+		PushConstanti8              1
+		Pull                        2
+		GetMemberFunctionString     "play"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  6279, 4
+		LineNumberAlt1              40, 184
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xa0bb1
+		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le02.vbo" 45:51
+		MemberFunctionArgumentCheck   1
+		LineNumber                    6284, 4
+		LineNumberAlt1                45, 184
+		GetThisMemberValueString      "puzzle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6285, 4
+		LineNumberAlt1                46, 184
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    6288, 4
+		LineNumberAlt1                49, 184
+		GetThisMemberValueString      "bgmusic"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    6289, 4
+		LineNumberAlt1                50, 184
+		GetThisMemberValueString      "bgmusic"
+		Dup
+		GetMemberFunctionString       "stop"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    6290, 4
+		LineNumberAlt1                51, 184
+		PushNothing
+		SetThisMemberValueString      "bgmusic"
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xa0c11
+		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le02.vbo" 57:57
+		MemberFunctionArgumentCheck 2
+		LineNumber                  6296, 4
+		LineNumberAlt1              57, 184
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "process"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xa0c2d
+		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le02.vbo" 62:62
+		MemberFunctionArgumentCheck 2
+		LineNumber                  6301, 4
+		LineNumberAlt1              62, 184
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xa0c49
+		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le02.vbo" 67:67
+		MemberFunctionArgumentCheck 2
+		LineNumber                  6306, 4
+		LineNumberAlt1              67, 184
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1        ; local
+		Pull                        2
+		GetMemberFunctionString     "input"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xa0c65
+		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le02.vbo" 72:76
+		MemberFunctionArgumentCheck   1
+		LineNumber                    6311, 4
+		LineNumberAlt1                72, 184
+		GetThisMemberValueString      "puzzle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    6312, 4
+		LineNumberAlt1                73, 184
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "exit"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    6313, 4
+		LineNumberAlt1                74, 184
+		PushNothing
+		SetThisMemberValueString      "puzzle"
+		; <-
+		BranchTarget                  0
+		LineNumber                    6315, 4
+		LineNumberAlt1                76, 184
+		PushNothing
+		SetThisMemberValueString      "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,448 @@
+begin class "gly35_puzzle"
+	property "parent"
+	property "abletosuft"
+	property "surfing"
+	property "glyph"
+	property "showpickup"
+	property "callsurfonce"
+
+	begin method "gly35_puzzle"
+		; address: 0xa6e7a
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 89:90
+		MemberFunctionArgumentCheck 2
+		LineNumber                  9118, 4
+		LineNumberAlt1              89, 197
+		GetVariableValue            1            ; local
+		SetThisMemberValueString    "parent"
+		LineNumber                  9119, 4
+		LineNumberAlt1              90, 197
+		PushConstanti8              1
+		SetThisMemberValueString    "showpickup"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xa6e9d
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 98:111
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    9127, 4
+		LineNumberAlt1                98, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicSurfAndSnowboard"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9128, 4
+		LineNumberAlt1                99, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9130, 4
+		LineNumberAlt1                101, 197
+		PushConstanti8                1
+		SetThisMemberValueString      "abletosuft"
+		LineNumber                    9131, 4
+		LineNumberAlt1                102, 197
+		PushConstant0
+		SetThisMemberValueString      "surfing"
+		LineNumber                    9132, 4
+		LineNumberAlt1                103, 197
+		PushConstanti8                1
+		SetThisMemberValueString      "callsurfonce"
+		LineNumber                    9134, 4
+		LineNumberAlt1                105, 197
+		PushConstantStringString      "glyp"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9134, 4
+		LineNumberAlt1                105, 197
+		CallGameFunctionString        "gcsaver", "findglyph", 1
+		LineNumber                    9134, 4
+		LineNumberAlt1                105, 197
+		SetVariableValue              1                                            ; local
+		LineNumber                    9135, 4
+		LineNumberAlt1                106, 197
+		GetVariableValue              1                                            ; local
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9136, 4
+		LineNumberAlt1                107, 197
+		PushConstant0
+		SetThisMemberValueString      "showpickup"
+		; <-
+		BranchTarget                  0
+		LineNumber                    9138, 4
+		LineNumberAlt1                109, 197
+		GetThisMemberValueString      "showpickup"
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    9139, 4
+		LineNumberAlt1                110, 197
+		CreateObjectString            "lego_pickup"
+		Dup
+		PushConstantStringString      "glyp"
+		PushConstanti8                16
+		PushConstanti8                2
+		PushConstantStringString      "item"
+		PushConstanti8                3
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "lego_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    9139, 4
+		LineNumberAlt1                110, 197
+		SetThisMemberValueString      "glyph"
+		LineNumber                    9140, 4
+		LineNumberAlt1                111, 197
+		GetThisMemberValueString      "glyph"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xa6fa4
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 117:122
+		MemberFunctionArgumentCheck   1
+		LineNumber                    9146, 4
+		LineNumberAlt1                117, 197
+		PushNothing
+		SetThisMemberValueString      "abletosuft"
+		LineNumber                    9147, 4
+		LineNumberAlt1                118, 197
+		PushNothing
+		SetThisMemberValueString      "surfing"
+		LineNumber                    9149, 4
+		LineNumberAlt1                120, 197
+		GetThisMemberValueString      "glyph"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9150, 4
+		LineNumberAlt1                121, 197
+		GetThisMemberValueString      "glyph"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9151, 4
+		LineNumberAlt1                122, 197
+		PushNothing
+		SetThisMemberValueString      "glyph"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xa6ff9
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 130:130
+		MemberFunctionArgumentCheck 1
+		LineNumber                  9159, 4
+		LineNumberAlt1              130, 197
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xa700b
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 136:140
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    9165, 4
+		LineNumberAlt1                136, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		Dup
+		GetMemberFunctionString       "getbasicpoint"
+		JumpAbsolute                  1
+		LineNumber                    9165, 4
+		LineNumberAlt1                136, 197
+		GetMemberValueString          "y"
+		SetVariableValue              2                 ; local
+		LineNumber                    9166, 4
+		LineNumberAlt1                137, 197
+		GetVariableValue              2                 ; local
+		PushConstant0
+		PushConstantf32               159.1999969482422
+		Subtract
+		LessThan
+		GetVariableValue              2                 ; local
+		PushConstanti16               -1473
+		GreaterThan
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9167, 4
+		LineNumberAlt1                138, 197
+		GetVariableValue              0                 ; local
+		GetThisMemberFunctionString   "startsurf"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    9169, 4
+		LineNumberAlt1                140, 197
+		GetVariableValue              0                 ; local
+		GetThisMemberFunctionString   "stopsurf"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xa7083
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 147:157
+		MemberFunctionArgumentCheck   2
+		LineNumber                    9176, 4
+		LineNumberAlt1                147, 197
+		GetVariableValue              1                                        ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9178, 4
+		LineNumberAlt1                149, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                7
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9179, 4
+		LineNumberAlt1                150, 197
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    9182, 4
+		LineNumberAlt1                153, 197
+		GetVariableValue              0                                        ; local
+		GetThisMemberFunctionString   "stopsurf"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9184, 4
+		LineNumberAlt1                155, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9185, 4
+		LineNumberAlt1                156, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterstartid"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterlookid"
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    9186, 4
+		LineNumberAlt1                157, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xa714a
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 164:165
+		MemberFunctionArgumentCheck   2
+		LineNumber                    9193, 4
+		LineNumberAlt1                164, 197
+		GetVariableValue              1           ; local
+		GetMemberValueString          "button"
+		PushConstanti8                90
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9193, 4
+		LineNumberAlt1                164, 197
+		GetVariableValue              1           ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9193, 4
+		LineNumberAlt1                164, 197
+		GetVariableValue              0           ; local
+		GetThisMemberFunctionString   "startsurf"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    9194, 4
+		LineNumberAlt1                165, 197
+		GetVariableValue              1           ; local
+		GetMemberValueString          "button"
+		PushConstanti8                88
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    9194, 4
+		LineNumberAlt1                165, 197
+		GetVariableValue              1           ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    9194, 4
+		LineNumberAlt1                165, 197
+		GetVariableValue              0           ; local
+		GetThisMemberFunctionString   "stopsurf"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "startsurf"
+		; address: 0xa71cc
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 171:177
+		MemberFunctionArgumentCheck   1
+		LineNumber                    9200, 4
+		LineNumberAlt1                171, 197
+		GetThisMemberValueString      "surfing"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9202, 4
+		LineNumberAlt1                173, 197
+		PushConstanti8                1
+		SetThisMemberValueString      "surfing"
+		LineNumber                    9203, 4
+		LineNumberAlt1                174, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstanti8                13
+		Pull                          2
+		GetMemberFunctionString       "setsurfminspeed"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9204, 4
+		LineNumberAlt1                175, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstanti8                17
+		Pull                          2
+		GetMemberFunctionString       "setsurfmaxspeed"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9206, 4
+		LineNumberAlt1                177, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               1
+		PushConstantf32               0.800000011920929
+		Pull                          3
+		GetMemberFunctionString       "setsurfingability"
+		JumpAbsolute                  3
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stopsurf"
+		; address: 0xa7250
+		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_shrn.vbo" 184:188
+		MemberFunctionArgumentCheck   1
+		LineNumber                    9213, 4
+		LineNumberAlt1                184, 197
+		GetThisMemberValueString      "surfing"
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9215, 4
+		LineNumberAlt1                186, 197
+		PushConstant0
+		SetThisMemberValueString      "surfing"
+		LineNumber                    9216, 4
+		LineNumberAlt1                187, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               0
+		PushConstantf32               0.800000011920929
+		Pull                          3
+		GetMemberFunctionString       "setsurfingability"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    9217, 4
+		LineNumberAlt1                188, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "l000"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9217, 4
+		LineNumberAlt1                188, 197
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "setsplitanimation"
+		JumpAbsolute                  3
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+end ; class

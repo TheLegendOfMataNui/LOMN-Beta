@@ -1,0 +1,103 @@
+begin class "ss_stretchablesprite", "ss_basesprite"
+	begin method "ss_stretchablesprite"
+		; address: 0x32236
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 344:344
+		MemberFunctionArgumentCheck 8
+		LineNumber                  4250, 4
+		LineNumberAlt1              344, 21
+		GetVariableValue            0               ; local
+		GetVariableValue            1               ; local
+		GetVariableValue            2               ; local
+		GetVariableValue            3               ; local
+		GetVariableValue            4               ; local
+		GetVariableValue            5               ; local
+		GetVariableValue            6               ; local
+		GetVariableValue            7               ; local
+		GetThisMemberFunctionString "ss_basesprite"
+		JumpAbsolute                8
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stretch"
+		; address: 0x32262
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 350:355
+		MemberFunctionArgumentCheck   5
+		LineNumber                    4256, 4
+		LineNumberAlt1                350, 21
+		GetVariableValue              3                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4256, 4
+		LineNumberAlt1                350, 21
+		GetThisMemberValueString      "x2"
+		GetVariableValue              3                                  ; local
+		Add
+		SetThisMemberValueString      "x2"
+		; <-
+		BranchTarget                  0
+		LineNumber                    4257, 4
+		LineNumberAlt1                351, 21
+		GetVariableValue              4                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    4257, 4
+		LineNumberAlt1                351, 21
+		GetThisMemberValueString      "y2"
+		GetVariableValue              4                                  ; local
+		Add
+		SetThisMemberValueString      "y2"
+		; <-
+		BranchTarget                  1
+		LineNumber                    4258, 4
+		LineNumberAlt1                352, 21
+		GetVariableValue              1                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    4258, 4
+		LineNumberAlt1                352, 21
+		GetThisMemberValueString      "x1"
+		GetVariableValue              1                                  ; local
+		Add
+		SetThisMemberValueString      "x1"
+		; <-
+		BranchTarget                  2
+		LineNumber                    4259, 4
+		LineNumberAlt1                353, 21
+		GetVariableValue              2                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    4259, 4
+		LineNumberAlt1                353, 21
+		GetThisMemberValueString      "y1"
+		GetVariableValue              2                                  ; local
+		Add
+		SetThisMemberValueString      "y1"
+		; <-
+		BranchTarget                  3
+		LineNumber                    4261, 4
+		LineNumberAlt1                355, 21
+		GetThisMemberValueString      "sprite"
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "x2"
+		GetThisMemberValueString      "y2"
+		CallGameFunctionString        "gcbigsprite", "sethudposition", 5
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

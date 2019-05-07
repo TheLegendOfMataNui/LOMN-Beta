@@ -1,0 +1,1058 @@
+begin class "ss_shoefittermenu"
+	property "items"
+	property "pointer"
+	property "destination"
+	property "fullarray"
+	property "needtoscroll"
+	property "pause"
+	property "scrollmarker"
+	property "scrollbar"
+	property "scrollmoveamount"
+
+	begin method "ss_shoefittermenu"
+		; address: 0x76423
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1820:1854
+		MemberFunctionArgumentCheck   3
+		CreateStackVariables          1
+		LineNumber                    50247, 4
+		LineNumberAlt1                1820, 124
+		GetThisMemberValueString      "items"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    50248, 4
+		LineNumberAlt1                1821, 124
+		GetVariableValue              1                                          ; local
+		SetThisMemberValueString      "items"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    50250, 4
+		LineNumberAlt1                1823, 124
+		CreateArray
+		SetThisMemberValueString      "items"
+		; <-
+		BranchTarget                  1
+		LineNumber                    50253, 4
+		LineNumberAlt1                1826, 124
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                13
+		GreaterThan
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    50254, 4
+		LineNumberAlt1                1827, 124
+		GetThisMemberValueString      "items"
+		SetThisMemberValueString      "fullarray"
+		LineNumber                    50255, 4
+		LineNumberAlt1                1828, 124
+		CreateArray
+		SetThisMemberValueString      "items"
+		LineNumber                    50256, 4
+		LineNumberAlt1                1829, 124
+		PushConstanti8                12
+		PushConstant0
+		SetVariableValue              3                                          ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              3                                          ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    50257, 4
+		LineNumberAlt1                1830, 124
+		GetThisMemberValueString      "items"
+		CreateObjectString            "ss_shoefittermenucontainer"
+		Dup
+		CreateObjectString            "gs_legoactivetext"
+		Dup
+		PushConstantStringString      "Root/Data/Art/Fonts/tech_font_01"
+		PushConstantStringString      "Root/Data/Art/Fonts/tech_font_01_hilight"
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              3                                          ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetMemberValueString          "string"
+		CallGameFunctionString        "scslosistringfuncs", "toupper", 1
+		LineNumber                    50260, 4
+		LineNumberAlt1                1833, 124
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              3                                          ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetMemberValueString          "x1"
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              3                                          ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetMemberValueString          "y1"
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              3                                          ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetMemberValueString          "z"
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              3                                          ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetMemberValueString          "scale"
+		Pull                          8
+		GetMemberFunctionString       "gs_legoactivetext"
+		JumpAbsolute                  8
+		Pop
+		LineNumber                    50265, 4
+		LineNumberAlt1                1838, 124
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              3                                          ; local
+		GetArrayValue
+		GetMemberValueString          "id"
+		Pull                          3
+		GetMemberFunctionString       "ss_shoefittermenucontainer"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    50267, 4
+		LineNumberAlt1                1840, 124
+		AppendToArray
+		IncrementVariable             3
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    50270, 4
+		LineNumberAlt1                1843, 124
+		PushConstanti8                1
+		SetThisMemberValueString      "needtoscroll"
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    50272, 4
+		LineNumberAlt1                1845, 124
+		CreateArray
+		SetThisMemberValueString      "fullarray"
+		LineNumber                    50273, 4
+		LineNumberAlt1                1846, 124
+		PushConstant0
+		SetThisMemberValueString      "needtoscroll"
+		; <-
+		BranchTarget                  5
+		LineNumber                    50276, 4
+		LineNumberAlt1                1849, 124
+		GetVariableValue              2                                          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    50277, 4
+		LineNumberAlt1                1850, 124
+		GetVariableValue              2                                          ; local
+		SetThisMemberValueString      "scrollbar"
+		; <-
+		BranchTarget                  6
+		LineNumber                    50280, 4
+		LineNumberAlt1                1853, 124
+		PushConstanti8                0
+		SetThisMemberValueString      "pointer"
+		LineNumber                    50281, 4
+		LineNumberAlt1                1854, 124
+		PushConstant0
+		SetThisMemberValueString      "scrollmarker"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x765b7
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1859:1868
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    50286, 4
+		LineNumberAlt1                1859, 124
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                    ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50287, 4
+		LineNumberAlt1                1860, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              1                    ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50288, 4
+		LineNumberAlt1                1861, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              1                    ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50289, 4
+		LineNumberAlt1                1862, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              1                    ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    50291, 4
+		LineNumberAlt1                1864, 124
+		GetThisMemberValueString      "scrollbar"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50292, 4
+		LineNumberAlt1                1865, 124
+		GetThisMemberValueString      "scrollbar"
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50293, 4
+		LineNumberAlt1                1866, 124
+		GetThisMemberValueString      "scrollbar"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enabletransparency"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50294, 4
+		LineNumberAlt1                1867, 124
+		GetThisMemberValueString      "scrollbar"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50295, 4
+		LineNumberAlt1                1868, 124
+		PushConstantf32               0
+		SetThisMemberValueString      "pause"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x7669a
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1873:1873
+		MemberFunctionArgumentCheck 1
+		LineNumber                  50300, 4
+		LineNumberAlt1              1873, 124
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x766b1
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1878:1880
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    50305, 4
+		LineNumberAlt1                1878, 124
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1         ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1         ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50306, 4
+		LineNumberAlt1                1879, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              1         ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50307, 4
+		LineNumberAlt1                1880, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              1         ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x76711
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1886:1895
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    50313, 4
+		LineNumberAlt1                1886, 124
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50314, 4
+		LineNumberAlt1                1887, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50315, 4
+		LineNumberAlt1                1888, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50316, 4
+		LineNumberAlt1                1889, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    50318, 4
+		LineNumberAlt1                1891, 124
+		GetThisMemberValueString      "scrollbar"
+		GetMemberValueString          "onscreen"
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    50319, 4
+		LineNumberAlt1                1892, 124
+		GetThisMemberValueString      "scrollbar"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    50321, 4
+		LineNumberAlt1                1894, 124
+		GetThisMemberValueString      "scrollbar"
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50322, 4
+		LineNumberAlt1                1895, 124
+		GetThisMemberValueString      "scrollbar"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x767db
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1900:1900
+		MemberFunctionArgumentCheck 1
+		LineNumber                  50327, 4
+		LineNumberAlt1              1900, 124
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x767f2
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1906:1908
+		MemberFunctionArgumentCheck   2
+		LineNumber                    50333, 4
+		LineNumberAlt1                1906, 124
+		GetVariableValue              0               ; local
+		GetVariableValue              1               ; local
+		GetThisMemberFunctionString   "keyboardinput"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50334, 4
+		LineNumberAlt1                1907, 124
+		GetVariableValue              1               ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    50335, 4
+		LineNumberAlt1                1908, 124
+		PushConstantf32               0
+		SetThisMemberValueString      "pause"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "keyboardinput"
+		; address: 0x76834
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1924:1928
+		MemberFunctionArgumentCheck   2
+		LineNumber                    50351, 4
+		LineNumberAlt1                1924, 124
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                38
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    50351, 4
+		LineNumberAlt1                1924, 124
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    50351, 4
+		LineNumberAlt1                1924, 124
+		GetVariableValue              0            ; local
+		PushConstanti8                -1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    50352, 4
+		LineNumberAlt1                1925, 124
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                40
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50352, 4
+		LineNumberAlt1                1925, 124
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50352, 4
+		LineNumberAlt1                1925, 124
+		GetVariableValue              0            ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    50353, 4
+		LineNumberAlt1                1926, 124
+		GetThisMemberValueString      "pause"
+		PushConstantf32               0.5
+		GreaterThan
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    50354, 4
+		LineNumberAlt1                1927, 124
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                38
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    50354, 4
+		LineNumberAlt1                1927, 124
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    50354, 4
+		LineNumberAlt1                1927, 124
+		GetVariableValue              0            ; local
+		PushConstanti8                -1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    50355, 4
+		LineNumberAlt1                1928, 124
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                40
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    50355, 4
+		LineNumberAlt1                1928, 124
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    50355, 4
+		LineNumberAlt1                1928, 124
+		GetVariableValue              0            ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "setpointer"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setpointer"
+		; address: 0x76952
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1934:1938
+		MemberFunctionArgumentCheck   2
+		LineNumber                    50361, 4
+		LineNumberAlt1                1934, 124
+		GetThisMemberValueString      "pointer"
+		GetVariableValue              1              ; local
+		Add
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessOrEqual
+		GetThisMemberValueString      "pointer"
+		GetVariableValue              1              ; local
+		Add
+		PushConstanti8                0
+		GreaterOrEqual
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    50362, 4
+		LineNumberAlt1                1935, 124
+		GetThisMemberValueString      "pointer"
+		GetVariableValue              1              ; local
+		Add
+		SetThisMemberValueString      "pointer"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    50364, 4
+		LineNumberAlt1                1937, 124
+		GetThisMemberValueString      "needtoscroll"
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50365, 4
+		LineNumberAlt1                1938, 124
+		GetVariableValue              0              ; local
+		GetVariableValue              1              ; local
+		GetThisMemberFunctionString   "scroll"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x769ba
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1945:1962
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    50372, 4
+		LineNumberAlt1                1945, 124
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    50373, 4
+		LineNumberAlt1                1946, 124
+		GetVariableValue              2                ; local
+		GetThisMemberValueString      "pointer"
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50374, 4
+		LineNumberAlt1                1947, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              2                ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetVariableValue              1                ; local
+		Pull                          2
+		GetMemberFunctionString       "setactive"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50375, 4
+		LineNumberAlt1                1948, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              2                ; local
+		GetArrayValue
+		GetMemberValueString          "id"
+		SetThisMemberValueString      "destination"
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    50377, 4
+		LineNumberAlt1                1950, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              2                ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		Dup
+		GetMemberFunctionString       "setinactive"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    50380, 4
+		LineNumberAlt1                1953, 124
+		GetThisMemberValueString      "pause"
+		GetVariableValue              1                ; local
+		GetMemberValueString          "deltatime"
+		Add
+		SetThisMemberValueString      "pause"
+		LineNumber                    50381, 4
+		LineNumberAlt1                1954, 124
+		GetThisMemberValueString      "needtoscroll"
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    50382, 4
+		LineNumberAlt1                1955, 124
+		GetThisMemberValueString      "scrollbar"
+		GetMemberValueString          "onscreen"
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    50383, 4
+		LineNumberAlt1                1956, 124
+		GetThisMemberValueString      "scrollbar"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50384, 4
+		LineNumberAlt1                1957, 124
+		GetVariableValue              0                ; local
+		GetThisMemberFunctionString   "setupscrollbar"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  4
+		LineNumber                    50387, 4
+		LineNumberAlt1                1960, 124
+		GetThisMemberValueString      "needtoscroll"
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    50388, 4
+		LineNumberAlt1                1961, 124
+		GetThisMemberValueString      "scrollbar"
+		GetMemberValueString          "onscreen"
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    50389, 4
+		LineNumberAlt1                1962, 124
+		GetThisMemberValueString      "scrollbar"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  5
+		PushNothing
+		Return
+	end ; method
+
+	begin method "scroll"
+		; address: 0x76ae6
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1969:1976
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          2
+		LineNumber                    50396, 4
+		LineNumberAlt1                1969, 124
+		GetThisMemberValueString      "scrollmarker"
+		GetVariableValue              1               ; local
+		Add
+		PushConstant0
+		GreaterOrEqual
+		GetThisMemberValueString      "scrollmarker"
+		PushConstanti8                12
+		Add
+		GetVariableValue              1               ; local
+		Add
+		GetThisMemberValueString      "fullarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessOrEqual
+		And
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    50397, 4
+		LineNumberAlt1                1970, 124
+		GetThisMemberValueString      "scrollmarker"
+		PushConstanti8                12
+		Add
+		GetThisMemberValueString      "scrollmarker"
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2               ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50398, 4
+		LineNumberAlt1                1971, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              2               ; local
+		GetThisMemberValueString      "scrollmarker"
+		Subtract
+		GetArrayValue
+		SetVariableValue              3               ; local
+		LineNumber                    50399, 4
+		LineNumberAlt1                1972, 124
+		GetVariableValue              3               ; local
+		GetMemberValueString          "name"
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              2               ; local
+		GetVariableValue              1               ; local
+		Add
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetMemberValueString          "string"
+		Pull                          2
+		GetMemberFunctionString       "setstring"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50400, 4
+		LineNumberAlt1                1973, 124
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              2               ; local
+		GetVariableValue              1               ; local
+		Add
+		GetArrayValue
+		GetMemberValueString          "id"
+		GetVariableValue              3               ; local
+		SetMemberValueString          "id"
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    50402, 4
+		LineNumberAlt1                1975, 124
+		GetThisMemberValueString      "scrollmarker"
+		GetVariableValue              1               ; local
+		Add
+		SetThisMemberValueString      "scrollmarker"
+		LineNumber                    50403, 4
+		LineNumberAlt1                1976, 124
+		GetVariableValue              0               ; local
+		GetVariableValue              1               ; local
+		GetThisMemberFunctionString   "movescrollbar"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "switchitems"
+		; address: 0x76bc3
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1982:1987
+		MemberFunctionArgumentCheck   4
+		LineNumber                    50409, 4
+		LineNumberAlt1                1982, 124
+		GetVariableValue              0                       ; local
+		GetThisMemberFunctionString   "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50410, 4
+		LineNumberAlt1                1983, 124
+		GetVariableValue              0                       ; local
+		GetVariableValue              1                       ; local
+		GetThisMemberFunctionString   "ss_shoefittermenu"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50411, 4
+		LineNumberAlt1                1984, 124
+		GetVariableValue              0                       ; local
+		GetThisMemberFunctionString   "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50412, 4
+		LineNumberAlt1                1985, 124
+		GetVariableValue              0                       ; local
+		GetVariableValue              3                       ; local
+		GetThisMemberFunctionString   "adjustforscrollmarker"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50413, 4
+		LineNumberAlt1                1986, 124
+		GetVariableValue              2                       ; local
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		LessOrEqual
+		GetVariableValue              2                       ; local
+		PushConstanti8                0
+		GreaterOrEqual
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    50414, 4
+		LineNumberAlt1                1987, 124
+		GetVariableValue              2                       ; local
+		SetThisMemberValueString      "pointer"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "adjustforscrollmarker"
+		; address: 0x76c48
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 1993:2001
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          2
+		LineNumber                    50420, 4
+		LineNumberAlt1                1993, 124
+		GetThisMemberValueString      "fullarray"
+		ElementsInArray
+		PushConstant0
+		GreaterThan
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    50421, 4
+		LineNumberAlt1                1994, 124
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              2                ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    50422, 4
+		LineNumberAlt1                1995, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              2                ; local
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              2                ; local
+		GetVariableValue              1                ; local
+		Add
+		GetArrayValue
+		GetMemberValueString          "name"
+		GetMemberValueString          "string"
+		Pull                          2
+		GetMemberFunctionString       "setstring"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50423, 4
+		LineNumberAlt1                1996, 124
+		GetThisMemberValueString      "items"
+		GetVariableValue              2                ; local
+		GetArrayValue
+		SetVariableValue              3                ; local
+		LineNumber                    50424, 4
+		LineNumberAlt1                1997, 124
+		GetThisMemberValueString      "fullarray"
+		GetVariableValue              2                ; local
+		GetVariableValue              1                ; local
+		Add
+		GetArrayValue
+		GetMemberValueString          "id"
+		GetVariableValue              3                ; local
+		SetMemberValueString          "id"
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    50426, 4
+		LineNumberAlt1                1999, 124
+		GetVariableValue              0                ; local
+		GetThisMemberFunctionString   "setupscrollbar"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    50427, 4
+		LineNumberAlt1                2000, 124
+		GetVariableValue              0                ; local
+		GetVariableValue              1                ; local
+		GetThisMemberFunctionString   "movescrollbar"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    50428, 4
+		LineNumberAlt1                2001, 124
+		GetVariableValue              1                ; local
+		SetThisMemberValueString      "scrollmarker"
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setupscrollbar"
+		; address: 0x76d1d
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 2007:2009
+		MemberFunctionArgumentCheck 1
+		LineNumber                  50434, 4
+		LineNumberAlt1              2007, 124
+		GetThisMemberValueString    "scrollbar"
+		GetMemberValueString        "y2"
+		GetThisMemberValueString    "scrollbar"
+		GetMemberValueString        "y1"
+		Subtract
+		GetThisMemberValueString    "scrollbar"
+		SetMemberValueString        "h"
+		LineNumber                  50435, 4
+		LineNumberAlt1              2008, 124
+		GetThisMemberValueString    "scrollbar"
+		GetThisMemberValueString    "scrollbar"
+		GetMemberValueString        "x1"
+		PushConstanti8              52
+		GetThisMemberValueString    "scrollbar"
+		GetMemberValueString        "x2"
+		PushConstanti8              52
+		GetThisMemberValueString    "scrollbar"
+		GetMemberValueString        "h"
+		Add
+		Pull                        5
+		GetMemberFunctionString     "setpos"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  50436, 4
+		LineNumberAlt1              2009, 124
+		PushConstanti16             260
+		GetThisMemberValueString    "scrollbar"
+		GetMemberValueString        "y2"
+		Subtract
+		ConvertToFloat
+		GetThisMemberValueString    "fullarray"
+		ElementsInArray
+		PushConstanti8              13
+		Subtract
+		ConvertToFloat
+		Divide
+		SetThisMemberValueString    "scrollmoveamount"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "movescrollbar"
+		; address: 0x76d8b
+		; source: 124 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/slkheader.h" 2014:2014
+		MemberFunctionArgumentCheck 2
+		LineNumber                  50441, 4
+		LineNumberAlt1              2014, 124
+		GetThisMemberValueString    "scrollbar"
+		PushConstant0
+		GetThisMemberValueString    "scrollmoveamount"
+		GetVariableValue            1                  ; local
+		Multiply
+		Pull                        3
+		GetMemberFunctionString     "changepos"
+		JumpAbsolute                3
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

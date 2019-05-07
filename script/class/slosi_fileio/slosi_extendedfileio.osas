@@ -1,0 +1,160 @@
+begin class "slosi_extendedfileio", "slosi_fileio"
+	begin method "slosi_extendedfileio"
+		; address: 0x71622
+		; source: 126 "C:\\projects\\lego\\Scripting\\VBO\\demo.vbo" 96:96
+		MemberFunctionArgumentCheck 2
+		LineNumber                  47998, 4
+		LineNumberAlt1              96, 126
+		GetVariableValue            1          ; local
+		SetThisMemberValueString    "filename"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "write"
+		; address: 0x71636
+		; source: 126 "C:\\projects\\lego\\Scripting\\VBO\\demo.vbo" 108:108
+		MemberFunctionArgumentCheck 2
+		LineNumber                  48010, 4
+		LineNumberAlt1              108, 126
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                           ; local
+		CallGameFunctionString      "scslosifileio", "write", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "writeln"
+		; address: 0x71651
+		; source: 126 "C:\\projects\\lego\\Scripting\\VBO\\demo.vbo" 118:118
+		MemberFunctionArgumentCheck 2
+		LineNumber                  48020, 4
+		LineNumberAlt1              118, 126
+		GetThisMemberValueString    "handle"
+		GetVariableValue            1                           ; local
+		PushConstantStringString    "\r\n"
+		Add
+		CallGameFunctionString      "scslosifileio", "write", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "eol"
+		; address: 0x71670
+		; source: 126 "C:\\projects\\lego\\Scripting\\VBO\\demo.vbo" 122:122
+		MemberFunctionArgumentCheck 1
+		LineNumber                  48024, 4
+		LineNumberAlt1              122, 126
+		GetThisMemberValueString    "handle"
+		PushConstantStringString    "\r\n"
+		CallGameFunctionString      "scslosifileio", "write", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "is_eof"
+		; address: 0x7168b
+		; source: 126 "C:\\projects\\lego\\Scripting\\VBO\\demo.vbo" 126:126
+		MemberFunctionArgumentCheck 1
+		LineNumber                  48028, 4
+		LineNumberAlt1              126, 126
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "scslosifileio", "iseof", 1
+		LineNumber                  48028, 4
+		LineNumberAlt1              126, 126
+		Return
+	end ; method
+
+	begin method "clearfile"
+		; address: 0x716ab
+		; source: 126 "C:\\projects\\lego\\Scripting\\VBO\\demo.vbo" 130:145
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    48032, 4
+		LineNumberAlt1                130, 126
+		PushConstanti8                1
+		SetVariableValue              1         ; local
+		; <-
+		BranchTarget                  0
+		LineNumber                    48034, 4
+		LineNumberAlt1                132, 126
+		GetVariableValue              0         ; local
+		GetThisMemberFunctionString   "is_eof"
+		JumpAbsolute                  1
+		LineNumber                    48034, 4
+		LineNumberAlt1                132, 126
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    48035, 4
+		LineNumberAlt1                133, 126
+		GetVariableValue              1         ; local
+		PushConstanti8                1
+		Add
+		SetVariableValue              1         ; local
+		LineNumber                    48036, 4
+		LineNumberAlt1                134, 126
+		GetVariableValue              0         ; local
+		GetThisMemberFunctionString   "read"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    48039, 4
+		LineNumberAlt1                137, 126
+		GetVariableValue              0         ; local
+		GetThisMemberFunctionString   "close"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    48040, 4
+		LineNumberAlt1                138, 126
+		GetVariableValue              0         ; local
+		GetThisMemberFunctionString   "open"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    48042, 4
+		LineNumberAlt1                140, 126
+		GetVariableValue              1         ; local
+		PushConstanti8                1
+		SetVariableValue              2         ; local
+		; <-
+		BranchTarget                  2
+		Dup
+		GetVariableValue              2         ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    48043, 4
+		LineNumberAlt1                141, 126
+		GetVariableValue              0         ; local
+		PushConstantStringString      ""
+		GetThisMemberFunctionString   "writeln"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Pop
+		LineNumber                    48046, 4
+		LineNumberAlt1                144, 126
+		GetVariableValue              0         ; local
+		GetThisMemberFunctionString   "close"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    48047, 4
+		LineNumberAlt1                145, 126
+		GetVariableValue              0         ; local
+		GetThisMemberFunctionString   "open"
+		JumpAbsolute                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

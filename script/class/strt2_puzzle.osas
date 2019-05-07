@@ -1,0 +1,590 @@
+begin class "strt2_puzzle"
+	property "parent"
+	property "door"
+	property "killedcharacters"
+	property "callev_safe_time_once"
+	property "hiveinc"
+	property "hive1handle"
+	property "hive2handle"
+
+	begin method "strt2_puzzle"
+		; address: 0x7b266
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 92:92
+		MemberFunctionArgumentCheck 2
+		LineNumber                  53039, 4
+		LineNumberAlt1              92, 136
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x7b27a
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 100:123
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  53047, 4
+		LineNumberAlt1              100, 136
+		PushConstant0
+		SetThisMemberValueString    "killedcharacters"
+		LineNumber                  53048, 4
+		LineNumberAlt1              101, 136
+		PushConstant0
+		SetThisMemberValueString    "hiveinc"
+		LineNumber                  53049, 4
+		LineNumberAlt1              102, 136
+		PushConstant0
+		CallGameFunctionString      "gclightdirector", "setcavelighting", 1
+		Pop
+		LineNumber                  53050, 4
+		LineNumberAlt1              103, 136
+		CreateObjectString          "lego_moveableobject"
+		Dup
+		PushConstantStringString    "drs0"
+		Pull                        2
+		GetMemberFunctionString     "lego_moveableobject"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  53050, 4
+		LineNumberAlt1              103, 136
+		SetThisMemberValueString    "door"
+		LineNumber                  53051, 4
+		LineNumberAlt1              104, 136
+		GetThisMemberValueString    "door"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  53052, 4
+		LineNumberAlt1              105, 136
+		PushConstanti8              1
+		SetThisMemberValueString    "callev_safe_time_once"
+		LineNumber                  53054, 4
+		LineNumberAlt1              107, 136
+		PushConstantStringString    "ghv0"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  53054, 4
+		LineNumberAlt1              107, 136
+		CallGameFunctionString      "gcareadirector", "gethive", 1
+		LineNumber                  53054, 4
+		LineNumberAlt1              107, 136
+		SetThisMemberValueString    "hive1handle"
+		LineNumber                  53055, 4
+		LineNumberAlt1              108, 136
+		GetThisMemberValueString    "hive1handle"
+		PushConstanti8              8
+		CallGameFunctionString      "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                  53056, 4
+		LineNumberAlt1              109, 136
+		GetThisMemberValueString    "hive1handle"
+		PushConstantStringString    "crb1"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  53056, 4
+		LineNumberAlt1              109, 136
+		CallGameFunctionString      "gchive", "setcreaturetype", 2
+		Pop
+		LineNumber                  53057, 4
+		LineNumberAlt1              110, 136
+		GetThisMemberValueString    "hive1handle"
+		PushConstanti8              5
+		CallGameFunctionString      "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                  53059, 4
+		LineNumberAlt1              112, 136
+		PushConstantStringString    "ghv1"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  53059, 4
+		LineNumberAlt1              112, 136
+		CallGameFunctionString      "gcareadirector", "gethive", 1
+		LineNumber                  53059, 4
+		LineNumberAlt1              112, 136
+		SetThisMemberValueString    "hive2handle"
+		LineNumber                  53060, 4
+		LineNumberAlt1              113, 136
+		GetThisMemberValueString    "hive2handle"
+		PushConstanti8              8
+		CallGameFunctionString      "gchive", "setmaxcreatures", 2
+		Pop
+		LineNumber                  53061, 4
+		LineNumberAlt1              114, 136
+		GetThisMemberValueString    "hive2handle"
+		PushConstantStringString    "crb1"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  53061, 4
+		LineNumberAlt1              114, 136
+		CallGameFunctionString      "gchive", "setcreaturetype", 2
+		Pop
+		LineNumber                  53062, 4
+		LineNumberAlt1              115, 136
+		GetThisMemberValueString    "hive2handle"
+		PushConstanti8              5
+		CallGameFunctionString      "gchive", "setspawnrate", 2
+		Pop
+		LineNumber                  53065, 4
+		LineNumberAlt1              118, 136
+		PushConstantStringString    "vlgr"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  53065, 4
+		LineNumberAlt1              118, 136
+		PushConstant0
+		CallGameFunctionString      "gcmodeldirector", "getcharacter", 2
+		LineNumber                  53065, 4
+		LineNumberAlt1              118, 136
+		SetVariableValue            1                                            ; local
+		LineNumber                  53066, 4
+		LineNumberAlt1              119, 136
+		GetVariableValue            1                                            ; local
+		PushConstantColor8888       0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstanti16             255
+		SetBlueValue
+		PushConstanti16             255
+		SetAlphaValue
+		PushConstantColor8888       0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstanti16             255
+		SetBlueValue
+		PushConstanti16             255
+		SetAlphaValue
+		PushConstantStringString    "mk7a"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  53066, 4
+		LineNumberAlt1              119, 136
+		CallGameFunctionString      "gccharacter", "settohunga", 4
+		Pop
+		LineNumber                  53067, 4
+		LineNumberAlt1              120, 136
+		GetVariableValue            1                                            ; local
+		PushConstantStringString    "none"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  53067, 4
+		LineNumberAlt1              120, 136
+		CallGameFunctionString      "gccharacter", "setinputstate", 2
+		Pop
+		LineNumber                  53068, 4
+		LineNumberAlt1              121, 136
+		GetVariableValue            1                                            ; local
+		PushConstantf32             1.5
+		PushConstantf32             0.800000011920929
+		PushConstanti8              1
+		PushConstant0
+		PushConstant0
+		CallGameFunctionString      "gccharacter", "setupmoveable", 6
+		Pop
+		LineNumber                  53069, 4
+		LineNumberAlt1              122, 136
+		GetVariableValue            1                                            ; local
+		PushConstantStringString    "d000"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  53069, 4
+		LineNumberAlt1              122, 136
+		PushConstanti8              -1
+		CallGameFunctionString      "gccharacter", "setsplitanimation", 3
+		Pop
+		LineNumber                  53070, 4
+		LineNumberAlt1              123, 136
+		GetVariableValue            1                                            ; local
+		PushConstanti16             250
+		CallGameFunctionString      "gccharacter", "setorientation", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x7b500
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 129:131
+		MemberFunctionArgumentCheck  1
+		LineNumber                   53076, 4
+		LineNumberAlt1               129, 136
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "enterstartid"
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "enterlookid"
+		Pull                         3
+		GetMemberFunctionString      "gotopos"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   53077, 4
+		LineNumberAlt1               130, 136
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		Dup
+		GetMemberFunctionString      "unkill"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   53078, 4
+		LineNumberAlt1               131, 136
+		PushConstanti8               1
+		SetThisMemberValueString     "callev_safe_time_once"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x7b551
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 136:138
+		MemberFunctionArgumentCheck 1
+		LineNumber                  53083, 4
+		LineNumberAlt1              136, 136
+		PushNothing
+		SetThisMemberValueString    "hive1handle"
+		LineNumber                  53084, 4
+		LineNumberAlt1              137, 136
+		PushNothing
+		SetThisMemberValueString    "hive2handle"
+		LineNumber                  53085, 4
+		LineNumberAlt1              138, 136
+		GetThisMemberValueString    "door"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x7b585
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 144:146
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    53091, 4
+		LineNumberAlt1                144, 136
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		Dup
+		GetMemberFunctionString       "getposy"
+		JumpAbsolute                  1
+		LineNumber                    53091, 4
+		LineNumberAlt1                144, 136
+		SetVariableValue              2             ; local
+		LineNumber                    53092, 4
+		LineNumberAlt1                145, 136
+		GetVariableValue              2             ; local
+		PushConstant0
+		PushConstantf32               38
+		Subtract
+		LessThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    53093, 4
+		LineNumberAlt1                146, 136
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "kill"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x7b5e0
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 153:175
+		MemberFunctionArgumentCheck   2
+		LineNumber                    53100, 4
+		LineNumberAlt1                153, 136
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                44
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    53102, 4
+		LineNumberAlt1                155, 136
+		GetThisMemberValueString      "callev_safe_time_once"
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    53103, 4
+		LineNumberAlt1                156, 136
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterstartid"
+		PushConstantStringString      "str1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    53103, 4
+		LineNumberAlt1                156, 136
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    53104, 4
+		LineNumberAlt1                157, 136
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "movedoorup"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    53106, 4
+		LineNumberAlt1                159, 136
+		PushConstant0
+		SetThisMemberValueString      "callev_safe_time_once"
+		; <-
+		BranchTarget                  1
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti8                51
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    53109, 4
+		LineNumberAlt1                162, 136
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    53111, 4
+		LineNumberAlt1                164, 136
+		GetThisMemberValueString      "hiveinc"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "hiveinc"
+		LineNumber                    53112, 4
+		LineNumberAlt1                165, 136
+		GetThisMemberValueString      "hiveinc"
+		PushConstanti8                2
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    53113, 4
+		LineNumberAlt1                166, 136
+		PushConstantStringString      "**** CONGRATS PUZZLE SOLVED"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    53114, 4
+		LineNumberAlt1                167, 136
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "movedoorup"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  3
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    53117, 4
+		LineNumberAlt1                170, 136
+		PushConstantStringString      "********* YEAH YOU HAVE KILLED A HIVE!!"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		; <-
+		BranchTarget                  5
+		Pop
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    53120, 4
+		LineNumberAlt1                173, 136
+		PushConstantf32               0.699999988079071
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    53122, 4
+		LineNumberAlt1                175, 136
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "initshort"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  8
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0x7b720
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 182:183
+		MemberFunctionArgumentCheck   2
+		LineNumber                    53129, 4
+		LineNumberAlt1                182, 136
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                90
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    53129, 4
+		LineNumberAlt1                182, 136
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    53129, 4
+		LineNumberAlt1                182, 136
+		GetVariableValue              0            ; local
+		GetThisMemberFunctionString   "movedoorup"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    53130, 4
+		LineNumberAlt1                183, 136
+		GetVariableValue              1            ; local
+		GetMemberValueString          "button"
+		PushConstanti8                88
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    53130, 4
+		LineNumberAlt1                183, 136
+		GetVariableValue              1            ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    53130, 4
+		LineNumberAlt1                183, 136
+		GetVariableValue              0            ; local
+		GetThisMemberFunctionString   "cheat"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cheat"
+		; address: 0x7b7a2
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 188:189
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  53135, 4
+		LineNumberAlt1              188, 136
+		CreateObjectString          "scriptevent"
+		Dup
+		PushConstanti8              51
+		CreateArray
+		Dup
+		PushConstant0
+		AppendToArray
+		Dup
+		PushConstanti8              1
+		AppendToArray
+		Pull                        3
+		GetMemberFunctionString     "scriptevent"
+		JumpAbsolute                3
+		Pop
+		LineNumber                  53135, 4
+		LineNumberAlt1              188, 136
+		SetVariableValue            1             ; local
+		LineNumber                  53136, 4
+		LineNumberAlt1              189, 136
+		GetVariableValue            1             ; local
+		Dup
+		GetMemberFunctionString     "send"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "movedoorup"
+		; address: 0x7b7e9
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 195:199
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        3
+		LineNumber                  53142, 4
+		LineNumberAlt1              195, 136
+		GetThisMemberValueString    "door"
+		Dup
+		GetMemberFunctionString     "getx"
+		JumpAbsolute                1
+		LineNumber                  53142, 4
+		LineNumberAlt1              195, 136
+		SetVariableValue            1             ; local
+		LineNumber                  53143, 4
+		LineNumberAlt1              196, 136
+		GetThisMemberValueString    "door"
+		Dup
+		GetMemberFunctionString     "gety"
+		JumpAbsolute                1
+		LineNumber                  53143, 4
+		LineNumberAlt1              196, 136
+		PushConstantf32             9
+		Add
+		SetVariableValue            2             ; local
+		LineNumber                  53144, 4
+		LineNumberAlt1              197, 136
+		GetThisMemberValueString    "door"
+		Dup
+		GetMemberFunctionString     "getz"
+		JumpAbsolute                1
+		LineNumber                  53144, 4
+		LineNumberAlt1              197, 136
+		SetVariableValue            3             ; local
+		LineNumber                  53146, 4
+		LineNumberAlt1              199, 136
+		GetThisMemberValueString    "door"
+		GetVariableValue            1             ; local
+		GetVariableValue            2             ; local
+		GetVariableValue            3             ; local
+		PushConstantf32             1.5
+		Pull                        5
+		GetMemberFunctionString     "interpolate"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x7b878
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 204:204
+		MemberFunctionArgumentCheck 1
+		LineNumber                  53151, 4
+		LineNumberAlt1              204, 136
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+end ; class

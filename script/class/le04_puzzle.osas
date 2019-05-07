@@ -1,0 +1,405 @@
+begin class "le04_puzzle"
+	property "parent"
+	property "spiderpickup"
+	property "hookarray"
+
+	begin method "le04_puzzle"
+		; address: 0xa4176
+		; source: 191 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly1.vbo" 84:84
+		MemberFunctionArgumentCheck 2
+		LineNumber                  7828, 4
+		LineNumberAlt1              84, 191
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xa418a
+		; source: 191 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly1.vbo" 92:119
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    7836, 4
+		LineNumberAlt1                92, 191
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicOnuaAmbience"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7837, 4
+		LineNumberAlt1                93, 191
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7839, 4
+		LineNumberAlt1                95, 191
+		CreateArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "hk01"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7840, 4
+		LineNumberAlt1                96, 191
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "hk03"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7842, 4
+		LineNumberAlt1                98, 191
+		AppendToArray
+		Dup
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "hk05"
+		Pull                          2
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7844, 4
+		LineNumberAlt1                100, 191
+		AppendToArray
+		SetThisMemberValueString      "hookarray"
+		LineNumber                    7846, 4
+		LineNumberAlt1                102, 191
+		GetThisMemberValueString      "hookarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1                                                        ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1                                                        ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    7847, 4
+		LineNumberAlt1                103, 191
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                                                        ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7848, 4
+		LineNumberAlt1                104, 191
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                                                        ; local
+		GetArrayValue
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "setmytargetingflags"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7849, 4
+		LineNumberAlt1                105, 191
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1                                                        ; local
+		GetArrayValue
+		PushConstanti8                1
+		PushConstanti8                1
+		PushConstanti8                1
+		Pull                          4
+		GetMemberFunctionString       "setresponse"
+		JumpAbsolute                  4
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		LineNumber                    7862, 4
+		LineNumberAlt1                118, 191
+		PushConstantStringString      "********** Grappling hook is being set to 50 in length"
+		CallGameFunctionString        "debug", "print", 1
+		Pop
+		LineNumber                    7863, 4
+		LineNumberAlt1                119, 191
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstanti8                55
+		Pull                          2
+		GetMemberFunctionString       "setgrapplinghookdistance"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xa42c5
+		; source: 191 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly1.vbo" 124:132
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    7868, 4
+		LineNumberAlt1                124, 191
+		GetThisMemberValueString      "spiderpickup"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    7869, 4
+		LineNumberAlt1                125, 191
+		GetThisMemberValueString      "spiderpickup"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7870, 4
+		LineNumberAlt1                126, 191
+		PushNothing
+		SetThisMemberValueString      "spiderpickup"
+		; <-
+		BranchTarget                  0
+		LineNumber                    7872, 4
+		LineNumberAlt1                128, 191
+		GetThisMemberValueString      "hookarray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1              ; local
+		; <-
+		BranchTarget                  1
+		Dup
+		GetVariableValue              1              ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    7873, 4
+		LineNumberAlt1                129, 191
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1              ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7874, 4
+		LineNumberAlt1                130, 191
+		GetThisMemberValueString      "hookarray"
+		GetVariableValue              1              ; local
+		PushNothing
+		SetArrayValue
+		IncrementVariable             1
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Pop
+		LineNumber                    7876, 4
+		LineNumberAlt1                132, 191
+		PushNothing
+		SetThisMemberValueString      "hookarray"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xa435c
+		; source: 191 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly1.vbo" 137:137
+		MemberFunctionArgumentCheck 1
+		LineNumber                  7881, 4
+		LineNumberAlt1              137, 191
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xa436e
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xa4372
+		; source: 191 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly1.vbo" 149:161
+		MemberFunctionArgumentCheck   2
+		LineNumber                    7893, 4
+		LineNumberAlt1                149, 191
+		GetVariableValue              1                                                       ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    7895, 4
+		LineNumberAlt1                151, 191
+		GetVariableValue              1                                                       ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "tb00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    7895, 4
+		LineNumberAlt1                151, 191
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    7896, 4
+		LineNumberAlt1                152, 191
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "kill"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7897, 4
+		LineNumberAlt1                153, 191
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                7
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    7900, 4
+		LineNumberAlt1                156, 191
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    7902, 4
+		LineNumberAlt1                158, 191
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    7903, 4
+		LineNumberAlt1                159, 191
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    7904, 4
+		LineNumberAlt1                160, 191
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterstartid"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterlookid"
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    7905, 4
+		LineNumberAlt1                161, 191
+		PushConstantStringString      "tb00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    7905, 4
+		LineNumberAlt1                161, 191
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
+		Pop
+		; <-
+		BranchTarget                  3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xa4495
+		; source: 191 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly1.vbo" 167:167
+		MemberFunctionArgumentCheck   2
+		LineNumber                    7911, 4
+		LineNumberAlt1                167, 191
+		GetVariableValue              1        ; local
+		GetMemberValueString          "button"
+		PushConstanti8                90
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    7911, 4
+		LineNumberAlt1                167, 191
+		GetVariableValue              1        ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    7911, 4
+		LineNumberAlt1                167, 191
+		GetVariableValue              0        ; local
+		GetThisMemberFunctionString   "cheat"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cheat"
+		; address: 0xa44d8
+		; source: 191 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly1.vbo" 173:174
+		MemberFunctionArgumentCheck  1
+		LineNumber                   7917, 4
+		LineNumberAlt1               173, 191
+		PushConstantStringString     "********** Grappling hook is being set to 50 in length"
+		CallGameFunctionString       "debug", "print", 1
+		Pop
+		LineNumber                   7918, 4
+		LineNumberAlt1               174, 191
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		PushConstanti8               55
+		Pull                         2
+		GetMemberFunctionString      "setgrapplinghookdistance"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

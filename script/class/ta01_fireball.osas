@@ -1,0 +1,984 @@
+begin class "ta01_fireball"
+	property "obj"
+	property "name"
+	property "id"
+	property "timefromlastdrop"
+	property "timetodrop"
+	property "dropzoneflag"
+	property "burningsound"
+	property "burningsoundcleanedup"
+	property "explodesound"
+
+	begin method "ta01_fireball"
+		; address: 0xaba2c
+		; source: 207 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta07.vbo" 294:303
+		MemberFunctionArgumentCheck 3
+		LineNumber                  11275, 4
+		LineNumberAlt1              294, 207
+		GetVariableValue            1                                            ; local
+		SetThisMemberValueString    "name"
+		LineNumber                  11276, 4
+		LineNumberAlt1              295, 207
+		GetThisMemberValueString    "name"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  11276, 4
+		LineNumberAlt1              295, 207
+		SetThisMemberValueString    "id"
+		LineNumber                  11277, 4
+		LineNumberAlt1              296, 207
+		GetVariableValue            2                                            ; local
+		SetThisMemberValueString    "dropzoneflag"
+		LineNumber                  11278, 4
+		LineNumberAlt1              297, 207
+		CreateObjectString          "sprite_projectile"
+		Dup
+		GetThisMemberValueString    "name"
+		PushConstantStringString    "firebll"
+		PushConstantStringString    "Root/Data/art/SpriteAnims/fireBall/"
+		PushConstanti8              45
+		PushConstanti8              15
+		PushConstanti8              100
+		PushConstanti8              24
+		Pull                        8
+		GetMemberFunctionString     "sprite_projectile"
+		JumpAbsolute                8
+		Pop
+		LineNumber                  11278, 4
+		LineNumberAlt1              297, 207
+		SetThisMemberValueString    "obj"
+		LineNumber                  11279, 4
+		LineNumberAlt1              298, 207
+		PushConstant0
+		SetThisMemberValueString    "timetodrop"
+		LineNumber                  11280, 4
+		LineNumberAlt1              299, 207
+		PushConstant0
+		SetThisMemberValueString    "timefromlastdrop"
+		LineNumber                  11281, 4
+		LineNumberAlt1              300, 207
+		CreateObjectString          "tablecopysound"
+		Dup
+		PushConstanti16             1058
+		Pull                        2
+		GetMemberFunctionString     "tablecopysound"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  11281, 4
+		LineNumberAlt1              300, 207
+		SetThisMemberValueString    "explodesound"
+		LineNumber                  11282, 4
+		LineNumberAlt1              301, 207
+		GetThisMemberValueString    "explodesound"
+		GetThisMemberValueString    "obj"
+		GetMemberValueString        "handle"
+		Pull                        2
+		GetMemberFunctionString     "synctoprojectile"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  11283, 4
+		LineNumberAlt1              302, 207
+		GetThisMemberValueString    "explodesound"
+		PushConstantf32             0.5
+		Pull                        2
+		GetMemberFunctionString     "setlistenerrollofffactor"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  11284, 4
+		LineNumberAlt1              303, 207
+		PushConstanti8              1
+		SetThisMemberValueString    "burningsoundcleanedup"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xabb2a
+		; source: 207 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta07.vbo" 309:320
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    11290, 4
+		LineNumberAlt1                309, 207
+		GetThisMemberValueString      "obj"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    11291, 4
+		LineNumberAlt1                310, 207
+		PushNothing
+		SetThisMemberValueString      "obj"
+		LineNumber                    11292, 4
+		LineNumberAlt1                311, 207
+		PushNothing
+		SetThisMemberValueString      "name"
+		LineNumber                    11293, 4
+		LineNumberAlt1                312, 207
+		PushNothing
+		SetVariableValue              1                       ; local
+		LineNumber                    11294, 4
+		LineNumberAlt1                313, 207
+		GetThisMemberValueString      "burningsoundcleanedup"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    11295, 4
+		LineNumberAlt1                314, 207
+		GetThisMemberValueString      "burningsound"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    11296, 4
+		LineNumberAlt1                315, 207
+		PushNothing
+		SetThisMemberValueString      "burningsound"
+		LineNumber                    11297, 4
+		LineNumberAlt1                316, 207
+		PushConstanti8                1
+		SetThisMemberValueString      "burningsoundcleanedup"
+		; <-
+		BranchTarget                  0
+		LineNumber                    11300, 4
+		LineNumberAlt1                319, 207
+		GetThisMemberValueString      "explodesound"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    11301, 4
+		LineNumberAlt1                320, 207
+		PushNothing
+		SetThisMemberValueString      "explodesound"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xabbd3
+		; source: 207 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta07.vbo" 325:329
+		MemberFunctionArgumentCheck   2
+		LineNumber                    11306, 4
+		LineNumberAlt1                325, 207
+		GetThisMemberValueString      "obj"
+		GetVariableValue              1                  ; local
+		Pull                          2
+		GetMemberFunctionString       "process"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    11307, 4
+		LineNumberAlt1                326, 207
+		GetThisMemberValueString      "timefromlastdrop"
+		GetVariableValue              1                  ; local
+		GetMemberValueString          "deltatime"
+		Add
+		SetThisMemberValueString      "timefromlastdrop"
+		LineNumber                    11308, 4
+		LineNumberAlt1                327, 207
+		GetThisMemberValueString      "timefromlastdrop"
+		GetThisMemberValueString      "timetodrop"
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    11309, 4
+		LineNumberAlt1                328, 207
+		GetVariableValue              0                  ; local
+		GetThisMemberFunctionString   "drop"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    11310, 4
+		LineNumberAlt1                329, 207
+		PushConstant0
+		SetThisMemberValueString      "timefromlastdrop"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xabc3b
+		; source: 207 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta07.vbo" 336:345
+		MemberFunctionArgumentCheck   2
+		LineNumber                    11317, 4
+		LineNumberAlt1                336, 207
+		GetVariableValue              1          ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                19
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    11324, 4
+		LineNumberAlt1                343, 207
+		GetVariableValue              1          ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		GetThisMemberValueString      "id"
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    11326, 4
+		LineNumberAlt1                345, 207
+		GetVariableValue              0          ; local
+		GetVariableValue              1          ; local
+		GetMemberValueString          "args"
+		PushConstanti8                2
+		GetArrayValue
+		GetVariableValue              1          ; local
+		GetMemberValueString          "args"
+		PushConstanti8                3
+		GetArrayValue
+		GetVariableValue              1          ; local
+		GetMemberValueString          "args"
+		PushConstanti8                4
+		GetArrayValue
+		GetVariableValue              1          ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		GetThisMemberFunctionString   "detonate"
+		JumpAbsolute                  5
+		Pop
+		; <-
+		BranchTarget                  0
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "detonate"
+		; address: 0xabca7
+		; source: 207 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta07.vbo" 356:369
+		MemberFunctionArgumentCheck   5
+		LineNumber                    11337, 4
+		LineNumberAlt1                356, 207
+		GetThisMemberValueString      "burningsoundcleanedup"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    11338, 4
+		LineNumberAlt1                357, 207
+		GetThisMemberValueString      "burningsound"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    11339, 4
+		LineNumberAlt1                358, 207
+		PushNothing
+		SetThisMemberValueString      "burningsound"
+		LineNumber                    11340, 4
+		LineNumberAlt1                359, 207
+		PushConstanti8                1
+		SetThisMemberValueString      "burningsoundcleanedup"
+		; <-
+		BranchTarget                  0
+		LineNumber                    11344, 4
+		LineNumberAlt1                363, 207
+		GetVariableValue              4                                            ; local
+		PushConstantStringString      "cnt1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    11344, 4
+		LineNumberAlt1                363, 207
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    11345, 4
+		LineNumberAlt1                364, 207
+		GetThisMemberValueString      "explodesound"
+		PushConstanti8                100
+		Pull                          2
+		GetMemberFunctionString       "setvolume"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    11346, 4
+		LineNumberAlt1                365, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstantf32               0.5
+		PushConstantf32               0.07999999821186066
+		Pull                          3
+		GetMemberFunctionString       "shakecamera"
+		JumpAbsolute                  3
+		Pop
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    11348, 4
+		LineNumberAlt1                367, 207
+		GetThisMemberValueString      "explodesound"
+		PushConstanti8                50
+		Pull                          2
+		GetMemberFunctionString       "setvolume"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    11350, 4
+		LineNumberAlt1                369, 207
+		GetThisMemberValueString      "explodesound"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "drop"
+		; address: 0xabd7e
+		; source: 207 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta07.vbo" 376:387
+		MemberFunctionArgumentCheck  1
+		CreateStackVariables         2
+		LineNumber                   11357, 4
+		LineNumberAlt1               376, 207
+		GetVariableValue             0                          ; local
+		GetThisMemberFunctionString  "dropzone"
+		JumpAbsolute                 1
+		LineNumber                   11357, 4
+		LineNumberAlt1               376, 207
+		SetVariableValue             1                          ; local
+		LineNumber                   11358, 4
+		LineNumberAlt1               377, 207
+		GetVariableValue             0                          ; local
+		GetVariableValue             1                          ; local
+		PushConstanti16              150
+		GetThisMemberFunctionString  "ysubtract"
+		JumpAbsolute                 3
+		LineNumber                   11358, 4
+		LineNumberAlt1               377, 207
+		SetVariableValue             2                          ; local
+		LineNumber                   11359, 4
+		LineNumberAlt1               378, 207
+		GetThisMemberValueString     "obj"
+		GetVariableValue             2                          ; local
+		GetVariableValue             1                          ; local
+		Pull                         3
+		GetMemberFunctionString      "launch"
+		JumpAbsolute                 3
+		Pop
+		LineNumber                   11360, 4
+		LineNumberAlt1               379, 207
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "randnum"
+		PushConstantf32              4
+		PushConstantf32              7
+		Pull                         3
+		GetMemberFunctionString      "getrandomfloat"
+		JumpAbsolute                 3
+		LineNumber                   11360, 4
+		LineNumberAlt1               379, 207
+		SetThisMemberValueString     "timetodrop"
+		LineNumber                   11363, 4
+		LineNumberAlt1               382, 207
+		PushConstant0
+		SetThisMemberValueString     "burningsoundcleanedup"
+		LineNumber                   11364, 4
+		LineNumberAlt1               383, 207
+		CreateObjectString           "tablecopysound"
+		Dup
+		PushConstanti16              1057
+		Pull                         2
+		GetMemberFunctionString      "tablecopysound"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   11364, 4
+		LineNumberAlt1               383, 207
+		SetThisMemberValueString     "burningsound"
+		LineNumber                   11365, 4
+		LineNumberAlt1               384, 207
+		GetThisMemberValueString     "burningsound"
+		GetThisMemberValueString     "obj"
+		GetMemberValueString         "handle"
+		Pull                         2
+		GetMemberFunctionString      "synctoprojectile"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   11366, 4
+		LineNumberAlt1               385, 207
+		GetThisMemberValueString     "burningsound"
+		PushConstantf32              1.5
+		Pull                         2
+		GetMemberFunctionString      "setmindistance"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   11367, 4
+		LineNumberAlt1               386, 207
+		GetThisMemberValueString     "burningsound"
+		PushConstantf32              0.5
+		Pull                         2
+		GetMemberFunctionString      "setlistenerrollofffactor"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   11368, 4
+		LineNumberAlt1               387, 207
+		GetThisMemberValueString     "burningsound"
+		PushConstanti8               1
+		Pull                         2
+		GetMemberFunctionString      "play"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "dropzone"
+		; address: 0xabeab
+		; source: 207 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta07.vbo" 394:530
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          2
+		LineNumber                    11375, 4
+		LineNumberAlt1                394, 207
+		GetThisMemberValueString      "dropzoneflag"
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    11377, 4
+		LineNumberAlt1                396, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti8                1
+		PushConstanti8                2
+		Pull                          3
+		GetMemberFunctionString       "getrandomnumber"
+		JumpAbsolute                  3
+		LineNumber                    11377, 4
+		LineNumberAlt1                396, 207
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    11381, 4
+		LineNumberAlt1                400, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti8                35
+		PushConstanti8                80
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11381, 4
+		LineNumberAlt1                400, 207
+		SetVariableValue              1                  ; local
+		LineNumber                    11382, 4
+		LineNumberAlt1                401, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti8                30
+		PushConstanti16               170
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11382, 4
+		LineNumberAlt1                401, 207
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    11388, 4
+		LineNumberAlt1                407, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti16               -200
+		PushConstanti8                -100
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11388, 4
+		LineNumberAlt1                407, 207
+		SetVariableValue              1                  ; local
+		LineNumber                    11389, 4
+		LineNumberAlt1                408, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti16               200
+		PushConstanti16               380
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11389, 4
+		LineNumberAlt1                408, 207
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    11395, 4
+		LineNumberAlt1                414, 207
+		PushConstantf32               49
+		SetVariableValue              1                  ; local
+		LineNumber                    11396, 4
+		LineNumberAlt1                415, 207
+		PushConstantf32               108
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    11401, 4
+		LineNumberAlt1                420, 207
+		PushConstant0
+		PushConstantf32               155
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11402, 4
+		LineNumberAlt1                421, 207
+		PushConstantf32               310
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstanti8                5
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    11407, 4
+		LineNumberAlt1                426, 207
+		PushConstant0
+		PushConstantf32               57
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11408, 4
+		LineNumberAlt1                427, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti16               180
+		PushConstanti16               345
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11408, 4
+		LineNumberAlt1                427, 207
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstanti8                6
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    11413, 4
+		LineNumberAlt1                432, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti8                -100
+		PushConstant0
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11413, 4
+		LineNumberAlt1                432, 207
+		SetVariableValue              1                  ; local
+		LineNumber                    11414, 4
+		LineNumberAlt1                433, 207
+		PushConstantf32               280
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Dup
+		PushConstanti8                7
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    11419, 4
+		LineNumberAlt1                438, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti8                -100
+		PushConstanti8                -10
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11419, 4
+		LineNumberAlt1                438, 207
+		SetVariableValue              1                  ; local
+		LineNumber                    11420, 4
+		LineNumberAlt1                439, 207
+		PushConstantf32               345
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstanti8                8
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    11425, 4
+		LineNumberAlt1                444, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti16               408
+		PushConstanti16               470
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11425, 4
+		LineNumberAlt1                444, 207
+		SetVariableValue              1                  ; local
+		LineNumber                    11426, 4
+		LineNumberAlt1                445, 207
+		PushConstantf32               153
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            8, 0
+		; ->
+		; <-
+		BranchTarget                  7
+		Dup
+		PushConstanti8                9
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    11431, 4
+		LineNumberAlt1                450, 207
+		PushConstantf32               141
+		SetVariableValue              1                  ; local
+		LineNumber                    11432, 4
+		LineNumberAlt1                451, 207
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "randnum"
+		PushConstanti16               -220
+		PushConstanti16               -183
+		Pull                          3
+		GetMemberFunctionString       "getrandomfloat"
+		JumpAbsolute                  3
+		LineNumber                    11432, 4
+		LineNumberAlt1                451, 207
+		SetVariableValue              2                  ; local
+		; <-
+		BranchTarget                  8
+		Pop
+		BranchAlwaysTarget            24, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		LineNumber                    11436, 4
+		LineNumberAlt1                455, 207
+		GetThisMemberValueString      "dropzoneflag"
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    11439, 4
+		LineNumberAlt1                458, 207
+		PushConstantf32               37.099998474121094
+		SetVariableValue              1                  ; local
+		LineNumber                    11440, 4
+		LineNumberAlt1                459, 207
+		PushConstantf32               32.099998474121094
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		Dup
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 11, 0
+		; ->
+		LineNumber                    11445, 4
+		LineNumberAlt1                464, 207
+		PushConstantf32               53.099998474121094
+		SetVariableValue              1                  ; local
+		LineNumber                    11446, 4
+		LineNumberAlt1                465, 207
+		PushConstantf32               55.099998474121094
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  11
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 12, 0
+		; ->
+		LineNumber                    11450, 4
+		LineNumberAlt1                469, 207
+		PushConstantf32               50.099998474121094
+		SetVariableValue              1                  ; local
+		LineNumber                    11451, 4
+		LineNumberAlt1                470, 207
+		PushConstantf32               79.0999984741211
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  12
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    11455, 4
+		LineNumberAlt1                474, 207
+		PushConstantf32               49
+		SetVariableValue              1                  ; local
+		LineNumber                    11456, 4
+		LineNumberAlt1                475, 207
+		PushConstantf32               108
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  13
+		Dup
+		PushConstanti8                5
+		EqualTo
+		CompareAndBranchIfFalseTarget 14, 0
+		; ->
+		LineNumber                    11461, 4
+		LineNumberAlt1                480, 207
+		PushConstantf32               58
+		SetVariableValue              1                  ; local
+		LineNumber                    11462, 4
+		LineNumberAlt1                481, 207
+		PushConstantf32               137
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  14
+		Dup
+		PushConstanti8                6
+		EqualTo
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    11467, 4
+		LineNumberAlt1                486, 207
+		PushConstantf32               74
+		SetVariableValue              1                  ; local
+		LineNumber                    11468, 4
+		LineNumberAlt1                487, 207
+		PushConstantf32               160
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  15
+		Dup
+		PushConstanti8                7
+		EqualTo
+		CompareAndBranchIfFalseTarget 16, 0
+		; ->
+		LineNumber                    11472, 4
+		LineNumberAlt1                491, 207
+		PushConstant0
+		PushConstantf32               129
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11473, 4
+		LineNumberAlt1                492, 207
+		PushConstantf32               222
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  16
+		Dup
+		PushConstanti8                8
+		EqualTo
+		CompareAndBranchIfFalseTarget 17, 0
+		; ->
+		LineNumber                    11477, 4
+		LineNumberAlt1                496, 207
+		PushConstant0
+		PushConstantf32               147
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11478, 4
+		LineNumberAlt1                497, 207
+		PushConstantf32               248
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  17
+		Dup
+		PushConstanti8                9
+		EqualTo
+		CompareAndBranchIfFalseTarget 18, 0
+		; ->
+		LineNumber                    11482, 4
+		LineNumberAlt1                501, 207
+		PushConstant0
+		PushConstantf32               155
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11483, 4
+		LineNumberAlt1                502, 207
+		PushConstantf32               280
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  18
+		Dup
+		PushConstanti8                10
+		EqualTo
+		CompareAndBranchIfFalseTarget 19, 0
+		; ->
+		LineNumber                    11487, 4
+		LineNumberAlt1                506, 207
+		PushConstant0
+		PushConstantf32               155
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11488, 4
+		LineNumberAlt1                507, 207
+		PushConstantf32               310
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  19
+		Dup
+		PushConstanti8                11
+		EqualTo
+		CompareAndBranchIfFalseTarget 20, 0
+		; ->
+		LineNumber                    11492, 4
+		LineNumberAlt1                511, 207
+		PushConstant0
+		PushConstantf32               158
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11493, 4
+		LineNumberAlt1                512, 207
+		PushConstantf32               342
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  20
+		Dup
+		PushConstanti8                12
+		EqualTo
+		CompareAndBranchIfFalseTarget 21, 0
+		; ->
+		LineNumber                    11496, 4
+		LineNumberAlt1                515, 207
+		PushConstant0
+		PushConstantf32               172
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11497, 4
+		LineNumberAlt1                516, 207
+		PushConstantf32               364
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  21
+		Dup
+		PushConstanti8                13
+		EqualTo
+		CompareAndBranchIfFalseTarget 22, 0
+		; ->
+		LineNumber                    11501, 4
+		LineNumberAlt1                520, 207
+		PushConstant0
+		PushConstantf32               195
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11502, 4
+		LineNumberAlt1                521, 207
+		PushConstantf32               377
+		SetVariableValue              2                  ; local
+		BranchAlwaysTarget            23, 0
+		; ->
+		; <-
+		BranchTarget                  22
+		Dup
+		PushConstanti8                14
+		EqualTo
+		CompareAndBranchIfFalseTarget 23, 0
+		; ->
+		LineNumber                    11505, 4
+		LineNumberAlt1                524, 207
+		PushConstant0
+		PushConstantf32               66
+		Subtract
+		SetVariableValue              1                  ; local
+		LineNumber                    11506, 4
+		LineNumberAlt1                525, 207
+		PushConstantf32               288
+		SetVariableValue              2                  ; local
+		; <-
+		BranchTarget                  23
+		Pop
+		; <-
+		BranchTarget                  24
+		LineNumber                    11511, 4
+		LineNumberAlt1                530, 207
+		CreateObjectString            "basicpoint"
+		Dup
+		GetVariableValue              1                  ; local
+		PushConstantf32               100
+		GetVariableValue              2                  ; local
+		Pull                          4
+		GetMemberFunctionString       "basicpoint"
+		JumpAbsolute                  4
+		Pop
+		LineNumber                    11511, 4
+		LineNumberAlt1                530, 207
+		Return
+	end ; method
+
+	begin method "ysubtract"
+		; address: 0xac423
+		; source: 207 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta07.vbo" 536:536
+		MemberFunctionArgumentCheck 3
+		LineNumber                  11517, 4
+		LineNumberAlt1              536, 207
+		CreateObjectString          "basicpoint"
+		Dup
+		GetVariableValue            1            ; local
+		GetMemberValueString        "x"
+		GetVariableValue            1            ; local
+		GetMemberValueString        "y"
+		GetVariableValue            2            ; local
+		Subtract
+		GetVariableValue            1            ; local
+		GetMemberValueString        "z"
+		Pull                        4
+		GetMemberFunctionString     "basicpoint"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  11517, 4
+		LineNumberAlt1              536, 207
+		Return
+	end ; method
+end ; class

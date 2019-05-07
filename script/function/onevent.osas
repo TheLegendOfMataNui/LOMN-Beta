@@ -1,0 +1,54 @@
+begin function "onevent", 10
+	; address: 0x2cb4d
+	; source: 2 "C:\\projects\\lego\\Scripting\\VBO\\base.vbo" 110:114
+	CreateStackVariables          1
+	LineNumber                    20017, 4
+	LineNumberAlt1                110, 2
+	GetVariableValueGlobalString  "screenlist"
+	PushNothing
+	EqualTo
+	Not
+	CompareAndBranchIfFalseTarget 0, 0
+	; ->
+	LineNumber                    20018, 4
+	LineNumberAlt1                111, 2
+	CreateObjectString            "base_standardonevent"
+	Dup
+	GetVariableValue              0                      ; local
+	GetVariableValue              1                      ; local
+	GetVariableValue              2                      ; local
+	GetVariableValue              3                      ; local
+	GetVariableValue              4                      ; local
+	GetVariableValue              5                      ; local
+	GetVariableValue              6                      ; local
+	GetVariableValue              7                      ; local
+	GetVariableValue              8                      ; local
+	GetVariableValue              9                      ; local
+	Pull                          11
+	GetMemberFunctionString       "base_standardonevent"
+	JumpAbsolute                  11
+	Pop
+	LineNumber                    20018, 4
+	LineNumberAlt1                111, 2
+	SetVariableValue              10                     ; local
+	LineNumber                    20019, 4
+	LineNumberAlt1                112, 2
+	GetVariableValueGlobalString  "screenlist"
+	GetVariableValue              10                     ; local
+	Pull                          2
+	GetMemberFunctionString       "onevent"
+	JumpAbsolute                  2
+	Pop
+	LineNumber                    20021, 4
+	LineNumberAlt1                114, 2
+	GetVariableValueGlobalString  "globalclass"
+	GetVariableValue              10                     ; local
+	Pull                          2
+	GetMemberFunctionString       "onevent"
+	JumpAbsolute                  2
+	Pop
+	; <-
+	BranchTarget                  0
+	PushNothing
+	Return
+end ; function

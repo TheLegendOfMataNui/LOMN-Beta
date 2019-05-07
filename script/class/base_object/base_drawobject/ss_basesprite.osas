@@ -1,0 +1,602 @@
+begin class "ss_basesprite", "base_drawobject"
+	property "filename"
+	property "sprite"
+	property "handle"
+
+	begin method "ss_basesprite"
+		; address: 0x3196e
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 83:99
+		MemberFunctionArgumentCheck   8
+		CreateStackVariables          1
+		LineNumber                    3989, 4
+		LineNumberAlt1                83, 21
+		GetVariableValue              1          ; local
+		SetThisMemberValueString      "filename"
+		LineNumber                    3991, 4
+		LineNumberAlt1                85, 21
+		GetVariableValue              2          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    3991, 4
+		LineNumberAlt1                85, 21
+		GetVariableValue              2          ; local
+		SetThisMemberValueString      "x1"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    3992, 4
+		LineNumberAlt1                86, 21
+		PushConstant0
+		SetThisMemberValueString      "x1"
+		; <-
+		BranchTarget                  1
+		LineNumber                    3993, 4
+		LineNumberAlt1                87, 21
+		GetVariableValue              3          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    3993, 4
+		LineNumberAlt1                87, 21
+		GetVariableValue              3          ; local
+		SetThisMemberValueString      "y1"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    3994, 4
+		LineNumberAlt1                88, 21
+		PushConstant0
+		SetThisMemberValueString      "y1"
+		; <-
+		BranchTarget                  3
+		LineNumber                    3995, 4
+		LineNumberAlt1                89, 21
+		GetVariableValue              5          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    3995, 4
+		LineNumberAlt1                89, 21
+		GetVariableValue              5          ; local
+		SetThisMemberValueString      "x2"
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    3996, 4
+		LineNumberAlt1                90, 21
+		PushConstant0
+		SetThisMemberValueString      "x2"
+		; <-
+		BranchTarget                  5
+		LineNumber                    3997, 4
+		LineNumberAlt1                91, 21
+		GetVariableValue              6          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    3997, 4
+		LineNumberAlt1                91, 21
+		GetVariableValue              6          ; local
+		SetThisMemberValueString      "y2"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		LineNumber                    3998, 4
+		LineNumberAlt1                92, 21
+		PushConstant0
+		SetThisMemberValueString      "y2"
+		; <-
+		BranchTarget                  7
+		LineNumber                    4000, 4
+		LineNumberAlt1                94, 21
+		GetVariableValue              4          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    4000, 4
+		LineNumberAlt1                94, 21
+		GetVariableValue              4          ; local
+		SetThisMemberValueString      "z"
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    4001, 4
+		LineNumberAlt1                95, 21
+		PushConstant0
+		SetThisMemberValueString      "z"
+		; <-
+		BranchTarget                  9
+		LineNumber                    4003, 4
+		LineNumberAlt1                97, 21
+		GetVariableValue              7          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    4003, 4
+		LineNumberAlt1                97, 21
+		GetVariableValue              7          ; local
+		SetThisMemberValueString      "transval"
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		LineNumber                    4004, 4
+		LineNumberAlt1                98, 21
+		PushConstanti16               255
+		SetThisMemberValueString      "transval"
+		; <-
+		BranchTarget                  11
+		LineNumber                    4005, 4
+		LineNumberAlt1                99, 21
+		PushConstant0
+		SetVariableValue              8          ; local
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x31acc
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 105:106
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4011, 4
+		LineNumberAlt1              105, 21
+		GetThisMemberValueString    "x1"
+		GetThisMemberValueString    "y1"
+		GetThisMemberValueString    "x2"
+		GetThisMemberValueString    "y2"
+		GetThisMemberValueString    "filename"
+		PushConstant0
+		CallGameFunctionString      "gcbigsprite", "loadhudsprite", 6
+		LineNumber                  4011, 4
+		LineNumberAlt1              105, 21
+		SetThisMemberValueString    "sprite"
+		LineNumber                  4012, 4
+		LineNumberAlt1              106, 21
+		GetThisMemberValueString    "sprite"
+		GetThisMemberValueString    "z"
+		CallGameFunctionString      "gcbigsprite", "setzdepth", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x31b14
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 111:111
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4017, 4
+		LineNumberAlt1              111, 21
+		GetVariableValue            0          ; local
+		GetThisMemberFunctionString "initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x31b2b
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 116:120
+		MemberFunctionArgumentCheck   1
+		LineNumber                    4022, 4
+		LineNumberAlt1                116, 21
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4023, 4
+		LineNumberAlt1                117, 21
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gchuddirector", "remove", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    4025, 4
+		LineNumberAlt1                119, 21
+		PushNothing
+		SetThisMemberValueString      "sprite"
+		LineNumber                    4026, 4
+		LineNumberAlt1                120, 21
+		PushNothing
+		SetThisMemberValueString      "handle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x31b72
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 125:125
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4031, 4
+		LineNumberAlt1              125, 21
+		GetVariableValue            0             ; local
+		GetThisMemberFunctionString "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x31b89
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 130:130
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4036, 4
+		LineNumberAlt1              130, 21
+		GetThisMemberValueString    "sprite"
+		CallGameFunctionString      "gchuddirector", "addbigsprite", 1
+		LineNumber                  4036, 4
+		LineNumberAlt1              130, 21
+		SetThisMemberValueString    "handle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "remove"
+		; address: 0x31bad
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 135:137
+		MemberFunctionArgumentCheck   1
+		LineNumber                    4041, 4
+		LineNumberAlt1                135, 21
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4042, 4
+		LineNumberAlt1                136, 21
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gchuddirector", "remove", 1
+		Pop
+		LineNumber                    4043, 4
+		LineNumberAlt1                137, 21
+		PushNothing
+		SetThisMemberValueString      "handle"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x31be6
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 143:144
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4049, 4
+		LineNumberAlt1              143, 21
+		GetThisMemberValueString    "handle"
+		CallGameFunctionString      "gchuddirector", "show", 1
+		Pop
+		LineNumber                  4050, 4
+		LineNumberAlt1              144, 21
+		PushConstanti8              1
+		SetThisMemberValueString    "onscreen"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x31c0d
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 149:151
+		MemberFunctionArgumentCheck   1
+		LineNumber                    4055, 4
+		LineNumberAlt1                149, 21
+		GetThisMemberValueString      "handle"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4056, 4
+		LineNumberAlt1                150, 21
+		GetThisMemberValueString      "handle"
+		CallGameFunctionString        "gchuddirector", "hide", 1
+		Pop
+		LineNumber                    4057, 4
+		LineNumberAlt1                151, 21
+		PushConstant0
+		SetThisMemberValueString      "onscreen"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setpos"
+		; address: 0x31c46
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 157:163
+		MemberFunctionArgumentCheck   5
+		LineNumber                    4063, 4
+		LineNumberAlt1                157, 21
+		GetVariableValue              1                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4063, 4
+		LineNumberAlt1                157, 21
+		GetVariableValue              1                                  ; local
+		SetThisMemberValueString      "x1"
+		; <-
+		BranchTarget                  0
+		LineNumber                    4064, 4
+		LineNumberAlt1                158, 21
+		GetVariableValue              3                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    4064, 4
+		LineNumberAlt1                158, 21
+		GetVariableValue              3                                  ; local
+		SetThisMemberValueString      "x2"
+		; <-
+		BranchTarget                  1
+		LineNumber                    4065, 4
+		LineNumberAlt1                159, 21
+		GetVariableValue              2                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    4065, 4
+		LineNumberAlt1                159, 21
+		GetVariableValue              2                                  ; local
+		SetThisMemberValueString      "y1"
+		; <-
+		BranchTarget                  2
+		LineNumber                    4066, 4
+		LineNumberAlt1                160, 21
+		GetVariableValue              4                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    4066, 4
+		LineNumberAlt1                160, 21
+		GetVariableValue              4                                  ; local
+		SetThisMemberValueString      "y2"
+		; <-
+		BranchTarget                  3
+		LineNumber                    4068, 4
+		LineNumberAlt1                162, 21
+		GetThisMemberValueString      "sprite"
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "x2"
+		GetThisMemberValueString      "y2"
+		CallGameFunctionString        "gcbigsprite", "sethudposition", 5
+		Pop
+		LineNumber                    4069, 4
+		LineNumberAlt1                163, 21
+		GetThisMemberValueString      "sprite"
+		GetThisMemberValueString      "z"
+		CallGameFunctionString        "gcbigsprite", "setzdepth", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "changepos"
+		; address: 0x31d0d
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 168:177
+		MemberFunctionArgumentCheck   3
+		LineNumber                    4074, 4
+		LineNumberAlt1                168, 21
+		GetVariableValue              1                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4075, 4
+		LineNumberAlt1                169, 21
+		GetThisMemberValueString      "x1"
+		GetVariableValue              1                                  ; local
+		Add
+		SetThisMemberValueString      "x1"
+		LineNumber                    4076, 4
+		LineNumberAlt1                170, 21
+		GetThisMemberValueString      "x2"
+		GetVariableValue              1                                  ; local
+		Add
+		SetThisMemberValueString      "x2"
+		; <-
+		BranchTarget                  0
+		LineNumber                    4078, 4
+		LineNumberAlt1                172, 21
+		GetVariableValue              2                                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    4079, 4
+		LineNumberAlt1                173, 21
+		GetThisMemberValueString      "y1"
+		GetVariableValue              2                                  ; local
+		Add
+		SetThisMemberValueString      "y1"
+		LineNumber                    4080, 4
+		LineNumberAlt1                174, 21
+		GetThisMemberValueString      "y2"
+		GetVariableValue              2                                  ; local
+		Add
+		SetThisMemberValueString      "y2"
+		; <-
+		BranchTarget                  1
+		LineNumber                    4083, 4
+		LineNumberAlt1                177, 21
+		GetThisMemberValueString      "sprite"
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "x2"
+		GetThisMemberValueString      "y2"
+		CallGameFunctionString        "gcbigsprite", "sethudposition", 5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setzvalue"
+		; address: 0x31da7
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 182:184
+		MemberFunctionArgumentCheck   2
+		LineNumber                    4088, 4
+		LineNumberAlt1                182, 21
+		GetVariableValue              1                             ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4088, 4
+		LineNumberAlt1                182, 21
+		GetVariableValue              1                             ; local
+		SetThisMemberValueString      "z"
+		; <-
+		BranchTarget                  0
+		LineNumber                    4090, 4
+		LineNumberAlt1                184, 21
+		GetThisMemberValueString      "sprite"
+		GetThisMemberValueString      "z"
+		CallGameFunctionString        "gcbigsprite", "setzdepth", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "enabletransparency"
+		; address: 0x31de5
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 189:192
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    4095, 4
+		LineNumberAlt1                189, 21
+		GetVariableValue              1                                      ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4095, 4
+		LineNumberAlt1                189, 21
+		GetVariableValue              1                                      ; local
+		SetVariableValue              2                                      ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    4096, 4
+		LineNumberAlt1                190, 21
+		PushConstanti8                1
+		SetVariableValue              2                                      ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    4098, 4
+		LineNumberAlt1                192, 21
+		GetThisMemberValueString      "sprite"
+		GetVariableValue              1                                      ; local
+		CallGameFunctionString        "gcbigsprite", "enabletransparency", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "settransparency"
+		; address: 0x31e37
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 203:204
+		MemberFunctionArgumentCheck 2
+		LineNumber                  4109, 4
+		LineNumberAlt1              203, 21
+		GetVariableValue            1                                   ; local
+		SetThisMemberValueString    "transval"
+		LineNumber                  4110, 4
+		LineNumberAlt1              204, 21
+		GetThisMemberValueString    "sprite"
+		GetThisMemberValueString    "transval"
+		CallGameFunctionString      "gcbigsprite", "settransparency", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "enablealphachannel"
+		; address: 0x31e62
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 208:211
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    4114, 4
+		LineNumberAlt1                208, 21
+		GetVariableValue              1                                      ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4114, 4
+		LineNumberAlt1                208, 21
+		GetVariableValue              1                                      ; local
+		SetVariableValue              2                                      ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    4115, 4
+		LineNumberAlt1                209, 21
+		PushConstanti8                1
+		SetVariableValue              2                                      ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    4117, 4
+		LineNumberAlt1                211, 21
+		GetThisMemberValueString      "sprite"
+		GetVariableValue              1                                      ; local
+		CallGameFunctionString        "gcbigsprite", "enablealphachannel", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setcolor"
+		; address: 0x31eb4
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 218:218
+		MemberFunctionArgumentCheck 5
+		LineNumber                  4124, 4
+		LineNumberAlt1              218, 21
+		GetThisMemberValueString    "sprite"
+		GetVariableValue            1                            ; local
+		GetVariableValue            2                            ; local
+		GetVariableValue            3                            ; local
+		GetVariableValue            4                            ; local
+		CallGameFunctionString      "gcbigsprite", "setcolor", 5
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

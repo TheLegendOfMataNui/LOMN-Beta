@@ -1,0 +1,246 @@
+begin class "lego_area_tahu", "gs_lego_area"
+	property "puzzle"
+
+	begin method "lego_area_tahu"
+		; address: 0xbbbfd
+		; source: 234 unknown 20:20
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19097, 4
+		LineNumberAlt1              20, 234
+		GetVariableValue            0              ; local
+		PushConstantStringString    "tahu"
+		GetVariableValue            1              ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xbbc1c
+		; source: 234 unknown 27:34
+		MemberFunctionArgumentCheck  1
+		LineNumber                   19104, 4
+		LineNumberAlt1               27, 234
+		PushConstanti8               10
+		CallGameFunctionString       "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                   19106, 4
+		LineNumberAlt1               29, 234
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		GetMemberValueString         "cdtimer"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   19107, 4
+		LineNumberAlt1               30, 234
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		GetMemberValueString         "cdtimer"
+		PushConstantf32              120
+		Pull                         2
+		GetMemberFunctionString      "settime"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   19108, 4
+		LineNumberAlt1               31, 234
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		GetMemberValueString         "cdtimer"
+		Dup
+		GetMemberFunctionString      "start"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   19110, 4
+		LineNumberAlt1               33, 234
+		CreateObjectString           "puzzle_tahu7"
+		Dup
+		Dup
+		GetMemberFunctionString      "puzzle_tahu7"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   19110, 4
+		LineNumberAlt1               33, 234
+		SetThisMemberValueString     "puzzle"
+		LineNumber                   19111, 4
+		LineNumberAlt1               34, 234
+		GetThisMemberValueString     "puzzle"
+		GetThisMemberValueString     "name"
+		Pull                         2
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xbbcc1
+		; source: 234 unknown 40:42
+		MemberFunctionArgumentCheck  1
+		LineNumber                   19117, 4
+		LineNumberAlt1               40, 234
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "hud"
+		GetMemberValueString         "cdtimer"
+		Dup
+		GetMemberFunctionString      "cleanupfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   19118, 4
+		LineNumberAlt1               41, 234
+		GetThisMemberValueString     "puzzle"
+		Dup
+		GetMemberFunctionString      "cleanupfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   19119, 4
+		LineNumberAlt1               42, 234
+		PushNothing
+		SetThisMemberValueString     "puzzle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xbbd01
+		; source: 234 unknown 48:52
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    19125, 4
+		LineNumberAlt1                48, 234
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "cdtimer"
+		Dup
+		GetMemberFunctionString       "finished"
+		JumpAbsolute                  1
+		LineNumber                    19125, 4
+		LineNumberAlt1                48, 234
+		SetVariableValue              2                                              ; local
+		LineNumber                    19126, 4
+		LineNumberAlt1                49, 234
+		GetVariableValue              2                                              ; local
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19127, 4
+		LineNumberAlt1                50, 234
+		PushConstantStringString      "str0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19127, 4
+		LineNumberAlt1                50, 234
+		PushConstantStringString      "lok0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19127, 4
+		LineNumberAlt1                50, 234
+		CallGameFunctionString        "gccollisionphysicsgroup", "settoaposition", 2
+		Pop
+		LineNumber                    19128, 4
+		LineNumberAlt1                51, 234
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		GetMemberValueString          "cdtimer"
+		Dup
+		GetMemberFunctionString       "reset"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    19129, 4
+		LineNumberAlt1                52, 234
+		GetThisMemberValueString      "puzzle"
+		Dup
+		GetMemberFunctionString       "resetpuzzle"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xbbda2
+		; source: 234 unknown 60:67
+		; source: 198 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_boss.vbo" 98:98
+		MemberFunctionArgumentCheck   2
+		LineNumber                    19137, 4
+		LineNumberAlt1                60, 234
+		GetVariableValue              1                                              ; local
+		GetMemberValueString          "eventid"
+		PushConstanti8                44
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19138, 4
+		LineNumberAlt1                61, 234
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actorid"
+		PushConstantStringString      "tahu"
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    19139, 4
+		LineNumberAlt1                62, 234
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstantStringString      "tahu"
+		Pull                          2
+		GetMemberFunctionString       "changetoa"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9327, 4
+		LineNumberAlt1                98, 198
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "maskcontrol"
+		PushConstanti8                5
+		Pull                          2
+		GetMemberFunctionString       "changemask"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    19140, 4
+		LineNumberAlt1                63, 234
+		PushConstantStringString      "str0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19140, 4
+		LineNumberAlt1                63, 234
+		PushConstantStringString      "lok0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    19140, 4
+		LineNumberAlt1                63, 234
+		CallGameFunctionString        "gccollisionphysicsgroup", "settoaposition", 2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    19144, 4
+		LineNumberAlt1                67, 234
+		GetThisMemberValueString      "puzzle"
+		GetVariableValue              1                                              ; local
+		Pull                          2
+		GetMemberFunctionString       "onevent"
+		JumpAbsolute                  2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xbbe5e
+		MemberFunctionArgumentCheck 2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xbbe62
+		MemberFunctionArgumentCheck 1
+		PushNothing
+		Return
+	end ; method
+end ; class

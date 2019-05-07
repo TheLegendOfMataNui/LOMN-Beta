@@ -1,0 +1,622 @@
+begin class "ss_changesprite", "ss_basesprite"
+	property "first"
+	property "last"
+	property "spritearray"
+	property "currentsprite"
+
+	begin method "ss_changesprite"
+		; address: 0x32322
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 380:408
+		MemberFunctionArgumentCheck   9
+		LineNumber                    4286, 4
+		LineNumberAlt1                380, 21
+		GetVariableValue              1          ; local
+		SetThisMemberValueString      "filename"
+		LineNumber                    4294, 4
+		LineNumberAlt1                388, 21
+		GetVariableValue              2          ; local
+		SetThisMemberValueString      "first"
+		LineNumber                    4302, 4
+		LineNumberAlt1                396, 21
+		GetVariableValue              3          ; local
+		SetThisMemberValueString      "last"
+		LineNumber                    4304, 4
+		LineNumberAlt1                398, 21
+		GetVariableValue              4          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4304, 4
+		LineNumberAlt1                398, 21
+		GetVariableValue              4          ; local
+		SetThisMemberValueString      "x1"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    4305, 4
+		LineNumberAlt1                399, 21
+		PushConstant0
+		SetThisMemberValueString      "x1"
+		; <-
+		BranchTarget                  1
+		LineNumber                    4306, 4
+		LineNumberAlt1                400, 21
+		GetVariableValue              5          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    4306, 4
+		LineNumberAlt1                400, 21
+		GetVariableValue              5          ; local
+		SetThisMemberValueString      "y1"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    4307, 4
+		LineNumberAlt1                401, 21
+		PushConstant0
+		SetThisMemberValueString      "y1"
+		; <-
+		BranchTarget                  3
+		LineNumber                    4308, 4
+		LineNumberAlt1                402, 21
+		GetVariableValue              7          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    4308, 4
+		LineNumberAlt1                402, 21
+		GetVariableValue              7          ; local
+		SetThisMemberValueString      "x2"
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		LineNumber                    4309, 4
+		LineNumberAlt1                403, 21
+		PushConstant0
+		SetThisMemberValueString      "x2"
+		; <-
+		BranchTarget                  5
+		LineNumber                    4310, 4
+		LineNumberAlt1                404, 21
+		GetVariableValue              8          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    4310, 4
+		LineNumberAlt1                404, 21
+		GetVariableValue              8          ; local
+		SetThisMemberValueString      "y2"
+		BranchAlwaysTarget            7, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		LineNumber                    4311, 4
+		LineNumberAlt1                405, 21
+		PushConstant0
+		SetThisMemberValueString      "y2"
+		; <-
+		BranchTarget                  7
+		LineNumber                    4313, 4
+		LineNumberAlt1                407, 21
+		GetVariableValue              6          ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    4313, 4
+		LineNumberAlt1                407, 21
+		GetVariableValue              6          ; local
+		SetThisMemberValueString      "z"
+		BranchAlwaysTarget            9, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		LineNumber                    4314, 4
+		LineNumberAlt1                408, 21
+		PushConstant0
+		SetThisMemberValueString      "z"
+		; <-
+		BranchTarget                  9
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0x3245a
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 420:438
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          3
+		LineNumber                    4326, 4
+		LineNumberAlt1                420, 21
+		CreateArray
+		SetThisMemberValueString      "spritearray"
+		LineNumber                    4327, 4
+		LineNumberAlt1                421, 21
+		PushConstant0
+		SetThisMemberValueString      "currentsprite"
+		LineNumber                    4329, 4
+		LineNumberAlt1                423, 21
+		GetThisMemberValueString      "last"
+		GetThisMemberValueString      "first"
+		SetVariableValue              1               ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1               ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    4330, 4
+		LineNumberAlt1                424, 21
+		GetVariableValue              1               ; local
+		PushConstanti8                10
+		LessThan
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    4331, 4
+		LineNumberAlt1                425, 21
+		GetThisMemberValueString      "filename"
+		PushConstantStringString      "000"
+		Add
+		GetVariableValue              1               ; local
+		ConvertToString
+		Add
+		PushConstantStringString      ".tga"
+		Add
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    4333, 4
+		LineNumberAlt1                427, 21
+		GetVariableValue              1               ; local
+		PushConstanti8                10
+		GreaterOrEqual
+		GetVariableValue              1               ; local
+		PushConstanti8                100
+		LessThan
+		And
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    4334, 4
+		LineNumberAlt1                428, 21
+		GetThisMemberValueString      "filename"
+		PushConstantStringString      "00"
+		Add
+		GetVariableValue              1               ; local
+		ConvertToString
+		Add
+		PushConstantStringString      ".tga"
+		Add
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  2
+		LineNumber                    4336, 4
+		LineNumberAlt1                430, 21
+		GetVariableValue              1               ; local
+		PushConstanti8                100
+		GreaterOrEqual
+		GetVariableValue              1               ; local
+		PushConstanti16               1000
+		LessThan
+		And
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    4337, 4
+		LineNumberAlt1                431, 21
+		GetThisMemberValueString      "filename"
+		PushConstantStringString      "0"
+		Add
+		GetVariableValue              1               ; local
+		ConvertToString
+		Add
+		PushConstantStringString      ".tga"
+		Add
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  3
+		LineNumber                    4339, 4
+		LineNumberAlt1                433, 21
+		GetVariableValue              1               ; local
+		PushConstanti16               1000
+		GreaterOrEqual
+		GetVariableValue              1               ; local
+		PushConstanti16               10000
+		LessThan
+		And
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    4340, 4
+		LineNumberAlt1                434, 21
+		GetThisMemberValueString      "filename"
+		GetVariableValue              1               ; local
+		ConvertToString
+		Add
+		PushConstantStringString      ".tga"
+		Add
+		SetVariableValue              2               ; local
+		; <-
+		BranchTarget                  4
+		LineNumber                    4342, 4
+		LineNumberAlt1                436, 21
+		CreateObjectString            "ss_basesprite"
+		Dup
+		GetVariableValue              2               ; local
+		GetThisMemberValueString      "x1"
+		GetThisMemberValueString      "y1"
+		GetThisMemberValueString      "z"
+		GetThisMemberValueString      "x2"
+		GetThisMemberValueString      "y2"
+		Pull                          7
+		GetMemberFunctionString       "ss_basesprite"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    4342, 4
+		LineNumberAlt1                436, 21
+		SetVariableValue              3               ; local
+		LineNumber                    4343, 4
+		LineNumberAlt1                437, 21
+		GetVariableValue              3               ; local
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    4344, 4
+		LineNumberAlt1                438, 21
+		GetThisMemberValueString      "spritearray"
+		GetVariableValue              3               ; local
+		AppendToArray
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initshort"
+		; address: 0x325cc
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 445:446
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    4351, 4
+		LineNumberAlt1                445, 21
+		GetThisMemberValueString      "spritearray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    4352, 4
+		LineNumberAlt1                446, 21
+		GetThisMemberValueString      "spritearray"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x3260e
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 452:453
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4358, 4
+		LineNumberAlt1              452, 21
+		PushNothing
+		SetThisMemberValueString    "spritearray"
+		LineNumber                  4359, 4
+		LineNumberAlt1              453, 21
+		PushNothing
+		SetThisMemberValueString    "currentsprite"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupshort"
+		; address: 0x3262e
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 458:459
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    4364, 4
+		LineNumberAlt1                458, 21
+		GetThisMemberValueString      "spritearray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    4365, 4
+		LineNumberAlt1                459, 21
+		GetThisMemberValueString      "spritearray"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "add"
+		; address: 0x32670
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 465:466
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    4371, 4
+		LineNumberAlt1                465, 21
+		GetThisMemberValueString      "spritearray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    4372, 4
+		LineNumberAlt1                466, 21
+		GetThisMemberValueString      "spritearray"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x326b2
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 472:477
+		MemberFunctionArgumentCheck   2
+		LineNumber                    4378, 4
+		LineNumberAlt1                472, 21
+		GetVariableValue              1               ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4379, 4
+		LineNumberAlt1                473, 21
+		GetThisMemberValueString      "spritearray"
+		GetThisMemberValueString      "currentsprite"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    4381, 4
+		LineNumberAlt1                475, 21
+		GetThisMemberValueString      "spritearray"
+		GetThisMemberValueString      "currentsprite"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    4382, 4
+		LineNumberAlt1                476, 21
+		GetVariableValue              1               ; local
+		SetThisMemberValueString      "currentsprite"
+		LineNumber                    4383, 4
+		LineNumberAlt1                477, 21
+		GetThisMemberValueString      "spritearray"
+		GetThisMemberValueString      "currentsprite"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x32723
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 483:488
+		MemberFunctionArgumentCheck   2
+		LineNumber                    4389, 4
+		LineNumberAlt1                483, 21
+		GetVariableValue              1               ; local
+		PushNothing
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    4390, 4
+		LineNumberAlt1                484, 21
+		GetThisMemberValueString      "spritearray"
+		GetThisMemberValueString      "currentsprite"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    4392, 4
+		LineNumberAlt1                486, 21
+		GetThisMemberValueString      "spritearray"
+		GetThisMemberValueString      "currentsprite"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    4393, 4
+		LineNumberAlt1                487, 21
+		GetVariableValue              1               ; local
+		SetThisMemberValueString      "currentsprite"
+		LineNumber                    4394, 4
+		LineNumberAlt1                488, 21
+		GetThisMemberValueString      "spritearray"
+		GetThisMemberValueString      "currentsprite"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "remove"
+		; address: 0x32794
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 493:494
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    4399, 4
+		LineNumberAlt1                493, 21
+		GetThisMemberValueString      "spritearray"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstant0
+		SetVariableValue              1             ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              1             ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    4400, 4
+		LineNumberAlt1                494, 21
+		GetThisMemberValueString      "spritearray"
+		GetVariableValue              1             ; local
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		IncrementVariable             1
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "showcurrent"
+		; address: 0x327d6
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 500:500
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4406, 4
+		LineNumberAlt1              500, 21
+		GetThisMemberValueString    "spritearray"
+		GetThisMemberValueString    "currentsprite"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "show"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hidecurrent"
+		; address: 0x327f2
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 505:505
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4411, 4
+		LineNumberAlt1              505, 21
+		GetThisMemberValueString    "spritearray"
+		GetThisMemberValueString    "currentsprite"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getcurrent"
+		; address: 0x3280e
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 510:510
+		MemberFunctionArgumentCheck 1
+		LineNumber                  4416, 4
+		LineNumberAlt1              510, 21
+		GetThisMemberValueString    "currentsprite"
+		Return
+	end ; method
+
+	begin method "setcurrent"
+		; address: 0x3281e
+		; source: 21 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_baseSprite.vbo" 521:521
+		MemberFunctionArgumentCheck 2
+		LineNumber                  4427, 4
+		LineNumberAlt1              521, 21
+		GetVariableValue            1               ; local
+		SetThisMemberValueString    "currentsprite"
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,139 @@
+begin class "ss_markersound", "ss_basesound"
+	property "enableevents"
+
+	begin method "ss_markersound"
+		; address: 0x35c82
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 155:162
+		MemberFunctionArgumentCheck   5
+		LineNumber                    8509, 4
+		LineNumberAlt1                155, 35
+		GetVariableValue              1                                            ; local
+		PushConstantStringString      ".PCSND"
+		Add
+		SetThisMemberValueString      "filename"
+		LineNumber                    8510, 4
+		LineNumberAlt1                156, 35
+		GetVariableValue              2                                            ; local
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    8510, 4
+		LineNumberAlt1                156, 35
+		SetThisMemberValueString      "sndid"
+		LineNumber                    8512, 4
+		LineNumberAlt1                158, 35
+		GetVariableValue              3                                            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    8512, 4
+		LineNumberAlt1                158, 35
+		GetVariableValue              3                                            ; local
+		SetThisMemberValueString      "enableevents"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    8513, 4
+		LineNumberAlt1                159, 35
+		PushConstant0
+		SetThisMemberValueString      "enableevents"
+		; <-
+		BranchTarget                  1
+		LineNumber                    8515, 4
+		LineNumberAlt1                161, 35
+		GetVariableValue              4                                            ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    8515, 4
+		LineNumberAlt1                161, 35
+		GetVariableValue              4                                            ; local
+		SetThisMemberValueString      "restart"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    8516, 4
+		LineNumberAlt1                162, 35
+		PushConstant0
+		SetThisMemberValueString      "restart"
+		; <-
+		BranchTarget                  3
+		PushNothing
+		Return
+	end ; method
+
+	begin method "opensound"
+		; address: 0x35d22
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 168:168
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8522, 4
+		LineNumberAlt1              168, 35
+		GetThisMemberValueString    "sound"
+		GetThisMemberValueString    "filename"
+		GetThisMemberValueString    "sndid"
+		GetThisMemberValueString    "enableevents"
+		CallGameFunctionString      "gcwavesound", "openfile", 4
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "playatmarker"
+		; address: 0x35d43
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 172:174
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    8526, 4
+		LineNumberAlt1                172, 35
+		GetVariableValue              1                                            ; local
+		IsString
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    8526, 4
+		LineNumberAlt1                172, 35
+		GetVariableValue              1                                            ; local
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    8526, 4
+		LineNumberAlt1                172, 35
+		SetVariableValue              2                                            ; local
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    8527, 4
+		LineNumberAlt1                173, 35
+		GetVariableValue              1                                            ; local
+		SetVariableValue              2                                            ; local
+		; <-
+		BranchTarget                  1
+		LineNumber                    8528, 4
+		LineNumberAlt1                174, 35
+		GetThisMemberValueString      "sound"
+		GetVariableValue              2                                            ; local
+		CallGameFunctionString        "gcwavesound", "playmarker", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "seteventstate"
+		; address: 0x35da4
+		; source: 35 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_BaseSound.vbo" 178:179
+		MemberFunctionArgumentCheck 2
+		LineNumber                  8532, 4
+		LineNumberAlt1              178, 35
+		GetVariableValue            1                                ; local
+		SetThisMemberValueString    "enableevents"
+		LineNumber                  8533, 4
+		LineNumberAlt1              179, 35
+		GetThisMemberValueString    "enableevents"
+		CallGameFunctionString      "gcwavesound", "enableevents", 1
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

@@ -1,0 +1,193 @@
+begin class "ss_pointspline", "ss_spline_value"
+	property "valuey"
+	property "valuez"
+	property "point"
+
+	begin method "ss_pointspline"
+		; address: 0x30c8a
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 172:172
+		MemberFunctionArgumentCheck 2
+		LineNumber                  3237, 4
+		LineNumberAlt1              172, 20
+		GetVariableValue            0                ; local
+		GetVariableValue            1                ; local
+		GetThisMemberFunctionString "ss_splinevalue"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "getvalue"
+		; address: 0x30ca4
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 177:181
+		MemberFunctionArgumentCheck 1
+		LineNumber                  3242, 4
+		LineNumberAlt1              177, 20
+		GetThisMemberValueString    "object"
+		PushConstant0
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3242, 4
+		LineNumberAlt1              177, 20
+		SetThisMemberValueString    "value"
+		LineNumber                  3243, 4
+		LineNumberAlt1              178, 20
+		GetThisMemberValueString    "object"
+		PushConstanti8              1
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3243, 4
+		LineNumberAlt1              178, 20
+		SetThisMemberValueString    "valuey"
+		LineNumber                  3244, 4
+		LineNumberAlt1              179, 20
+		GetThisMemberValueString    "object"
+		PushConstanti8              2
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3244, 4
+		LineNumberAlt1              179, 20
+		SetThisMemberValueString    "valuez"
+		LineNumber                  3245, 4
+		LineNumberAlt1              180, 20
+		CreateObjectString          "ss_point"
+		Dup
+		GetThisMemberValueString    "value"
+		GetThisMemberValueString    "valuey"
+		GetThisMemberValueString    "valuez"
+		Pull                        4
+		GetMemberFunctionString     "ss_point"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  3245, 4
+		LineNumberAlt1              180, 20
+		SetThisMemberValueString    "point"
+		LineNumber                  3246, 4
+		LineNumberAlt1              181, 20
+		GetThisMemberValueString    "point"
+		Return
+	end ; method
+
+	begin method "getstartvalue"
+		; address: 0x30d4e
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 185:190
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  3250, 4
+		LineNumberAlt1              185, 20
+		GetVariableValue            0                                         ; local
+		PushConstant0
+		GetThisMemberFunctionString "getmintime"
+		JumpAbsolute                2
+		LineNumber                  3250, 4
+		LineNumberAlt1              185, 20
+		SetVariableValue            1                                         ; local
+		LineNumber                  3251, 4
+		LineNumberAlt1              186, 20
+		GetThisMemberValueString    "object"
+		PushConstant0
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3251, 4
+		LineNumberAlt1              186, 20
+		SetThisMemberValueString    "value"
+		LineNumber                  3252, 4
+		LineNumberAlt1              187, 20
+		GetThisMemberValueString    "object"
+		PushConstanti8              1
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3252, 4
+		LineNumberAlt1              187, 20
+		SetThisMemberValueString    "valuey"
+		LineNumber                  3253, 4
+		LineNumberAlt1              188, 20
+		GetThisMemberValueString    "object"
+		PushConstanti8              2
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3253, 4
+		LineNumberAlt1              188, 20
+		SetThisMemberValueString    "valuez"
+		LineNumber                  3254, 4
+		LineNumberAlt1              189, 20
+		CreateObjectString          "ss_point"
+		Dup
+		GetThisMemberValueString    "value"
+		GetThisMemberValueString    "valuey"
+		GetThisMemberValueString    "valuez"
+		Pull                        4
+		GetMemberFunctionString     "ss_point"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  3254, 4
+		LineNumberAlt1              189, 20
+		SetThisMemberValueString    "point"
+		LineNumber                  3255, 4
+		LineNumberAlt1              190, 20
+		GetThisMemberValueString    "point"
+		Return
+	end ; method
+
+	begin method "getendvalue"
+		; address: 0x30e1a
+		; source: 20 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\ssbase/ss_basemotion.vbo" 194:199
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        1
+		LineNumber                  3259, 4
+		LineNumberAlt1              194, 20
+		GetVariableValue            0                                         ; local
+		PushConstant0
+		GetThisMemberFunctionString "getmaxtime"
+		JumpAbsolute                2
+		LineNumber                  3259, 4
+		LineNumberAlt1              194, 20
+		SetVariableValue            1                                         ; local
+		LineNumber                  3260, 4
+		LineNumberAlt1              195, 20
+		GetThisMemberValueString    "object"
+		PushConstant0
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3260, 4
+		LineNumberAlt1              195, 20
+		SetThisMemberValueString    "value"
+		LineNumber                  3261, 4
+		LineNumberAlt1              196, 20
+		GetThisMemberValueString    "object"
+		PushConstanti8              1
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3261, 4
+		LineNumberAlt1              196, 20
+		SetThisMemberValueString    "valuey"
+		LineNumber                  3262, 4
+		LineNumberAlt1              197, 20
+		GetThisMemberValueString    "object"
+		PushConstanti8              2
+		GetThisMemberValueString    "time"
+		CallGameFunctionString      "scslosislkcubicspline", "interpolate", 3
+		LineNumber                  3262, 4
+		LineNumberAlt1              197, 20
+		SetThisMemberValueString    "valuez"
+		LineNumber                  3263, 4
+		LineNumberAlt1              198, 20
+		CreateObjectString          "ss_point"
+		Dup
+		GetThisMemberValueString    "value"
+		GetThisMemberValueString    "valuey"
+		GetThisMemberValueString    "valuez"
+		Pull                        4
+		GetMemberFunctionString     "ss_point"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  3263, 4
+		LineNumberAlt1              198, 20
+		SetThisMemberValueString    "point"
+		LineNumber                  3264, 4
+		LineNumberAlt1              199, 20
+		GetThisMemberValueString    "point"
+		Return
+	end ; method
+end ; class

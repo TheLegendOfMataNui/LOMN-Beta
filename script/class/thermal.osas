@@ -1,0 +1,494 @@
+begin class "thermal"
+	property "obj"
+	property "id"
+	property "name"
+	property "levitateup"
+	property "curentorient"
+	property "rotatetime"
+	property "rotatespeed"
+	property "windsound"
+	property "drifttofull"
+
+	begin method "thermal"
+		; address: 0x4421e
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1337:1354
+		MemberFunctionArgumentCheck 2
+		LineNumber                  19973, 4
+		LineNumberAlt1              1337, 52
+		GetVariableValue            1                                            ; local
+		SetThisMemberValueString    "name"
+		LineNumber                  19974, 4
+		LineNumberAlt1              1338, 52
+		GetVariableValue            1                                            ; local
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  19974, 4
+		LineNumberAlt1              1338, 52
+		SetThisMemberValueString    "id"
+		LineNumber                  19975, 4
+		LineNumberAlt1              1339, 52
+		CreateObjectString          "lego_moveableobject"
+		Dup
+		GetVariableValue            1                                            ; local
+		Pull                        2
+		GetMemberFunctionString     "lego_moveableobject"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  19975, 4
+		LineNumberAlt1              1339, 52
+		SetThisMemberValueString    "obj"
+		LineNumber                  19976, 4
+		LineNumberAlt1              1340, 52
+		GetThisMemberValueString    "obj"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  19977, 4
+		LineNumberAlt1              1341, 52
+		GetThisMemberValueString    "obj"
+		PushConstanti8              4
+		PushConstanti8              4
+		PushConstanti8              4
+		Pull                        4
+		GetMemberFunctionString     "setresponse"
+		JumpAbsolute                4
+		Pop
+		LineNumber                  19978, 4
+		LineNumberAlt1              1342, 52
+		GetThisMemberValueString    "obj"
+		Dup
+		GetMemberFunctionString     "setalpha"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  19979, 4
+		LineNumberAlt1              1343, 52
+		PushConstant0
+		SetThisMemberValueString    "levitateup"
+		LineNumber                  19982, 4
+		LineNumberAlt1              1346, 52
+		PushConstant0
+		SetThisMemberValueString    "curentorient"
+		LineNumber                  19983, 4
+		LineNumberAlt1              1347, 52
+		PushConstant0
+		SetThisMemberValueString    "rotatetime"
+		LineNumber                  19984, 4
+		LineNumberAlt1              1348, 52
+		PushConstanti8              9
+		SetThisMemberValueString    "rotatespeed"
+		LineNumber                  19987, 4
+		LineNumberAlt1              1351, 52
+		CreateObjectString          "tablecopysound"
+		Dup
+		PushConstanti16             1110
+		Pull                        2
+		GetMemberFunctionString     "tablecopysound"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  19987, 4
+		LineNumberAlt1              1351, 52
+		SetThisMemberValueString    "windsound"
+		LineNumber                  19988, 4
+		LineNumberAlt1              1352, 52
+		GetThisMemberValueString    "windsound"
+		PushConstant0
+		Pull                        2
+		GetMemberFunctionString     "setvolume"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  19989, 4
+		LineNumberAlt1              1353, 52
+		GetThisMemberValueString    "windsound"
+		PushConstanti8              1
+		Pull                        2
+		GetMemberFunctionString     "play"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  19990, 4
+		LineNumberAlt1              1354, 52
+		PushConstant0
+		SetThisMemberValueString    "drifttofull"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x44355
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1362:1369
+		MemberFunctionArgumentCheck   2
+		LineNumber                    19998, 4
+		LineNumberAlt1                1362, 52
+		GetThisMemberValueString      "obj"
+		GetVariableValue              1             ; local
+		Pull                          2
+		GetMemberFunctionString       "process"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20001, 4
+		LineNumberAlt1                1365, 52
+		GetThisMemberValueString      "rotatetime"
+		GetVariableValue              1             ; local
+		GetMemberValueString          "deltatime"
+		Add
+		SetThisMemberValueString      "rotatetime"
+		LineNumber                    20002, 4
+		LineNumberAlt1                1366, 52
+		GetThisMemberValueString      "rotatespeed"
+		PushConstant0
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20003, 4
+		LineNumberAlt1                1367, 52
+		GetThisMemberValueString      "rotatetime"
+		PushConstanti8                1
+		GetThisMemberValueString      "rotatespeed"
+		Divide
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20004, 4
+		LineNumberAlt1                1368, 52
+		PushConstant0
+		SetThisMemberValueString      "rotatetime"
+		LineNumber                    20005, 4
+		LineNumberAlt1                1369, 52
+		GetVariableValue              0             ; local
+		GetThisMemberFunctionString   "spin"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0x443d2
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1380:1414
+		MemberFunctionArgumentCheck   2
+		LineNumber                    20016, 4
+		LineNumberAlt1                1380, 52
+		GetThisMemberValueString      "obj"
+		GetVariableValue              1                                            ; local
+		Pull                          2
+		GetMemberFunctionString       "onevent"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20017, 4
+		LineNumberAlt1                1381, 52
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    20023, 4
+		LineNumberAlt1                1387, 52
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "cnt1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    20023, 4
+		LineNumberAlt1                1387, 52
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    20024, 4
+		LineNumberAlt1                1388, 52
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		GetThisMemberValueString      "obj"
+		GetMemberValueString          "id"
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    20026, 4
+		LineNumberAlt1                1390, 52
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstanti8                2
+		GetArrayValue
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20028, 4
+		LineNumberAlt1                1392, 52
+		GetVariableValue              0                                            ; local
+		PushConstant0
+		GetThisMemberFunctionString   "switchlevitation"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20029, 4
+		LineNumberAlt1                1393, 52
+		GetVariableValue              0                                            ; local
+		PushConstant0
+		GetThisMemberFunctionString   "sounddriftto_full"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    20034, 4
+		LineNumberAlt1                1398, 52
+		GetVariableValue              0                                            ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "switchlevitation"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    20035, 4
+		LineNumberAlt1                1399, 52
+		GetVariableValue              0                                            ; local
+		PushConstanti8                1
+		GetThisMemberFunctionString   "sounddriftto_full"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  1
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti16               1010
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    20047, 4
+		LineNumberAlt1                1411, 52
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    20048, 4
+		LineNumberAlt1                1412, 52
+		GetThisMemberValueString      "levitateup"
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    20050, 4
+		LineNumberAlt1                1414, 52
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "insidelevitatevortex"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  3
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "sounddriftto_full"
+		; address: 0x4450a
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1423:1431
+		MemberFunctionArgumentCheck   2
+		LineNumber                    20059, 4
+		LineNumberAlt1                1423, 52
+		GetVariableValue              1               ; local
+		GetThisMemberValueString      "drifttofull"
+		PushConstant0
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20060, 4
+		LineNumberAlt1                1424, 52
+		PushConstanti8                1
+		SetThisMemberValueString      "drifttofull"
+		LineNumber                    20061, 4
+		LineNumberAlt1                1425, 52
+		GetThisMemberValueString      "windsound"
+		PushConstanti8                100
+		PushConstanti8                1
+		Pull                          3
+		GetMemberFunctionString       "drifttovolume"
+		JumpAbsolute                  3
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    20065, 4
+		LineNumberAlt1                1429, 52
+		GetVariableValue              1               ; local
+		PushConstant0
+		EqualTo
+		GetThisMemberValueString      "drifttofull"
+		And
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    20066, 4
+		LineNumberAlt1                1430, 52
+		PushConstant0
+		SetThisMemberValueString      "drifttofull"
+		LineNumber                    20067, 4
+		LineNumberAlt1                1431, 52
+		GetThisMemberValueString      "windsound"
+		PushConstant0
+		PushConstanti8                1
+		Pull                          3
+		GetMemberFunctionString       "drifttovolume"
+		JumpAbsolute                  3
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "switchlevitation"
+		; address: 0x44588
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1442:1452
+		MemberFunctionArgumentCheck   2
+		LineNumber                    20078, 4
+		LineNumberAlt1                1442, 52
+		GetVariableValue              1                      ; local
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    20079, 4
+		LineNumberAlt1                1443, 52
+		GetThisMemberValueString      "levitateup"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20080, 4
+		LineNumberAlt1                1444, 52
+		PushConstanti8                1
+		SetThisMemberValueString      "levitateup"
+		LineNumber                    20081, 4
+		LineNumberAlt1                1445, 52
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "insidelevitatevortex"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    20086, 4
+		LineNumberAlt1                1450, 52
+		GetThisMemberValueString      "levitateup"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    20087, 4
+		LineNumberAlt1                1451, 52
+		PushConstant0
+		SetThisMemberValueString      "levitateup"
+		LineNumber                    20088, 4
+		LineNumberAlt1                1452, 52
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstant0
+		Pull                          2
+		GetMemberFunctionString       "insidelevitatevortex"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0x4461d
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1463:1468
+		MemberFunctionArgumentCheck 1
+		LineNumber                  20099, 4
+		LineNumberAlt1              1463, 52
+		GetThisMemberValueString    "obj"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  20100, 4
+		LineNumberAlt1              1464, 52
+		PushNothing
+		SetThisMemberValueString    "obj"
+		LineNumber                  20101, 4
+		LineNumberAlt1              1465, 52
+		PushNothing
+		SetThisMemberValueString    "id"
+		LineNumber                  20102, 4
+		LineNumberAlt1              1466, 52
+		PushNothing
+		SetThisMemberValueString    "name"
+		LineNumber                  20103, 4
+		LineNumberAlt1              1467, 52
+		PushNothing
+		SetThisMemberValueString    "levitateup"
+		LineNumber                  20104, 4
+		LineNumberAlt1              1468, 52
+		PushNothing
+		SetThisMemberValueString    "windsound"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "spin"
+		; address: 0x4467b
+		; source: 52 "C:\\projects\\lego\\Scripting\\VBO\\legobase/lego_moveableObj.vbo" 1474:1479
+		MemberFunctionArgumentCheck   1
+		LineNumber                    20110, 4
+		LineNumberAlt1                1474, 52
+		GetThisMemberValueString      "curentorient"
+		GetThisMemberValueString      "rotatespeed"
+		Add
+		SetThisMemberValueString      "curentorient"
+		LineNumber                    20111, 4
+		LineNumberAlt1                1475, 52
+		GetThisMemberValueString      "curentorient"
+		PushConstanti16               360
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    20113, 4
+		LineNumberAlt1                1477, 52
+		GetThisMemberValueString      "curentorient"
+		PushConstanti16               360
+		Subtract
+		SetThisMemberValueString      "curentorient"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    20115, 4
+		LineNumberAlt1                1479, 52
+		GetThisMemberValueString      "obj"
+		PushConstant0
+		GetThisMemberValueString      "curentorient"
+		PushConstant0
+		Pull                          4
+		GetMemberFunctionString       "setorientation"
+		JumpAbsolute                  4
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+end ; class

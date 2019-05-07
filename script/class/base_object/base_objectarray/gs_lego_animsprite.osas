@@ -1,0 +1,284 @@
+begin class "gs_lego_animsprite", "base_objectarray"
+	property "def"
+	property "cur"
+	property "animate"
+	property "rate"
+	property "frame"
+
+	begin method "gs_lego_animsprite"
+		; address: 0x35e5c
+		; source: 36 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_sprites.vbo" 27:40
+		MemberFunctionArgumentCheck   4
+		LineNumber                    8747, 4
+		LineNumberAlt1                27, 36
+		GetVariableValue              0                  ; local
+		GetVariableValue              1                  ; local
+		GetThisMemberFunctionString   "base_objectarray"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    8748, 4
+		LineNumberAlt1                28, 36
+		GetVariableValue              2                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    8749, 4
+		LineNumberAlt1                29, 36
+		GetVariableValue              2                  ; local
+		SetThisMemberValueString      "rate"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    8751, 4
+		LineNumberAlt1                31, 36
+		PushConstanti8                1
+		SetThisMemberValueString      "rate"
+		; <-
+		BranchTarget                  1
+		LineNumber                    8753, 4
+		LineNumberAlt1                33, 36
+		PushConstant0
+		SetThisMemberValueString      "frame"
+		LineNumber                    8754, 4
+		LineNumberAlt1                34, 36
+		GetVariableValue              3                  ; local
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    8755, 4
+		LineNumberAlt1                35, 36
+		GetVariableValue              3                  ; local
+		SetThisMemberValueString      "def"
+		BranchAlwaysTarget            3, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		LineNumber                    8757, 4
+		LineNumberAlt1                37, 36
+		PushConstant0
+		SetThisMemberValueString      "def"
+		; <-
+		BranchTarget                  3
+		LineNumber                    8759, 4
+		LineNumberAlt1                39, 36
+		GetThisMemberValueString      "def"
+		SetThisMemberValueString      "cur"
+		LineNumber                    8760, 4
+		LineNumberAlt1                40, 36
+		PushConstant0
+		SetThisMemberValueString      "animate"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "show"
+		; address: 0x35f0b
+		; source: 36 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_sprites.vbo" 45:45
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8765, 4
+		LineNumberAlt1              45, 36
+		GetThisMemberValueString    "items"
+		GetThisMemberValueString    "def"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "show"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "hide"
+		; address: 0x35f27
+		; source: 36 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_sprites.vbo" 49:49
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8769, 4
+		LineNumberAlt1              49, 36
+		GetThisMemberValueString    "items"
+		GetThisMemberValueString    "cur"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "enablealphachannel"
+		; address: 0x35f43
+		; source: 36 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_sprites.vbo" 53:54
+		MemberFunctionArgumentCheck   2
+		CreateStackVariables          1
+		LineNumber                    8773, 4
+		LineNumberAlt1                53, 36
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		PushConstanti8                0
+		SetVariableValue              2                    ; local
+		; <-
+		BranchTarget                  0
+		Dup
+		GetVariableValue              2                    ; local
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    8774, 4
+		LineNumberAlt1                54, 36
+		GetThisMemberValueString      "items"
+		GetVariableValue              2                    ; local
+		GetArrayValue
+		GetVariableValue              1                    ; local
+		Pull                          2
+		GetMemberFunctionString       "enablealphachannel"
+		JumpAbsolute                  2
+		Pop
+		IncrementVariable             2
+		BranchAlwaysTarget            0, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "setdefault"
+		; address: 0x35f8a
+		; source: 36 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_sprites.vbo" 59:59
+		MemberFunctionArgumentCheck 2
+		LineNumber                  8779, 4
+		LineNumberAlt1              59, 36
+		GetVariableValue            1       ; local
+		SetThisMemberValueString    "def"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "play"
+		; address: 0x35f9e
+		; source: 36 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_sprites.vbo" 63:64
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8783, 4
+		LineNumberAlt1              63, 36
+		PushConstanti8              1
+		SetThisMemberValueString    "animate"
+		LineNumber                  8784, 4
+		LineNumberAlt1              64, 36
+		GetThisMemberValueString    "def"
+		SetThisMemberValueString    "cur"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "stop"
+		; address: 0x35fc1
+		; source: 36 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_sprites.vbo" 71:73
+		MemberFunctionArgumentCheck 1
+		LineNumber                  8791, 4
+		LineNumberAlt1              71, 36
+		GetThisMemberValueString    "items"
+		GetThisMemberValueString    "cur"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  8792, 4
+		LineNumberAlt1              72, 36
+		GetThisMemberValueString    "items"
+		GetThisMemberValueString    "def"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString     "show"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  8793, 4
+		LineNumberAlt1              73, 36
+		PushConstant0
+		SetThisMemberValueString    "animate"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0x36003
+		; source: 36 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_sprites.vbo" 78:89
+		MemberFunctionArgumentCheck   2
+		LineNumber                    8798, 4
+		LineNumberAlt1                78, 36
+		GetThisMemberValueString      "animate"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    8799, 4
+		LineNumberAlt1                79, 36
+		GetThisMemberValueString      "frame"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "frame"
+		LineNumber                    8800, 4
+		LineNumberAlt1                80, 36
+		GetThisMemberValueString      "frame"
+		GetThisMemberValueString      "rate"
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    8802, 4
+		LineNumberAlt1                82, 36
+		GetThisMemberValueString      "items"
+		GetThisMemberValueString      "cur"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    8803, 4
+		LineNumberAlt1                83, 36
+		GetThisMemberValueString      "cur"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "cur"
+		LineNumber                    8804, 4
+		LineNumberAlt1                84, 36
+		GetThisMemberValueString      "cur"
+		GetThisMemberValueString      "items"
+		ElementsInArray
+		PushConstanti8                1
+		Subtract
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    8805, 4
+		LineNumberAlt1                85, 36
+		PushConstant0
+		SetThisMemberValueString      "cur"
+		; <-
+		BranchTarget                  0
+		LineNumber                    8808, 4
+		LineNumberAlt1                88, 36
+		GetThisMemberValueString      "items"
+		GetThisMemberValueString      "cur"
+		GetArrayValue
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    8809, 4
+		LineNumberAlt1                89, 36
+		PushConstant0
+		SetThisMemberValueString      "frame"
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+end ; class
