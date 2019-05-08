@@ -17,6 +17,7 @@ build: native script data blockfiles
 
 clean:
 	@if exist build\NUL rmdir build /s /q
+	@if exist packaged\NUL rmdir packaged /s /q
 
 run: build
 	@start build\LEGOBionicle.exe
@@ -25,10 +26,19 @@ rebuild:
 	@$(MAKE) -s clean
 	@$(MAKE) -s build
 
-.PHONY: extract
+.PHONY: extract diff release
 
-release: build
+# 
+# Utility recipe for building releases (self-extracting 7z)
+# 
+release: ./packaged/patch.exe
+
+diff: build
 	$(RELEASETOOL) package build\ "vanilla snapshot.txt" packaged\patch\
+
+./packaged/patch.exe: diff
+	@if exist packaged\patch.exe rm packaged\patch.exe
+	@cd packaged\patch\ && ..\..\tools\7zip\7za.exe a -sfx7z.sfx ..\patch.exe *
 
 # 
 # Utility recipe for extracting existing blockfiles.
@@ -38,7 +48,7 @@ extract: $(addsuffix .tmp,$(addprefix ./blockfiles/,$(basename $(BLOCKFILES))))
 ./blockfiles/%.tmp:
 	@echo Blockfile: $(addsuffix .blk,$(basename $@))
 	@if exist $(subst /,\,$(basename $@))\NUL rmdir $(subst /,\,$(basename $@)) /s /q
-	@$(BLKTOOL) $(addsuffix .blk,$(basename $@)) > /dev/null
+	@$(BLKTOOL) $(addsuffix .blk,$(basename $@)) > NUL
 
 # 
 # Native files copied from native/
