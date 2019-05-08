@@ -18,6 +18,8 @@ The built game will be created in the `build/` directory, and you can run it by 
 
 You can also run `make clean` to delete the `build/` folder, `make rebuild` to `clean` and then build, or `make run` to `build` and then launch the game.
 
+To package just the files that have changed from the vanilla build of the game, run `make release`, and the modified files will be copied to the `packaged/patch/` folder.
+
 When using `make`, you can use ` COMPRESSION=compressed` with a `make` command (e.g. `make COMPRESSION=compressed`) to compress the blockfiles, but be warned: they will not be rebuilt even if they are up-to-date but not compressed, and compression will slow the process down significantly.
 
 **NOTE**
