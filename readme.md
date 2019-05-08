@@ -21,7 +21,7 @@ You can also run `make clean` to delete the `build/` folder, `make rebuild` to `
 When using `make`, you can use ` COMPRESSION=compressed` with a `make` command (e.g. `make COMPRESSION=compressed`) to compress the blockfiles, but be warned: they will not be rebuilt even if they are up-to-date but not compressed, and compression will slow the process down significantly.
 
 **NOTE**
-If you modify or add a file in a blockfile, running `make` will rebuild that blockfile. However, deleting a file in a blockfile will not be detected by `make`, so you will need to manually trigger the rebuild by either deleting the corresponding `.blk` file in the `build/data/` directories, or running `make clean` to rebuild the whole game. (Again, this takes a long time!)
+If you modify or add a file in a blockfile, running `make` will rebuild that blockfile. However, deleting or renaming a file in a blockfile will not be detected by `make` because the file's last-modified time will not have been updated, so you will need to manually trigger the rebuild by either deleting the corresponding `.blk` file in the `build/data/` directories, or running `make clean` to rebuild the whole game. (Again, this takes a long time!)
 
 Script Development
 ------------------
