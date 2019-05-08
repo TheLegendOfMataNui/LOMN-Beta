@@ -78,5 +78,6 @@ blockfiles: $(addprefix ./build/data/,$(BLOCKFILES))
 ./build/data/%.blk: $$(wildcard ./blockfiles/%/*.*)
 	@echo Packaging '$@'...
 	@if not exist $(subst /,\,$(dir $@))NUL mkdir $(subst /,\,$(dir $@))
+	@if not exist $(subst /,\,$(patsubst build/data/%.blk,./blockfiles/%,$@))NUL mkdir $(subst /,\,$(patsubst build/data/%.blk,./blockfiles/%,$@))
 	@if exist $(subst /,\,$@) rm $(subst /,\,$@)
 	@$(BLKTOOL) $(BLKARGS) -o $@ $(patsubst build/data/%.blk,./blockfiles/%,$@) > NUL
