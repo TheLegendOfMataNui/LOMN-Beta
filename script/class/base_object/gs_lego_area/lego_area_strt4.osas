@@ -4,8 +4,8 @@ begin class "lego_area_strt4", "gs_lego_area"
 	property "parent"
 
 	begin method "lego_area_strt4"
-		; address: 0x93473
-		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_maz1.vbo" 21:24
+		; address: 0x99be9
+		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_strt.vbo" 21:24
 		MemberFunctionArgumentCheck 2
 		LineNumber                  231, 4
 		LineNumberAlt1              21, 169
@@ -44,12 +44,13 @@ begin class "lego_area_strt4", "gs_lego_area"
 	end ; method
 
 	begin method "initfull"
-		; address: 0x934db
-		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_maz1.vbo" 33:38
-		; source: 171 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_tele.vbo" 57:58
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 103:103
-		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 45:49
+		; address: 0x99c51
+		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_strt.vbo" 33:38
+		; source: 171 "C:\\projects\\lego\\Scripting\\VBO\\lev4/Lev4_vllg.vbo" 57:58
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 103:103
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtup.vbo" 45:49
 		MemberFunctionArgumentCheck   1
+		CreateStackVariables		  1
 		LineNumber                    243, 4
 		LineNumberAlt1                33, 169
 		GetVariableValue              0                                            ; local
@@ -74,7 +75,7 @@ begin class "lego_area_strt4", "gs_lego_area"
 		LineNumberAlt1                37, 169
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "bgmusic"
-		PushConstantStringString      "Root/Data/Sounds/MusicKopakaAmbience"
+		PushConstantStringString      "Root/Data/sounds/MusicKopakaAmbience"
 		Pull                          2
 		GetMemberFunctionString       "changefilename"
 		JumpAbsolute                  2
@@ -98,10 +99,10 @@ begin class "lego_area_strt4", "gs_lego_area"
 		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
 		LineNumber                    1069, 4
 		LineNumberAlt1                57, 171
-		SetVariableValue              2                                            ; local
+		SetVariableValue              1                                            ; local
 		LineNumber                    1070, 4
 		LineNumberAlt1                58, 171
-		GetVariableValue              2                                            ; local
+		GetVariableValue              1                                            ; local
 		PushConstantColor8888         0xffffffff
 		PushConstanti16               131
 		SetRedValue
@@ -126,6 +127,21 @@ begin class "lego_area_strt4", "gs_lego_area"
 		LineNumberAlt1                58, 171
 		CallGameFunctionString        "gccharacter", "settohunga", 4
 		Pop
+		GetVariableValue              1                                            ; local
+		PushConstanti16               -42
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              1                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              1                                            ; local
+        PushConstantStringString      "d003"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
 		LineNumber                    63403, 4
 		LineNumberAlt1                103, 162
 		PushConstantStringString      "cin1"
@@ -171,9 +187,9 @@ begin class "lego_area_strt4", "gs_lego_area"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x93662
-		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_maz1.vbo" 44:46
-		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 54:54
+		; address: 0x99dd8
+		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_strt.vbo" 44:46
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtup.vbo" 54:54
 		MemberFunctionArgumentCheck 1
 		LineNumber                  254, 4
 		LineNumberAlt1              44, 169
@@ -197,8 +213,8 @@ begin class "lego_area_strt4", "gs_lego_area"
 	end ; method
 
 	begin method "process"
-		; address: 0x9369b
-		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_maz1.vbo" 52:52
+		; address: 0x99e11
+		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_strt.vbo" 52:52
 		MemberFunctionArgumentCheck 2
 		LineNumber                  262, 4
 		LineNumberAlt1              52, 169
@@ -213,9 +229,9 @@ begin class "lego_area_strt4", "gs_lego_area"
 	end ; method
 
 	begin method "input"
-		; address: 0x936b7
-		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_maz1.vbo" 57:57
-		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 59:63
+		; address: 0x99e2d
+		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_strt.vbo" 57:57
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtup.vbo" 59:63
 		MemberFunctionArgumentCheck   2
 		LineNumber                    267, 4
 		LineNumberAlt1                57, 169
@@ -265,10 +281,10 @@ begin class "lego_area_strt4", "gs_lego_area"
 	end ; method
 
 	begin method "onevent"
-		; address: 0x93729
-		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_maz1.vbo" 62:62
-		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_hk01.vbo" 72:74
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 165:166
+		; address: 0x99e9f
+		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_strt.vbo" 62:62
+		; source: 135 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtup.vbo" 72:74
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 165:166
 		MemberFunctionArgumentCheck   2
 		LineNumber                    272, 4
 		LineNumberAlt1                62, 169
@@ -291,7 +307,7 @@ begin class "lego_area_strt4", "gs_lego_area"
 		LineNumberAlt1                165, 162
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "bgmusic"
-		PushConstantStringString      "Root/Data/Sounds/MusicKopakaAmbience"
+		PushConstantStringString      "Root/Data/sounds/MusicKopakaAmbience"
 		Pull                          2
 		GetMemberFunctionString       "changefilename"
 		JumpAbsolute                  2
@@ -300,7 +316,7 @@ begin class "lego_area_strt4", "gs_lego_area"
 		LineNumberAlt1                166, 162
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "bgmusic"
-		PushConstanti8                1
+		PushConstanti8                3
 		Pull                          2
 		GetMemberFunctionString       "play"
 		JumpAbsolute                  2
@@ -323,8 +339,8 @@ begin class "lego_area_strt4", "gs_lego_area"
 	end ; method
 
 	begin method "exit"
-		; address: 0x937af
-		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_maz1.vbo" 67:71
+		; address: 0x99f25
+		; source: 169 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_strt.vbo" 67:71
 		MemberFunctionArgumentCheck   1
 		LineNumber                    277, 4
 		LineNumberAlt1                67, 169

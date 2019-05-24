@@ -1,0 +1,171 @@
+begin class "lego_area_endg", "gs_lego_area"
+	property "cinema"
+	property "safecount"
+	property "puzzle"
+
+	begin method "lego_area_endg"
+		; address: 0xc6ee9
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 27:29
+		MemberFunctionArgumentCheck 2
+		LineNumber                  37050, 4
+		LineNumberAlt1              27, 92
+		GetVariableValue            0                    ; local
+		PushConstantStringString    "endg"
+		GetVariableValue            1                    ; local
+		PushConstant0
+		PushConstant0
+		GetThisMemberFunctionString "gs_lego_area"
+		JumpAbsolute                5
+		Pop
+		LineNumber                  37051, 4
+		LineNumberAlt1              28, 92
+		CreateObjectString          "endgm_puzzle"
+		Dup
+		GetVariableValue            0                    ; local
+		Pull                        2
+		GetMemberFunctionString     "endgm_puzzle"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  37051, 4
+		LineNumberAlt1              28, 92
+		SetThisMemberValueString    "puzzle"
+		LineNumber                  37052, 4
+		LineNumberAlt1              29, 92
+		GetVariableValue            0                    ; local
+		GetThisMemberFunctionString "lego_area_initfull"
+		JumpAbsolute                1
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xc6f41
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 37:49
+		MemberFunctionArgumentCheck 1
+		CreateStackVariables        2
+		LineNumber                  37060, 4
+		LineNumberAlt1              37, 92
+		GetVariableValue            0                                            ; local
+		GetThisMemberFunctionString "lego_area_show"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  37061, 4
+		LineNumberAlt1              38, 92
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "initfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  37068, 4
+		LineNumberAlt1              45, 92
+		PushConstantStringString    "crb1"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  37068, 4
+		LineNumberAlt1              45, 92
+		CallGameFunctionString      "gcmodeldirector", "getcharacter", 1
+		LineNumber                  37068, 4
+		LineNumberAlt1              45, 92
+		SetVariableValue            1                                            ; local
+		LineNumber                  37069, 4
+		LineNumberAlt1              46, 92
+		PushConstantStringString    "cr01"
+		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                  37069, 4
+		LineNumberAlt1              46, 92
+		CallGameFunctionString      "gcmodeldirector", "getcharacter", 1
+		LineNumber                  37069, 4
+		LineNumberAlt1              46, 92
+		SetVariableValue            2                                            ; local
+		LineNumber                  37071, 4
+		LineNumberAlt1              48, 92
+		GetVariableValue            1                                            ; local
+		PushConstantf32             2
+		CallGameFunctionString      "gccharacter", "setscale", 2
+		Pop
+		LineNumber                  37072, 4
+		LineNumberAlt1              49, 92
+		GetVariableValue            2                                            ; local
+		PushConstantf32             2
+		CallGameFunctionString      "gccharacter", "setscale", 2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xc7000
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 63:63
+		MemberFunctionArgumentCheck 2
+		LineNumber                  37086, 4
+		LineNumberAlt1              63, 92
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1         ; local
+		Pull                        2
+		GetMemberFunctionString     "onevent"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xc701c
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 68:69
+		MemberFunctionArgumentCheck 1
+		LineNumber                  37091, 4
+		LineNumberAlt1              68, 92
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "lego_area_hide"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  37092, 4
+		LineNumberAlt1              69, 92
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "cleanupfull"
+		JumpAbsolute                1
+		Pop
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xc7048
+		; source: 92 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_bech.vbo" 74:76
+		MemberFunctionArgumentCheck 1
+		LineNumber                  37097, 4
+		LineNumberAlt1              74, 92
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  37098, 4
+		LineNumberAlt1              75, 92
+		GetThisMemberValueString    "puzzle"
+		Dup
+		GetMemberFunctionString     "exit"
+		JumpAbsolute                1
+		Pop
+		LineNumber                  37099, 4
+		LineNumberAlt1              76, 92
+		PushNothing
+		SetThisMemberValueString    "puzzle"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xc7081
+		MemberFunctionArgumentCheck 2
+		GetThisMemberValueString    "puzzle"
+		GetVariableValue            1        ; local
+		Pull                        2
+		GetMemberFunctionString     "input"
+		JumpAbsolute                2
+		Pop
+		PushNothing
+		Return
+	end ; method
+end ; class

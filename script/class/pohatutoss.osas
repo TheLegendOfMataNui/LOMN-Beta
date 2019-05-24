@@ -7,8 +7,8 @@ begin class "pohatutoss"
 	property "ballpickup"
 
 	begin method "pohatutoss"
-		; address: 0x8eb98
-		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev4/level_4.vbo" 96:102
+		; address: 0x94ed0
+		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 96:102
 		MemberFunctionArgumentCheck 2
 		LineNumber                  63610, 4
 		LineNumberAlt1              96, 163
@@ -27,9 +27,9 @@ begin class "pohatutoss"
 	end ; method
 
 	begin method "init"
-		; address: 0x8ebc9
-		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev4/level_4.vbo" 110:222
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 100:103
+		; address: 0x94f01
+		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 110:222
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 100:103
 		MemberFunctionArgumentCheck   1
 		LineNumber                    63624, 4
 		LineNumberAlt1                110, 163
@@ -277,8 +277,8 @@ begin class "pohatutoss"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x8eedb
-		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev4/level_4.vbo" 142:157
+		; address: 0x95213
+		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 142:157
 		MemberFunctionArgumentCheck   1
 		LineNumber                    63656, 4
 		LineNumberAlt1                142, 163
@@ -339,15 +339,15 @@ begin class "pohatutoss"
 	end ; method
 
 	begin method "process"
-		; address: 0x8ef73
+		; address: 0x952ab
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "input"
-		; address: 0x8ef77
-		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev4/level_4.vbo" 178:183
+		; address: 0x952af
+		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 178:183
 		MemberFunctionArgumentCheck   2
 		LineNumber                    63692, 4
 		LineNumberAlt1                178, 163
@@ -389,63 +389,17 @@ begin class "pohatutoss"
 	end ; method
 
 	begin method "onevent"
-		; address: 0x8efd1
-		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev4/level_4.vbo" 198:262
+		; address: 0x95309
+		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 198:262
 		MemberFunctionArgumentCheck   2
 		LineNumber                    63712, 4
 		LineNumberAlt1                198, 163
 		GetVariableValue              1                                                       ; local
 		GetMemberValueString          "eventid"
 		Dup
-		PushConstanti8                3
-		EqualTo
-		CompareAndBranchIfFalseTarget 1, 0
-		; ->
-		LineNumber                    63753, 4
-		LineNumberAlt1                239, 163
-		GetVariableValue              1                                                       ; local
-		GetMemberValueString          "args"
-		PushConstant0
-		GetArrayValue
-		PushConstantStringString      "tb00"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    63753, 4
-		LineNumberAlt1                239, 163
-		EqualTo
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    63754, 4
-		LineNumberAlt1                240, 163
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		Dup
-		GetMemberFunctionString       "kill"
-		JumpAbsolute                  1
-		Pop
-		; <-
-		BranchTarget                  0
-		BranchAlwaysTarget            4, 0
-		; ->
-		; <-
-		BranchTarget                  1
-		Dup
-		PushConstanti8                46
-		EqualTo
-		CompareAndBranchIfFalseTarget 2, 0
-		; ->
-		LineNumber                    63760, 4
-		LineNumberAlt1                246, 163
-		PushConstantf32               1.2000000476837158
-		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
-		Pop
-		BranchAlwaysTarget            4, 0
-		; ->
-		; <-
-		BranchTarget                  2
-		Dup
 		PushConstanti8                30
 		EqualTo
-		CompareAndBranchIfFalseTarget 3, 0
+		CompareAndBranchIfFalseTarget 0, 0
 		; ->
 		LineNumber                    63746, 4
 		LineNumberAlt1                232, 163
@@ -472,6 +426,52 @@ begin class "pohatutoss"
 		Pull                          2
 		GetMemberFunctionString       "play"
 		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    63753, 4
+		LineNumberAlt1                239, 163
+		GetVariableValue              1                                                       ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "tb00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    63753, 4
+		LineNumberAlt1                239, 163
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    63754, 4
+		LineNumberAlt1                240, 163
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "kill"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  2
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    63760, 4
+		LineNumberAlt1                246, 163
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
 		Pop
 		BranchAlwaysTarget            4, 0
 		; ->
@@ -534,8 +534,8 @@ begin class "pohatutoss"
 	end ; method
 
 	begin method "exit"
-		; address: 0x8f147
-		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev4/level_4.vbo" 270:270
+		; address: 0x9547f
+		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_ptos.vbo" 270:270
 		MemberFunctionArgumentCheck 1
 		LineNumber                  63784, 4
 		LineNumberAlt1              270, 163

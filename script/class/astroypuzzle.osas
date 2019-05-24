@@ -1598,7 +1598,7 @@ begin class "astroypuzzle"
 		; ->
 		LineNumber                    64287, 4
 		LineNumberAlt1                491, 164
-		PushConstantf32               1.2000000476837158
+		PushConstantf32               0.75
 		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
 		Pop
 		BranchAlwaysTarget            14, 0
@@ -1927,6 +1927,18 @@ begin class "astroypuzzle"
 		GetMemberFunctionString       "interpolate"
 		JumpAbsolute                  5
 		Pop
+		PushConstanti16               1053
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "level"
+		GetMemberValueString         "cam"
+		PushConstantf32              2
+		PushConstantf32              0.07999999821186066
+		Pull                         3
+		GetMemberFunctionString      "shakecamera"
+		JumpAbsolute                 3
+		Pop
 		LineNumber                    64385, 4
 		LineNumberAlt1                589, 164
 		GetThisMemberValueString      "entrancedoora"
@@ -2092,6 +2104,18 @@ begin class "astroypuzzle"
 		Dup
 		GetMemberFunctionString       "drop"
 		JumpAbsolute                  1
+		Pop
+		PushConstanti16               441
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		GetThisMemberValueString     "parent"
+		GetMemberValueString         "level"
+		GetMemberValueString         "cam"
+		PushConstantf32              1
+		PushConstantf32              0.47999999821186066
+		Pull                         3
+		GetMemberFunctionString      "shakecamera"
+		JumpAbsolute                 3
 		Pop
 		LineNumber                    64415, 4
 		LineNumberAlt1                619, 164

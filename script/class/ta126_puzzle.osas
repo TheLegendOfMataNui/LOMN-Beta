@@ -7,12 +7,11 @@ begin class "ta126_puzzle"
 	property "origz"
 	property "music"
 	property "halfway"
-	property "maskx"
-	property "showmask"
+	property "mask"
 
 	begin method "ta126_puzzle"
-		; address: 0xb3853
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 90:90
+		; address: 0xbaa55
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 90:90
 		MemberFunctionArgumentCheck 2
 		LineNumber                  15272, 4
 		LineNumberAlt1              90, 217
@@ -23,10 +22,8 @@ begin class "ta126_puzzle"
 	end ; method
 
 	begin method "initfull"
-		; address: 0xb3867
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 97:198
-		; source: 199 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_tura.vbo" 97:105
-		; source: 163 "C:\\projects\\lego\\Scripting\\VBO\\lev4/level_4.vbo" 120:123
+		; address: 0xbaa69
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 97:201
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          2
 		LineNumber                    15279, 4
@@ -965,7 +962,7 @@ begin class "ta126_puzzle"
 		LineNumber                    15371, 4
 		LineNumberAlt1                189, 217
 		GetThisMemberValueString      "music"
-		PushConstantStringString      "Root/Data/sounds/MusicMakutaTheme"
+		PushConstantStringString      "Root/Data/sounds/MusicPart2LegoUNDERGROUND"
 		Pull                          2
 		GetMemberFunctionString       "setupforplay"
 		JumpAbsolute                  2
@@ -982,36 +979,6 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                192, 217
 		PushConstant0
 		SetThisMemberValueString      "halfway"
-		LineNumber                    9461, 4
-		LineNumberAlt1                97, 199
-		PushConstanti8                1
-		SetThisMemberValueString      "showmask"
-		LineNumber                    15380, 4
-		LineNumberAlt1                198, 217
-		PushConstantStringString      "mk5a"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    15380, 4
-		LineNumberAlt1                198, 217
-		CallGameFunctionString        "gcsaver", "findmask", 1
-		LineNumber                    15380, 4
-		LineNumberAlt1                198, 217
-		SetVariableValue              1                                                        ; local
-		LineNumber                    9463, 4
-		LineNumberAlt1                99, 199
-		GetVariableValue              1                                                        ; local
-		CompareAndBranchIfFalseTarget 5, 0
-		; ->
-		LineNumber                    63634, 4
-		LineNumberAlt1                120, 163
-		PushConstant0
-		SetThisMemberValueString      "showmask"
-		; <-
-		BranchTarget                  5
-		LineNumber                    63637, 4
-		LineNumberAlt1                123, 163
-		GetThisMemberValueString      "showmask"
-		CompareAndBranchIfFalseTarget 1, 0
-		; ->
 		LineNumber                    15378, 4
 		LineNumberAlt1                196, 217
 		CreateObjectString            "lego_pickup"
@@ -1028,28 +995,52 @@ begin class "ta126_puzzle"
 		Pop
 		LineNumber                    15378, 4
 		LineNumberAlt1                196, 217
-		SetThisMemberValueString      "maskx"
+		SetThisMemberValueString      "mask"
 		LineNumber                    15379, 4
 		LineNumberAlt1                197, 217
-		GetThisMemberValueString      "maskx"
+		GetThisMemberValueString      "mask"
 		Dup
 		GetMemberFunctionString       "initfull"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    9469, 4
-		LineNumberAlt1                105, 199
-		GetThisMemberValueString      "maskx"
+		LineNumber                    15380, 4
+		LineNumberAlt1                198, 217
+		PushConstantStringString      "mk5a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15380, 4
+		LineNumberAlt1                198, 217
+		CallGameFunctionString        "gcsaver", "findmask", 1
+		LineNumber                    15380, 4
+		LineNumberAlt1                198, 217
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    15381, 4
+		LineNumberAlt1                199, 217
+		GetThisMemberValueString      "mask"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		LineNumber                    15383, 4
+		LineNumberAlt1                201, 217
+		GetThisMemberValueString      "mask"
 		Dup
 		GetMemberFunctionString       "show"
 		JumpAbsolute                  1
 		Pop
+		; <-
+		BranchTarget                  6
 		PushNothing
 		Return
 	end ; method
 
 	begin method "initshort"
-		; address: 0xb42be
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 211:224
+		; address: 0xbb49a
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 211:224
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
 		LineNumber                    15393, 4
@@ -1187,8 +1178,8 @@ begin class "ta126_puzzle"
 	end ; method
 
 	begin method "cleanupshort"
-		; address: 0xb4402
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 229:232
+		; address: 0xbb5de
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 229:232
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
 		LineNumber                    15411, 4
@@ -1233,9 +1224,8 @@ begin class "ta126_puzzle"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0xb4458
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 238:259
-		; source: 172 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_swrd.vbo" 198:200
+		; address: 0xbb634
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 238:259
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
 		LineNumber                    15420, 4
@@ -1341,34 +1331,13 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                259, 217
 		PushNothing
 		SetThisMemberValueString      "halfway"
-		LineNumber                    1461, 4
-		LineNumberAlt1                198, 172
-		GetThisMemberValueString      "maskx"
-		PushNothing
-		EqualTo
-		Not
-		CompareAndBranchIfFalseTarget 4, 0
-		; ->
-		LineNumber                    1462, 4
-		LineNumberAlt1                199, 172
-		GetThisMemberValueString      "maskx"
-		Dup
-		GetMemberFunctionString       "cleanupfull"
-		JumpAbsolute                  1
-		Pop
-		LineNumber                    1463, 4
-		LineNumberAlt1                200, 172
-		PushNothing
-		SetThisMemberValueString      "maskx"
-		; <-
-		BranchTarget                  4
 		PushNothing
 		Return
 	end ; method
 
 	begin method "exit"
-		; address: 0xb4597
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 265:265
+		; address: 0xbb73e
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 265:265
 		MemberFunctionArgumentCheck 1
 		LineNumber                  15447, 4
 		LineNumberAlt1              265, 217
@@ -1379,15 +1348,15 @@ begin class "ta126_puzzle"
 	end ; method
 
 	begin method "process"
-		; address: 0xb45a9
+		; address: 0xbb750
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "onevent"
-		; address: 0xb45ad
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 276:321
+		; address: 0xbb754
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 276:321
 		MemberFunctionArgumentCheck   2
 		CreateStackVariables          4
 		LineNumber                    15458, 4
@@ -1670,8 +1639,8 @@ begin class "ta126_puzzle"
 	end ; method
 
 	begin method "input"
-		; address: 0xb483e
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 331:331
+		; address: 0xbb9e5
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 331:331
 		MemberFunctionArgumentCheck   2
 		LineNumber                    15513, 4
 		LineNumberAlt1                331, 217
@@ -1702,8 +1671,8 @@ begin class "ta126_puzzle"
 	end ; method
 
 	begin method "cheat"
-		; address: 0xb4881
-		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_shrn.vbo" 337:341
+		; address: 0xbba28
+		; source: 217 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta12.vbo" 337:341
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
 		LineNumber                    15519, 4

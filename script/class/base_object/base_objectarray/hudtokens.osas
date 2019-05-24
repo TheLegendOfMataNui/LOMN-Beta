@@ -4,14 +4,14 @@ begin class "hudtokens", "base_objectarray"
 	property "cidx"
 
 	begin method "hudtokens"
-		; address: 0x3c35a
+		; address: 0x3dfb5
 		MemberFunctionArgumentCheck 1
 		PushNothing
 		Return
 	end ; method
 
 	begin method "initfull"
-		; address: 0x3c35e
+		; address: 0x3dfb9
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1805:1820
 		MemberFunctionArgumentCheck  1
 		CreateStackVariables         1
@@ -141,7 +141,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x3c492
+		; address: 0x3e0ed
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1828:1836
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          2
@@ -230,7 +230,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "setcolor"
-		; address: 0x3c557
+		; address: 0x3e1b2
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1843:1855
 		MemberFunctionArgumentCheck   1
 		LineNumber                    13102, 4
@@ -243,7 +243,7 @@ begin class "hudtokens", "base_objectarray"
 		EqualTo
 		CompareAndBranchIfFalseTarget 0, 0
 		; ->
-		BranchAlwaysTarget            5, 0
+		BranchAlwaysTarget            6, 0
 		; ->
 		; <-
 		BranchTarget                  0
@@ -265,7 +265,7 @@ begin class "hudtokens", "base_objectarray"
 		GetMemberFunctionString       "setcolor"
 		JumpAbsolute                  5
 		Pop
-		BranchAlwaysTarget            5, 0
+		BranchAlwaysTarget            6, 0
 		; ->
 		; <-
 		BranchTarget                  1
@@ -287,7 +287,7 @@ begin class "hudtokens", "base_objectarray"
 		GetMemberFunctionString       "setcolor"
 		JumpAbsolute                  5
 		Pop
-		BranchAlwaysTarget            5, 0
+		BranchAlwaysTarget            6, 0
 		; ->
 		; <-
 		BranchTarget                  2
@@ -296,7 +296,7 @@ begin class "hudtokens", "base_objectarray"
 		EqualTo
 		CompareAndBranchIfFalseTarget 3, 0
 		; ->
-		BranchAlwaysTarget            5, 0
+		BranchAlwaysTarget            6, 0
 		; ->
 		; <-
 		BranchTarget                  3
@@ -318,7 +318,7 @@ begin class "hudtokens", "base_objectarray"
 		GetMemberFunctionString       "setcolor"
 		JumpAbsolute                  5
 		Pop
-		BranchAlwaysTarget            5, 0
+		BranchAlwaysTarget            6, 0
 		; ->
 		; <-
 		BranchTarget                  4
@@ -340,15 +340,37 @@ begin class "hudtokens", "base_objectarray"
 		GetMemberFunctionString       "setcolor"
 		JumpAbsolute                  5
 		Pop
+		BranchAlwaysTarget            6, 0
+		; ->
 		; <-
 		BranchTarget                  5
+		Dup
+		PushConstantStringString      "nbua"
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    13114, 4
+		LineNumberAlt1                1855, 28
+		GetThisMemberValueString      "items"
+		PushConstant0
+		GetArrayValue
+		PushConstanti8                122
+		PushConstant0
+		PushConstanti8                122
+		PushConstanti16               255
+		Pull                          5
+		GetMemberFunctionString       "setcolor"
+		JumpAbsolute                  5
+		Pop
+		; <-
+		BranchTarget                  6
 		Pop
 		PushNothing
 		Return
 	end ; method
 
 	begin method "initshort"
-		; address: 0x3c62d
+		; address: 0x3e2b2
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1861:1861
 		MemberFunctionArgumentCheck 1
 		LineNumber                  13120, 4
@@ -360,7 +382,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "cleanupshort"
-		; address: 0x3c63f
+		; address: 0x3e2c4
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1865:1865
 		MemberFunctionArgumentCheck 1
 		LineNumber                  13124, 4
@@ -374,7 +396,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "add"
-		; address: 0x3c656
+		; address: 0x3e2db
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1870:1872
 		MemberFunctionArgumentCheck 1
 		LineNumber                  13129, 4
@@ -409,7 +431,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "show"
-		; address: 0x3c69e
+		; address: 0x3e323
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1878:1883
 		MemberFunctionArgumentCheck   1
 		LineNumber                    13137, 4
@@ -474,7 +496,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "hide"
-		; address: 0x3c731
+		; address: 0x3e3b6
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1889:1890
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
@@ -510,21 +532,21 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "changepos"
-		; address: 0x3c76e
+		; address: 0x3e3f3
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "setxpos"
-		; address: 0x3c772
+		; address: 0x3e3f7
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "addtoken"
-		; address: 0x3c776
+		; address: 0x3e3fb
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1906:1906
 		MemberFunctionArgumentCheck 2
 		LineNumber                  13165, 4
@@ -538,7 +560,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "removetoken"
-		; address: 0x3c78e
+		; address: 0x3e413
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1911:1911
 		MemberFunctionArgumentCheck 2
 		LineNumber                  13170, 4
@@ -552,7 +574,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "settokens"
-		; address: 0x3c7a6
+		; address: 0x3e42b
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1916:1916
 		MemberFunctionArgumentCheck 2
 		LineNumber                  13175, 4
@@ -564,14 +586,14 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "input"
-		; address: 0x3c7ba
+		; address: 0x3e43f
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "process"
-		; address: 0x3c7be
+		; address: 0x3e443
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1928:1937
 		MemberFunctionArgumentCheck   2
 		LineNumber                    13187, 4
@@ -650,7 +672,7 @@ begin class "hudtokens", "base_objectarray"
 	end ; method
 
 	begin method "slide"
-		; address: 0x3c869
+		; address: 0x3e4ee
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return

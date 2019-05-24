@@ -1,7 +1,7 @@
 begin class "lego_area_tura1", "gs_lego_area"
 	begin method "lego_area_tura1"
-		; address: 0x6f9d3
-		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 29:30
+		; address: 0x75257
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_tura.vbo" 29:30
 		MemberFunctionArgumentCheck 2
 		LineNumber                  47217, 4
 		LineNumberAlt1              29, 123
@@ -24,10 +24,19 @@ begin class "lego_area_tura1", "gs_lego_area"
 	end ; method
 
 	begin method "initfull"
-		; address: 0x6fa05
-		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 36:57
+		; address: 0x75289
+		; source: 198 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_mtop.vbo" 37:37
+		; source: 46 "C:\\projects\\lego\\Scripting\\VBO\\lego_frontend.vbo" 166:166
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_tura.vbo" 36:57
+		; source: 111 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_mud0.vbo" 692:693
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          2
+		LineNumber                    19819, 4
+		LineNumberAlt1                1183, 52
+		GetVariableValue              0                                             ; local
+		GetThisMemberFunctionString   "playlegend"
+		JumpAbsolute                  1
+		Pop
 		LineNumber                    47224, 4
 		LineNumberAlt1                36, 123
 		GetVariableValue              0                                                     ; local
@@ -122,8 +131,8 @@ begin class "lego_area_tura1", "gs_lego_area"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x6fb5a
-		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 62:63
+		; address: 0x75441
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_tura.vbo" 62:63
 		MemberFunctionArgumentCheck 1
 		LineNumber                  47250, 4
 		LineNumberAlt1              62, 123
@@ -136,8 +145,8 @@ begin class "lego_area_tura1", "gs_lego_area"
 	end ; method
 
 	begin method "exit"
-		; address: 0x6fb7f
-		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 68:68
+		; address: 0x75466
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_tura.vbo" 68:68
 		MemberFunctionArgumentCheck 1
 		LineNumber                  47256, 4
 		LineNumberAlt1              68, 123
@@ -145,6 +154,248 @@ begin class "lego_area_tura1", "gs_lego_area"
 		GetThisMemberFunctionString "lego_area_cleanupfull"
 		JumpAbsolute                1
 		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "playlegend"
+		; address: 0x75466
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_tura.vbo" 68:68
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          1
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti32               50
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1					; Check if post-FMV conversation has branched
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti8                0
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+        LineNumber                    14631, 4
+        LineNumberAlt1                64, 45
+        CallGameFunctionString        "gcareadirector", "getlanguage", 0
+        LineNumber                    37314, 4
+        LineNumberAlt1                146, 95
+        PushConstanti8                0														; Language ID
+        EqualTo
+        CompareAndBranchIfFalseTarget 1, 0
+        ; ->
+		LineNumber                    35381, 4
+		LineNumberAlt1                166, 46
+		PushConstantStringString      "Root/Data/cinematics/LegendFMVEn.bik"
+		PushConstanti8                1
+		CallGameFunctionString        "gchuddirector", "playcinematic", 2
+		Pop
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		CallGameFunctionString        "gcconversationengine", "getconversationengine", 0
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		SetVariableValue              1                                                     ; local
+		LineNumber                    43978, 4
+		LineNumberAlt1                693, 111
+		GetVariableValue              1                                                     ; local
+		PushConstanti32               2003330414
+		CallGameFunctionString        "gcconversationengine", "forceconversation", 2
+		BranchTarget				  1														; French
+		; ->
+        LineNumber                    14631, 4
+        LineNumberAlt1                64, 45
+        CallGameFunctionString        "gcareadirector", "getlanguage", 0
+        LineNumber                    37314, 4
+        LineNumberAlt1                146, 95
+        PushConstanti8                1														; Language ID
+        EqualTo
+        CompareAndBranchIfFalseTarget 2, 0
+        ; ->
+		LineNumber                    35381, 4
+		LineNumberAlt1                166, 46
+		PushConstantStringString      "Root/Data/cinematics/LegendFMVFr.bik"
+		PushConstanti8                1
+		CallGameFunctionString        "gchuddirector", "playcinematic", 2
+		Pop
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		CallGameFunctionString        "gcconversationengine", "getconversationengine", 0
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		SetVariableValue              1                                                     ; local
+		LineNumber                    43978, 4
+		LineNumberAlt1                693, 111
+		GetVariableValue              1                                                     ; local
+		PushConstanti32               2003330414
+		CallGameFunctionString        "gcconversationengine", "forceconversation", 2
+		BranchTarget				  2														; Spanish
+		; ->
+        LineNumber                    14631, 4
+        LineNumberAlt1                64, 45
+        CallGameFunctionString        "gcareadirector", "getlanguage", 0
+        LineNumber                    37314, 4
+        LineNumberAlt1                146, 95
+        PushConstanti8                2														; Language ID
+        EqualTo
+        CompareAndBranchIfFalseTarget 3, 0
+        ; ->
+		LineNumber                    35381, 4
+		LineNumberAlt1                166, 46
+		PushConstantStringString      "Root/Data/cinematics/LegendFMVGer.bik"
+		PushConstanti8                1
+		CallGameFunctionString        "gchuddirector", "playcinematic", 2
+		Pop
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		CallGameFunctionString        "gcconversationengine", "getconversationengine", 0
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		SetVariableValue              1                                                     ; local
+		LineNumber                    43978, 4
+		LineNumberAlt1                693, 111
+		GetVariableValue              1                                                     ; local
+		PushConstanti32               2003330414
+		CallGameFunctionString        "gcconversationengine", "forceconversation", 2
+		BranchTarget				  3														; Italian
+		; ->
+        LineNumber                    14631, 4
+        LineNumberAlt1                64, 45
+        CallGameFunctionString        "gcareadirector", "getlanguage", 0
+        LineNumber                    37314, 4
+        LineNumberAlt1                146, 95
+        PushConstanti8                3														; Language ID
+        EqualTo
+        CompareAndBranchIfFalseTarget 4, 0
+        ; ->
+		LineNumber                    35381, 4
+		LineNumberAlt1                166, 46
+		PushConstantStringString      "Root/Data/cinematics/LegendFMVDa.bik"
+		PushConstanti8                1
+		CallGameFunctionString        "gchuddirector", "playcinematic", 2
+		Pop
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		CallGameFunctionString        "gcconversationengine", "getconversationengine", 0
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		SetVariableValue              1                                                     ; local
+		LineNumber                    43978, 4
+		LineNumberAlt1                693, 111
+		GetVariableValue              1                                                     ; local
+		PushConstanti32               2003330414
+		CallGameFunctionString        "gcconversationengine", "forceconversation", 2
+		BranchTarget				  4														; Dutch
+		; ->
+        LineNumber                    14631, 4
+        LineNumberAlt1                64, 45
+        CallGameFunctionString        "gcareadirector", "getlanguage", 0
+        LineNumber                    37314, 4
+        LineNumberAlt1                146, 95
+        PushConstanti8                4														; Language ID
+        EqualTo
+        CompareAndBranchIfFalseTarget 5, 0
+        ; ->
+		LineNumber                    35381, 4
+		LineNumberAlt1                166, 46
+		PushConstantStringString      "Root/Data/cinematics/LegendFMVDu.bik"
+		PushConstanti8                1
+		CallGameFunctionString        "gchuddirector", "playcinematic", 2
+		Pop
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		CallGameFunctionString        "gcconversationengine", "getconversationengine", 0
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		SetVariableValue              1                                                     ; local
+		LineNumber                    43978, 4
+		LineNumberAlt1                693, 111
+		GetVariableValue              1                                                     ; local
+		PushConstanti32               2003330414
+		CallGameFunctionString        "gcconversationengine", "forceconversation", 2
+		BranchTarget				  5														; German
+		; ->
+        LineNumber                    14631, 4
+        LineNumberAlt1                64, 45
+        CallGameFunctionString        "gcareadirector", "getlanguage", 0
+        LineNumber                    37314, 4
+        LineNumberAlt1                146, 95
+        PushConstanti8                5														; Language ID
+        EqualTo
+        CompareAndBranchIfFalseTarget 6, 0
+        ; ->
+		LineNumber                    35381, 4
+		LineNumberAlt1                166, 46
+		PushConstantStringString      "Root/Data/cinematics/LegendFMVIt.bik"
+		PushConstanti8                1
+		CallGameFunctionString        "gchuddirector", "playcinematic", 2
+		Pop
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		CallGameFunctionString        "gcconversationengine", "getconversationengine", 0
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		SetVariableValue              1                                                     ; local
+		LineNumber                    43978, 4
+		LineNumberAlt1                693, 111
+		GetVariableValue              1                                                     ; local
+		PushConstanti32               2003330414
+		CallGameFunctionString        "gcconversationengine", "forceconversation", 2
+		BranchTarget				  6														; Danish
+		; ->
+        LineNumber                    14631, 4
+        LineNumberAlt1                64, 45
+        CallGameFunctionString        "gcareadirector", "getlanguage", 0
+        LineNumber                    37314, 4
+        LineNumberAlt1                146, 95
+        PushConstanti8                6														; Language ID
+        EqualTo
+        CompareAndBranchIfFalseTarget 7, 0
+        ; ->
+		LineNumber                    35381, 4
+		LineNumberAlt1                166, 46
+		PushConstantStringString      "Root/Data/cinematics/LegendFMVSpa.bik"
+		PushConstanti8                1
+		CallGameFunctionString        "gchuddirector", "playcinematic", 2
+		Pop
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		CallGameFunctionString        "gcconversationengine", "getconversationengine", 0
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		SetVariableValue              1                                                     ; local
+		LineNumber                    43978, 4
+		LineNumberAlt1                693, 111
+		GetVariableValue              1                                                     ; local
+		PushConstanti32               2003330414
+		CallGameFunctionString        "gcconversationengine", "forceconversation", 2
+		BranchTarget				  7														; Swedish
+		; ->
+        LineNumber                    14631, 4
+        LineNumberAlt1                64, 45
+        CallGameFunctionString        "gcareadirector", "getlanguage", 0
+        LineNumber                    37314, 4
+        LineNumberAlt1                146, 95
+        PushConstanti8                7														; Language ID
+        EqualTo
+        CompareAndBranchIfFalseTarget 8, 0
+        ; ->
+		LineNumber                    35381, 4
+		LineNumberAlt1                166, 46
+		PushConstantStringString      "Root/Data/cinematics/LegendFMVSwe.bik"
+		PushConstanti8                1
+		CallGameFunctionString        "gchuddirector", "playcinematic", 2
+		Pop
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		CallGameFunctionString        "gcconversationengine", "getconversationengine", 0
+		LineNumber                    43977, 4
+		LineNumberAlt1                692, 111
+		SetVariableValue              1                                                     ; local
+		LineNumber                    43978, 4
+		LineNumberAlt1                693, 111
+		GetVariableValue              1                                                     ; local
+		PushConstanti32               2003330414
+		CallGameFunctionString        "gcconversationengine", "forceconversation", 2
+		BranchTarget				  8														; N/A (Reserved for BetterSaver branch. Repoint above if utilizing this target)
 		PushNothing
 		Return
 	end ; method

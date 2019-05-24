@@ -2,8 +2,8 @@ begin class "lego_area_strt2", "gs_lego_area"
 	property "puzzle"
 
 	begin method "lego_area_strt2"
-		; address: 0x7b0aa
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 28:30
+		; address: 0x809cc
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 28:30
 		MemberFunctionArgumentCheck 2
 		LineNumber                  52975, 4
 		LineNumberAlt1              28, 136
@@ -38,9 +38,9 @@ begin class "lego_area_strt2", "gs_lego_area"
 	end ; method
 
 	begin method "initfull"
-		; address: 0x7b102
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 37:42
-		; source: 141 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_shrn.vbo" 99:100
+		; address: 0x80a24
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 37:42
+		; source: 141 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 99:100
 		MemberFunctionArgumentCheck  1
 		LineNumber                   52984, 4
 		LineNumberAlt1               37, 136
@@ -104,8 +104,8 @@ begin class "lego_area_strt2", "gs_lego_area"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x7b1c1
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 47:48
+		; address: 0x80ae3
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 47:48
 		MemberFunctionArgumentCheck 1
 		LineNumber                  52994, 4
 		LineNumberAlt1              47, 136
@@ -125,8 +125,8 @@ begin class "lego_area_strt2", "gs_lego_area"
 	end ; method
 
 	begin method "process"
-		; address: 0x7b1ec
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 53:53
+		; address: 0x80b0e
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 53:53
 		MemberFunctionArgumentCheck 2
 		LineNumber                  53000, 4
 		LineNumberAlt1              53, 136
@@ -141,8 +141,8 @@ begin class "lego_area_strt2", "gs_lego_area"
 	end ; method
 
 	begin method "onevent"
-		; address: 0x7b208
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 58:58
+		; address: 0x80b2a
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 58:58
 		MemberFunctionArgumentCheck 2
 		LineNumber                  53005, 4
 		LineNumberAlt1              58, 136
@@ -157,8 +157,8 @@ begin class "lego_area_strt2", "gs_lego_area"
 	end ; method
 
 	begin method "input"
-		; address: 0x7b224
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 63:63
+		; address: 0x80b46
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 63:63
 		MemberFunctionArgumentCheck 2
 		LineNumber                  53010, 4
 		LineNumberAlt1              63, 136
@@ -173,9 +173,13 @@ begin class "lego_area_strt2", "gs_lego_area"
 	end ; method
 
 	begin method "exit"
-		; address: 0x7b240
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 68:69
+		; address: 0x80b62
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 68:69
 		MemberFunctionArgumentCheck 1
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
 		LineNumber                  53015, 4
 		LineNumberAlt1              68, 136
 		GetThisMemberValueString    "puzzle"
@@ -183,10 +187,6 @@ begin class "lego_area_strt2", "gs_lego_area"
 		GetMemberFunctionString     "exit"
 		JumpAbsolute                1
 		Pop
-		LineNumber                  53016, 4
-		LineNumberAlt1              69, 136
-		PushNothing
-		SetThisMemberValueString    "puzzle"
 		PushNothing
 		Return
 	end ; method

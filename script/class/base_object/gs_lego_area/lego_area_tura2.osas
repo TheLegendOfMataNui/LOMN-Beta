@@ -1,7 +1,7 @@
 begin class "lego_area_tura2", "gs_lego_area"
 	begin method "lego_area_tura2"
-		; address: 0x7d594
-		; source: 138 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_evac.vbo" 26:26
+		; address: 0x83435
+		; source: 138 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_tura.vbo" 26:26
 		MemberFunctionArgumentCheck 2
 		LineNumber                  53790, 4
 		LineNumberAlt1              26, 138
@@ -13,14 +13,20 @@ begin class "lego_area_tura2", "gs_lego_area"
 		GetThisMemberFunctionString "gs_lego_area"
 		JumpAbsolute                5
 		Pop
+		LineNumber                    53798, 4
+		LineNumberAlt1                34, 138
+		GetVariableValue              0                                                     ; local
+		GetThisMemberFunctionString   "lego_area_initfull"
+		JumpAbsolute                  1
+		Pop
 		PushNothing
 		Return
 	end ; method
 
 	begin method "initfull"
-		; address: 0x7d5b3
-		; source: 138 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_evac.vbo" 33:53
-		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\eventeditor/shoefittersounds.h" 56:57
+		; address: 0x83454
+		; source: 138 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_tura.vbo" 33:53
+		; source: 123 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_tura.vbo" 56:57
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          3
 		LineNumber                    53797, 4
@@ -29,11 +35,32 @@ begin class "lego_area_tura2", "gs_lego_area"
 		GetThisMemberFunctionString   "lego_area_show"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    53798, 4
-		LineNumberAlt1                34, 138
-		GetVariableValue              0                                                     ; local
-		GetThisMemberFunctionString   "lego_area_initfull"
-		JumpAbsolute                  1
+		LineNumber                    53814, 4
+		LineNumberAlt1                50, 138
+		PushConstanti8                3
+		CallGameFunctionString        "gcmodeldirector", "setnearestmax", 1
+		Pop
+		LineNumber                    53815, 4
+		LineNumberAlt1                51, 138
+		PushConstanti8                3
+		CallGameFunctionString        "gcareadirector", "setnearestmax", 1
+		Pop
+		LineNumber                    53816, 4
+		LineNumberAlt1                52, 138
+		PushConstanti32               -9143565
+		PushConstant0
+		PushConstantf32               1000
+		Subtract
+		PushConstant0
+		PushConstantf32               2400
+		Subtract
+		PushConstantf32               0.009999999776482582
+		CallGameFunctionString        "gcareadirector", "setfog", 4
+		Pop
+		LineNumber                    53817, 4
+		LineNumberAlt1                53, 138
+		PushConstanti8                1
+		CallGameFunctionString        "gclightdirector", "setcavelighting", 1
 		Pop
 		LineNumber                    53806, 4
 		LineNumberAlt1                42, 138
@@ -73,33 +100,6 @@ begin class "lego_area_tura2", "gs_lego_area"
 		Pop
 		; <-
 		BranchTarget                  1
-		LineNumber                    53814, 4
-		LineNumberAlt1                50, 138
-		PushConstanti8                7
-		CallGameFunctionString        "gcmodeldirector", "setnearestmax", 1
-		Pop
-		LineNumber                    53815, 4
-		LineNumberAlt1                51, 138
-		PushConstanti8                7
-		CallGameFunctionString        "gcareadirector", "setnearestmax", 1
-		Pop
-		LineNumber                    53816, 4
-		LineNumberAlt1                52, 138
-		PushConstanti32               -9143565
-		PushConstant0
-		PushConstantf32               1000
-		Subtract
-		PushConstant0
-		PushConstantf32               2400
-		Subtract
-		PushConstantf32               0.009999999776482582
-		CallGameFunctionString        "gcareadirector", "setfog", 4
-		Pop
-		LineNumber                    53817, 4
-		LineNumberAlt1                53, 138
-		PushConstanti8                1
-		CallGameFunctionString        "gclightdirector", "setcavelighting", 1
-		Pop
 		LineNumber                    47244, 4
 		LineNumberAlt1                56, 123
 		GetVariableValueGlobalString  "globalclass"
@@ -123,8 +123,8 @@ begin class "lego_area_tura2", "gs_lego_area"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x7d71b
-		; source: 138 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_evac.vbo" 58:59
+		; address: 0x835bc
+		; source: 138 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_tura.vbo" 58:59
 		MemberFunctionArgumentCheck 1
 		LineNumber                  53822, 4
 		LineNumberAlt1              58, 138
@@ -132,19 +132,19 @@ begin class "lego_area_tura2", "gs_lego_area"
 		GetThisMemberFunctionString "lego_area_hide"
 		JumpAbsolute                1
 		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0x835f2
+		MemberFunctionArgumentCheck 1
 		LineNumber                  53823, 4
 		LineNumberAlt1              59, 138
 		GetVariableValue            0                       ; local
 		GetThisMemberFunctionString "lego_area_cleanupfull"
 		JumpAbsolute                1
 		Pop
-		PushNothing
-		Return
-	end ; method
-
-	begin method "exit"
-		; address: 0x7d751
-		MemberFunctionArgumentCheck 1
 		PushNothing
 		Return
 	end ; method

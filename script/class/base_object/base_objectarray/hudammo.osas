@@ -5,14 +5,14 @@ begin class "hudammo", "base_objectarray"
 	property "ready"
 
 	begin method "hudammo"
-		; address: 0x3a4e6
+		; address: 0x3c116
 		MemberFunctionArgumentCheck 1
 		PushNothing
 		Return
 	end ; method
 
 	begin method "initfull"
-		; address: 0x3a4ea
+		; address: 0x3c11a
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1045:1045
 		MemberFunctionArgumentCheck 1
 		LineNumber                  12304, 4
@@ -24,7 +24,7 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "setcolor"
-		; address: 0x3a4fc
+		; address: 0x3c12c
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1052:1096
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          5
@@ -59,9 +59,9 @@ begin class "hudammo", "base_objectarray"
 		; ->
 		LineNumber                    12318, 4
 		LineNumberAlt1                1059, 28
-		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbonua"
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpybllonua"
 		SetVariableValue              4                                            ; local
-		BranchAlwaysTarget            6, 0
+		BranchAlwaysTarget            7, 0
 		; ->
 		; <-
 		BranchTarget                  0
@@ -75,9 +75,9 @@ begin class "hudammo", "base_objectarray"
 		; ->
 		LineNumber                    12320, 4
 		LineNumberAlt1                1061, 28
-		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbgali"
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpybllgali"
 		SetVariableValue              4                                            ; local
-		BranchAlwaysTarget            6, 0
+		BranchAlwaysTarget            7, 0
 		; ->
 		; <-
 		BranchTarget                  1
@@ -91,9 +91,9 @@ begin class "hudammo", "base_objectarray"
 		; ->
 		LineNumber                    12322, 4
 		LineNumberAlt1                1063, 28
-		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbpohatu"
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpybllpohatu"
 		SetVariableValue              4                                            ; local
-		BranchAlwaysTarget            6, 0
+		BranchAlwaysTarget            7, 0
 		; ->
 		; <-
 		BranchTarget                  2
@@ -107,9 +107,9 @@ begin class "hudammo", "base_objectarray"
 		; ->
 		LineNumber                    12324, 4
 		LineNumberAlt1                1065, 28
-		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbkopaka"
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpybllkopaka"
 		SetVariableValue              4                                            ; local
-		BranchAlwaysTarget            6, 0
+		BranchAlwaysTarget            7, 0
 		; ->
 		; <-
 		BranchTarget                  3
@@ -123,9 +123,9 @@ begin class "hudammo", "base_objectarray"
 		; ->
 		LineNumber                    12326, 4
 		LineNumberAlt1                1067, 28
-		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbonua"
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpyblllewa"
 		SetVariableValue              4                                            ; local
-		BranchAlwaysTarget            6, 0
+		BranchAlwaysTarget            7, 0
 		; ->
 		; <-
 		BranchTarget                  4
@@ -139,18 +139,34 @@ begin class "hudammo", "base_objectarray"
 		; ->
 		LineNumber                    12328, 4
 		LineNumberAlt1                1069, 28
-		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbtahu"
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpyblltahu"
 		SetVariableValue              4                                            ; local
-		BranchAlwaysTarget            6, 0
+		BranchAlwaysTarget            7, 0
 		; ->
 		; <-
 		BranchTarget                  5
-		LineNumber                    12330, 4
-		LineNumberAlt1                1071, 28
-		PushConstantStringString      "Root/data/art/hud/elemrotate/genhfbtahu"
+		Dup
+		PushConstantStringString      "lev8"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    12327, 4
+		LineNumberAlt1                1068, 28
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    12328, 4
+		LineNumberAlt1                1069, 28
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpybllonua"
 		SetVariableValue              4                                            ; local
+		BranchAlwaysTarget            7, 0
+		; ->
 		; <-
 		BranchTarget                  6
+		LineNumber                    12330, 4
+		LineNumberAlt1                1071, 28
+		PushConstantStringString      "Root/data/art/hud/elemrotate/hpyblltahu"
+		SetVariableValue              4                                            ; local
+		; <-
+		BranchTarget                  7
 		Pop
 		LineNumber                    12337, 4
 		LineNumberAlt1                1078, 28
@@ -280,7 +296,7 @@ begin class "hudammo", "base_objectarray"
 		GetVariableValue              5                                            ; local
 		PushNothing
 		EqualTo
-		CompareAndBranchIfFalseTarget 7, 0
+		CompareAndBranchIfFalseTarget 8, 0
 		; ->
 		LineNumber                    12349, 4
 		LineNumberAlt1                1090, 28
@@ -289,10 +305,10 @@ begin class "hudammo", "base_objectarray"
 		GetThisMemberFunctionString   "setammo"
 		JumpAbsolute                  2
 		Pop
-		BranchAlwaysTarget            8, 0
+		BranchAlwaysTarget            9, 0
 		; ->
 		; <-
-		BranchTarget                  7
+		BranchTarget                  8
 		LineNumber                    12351, 4
 		LineNumberAlt1                1092, 28
 		GetVariableValue              0                                            ; local
@@ -301,7 +317,7 @@ begin class "hudammo", "base_objectarray"
 		JumpAbsolute                  2
 		Pop
 		; <-
-		BranchTarget                  8
+		BranchTarget                  9
 		LineNumber                    12354, 4
 		LineNumberAlt1                1095, 28
 		GetVariableValue              0                                            ; local
@@ -319,7 +335,7 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x3a803
+		; address: 0x3c45e
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1100:1108
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          2
@@ -408,7 +424,7 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "initshort"
-		; address: 0x3a8c8
+		; address: 0x3c523
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1114:1114
 		MemberFunctionArgumentCheck 1
 		LineNumber                  12373, 4
@@ -420,7 +436,7 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "cleanupshort"
-		; address: 0x3a8da
+		; address: 0x3c535
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1118:1118
 		MemberFunctionArgumentCheck 1
 		LineNumber                  12377, 4
@@ -434,7 +450,7 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "add"
-		; address: 0x3a8f1
+		; address: 0x3c54c
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1123:1126
 		MemberFunctionArgumentCheck   1
 		LineNumber                    12382, 4
@@ -479,7 +495,7 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "show"
-		; address: 0x3a94c
+		; address: 0x3c5a7
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1133:1140
 		MemberFunctionArgumentCheck   1
 		LineNumber                    12392, 4
@@ -552,7 +568,7 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "hide"
-		; address: 0x3a9f2
+		; address: 0x3c64d
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1147:1149
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
@@ -601,7 +617,7 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "setammo"
-		; address: 0x3aa47
+		; address: 0x3c6a2
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1156:1164
 		MemberFunctionArgumentCheck   2
 		LineNumber                    12415, 4
@@ -682,14 +698,14 @@ begin class "hudammo", "base_objectarray"
 	end ; method
 
 	begin method "input"
-		; address: 0x3aaf9
+		; address: 0x3c754
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "process"
-		; address: 0x3aafd
+		; address: 0x3c758
 		; source: 28 "C:\\projects\\lego\\Scripting\\VBO\\LegoBase/lego_hud.vbo" 1177:1178
 		MemberFunctionArgumentCheck   2
 		LineNumber                    12436, 4

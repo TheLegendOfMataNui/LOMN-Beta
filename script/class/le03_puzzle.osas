@@ -3,8 +3,8 @@ begin class "le03_puzzle"
 	property "hook"
 
 	begin method "le03_puzzle"
-		; address: 0xa3c57
-		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_lep2.vbo" 84:84
+		; address: 0xaa98d
+		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le03.vbo" 84:84
 		MemberFunctionArgumentCheck 2
 		LineNumber                  7657, 4
 		LineNumberAlt1              84, 190
@@ -15,8 +15,8 @@ begin class "le03_puzzle"
 	end ; method
 
 	begin method "initfull"
-		; address: 0xa3c6b
-		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_lep2.vbo" 92:113
+		; address: 0xaa9a1
+		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le03.vbo" 92:113
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          4
 		LineNumber                    7665, 4
@@ -66,11 +66,6 @@ begin class "le03_puzzle"
 		GetVariableValue              1                                                         ; local
 		CompareAndBranchIfFalseTarget 1, 0
 		; ->
-		LineNumber                    7674, 4
-		LineNumberAlt1                101, 190
-		PushConstantStringString      "******************************** SHOWING THE CLAWPICKUP"
-		CallGameFunctionString        "debug", "print", 1
-		Pop
 		LineNumber                    7675, 4
 		LineNumberAlt1                102, 190
 		CreateObjectString            "lego_pickup"
@@ -145,22 +140,22 @@ begin class "le03_puzzle"
 		PushConstantColor8888         0xffffffff
 		PushConstant0
 		SetRedValue
-		PushConstanti16               150
+		PushConstant0
 		SetGreenValue
-		PushConstanti8                121
+		PushConstant0
 		SetBlueValue
-		PushConstanti16               255
+		PushConstant0
 		SetAlphaValue
 		PushConstantColor8888         0xffffffff
 		PushConstant0
 		SetRedValue
-		PushConstanti16               150
+		PushConstant0
 		SetGreenValue
-		PushConstanti8                121
+		PushConstant0
 		SetBlueValue
-		PushConstanti16               255
+		PushConstant0
 		SetAlphaValue
-		PushConstantStringString      "mk4a"
+		PushConstantStringString      "mkaa"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    7686, 4
 		LineNumberAlt1                113, 190
@@ -172,18 +167,27 @@ begin class "le03_puzzle"
         CallGameFunctionString        "gccharacter", "setinputstate", 2
         Pop
         GetVariableValue              4                                            ; local
-        PushConstantStringString      "d000"
+        PushConstantStringString      "d003"
         CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
         PushConstanti8                -1
         CallGameFunctionString        "gccharacter", "switchanimation", 3
         Pop
+	    PushConstantStringString      "vlgr"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x027F1EFF ; color2 = feet
+	    PushConstantColor8888		  0xBBE785FF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+		Pop
 		PushNothing
 		Return
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0xa3e67
-		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_lep2.vbo" 119:123
+		; address: 0xaab9d
+		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le03.vbo" 119:123
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          2
 		LineNumber                    7692, 4
@@ -220,8 +224,8 @@ begin class "le03_puzzle"
 	end ; method
 
 	begin method "exit"
-		; address: 0xa3ebe
-		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_lep2.vbo" 129:129
+		; address: 0xaabf4
+		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le03.vbo" 129:129
 		MemberFunctionArgumentCheck 1
 		LineNumber                  7702, 4
 		LineNumberAlt1              129, 190
@@ -232,15 +236,15 @@ begin class "le03_puzzle"
 	end ; method
 
 	begin method "process"
-		; address: 0xa3ed0
+		; address: 0xaac06
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "onevent"
-		; address: 0xa3ed4
-		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_lep2.vbo" 140:154
+		; address: 0xaac0a
+		; source: 190 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_le03.vbo" 140:154
 		MemberFunctionArgumentCheck   2
 		LineNumber                    7713, 4
 		LineNumberAlt1                140, 190
@@ -355,7 +359,7 @@ begin class "le03_puzzle"
 	end ; method
 
 	begin method "input"
-		; address: 0xa3ff7
+		; address: 0xaad2d
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return

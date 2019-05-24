@@ -6,8 +6,8 @@ begin class "bullrun1"
 	property "whichplane"
 
 	begin method "bullrun1"
-		; address: 0x876ce
-		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_tura.vbo" 92:92
+		; address: 0x8d587
+		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr1.vbo" 92:92
 		MemberFunctionArgumentCheck 2
 		LineNumber                  60444, 4
 		LineNumberAlt1              92, 156
@@ -18,8 +18,8 @@ begin class "bullrun1"
 	end ; method
 
 	begin method "init"
-		; address: 0x876e2
-		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_tura.vbo" 100:124
+		; address: 0x8d59b
+		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr1.vbo" 100:124
 		MemberFunctionArgumentCheck  1
 		CreateStackVariables         1
 		LineNumber                   60452, 4
@@ -177,8 +177,8 @@ begin class "bullrun1"
 	end ; method
 
 	begin method "cleanup"
-		; address: 0x878f5
-		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_tura.vbo" 130:138
+		; address: 0x8d7ae
+		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr1.vbo" 130:138
 		MemberFunctionArgumentCheck 1
 		LineNumber                  60482, 4
 		LineNumberAlt1              130, 156
@@ -230,15 +230,15 @@ begin class "bullrun1"
 	end ; method
 
 	begin method "process"
-		; address: 0x8798d
+		; address: 0x8d846
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "input"
-		; address: 0x87991
-		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_tura.vbo" 150:160
+		; address: 0x8d84a
+		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr1.vbo" 150:160
 		MemberFunctionArgumentCheck   2
 		LineNumber                    60502, 4
 		LineNumberAlt1                150, 156
@@ -347,8 +347,8 @@ begin class "bullrun1"
 	end ; method
 
 	begin method "onevent"
-		; address: 0x87aba
-		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_tura.vbo" 130:236
+		; address: 0x8d973
+		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr1.vbo" 130:236
 		MemberFunctionArgumentCheck   2
 		LineNumber                    60522, 4
 		LineNumberAlt1                170, 156
@@ -396,7 +396,7 @@ begin class "bullrun1"
 		; <-
 		BranchTarget                  1
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
 		BranchTarget                  2
@@ -424,14 +424,23 @@ begin class "bullrun1"
 		GetMemberFunctionString       "play"
 		JumpAbsolute                  2
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
 		BranchTarget                  3
 		Dup
+		PushConstanti8                44
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		BranchAlwaysTarget            12, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
 		PushConstanti8                11
 		EqualTo
-		CompareAndBranchIfFalseTarget 5, 0
+		CompareAndBranchIfFalseTarget 6, 0
 		; ->
 		LineNumber                    60541, 4
 		LineNumberAlt1                189, 156
@@ -445,7 +454,7 @@ begin class "bullrun1"
 		Dup
 		PushConstantStringString      "bl09"
 		EqualTo
-		CompareAndBranchIfFalseTarget 4, 0
+		CompareAndBranchIfFalseTarget 5, 0
 		; ->
 		LineNumber                    60547, 4
 		LineNumberAlt1                195, 156
@@ -475,16 +484,16 @@ begin class "bullrun1"
 		JumpAbsolute                  2
 		Pop
 		; <-
-		BranchTarget                  4
+		BranchTarget                  5
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
-		BranchTarget                  5
+		BranchTarget                  6
 		Dup
 		PushConstanti8                3
 		EqualTo
-		CompareAndBranchIfFalseTarget 6, 0
+		CompareAndBranchIfFalseTarget 7, 0
 		; ->
 		LineNumber                    60554, 4
 		LineNumberAlt1                202, 156
@@ -504,28 +513,28 @@ begin class "bullrun1"
 		PushConstantf32               1.2000000476837158
 		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
-		BranchTarget                  6
+		BranchTarget                  7
 		Dup
 		PushConstanti8                46
 		EqualTo
-		CompareAndBranchIfFalseTarget 7, 0
+		CompareAndBranchIfFalseTarget 8, 0
 		; ->
 		LineNumber                    60560, 4
 		LineNumberAlt1                208, 156
 		PushConstantf32               1.2000000476837158
 		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
-		BranchTarget                  7
+		BranchTarget                  8
 		Dup
 		PushConstanti8                27
 		EqualTo
-		CompareAndBranchIfFalseTarget 11, 0
+		CompareAndBranchIfFalseTarget 12, 0
 		; ->
 		LineNumber                    60566, 4
 		LineNumberAlt1                214, 156
@@ -533,7 +542,7 @@ begin class "bullrun1"
 		Dup
 		PushConstant0
 		EqualTo
-		CompareAndBranchIfFalseTarget 8, 0
+		CompareAndBranchIfFalseTarget 9, 0
 		; ->
 		LineNumber                    60568, 4
 		LineNumberAlt1                216, 156
@@ -550,14 +559,14 @@ begin class "bullrun1"
 		GetMemberFunctionString       "gotostartpos"
 		JumpAbsolute                  3
 		Pop
-		BranchAlwaysTarget            10, 0
+		BranchAlwaysTarget            11, 0
 		; ->
 		; <-
-		BranchTarget                  8
+		BranchTarget                  9
 		Dup
 		PushConstanti8                1
 		EqualTo
-		CompareAndBranchIfFalseTarget 9, 0
+		CompareAndBranchIfFalseTarget 10, 0
 		; ->
 		LineNumber                    60570, 4
 		LineNumberAlt1                218, 156
@@ -574,14 +583,14 @@ begin class "bullrun1"
 		GetMemberFunctionString       "gotostartpos"
 		JumpAbsolute                  3
 		Pop
-		BranchAlwaysTarget            10, 0
+		BranchAlwaysTarget            11, 0
 		; ->
 		; <-
-		BranchTarget                  9
+		BranchTarget                  10
 		Dup
 		PushConstanti8                2
 		EqualTo
-		CompareAndBranchIfFalseTarget 10, 0
+		CompareAndBranchIfFalseTarget 11, 0
 		; ->
 		LineNumber                    60572, 4
 		LineNumberAlt1                220, 156
@@ -599,7 +608,7 @@ begin class "bullrun1"
 		JumpAbsolute                  3
 		Pop
 		; <-
-		BranchTarget                  10
+		BranchTarget                  11
 		Pop
 		LineNumber                    60575, 4
 		LineNumberAlt1                223, 156
@@ -737,15 +746,15 @@ begin class "bullrun1"
 		JumpAbsolute                  2
 		Pop
 		; <-
-		BranchTarget                  11
+		BranchTarget                  12
 		Pop
 		PushNothing
 		Return
 	end ; method
 
 	begin method "exit"
-		; address: 0x87f56
-		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_tura.vbo" 244:244
+		; address: 0x8de19
+		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr1.vbo" 244:244
 		MemberFunctionArgumentCheck 1
 		LineNumber                  60596, 4
 		LineNumberAlt1              244, 156

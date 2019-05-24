@@ -1,15 +1,15 @@
 begin class "strt2_puzzle"
 	property "parent"
+	property "gatestone"
 	property "door"
-	property "killedcharacters"
-	property "callev_safe_time_once"
-	property "hiveinc"
 	property "hive1handle"
 	property "hive2handle"
+	property "upgradefruit3"
+	property "upgradefruit3_shown"
 
 	begin method "strt2_puzzle"
-		; address: 0x7b266
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 92:92
+		; address: 0x80b88
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 92:92
 		MemberFunctionArgumentCheck 2
 		LineNumber                  53039, 4
 		LineNumberAlt1              92, 136
@@ -20,18 +20,10 @@ begin class "strt2_puzzle"
 	end ; method
 
 	begin method "initfull"
-		; address: 0x7b27a
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 100:123
+		; address: 0x80b9c
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 100:123
 		MemberFunctionArgumentCheck 1
-		CreateStackVariables        1
-		LineNumber                  53047, 4
-		LineNumberAlt1              100, 136
-		PushConstant0
-		SetThisMemberValueString    "killedcharacters"
-		LineNumber                  53048, 4
-		LineNumberAlt1              101, 136
-		PushConstant0
-		SetThisMemberValueString    "hiveinc"
+		CreateStackVariables        3
 		LineNumber                  53049, 4
 		LineNumberAlt1              102, 136
 		PushConstant0
@@ -56,10 +48,6 @@ begin class "strt2_puzzle"
 		GetMemberFunctionString     "initfull"
 		JumpAbsolute                1
 		Pop
-		LineNumber                  53052, 4
-		LineNumberAlt1              105, 136
-		PushConstanti8              1
-		SetThisMemberValueString    "callev_safe_time_once"
 		LineNumber                  53054, 4
 		LineNumberAlt1              107, 136
 		PushConstantStringString    "ghv0"
@@ -154,7 +142,7 @@ begin class "strt2_puzzle"
 		SetBlueValue
 		PushConstanti16             255
 		SetAlphaValue
-		PushConstantStringString    "mk7a"
+		PushConstantStringString    "mkaa"
 		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                  53066, 4
 		LineNumberAlt1              119, 136
@@ -169,20 +157,10 @@ begin class "strt2_puzzle"
 		LineNumberAlt1              120, 136
 		CallGameFunctionString      "gccharacter", "setinputstate", 2
 		Pop
-		LineNumber                  53068, 4
-		LineNumberAlt1              121, 136
-		GetVariableValue            1                                            ; local
-		PushConstantf32             1.5
-		PushConstantf32             0.800000011920929
-		PushConstanti8              1
-		PushConstant0
-		PushConstant0
-		CallGameFunctionString      "gccharacter", "setupmoveable", 6
-		Pop
 		LineNumber                  53069, 4
 		LineNumberAlt1              122, 136
 		GetVariableValue            1                                            ; local
-		PushConstantStringString    "d000"
+		PushConstantStringString    "d003"
 		CallGameFunctionString      "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                  53069, 4
 		LineNumberAlt1              122, 136
@@ -192,16 +170,226 @@ begin class "strt2_puzzle"
 		LineNumber                  53070, 4
 		LineNumberAlt1              123, 136
 		GetVariableValue            1                                            ; local
-		PushConstanti16             250
+		PushConstanti16             -56
 		CallGameFunctionString      "gccharacter", "setorientation", 2
 		Pop
+		LineNumber                    53361, 4
+		LineNumberAlt1                194, 137
+		PushConstantStringString      "gstn"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    53361, 4
+		LineNumberAlt1                194, 137
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    53361, 4
+		LineNumberAlt1                194, 137
+		SetVariableValue              2                                                ; local
+		LineNumber                    53362, 4
+		LineNumberAlt1                195, 137
+		GetVariableValue              2                                                ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    53363, 4
+		LineNumberAlt1                196, 137
+		CreateObjectString            "lego_pickup"
+		Dup
+		PushConstantStringString      "gstn"
+		PushConstant0
+		PushConstanti8                5
+		PushConstantStringString      "item"
+		PushConstanti8                7
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "lego_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    53363, 4
+		LineNumberAlt1                196, 137
+		SetThisMemberValueString      "gatestone"
+		LineNumber                    53364, 4
+		LineNumberAlt1                197, 137
+		GetThisMemberValueString      "gatestone"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    53365, 4
+		LineNumberAlt1                198, 137
+		GetThisMemberValueString      "gatestone"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    53366, 4
+		LineNumberAlt1                199, 137
+		GetThisMemberValueString      "gatestone"
+		PushConstanti32               262144
+		Pull                          2
+		GetMemberFunctionString       "setcondition"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    53367, 4
+		LineNumberAlt1                200, 137
+		GetThisMemberValueString      "gatestone"
+		PushConstanti8                3
+		Pull                          2
+		GetMemberFunctionString       "setquest"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		PushConstantStringString      "fru1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    9905, 4
+		LineNumberAlt1                98, 201
+		SetThisMemberValueString      "upgradefruit3_shown"
+		LineNumber                    9906, 4
+		LineNumberAlt1                99, 201
+		GetThisMemberValueString      "upgradefruit3_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    16362, 4
+		LineNumberAlt1                97, 220
+		CreateObjectString            "vitality_pickup"
+		Dup
+		PushConstantStringString      "fru1"
+		PushConstanti8                17
+		PushConstanti8                2
+		PushConstantStringString      "frut"
+		PushConstanti8                1
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "vitality_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    16362, 4
+		LineNumberAlt1                97, 220
+		SetThisMemberValueString      "upgradefruit3"
+		LineNumber                    16363, 4
+		LineNumberAlt1                98, 220
+		GetThisMemberValueString      "upgradefruit3"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti32               37
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    53386, 4
+		LineNumberAlt1                219, 137
+		PushConstantStringString      "vlgr"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    53386, 4
+		LineNumberAlt1                219, 137
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    53386, 4
+		LineNumberAlt1                219, 137
+		SetVariableValue              1                                                ; local
+		LineNumber                    53387, 4
+		LineNumberAlt1                220, 137
+		GetVariableValue              1                                                ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstanti16               255
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstanti16               255
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		PushConstantStringString      "mkaa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    53387, 4
+		LineNumberAlt1                220, 137
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+        GetVariableValue              1                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              1                                            ; local
+        PushConstantStringString      "d000"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+		LineNumber                  53142, 4
+		LineNumberAlt1              195, 136
+		GetThisMemberValueString    "door"
+		Dup
+		GetMemberFunctionString     "getx"
+		JumpAbsolute                1
+		LineNumber                  53142, 4
+		LineNumberAlt1              195, 136
+		SetVariableValue            1             ; local
+		LineNumber                  53143, 4
+		LineNumberAlt1              196, 136
+		GetThisMemberValueString    "door"
+		Dup
+		GetMemberFunctionString     "gety"
+		JumpAbsolute                1
+		LineNumber                  53143, 4
+		LineNumberAlt1              196, 136
+		PushConstantf32             9
+		Add
+		SetVariableValue            2             ; local
+		LineNumber                  53144, 4
+		LineNumberAlt1              197, 136
+		GetThisMemberValueString    "door"
+		Dup
+		GetMemberFunctionString     "getz"
+		JumpAbsolute                1
+		LineNumber                  53144, 4
+		LineNumberAlt1              197, 136
+		SetVariableValue            3             ; local
+		LineNumber                  53146, 4
+		LineNumberAlt1              199, 136
+		GetThisMemberValueString    "door"
+		GetVariableValue            1             ; local
+		GetVariableValue            2             ; local
+		GetVariableValue            3             ; local
+		PushConstantf32             0
+		Pull                        5
+		GetMemberFunctionString     "interpolate"
+		JumpAbsolute                5
+		Pop
+		; <-
+		BranchTarget                  2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "initshort"
-		; address: 0x7b500
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 129:131
+		; address: 0x80e22
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 129:131
 		MemberFunctionArgumentCheck  1
 		LineNumber                   53076, 4
 		LineNumberAlt1               129, 136
@@ -224,18 +412,56 @@ begin class "strt2_puzzle"
 		GetMemberFunctionString      "unkill"
 		JumpAbsolute                 1
 		Pop
-		LineNumber                   53078, 4
-		LineNumberAlt1               131, 136
-		PushConstanti8               1
-		SetThisMemberValueString     "callev_safe_time_once"
 		PushNothing
 		Return
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x7b551
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 136:138
+		; address: 0x80e73
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 136:138
 		MemberFunctionArgumentCheck 1
+		LineNumber                    48850, 4
+		LineNumberAlt1                111, 131
+		GetThisMemberValueString      "gatestone"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    48851, 4
+		LineNumberAlt1                112, 131
+		GetThisMemberValueString      "gatestone"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    48852, 4
+		LineNumberAlt1                113, 131
+		PushNothing
+		SetThisMemberValueString      "gatestone"
+		; <-
+		BranchTarget                  0
+		LineNumber                    39555, 4
+		LineNumberAlt1                175, 97
+		GetThisMemberValueString      "upgradefruit3"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    39557, 4
+		LineNumberAlt1                177, 97
+		GetThisMemberValueString      "upgradefruit3"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    39558, 4
+		LineNumberAlt1                178, 97
+		PushNothing
+		SetThisMemberValueString      "upgradefruit3"
+		; <-
+		BranchTarget                  1
 		LineNumber                  53083, 4
 		LineNumberAlt1              136, 136
 		PushNothing
@@ -251,159 +477,53 @@ begin class "strt2_puzzle"
 		GetMemberFunctionString     "cleanupfull"
 		JumpAbsolute                1
 		Pop
+		LineNumber                  48855, 4
+		LineNumberAlt1              116, 131
+		PushNothing
+		SetThisMemberValueString    "door"
 		PushNothing
 		Return
 	end ; method
 
 	begin method "process"
-		; address: 0x7b585
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 144:146
+		; address: 0x80ea7
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 144:146
 		MemberFunctionArgumentCheck   2
-		CreateStackVariables          1
-		LineNumber                    53091, 4
-		LineNumberAlt1                144, 136
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		GetMemberValueString          "actor"
-		Dup
-		GetMemberFunctionString       "getposy"
-		JumpAbsolute                  1
-		LineNumber                    53091, 4
-		LineNumberAlt1                144, 136
-		SetVariableValue              2             ; local
-		LineNumber                    53092, 4
-		LineNumberAlt1                145, 136
-		GetVariableValue              2             ; local
-		PushConstant0
-		PushConstantf32               38
-		Subtract
-		LessThan
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    53093, 4
-		LineNumberAlt1                146, 136
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		Dup
-		GetMemberFunctionString       "kill"
-		JumpAbsolute                  1
-		Pop
-		; <-
-		BranchTarget                  0
 		PushNothing
 		Return
 	end ; method
 
 	begin method "onevent"
-		; address: 0x7b5e0
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 153:175
+		; address: 0x80f02
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 153:175
 		MemberFunctionArgumentCheck   2
 		LineNumber                    53100, 4
 		LineNumberAlt1                153, 136
 		GetVariableValue              1                                            ; local
 		GetMemberValueString          "eventid"
 		Dup
-		PushConstanti8                44
-		EqualTo
-		CompareAndBranchIfFalseTarget 2, 0
-		; ->
-		LineNumber                    53102, 4
-		LineNumberAlt1                155, 136
-		GetThisMemberValueString      "callev_safe_time_once"
-		CompareAndBranchIfFalseTarget 1, 0
-		; ->
-		LineNumber                    53103, 4
-		LineNumberAlt1                156, 136
-		GetThisMemberValueString      "parent"
-		GetMemberValueString          "enterstartid"
-		PushConstantStringString      "str1"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    53103, 4
-		LineNumberAlt1                156, 136
+		PushConstanti8                41
 		EqualTo
 		CompareAndBranchIfFalseTarget 0, 0
 		; ->
-		LineNumber                    53104, 4
-		LineNumberAlt1                157, 136
-		GetVariableValue              0                                            ; local
+		PushConstanti32               37
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		GetVariableValue              0                                        ; local
+		GetThisMemberFunctionString   "give_fruit3"
+		JumpAbsolute                  1
+		Pop
+		GetVariableValue              0                                        ; local
 		GetThisMemberFunctionString   "movedoorup"
 		JumpAbsolute                  1
 		Pop
-		; <-
-		BranchTarget                  0
-		LineNumber                    53106, 4
-		LineNumberAlt1                159, 136
-		PushConstant0
-		SetThisMemberValueString      "callev_safe_time_once"
 		; <-
 		BranchTarget                  1
 		BranchAlwaysTarget            8, 0
 		; ->
 		; <-
-		BranchTarget                  2
-		Dup
-		PushConstanti8                51
-		EqualTo
-		CompareAndBranchIfFalseTarget 6, 0
-		; ->
-		LineNumber                    53109, 4
-		LineNumberAlt1                162, 136
-		GetVariableValue              1                                            ; local
-		GetMemberValueString          "args"
-		PushConstanti8                1
-		GetArrayValue
-		Dup
-		PushConstanti8                1
-		EqualTo
-		CompareAndBranchIfFalseTarget 4, 0
-		; ->
-		LineNumber                    53111, 4
-		LineNumberAlt1                164, 136
-		GetThisMemberValueString      "hiveinc"
-		PushConstanti8                1
-		Add
-		SetThisMemberValueString      "hiveinc"
-		LineNumber                    53112, 4
-		LineNumberAlt1                165, 136
-		GetThisMemberValueString      "hiveinc"
-		PushConstanti8                2
-		GreaterOrEqual
-		CompareAndBranchIfFalseTarget 3, 0
-		; ->
-		LineNumber                    53113, 4
-		LineNumberAlt1                166, 136
-		PushConstantStringString      "**** CONGRATS PUZZLE SOLVED"
-		CallGameFunctionString        "debug", "print", 1
-		Pop
-		LineNumber                    53114, 4
-		LineNumberAlt1                167, 136
-		GetVariableValue              0                                            ; local
-		GetThisMemberFunctionString   "movedoorup"
-		JumpAbsolute                  1
-		Pop
-		; <-
-		BranchTarget                  3
-		BranchAlwaysTarget            5, 0
-		; ->
-		; <-
-		BranchTarget                  4
-		Dup
-		PushConstant0
-		EqualTo
-		CompareAndBranchIfFalseTarget 5, 0
-		; ->
-		LineNumber                    53117, 4
-		LineNumberAlt1                170, 136
-		PushConstantStringString      "********* YEAH YOU HAVE KILLED A HIVE!!"
-		CallGameFunctionString        "debug", "print", 1
-		Pop
-		; <-
-		BranchTarget                  5
-		Pop
-		BranchAlwaysTarget            8, 0
-		; ->
-		; <-
-		BranchTarget                  6
+		BranchTarget                  0
 		Dup
 		PushConstanti8                46
 		EqualTo
@@ -437,8 +557,8 @@ begin class "strt2_puzzle"
 	end ; method
 
 	begin method "input"
-		; address: 0x7b720
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 182:183
+		; address: 0x81042
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 182:183
 		MemberFunctionArgumentCheck   2
 		LineNumber                    53129, 4
 		LineNumberAlt1                182, 136
@@ -493,8 +613,8 @@ begin class "strt2_puzzle"
 	end ; method
 
 	begin method "cheat"
-		; address: 0x7b7a2
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 188:189
+		; address: 0x810c4
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 188:189
 		MemberFunctionArgumentCheck 1
 		CreateStackVariables        1
 		LineNumber                  53135, 4
@@ -528,8 +648,8 @@ begin class "strt2_puzzle"
 	end ; method
 
 	begin method "movedoorup"
-		; address: 0x7b7e9
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 195:199
+		; address: 0x8110b
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 195:199
 		MemberFunctionArgumentCheck 1
 		CreateStackVariables        3
 		LineNumber                  53142, 4
@@ -577,13 +697,37 @@ begin class "strt2_puzzle"
 	end ; method
 
 	begin method "exit"
-		; address: 0x7b878
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 204:204
+		; address: 0x8119a
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 204:204
 		MemberFunctionArgumentCheck 1
 		LineNumber                  53151, 4
 		LineNumberAlt1              204, 136
 		PushNothing
 		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "give_fruit3"
+		MemberFunctionArgumentCheck   1
+		GetThisMemberValueString      "upgradefruit3_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		GetThisMemberValueString     "upgradefruit3"
+		GetMemberValueString         "obj"
+		PushConstantf32              48.235977
+		PushConstantf32              1.150006
+		PushConstantf32              -34.390812
+		Pull                         4
+		GetMemberFunctionString      "setpos"
+		JumpAbsolute                 4
+		Pop
+		PushConstanti8                1
+		SetThisMemberValueString      "upgradefruit3_shown"
+		; <-
+		BranchTarget                  0
 		PushNothing
 		Return
 	end ; method

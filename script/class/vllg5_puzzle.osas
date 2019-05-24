@@ -1,0 +1,2472 @@
+begin class "vllg5_puzzle"
+	property "parent"
+	property "discpickup"
+	property "cinema"
+	property "cinema_shown"
+	property "deadhives"
+	property "coindoor"
+	property "coindoortext"
+	property "coindoortexttimer"
+	property "showcoindoor"
+	property "upgradefruit"
+	property "upgradefruit2"
+	property "upgradefruit3"
+	property "upgradefruit_shown"
+	property "upgradefruit2_shown"
+	property "upgradefruit3_shown"
+
+	begin method "vllg5_puzzle"
+		; address: 0xaeb1c
+		; source: 200 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_vllg.vbo" 93:93
+		MemberFunctionArgumentCheck 2
+		LineNumber                  9625, 4
+		LineNumberAlt1              93, 200
+		GetVariableValue            1        ; local
+		SetThisMemberValueString    "parent"
+		LineNumber                  37300, 4
+		LineNumberAlt1              132, 95
+		PushConstanti8              1
+		SetThisMemberValueString    "showcoindoor"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "initfull"
+		; address: 0xaeb30
+		; source: 200 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_vllg.vbo" 101:170
+		; source: 95 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_vllg.vbo" 184:185
+		MemberFunctionArgumentCheck   1
+		CreateStackVariables          4
+		LineNumber                    40993, 4
+		LineNumberAlt1                45, 114
+		PushConstantStringString      "cin4"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    40993, 4
+		LineNumberAlt1                45, 114
+		CallGameFunctionString        "gcsaver", "findcinema", 1
+		LineNumber                    30326, 4
+		LineNumberAlt1                106, 83
+		SetVariableValue              4                                            ; local
+		LineNumber                    30327, 4
+		LineNumberAlt1                107, 83
+		GetVariableValue              4                                            ; local
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    30328, 4
+		LineNumberAlt1                108, 83
+		PushConstanti8                1
+		SetThisMemberValueString      "cinema_shown"
+		BranchAlwaysTarget            11, 0
+		; ->
+		; <-
+		BranchTarget                  10
+		LineNumber                    30330, 4
+		LineNumberAlt1                110, 83
+		PushConstant0
+		SetThisMemberValueString      "cinema_shown"
+		; <-
+		BranchTarget                  11
+		LineNumber                    30332, 4
+		LineNumberAlt1                112, 83
+		GetThisMemberValueString      "cinema_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 12, 0
+		; ->
+		LineNumber                    40999, 4
+		LineNumberAlt1                51, 114
+		CallGameFunctionString        "gccinemaengine", "create", 0
+		LineNumber                    40999, 4
+		LineNumberAlt1                51, 114
+		SetThisMemberValueString      "cinema"
+		LineNumber                    41000, 4
+		LineNumberAlt1                52, 114
+		GetThisMemberValueString      "cinema"
+		PushConstantStringString      "cin4"
+		CallGameFunctionString        "gccinemaengine", "load", 2
+		Pop
+		GetThisMemberValueString      "cinema"
+		PushConstantStringString      "tura"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		CallGameFunctionString        "gccinemaengine", "setnextarea", 2
+		Pop
+		; <-
+		BranchTarget                  12
+		LineNumber                    9638, 4
+		LineNumberAlt1                106, 200
+		PushConstantStringString      "dsc5"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9638, 4
+		LineNumberAlt1                106, 200
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    9638, 4
+		LineNumberAlt1                106, 200
+		SetVariableValue              1                                                                                      ; local
+		LineNumber                    9639, 4
+		LineNumberAlt1                107, 200
+		GetVariableValue              1                                                                                      ; local
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9640, 4
+		LineNumberAlt1                108, 200
+		CreateObjectString            "lego_pickup"
+		Dup
+		PushConstantStringString      "dsc5"
+		PushConstant0
+		PushConstanti8                5
+		PushConstantStringString      "item"
+		PushConstanti8                7
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "lego_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    9640, 4
+		LineNumberAlt1                108, 200
+		SetThisMemberValueString      "discpickup"
+		LineNumber                    9641, 4
+		LineNumberAlt1                109, 200
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9642, 4
+		LineNumberAlt1                110, 200
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9643, 4
+		LineNumberAlt1                111, 200
+		GetThisMemberValueString      "discpickup"
+		PushConstanti32               32768
+		Pull                          2
+		GetMemberFunctionString       "setcondition"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9644, 4
+		LineNumberAlt1                112, 200
+		GetThisMemberValueString      "discpickup"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "setquest"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  0
+		LineNumber                    9633, 4
+		LineNumberAlt1                101, 200
+		PushConstant0
+		SetThisMemberValueString      "deadhives"
+		LineNumber                    9647, 4
+		LineNumberAlt1                115, 200
+		PushConstanti32               4194304
+		CallGameFunctionString        "gcsaver", "isconditionset", 1
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    9652, 4
+		LineNumberAlt1                120, 200
+		PushConstantStringString      "vlgr"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9652, 4
+		LineNumberAlt1                120, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9652, 4
+		LineNumberAlt1                120, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9653, 4
+		LineNumberAlt1                121, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mkba"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9653, 4
+		LineNumberAlt1                121, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               169
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d000"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vlgr"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x027F1EFF ; color2 = feet
+	    PushConstantColor8888		  0x027F1EFF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		LineNumber                    9655, 4
+		LineNumberAlt1                123, 200
+		PushConstantStringString      "vl01"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9655, 4
+		LineNumberAlt1                123, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9655, 4
+		LineNumberAlt1                123, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9656, 4
+		LineNumberAlt1                124, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk8a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9656, 4
+		LineNumberAlt1                124, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d003"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl01"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x027F1EFF ; color2 = feet
+	    PushConstantColor8888		  0x027F1EFF ; color3 = head
+	    PushConstantColor8888		  0x009679FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		LineNumber                    9658, 4
+		LineNumberAlt1                126, 200
+		PushConstantStringString      "vl02"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9658, 4
+		LineNumberAlt1                126, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9658, 4
+		LineNumberAlt1                126, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9659, 4
+		LineNumberAlt1                127, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstanti16               150
+		SetGreenValue
+		PushConstanti8                121
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstanti16               150
+		SetGreenValue
+		PushConstanti8                121
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		PushConstantStringString      "mk4a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9659, 4
+		LineNumberAlt1                127, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               -65
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d000"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+		LineNumber                    9661, 4
+		LineNumberAlt1                129, 200
+		PushConstantStringString      "vl03"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9661, 4
+		LineNumberAlt1                129, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9661, 4
+		LineNumberAlt1                129, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9662, 4
+		LineNumberAlt1                130, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk0a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9662, 4
+		LineNumberAlt1                130, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               -151
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d003"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl03"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0xBBE785FF ; color2 = feet
+	    PushConstantColor8888		  0xBBE785FF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		LineNumber                    9664, 4
+		LineNumberAlt1                132, 200
+		PushConstantStringString      "vl04"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9664, 4
+		LineNumberAlt1                132, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9664, 4
+		LineNumberAlt1                132, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9665, 4
+		LineNumberAlt1                133, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mkca"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9665, 4
+		LineNumberAlt1                133, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+	    PushConstantStringString      "vl04"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x027F1EFF ; color2 = feet
+	    PushConstantColor8888		  0x027F1EFF ; color3 = head
+	    PushConstantColor8888		  0x737573FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		LineNumber                    9667, 4
+		LineNumberAlt1                135, 200
+		PushConstantStringString      "vl05"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9667, 4
+		LineNumberAlt1                135, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9667, 4
+		LineNumberAlt1                135, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9668, 4
+		LineNumberAlt1                136, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk0a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9668, 4
+		LineNumberAlt1                136, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               -165
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "hak5"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl05"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x009679FF ; color2 = feet
+	    PushConstantColor8888		  0x009679FF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		LineNumber                    9670, 4
+		LineNumberAlt1                138, 200
+		PushConstantStringString      "vl06"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9670, 4
+		LineNumberAlt1                138, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9670, 4
+		LineNumberAlt1                138, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9671, 4
+		LineNumberAlt1                139, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mkca"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9671, 4
+		LineNumberAlt1                139, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+	    PushConstantStringString      "vl06"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0xBBE785FF ; color2 = feet
+	    PushConstantColor8888		  0x027F1EFF ; color3 = head
+	    PushConstantColor8888		  0x009679FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstantStringString      "vl07"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk9a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               105
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "hak5"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl07"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0xBBE785FF ; color2 = feet
+	    PushConstantColor8888		  0xBBE785FF ; color3 = head
+	    PushConstantColor8888		  0x009679FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		LineNumber                    9676, 4
+		LineNumberAlt1                144, 200
+		PushConstantStringString      "vl08"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9676, 4
+		LineNumberAlt1                144, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9676, 4
+		LineNumberAlt1                144, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9677, 4
+		LineNumberAlt1                145, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk6a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9677, 4
+		LineNumberAlt1                145, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               -132
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d003"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl08"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x027F1EFF ; color2 = feet
+	    PushConstantColor8888		  0x027F1EFF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		LineNumber                    9680, 4
+		LineNumberAlt1                148, 200
+		PushConstantStringString      "vl09"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9680, 4
+		LineNumberAlt1                148, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9680, 4
+		LineNumberAlt1                148, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9681, 4
+		LineNumberAlt1                149, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk2a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9681, 4
+		LineNumberAlt1                149, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+	    PushConstantStringString      "vl09"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x009679FF ; color2 = feet
+	    PushConstantColor8888		  0x009679FF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+		Pop
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstantStringString      "vl10"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mkba"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               -91
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "hak5"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl10"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x027F1EFF ; color2 = feet
+	    PushConstantColor8888		  0x027F1EFF ; color3 = head
+	    PushConstantColor8888		  0x737573FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+		Pop
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstantStringString      "vl11"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk4a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               45
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d000"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl11"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x00D021FF ; color2 = feet
+	    PushConstantColor8888		  0x00D021FF ; color3 = head
+	    PushConstantColor8888		  0x660066FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+		Pop
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstantStringString      "vl12"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk7a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               -41
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d000"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl12"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0xBBE785FF ; color2 = feet
+	    PushConstantColor8888		  0xBBE785FF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+		Pop
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstantStringString      "vl13"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstanti16               187
+		SetRedValue
+		PushConstanti16               231
+		SetGreenValue
+		PushConstanti16               133
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstanti16               150
+		SetGreenValue
+		PushConstanti8                121
+		SetBlueValue
+		PushConstanti16               255
+		SetAlphaValue
+		PushConstantStringString      "mkaa"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+		GetVariableValue              3                                            ; local
+		PushConstanti16               142
+		CallGameFunctionString        "gccharacter", "setorientation", 2
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d000"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstantStringString      "vl14"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk1a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+	    PushConstantStringString      "vl14"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0xBBE785FF ; color2 = feet
+	    PushConstantColor8888		  0xBBE785FF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+		Pop
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstantStringString      "vl15"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9673, 4
+		LineNumberAlt1                141, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk3a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9674, 4
+		LineNumberAlt1                142, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+	    PushConstantStringString      "vl15"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x009679FF ; color2 = feet
+	    PushConstantColor8888		  0xBBE785FF ; color3 = head
+	    PushConstantColor8888		  0xBBE785FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+		Pop
+		LineNumber                    9650, 4
+		LineNumberAlt1                118, 200
+		PushConstantStringString      "fhv0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9650, 4
+		LineNumberAlt1                118, 200
+		PushConstantStringString      "vllg"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9650, 4
+		LineNumberAlt1                118, 200
+		CallGameFunctionString        "gcareadirector", "hide", 2
+		Pop
+		LineNumber                    37352, 4
+		LineNumberAlt1                184, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicVillage"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    37353, 4
+		LineNumberAlt1                185, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            2, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    9684, 4
+		LineNumberAlt1                152, 200
+		PushConstantStringString      "vlgr"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9684, 4
+		LineNumberAlt1                152, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9685, 4
+		LineNumberAlt1                153, 200
+		PushConstantStringString      "vl01"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9685, 4
+		LineNumberAlt1                153, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9686, 4
+		LineNumberAlt1                154, 200
+		PushConstantStringString      "vl02"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9686, 4
+		LineNumberAlt1                154, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9687, 4
+		LineNumberAlt1                155, 200
+		PushConstantStringString      "vl03"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9687, 4
+		LineNumberAlt1                155, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9688, 4
+		LineNumberAlt1                156, 200
+		PushConstantStringString      "vl04"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9688, 4
+		LineNumberAlt1                156, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9689, 4
+		LineNumberAlt1                157, 200
+		PushConstantStringString      "vl05"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9689, 4
+		LineNumberAlt1                157, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9690, 4
+		LineNumberAlt1                158, 200
+		PushConstantStringString      "vl06"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9690, 4
+		LineNumberAlt1                158, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9691, 4
+		LineNumberAlt1                159, 200
+		PushConstantStringString      "vl07"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9691, 4
+		LineNumberAlt1                159, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9692, 4
+		LineNumberAlt1                160, 200
+		PushConstantStringString      "vl08"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9692, 4
+		LineNumberAlt1                160, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstantStringString      "vl09"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstantStringString      "vl10"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstantStringString      "vl11"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstantStringString      "vl12"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstantStringString      "vl13"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstantStringString      "vl14"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstantStringString      "vl15"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9693, 4
+		LineNumberAlt1                161, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "hide", 2
+		Pop
+		LineNumber                    9635, 4
+		LineNumberAlt1                103, 200
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicLewaTheme"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9636, 4
+		LineNumberAlt1                104, 200
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		LineNumber                    37392, 4
+		LineNumberAlt1                224, 95
+		CreateObjectString            "lego_moveableobject"
+		Dup
+		PushConstantStringString      "door"
+		PushConstantStringString      "vllg"
+		Pull                          3
+		GetMemberFunctionString       "lego_moveableobject"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    37392, 4
+		LineNumberAlt1                224, 95
+		SetThisMemberValueString      "coindoor"
+		LineNumber                    37393, 4
+		LineNumberAlt1                225, 95
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37395, 4
+		LineNumberAlt1                227, 95
+		GetThisMemberValueString      "showcoindoor"
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		LineNumber                    37396, 4
+		LineNumberAlt1                228, 95
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9700, 4
+		LineNumberAlt1                168, 200
+		GetThisMemberValueString      "coindoor"
+		PushConstantf32               0.699999988079071
+		Pull                          2
+		GetMemberFunctionString       "setalpha"
+		JumpAbsolute                  2
+		Pop
+		BranchAlwaysTarget            14, 0
+		; ->
+		; <-
+		BranchTarget                  13
+		LineNumber                    37402, 4
+		LineNumberAlt1                234, 95
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  14
+		LineNumber                    37405, 4
+		LineNumberAlt1                237, 95
+		PushConstantStringString      "door"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    37405, 4
+		LineNumberAlt1                237, 95
+		PushConstanti8                1
+		PushConstant0
+		PushConstanti8                10
+		CallGameFunctionString        "gcareadirector", "getscriptfluffstringuint", 4
+		LineNumber                    37405, 4
+		LineNumberAlt1                237, 95
+		SetVariableValue              2                                               ; local
+		LineNumber                    37406, 4
+		LineNumberAlt1                238, 95
+		CreateObjectString            "gs_legotext"
+		Dup
+		PushConstantStringString      "Root/Data/Art/Fonts/BionicleFontHi"
+		GetVariableValue              2                                               ; local
+		GetVariableValueGlobalString  "screenx"
+		PushConstantf32               0.5
+		Multiply
+		GetVariableValueGlobalString  "screeny"
+		PushConstantf32               0.8299999833106995
+		Multiply
+		PushConstant0
+		PushConstantf32               1.5
+		PushConstanti16               256
+		PushConstanti8                4
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_legotext"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    37406, 4
+		LineNumberAlt1                238, 95
+		SetThisMemberValueString      "coindoortext"
+		LineNumber                    37407, 4
+		LineNumberAlt1                239, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37408, 4
+		LineNumberAlt1                240, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37409, 4
+		LineNumberAlt1                241, 95
+		PushConstantf32               0
+		SetThisMemberValueString      "coindoortexttimer"
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		PushConstantStringString      "frut"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    9905, 4
+		LineNumberAlt1                98, 201
+		SetThisMemberValueString      "upgradefruit_shown"
+		LineNumber                    9906, 4
+		LineNumberAlt1                99, 201
+		GetThisMemberValueString      "upgradefruit_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    16362, 4
+		LineNumberAlt1                97, 220
+		CreateObjectString            "vitality_pickup"
+		Dup
+		PushConstantStringString      "frut"
+		PushConstanti8                17
+		PushConstanti8                2
+		PushConstantStringString      "frut"
+		PushConstanti8                1
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "vitality_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    16362, 4
+		LineNumberAlt1                97, 220
+		SetThisMemberValueString      "upgradefruit"
+		LineNumber                    16363, 4
+		LineNumberAlt1                98, 220
+		GetThisMemberValueString      "upgradefruit"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  3
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		PushConstantStringString      "fru0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    9905, 4
+		LineNumberAlt1                98, 201
+		SetThisMemberValueString      "upgradefruit2_shown"
+		LineNumber                    9906, 4
+		LineNumberAlt1                99, 201
+		GetThisMemberValueString      "upgradefruit2_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    16362, 4
+		LineNumberAlt1                97, 220
+		CreateObjectString            "vitality_pickup"
+		Dup
+		PushConstantStringString      "fru0"
+		PushConstanti8                17
+		PushConstanti8                2
+		PushConstantStringString      "frut"
+		PushConstanti8                1
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "vitality_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    16362, 4
+		LineNumberAlt1                97, 220
+		SetThisMemberValueString      "upgradefruit2"
+		LineNumber                    16363, 4
+		LineNumberAlt1                98, 220
+		GetThisMemberValueString      "upgradefruit2"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  4
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		PushConstantStringString      "fru1"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    7363, 4
+		LineNumberAlt1                45, 188
+		CallGameFunctionString        "gcsaver", "finditem", 1
+		LineNumber                    9905, 4
+		LineNumberAlt1                98, 201
+		SetThisMemberValueString      "upgradefruit3_shown"
+		LineNumber                    9906, 4
+		LineNumberAlt1                99, 201
+		GetThisMemberValueString      "upgradefruit3_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    16362, 4
+		LineNumberAlt1                97, 220
+		CreateObjectString            "vitality_pickup"
+		Dup
+		PushConstantStringString      "fru1"
+		PushConstanti8                17
+		PushConstanti8                2
+		PushConstantStringString      "frut"
+		PushConstanti8                1
+		PushConstanti8                1
+		Pull                          7
+		GetMemberFunctionString       "vitality_pickup"
+		JumpAbsolute                  7
+		Pop
+		LineNumber                    16362, 4
+		LineNumberAlt1                97, 220
+		SetThisMemberValueString      "upgradefruit3"
+		LineNumber                    16363, 4
+		LineNumberAlt1                98, 220
+		GetThisMemberValueString      "upgradefruit3"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  5
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti32               44
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    9655, 4
+		LineNumberAlt1                123, 200
+		PushConstantStringString      "vl01"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9655, 4
+		LineNumberAlt1                123, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9655, 4
+		LineNumberAlt1                123, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9656, 4
+		LineNumberAlt1                124, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk8a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9656, 4
+		LineNumberAlt1                124, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d000"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl01"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x027F1EFF ; color2 = feet
+	    PushConstantColor8888		  0x027F1EFF ; color3 = head
+	    PushConstantColor8888		  0x009679FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		; <-
+		BranchTarget                  6
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti32               45
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    9661, 4
+		LineNumberAlt1                129, 200
+		PushConstantStringString      "vl03"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9661, 4
+		LineNumberAlt1                129, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9661, 4
+		LineNumberAlt1                129, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9662, 4
+		LineNumberAlt1                130, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk0a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9662, 4
+		LineNumberAlt1                130, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d000"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl03"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0xBBE785FF ; color2 = feet
+	    PushConstantColor8888		  0xBBE785FF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		; <-
+		BranchTarget                  7
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti32               46
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		LineNumber                    37314, 4
+		LineNumberAlt1                146, 95
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    9676, 4
+		LineNumberAlt1                144, 200
+		PushConstantStringString      "vl08"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9676, 4
+		LineNumberAlt1                144, 200
+		PushConstant0
+		CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+		LineNumber                    9676, 4
+		LineNumberAlt1                144, 200
+		SetVariableValue              3                                                                                      ; local
+		LineNumber                    9677, 4
+		LineNumberAlt1                145, 200
+		GetVariableValue              3                                                                                      ; local
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantColor8888         0xffffffff
+		PushConstant0
+		SetRedValue
+		PushConstant0
+		SetGreenValue
+		PushConstant0
+		SetBlueValue
+		PushConstant0
+		SetAlphaValue
+		PushConstantStringString      "mk6a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9677, 4
+		LineNumberAlt1                145, 200
+		CallGameFunctionString        "gccharacter", "settohunga", 4
+		Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "none"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        CallGameFunctionString        "gccharacter", "setinputstate", 2
+        Pop
+        GetVariableValue              3                                            ; local
+        PushConstantStringString      "d003"
+        CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+        PushConstanti8                -1
+        CallGameFunctionString        "gccharacter", "switchanimation", 3
+        Pop
+	    PushConstantStringString      "vl08"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x027F1EFF ; color2 = feet
+	    PushConstantColor8888		  0x027F1EFF ; color3 = head
+	    PushConstantColor8888		  0x027F1EFF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
+		; <-
+		BranchTarget                  8
+		PushConstanti8				  56
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  15
+		PushConstanti8				  62
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 16, 0
+		; ->
+		PushConstantStringString      "ar00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "togglepickuponoff", 2
+		Pop
+		PushConstantStringString      "ar00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		CallGameFunctionString        "gcareadirector", "getcurrentarea", 0
+		CallGameFunctionString        "gcnolightdirector", "hide", 2
+		Pop
+		; <-
+		BranchTarget                  16
+		PushNothing
+		Return
+	end ; method
+
+	begin method "cleanupfull"
+		; address: 0xaf445
+		; source: 200 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_vllg.vbo" 176:182
+		MemberFunctionArgumentCheck   1
+		LineNumber                    37424, 4
+		LineNumberAlt1                256, 95
+		PushNothing
+		SetThisMemberValueString      "coindoortexttimer"
+		LineNumber                    37425, 4
+		LineNumberAlt1                257, 95
+		GetThisMemberValueString      "coindoortext"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    37426, 4
+		LineNumberAlt1                258, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37427, 4
+		LineNumberAlt1                259, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37428, 4
+		LineNumberAlt1                260, 95
+		PushNothing
+		SetThisMemberValueString      "coindoortext"
+		; <-
+		BranchTarget                  5
+		LineNumber                    9708, 4
+		LineNumberAlt1                176, 200
+		GetThisMemberValueString      "coindoor"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    9709, 4
+		LineNumberAlt1                177, 200
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9710, 4
+		LineNumberAlt1                178, 200
+		PushNothing
+		SetThisMemberValueString      "coindoor"
+		; <-
+		BranchTarget                  0
+		LineNumber                    9712, 4
+		LineNumberAlt1                180, 200
+		GetThisMemberValueString      "discpickup"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    9713, 4
+		LineNumberAlt1                181, 200
+		GetThisMemberValueString      "discpickup"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9714, 4
+		LineNumberAlt1                182, 200
+		PushNothing
+		SetThisMemberValueString      "discpickup"
+		; <-
+		BranchTarget                  1
+		LineNumber                    39555, 4
+		LineNumberAlt1                175, 97
+		GetThisMemberValueString      "upgradefruit"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    39557, 4
+		LineNumberAlt1                177, 97
+		GetThisMemberValueString      "upgradefruit"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    39558, 4
+		LineNumberAlt1                178, 97
+		PushNothing
+		SetThisMemberValueString      "upgradefruit"
+		; <-
+		BranchTarget                  2
+		LineNumber                    39555, 4
+		LineNumberAlt1                175, 97
+		GetThisMemberValueString      "upgradefruit2"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    39557, 4
+		LineNumberAlt1                177, 97
+		GetThisMemberValueString      "upgradefruit2"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    39558, 4
+		LineNumberAlt1                178, 97
+		PushNothing
+		SetThisMemberValueString      "upgradefruit2"
+		; <-
+		BranchTarget                  3
+		LineNumber                    39555, 4
+		LineNumberAlt1                175, 97
+		GetThisMemberValueString      "upgradefruit3"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    39557, 4
+		LineNumberAlt1                177, 97
+		GetThisMemberValueString      "upgradefruit3"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    39558, 4
+		LineNumberAlt1                178, 97
+		PushNothing
+		SetThisMemberValueString      "upgradefruit3"
+		; <-
+		BranchTarget                  4
+		PushNothing
+		SetThisMemberValueString      "deadhives"
+		PushNothing
+		SetThisMemberValueString      "cinema"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "exit"
+		; address: 0xaf4b7
+		; source: 200 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_vllg.vbo" 188:188
+		MemberFunctionArgumentCheck 1
+		LineNumber                  9720, 4
+		LineNumberAlt1              188, 200
+		PushNothing
+		SetThisMemberValueString    "parent"
+		PushNothing
+		Return
+	end ; method
+
+	begin method "process"
+		; address: 0xaf4c9
+		; source: 200 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_vllg.vbo" 194:202
+		MemberFunctionArgumentCheck   2
+		LineNumber                    37454, 4
+		LineNumberAlt1                286, 95
+		GetThisMemberValueString      "coindoortexttimer"
+		PushConstant0
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37455, 4
+		LineNumberAlt1                287, 95
+		GetThisMemberValueString      "coindoortexttimer"
+		GetVariableValue              1                   ; local
+		GetMemberValueString          "deltatime"
+		Subtract
+		SetThisMemberValueString      "coindoortexttimer"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    37457, 4
+		LineNumberAlt1                289, 95
+		GetThisMemberValueString      "coindoortext"
+		GetMemberValueString          "onscreen"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    37458, 4
+		LineNumberAlt1                290, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xaf5a8
+		; source: 200 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_vllg.vbo" 213:253
+		; source: 95 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_vllg.vbo" 184:185
+		MemberFunctionArgumentCheck   2
+		LineNumber                    9745, 4
+		LineNumberAlt1                213, 200
+		GetVariableValue              1                                                                                          ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37495, 4
+		LineNumberAlt1                327, 95
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		PushConstantStringString      "door"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    37495, 4
+		LineNumberAlt1                327, 95
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37496, 4
+		LineNumberAlt1                328, 95
+		GetThisMemberValueString      "showcoindoor"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37497, 4
+		LineNumberAlt1                329, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "tokens"
+		PushConstanti8                15
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    37500, 4
+		LineNumberAlt1                332, 95
+		GetThisMemberValueString      "coindoor"
+		PushConstantf32               1.5
+		Pull                          2
+		GetMemberFunctionString       "fadeout"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    37501, 4
+		LineNumberAlt1                333, 95
+		PushConstanti16               1084
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    37502, 4
+		LineNumberAlt1                334, 95
+		PushConstant0
+		SetThisMemberValueString      "showcoindoor"
+		LineNumber                    37503, 4
+		LineNumberAlt1                335, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    37506, 4
+		LineNumberAlt1                338, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37507, 4
+		LineNumberAlt1                339, 95
+		PushConstantf32               1
+		SetThisMemberValueString      "coindoortexttimer"
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                35
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    9758, 4
+		LineNumberAlt1                226, 200
+		GetVariableValue              1                                                                                          ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		Dup
+		PushConstantStringString      "door"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9759, 4
+		LineNumberAlt1                227, 200
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		PushConstanti8				 56
+		PushConstanti8               1
+		CallGameFunctionString       "bettersaver", "setbooleanvalue", 2
+		Pop
+		LineNumber                    9762, 4
+		LineNumberAlt1                230, 200
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		Pop
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstanti8                51
+		EqualTo
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		LineNumber                    9766, 4
+		LineNumberAlt1                234, 200
+		GetVariableValue              1                                                                                          ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    9768, 4
+		LineNumberAlt1                236, 200
+		GetThisMemberValueString      "deadhives"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "deadhives"
+		LineNumber                    9769, 4
+		LineNumberAlt1                237, 200
+		GetThisMemberValueString      "deadhives"
+		PushConstanti8                1
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    9771, 4
+		LineNumberAlt1                239, 200
+		PushConstanti32               4194304
+		PushConstanti8                1
+		CallGameFunctionString        "gcsaver", "setcondition", 2
+		Pop
+		LineNumber                    37352, 4
+		LineNumberAlt1                184, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicVillage"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    37353, 4
+		LineNumberAlt1                185, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  5
+		Pop
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  6
+		Dup
+		PushConstanti8                3
+		EqualTo
+		CompareAndBranchIfFalseTarget 8, 0
+		; ->
+		LineNumber                    9775, 4
+		LineNumberAlt1                243, 200
+		GetVariableValue              1                                                                                          ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "tb00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9775, 4
+		LineNumberAlt1                243, 200
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
+		LineNumber                    9776, 4
+		LineNumberAlt1                244, 200
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "kill"
+		JumpAbsolute                  1
+		Pop
+		PushConstanti16               1048
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    9777, 4
+		LineNumberAlt1                245, 200
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                7
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "none"
+		Pull                          2
+		GetMemberFunctionString       "setinputstate"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  7
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  8
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 9, 0
+		; ->
+		LineNumber                    9780, 4
+		LineNumberAlt1                248, 200
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  9
+		Dup
+		PushConstanti8                41
+		EqualTo
+		CompareAndBranchIfFalseTarget 11, 0
+		; ->
+		PushConstanti32               44
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		CompareAndBranchIfFalseTarget 12, 0
+		; ->
+		GetVariableValue              0                                        ; local
+		GetThisMemberFunctionString   "give_fruit"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  12
+		Dup
+		PushConstanti32               45
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		CompareAndBranchIfFalseTarget 13, 0
+		; ->
+		GetVariableValue              0                                        ; local
+		GetThisMemberFunctionString   "give_fruit2"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  13
+		Dup
+		PushConstanti32               46
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		CompareAndBranchIfFalseTarget 14, 0
+		; ->
+		GetVariableValue              0                                        ; local
+		GetThisMemberFunctionString   "give_fruit3"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  14
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget                  11
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 16, 0
+		; ->
+		LineNumber                    37495, 4
+		LineNumberAlt1                327, 95
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "cin4"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		EqualTo
+		GetThisMemberValueString      "cinema_shown"
+		PushConstant0
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		PushConstanti8                1
+		CallGameFunctionString        "gcsaver", "isconditionset", 1
+		PushConstanti8                2
+		CallGameFunctionString        "gcsaver", "isconditionset", 1
+		And
+		PushConstanti8                4
+		CallGameFunctionString        "gcsaver", "isconditionset", 1
+		And
+		PushConstanti8                8
+		CallGameFunctionString        "gcsaver", "isconditionset", 1
+		And
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		LineNumber                    9972, 4
+		LineNumberAlt1                165, 201
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "hud"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    9973, 4
+		LineNumberAlt1                166, 201
+		GetThisMemberValueString      "cinema"
+		CallGameFunctionString        "gccinemaengine", "play", 1
+		Pop
+		LineNumber                    9974, 4
+		LineNumberAlt1                167, 201
+		PushConstanti8                1
+		SetThisMemberValueString      "cinema_shown"
+		; <-
+		BranchTarget				  15
+		BranchAlwaysTarget            10, 0
+		; ->
+		; <-
+		BranchTarget				  16
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 10, 0
+		; ->
+		LineNumber                    9782, 4
+		LineNumberAlt1                250, 200
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9783, 4
+		LineNumberAlt1                251, 200
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterstartid"
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "enterlookid"
+		Pull                          3
+		GetMemberFunctionString       "gotopos"
+		JumpAbsolute                  3
+		Pop
+		LineNumber                    9784, 4
+		LineNumberAlt1                252, 200
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		Dup
+		GetMemberFunctionString       "unkill"
+		JumpAbsolute                  1
+		Pop
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "l000"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    39545, 4
+		LineNumberAlt1                165, 97
+		Pull                          2
+		GetMemberFunctionString       "switchanimation"
+		JumpAbsolute                  2
+		Pop
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "ninp"
+		Pull                          2
+		GetMemberFunctionString       "setinputstate"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    9785, 4
+		LineNumberAlt1                253, 200
+		PushConstantStringString      "tb00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9785, 4
+		LineNumberAlt1                253, 200
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
+		Pop
+		; <-
+		BranchTarget                  10
+		Pop
+		PushNothing
+		Return
+	end ; method
+
+	begin method "input"
+		; address: 0xaf878
+		MemberFunctionArgumentCheck 2
+		GetVariableValue              1                           ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		GetVariableValue              1                           ; local
+		GetMemberValueString          "button"
+		Dup
+		PushConstanti16               251
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		GetThisMemberValueString      "cinema"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		GetThisMemberValueString      "cinema"
+		CallGameFunctionString        "gccinemaengine", "stop", 1
+		Pop
+		; <-
+		BranchTarget                  0
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "give_fruit"
+		MemberFunctionArgumentCheck   1
+		GetThisMemberValueString      "upgradefruit_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		GetThisMemberValueString     "upgradefruit"
+		GetMemberValueString         "obj"
+		PushConstantf32              -52.534065
+		PushConstantf32              -28.625332
+		PushConstantf32              -103.104942
+		Pull                         4
+		GetMemberFunctionString      "setpos"
+		JumpAbsolute                 4
+		Pop
+		PushConstanti8                1
+		SetThisMemberValueString      "upgradefruit_shown"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "give_fruit2"
+		MemberFunctionArgumentCheck   1
+		GetThisMemberValueString      "upgradefruit2_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		GetThisMemberValueString     "upgradefruit2"
+		GetMemberValueString         "obj"
+		PushConstantf32              45.941643
+		PushConstantf32              -28.62541
+		PushConstantf32              3.30511
+		Pull                         4
+		GetMemberFunctionString      "setpos"
+		JumpAbsolute                 4
+		Pop
+		PushConstanti8                1
+		SetThisMemberValueString      "upgradefruit2_shown"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "give_fruit3"
+		MemberFunctionArgumentCheck   1
+		GetThisMemberValueString      "upgradefruit3_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		GetThisMemberValueString     "upgradefruit3"
+		GetMemberValueString         "obj"
+		PushConstantf32              87.122612
+		PushConstantf32              10.079246
+		PushConstantf32              -34.893009
+		Pull                         4
+		GetMemberFunctionString      "setpos"
+		JumpAbsolute                 4
+		Pop
+		PushConstanti8                1
+		SetThisMemberValueString      "upgradefruit3_shown"
+		; <-
+		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+end ; class

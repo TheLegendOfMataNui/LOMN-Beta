@@ -2,8 +2,9 @@ begin class "lego_level_3", "gs_lego_level"
 	property "thebull"
 
 	begin method "lego_level_3"
-		; address: 0x92d4a
-		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 53:105
+		; address: 0x99434
+		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/level_3.vbo" 53:105
+		; source: 126 "C:\\projects\\lego\\Scripting\\VBO\\c:\\projects\\lego\\slib\\sageparts\\scripting\\vbo\\slosi/slosi_fileio.vbo" 92:93
 		MemberFunctionArgumentCheck 1
 		CreateStackVariables        1
 		LineNumber                  16, 4
@@ -85,11 +86,11 @@ begin class "lego_level_3", "gs_lego_level"
 		AppendToArray
 		LineNumber                  41, 4
 		LineNumberAlt1              78, 152
-		CreateObjectString          "lego_area_vilg"
+		CreateObjectString          "lego_area_vllg3"
 		Dup
 		GetVariableValue            0                 ; local
 		Pull                        2
-		GetMemberFunctionString     "lego_area_vilg"
+		GetMemberFunctionString     "lego_area_vllg3"
 		JumpAbsolute                2
 		Pop
 		LineNumber                  41, 4
@@ -204,11 +205,11 @@ begin class "lego_level_3", "gs_lego_level"
 		AppendToArray
 		LineNumber                  57, 4
 		LineNumberAlt1              94, 152
-		CreateObjectString          "lego_area_gly3"
+		CreateObjectString          "lego_area_gly33"
 		Dup
 		GetVariableValue            0                 ; local
 		Pull                        2
-		GetMemberFunctionString     "lego_area_gly3"
+		GetMemberFunctionString     "lego_area_gly33"
 		JumpAbsolute                2
 		Pop
 		LineNumber                  57, 4
@@ -255,11 +256,11 @@ begin class "lego_level_3", "gs_lego_level"
 		AppendToArray
 		LineNumber                  67, 4
 		LineNumberAlt1              104, 152
-		CreateObjectString          "lego_area_hutt"
+		CreateObjectString          "lego_area_tura3"
 		Dup
 		GetVariableValue            0                 ; local
 		Pull                        2
-		GetMemberFunctionString     "lego_area_hutt"
+		GetMemberFunctionString     "lego_area_tura3"
 		JumpAbsolute                2
 		Pop
 		LineNumber                  67, 4
@@ -270,13 +271,30 @@ begin class "lego_level_3", "gs_lego_level"
 		GetThisMemberValueString    "areas"
 		GetVariableValue            1                 ; local
 		AppendToArray
+		LineNumber                  54114, 4
+		LineNumberAlt1              92, 126
+		CreateObjectString          "lego_area_grhz"
+		Dup
+		GetVariableValue            0                 ; local
+		Pull                        2
+		GetMemberFunctionString     "lego_area_grhz"
+		JumpAbsolute                2
+		Pop
+		LineNumber                  54114, 4
+		LineNumberAlt1              92, 126
+		SetVariableValue            1                 ; local
+		LineNumber                  54115, 4
+		LineNumberAlt1              93, 126
+		GetThisMemberValueString    "areas"
+		GetVariableValue            1                 ; local
+		AppendToArray
 		PushNothing
 		Return
 	end ; method
 
 	begin method "initfull"
-		; address: 0x930a5
-		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 116:142
+		; address: 0x997fd
+		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/level_3.vbo" 116:142
 		MemberFunctionArgumentCheck   1
 		LineNumber                    79, 4
 		LineNumberAlt1                116, 152
@@ -342,7 +360,7 @@ begin class "lego_level_3", "gs_lego_level"
 		LineNumberAlt1                129, 152
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "saverloaded"
-		CompareAndBranchIfFalseTarget 4, 0
+		CompareAndBranchIfFalseTarget 5, 0
 		; ->
 		LineNumber                    94, 4
 		LineNumberAlt1                131, 152
@@ -398,6 +416,33 @@ begin class "lego_level_3", "gs_lego_level"
 		Pop
 		; <-
 		BranchTarget                  1
+		LineNumber                    97, 4
+		LineNumberAlt1                134, 152
+		PushConstantStringString      "msks"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    97, 4
+		LineNumberAlt1                134, 152
+		PushConstantStringString      "grhz"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    97, 4
+		LineNumberAlt1                134, 152
+		CallGameFunctionString        "gcsaver", "findmaska", 2
+		LineNumber                    97, 4
+		LineNumberAlt1                134, 152
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    98, 4
+		LineNumberAlt1                135, 152
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		PushConstantStringString      "fake"
+		PushConstanti8                2
+		Pull                          3
+		GetMemberFunctionString       "addmask"
+		JumpAbsolute                  3
+		Pop
+		; <-
+		BranchTarget                  2
 		LineNumber                    104, 4
 		LineNumberAlt1                141, 152
 		PushConstantStringString      "glyp"
@@ -411,7 +456,7 @@ begin class "lego_level_3", "gs_lego_level"
 		CallGameFunctionString        "gcsaver", "findglypha", 2
 		LineNumber                    104, 4
 		LineNumberAlt1                141, 152
-		CompareAndBranchIfFalseTarget 2, 0
+		CompareAndBranchIfFalseTarget 3, 0
 		; ->
 		LineNumber                    105, 4
 		LineNumberAlt1                142, 152
@@ -422,13 +467,13 @@ begin class "lego_level_3", "gs_lego_level"
 		JumpAbsolute                  1
 		Pop
 		; <-
-		BranchTarget                  2
+		BranchTarget                  3
 		PushConstantStringString      "hook"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		PushConstantStringString      "gly1"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		CallGameFunctionString        "gcsaver", "finditema", 2
-		CompareAndBranchIfFalseTarget 3, 0
+		CompareAndBranchIfFalseTarget 4, 0
 		; ->
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
@@ -444,7 +489,7 @@ begin class "lego_level_3", "gs_lego_level"
 		JumpAbsolute                  2
 		Pop
 		; <-
-		BranchTarget                  3
+		BranchTarget                  4
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
 		Dup
@@ -452,7 +497,7 @@ begin class "lego_level_3", "gs_lego_level"
 		JumpAbsolute                  1
 		Pop
 		; <-
-		BranchTarget                  4
+		BranchTarget                  5
 		PushConstanti8                0
 		GetVariableValueGlobalString  "globalclass"
 		SetMemberValueString          "saverloaded"
@@ -461,8 +506,8 @@ begin class "lego_level_3", "gs_lego_level"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x932cc
-		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 170:174
+		; address: 0x99a42
+		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/level_3.vbo" 170:174
 		MemberFunctionArgumentCheck   1
 		LineNumber                    133, 4
 		LineNumberAlt1                170, 152
@@ -491,8 +536,8 @@ begin class "lego_level_3", "gs_lego_level"
 	end ; method
 
 	begin method "initshort"
-		; address: 0x93309
-		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 181:189
+		; address: 0x99a7f
+		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/level_3.vbo" 181:189
 		MemberFunctionArgumentCheck  1
 		LineNumber                   144, 4
 		LineNumberAlt1               181, 152
@@ -559,8 +604,8 @@ begin class "lego_level_3", "gs_lego_level"
 	end ; method
 
 	begin method "createbull"
-		; address: 0x933be
-		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 196:200
+		; address: 0x99b34
+		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/level_3.vbo" 196:200
 		MemberFunctionArgumentCheck 2
 		LineNumber                  159, 4
 		LineNumberAlt1              196, 152
@@ -609,8 +654,8 @@ begin class "lego_level_3", "gs_lego_level"
 	end ; method
 
 	begin method "destroybull"
-		; address: 0x9343d
-		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 206:207
+		; address: 0x99bb3
+		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/level_3.vbo" 206:207
 		MemberFunctionArgumentCheck 1
 		LineNumber                  169, 4
 		LineNumberAlt1              206, 152
@@ -628,8 +673,8 @@ begin class "lego_level_3", "gs_lego_level"
 	end ; method
 
 	begin method "getbull"
-		; address: 0x93463
-		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 212:212
+		; address: 0x99bd9
+		; source: 152 "C:\\projects\\lego\\Scripting\\VBO\\lev3/level_3.vbo" 212:212
 		MemberFunctionArgumentCheck 1
 		LineNumber                  175, 4
 		LineNumberAlt1              212, 152

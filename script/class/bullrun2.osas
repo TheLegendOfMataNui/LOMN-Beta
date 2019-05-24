@@ -8,8 +8,8 @@ begin class "bullrun2"
 	property "whichplane"
 
 	begin method "bullrun2"
-		; address: 0x8806e
-		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 98:100
+		; address: 0x8df31
+		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 98:100
 		MemberFunctionArgumentCheck 2
 		LineNumber                  60712, 4
 		LineNumberAlt1              98, 157
@@ -28,8 +28,8 @@ begin class "bullrun2"
 	end ; method
 
 	begin method "init"
-		; address: 0x8809e
-		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 108:125
+		; address: 0x8df61
+		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 108:125
 		MemberFunctionArgumentCheck  1
 		LineNumber                   60722, 4
 		LineNumberAlt1               108, 157
@@ -174,9 +174,8 @@ begin class "bullrun2"
 	end ; method
 
 	begin method "cleanup"
-		; address: 0x88289
-		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 130:140
-		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_tura.vbo" 136:136
+		; address: 0x8e14c
+		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 130:140
 		MemberFunctionArgumentCheck   1
 		LineNumber                    60744, 4
 		LineNumberAlt1                130, 157
@@ -223,8 +222,6 @@ begin class "bullrun2"
 		GetMemberFunctionString       "destroybull"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    60488, 4
-		LineNumberAlt1                136, 156
 		GetThisMemberValueString      "bully"
 		PushConstantf32               0
 		Pull                          2
@@ -246,15 +243,15 @@ begin class "bullrun2"
 	end ; method
 
 	begin method "process"
-		; address: 0x88341
+		; address: 0x8e1fa
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "input"
-		; address: 0x88345
-		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 152:162
+		; address: 0x8e1fe
+		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 152:162
 		MemberFunctionArgumentCheck   2
 		LineNumber                    60766, 4
 		LineNumberAlt1                152, 157
@@ -343,9 +340,9 @@ begin class "bullrun2"
 	end ; method
 
 	begin method "onevent"
-		; address: 0x88419
-		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 172:237
-		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_tura.vbo" 130:130
+		; address: 0x8e2d2
+		; source: 157 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr2.vbo" 172:237
+		; source: 156 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_blr1.vbo" 130:130
 		MemberFunctionArgumentCheck   2
 		LineNumber                    60786, 4
 		LineNumberAlt1                172, 157
@@ -393,7 +390,7 @@ begin class "bullrun2"
 		; <-
 		BranchTarget                  1
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
 		BranchTarget                  2
@@ -421,14 +418,23 @@ begin class "bullrun2"
 		GetMemberFunctionString       "play"
 		JumpAbsolute                  2
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
 		BranchTarget                  3
 		Dup
+		PushConstanti8                44
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		BranchAlwaysTarget            12, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
 		PushConstanti8                11
 		EqualTo
-		CompareAndBranchIfFalseTarget 5, 0
+		CompareAndBranchIfFalseTarget 6, 0
 		; ->
 		LineNumber                    60806, 4
 		LineNumberAlt1                192, 157
@@ -442,7 +448,7 @@ begin class "bullrun2"
 		Dup
 		PushConstantStringString      "bl09"
 		EqualTo
-		CompareAndBranchIfFalseTarget 4, 0
+		CompareAndBranchIfFalseTarget 5, 0
 		; ->
 		LineNumber                    60808, 4
 		LineNumberAlt1                194, 157
@@ -472,16 +478,16 @@ begin class "bullrun2"
 		JumpAbsolute                  2
 		Pop
 		; <-
-		BranchTarget                  4
+		BranchTarget                  5
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
-		BranchTarget                  5
+		BranchTarget                  6
 		Dup
 		PushConstanti8                3
 		EqualTo
-		CompareAndBranchIfFalseTarget 6, 0
+		CompareAndBranchIfFalseTarget 7, 0
 		; ->
 		LineNumber                    60814, 4
 		LineNumberAlt1                200, 157
@@ -501,28 +507,28 @@ begin class "bullrun2"
 		PushConstantf32               1.2000000476837158
 		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
-		BranchTarget                  6
+		BranchTarget                  7
 		Dup
 		PushConstanti8                46
 		EqualTo
-		CompareAndBranchIfFalseTarget 7, 0
+		CompareAndBranchIfFalseTarget 8, 0
 		; ->
 		LineNumber                    60820, 4
 		LineNumberAlt1                206, 157
 		PushConstantf32               1.2000000476837158
 		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
 		Pop
-		BranchAlwaysTarget            11, 0
+		BranchAlwaysTarget            12, 0
 		; ->
 		; <-
-		BranchTarget                  7
+		BranchTarget                  8
 		Dup
 		PushConstanti8                27
 		EqualTo
-		CompareAndBranchIfFalseTarget 11, 0
+		CompareAndBranchIfFalseTarget 12, 0
 		; ->
 		LineNumber                    60825, 4
 		LineNumberAlt1                211, 157
@@ -530,7 +536,7 @@ begin class "bullrun2"
 		Dup
 		PushConstant0
 		EqualTo
-		CompareAndBranchIfFalseTarget 8, 0
+		CompareAndBranchIfFalseTarget 9, 0
 		; ->
 		LineNumber                    60827, 4
 		LineNumberAlt1                213, 157
@@ -547,14 +553,14 @@ begin class "bullrun2"
 		GetMemberFunctionString       "gotostartpos"
 		JumpAbsolute                  3
 		Pop
-		BranchAlwaysTarget            10, 0
+		BranchAlwaysTarget            11, 0
 		; ->
 		; <-
-		BranchTarget                  8
+		BranchTarget                  9
 		Dup
 		PushConstanti8                1
 		EqualTo
-		CompareAndBranchIfFalseTarget 9, 0
+		CompareAndBranchIfFalseTarget 10, 0
 		; ->
 		LineNumber                    60829, 4
 		LineNumberAlt1                215, 157
@@ -571,14 +577,14 @@ begin class "bullrun2"
 		GetMemberFunctionString       "gotostartpos"
 		JumpAbsolute                  3
 		Pop
-		BranchAlwaysTarget            10, 0
+		BranchAlwaysTarget            11, 0
 		; ->
 		; <-
-		BranchTarget                  9
+		BranchTarget                  10
 		Dup
 		PushConstanti8                2
 		EqualTo
-		CompareAndBranchIfFalseTarget 10, 0
+		CompareAndBranchIfFalseTarget 11, 0
 		; ->
 		LineNumber                    60831, 4
 		LineNumberAlt1                217, 157
@@ -596,7 +602,7 @@ begin class "bullrun2"
 		JumpAbsolute                  3
 		Pop
 		; <-
-		BranchTarget                  10
+		BranchTarget                  11
 		Pop
 		LineNumber                    60834, 4
 		LineNumberAlt1                220, 157
@@ -722,15 +728,6 @@ begin class "bullrun2"
 		PushConstant0
 		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
 		Pop
-		LineNumber                    60847, 4
-		LineNumberAlt1                233, 157
-		PushConstantStringString      "tb10"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    60847, 4
-		LineNumberAlt1                233, 157
-		PushConstant0
-		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
-		Pop
 		LineNumber                    60848, 4
 		LineNumberAlt1                234, 157
 		PushConstantStringString      "tb11"
@@ -761,7 +758,7 @@ begin class "bullrun2"
 		JumpAbsolute                  2
 		Pop
 		; <-
-		BranchTarget                  11
+		BranchTarget                  12
 		Pop
 		PushNothing
 		Return

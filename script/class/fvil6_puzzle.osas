@@ -2,25 +2,31 @@ begin class "fvil6_puzzle"
 	property "parent"
 	property "leverpickup"
 	property "hookarray"
-	property "elmdoor"
-	property "elmdoorshone"
+	property "coindoor"
+	property "coindoortext"
+	property "coindoortexttimer"
+	property "showcoindoor"
 
 	begin method "fvil6_puzzle"
-		; address: 0xaabe8
-		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta05.vbo" 82:82
+		; address: 0xb1dea
+		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_fvil.vbo" 82:82
 		MemberFunctionArgumentCheck 2
 		LineNumber                  10841, 4
 		LineNumberAlt1              82, 206
 		GetVariableValue            1        ; local
 		SetThisMemberValueString    "parent"
+		LineNumber                  37300, 4
+		LineNumberAlt1              132, 95
+		PushConstanti8              1
+		SetThisMemberValueString    "showcoindoor"
 		PushNothing
 		Return
 	end ; method
 
 	begin method "initfull"
-		; address: 0xaabfc
-		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta05.vbo" 90:123
-		; source: 137 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_vtnl.vbo" 148:148
+		; address: 0xb1dfe
+		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_fvil.vbo" 90:123
+		; source: 137 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_vllg.vbo" 148:148
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          2
 		LineNumber                    10849, 4
@@ -247,33 +253,124 @@ begin class "fvil6_puzzle"
 		Pop
 		LineNumber                    10880, 4
 		LineNumberAlt1                121, 206
-		SetThisMemberValueString      "elmdoor"
+		SetThisMemberValueString      "coindoor"
 		LineNumber                    10881, 4
 		LineNumberAlt1                122, 206
-		GetThisMemberValueString      "elmdoor"
+		GetThisMemberValueString      "coindoor"
 		Dup
 		GetMemberFunctionString       "initfull"
 		JumpAbsolute                  1
 		Pop
+		LineNumber                    37395, 4
+		LineNumberAlt1                227, 95
+		GetThisMemberValueString      "showcoindoor"
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    37396, 4
+		LineNumberAlt1                228, 95
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
 		LineNumber                    53315, 4
 		LineNumberAlt1                148, 137
-		GetThisMemberValueString      "elmdoor"
+		GetThisMemberValueString      "coindoor"
 		PushConstantf32               0.800000011920929
 		Pull                          2
 		GetMemberFunctionString       "setalpha"
 		JumpAbsolute                  2
 		Pop
-		LineNumber                    10882, 4
-		LineNumberAlt1                123, 206
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		LineNumber                    37402, 4
+		LineNumberAlt1                234, 95
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  4
+		LineNumber                    37405, 4
+		LineNumberAlt1                237, 95
+		PushConstantStringString      "door"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    37405, 4
+		LineNumberAlt1                237, 95
 		PushConstanti8                1
-		SetThisMemberValueString      "elmdoorshone"
+		PushConstant0
+		PushConstanti8                10
+		CallGameFunctionString        "gcareadirector", "getscriptfluffstringuint", 4
+		LineNumber                    37405, 4
+		LineNumberAlt1                237, 95
+		SetVariableValue              2                                               ; local
+		LineNumber                    37406, 4
+		LineNumberAlt1                238, 95
+		CreateObjectString            "gs_legotext"
+		Dup
+		PushConstantStringString      "Root/Data/Art/Fonts/BionicleFontHi"
+		GetVariableValue              2                                               ; local
+		GetVariableValueGlobalString  "screenx"
+		PushConstantf32               0.5
+		Multiply
+		GetVariableValueGlobalString  "screeny"
+		PushConstantf32               0.8299999833106995
+		Multiply
+		PushConstant0
+		PushConstantf32               1.5
+		PushConstanti16               256
+		PushConstanti8                4
+		PushConstant0
+		Pull                          10
+		GetMemberFunctionString       "gs_legotext"
+		JumpAbsolute                  10
+		Pop
+		LineNumber                    37406, 4
+		LineNumberAlt1                238, 95
+		SetThisMemberValueString      "coindoortext"
+		LineNumber                    37407, 4
+		LineNumberAlt1                239, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "initfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37408, 4
+		LineNumberAlt1                240, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "add"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37409, 4
+		LineNumberAlt1                241, 95
+		PushConstantf32               0
+		SetThisMemberValueString      "coindoortexttimer"
+		PushConstanti8				  57
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    9762, 4
+		LineNumberAlt1                230, 200
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  5
 		PushNothing
 		Return
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0xaaea1
-		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta05.vbo" 129:144
+		; address: 0xb20a3
+		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_fvil.vbo" 129:144
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
 		LineNumber                    10888, 4
@@ -346,25 +443,250 @@ begin class "fvil6_puzzle"
 		GetMemberFunctionString       "setgrapplinghookdistance"
 		JumpAbsolute                  2
 		Pop
-		LineNumber                    10902, 4
-		LineNumberAlt1                143, 206
-		GetThisMemberValueString      "elmdoor"
+		LineNumber                    37424, 4
+		LineNumberAlt1                256, 95
+		PushNothing
+		SetThisMemberValueString      "coindoortexttimer"
+		LineNumber                    37425, 4
+		LineNumberAlt1                257, 95
+		GetThisMemberValueString      "coindoortext"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    37426, 4
+		LineNumberAlt1                258, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "remove"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37427, 4
+		LineNumberAlt1                259, 95
+		GetThisMemberValueString      "coindoortext"
 		Dup
 		GetMemberFunctionString       "cleanupfull"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    10903, 4
-		LineNumberAlt1                144, 206
+		LineNumber                    37428, 4
+		LineNumberAlt1                260, 95
 		PushNothing
-		SetThisMemberValueString      "elmdoor"
+		SetThisMemberValueString      "coindoortext"
+		; <-
+		BranchTarget                  3
+		LineNumber                    37430, 4
+		LineNumberAlt1                262, 95
+		GetThisMemberValueString      "coindoor"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    37431, 4
+		LineNumberAlt1                263, 95
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37432, 4
+		LineNumberAlt1                264, 95
+		PushNothing
+		SetThisMemberValueString      "coindoor"
+		; <-
+		BranchTarget                  4
 		PushNothing
 		Return
 	end ; method
 
-	begin method "initshort"
-		; address: 0xaaf74
-		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta05.vbo" 151:154
-		MemberFunctionArgumentCheck  1
+	begin method "process"
+		; address: 0xb21da
+		MemberFunctionArgumentCheck 2
+		LineNumber                    37454, 4
+		LineNumberAlt1                286, 95
+		GetThisMemberValueString      "coindoortexttimer"
+		PushConstant0
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37455, 4
+		LineNumberAlt1                287, 95
+		GetThisMemberValueString      "coindoortexttimer"
+		GetVariableValue              1                   ; local
+		GetMemberValueString          "deltatime"
+		Subtract
+		SetThisMemberValueString      "coindoortexttimer"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    37457, 4
+		LineNumberAlt1                289, 95
+		GetThisMemberValueString      "coindoortext"
+		GetMemberValueString          "onscreen"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    37458, 4
+		LineNumberAlt1                290, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  1
+		PushNothing
+		Return
+	end ; method
+
+	begin method "onevent"
+		; address: 0xb21de
+		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_fvil.vbo" 172:203
+		MemberFunctionArgumentCheck   2
+		LineNumber                    10931, 4
+		LineNumberAlt1                172, 206
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37495, 4
+		LineNumberAlt1                327, 95
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "args"
+		PushConstanti8                1
+		GetArrayValue
+		PushConstantStringString      "door"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    37495, 4
+		LineNumberAlt1                327, 95
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37496, 4
+		LineNumberAlt1                328, 95
+		GetThisMemberValueString      "showcoindoor"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    37497, 4
+		LineNumberAlt1                329, 95
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "tokens"
+		PushConstanti8                8
+		GreaterOrEqual
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		GetMemberValueString          "ishookenabled"
+		LineNumber                    16860, 4
+		LineNumberAlt1                228, 222
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		LineNumber                    37500, 4
+		LineNumberAlt1                332, 95
+		GetThisMemberValueString      "coindoor"
+		PushConstantf32               1.5
+		Pull                          2
+		GetMemberFunctionString       "fadeout"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    37501, 4
+		LineNumberAlt1                333, 95
+		PushConstanti16               1084
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    37502, 4
+		LineNumberAlt1                334, 95
+		PushConstant0
+		SetThisMemberValueString      "showcoindoor"
+		LineNumber                    37503, 4
+		LineNumberAlt1                335, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  1
+		LineNumber                    37506, 4
+		LineNumberAlt1                338, 95
+		GetThisMemberValueString      "coindoortext"
+		Dup
+		GetMemberFunctionString       "show"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    37507, 4
+		LineNumberAlt1                339, 95
+		PushConstantf32               1
+		SetThisMemberValueString      "coindoortexttimer"
+		; <-
+		BranchTarget                  0
+		Dup
+		PushConstanti8                35
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		LineNumber                    10950, 4
+		LineNumberAlt1                191, 206
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "door"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    10950, 4
+		LineNumberAlt1                191, 206
+		EqualTo
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		PushConstanti8				 57
+		PushConstanti8               1
+		CallGameFunctionString       "bettersaver", "setbooleanvalue", 2
+		Pop
+		LineNumber                    10951, 4
+		LineNumberAlt1                192, 206
+		GetThisMemberValueString      "coindoor"
+		Dup
+		GetMemberFunctionString       "hide"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  2
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstanti8                46
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    10956, 4
+		LineNumberAlt1                197, 206
+		PushConstantf32               1.2000000476837158
+		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
+		Pop
+		BranchAlwaysTarget            5, 0
+		; ->
+		; <-
+		BranchTarget                  4
+		Dup
+		PushConstanti8                27
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
 		LineNumber                   10910, 4
 		LineNumberAlt1               151, 206
 		GetVariableValueGlobalString "globalclass"
@@ -396,172 +718,6 @@ begin class "fvil6_puzzle"
 		GetMemberFunctionString      "setinputstate"
 		JumpAbsolute                 2
 		Pop
-		PushNothing
-		Return
-	end ; method
-
-	begin method "cleanupshort"
-		; address: 0xaafd4
-		MemberFunctionArgumentCheck 1
-		PushNothing
-		Return
-	end ; method
-
-	begin method "process"
-		; address: 0xaafd8
-		MemberFunctionArgumentCheck 2
-		PushNothing
-		Return
-	end ; method
-
-	begin method "onevent"
-		; address: 0xaafdc
-		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta05.vbo" 172:203
-		MemberFunctionArgumentCheck   2
-		LineNumber                    10931, 4
-		LineNumberAlt1                172, 206
-		GetVariableValue              1                                             ; local
-		GetMemberValueString          "eventid"
-		Dup
-		PushConstanti8                1
-		EqualTo
-		CompareAndBranchIfFalseTarget 1, 0
-		; ->
-		LineNumber                    10935, 4
-		LineNumberAlt1                176, 206
-		GetVariableValue              1                                             ; local
-		GetMemberValueString          "args"
-		PushConstanti8                1
-		GetArrayValue
-		PushConstantStringString      "door"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    10935, 4
-		LineNumberAlt1                176, 206
-		EqualTo
-		GetVariableValue              1                                             ; local
-		GetMemberValueString          "args"
-		PushConstant0
-		GetArrayValue
-		PushConstantStringString      "cnt1"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    10935, 4
-		LineNumberAlt1                176, 206
-		EqualTo
-		And
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    10936, 4
-		LineNumberAlt1                177, 206
-		GetThisMemberValueString      "elmdoorshone"
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    10937, 4
-		LineNumberAlt1                178, 206
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		GetMemberValueString          "tokens"
-		PushConstanti8                8
-		GreaterOrEqual
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		GetMemberValueString          "actor"
-		GetMemberValueString          "ishookenabled"
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    10938, 4
-		LineNumberAlt1                179, 206
-		GetThisMemberValueString      "elmdoor"
-		PushConstantf32               1.5
-		Pull                          2
-		GetMemberFunctionString       "fadeout"
-		JumpAbsolute                  2
-		Pop
-		LineNumber                    10939, 4
-		LineNumberAlt1                180, 206
-		PushConstanti16               1084
-		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
-		Pop
-		LineNumber                    10940, 4
-		LineNumberAlt1                181, 206
-		PushConstant0
-		SetThisMemberValueString      "elmdoorshone"
-		; <-
-		BranchTarget                  0
-		BranchAlwaysTarget            5, 0
-		; ->
-		; <-
-		BranchTarget                  1
-		Dup
-		PushConstanti8                35
-		EqualTo
-		CompareAndBranchIfFalseTarget 3, 0
-		; ->
-		LineNumber                    10950, 4
-		LineNumberAlt1                191, 206
-		GetVariableValue              1                                             ; local
-		GetMemberValueString          "args"
-		PushConstant0
-		GetArrayValue
-		PushConstantStringString      "door"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    10950, 4
-		LineNumberAlt1                191, 206
-		EqualTo
-		GetVariableValue              1                                             ; local
-		GetMemberValueString          "args"
-		PushConstanti8                1
-		GetArrayValue
-		PushConstant0
-		EqualTo
-		And
-		CompareAndBranchIfFalseTarget 2, 0
-		; ->
-		LineNumber                    10951, 4
-		LineNumberAlt1                192, 206
-		GetThisMemberValueString      "elmdoor"
-		Dup
-		GetMemberFunctionString       "hide"
-		JumpAbsolute                  1
-		Pop
-		; <-
-		BranchTarget                  2
-		BranchAlwaysTarget            5, 0
-		; ->
-		; <-
-		BranchTarget                  3
-		Dup
-		PushConstanti8                46
-		EqualTo
-		CompareAndBranchIfFalseTarget 4, 0
-		; ->
-		LineNumber                    10956, 4
-		LineNumberAlt1                197, 206
-		PushConstantf32               1.2000000476837158
-		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
-		Pop
-		LineNumber                    10957, 4
-		LineNumberAlt1                198, 206
-		GetVariableValue              0                                             ; local
-		GetThisMemberFunctionString   "cleanupshort"
-		JumpAbsolute                  1
-		Pop
-		BranchAlwaysTarget            5, 0
-		; ->
-		; <-
-		BranchTarget                  4
-		Dup
-		PushConstanti8                27
-		EqualTo
-		CompareAndBranchIfFalseTarget 5, 0
-		; ->
-		LineNumber                    10962, 4
-		LineNumberAlt1                203, 206
-		GetVariableValue              0                                             ; local
-		GetThisMemberFunctionString   "initshort"
-		JumpAbsolute                  1
-		Pop
 		; <-
 		BranchTarget                  5
 		Pop
@@ -570,15 +726,15 @@ begin class "fvil6_puzzle"
 	end ; method
 
 	begin method "input"
-		; address: 0xab156
+		; address: 0xb2358
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "exit"
-		; address: 0xab15a
-		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta05.vbo" 214:214
+		; address: 0xb235c
+		; source: 206 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_fvil.vbo" 214:214
 		MemberFunctionArgumentCheck 1
 		LineNumber                  10973, 4
 		LineNumberAlt1              214, 206

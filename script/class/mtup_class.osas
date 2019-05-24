@@ -4,8 +4,8 @@ begin class "mtup_class"
 	property "door"
 
 	begin method "mtup_class"
-		; address: 0x8e530
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 86:86
+		; address: 0x94868
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 86:86
 		MemberFunctionArgumentCheck 2
 		LineNumber                  63386, 4
 		LineNumberAlt1              86, 162
@@ -16,9 +16,9 @@ begin class "mtup_class"
 	end ; method
 
 	begin method "initfull"
-		; address: 0x8e544
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 94:122
-		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_mtop.vbo" 120:123
+		; address: 0x9487c
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 94:122
+		; source: 136 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_strt.vbo" 120:123
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
 		LineNumber                    63394, 4
@@ -63,29 +63,38 @@ begin class "mtup_class"
 		LineNumberAlt1                101, 162
 		GetVariableValue              1                                            ; local
 		PushConstantColor8888         0xffffffff
-		PushConstanti16               163
+		PushConstant0
 		SetRedValue
-		PushConstanti8                81
+		PushConstant0
 		SetGreenValue
 		PushConstant0
 		SetBlueValue
-		PushConstanti16               255
+		PushConstant0
 		SetAlphaValue
 		PushConstantColor8888         0xffffffff
-		PushConstanti16               163
+		PushConstant0
 		SetRedValue
-		PushConstanti8                81
+		PushConstant0
 		SetGreenValue
 		PushConstant0
 		SetBlueValue
-		PushConstanti16               255
+		PushConstant0
 		SetAlphaValue
-		PushConstantStringString      "mk2a"
+		PushConstantStringString      "mk8a"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    63401, 4
 		LineNumberAlt1                101, 162
 		CallGameFunctionString        "gccharacter", "settohunga", 4
 		Pop
+	    PushConstantStringString      "vlgr"
+	    CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+	    PushConstant0
+	    CallGameFunctionString        "gcmodeldirector", "getcharacter", 2
+	    PushConstantColor8888		  0x272627FF ; color2 = feet
+	    PushConstantColor8888		  0xDEC680FF ; color3 = head
+	    PushConstantColor8888		  0x523018FF ; color1 = body
+	    CallGameFunctionString		  "gccharacter", "setcolors", 4
+	    Pop		
 		LineNumber                    53067, 4
 		LineNumberAlt1                120, 136
 		GetVariableValue              1                                            ; local
@@ -95,20 +104,10 @@ begin class "mtup_class"
 		LineNumberAlt1                120, 136
 		CallGameFunctionString        "gccharacter", "setinputstate", 2
 		Pop
-		LineNumber                    53068, 4
-		LineNumberAlt1                121, 136
-		GetVariableValue              1                                            ; local
-		PushConstantf32               1.5
-		PushConstantf32               0.800000011920929
-		PushConstanti8                1
-		PushConstant0
-		PushConstant0
-		CallGameFunctionString        "gccharacter", "setupmoveable", 6
-		Pop
 		LineNumber                    53069, 4
 		LineNumberAlt1                122, 136
 		GetVariableValue              1                                            ; local
-		PushConstantStringString      "d000"
+		PushConstantStringString      "d003"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    53069, 4
 		LineNumberAlt1                122, 136
@@ -118,7 +117,7 @@ begin class "mtup_class"
 		LineNumber                    53070, 4
 		LineNumberAlt1                123, 136
 		GetVariableValue              1                                            ; local
-		PushConstanti16               -300
+		PushConstanti16               56
 		CallGameFunctionString        "gccharacter", "setorientation", 2
 		Pop
 		LineNumber                    63403, 4
@@ -197,27 +196,62 @@ begin class "mtup_class"
 		GetMemberFunctionString       "settweakable"
 		JumpAbsolute                  1
 		Pop
+		PushConstanti8				  51
+		CallGameFunctionString        "bettersaver", "getbooleanvalue", 1
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 1, 0
+		; ->
+		PushConstantStringString      "ghv0"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		PushConstantStringString      "mtup"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		CallGameFunctionString        "gcareadirector", "hide", 2
+		Pop
+		LineNumber                    63475, 4
+		LineNumberAlt1                175, 162
+		GetThisMemberValueString      "door"
+		GetThisMemberValueString      "door"
+		Dup
+		GetMemberFunctionString       "getx"
+		JumpAbsolute                  1
+		LineNumber                    63475, 4
+		LineNumberAlt1                175, 162
+		PushConstantf32               4.024400234222412
+		GetThisMemberValueString      "door"
+		Dup
+		GetMemberFunctionString       "getz"
+		JumpAbsolute                  1
+		LineNumber                    63475, 4
+		LineNumberAlt1                175, 162
+		PushConstanti8                5
+		Pull                          5
+		GetMemberFunctionString       "interpolate"
+		JumpAbsolute                  5
+		Pop
+		; <-
+		BranchTarget                  1
 		PushNothing
 		Return
 	end ; method
 
 	begin method "show"
-		; address: 0x8e7a7
+		; address: 0x94adf
 		MemberFunctionArgumentCheck 1
 		PushNothing
 		Return
 	end ; method
 
 	begin method "process"
-		; address: 0x8e7ab
+		; address: 0x94ae3
 		MemberFunctionArgumentCheck 2
 		PushNothing
 		Return
 	end ; method
 
 	begin method "input"
-		; address: 0x8e7af
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 138:148
+		; address: 0x94ae7
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 138:148
 		MemberFunctionArgumentCheck   2
 		LineNumber                    63438, 4
 		LineNumberAlt1                138, 162
@@ -298,8 +332,8 @@ begin class "mtup_class"
 	end ; method
 
 	begin method "onevent"
-		; address: 0x8e866
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 157:189
+		; address: 0x94b9e
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 157:189
 		MemberFunctionArgumentCheck   2
 		LineNumber                    63457, 4
 		LineNumberAlt1                157, 162
@@ -382,6 +416,10 @@ begin class "mtup_class"
 		EqualTo
 		CompareAndBranchIfFalseTarget 2, 0
 		; ->
+		PushConstanti8				 51
+		PushConstanti8               1
+		CallGameFunctionString       "bettersaver", "setbooleanvalue", 2
+		Pop
 		LineNumber                    63475, 4
 		LineNumberAlt1                175, 162
 		GetThisMemberValueString      "door"
@@ -481,8 +519,8 @@ begin class "mtup_class"
 	end ; method
 
 	begin method "cleanupfull"
-		; address: 0x8ea38
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 196:199
+		; address: 0x94d70
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 196:199
 		MemberFunctionArgumentCheck 1
 		LineNumber                  63496, 4
 		LineNumberAlt1              196, 162
@@ -504,8 +542,8 @@ begin class "mtup_class"
 	end ; method
 
 	begin method "exit"
-		; address: 0x8ea6c
-		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_xrod.vbo" 204:204
+		; address: 0x94da4
+		; source: 162 "C:\\projects\\lego\\Scripting\\VBO\\lev3/lev3_mtup.vbo" 204:204
 		MemberFunctionArgumentCheck 1
 		LineNumber                  63504, 4
 		LineNumberAlt1              204, 162
