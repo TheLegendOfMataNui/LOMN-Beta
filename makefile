@@ -1,7 +1,6 @@
 SHELL = cmd
 BLKTOOL = python tools\blkfile.py
 COMPRESSION = decompressed # can also set to compressed
-BLKARGS = --$(COMPRESSION)
 OSATOOL = sage-js
 OSAARGS = res:osi:asm:sassemble
 RELEASETOOL = python tools\releasetool.py
@@ -95,4 +94,4 @@ blockfiles: $(addprefix ./build/data/,$(BLOCKFILES))
 	@if not exist $(subst /,\,$(dir $@))NUL mkdir $(subst /,\,$(dir $@))
 	@if not exist $(subst /,\,$(patsubst build/data/%.blk,./blockfiles/%,$@))\NUL mkdir $(subst /,\,$(patsubst build/data/%.blk,./blockfiles/%,$@))
 	@if exist $(subst /,\,$@) del $(subst /,\,$@)
-	@$(BLKTOOL) $(BLKARGS) -o $@ $(patsubst build/data/%.blk,./blockfiles/%,$@) > NUL
+	@$(BLKTOOL) --$(if $(wildcard $(patsubst build/data/%.blk,./blockfiles/%/.nocompress,$@)),decompressed,$(COMPRESSION)) -o $@ $(patsubst build/data/%.blk,./blockfiles/%,$@) > NUL
