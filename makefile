@@ -37,7 +37,7 @@ diff: build
 	$(RELEASETOOL) package build\ "vanilla snapshot.txt" packaged\patch\
 
 ./packaged/patch.exe: diff
-	@if exist packaged\patch.exe rm packaged\patch.exe
+	@if exist packaged\patch.exe rmdir packaged\patch.exe
 	@cd packaged\patch\ && ..\..\tools\7zip\7za.exe a -sfx7z.sfx ..\patch.exe *
 
 # 
