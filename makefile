@@ -36,7 +36,7 @@ diff: build
 	$(RELEASETOOL) package build\ "vanilla snapshot.txt" packaged\patch\
 
 ./packaged/patch.exe: diff
-	@if exist packaged\patch.exe rm packaged\patch.exe
+	@if exist packaged\patch.exe rmdir packaged\patch.exe
 	@cd packaged\patch\ && ..\..\tools\7zip\7za.exe a -sfx7z.sfx ..\patch.exe *
 
 # 
@@ -94,4 +94,4 @@ blockfiles: $(addprefix ./build/data/,$(BLOCKFILES))
 	@if not exist $(subst /,\,$(dir $@))NUL mkdir $(subst /,\,$(dir $@))
 	@if not exist $(subst /,\,$(patsubst build/data/%.blk,./blockfiles/%,$@))\NUL mkdir $(subst /,\,$(patsubst build/data/%.blk,./blockfiles/%,$@))
 	@if exist $(subst /,\,$@) del $(subst /,\,$@)
-	@$(BLKTOOL) --$(if $(wildcard $(patsubst build/data/%.blk,./blockfiles/%/.nocompress,$@)),decompressed,$(COMPRESSION)) -o $@ $(patsubst build/data/%.blk,./blockfiles/%,$@) > NUL
+	$(BLKTOOL) --$(if $(wildcard $(patsubst build/data/%.blk,./blockfiles/%/.nocompress,$@)),decompressed,$(COMPRESSION)) -o $@ $(patsubst build/data/%.blk,./blockfiles/%,$@) > NUL
