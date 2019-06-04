@@ -13,6 +13,8 @@ begin class "vllg3_puzzle"
 	property "upgradefruit_shown"
 	property "upgradefruit2_shown"
 	property "upgradefruit3_shown"
+	property "wirlpool"
+	property "orientation"
 
 	begin method "vllg3_puzzle"
 		; address: 0x6378a
@@ -1593,6 +1595,36 @@ begin class "vllg3_puzzle"
 		Pop
 		; <-
 		BranchTarget                  16
+		LineNumber                   54859, 4
+		LineNumberAlt1               103, 143
+		CreateObjectString           "lego_moveableobject"
+		Dup
+		PushConstantStringString     "vtcr"
+		Pull                         2
+		GetMemberFunctionString      "lego_moveableobject"
+		JumpAbsolute                 2
+		Pop
+		LineNumber                   54859, 4
+		LineNumberAlt1               103, 143
+		SetThisMemberValueString     "wirlpool"
+		LineNumber                   54860, 4
+		LineNumberAlt1               104, 143
+		GetThisMemberValueString     "wirlpool"
+		Dup
+		GetMemberFunctionString      "initfull"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   54861, 4
+		LineNumberAlt1               105, 143
+		GetThisMemberValueString     "wirlpool"
+		Dup
+		GetMemberFunctionString      "settweakable"
+		JumpAbsolute                 1
+		Pop
+		LineNumber                   54862, 4
+		LineNumberAlt1               106, 143
+		PushConstanti8               1
+		SetThisMemberValueString     "orientation"
 		PushNothing
 		Return
 	end ; method
@@ -1754,6 +1786,12 @@ begin class "vllg3_puzzle"
 		; address: 0x64230
 		; source: 95 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_vllg.vbo" 286:290
 		MemberFunctionArgumentCheck   2
+		LineNumber                  54885, 4
+		LineNumberAlt1              129, 143
+		GetVariableValue            0                ; local
+		GetThisMemberFunctionString "rotatecrystal"
+		JumpAbsolute                1
+		Pop
 		LineNumber                    37454, 4
 		LineNumberAlt1                286, 95
 		GetThisMemberValueString      "coindoortexttimer"
@@ -2252,6 +2290,47 @@ begin class "vllg3_puzzle"
 		SetThisMemberValueString      "upgradefruit3_shown"
 		; <-
 		BranchTarget                  0
+		PushNothing
+		Return
+	end ; method
+
+	begin method "rotatecrystal"
+		; address: 0x85f99
+		; source: 143 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_evac.vbo" 174:179
+		MemberFunctionArgumentCheck   1
+		LineNumber                    54930, 4
+		LineNumberAlt1                174, 143
+		GetThisMemberValueString      "orientation"
+		PushConstanti16               359
+		GreaterThan
+		CompareAndBranchIfFalseTarget 0, 0
+		; ->
+		LineNumber                    54931, 4
+		LineNumberAlt1                175, 143
+		PushConstant0
+		SetThisMemberValueString      "orientation"
+		BranchAlwaysTarget            1, 0
+		; ->
+		; <-
+		BranchTarget                  0
+		LineNumber                    54933, 4
+		LineNumberAlt1                177, 143
+		GetThisMemberValueString      "orientation"
+		PushConstanti8                1
+		Add
+		SetThisMemberValueString      "orientation"
+		; <-
+		BranchTarget                  1
+		LineNumber                    54935, 4
+		LineNumberAlt1                179, 143
+		GetThisMemberValueString      "wirlpool"
+		PushConstantf32               0
+		GetThisMemberValueString      "orientation"
+		PushConstantf32               0
+		Pull                          4
+		GetMemberFunctionString       "setorientation"
+		JumpAbsolute                  4
+		Pop
 		PushNothing
 		Return
 	end ; method
