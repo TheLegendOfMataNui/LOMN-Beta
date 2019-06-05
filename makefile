@@ -30,14 +30,14 @@ rebuild:
 # 
 # Utility recipe for building releases (self-extracting 7z)
 # 
-release: ./packaged/patch.exe
+release: ./packaged/PatchB.exe
 
 diff: build
 	$(RELEASETOOL) package build\ "vanilla snapshot.txt" packaged\patch\
 
-./packaged/patch.exe: diff
-	@if exist packaged\patch.exe rmdir packaged\patch.exe
-	@cd packaged\patch\ && ..\..\tools\7zip\7za.exe a -sfx7z.sfx ..\patch.exe *
+./packaged/PatchB.exe: diff
+	@if exist packaged\PatchB.exe rmdir packaged\PatchB.exe
+	@cd packaged\patch\ && ..\..\tools\7zip\7za.exe a -sfx7z.sfx ..\PatchB.exe *
 
 # 
 # Utility recipe for extracting existing blockfiles.
