@@ -1510,6 +1510,19 @@ begin class "vllg4_puzzle"
 		Pop
 		; <-
 		BranchTarget                  10
+		Dup
+		PushConstanti8                30
+		EqualTo
+		CompareAndBranchIfFalseTarget 17, 0
+		; ->
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "stop"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  17
 		Pop
 		PushNothing
 		Return

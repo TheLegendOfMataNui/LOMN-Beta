@@ -2090,14 +2090,6 @@ begin class "vllg3_puzzle"
 		And
 		CompareAndBranchIfFalseTarget 11, 0
 		; ->
-		LineNumber                    9972, 4
-		LineNumberAlt1                165, 201
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "hud"
-		Dup
-		GetMemberFunctionString       "hide"
-		JumpAbsolute                  1
-		Pop
 		LineNumber                    9973, 4
 		LineNumberAlt1                166, 201
 		GetThisMemberValueString      "cinema"
@@ -2113,6 +2105,19 @@ begin class "vllg3_puzzle"
 		; ->
 		; <-
 		BranchTarget				  12
+		Dup
+		PushConstanti8                30
+		EqualTo
+		CompareAndBranchIfFalseTarget 15, 0
+		; ->
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "stop"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  15
 		Dup
 		PushConstanti8                1
 		EqualTo
@@ -2217,12 +2222,6 @@ begin class "vllg3_puzzle"
 		; ->
 		GetThisMemberValueString      "cinema"
 		CallGameFunctionString        "gccinemaengine", "stop", 1
-		Pop
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "bgmusic"
-		Dup
-		GetMemberFunctionString       "stop"
-		JumpAbsolute                  1
 		Pop
 		; <-
 		BranchTarget                  0
