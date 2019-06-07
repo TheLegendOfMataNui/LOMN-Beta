@@ -100,14 +100,6 @@ begin class "lego_area_vllg1", "gs_lego_area"
 		EqualTo
 		CompareAndBranchIfFalseTarget 0, 0
 		; ->
-		LineNumber                    9266, 4
-		LineNumberAlt1                37, 198
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "bgmusic"
-		Dup
-		GetMemberFunctionString       "stop"
-		JumpAbsolute                  1
-		Pop
 		PushConstantStringString      "ar00"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		CallGameFunctionString        "gcareadirector", "getcurrentarea", 0
@@ -139,14 +131,6 @@ begin class "lego_area_vllg1", "gs_lego_area"
 		LineNumber                    17315, 4
 		LineNumberAlt1                53, 225
 		CallGameFunctionString        "gccinemaengine", "setnextarea", 2
-		Pop
-		LineNumber                    17313, 4
-		LineNumberAlt1                51, 225
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "hud"
-		Dup
-		GetMemberFunctionString       "hide"
-		JumpAbsolute                  1
 		Pop
 		LineNumber                    17314, 4
 		LineNumberAlt1                52, 225
@@ -198,12 +182,6 @@ begin class "lego_area_vllg1", "gs_lego_area"
 		LineNumberAlt1                63, 135
 		GetThisMemberValueString      "cinema"
 		CallGameFunctionString        "gccinemaengine", "stop", 1
-		Pop
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "bgmusic"
-		Dup
-		GetMemberFunctionString       "stop"
-		JumpAbsolute                  1
 		Pop
 		; <-
 		BranchTarget                  0
@@ -560,6 +538,19 @@ begin class "lego_area_vllg1", "gs_lego_area"
 		Pop
 		; <-
 		BranchTarget                  2
+		Dup
+		PushConstanti8                30
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "stop"
+		JumpAbsolute                  1
+		Pop
+		; <-
+		BranchTarget                  3
 		Pop
 		PushNothing
 		Return

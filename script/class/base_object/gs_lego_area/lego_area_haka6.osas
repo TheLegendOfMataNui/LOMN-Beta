@@ -25,6 +25,24 @@ begin class "lego_area_haka6", "gs_lego_area"
 		; source: 225 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_haka.vbo" 44:56
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          1
+		LineNumber                    16943, 4
+		LineNumberAlt1                38, 223
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicVillage"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    16944, 4
+		LineNumberAlt1                39, 223
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
+		Pop
 		LineNumber                    17308, 4
 		LineNumberAlt1                46, 225
 		PushConstantStringString      "cin2"
@@ -75,14 +93,6 @@ begin class "lego_area_haka6", "gs_lego_area"
 		LineNumber                    17315, 4
 		LineNumberAlt1                53, 225
 		CallGameFunctionString        "gccinemaengine", "setnextarea", 2
-		Pop
-		LineNumber                    17313, 4
-		LineNumberAlt1                51, 225
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "hud"
-		Dup
-		GetMemberFunctionString       "hide"
-		JumpAbsolute                  1
 		Pop
 		LineNumber                    17314, 4
 		LineNumberAlt1                52, 225
@@ -846,12 +856,10 @@ begin class "lego_area_haka6", "gs_lego_area"
 		EqualTo
 		CompareAndBranchIfFalseTarget 1, 0
 		; ->
-		LineNumber                    17370, 4
-		LineNumberAlt1                108, 225
 		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "hud"
+		GetMemberValueString          "bgmusic"
 		Dup
-		GetMemberFunctionString       "show"
+		GetMemberFunctionString       "stop"
 		JumpAbsolute                  1
 		Pop
 		; <-
@@ -889,12 +897,6 @@ begin class "lego_area_haka6", "gs_lego_area"
 		LineNumberAlt1                116, 225
 		GetThisMemberValueString      "cinema"
 		CallGameFunctionString        "gccinemaengine", "stop", 1
-		Pop
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "bgmusic"
-		Dup
-		GetMemberFunctionString       "stop"
-		JumpAbsolute                  1
 		Pop
 		; <-
 		BranchTarget                  0
