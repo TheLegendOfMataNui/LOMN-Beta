@@ -7,7 +7,7 @@ begin class "ta126_puzzle"
 	property "origz"
 	property "music"
 	property "halfway"
-	property "maskx"
+	property "mask"
 	property "showmask"
 
 	begin method "ta126_puzzle"
@@ -982,10 +982,6 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                192, 217
 		PushConstant0
 		SetThisMemberValueString      "halfway"
-		LineNumber                    9461, 4
-		LineNumberAlt1                97, 199
-		PushConstanti8                1
-		SetThisMemberValueString      "showmask"
 		LineNumber                    15380, 4
 		LineNumberAlt1                198, 217
 		PushConstantStringString      "mk5a"
@@ -1005,12 +1001,22 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                120, 163
 		PushConstant0
 		SetThisMemberValueString      "showmask"
+		BranchAlwaysTarget            6, 0
+		; ->
 		; <-
 		BranchTarget                  5
 		LineNumber                    63637, 4
 		LineNumberAlt1                123, 163
+		PushConstanti8                1
+		SetThisMemberValueString      "showmask"
+		; <-
+		BranchTarget                  6
+		LineNumber                    40476, 4
+		LineNumberAlt1                144, 103
 		GetThisMemberValueString      "showmask"
-		CompareAndBranchIfFalseTarget 1, 0
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
 		; ->
 		LineNumber                    15378, 4
 		LineNumberAlt1                196, 217
@@ -1028,21 +1034,23 @@ begin class "ta126_puzzle"
 		Pop
 		LineNumber                    15378, 4
 		LineNumberAlt1                196, 217
-		SetThisMemberValueString      "maskx"
+		SetThisMemberValueString      "mask"
 		LineNumber                    15379, 4
 		LineNumberAlt1                197, 217
-		GetThisMemberValueString      "maskx"
+		GetThisMemberValueString      "mask"
 		Dup
 		GetMemberFunctionString       "initfull"
 		JumpAbsolute                  1
 		Pop
 		LineNumber                    9469, 4
 		LineNumberAlt1                105, 199
-		GetThisMemberValueString      "maskx"
+		GetThisMemberValueString      "mask"
 		Dup
 		GetMemberFunctionString       "show"
 		JumpAbsolute                  1
 		Pop
+		; <-
+		BranchTarget                  7
 		PushNothing
 		Return
 	end ; method
@@ -1341,27 +1349,41 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                259, 217
 		PushNothing
 		SetThisMemberValueString      "halfway"
-		LineNumber                    1461, 4
-		LineNumberAlt1                198, 172
-		GetThisMemberValueString      "maskx"
+		LineNumber                    40539, 4
+		LineNumberAlt1                207, 103
+		GetThisMemberValueString      "mask"
 		PushNothing
 		EqualTo
 		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    40540, 4
+		LineNumberAlt1                208, 103
+		GetThisMemberValueString      "mask"
+		GetMemberValueString          "objshown"
+		PushConstant0
+		EqualTo
 		CompareAndBranchIfFalseTarget 4, 0
 		; ->
-		LineNumber                    1462, 4
-		LineNumberAlt1                199, 172
-		GetThisMemberValueString      "maskx"
+		LineNumber                    40541, 4
+		LineNumberAlt1                209, 103
+		PushConstant0
+		SetThisMemberValueString      "showmask"
+		; <-
+		BranchTarget                  4
+		LineNumber                    40543, 4
+		LineNumberAlt1                211, 103
+		GetThisMemberValueString      "mask"
 		Dup
 		GetMemberFunctionString       "cleanupfull"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    1463, 4
-		LineNumberAlt1                200, 172
+		LineNumber                    40544, 4
+		LineNumberAlt1                212, 103
 		PushNothing
-		SetThisMemberValueString      "maskx"
+		SetThisMemberValueString      "mask"
 		; <-
-		BranchTarget                  4
+		BranchTarget                  5
 		PushNothing
 		Return
 	end ; method
