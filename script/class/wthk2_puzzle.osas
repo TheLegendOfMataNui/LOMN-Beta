@@ -39,15 +39,6 @@ begin class "wthk2_puzzle"
 		LineNumberAlt1               90, 147
 		PushConstanti8               1
 		SetThisMemberValueString     "callsurfonce"
-		LineNumber                   55854, 4
-		LineNumberAlt1               91, 147
-		GetVariableValueGlobalString "globalclass"
-		GetMemberValueString         "player"
-		GetMemberValueString         "actor"
-		Dup
-		GetMemberFunctionString      "setsecondarybclreport"
-		JumpAbsolute                 1
-		Pop
 		LineNumber                   55855, 4
 		LineNumberAlt1               92, 147
 		PushConstanti8               8
@@ -57,16 +48,13 @@ begin class "wthk2_puzzle"
 		Return
 	end ; method
 
-	begin method "show"
-		; address: 0x8219c
-		MemberFunctionArgumentCheck 1
-		PushNothing
-		Return
-	end ; method
-
 	begin method "cleanupfull"
 		; address: 0x821a0
 		MemberFunctionArgumentCheck 1
+		GetVariableValue            0                                            ; local
+		GetThisMemberFunctionString "endsurf"
+		JumpAbsolute                1
+		Pop
 		PushNothing
 		Return
 	end ; method
