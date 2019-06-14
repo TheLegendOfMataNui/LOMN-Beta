@@ -19,7 +19,6 @@ begin class "ta136_puzzle"
 	property "hookarray"
 	property "resetpoint"
 	property "resetorent"
-	property "music"
 
 	begin method "ta136_puzzle"
 		; address: 0xbbc3b
@@ -63,32 +62,19 @@ begin class "ta136_puzzle"
 		GetThisMemberFunctionString "initfull"
 		JumpAbsolute                1
 		Pop
-		LineNumber                  15666, 4
-		LineNumberAlt1              128, 218
-		CreateObjectString          "legomp3player"
-		Dup
-		Dup
-		GetMemberFunctionString     "legomp3player"
-		JumpAbsolute                1
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicPart2LegoUNDERGROUND"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
 		Pop
-		LineNumber                  15666, 4
-		LineNumberAlt1              128, 218
-		SetThisMemberValueString    "music"
-		LineNumber                  15667, 4
-		LineNumberAlt1              129, 218
-		GetThisMemberValueString    "music"
-		PushConstantStringString    "Root/Data/sounds/MusicPart2LegoUNDERGROUND"
-		Pull                        2
-		GetMemberFunctionString     "setupforplay"
-		JumpAbsolute                2
-		Pop
-		LineNumber                  15668, 4
-		LineNumberAlt1              130, 218
-		GetThisMemberValueString    "music"
-		PushConstanti8              1
-		Pull                        2
-		GetMemberFunctionString     "play"
-		JumpAbsolute                2
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
 		Pop
 		PushNothing
 		Return
@@ -1569,9 +1555,8 @@ begin class "ta136_puzzle"
 		; address: 0xbcb5a
 		; source: 218 "C:\\projects\\lego\\Scripting\\VBO\\lev6/Lev6_ta13.vbo" 359:363
 		MemberFunctionArgumentCheck 1
-		LineNumber                  15897, 4
-		LineNumberAlt1              359, 218
-		GetThisMemberValueString    "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		Dup
 		GetMemberFunctionString     "stop"
 		JumpAbsolute                1

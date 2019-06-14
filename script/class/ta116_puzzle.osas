@@ -3,7 +3,6 @@ begin class "ta116_puzzle"
 	property "sinkerarray"
 	property "resetpoint"
 	property "resetorientation"
-	property "music"
 
 	begin method "ta116_puzzle"
 		; address: 0xb9d09
@@ -597,28 +596,15 @@ begin class "ta116_puzzle"
 		GetMemberFunctionString       "goup"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    14961, 4
-		LineNumberAlt1                154, 216
-		CreateObjectString            "legomp3player"
-		Dup
-		Dup
-		GetMemberFunctionString       "legomp3player"
-		JumpAbsolute                  1
-		Pop
-		LineNumber                    14961, 4
-		LineNumberAlt1                154, 216
-		SetThisMemberValueString      "music"
-		LineNumber                    14962, 4
-		LineNumberAlt1                155, 216
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstantStringString      "Root/Data/sounds/MusicPart2LegoUNDERGROUND"
 		Pull                          2
-		GetMemberFunctionString       "setupforplay"
+		GetMemberFunctionString       "changefilename"
 		JumpAbsolute                  2
 		Pop
-		LineNumber                    14963, 4
-		LineNumberAlt1                156, 216
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstanti8                1
 		Pull                          2
 		GetMemberFunctionString       "play"
@@ -670,9 +656,8 @@ begin class "ta116_puzzle"
 		; <-
 		BranchTarget                  1
 		Pop
-		LineNumber                    14982, 4
-		LineNumberAlt1                175, 216
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		Dup
 		GetMemberFunctionString       "stop"
 		JumpAbsolute                  1
@@ -750,9 +735,8 @@ begin class "ta116_puzzle"
 		PushConstantf32               1.2000000476837158
 		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
 		Pop
-		LineNumber                    15006, 4
-		LineNumberAlt1                199, 216
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		Dup
 		GetMemberFunctionString       "stop"
 		JumpAbsolute                  1
@@ -809,9 +793,8 @@ begin class "ta116_puzzle"
 		GetMemberFunctionString       "unkill"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    15013, 4
-		LineNumberAlt1                206, 216
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstanti8                1
 		Pull                          2
 		GetMemberFunctionString       "play"

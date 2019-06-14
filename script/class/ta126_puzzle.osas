@@ -5,7 +5,6 @@ begin class "ta126_puzzle"
 	property "origx"
 	property "origy"
 	property "origz"
-	property "music"
 	property "halfway"
 	property "mask"
 	property "showmask"
@@ -949,28 +948,15 @@ begin class "ta126_puzzle"
 		Pop
 		; <-
 		BranchTarget                  4
-		LineNumber                    15370, 4
-		LineNumberAlt1                188, 217
-		CreateObjectString            "legomp3player"
-		Dup
-		Dup
-		GetMemberFunctionString       "legomp3player"
-		JumpAbsolute                  1
-		Pop
-		LineNumber                    15370, 4
-		LineNumberAlt1                188, 217
-		SetThisMemberValueString      "music"
-		LineNumber                    15371, 4
-		LineNumberAlt1                189, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstantStringString      "Root/Data/sounds/MusicPart2LegoUNDERGROUND"
 		Pull                          2
-		GetMemberFunctionString       "setupforplay"
+		GetMemberFunctionString       "changefilename"
 		JumpAbsolute                  2
 		Pop
-		LineNumber                    15372, 4
-		LineNumberAlt1                190, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstanti8                1
 		Pull                          2
 		GetMemberFunctionString       "play"
@@ -1180,9 +1166,8 @@ begin class "ta126_puzzle"
 		; <-
 		BranchTarget                  3
 		Pop
-		LineNumber                    15406, 4
-		LineNumberAlt1                224, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstanti8                1
 		Pull                          2
 		GetMemberFunctionString       "play"
@@ -1227,9 +1212,8 @@ begin class "ta126_puzzle"
 		; <-
 		BranchTarget                  1
 		Pop
-		LineNumber                    15414, 4
-		LineNumberAlt1                232, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		Dup
 		GetMemberFunctionString       "stop"
 		JumpAbsolute                  1
@@ -1335,9 +1319,8 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                252, 217
 		PushNothing
 		SetThisMemberValueString      "origz"
-		LineNumber                    15437, 4
-		LineNumberAlt1                255, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		Dup
 		GetMemberFunctionString       "stop"
 		JumpAbsolute                  1
