@@ -54,13 +54,6 @@ begin class "lego_area_wthk2", "gs_lego_area"
 		GetMemberFunctionString     "initfull"
 		JumpAbsolute                1
 		Pop
-		LineNumber                  55796, 4
-		LineNumberAlt1              33, 147
-		GetThisMemberValueString    "puzzle"
-		Dup
-		GetMemberFunctionString     "show"
-		JumpAbsolute                1
-		Pop
 		LineNumber                  55797, 4
 		LineNumberAlt1              34, 147
 		PushConstanti8              7
@@ -138,7 +131,7 @@ begin class "lego_area_wthk2", "gs_lego_area"
 		LineNumberAlt1              53, 147
 		GetThisMemberValueString    "puzzle"
 		Dup
-		GetMemberFunctionString     "endsurf"
+		GetMemberFunctionString     "cleanupfull"
 		JumpAbsolute                1
 		Pop
 		PushNothing
@@ -149,6 +142,10 @@ begin class "lego_area_wthk2", "gs_lego_area"
 		; address: 0x87f91
 		; source: 147 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_wthk.vbo" 58:59
 		MemberFunctionArgumentCheck 1
+		GetVariableValue            0                       ; local
+		GetThisMemberFunctionString "lego_area_cleanupfull"
+		JumpAbsolute                1
+		Pop
 		LineNumber                  55821, 4
 		LineNumberAlt1              58, 147
 		GetThisMemberValueString    "puzzle"
