@@ -5,9 +5,9 @@ begin class "ta126_puzzle"
 	property "origx"
 	property "origy"
 	property "origz"
-	property "music"
 	property "halfway"
 	property "mask"
+	property "showmask"
 
 	begin method "ta126_puzzle"
 		; address: 0xbaa55
@@ -948,28 +948,15 @@ begin class "ta126_puzzle"
 		Pop
 		; <-
 		BranchTarget                  4
-		LineNumber                    15370, 4
-		LineNumberAlt1                188, 217
-		CreateObjectString            "legomp3player"
-		Dup
-		Dup
-		GetMemberFunctionString       "legomp3player"
-		JumpAbsolute                  1
-		Pop
-		LineNumber                    15370, 4
-		LineNumberAlt1                188, 217
-		SetThisMemberValueString      "music"
-		LineNumber                    15371, 4
-		LineNumberAlt1                189, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstantStringString      "Root/Data/sounds/MusicPart2LegoUNDERGROUND"
 		Pull                          2
-		GetMemberFunctionString       "setupforplay"
+		GetMemberFunctionString       "changefilename"
 		JumpAbsolute                  2
 		Pop
-		LineNumber                    15372, 4
-		LineNumberAlt1                190, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstanti8                1
 		Pull                          2
 		GetMemberFunctionString       "play"
@@ -979,6 +966,42 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                192, 217
 		PushConstant0
 		SetThisMemberValueString      "halfway"
+		LineNumber                    15380, 4
+		LineNumberAlt1                198, 217
+		PushConstantStringString      "mk5a"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    15380, 4
+		LineNumberAlt1                198, 217
+		CallGameFunctionString        "gcsaver", "findmask", 1
+		LineNumber                    15380, 4
+		LineNumberAlt1                198, 217
+		SetVariableValue              1                                                        ; local
+		LineNumber                    9463, 4
+		LineNumberAlt1                99, 199
+		GetVariableValue              1                                                        ; local
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    63634, 4
+		LineNumberAlt1                120, 163
+		PushConstant0
+		SetThisMemberValueString      "showmask"
+		BranchAlwaysTarget            6, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		LineNumber                    63637, 4
+		LineNumberAlt1                123, 163
+		PushConstanti8                1
+		SetThisMemberValueString      "showmask"
+		; <-
+		BranchTarget                  6
+		LineNumber                    40476, 4
+		LineNumberAlt1                144, 103
+		GetThisMemberValueString      "showmask"
+		PushConstanti8                1
+		EqualTo
+		CompareAndBranchIfFalseTarget 7, 0
+		; ->
 		LineNumber                    15378, 4
 		LineNumberAlt1                196, 217
 		CreateObjectString            "lego_pickup"
@@ -1003,37 +1026,15 @@ begin class "ta126_puzzle"
 		GetMemberFunctionString       "initfull"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    15380, 4
-		LineNumberAlt1                198, 217
-		PushConstantStringString      "mk5a"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    15380, 4
-		LineNumberAlt1                198, 217
-		CallGameFunctionString        "gcsaver", "findmask", 1
-		LineNumber                    15380, 4
-		LineNumberAlt1                198, 217
-		CompareAndBranchIfFalseTarget 5, 0
-		; ->
-		LineNumber                    15381, 4
-		LineNumberAlt1                199, 217
-		GetThisMemberValueString      "mask"
-		Dup
-		GetMemberFunctionString       "hide"
-		JumpAbsolute                  1
-		Pop
-		BranchAlwaysTarget            6, 0
-		; ->
-		; <-
-		BranchTarget                  5
-		LineNumber                    15383, 4
-		LineNumberAlt1                201, 217
+		LineNumber                    9469, 4
+		LineNumberAlt1                105, 199
 		GetThisMemberValueString      "mask"
 		Dup
 		GetMemberFunctionString       "show"
 		JumpAbsolute                  1
 		Pop
 		; <-
-		BranchTarget                  6
+		BranchTarget                  7
 		PushNothing
 		Return
 	end ; method
@@ -1165,9 +1166,8 @@ begin class "ta126_puzzle"
 		; <-
 		BranchTarget                  3
 		Pop
-		LineNumber                    15406, 4
-		LineNumberAlt1                224, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		PushConstanti8                1
 		Pull                          2
 		GetMemberFunctionString       "play"
@@ -1212,9 +1212,8 @@ begin class "ta126_puzzle"
 		; <-
 		BranchTarget                  1
 		Pop
-		LineNumber                    15414, 4
-		LineNumberAlt1                232, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		Dup
 		GetMemberFunctionString       "stop"
 		JumpAbsolute                  1
@@ -1320,9 +1319,8 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                252, 217
 		PushNothing
 		SetThisMemberValueString      "origz"
-		LineNumber                    15437, 4
-		LineNumberAlt1                255, 217
-		GetThisMemberValueString      "music"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
 		Dup
 		GetMemberFunctionString       "stop"
 		JumpAbsolute                  1
@@ -1331,6 +1329,41 @@ begin class "ta126_puzzle"
 		LineNumberAlt1                259, 217
 		PushNothing
 		SetThisMemberValueString      "halfway"
+		LineNumber                    40539, 4
+		LineNumberAlt1                207, 103
+		GetThisMemberValueString      "mask"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		LineNumber                    40540, 4
+		LineNumberAlt1                208, 103
+		GetThisMemberValueString      "mask"
+		GetMemberValueString          "objshown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		LineNumber                    40541, 4
+		LineNumberAlt1                209, 103
+		PushConstant0
+		SetThisMemberValueString      "showmask"
+		; <-
+		BranchTarget                  4
+		LineNumber                    40543, 4
+		LineNumberAlt1                211, 103
+		GetThisMemberValueString      "mask"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
+		LineNumber                    40544, 4
+		LineNumberAlt1                212, 103
+		PushNothing
+		SetThisMemberValueString      "mask"
+		; <-
+		BranchTarget                  5
 		PushNothing
 		Return
 	end ; method

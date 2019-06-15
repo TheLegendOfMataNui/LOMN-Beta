@@ -1,6 +1,5 @@
 begin class "lego_area_boss4", "gs_lego_area"
 	property "puzzle"
-	property "bgmusic"
 	property "parent"
 
 	begin method "lego_area_boss4"
@@ -41,32 +40,19 @@ begin class "lego_area_boss4", "gs_lego_area"
 		; address: 0xa7346
 		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_boss.vbo" 36:40
 		MemberFunctionArgumentCheck 1
-		LineNumber                  6275, 4
-		LineNumberAlt1              36, 184
-		CreateObjectString          "legomp3player"
-		Dup
-		Dup
-		GetMemberFunctionString     "legomp3player"
-		JumpAbsolute                1
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/Sounds/MUSICKopakaTheme"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
 		Pop
-		LineNumber                  6275, 4
-		LineNumberAlt1              36, 184
-		SetThisMemberValueString    "bgmusic"
-		LineNumber                  6276, 4
-		LineNumberAlt1              37, 184
-		GetThisMemberValueString    "bgmusic"
-		PushConstantStringString    "Root/Data/Sounds/MUSICKopakaTheme"
-		Pull                        2
-		GetMemberFunctionString     "setupforplay"
-		JumpAbsolute                2
-		Pop
-		LineNumber                  6277, 4
-		LineNumberAlt1              38, 184
-		GetThisMemberValueString    "bgmusic"
-		PushConstanti8              1
-		Pull                        2
-		GetMemberFunctionString     "play"
-		JumpAbsolute                2
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstanti8                1
+		Pull                          2
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  2
 		Pop
 		LineNumber                  6279, 4
 		LineNumberAlt1              40, 184
@@ -100,27 +86,6 @@ begin class "lego_area_boss4", "gs_lego_area"
 		Pop
 		; <-
 		BranchTarget                  0
-		LineNumber                    6288, 4
-		LineNumberAlt1                49, 184
-		GetThisMemberValueString      "bgmusic"
-		PushNothing
-		EqualTo
-		Not
-		CompareAndBranchIfFalseTarget 1, 0
-		; ->
-		LineNumber                    6289, 4
-		LineNumberAlt1                50, 184
-		GetThisMemberValueString      "bgmusic"
-		Dup
-		GetMemberFunctionString       "stop"
-		JumpAbsolute                  1
-		Pop
-		LineNumber                    6290, 4
-		LineNumberAlt1                51, 184
-		PushNothing
-		SetThisMemberValueString      "bgmusic"
-		; <-
-		BranchTarget                  1
 		PushNothing
 		Return
 	end ; method
@@ -177,6 +142,10 @@ begin class "lego_area_boss4", "gs_lego_area"
 		; address: 0xa7463
 		; source: 184 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_boss.vbo" 72:76
 		MemberFunctionArgumentCheck   1
+		GetVariableValue              0                       ; local
+		GetThisMemberFunctionString   "lego_area_cleanupfull"
+		JumpAbsolute                  1
+		Pop
 		LineNumber                    6311, 4
 		LineNumberAlt1                72, 184
 		GetThisMemberValueString      "puzzle"
