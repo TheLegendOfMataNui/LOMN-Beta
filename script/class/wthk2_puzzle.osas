@@ -113,7 +113,7 @@ begin class "wthk2_puzzle"
 		Dup
 		PushConstanti8                3
 		EqualTo
-		CompareAndBranchIfFalseTarget 5, 0
+		CompareAndBranchIfFalseTarget 3, 0
 		; ->
 		LineNumber                    55893, 4
 		LineNumberAlt1                130, 147
@@ -121,69 +121,92 @@ begin class "wthk2_puzzle"
 		GetMemberValueString          "args"
 		PushConstant0
 		GetArrayValue
-		Dup
 		PushConstantStringString      "tb00"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    55894, 4
 		LineNumberAlt1                131, 147
 		EqualTo
-		CompareAndBranchIfFalseTarget 2, 0
-		; ->
-		LineNumber                    55895, 4
-		LineNumberAlt1                132, 147
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		Dup
-		GetMemberFunctionString       "kill"
-		JumpAbsolute                  1
-		Pop
-		BranchAlwaysTarget            4, 0
-		; ->
-		; <-
-		BranchTarget                  2
-		Dup
+		GetVariableValue              1                                                       ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
 		PushConstantStringString      "tb01"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    55896, 4
 		LineNumberAlt1                133, 147
 		EqualTo
-		CompareAndBranchIfFalseTarget 3, 0
-		; ->
-		LineNumber                    55897, 4
-		LineNumberAlt1                134, 147
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		Dup
-		GetMemberFunctionString       "kill"
-		JumpAbsolute                  1
-		Pop
-		BranchAlwaysTarget            4, 0
-		; ->
-		; <-
-		BranchTarget                  3
-		Dup
+		Or
+		GetVariableValue              1                                                       ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
 		PushConstantStringString      "tb02"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    55898, 4
 		LineNumberAlt1                135, 147
 		EqualTo
-		CompareAndBranchIfFalseTarget 4, 0
-		; ->
+		Or
+		GetVariableValue              1                                                       ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "tb03"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    55899, 4
 		LineNumberAlt1                136, 147
+		EqualTo
+		Or
+		GetVariableValue              1                                                       ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "tb04"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    4489, 4
+		LineNumberAlt1                195, 180
+		EqualTo
+		Or
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		LineNumber                    40189, 4
+		LineNumberAlt1                226, 102
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
 		Dup
 		GetMemberFunctionString       "kill"
 		JumpAbsolute                  1
 		Pop
-		; <-
-		BranchTarget                  4
+		LineNumber                    4491, 4
+		LineNumberAlt1                197, 180
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                7
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
 		Pop
+		LineNumber                    39818, 4
+		LineNumberAlt1                228, 101
+		PushConstanti16               1048
+		CallGameFunctionString        "gcstaticsoundsptrarray", "playtablesound", 1
+		Pop
+		LineNumber                    4493, 4
+		LineNumberAlt1                199, 180
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "none"
+		Pull                          2
+		GetMemberFunctionString       "setinputstate"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  2
 		BranchAlwaysTarget            7, 0
 		; ->
 		; <-
-		BranchTarget                  5
+		BranchTarget                  3
 		Dup
 		PushConstanti8                46
 		EqualTo
@@ -246,6 +269,82 @@ begin class "wthk2_puzzle"
 		Dup
 		GetMemberFunctionString      "unkill"
 		JumpAbsolute                 1
+		Pop
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "ninp"
+		Pull                          2
+		GetMemberFunctionString       "setinputstate"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    4524, 4
+		LineNumberAlt1                230, 180
+		GetThisMemberValueString      "parent"
+		GetMemberValueString          "level"
+		GetMemberValueString          "cam"
+		PushConstanti8                11
+		Pull                          2
+		GetMemberFunctionString       "setaimode"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    39545, 4
+		LineNumberAlt1                165, 97
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "g000"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    39545, 4
+		LineNumberAlt1                165, 97
+		Pull                          2
+		GetMemberFunctionString       "switchanimation"
+		JumpAbsolute                  2
+		Pop
+		LineNumber                    4525, 4
+		LineNumberAlt1                231, 180
+		PushConstantStringString      "tb00"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    4525, 4
+		LineNumberAlt1                231, 180
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
+		Pop
+		LineNumber                    4526, 4
+		LineNumberAlt1                232, 180
+		PushConstantStringString      "tb01"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    4526, 4
+		LineNumberAlt1                232, 180
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
+		Pop
+		LineNumber                    4527, 4
+		LineNumberAlt1                233, 180
+		PushConstantStringString      "tb02"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    4527, 4
+		LineNumberAlt1                233, 180
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
+		Pop
+		LineNumber                    4527, 4
+		LineNumberAlt1                233, 180
+		PushConstantStringString      "tb03"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    4527, 4
+		LineNumberAlt1                233, 180
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
+		Pop
+		LineNumber                    4527, 4
+		LineNumberAlt1                233, 180
+		PushConstantStringString      "tb04"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    4527, 4
+		LineNumberAlt1                233, 180
+		PushConstant0
+		CallGameFunctionString        "gccollisionphysicsgroup", "toggletriggerboxentered", 2
 		Pop
 		LineNumber                   55915, 4
 		LineNumberAlt1               152, 147
