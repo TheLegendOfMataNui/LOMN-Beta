@@ -24,6 +24,8 @@ begin class "vllg2_puzzle"
 	property "showcoindoor"
 	property "wirlpool"
 	property "orientation"
+	property "cinema"
+	property "cinema_shown"
 
 	begin method "vllg2_puzzle"
 		; address: 0x81383
@@ -44,7 +46,62 @@ begin class "vllg2_puzzle"
 		; source: 137 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_vllg.vbo" 137:229
 		; source: 95 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_vllg.vbo" 184:185
 		MemberFunctionArgumentCheck   1
-		CreateStackVariables          5
+		CreateStackVariables          6
+		LineNumber                    40993, 4
+		LineNumberAlt1                45, 114
+		PushConstantStringString      "cin3"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    40993, 4
+		LineNumberAlt1                45, 114
+		CallGameFunctionString        "gcsaver", "findcinema", 1
+		LineNumber                    30326, 4
+		LineNumberAlt1                106, 83
+		SetVariableValue              6                                            ; local
+		LineNumber                    30327, 4
+		LineNumberAlt1                107, 83
+		GetVariableValue              6                                            ; local
+		CompareAndBranchIfFalseTarget 100, 0
+		; ->
+		LineNumber                    30328, 4
+		LineNumberAlt1                108, 83
+		PushConstanti8                1
+		SetThisMemberValueString      "cinema_shown"
+		BranchAlwaysTarget            101, 0
+		; ->
+		; <-
+		BranchTarget                  100
+		LineNumber                    30330, 4
+		LineNumberAlt1                110, 83
+		PushConstant0
+		SetThisMemberValueString      "cinema_shown"
+		; <-
+		BranchTarget                  101
+		LineNumber                    30332, 4
+		LineNumberAlt1                112, 83
+		GetThisMemberValueString      "cinema_shown"
+		PushConstant0
+		EqualTo
+		CompareAndBranchIfFalseTarget 102, 0
+		; ->
+		LineNumber                    40999, 4
+		LineNumberAlt1                51, 114
+		CallGameFunctionString        "gccinemaengine", "create", 0
+		LineNumber                    40999, 4
+		LineNumberAlt1                51, 114
+		SetThisMemberValueString      "cinema"
+		LineNumber                    41000, 4
+		LineNumberAlt1                52, 114
+		GetThisMemberValueString      "cinema"
+		PushConstantStringString      "cin3"
+		CallGameFunctionString        "gccinemaengine", "load", 2
+		Pop
+;		GetThisMemberValueString      "cinema"
+;		PushConstantStringString      "tura"
+;		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+;		CallGameFunctionString        "gccinemaengine", "setnextarea", 2
+;		Pop
+		; <-
+		BranchTarget                  102
 		LineNumber                    53306, 4
 		LineNumberAlt1                139, 137
 		PushConstant0
@@ -1950,6 +2007,8 @@ begin class "vllg2_puzzle"
 		PushNothing
 		SetThisMemberValueString    "wirlpool"
 		PushNothing
+		SetThisMemberValueString      "cinema"
+		PushNothing
 		Return
 	end ; method
 
@@ -2060,6 +2119,54 @@ begin class "vllg2_puzzle"
 		LineNumberAlt1                295, 137
 		GetVariableValue              1                                                         ; local
 		GetMemberValueString          "eventid"
+		Dup
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 160, 0
+		; ->
+		LineNumber                    37495, 4
+		LineNumberAlt1                327, 95
+		GetVariableValue              1                                             ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		PushConstantStringString      "cin3"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		EqualTo
+		GetThisMemberValueString      "cinema_shown"
+		PushConstant0
+		EqualTo
+		And
+		CompareAndBranchIfFalseTarget 150, 0
+		; ->
+;		PushConstanti8                1
+;		CallGameFunctionString        "gcsaver", "isconditionset", 1
+;		PushConstanti8                2
+;		CallGameFunctionString        "gcsaver", "isconditionset", 1
+;		And
+;		PushConstanti8                4
+;		CallGameFunctionString        "gcsaver", "isconditionset", 1
+;		And
+;		PushConstanti8                8
+;		CallGameFunctionString        "gcsaver", "isconditionset", 1
+;		And
+;		CompareAndBranchIfFalseTarget 150, 0
+		; ->
+		LineNumber                    9973, 4
+		LineNumberAlt1                166, 201
+		GetThisMemberValueString      "cinema"
+		CallGameFunctionString        "gccinemaengine", "play", 1
+		Pop
+		LineNumber                    9974, 4
+		LineNumberAlt1                167, 201
+		PushConstanti8                1
+		SetThisMemberValueString      "cinema_shown"
+		; <-
+		BranchTarget				  150
+		BranchAlwaysTarget            26, 0
+		; ->
+		; <-
+		BranchTarget				  160
 		Dup
 		PushConstanti8                35
 		EqualTo
