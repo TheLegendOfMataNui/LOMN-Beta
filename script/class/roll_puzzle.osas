@@ -1,12 +1,10 @@
-begin class "gly35_puzzle"
+begin class "roll_puzzle"
 	property "parent"
 	property "abletosuft"
 	property "surfing"
-	property "glyph"
-	property "showpickup"
 	property "callsurfonce"
 
-	begin method "gly35_puzzle"
+	begin method "roll_puzzle"
 		; address: 0xadbb0
 		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly3.vbo" 89:90
 		MemberFunctionArgumentCheck 2
@@ -14,10 +12,6 @@ begin class "gly35_puzzle"
 		LineNumberAlt1              89, 197
 		GetVariableValue            1            ; local
 		SetThisMemberValueString    "parent"
-		LineNumber                  9119, 4
-		LineNumberAlt1              90, 197
-		PushConstanti8              1
-		SetThisMemberValueString    "showpickup"
 		PushNothing
 		Return
 	end ; method
@@ -56,58 +50,6 @@ begin class "gly35_puzzle"
 		LineNumberAlt1                103, 197
 		PushConstanti8                1
 		SetThisMemberValueString      "callsurfonce"
-		LineNumber                    9134, 4
-		LineNumberAlt1                105, 197
-		PushConstantStringString      "glyp"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    9134, 4
-		LineNumberAlt1                105, 197
-		CallGameFunctionString        "gcsaver", "findglyph", 1
-		LineNumber                    9134, 4
-		LineNumberAlt1                105, 197
-		SetVariableValue              1                                            ; local
-		LineNumber                    9135, 4
-		LineNumberAlt1                106, 197
-		GetVariableValue              1                                            ; local
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    9136, 4
-		LineNumberAlt1                107, 197
-		PushConstant0
-		SetThisMemberValueString      "showpickup"
-		; <-
-		BranchTarget                  0
-		LineNumber                    9138, 4
-		LineNumberAlt1                109, 197
-		GetThisMemberValueString      "showpickup"
-		CompareAndBranchIfFalseTarget 1, 0
-		; ->
-		LineNumber                    9139, 4
-		LineNumberAlt1                110, 197
-		CreateObjectString            "lego_pickup"
-		Dup
-		PushConstantStringString      "glyp"
-		PushConstanti8                16
-		PushConstanti8                2
-		PushConstantStringString      "item"
-		PushConstanti8                3
-		PushConstanti8                1
-		Pull                          7
-		GetMemberFunctionString       "lego_pickup"
-		JumpAbsolute                  7
-		Pop
-		LineNumber                    9139, 4
-		LineNumberAlt1                110, 197
-		SetThisMemberValueString      "glyph"
-		LineNumber                    9140, 4
-		LineNumberAlt1                111, 197
-		GetThisMemberValueString      "glyph"
-		Dup
-		GetMemberFunctionString       "initfull"
-		JumpAbsolute                  1
-		Pop
-		; <-
-		BranchTarget                  1
 		PushNothing
 		Return
 	end ; method
@@ -124,27 +66,6 @@ begin class "gly35_puzzle"
 		LineNumberAlt1                118, 197
 		PushNothing
 		SetThisMemberValueString      "surfing"
-		LineNumber                    9149, 4
-		LineNumberAlt1                120, 197
-		GetThisMemberValueString      "glyph"
-		PushNothing
-		EqualTo
-		Not
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    9150, 4
-		LineNumberAlt1                121, 197
-		GetThisMemberValueString      "glyph"
-		Dup
-		GetMemberFunctionString       "cleanupfull"
-		JumpAbsolute                  1
-		Pop
-		LineNumber                    9151, 4
-		LineNumberAlt1                122, 197
-		PushNothing
-		SetThisMemberValueString      "glyph"
-		; <-
-		BranchTarget                  0
 		PushNothing
 		Return
 	end ; method
@@ -431,7 +352,7 @@ begin class "gly35_puzzle"
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
 		GetMemberValueString          "actor"
-		PushConstantStringString      "l000"
+		PushConstantStringString      "o000"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    9217, 4
 		LineNumberAlt1                188, 197
