@@ -1,8 +1,7 @@
 begin class "roll_puzzle"
 	property "parent"
-	property "abletosuft"
-	property "surfing"
 	property "callsurfonce"
+	property "callunsurfonce"
 
 	begin method "roll_puzzle"
 		; address: 0xadbb0
@@ -20,9 +19,6 @@ begin class "roll_puzzle"
 		; address: 0xadbd3
 		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly3.vbo" 98:111
 		MemberFunctionArgumentCheck   1
-		CreateStackVariables          1
-		LineNumber                    9127, 4
-		LineNumberAlt1                98, 197
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "bgmusic"
 		PushConstantStringString      "Root/Data/sounds/MusicTechnoSnowboard"
@@ -30,26 +26,16 @@ begin class "roll_puzzle"
 		GetMemberFunctionString       "changefilename"
 		JumpAbsolute                  2
 		Pop
-		LineNumber                    9128, 4
-		LineNumberAlt1                99, 197
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "bgmusic"
 		Dup
 		GetMemberFunctionString       "play"
 		JumpAbsolute                  1
 		Pop
-		LineNumber                    9130, 4
-		LineNumberAlt1                101, 197
-		PushConstanti8                1
-		SetThisMemberValueString      "abletosuft"
-		LineNumber                    9131, 4
-		LineNumberAlt1                102, 197
-		PushConstant0
-		SetThisMemberValueString      "surfing"
-		LineNumber                    9132, 4
-		LineNumberAlt1                103, 197
 		PushConstanti8                1
 		SetThisMemberValueString      "callsurfonce"
+		PushConstanti8                1
+		SetThisMemberValueString      "callunsurfonce"
 		PushNothing
 		Return
 	end ; method
@@ -61,11 +47,11 @@ begin class "roll_puzzle"
 		LineNumber                    9146, 4
 		LineNumberAlt1                117, 197
 		PushNothing
-		SetThisMemberValueString      "abletosuft"
+		SetThisMemberValueString      "callsurfonce"
 		LineNumber                    9147, 4
 		LineNumberAlt1                118, 197
 		PushNothing
-		SetThisMemberValueString      "surfing"
+		SetThisMemberValueString      "callunsurfonce"
 		PushNothing
 		Return
 	end ; method
@@ -86,50 +72,6 @@ begin class "roll_puzzle"
 		; address: 0xadd41
 		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly3.vbo" 136:140
 		MemberFunctionArgumentCheck   2
-		CreateStackVariables          1
-		LineNumber                    9165, 4
-		LineNumberAlt1                136, 197
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		GetMemberValueString          "actor"
-		Dup
-		GetMemberFunctionString       "getbasicpoint"
-		JumpAbsolute                  1
-		LineNumber                    9165, 4
-		LineNumberAlt1                136, 197
-		GetMemberValueString          "y"
-		SetVariableValue              2                 ; local
-		LineNumber                    9166, 4
-		LineNumberAlt1                137, 197
-		GetVariableValue              2                 ; local
-		PushConstant0
-		PushConstantf32               159.1999969482422
-		Subtract
-		LessThan
-		GetVariableValue              2                 ; local
-		PushConstanti16               -1473
-		GreaterThan
-		And
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    9167, 4
-		LineNumberAlt1                138, 197
-		GetVariableValue              0                 ; local
-		GetThisMemberFunctionString   "startsurf"
-		JumpAbsolute                  1
-		Pop
-		BranchAlwaysTarget            1, 0
-		; ->
-		; <-
-		BranchTarget                  0
-		LineNumber                    9169, 4
-		LineNumberAlt1                140, 197
-		GetVariableValue              0                 ; local
-		GetThisMemberFunctionString   "stopsurf"
-		JumpAbsolute                  1
-		Pop
-		; <-
-		BranchTarget                  1
 		PushNothing
 		Return
 	end ; method
@@ -138,57 +80,25 @@ begin class "roll_puzzle"
 		; address: 0xaddb9
 		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly3.vbo" 147:157
 		MemberFunctionArgumentCheck   2
-		LineNumber                    9176, 4
-		LineNumberAlt1                147, 197
 		GetVariableValue              1                                        ; local
 		GetMemberValueString          "eventid"
-		Dup
 		PushConstanti8                46
 		EqualTo
 		CompareAndBranchIfFalseTarget 0, 0
 		; ->
-		LineNumber                    9178, 4
-		LineNumberAlt1                149, 197
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "level"
-		GetMemberValueString          "cam"
-		PushConstanti8                7
-		Pull                          2
-		GetMemberFunctionString       "setaimode"
-		JumpAbsolute                  2
-		Pop
-		LineNumber                    9179, 4
-		LineNumberAlt1                150, 197
 		PushConstantf32               1.2000000476837158
 		CallGameFunctionString        "gccollisionphysicsgroup", "spinmask", 1
 		Pop
-		BranchAlwaysTarget            1, 0
+		BranchAlwaysTarget            4, 0
 		; ->
 		; <-
 		BranchTarget                  0
-		Dup
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
 		PushConstanti8                27
 		EqualTo
 		CompareAndBranchIfFalseTarget 1, 0
 		; ->
-		LineNumber                    9182, 4
-		LineNumberAlt1                153, 197
-		GetVariableValue              0                                        ; local
-		GetThisMemberFunctionString   "stopsurf"
-		JumpAbsolute                  1
-		Pop
-		LineNumber                    9184, 4
-		LineNumberAlt1                155, 197
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "level"
-		GetMemberValueString          "cam"
-		PushConstanti8                11
-		Pull                          2
-		GetMemberFunctionString       "setaimode"
-		JumpAbsolute                  2
-		Pop
-		LineNumber                    9185, 4
-		LineNumberAlt1                156, 197
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
 		GetMemberValueString          "actor"
@@ -200,17 +110,107 @@ begin class "roll_puzzle"
 		GetMemberFunctionString       "gotopos"
 		JumpAbsolute                  3
 		Pop
-		LineNumber                    9186, 4
-		LineNumberAlt1                157, 197
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
 		Dup
 		GetMemberFunctionString       "unkill"
 		JumpAbsolute                  1
 		Pop
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "o000"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		Pull                          2
+		GetMemberFunctionString       "setsplitanimation"
+		JumpAbsolute                  2
+		Pop
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantf32               0
+		PushConstantf32               0
+		Pull                          3
+		GetMemberFunctionString       "setsurfingability"
+		JumpAbsolute                  3
+		Pop
+		BranchAlwaysTarget            4, 0
+		; ->
 		; <-
 		BranchTarget                  1
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "eventid"
+		PushConstanti8                4
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		GetVariableValue              1                                            ; local
+		GetMemberValueString          "args"
+		PushConstant0
+		GetArrayValue
+		Dup
+		PushConstantStringString      "tp02"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		EqualTo
+		CompareAndBranchIfFalseTarget 3, 0
+		; ->
+		GetThisMemberValueString      "callsurfonce"
+		CompareAndBranchIfFalseTarget 2, 0
+		; ->
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "startsurf"
+		JumpAbsolute                  1
 		Pop
+		PushConstant0
+		SetThisMemberValueString      "callsurfonce"
+		; <-
+		BranchTarget                  2
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  3
+		Dup
+		PushConstantStringString      "tp03"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		GetThisMemberValueString      "callunsurfonce"
+		CompareAndBranchIfFalseTarget 6, 0
+		; ->
+		GetVariableValue              0                                            ; local
+		GetThisMemberFunctionString   "stopsurf"
+		JumpAbsolute                  1
+		Pop
+		PushConstant0
+		SetThisMemberValueString      "callunsurfonce"
+		; <-
+		BranchTarget                  6
+		BranchAlwaysTarget            4, 0
+		; ->
+		; <-
+		BranchTarget                  5
+		Dup
+		PushConstantStringString      "tp04"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; <-
+		LineNumber                    9217, 4
+		LineNumberAlt1                188, 197
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "player"
+		GetMemberValueString          "actor"
+		PushConstantStringString      "o012"
+		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                    9217, 4
+		LineNumberAlt1                188, 197
+		Pull                          2
+		GetMemberFunctionString       "setsplitanimation"
+		JumpAbsolute                  2
+		Pop
+		; <-
+		BranchTarget                  4
 		PushNothing
 		Return
 	end ; method
@@ -219,106 +219,59 @@ begin class "roll_puzzle"
 		; address: 0xade80
 		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly3.vbo" 164:165
 		MemberFunctionArgumentCheck   2
-		LineNumber                    9193, 4
-		LineNumberAlt1                164, 197
-		GetVariableValue              1           ; local
-		GetMemberValueString          "button"
-		PushConstanti8                90
-		EqualTo
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    9193, 4
-		LineNumberAlt1                164, 197
-		GetVariableValue              1           ; local
-		GetMemberValueString          "event"
-		PushConstanti8                2
-		EqualTo
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    9193, 4
-		LineNumberAlt1                164, 197
-		GetVariableValue              0           ; local
-		GetThisMemberFunctionString   "startsurf"
-		JumpAbsolute                  1
-		Pop
-		; <-
-		BranchTarget                  0
-		LineNumber                    9194, 4
-		LineNumberAlt1                165, 197
-		GetVariableValue              1           ; local
-		GetMemberValueString          "button"
-		PushConstanti8                88
-		EqualTo
-		CompareAndBranchIfFalseTarget 1, 0
-		; ->
-		LineNumber                    9194, 4
-		LineNumberAlt1                165, 197
-		GetVariableValue              1           ; local
-		GetMemberValueString          "event"
-		PushConstanti8                2
-		EqualTo
-		CompareAndBranchIfFalseTarget 1, 0
-		; ->
-		LineNumber                    9194, 4
-		LineNumberAlt1                165, 197
-		GetVariableValue              0           ; local
-		GetThisMemberFunctionString   "stopsurf"
-		JumpAbsolute                  1
-		Pop
-		; <-
-		BranchTarget                  1
 		PushNothing
 		Return
 	end ; method
 
 	begin method "startsurf"
-		; address: 0xadf02
-		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly3.vbo" 171:177
-		MemberFunctionArgumentCheck   1
-		LineNumber                    9200, 4
-		LineNumberAlt1                171, 197
-		GetThisMemberValueString      "surfing"
-		PushConstant0
-		EqualTo
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    9202, 4
-		LineNumberAlt1                173, 197
-		PushConstanti8                1
-		SetThisMemberValueString      "surfing"
-		LineNumber                    9203, 4
-		LineNumberAlt1                174, 197
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		GetMemberValueString          "actor"
-		PushConstanti8                13
-		Pull                          2
-		GetMemberFunctionString       "setsurfminspeed"
-		JumpAbsolute                  2
+		; address: 0x88203
+		; source: 147 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_wthk.vbo" 160:161
+		; source: 180 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd3.vbo" 103:104
+		MemberFunctionArgumentCheck  1
+		LineNumber                   55923, 4
+		LineNumberAlt1               160, 147
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstantStringString     "o010"
+		CallGameFunctionString       "scslosifoundation", "stringtoidentifier", 1
+		LineNumber                   55923, 4
+		LineNumberAlt1               160, 147
+		Pull                         2
+		GetMemberFunctionString      "setsplitanimation"
+		JumpAbsolute                 2
 		Pop
-		LineNumber                    9204, 4
-		LineNumberAlt1                175, 197
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		GetMemberValueString          "actor"
-		PushConstanti8                17
-		Pull                          2
-		GetMemberFunctionString       "setsurfmaxspeed"
-		JumpAbsolute                  2
+		LineNumber                   55924, 4
+		LineNumberAlt1               161, 147
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstantf32              0.30000001192092896
+		PushConstantf32              0.800000011920929
+		Pull                         3
+		GetMemberFunctionString      "setsurfingability"
+		JumpAbsolute                 3
 		Pop
-		LineNumber                    9206, 4
-		LineNumberAlt1                177, 197
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		GetMemberValueString          "actor"
-		PushConstantf32               1
-		PushConstantf32               0.800000011920929
-		Pull                          3
-		GetMemberFunctionString       "setsurfingability"
-		JumpAbsolute                  3
+		LineNumber                   4397, 4
+		LineNumberAlt1               103, 180
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstantf32              7
+		Pull                         2
+		GetMemberFunctionString      "setsurfminspeed"
+		JumpAbsolute                 2
 		Pop
-		; <-
-		BranchTarget                  0
+		LineNumber                   4398, 4
+		LineNumberAlt1               104, 180
+		GetVariableValueGlobalString "globalclass"
+		GetMemberValueString         "player"
+		GetMemberValueString         "actor"
+		PushConstantf32              15
+		Pull                         2
+		GetMemberFunctionString      "setsurfmaxspeed"
+		JumpAbsolute                 2
+		Pop
 		PushNothing
 		Return
 	end ; method
@@ -327,42 +280,17 @@ begin class "roll_puzzle"
 		; address: 0xadf86
 		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly3.vbo" 184:188
 		MemberFunctionArgumentCheck   1
-		LineNumber                    9213, 4
-		LineNumberAlt1                184, 197
-		GetThisMemberValueString      "surfing"
-		CompareAndBranchIfFalseTarget 0, 0
-		; ->
-		LineNumber                    9215, 4
-		LineNumberAlt1                186, 197
-		PushConstant0
-		SetThisMemberValueString      "surfing"
 		LineNumber                    9216, 4
 		LineNumberAlt1                187, 197
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
 		GetMemberValueString          "actor"
 		PushConstantf32               0
-		PushConstantf32               0.800000011920929
+		PushConstantf32               0
 		Pull                          3
 		GetMemberFunctionString       "setsurfingability"
 		JumpAbsolute                  3
 		Pop
-		LineNumber                    9217, 4
-		LineNumberAlt1                188, 197
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "player"
-		GetMemberValueString          "actor"
-		PushConstantStringString      "o000"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    9217, 4
-		LineNumberAlt1                188, 197
-		PushConstant0
-		Pull                          3
-		GetMemberFunctionString       "setsplitanimation"
-		JumpAbsolute                  3
-		Pop
-		; <-
-		BranchTarget                  0
 		PushNothing
 		Return
 	end ; method
