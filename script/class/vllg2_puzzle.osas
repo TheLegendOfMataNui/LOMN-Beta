@@ -3138,6 +3138,33 @@ begin class "vllg2_puzzle"
 		Pop
 		; <-
 		BranchTarget                  3
+		GetVariableValue              1                           ; local
+		GetMemberValueString          "event"
+		PushConstanti8                2
+		EqualTo
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		GetVariableValue              1                           ; local
+		GetMemberValueString          "button"
+		Dup
+		PushConstanti16               251
+		EqualTo
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		GetThisMemberValueString      "cinema"
+		PushNothing
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 4, 0
+		; ->
+		GetThisMemberValueString      "cinema"
+		CallGameFunctionString        "gccinemaengine", "stop", 1
+		Pop
+		; <-
+		BranchTarget                  4
+		Pop
+		; <-
+		BranchTarget                  5
 		PushNothing
 		Return
 	end ; method
