@@ -11,7 +11,6 @@ class ta036_puzzle {
     }
     
     method initfull() {
-        var var1;
         this.mthermals = [ new thermal("tm10"), 
             new thermal("tm11"), 
             new thermal("tm12"), 
@@ -38,8 +37,7 @@ class ta036_puzzle {
             new thermal("tm33"), 
             new thermal("tm34"), 
             new thermal("tm35") ];
-        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mk6a"));
-        if (var1) {
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mk6a"))) {
             this.showmask = 0;
         }
         else {
@@ -64,6 +62,7 @@ class ta036_puzzle {
             this.mthermals[var1].cleanupfull();
             var1 = var1 + 1;
         }
+        this.mthermals = [ ];
         if (!(this.mask == null)) {
             if (this.mask.objshown == 0) {
                 this.showmask = 0;
