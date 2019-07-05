@@ -14,7 +14,10 @@ class cheatlist {
     property abilitynames;
     property letnames;
     property visualdebugnames;
+    property bettersavernames;
+    property bettersaverboolnames;
     property newlevel;
+    property boolindex;
     property levelnames;
     property levelareanames;
     property realdelta;
@@ -27,7 +30,8 @@ class cheatlist {
             "MASKS...", 
             "ABILITIES...", 
             "LIFE/ENERGY/TOKENS...", 
-            "VISUAL DEBUGGER..." ];
+            "VISUAL DEBUGGER...",
+            "BETTERSAVER..." ];
         this.characternames = [ "Onua", 
             "Gali", 
             "Pohatu", 
@@ -61,6 +65,14 @@ class cheatlist {
             "Trigger Planes", 
             "Cave Lighting", 
             "HUD" ];
+        this.bettersavernames = [ "Booleans",
+            "Integers",
+            "Floats" ];
+        this.bettersaverboolnames = [ "ID + 5",
+            "ID + 1",
+            null,
+            "ID - 1",
+            "ID - 5" ];
         this.levelnames = [ "Lev1 - Onua", 
             "Lev2 - Gali", 
             "Lev3 - Pohatu", 
@@ -257,6 +269,23 @@ class cheatlist {
             var2 = var2 + 1;
         }
         this.visualdebugnames = null;
+        
+        var1 = this.bettersavernames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.bettersavernames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.bettersavernames = null;
+        
+        var1 = this.bettersaverboolnames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.bettersaverboolnames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.bettersaverboolnames = null;
+        
         var1 = this.levelnames.__length - 1;
         var2 = 0;
         while (var1 >= var2) {
@@ -327,6 +356,12 @@ class cheatlist {
             else if (this.screen == 7) {
                 this.visualdebuginput(param1);
             }
+            else if (this.screen == 8) {
+                this.bettersaverinput(param1);
+            }
+            else if (this.screen == 9) {
+                this.bettersaverboolinput(param1);
+            }
             else if (this.screen == 99) {
                 this.levelinput(param1);
             }
@@ -385,6 +420,9 @@ class cheatlist {
                 }
                 else if (this.curidx == 6) {
                     this.visualdebugmenusetup();
+                }
+                else if (this.curidx == 7) {
+                    this.bettersavermenusetup();
                 }
             }
             else if (param1.button == 46) {
@@ -663,6 +701,73 @@ class cheatlist {
             }
             else if (param1.button == 46) {
                 this.mainmenusetup();
+            }
+        }
+        return null;
+    }
+    
+    method bettersaverinput(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                // HOME
+                if (this.curidx == 0) {
+                    // Booleans
+                    if (this.boolindex == null) {
+                        this.boolindex = 0;
+                    }
+                    this.bettersaverboolsetup();
+                }
+                else if (this.curidx == 1) {
+                    // Integers
+                }
+                else if (this.curidx == 2) {
+                    // Floats
+                }
+            }
+            else if (param1.button == 46) {
+                this.mainmenusetup();
+            }
+        }
+        return null;
+    }
+    
+    method bettersaverboolinput(param1) {
+        var oldidx;
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                // HOME
+                oldidx = this.curidx;
+                if (this.curidx == 0) {
+                    // ID + 5
+                    this.boolindex = this.boolindex + 5;
+                    this.bettersaverboolsetup();
+                }
+                else if (this.curidx == 1) {
+                    // ID + 1
+                    this.boolindex = this.boolindex + 1;
+                    this.bettersaverboolsetup();
+                }
+                else if (this.curidx == 2) {
+                    // Value
+                    bettersaver::setbooleanvalue(this.boolindex, !bettersaver::getbooleanvalue(this.boolindex));
+                    this.bettersaverboolsetup();
+                }
+                else if (this.curidx == 3) {
+                    // ID - 1
+                    this.boolindex = this.boolindex - 1;
+                    this.bettersaverboolsetup();
+                }
+                else if (this.curidx == 4) {
+                    // ID - 5
+                    this.boolindex = this.boolindex - 5;
+                    this.bettersaverboolsetup();
+                }
+                this.activemenu[this.curidx].setinactive();
+                this.curidx = oldidx;
+                this.activemenu[this.curidx].setactive();
+            }
+            else if (param1.button == 46) {
+                this.bettersavermenusetup();
             }
         }
         return null;
@@ -979,6 +1084,64 @@ class cheatlist {
         while ((this.visualdebugnames.__length - 1) >= var1) {
             var2 = var1 * 12;
             var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.visualdebugnames[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method bettersaverboolsetup() {
+        var var1;
+        var var2;
+        var var3;
+        var itemtext;
+        this.screen = 9;
+        this.maxidx = this.bettersaverboolnames.__length - 1;
+        this.resetactivemenu();
+        var1 = 0;
+        while ((this.bettersaverboolnames.__length - 1) >= var1) {
+            var2 = var1 * 12;
+            itemtext = this.bettersaverboolnames[var1];
+            if (var1 == 2) {
+                if (bettersaver::getbooleanvalue(this.boolindex)) {
+                    itemtext = __tostring(this.boolindex) + ": True";
+                }
+                else {
+                    itemtext = __tostring(this.boolindex) + ": False";
+                }
+            }
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", itemtext, this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method bettersavermenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.screen = 8;
+        this.maxidx = this.bettersavernames.__length - 1;
+        this.resetactivemenu();
+        var1 = 0;
+        while ((this.bettersavernames.__length - 1) >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.bettersavernames[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
             var3.initfull();
             var3.add();
             if (var1 <= this.showidx) {
