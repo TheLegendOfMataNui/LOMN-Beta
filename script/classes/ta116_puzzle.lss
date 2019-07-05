@@ -1,0 +1,134 @@
+class ta116_puzzle {
+    property parent;
+    property sinkerarray;
+    property resetpoint;
+    property resetorientation;
+    property music;
+    
+    method ta116_puzzle(param1) {
+        this.parent = param1;
+        this.resetpoint = new basicpoint(-4, 0 - 13.7, 0 - 93.1);
+        this.resetorientation = 7.5;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(50);
+        this.sinkerarray = [ new sinker("pl01", 1), 
+            new sinker("pl02", 2), 
+            new sinker("pl03", 3), 
+            new sinker("pl04", 4), 
+            new sinker("pl05", 5), 
+            new sinker("pl06", 6), 
+            new sinker("pl07", 7), 
+            new sinker("pl08", 8), 
+            new sinker("pl09", 9), 
+            new sinker("pl10", 10), 
+            new sinker("pl11", 11), 
+            new sinker("pl12", 12), 
+            new sinker("pl13", 13), 
+            new sinker("pl14", 14), 
+            new sinker("pl15", 15), 
+            new sinker("pl16", 16), 
+            new sinker("pl17", 17), 
+            new sinker("pl18", 18), 
+            new sinker("pl19", 19), 
+            new sinker("pl20", 20), 
+            new sinker("pl21", 21), 
+            new sinker("pl22", 22), 
+            new sinker("pl23", 23), 
+            new sinker("pl24", 24), 
+            new sinker("pl25", 25), 
+            new sinker("pl26", 26), 
+            new sinker("pl27", 27), 
+            new sinker("pl28", 28), 
+            new sinker("pl29", 29), 
+            new sinker("pl30", 30), 
+            new sinker("pl31", 31), 
+            new sinker("pl32", 32), 
+            new sinker("pl33", 33), 
+            new sinker("pl34", 34), 
+            new sinker("pl35", 35), 
+            new sinker("pl36", 36), 
+            new sinker("pl37", 37), 
+            new sinker("pl38", 38), 
+            new sinker("pl39", 39) ];
+        var1 = 0;
+        while ((this.sinkerarray.__length - 1) >= var1) {
+            this.sinkerarray[var1].initfull();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while (((this.sinkerarray.__length - 1) - 1) >= var1) {
+            this.sinkerarray[var1].link(this.sinkerarray[var1 + 1]);
+            var1 = var1 + 1;
+        }
+        this.sinkerarray[0].goup();
+        this.music = new legomp3player();
+        this.music.setupforplay("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        this.music.play(1);
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        var1 = 0;
+        while ((this.sinkerarray.__length - 1) >= var1) {
+            this.sinkerarray[var1].cleanupfull();
+            var1 = var1 + 1;
+        }
+        this.music.stop();
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.sinkerarray.__length - 1) >= var1) {
+            this.sinkerarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.music.stop();
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.setpos(this.resetpoint.y, this.resetpoint.y, this.resetpoint.z);
+            globalclass.player.actor.setorientation(this.resetorientation);
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.unkill();
+            this.music.play(1);
+            this.reset();
+        }
+        return null;
+    }
+    
+    method reset() {
+        var var1;
+        var1 = 0;
+        while ((this.sinkerarray.__length - 1) >= var1) {
+            this.sinkerarray[var1].reset();
+            var1 = var1 + 1;
+        }
+        this.sinkerarray[0].goup();
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

@@ -1,0 +1,206 @@
+class ss_shoefitterscreen : lego_base_screen {
+    property bottombar;
+    property sidebar;
+    property background;
+    property characterwindow;
+    property currentwindow;
+    property currentdisplay;
+    property selecteddisplay;
+    property pause;
+    property runninganimation;
+    
+    method ss_shoefitterscreen(param1, param2, param3, param4, param5, param6) {
+        this.background = param1;
+        this.bottombar = param2;
+        this.sidebar = param3;
+        this.currentdisplay = param4;
+        this.characterwindow = param5;
+        this.selecteddisplay = param6;
+        return null;
+    }
+    
+    method initfull() {
+        gcareadirector::setcurrentlevel("lev1");
+        gcareadirector::setcurrentarea("bech");
+        gclightdirector::toggleconstantlights();
+        this.background.initfull();
+        this.bottombar.initfull();
+        this.bottombar.parent = this;
+        this.sidebar.initfull();
+        this.sidebar.parent = this;
+        this.currentdisplay.initfull();
+        this.characterwindow.initfull();
+        this.characterwindow.parent = this;
+        this.selecteddisplay.initfull();
+        this.currentwindow = 0;
+        this.pause = 0.0;
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.background.cleanupfull();
+        this.bottombar.cleanupfull();
+        this.sidebar.cleanupfull();
+        this.currentdisplay.cleanupfull();
+        this.characterwindow.cleanupfull();
+        this.selecteddisplay.cleanupfull();
+        this.currentwindow = null;
+        this.pause = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.bottombar.onflag || this.bottombar.onsound) {
+            this.currentwindow = 1;
+        }
+        else {
+            this.currentwindow = 0;
+        }
+        this.characterwindow.process(param1);
+        if (this.currentwindow == 0) {
+            this.sidebar.process(param1);
+        }
+        else if (this.currentwindow == 1) {
+            this.bottombar.process(param1, this.selecteddisplay);
+        }
+        this.currentdisplay.process(param1, this.characterwindow.shoefittercharacter);
+        if (this.characterwindow.shoefittercharacter.onscreen) {
+            this.bottombar.animationrunning(param1, this.characterwindow);
+        }
+        this.playsounds();
+        this.pause = this.pause + param1.deltatime;
+        if (this.runninganimation) {
+            this.checkanimation();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        this.characterwindow.input(param1);
+        if (this.currentwindow == 0) {
+            this.sidebar.input(param1, this.characterwindow, this.currentdisplay, this.selecteddisplay, this.bottombar);
+        }
+        else if (this.currentwindow == 1) {
+            this.bottombar.input(param1, this.characterwindow, this.selecteddisplay);
+        }
+        if (param1.button == 32) {
+            if (param1.event == 2) {
+                this.switchwindows();
+            }
+        }
+        if (param1.event == 1) {
+            this.resetpause();
+        }
+        return null;
+    }
+    
+    method resetpause() {
+        this.pause = 0.0;
+        return null;
+    }
+    
+    method selectanimation() {
+        this.sidebar.selectitem(this.characterwindow, this.currentdisplay, this.selecteddisplay, this.bottombar);
+        this.characterwindow.shoefittercharacter.play();
+        return null;
+    }
+    
+    method checkanimation() {
+        if (this.characterwindow.shoefittercharacter.getduration() == this.characterwindow.shoefittercharacter.gettime()) {
+            this.characterwindow.shoefittercharacter.stop();
+            this.runninganimation = 0;
+        }
+        return null;
+    }
+    
+    method switchoptions() {
+        if (this.sidebar.currentwindow == 0) {
+            this.sidebar.setupmenu(this.sidebar.animationarray, "ANIMATIONS", 1, this.characterwindow, 1);
+        }
+        else if (this.sidebar.currentwindow == 2) {
+            this.sidebar.setupmenu(this.sidebar.animationarray, "ANIMATIONS", 1, this.characterwindow, 1);
+        }
+        else if (this.sidebar.currentwindow == 3) {
+            this.sidebar.setupmenu(this.sidebar.animationarray, "ANIMATIONS", 1, this.characterwindow, 1);
+            this.sidebar.flagtypearray.hide();
+        }
+        else if (this.sidebar.currentwindow == 4) {
+            this.sidebar.setupmenu(this.sidebar.animationarray, "ANIMATIONS", 1, this.characterwindow, 1);
+            this.characterwindow.setanimationflags(this.bottombar.flagarray, this.bottombar.soundarray);
+        }
+        else if (this.sidebar.currentwindow == 6) {
+            this.sidebar.setupmenu(this.sidebar.animationarray, "ANIMATIONS", 1, this.characterwindow, 1);
+            this.sidebar.definearray = [ "No Flag" ];
+        }
+        return null;
+    }
+    
+    method playsounds() {
+        var var1;
+        var var2;
+        var var3;
+        if (this.characterwindow.shoefittercharacter.onscreen) {
+            var1 = this.characterwindow.shoefittercharacter.gettime();
+            if (this.characterwindow.playing) {
+                var2 = 0;
+                while ((this.bottombar.soundarray.__length - 1) >= var2) {
+                    var3 = this.bottombar.soundarray[var2];
+                    if (((var1 >= var3.startspot) && (var1 <= var3.endspot)) && this.characterwindow.playing) {
+                        if (!var3.soundfile.isplaying()) {
+                            var3.soundfile.play();
+                        }
+                    }
+                    if ((var1 >= var3.endspot) && this.characterwindow.playing) {
+                        if (var3.soundfile.isplaying()) {
+                            var3.soundfile.stop();
+                        }
+                    }
+                    var2 = var2 + 1;
+                }
+            }
+            else {
+                var2 = 0;
+                while ((this.bottombar.soundarray.__length - 1) >= var2) {
+                    var3 = this.bottombar.soundarray[var2];
+                    if (var3.soundfile.isplaying()) {
+                        var3.soundfile.stop();
+                    }
+                    var2 = var2 + 1;
+                }
+            }
+        }
+        return null;
+    }
+    
+    method switchwindows() {
+        if (this.currentwindow == 0) {
+            if (this.bottombar.flagarray.__length > 0) {
+                this.bottombar.onflag = 1;
+            }
+            else if (this.bottombar.soundarray.__length > 0) {
+                this.bottombar.onsound = 1;
+            }
+        }
+        else if (this.currentwindow == 1) {
+            if (this.bottombar.onflag) {
+                this.bottombar.flagarray[this.bottombar.pointer].settransparency(150);
+            }
+            if (this.bottombar.onsound) {
+                this.bottombar.soundarray[this.bottombar.pointer].setcolor(null, null, 0);
+            }
+            this.bottombar.onsound = 0;
+            this.bottombar.onflag = 0;
+        }
+        return null;
+    }
+}

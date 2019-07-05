@@ -1,0 +1,78 @@
+class switchandblock {
+    property button;
+    property block1;
+    property block2;
+    property colide;
+    property switchhit;
+    
+    method switchandblock(param1, param2, param3) {
+        this.button = new lev4_vison_button(param1);
+        this.button.initfull();
+        this.block1 = new lev4_vison_block(param2);
+        this.block1.initfull();
+        if (!(param3 == null)) {
+            this.block2 = new lev4_vison_block(param3);
+            this.block2.initfull();
+        }
+        else {
+            this.block2 = null;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        this.switchhit = 0;
+        this.colide = 0;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.colide > 0) {
+            this.colide = this.colide - 1;
+            if (this.colide == 1) {
+                this.collide(0);
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (param1.args[0] == this.button.id) {
+                this.collide(1);
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method collide(param1) {
+        if (param1) {
+            this.colide = 5;
+            if (this.switchhit == 0) {
+                this.switchhit = 1;
+                this.hitswitch(1);
+                debug::print("*** hit");
+            }
+        }
+        else {
+            debug::print("*** unhit");
+            this.hitswitch(0);
+            this.switchhit = 0;
+        }
+        return null;
+    }
+    
+    method hitswitch(param1) {
+        this.button.triggerd(param1);
+        this.block1.triggerd(param1);
+        if (!(this.block2 == null)) {
+            this.block2.triggerd(param1);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        return null;
+    }
+}

@@ -1,0 +1,94 @@
+class shrine_puzzle {
+    property parent;
+    property edoor;
+    property portalactive;
+    property bossdoorshone;
+    
+    method shrine_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        gcareadirector::setnearestmax(10);
+        this.edoor = new lego_moveableobject("etdr", this.parent.name);
+        this.edoor.initfull();
+        this.edoor.setalpha(0.3);
+        this.bossdoorshone = 1;
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("nuju"), 0);
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var1, 1.5, 0.8, 1, 0, 0);
+        var2 = scslosifoundation::stringtoidentifier("tps9");
+        this.portalactive = gcsaver::portalactive();
+        if (this.portalactive == 1) {
+            gccollisionphysicsgroup::setportal(var2, "root/data/art/portals/kopa/village_ripple/k_prtl", 1);
+        }
+        else {
+            gccollisionphysicsgroup::turnoffnextarea(var2);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.edoor.cleanupfull();
+        this.edoor = null;
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 41) {
+            if (this.portalactive == 0) {
+                var1 = scslosifoundation::stringtoidentifier("tps9");
+                gccollisionphysicsgroup::turnonnextarea(var1, scslosifoundation::stringtoidentifier("tura"));
+                gccollisionphysicsgroup::setportal(var1, "root/data/art/portals/kopa/village_ripple/k_prtl", 1);
+                this.portalactive = 1;
+            }
+        }
+        else if (param1.eventid == 1) {
+            if ((param1.args[1] == scslosifoundation::stringtoidentifier("etdr")) && (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                if (this.bossdoorshone) {
+                    if (globalclass.player.tokens >= 60) {
+                        if (globalclass.player.maskcontrol.isselectable(3)) {
+                            if (globalclass.player.maskcontrol.isselectable(11)) {
+                                if (globalclass.player.actor.ishookenabled) {
+                                    if (globalclass.player.haselement()) {
+                                        this.edoor.fadeout(1.5);
+                                        gcstaticsoundsptrarray::playtablesound(1084);
+                                        this.bossdoorshone = 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 35) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("etdr")) && (param1.args[1] == 0)) {
+                this.edoor.hide();
+            }
+        }
+        else if (param1.eventid == 7) {
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
+                gcstaticsoundsptrarray::playtablesound(149);
+            }
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

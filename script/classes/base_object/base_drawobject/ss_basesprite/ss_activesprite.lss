@@ -1,0 +1,31 @@
+class ss_activesprite : ss_basesprite {
+    property filename2;
+    
+    method ss_activesprite(param1, param2, param3, param4, param5, param6, param7, param8) {
+        this.ss_basesprite(param1, param3, param4, param5, param6, param7, param8);
+        this.filename2 = param2;
+        return null;
+    }
+    
+    method setactive() {
+        this.hide();
+        this.remove();
+        this.sprite = gcbigsprite::loadhudsprite(this.x1, this.y1, this.x2, this.y2, this.filename2, 0);
+        gcbigsprite::setzdepth(this.sprite, this.z);
+        this.enablealphachannel(1);
+        this.add();
+        this.show();
+        return null;
+    }
+    
+    method setinactive() {
+        this.hide();
+        this.remove();
+        this.sprite = gcbigsprite::loadhudsprite(this.x1, this.y1, this.x2, this.y2, this.filename, 0);
+        gcbigsprite::setzdepth(this.sprite, this.z);
+        this.enablealphachannel(1);
+        this.add();
+        this.show();
+        return null;
+    }
+}

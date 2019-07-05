@@ -1,0 +1,226 @@
+class ss_shoefittermenu {
+    property items;
+    property pointer;
+    property destination;
+    property fullarray;
+    property needtoscroll;
+    property pause;
+    property scrollmarker;
+    property scrollbar;
+    property scrollmoveamount;
+    
+    method ss_shoefittermenu(param1, param2) {
+        var var1;
+        if (!(this.items == null)) {
+            this.items = param1;
+        }
+        else {
+            this.items = [  ];
+        }
+        if (this.items.__length > 13) {
+            this.fullarray = this.items;
+            this.items = [  ];
+            var1 = 0;
+            while (12 >= var1) {
+                this.items.__append(new ss_shoefittermenucontainer(new gs_legoactivetext("Root/Data/Art/Fonts/tech_font_01", "Root/Data/Art/Fonts/tech_font_01_hilight", scslosistringfuncs::toupper(this.fullarray[var1].name.string), this.fullarray[var1].name.x1, this.fullarray[var1].name.y1, this.fullarray[var1].name.z, this.fullarray[var1].name.scale), this.fullarray[var1].id));
+                var1 = var1 + 1;
+            }
+            this.needtoscroll = 1;
+        }
+        else {
+            this.fullarray = [  ];
+            this.needtoscroll = 0;
+        }
+        if (!(param2 == null)) {
+            this.scrollbar = param2;
+        }
+        this.pointer = 0;
+        this.scrollmarker = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].name.initfull();
+            this.items[var1].name.add();
+            this.items[var1].name.show();
+            var1 = var1 + 1;
+        }
+        this.scrollbar.initfull();
+        this.scrollbar.add();
+        this.scrollbar.enabletransparency(1);
+        this.scrollbar.enablealphachannel(1);
+        this.pause = 0.0;
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].name.hide();
+            this.items[var1].name.remove();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].name.hide();
+            this.items[var1].name.remove();
+            this.items[var1].name.cleanupfull();
+            var1 = var1 + 1;
+        }
+        if (this.scrollbar.onscreen) {
+            this.scrollbar.hide();
+        }
+        this.scrollbar.remove();
+        this.scrollbar.cleanupfull();
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method input(param1) {
+        this.keyboardinput(param1);
+        if (param1.event == 2) {
+            this.pause = 0.0;
+        }
+        return null;
+    }
+    
+    method keyboardinput(param1) {
+        if (param1.button == 38) {
+            if (param1.event == 2) {
+                this.setpointer(-1);
+            }
+        }
+        if (param1.button == 40) {
+            if (param1.event == 2) {
+                this.setpointer(1);
+            }
+        }
+        if (this.pause > 0.5) {
+            if (param1.button == 38) {
+                if (param1.event == 4) {
+                    this.setpointer(-1);
+                }
+            }
+            if (param1.button == 40) {
+                if (param1.event == 4) {
+                    this.setpointer(1);
+                }
+            }
+        }
+        return null;
+    }
+    
+    method setpointer(param1) {
+        if (((this.pointer + param1) <= (this.items.__length - 1)) && ((this.pointer + param1) >= 0)) {
+            this.pointer = this.pointer + param1;
+        }
+        else if (this.needtoscroll) {
+            this.scroll(param1);
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            if (var1 == this.pointer) {
+                this.items[var1].name.setactive(param1);
+                this.destination = this.items[var1].id;
+            }
+            else {
+                this.items[var1].name.setinactive();
+            }
+            var1 = var1 + 1;
+        }
+        this.pause = this.pause + param1.deltatime;
+        if (this.needtoscroll) {
+            if (!this.scrollbar.onscreen) {
+                this.scrollbar.show();
+                this.setupscrollbar();
+            }
+        }
+        if (!this.needtoscroll) {
+            if (this.scrollbar.onscreen) {
+                this.scrollbar.hide();
+            }
+        }
+        return null;
+    }
+    
+    method scroll(param1) {
+        var var1;
+        var var2;
+        if (((this.scrollmarker + param1) >= 0) && (((this.scrollmarker + 12) + param1) <= (this.fullarray.__length - 1))) {
+            var1 = this.scrollmarker;
+            while ((this.scrollmarker + 12) >= var1) {
+                var2 = this.items[var1 - this.scrollmarker];
+                var2.name.setstring(this.fullarray[var1 + param1].name.string);
+                var2.id = this.fullarray[var1 + param1].id;
+                var1 = var1 + 1;
+            }
+            this.scrollmarker = this.scrollmarker + param1;
+            this.movescrollbar(param1);
+        }
+        return null;
+    }
+    
+    method switchitems(param1, param2, param3) {
+        this.cleanupfull();
+        this.ss_shoefittermenu(param1);
+        this.initfull();
+        this.adjustforscrollmarker(param3);
+        if ((param2 <= (this.items.__length - 1)) && (param2 >= 0)) {
+            this.pointer = param2;
+        }
+        return null;
+    }
+    
+    method adjustforscrollmarker(param1) {
+        var var1;
+        var var2;
+        if (this.fullarray.__length > 0) {
+            var1 = 0;
+            while ((this.items.__length - 1) >= var1) {
+                this.items[var1].name.setstring(this.fullarray[var1 + param1].name.string);
+                var2 = this.items[var1];
+                var2.id = this.fullarray[var1 + param1].id;
+                var1 = var1 + 1;
+            }
+            this.setupscrollbar();
+            this.movescrollbar(param1);
+            this.scrollmarker = param1;
+        }
+        return null;
+    }
+    
+    method setupscrollbar() {
+        this.scrollbar.h = this.scrollbar.y2 - this.scrollbar.y1;
+        this.scrollbar.setpos(this.scrollbar.x1, 52, this.scrollbar.x2, 52 + this.scrollbar.h);
+        this.scrollmoveamount = __tofloat(260 - this.scrollbar.y2) / __tofloat(this.fullarray.__length - 13);
+        return null;
+    }
+    
+    method movescrollbar(param1) {
+        this.scrollbar.changepos(0, this.scrollmoveamount * param1);
+        return null;
+    }
+}

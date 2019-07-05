@@ -1,0 +1,56 @@
+class moveableobj_tweakable : base_object {
+    property obj;
+    property stepamount;
+    property desc;
+    
+    method moveableobj_tweakable(param1) {
+        this.obj = param1;
+        this.desc = this.obj.name;
+        this.stepamount = 0.0;
+        debug::print("Setting tweakable on " + __tostring(this.desc));
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method setpos(param1, param2, param3) {
+        this.obj.setpos(param1, param2, param3);
+        return null;
+    }
+    
+    method getx() {
+        return this.obj.getx();
+    }
+    
+    method gety() {
+        return this.obj.gety();
+    }
+    
+    method getz() {
+        return this.obj.getz();
+    }
+    
+    method getorientationx() {
+        return this.obj.getorientationx();
+    }
+    
+    method getorientationy() {
+        return this.obj.getorientationy();
+    }
+    
+    method getorientationz() {
+        return this.obj.getorientationz();
+    }
+    
+    method setorientation(param1, param2, param3) {
+        this.obj.setorientation(param1, param2, param3);
+        return null;
+    }
+    
+    method zap() {
+        globalclass.level.cam.setpos(this.getx(), this.gety(), this.getz());
+        return null;
+    }
+}

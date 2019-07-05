@@ -1,0 +1,53 @@
+class lego_area_bugs : gs_lego_area {
+    property parent;
+    property puzzle;
+    
+    method lego_area_bugs(param1) {
+        this.parent = param1;
+        this.gs_lego_area("bugs", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new bugpitpuzzle_class(this);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gcareadirector::setfog(-15066598, 0 - 1.0, 0 - 400.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(15);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.puzzle.exit();
+        this.puzzle = null;
+        this.parent = null;
+        return null;
+    }
+}

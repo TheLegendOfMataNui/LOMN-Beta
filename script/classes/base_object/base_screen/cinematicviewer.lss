@@ -1,0 +1,33 @@
+class cinematicviewer : base_screen {
+    property cam;
+    
+    method cinematicviewer() {
+        this.cam = new gs_legocamera(0 - 346.0, 0 - 61.0, 1349.0, 608.4, 0.7, 404.3);
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        debug::print("********CALLING INITFULL*********");
+        this.cam.initfull();
+        var1 = gccinemaeditor::create();
+        var2 = gccinemaeditor::getlevelid(var1);
+        var3 = gccinemaeditor::getareaid(var1);
+        var4 = gccinemaeditor::gettoaid(var1);
+        gcareadirector::setcurrentlevel(scslosifoundation::identifiertostring(var2));
+        gcareadirector::setcurrentarea(scslosifoundation::identifiertostring(var3));
+        globalclass.player.setactor("cnt1", "onua", 0.0, 0.0, 0.0, 0.0, "none");
+        this.cam.setaimode(11);
+        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        gccinemaeditor::setactive(var1, 1);
+        return null;
+    }
+    
+    method process(param1) {
+        this.cam.process(param1);
+        return null;
+    }
+}

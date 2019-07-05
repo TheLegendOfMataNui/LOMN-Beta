@@ -1,0 +1,91 @@
+class fireball {
+    property obj;
+    property id;
+    property burnsound;
+    property explodesound;
+    property name;
+    property burnsoundscleanedup;
+    
+    method fireball(param1, param2, param3, param4) {
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.obj = new sprite_projectile(this.name, "firebll", "Root/Data/art/SpriteAnims/newfireBall/", param2, param3, param4, 24);
+        this.explodesound = new tablecopysound(1058);
+        this.explodesound.synctoprojectile(this.obj.handle);
+        this.explodesound.setlistenerrollofffactor(0.5);
+        this.burnsoundscleanedup = 1;
+        return null;
+    }
+    
+    method fire(param1, param2) {
+        this.obj.launch(param1, param2);
+        this.burnsound = new tablecopysound(1057);
+        this.burnsoundscleanedup = 0;
+        this.burnsound.synctoprojectile(this.obj.handle);
+        this.burnsound.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.id = null;
+        if (this.burnsoundscleanedup == 0) {
+            this.burnsound.cleanupfull();
+            this.burnsoundscleanedup = 1;
+            this.burnsound = null;
+        }
+        this.burnsoundscleanedup = null;
+        this.explodesound.cleanupfull();
+        this.explodesound = null;
+        return null;
+    }
+    
+    method reset() {
+        if (this.burnsoundscleanedup == 0) {
+            this.burnsound.cleanupfull();
+            this.burnsoundscleanedup = 1;
+            this.burnsound = null;
+        }
+        this.obj.detonate();
+        return null;
+    }
+    
+    method process(param1) {
+        this.obj.process(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 19) {
+            if (param1.args[1] == this.id) {
+                this.detonate(param1.args[2], param1.args[3], param1.args[4], param1.args[0]);
+                if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                    globalclass.level.cam.shakecamera(0.3, 0.1);
+                }
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method detonate(param1, param2, param3, param4) {
+        if (this.burnsoundscleanedup == 0) {
+            this.burnsound.cleanupfull();
+            this.burnsoundscleanedup = 1;
+            this.burnsound = null;
+        }
+        if (param4 == scslosifoundation::stringtoidentifier("cnt1")) {
+            this.explodesound.setvolume(100);
+        }
+        else {
+            this.explodesound.setvolume(50);
+        }
+        this.explodesound.play(0);
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

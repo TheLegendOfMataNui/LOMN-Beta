@@ -1,0 +1,38 @@
+class ss_pointspline : ss_spline_value {
+    property valuey;
+    property valuez;
+    property point;
+    
+    method ss_pointspline(param1) {
+        this.ss_splinevalue(param1);
+        return null;
+    }
+    
+    method getvalue() {
+        this.value = scslosislkcubicspline::interpolate(this.object, 0, this.time);
+        this.valuey = scslosislkcubicspline::interpolate(this.object, 1, this.time);
+        this.valuez = scslosislkcubicspline::interpolate(this.object, 2, this.time);
+        this.point = new ss_point(this.value, this.valuey, this.valuez);
+        return this.point;
+    }
+    
+    method getstartvalue() {
+        var var1;
+        var1 = this.getmintime(0);
+        this.value = scslosislkcubicspline::interpolate(this.object, 0, this.time);
+        this.valuey = scslosislkcubicspline::interpolate(this.object, 1, this.time);
+        this.valuez = scslosislkcubicspline::interpolate(this.object, 2, this.time);
+        this.point = new ss_point(this.value, this.valuey, this.valuez);
+        return this.point;
+    }
+    
+    method getendvalue() {
+        var var1;
+        var1 = this.getmaxtime(0);
+        this.value = scslosislkcubicspline::interpolate(this.object, 0, this.time);
+        this.valuey = scslosislkcubicspline::interpolate(this.object, 1, this.time);
+        this.valuez = scslosislkcubicspline::interpolate(this.object, 2, this.time);
+        this.point = new ss_point(this.value, this.valuey, this.valuez);
+        return this.point;
+    }
+}

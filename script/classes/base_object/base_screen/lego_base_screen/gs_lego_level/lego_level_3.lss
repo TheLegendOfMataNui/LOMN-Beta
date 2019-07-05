@@ -1,0 +1,104 @@
+class lego_level_3 : gs_lego_level {
+    property thebull;
+    
+    method lego_level_3() {
+        var var1;
+        this.gs_lego_level("lev3", "poha", "mtup");
+        var1 = new lego_area_blcv(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_blr1(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_blr2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_ptos(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_vilg(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_xrod(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_bldr(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_bkik(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_boss(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_mtup(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_gly1(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_gly3(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_shrn3(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_rkfl(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_hutt(this);
+        this.areas.__append(var1);
+        return null;
+    }
+    
+    method initfull() {
+        this.thebull = null;
+        this.lego_level_initfull();
+        globalclass.player.addmask("fake", 0);
+        globalclass.player.addmask("fake", 7);
+        globalclass.player.addmask("fake", 8);
+        globalclass.player.addmask("fake", 1);
+        globalclass.player.addmask("fake", 9);
+        if (globalclass.saverloaded) {
+            if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mska"), scslosifoundation::stringtoidentifier("blcv"))) {
+                globalclass.player.addmask("fake", 10);
+            }
+            if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("msks"), scslosifoundation::stringtoidentifier("ptos"))) {
+                globalclass.player.addmask("fake", 2);
+            }
+            if (gcsaver::findglypha(scslosifoundation::stringtoidentifier("glyp"), scslosifoundation::stringtoidentifier("gly3"))) {
+                globalclass.player.addelement();
+            }
+            if (gcsaver::finditema(scslosifoundation::stringtoidentifier("hook"), scslosifoundation::stringtoidentifier("gly1"))) {
+                globalclass.player.setupgrapplinghook();
+                globalclass.player.setgrapplinghookdistance(120);
+            }
+            globalclass.player.initfromsaver();
+        }
+        globalclass.saverloaded = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.thebull == null)) {
+            this.destroybull();
+        }
+        this.lego_level_cleanupfull();
+        return null;
+    }
+    
+    method initshort() {
+        this.thebull = null;
+        this.lego_level_initshort();
+        globalclass.player.addmask("fake", 0);
+        globalclass.player.addmask("fake", 7);
+        globalclass.player.addmask("fake", 8);
+        globalclass.player.addmask("fake", 1);
+        globalclass.player.addmask("fake", 9);
+        return null;
+    }
+    
+    method createbull(param1) {
+        this.thebull = new gs_lego_character("cbly", "bull", param1, 0, 0, 0, 0, "aiin");
+        this.thebull.initfull();
+        this.thebull.add();
+        this.thebull.show();
+        return this.thebull;
+    }
+    
+    method destroybull() {
+        this.thebull.hide();
+        this.thebull = null;
+        return null;
+    }
+    
+    method getbull() {
+        return this.thebull;
+    }
+}

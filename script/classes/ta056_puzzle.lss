@@ -1,0 +1,280 @@
+class ta056_puzzle {
+    property mparent;
+    property msurfboards;
+    property mtriggerstate;
+    property mboulders;
+    property mmaskon;
+    property mcinema;
+    property firesound;
+    property surfing;
+    
+    method ta056_puzzle(param1) {
+        this.mparent = param1;
+        this.mtriggerstate = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.msurfboards.__length - 1) >= var1) {
+            this.msurfboards[var1].cleanupfull();
+            this.msurfboards[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.msurfboards = null;
+        var1 = 0;
+        while ((this.mboulders.__length - 1) >= var1) {
+            this.mboulders[var1].cleanupfull();
+            this.mboulders[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.mboulders = null;
+        this.mcinema = null;
+        this.mmaskon = null;
+        this.mtriggerstate = null;
+        this.firesound = null;
+        return null;
+    }
+    
+    method exit() {
+        this.mparent = null;
+        return null;
+    }
+    
+    method enterarea() {
+        var var1;
+        debug::print("TA05 EnterArea");
+        this.mtriggerstate = 0;
+        this.mboulders = [ new lego_moveableobject("bld2"), 
+            new runningobj("bld1") ];
+        this.msurfboards = [ new lego_moveableobject("surk"), 
+            new lego_moveableobject("surf") ];
+        this.mboulders[0].initfull();
+        this.mboulders[1].init("Root/Data/Levels/lev6/ta05/lev6_ta05_path_1.txt");
+        this.mboulders[1].settweakable();
+        this.mboulders[1].setrollspeed(1);
+        this.firesound = new tablecopysound(1110);
+        this.firesound.synctoobject(this.mboulders[1].id);
+        this.firesound.setmindistance(1.5);
+        this.firesound.setlistenerrollofffactor(0.5);
+        var1 = 0;
+        while ((this.msurfboards.__length - 1) >= var1) {
+            this.msurfboards[var1].initfull();
+            var1 = var1 + 1;
+        }
+        if (this.mtriggerstate == 0) {
+            this.mboulders[0].show();
+            this.mboulders[1].hide();
+            this.msurfboards[0].show();
+            this.msurfboards[1].hide();
+        }
+        else {
+            this.mboulders[0].hide();
+            this.mboulders[1].hide();
+            this.msurfboards[0].hide();
+            this.msurfboards[1].hide();
+        }
+        this.mmaskon = (globalclass.player.whichmaskonface() == 3) && (globalclass.player.ismaskpoweron() == 1);
+        if (this.mmaskon == 0) {
+            this.msurfboards[0].fadeout(0);
+        }
+        this.mcinema = gccinemaengine::create();
+        gccinemaengine::load(this.mcinema, "cin4");
+        this.surfing = 0;
+        return null;
+    }
+    
+    method leavearea() {
+        var var1;
+        debug::print("TA05 LeaveArea");
+        this.setsurfmode(0);
+        if (this.mtriggerstate > 0) {
+            gcsaver::setcondition(4194304, 1);
+            debug::print("* set ta02 to cold");
+        }
+        var1 = 0;
+        while ((this.mboulders.__length - 1) >= var1) {
+            this.mboulders[var1].hide();
+            this.mboulders[var1].cleanupfull();
+            this.mboulders[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.mboulders = null;
+        var1 = 0;
+        while ((this.msurfboards.__length - 1) >= var1) {
+            this.msurfboards[var1].hide();
+            this.msurfboards[var1].cleanupfull();
+            this.msurfboards[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.msurfboards = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.mboulders.__length - 1) >= var1) {
+            this.mboulders[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.msurfboards.__length - 1) >= var1) {
+            this.msurfboards[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        this.mboulders[1].onevent(param1);
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            globalclass.bgmusic.stop();
+        }
+        else if (param1.eventid == 27) {
+            this.resetafterdeath();
+        }
+        else if (param1.eventid == 1002) {
+            if (param1.args[0]) {
+                debug::print("TA05 Mask of Vision Activated");
+                if (this.mtriggerstate == 0) {
+                    debug::print("TA05 Fading in SURFBOARD_BOULDER");
+                    this.msurfboards[this.mtriggerstate].fadein(0.25);
+                }
+                this.mmaskon = 1;
+                debug::print("mMaskOn = true");
+            }
+            else {
+                debug::print("TA05 Mask of Vision Deactivated");
+                if (this.mtriggerstate == 0) {
+                    debug::print("TA05 Fading out SURFBOARD_BOULDER");
+                    if (!(this.mcinema == null)) {
+                        if (gccinemaengine::isplaying(this.mcinema) == 0) {
+                            this.msurfboards[this.mtriggerstate].fadeout(0.25);
+                        }
+                    }
+                    else {
+                        this.msurfboards[this.mtriggerstate].fadeout(0.25);
+                    }
+                }
+                this.mmaskon = 0;
+                debug::print("mMaskOn = false");
+            }
+        }
+        else if (param1.eventid == 1) {
+            if ((param1.args[1] == this.msurfboards[0].id) && (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                if (this.mmaskon && !(this.mcinema == null)) {
+                    debug::print("Playing cinematic of Tahu jumping on the surfoard");
+                    this.startcinematic();
+                }
+                else {
+                    debug::print("Mask isn't on, so the cinematic won't start");
+                }
+            }
+            if ((param1.args[0] == this.mboulders[1].id) && (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                globalclass.player.kill();
+                gccollisionphysicsgroup::spinmask(1.2);
+            }
+        }
+        else if (param1.eventid == 30) {
+            debug::print("Cinematic is over, so position the dude and stuff");
+            this.endcinematic();
+        }
+        else if (param1.eventid == 1000) {
+            var1 = __tostring(param1.args[0]);
+            debug::print(" got PATH_EVENT " + var1);
+            if (__toint(var1) == 1) {
+                
+            }
+        }
+        return null;
+    }
+    
+    method setsurfmode(param1) {
+        if (param1) {
+            this.surfing = 1;
+            globalclass.player.actor.setsurfingability(2.0, 0.8);
+            globalclass.player.actor.setsurfminspeed(28.0);
+            globalclass.player.actor.setsurfmaxspeed(40.0);
+            globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("surf"));
+            globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t038"));
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICtahuTheme");
+            globalclass.bgmusic.play(1);
+        }
+        else {
+            this.surfing = 0;
+            globalclass.player.actor.setsurfingability(0.0, 0.0);
+            globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("????"));
+            globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t000"));
+            globalclass.bgmusic.stop();
+        }
+        return null;
+    }
+    
+    method resetafterdeath() {
+        globalclass.player.unkill();
+        this.mtriggerstate = 0;
+        this.msurfboards[1].hide();
+        this.msurfboards[0].show();
+        this.mboulders[1].hide();
+        this.mboulders[0].show();
+        globalclass.bgmusic.play(1);
+        if (this.surfing) {
+            this.endcinematic();
+        }
+        else {
+            this.setsurfmode(0);
+            globalclass.player.actor.gotopos(this.mparent.enterstartid, this.mparent.enterlookid);
+        }
+        return null;
+    }
+    
+    method startcinematic() {
+        globalclass.hud.hide();
+        gccinemaengine::play(this.mcinema);
+        if (globalclass.player.maskcontrol.isactive() == 1) {
+            globalclass.player.maskcontrol.toggleactive();
+        }
+        return null;
+    }
+    
+    method endcinematic() {
+        this.mparent.level.cam.shakecamera(0.13, 0.4);
+        globalclass.hud.show();
+        globalclass.player.actor.setpos(15, -74, 32);
+        globalclass.player.actor.setorientation(0);
+        debug::print("hiding PreTrigger boulder/surfboard");
+        this.mboulders[this.mtriggerstate].hide();
+        this.msurfboards[this.mtriggerstate].hide();
+        this.mtriggerstate = 1;
+        debug::print("showing PostTrigger boulder/surfboard");
+        this.mboulders[this.mtriggerstate].show();
+        this.setsurfmode(1);
+        debug::print("telling the boulder start on it's path");
+        this.mboulders[this.mtriggerstate].startrunning(0.6);
+        gcsaver::setcondition(4194304, 1);
+        debug::print("*** set ta02 to cold");
+        this.firesound.play(1);
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (!(this.mcinema == null)) {
+                    gccinemaengine::stop(this.mcinema);
+                }
+            }
+            param1.button;
+        }
+        if (param1.button == 80) {
+            if (param1.event == 2) {
+                this.endcinematic();
+            }
+        }
+        return null;
+    }
+}

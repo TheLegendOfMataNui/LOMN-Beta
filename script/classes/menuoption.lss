@@ -1,0 +1,152 @@
+class menuoption {
+    property lefttext;
+    property righttext;
+    property lit;
+    property halfheight;
+    property sliderbg;
+    property slider;
+    property slidervalue;
+    property left;
+    property right;
+    property offset;
+    property type;
+    property initialvalue;
+    
+    method menuoption(param1, param2, param3, param4, param5) {
+        this.left = param1;
+        this.right = param2;
+        this.offset = param3;
+        this.type = param4;
+        if (param5 == null) {
+            this.initialvalue = 0;
+        }
+        else {
+            this.initialvalue = param5;
+        }
+        this.halfheight = __toint(32 * 0.5);
+        this.lit = 0;
+        this.lefttext = null;
+        return null;
+    }
+    
+    method initfull() {
+        this.lefttext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", this.left, 32.0, 50.0 + (this.offset * 40.0), 0, 1.5, 0, 4, 0, 1);
+        this.lefttext.initfull();
+        this.lefttext.add();
+        this.lefttext.show();
+        if (this.type == 2) {
+            this.righttext = null;
+            if (this.initialvalue == 0) {
+                this.slidervalue = 0;
+            }
+            else {
+                this.slidervalue = (this.initialvalue + 144) - 100;
+            }
+            this.slider = gceditorslider::create("Root/data/art/slider/lego_slider", screenx * 0.5, (50.0 + (this.offset * 40.0)) - this.halfheight, 32, 32, 0, 144, 1, this.slidervalue);
+            gceditorslider::setactive(this.slider, 1);
+            this.sliderbg = new ss_basesprite("Root/data/art/slider/lego_slider_bg", screenx * 0.5, (50.0 + (this.offset * 40.0)) - this.halfheight, 0, (screenx * 0.5) + 192, (50.0 + (this.offset * 40.0)) + this.halfheight);
+            this.sliderbg.initfull();
+            this.sliderbg.add();
+            this.sliderbg.show();
+        }
+        else {
+            this.slider = null;
+            this.sliderbg = null;
+            this.slidervalue = null;
+            this.righttext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", this.right, screenx * 0.5, 50.0 + (this.offset * 40.0), 0, 1.5, 0, 4, 0, 1);
+            this.righttext.initfull();
+            this.righttext.add();
+            this.righttext.show();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.lefttext == null)) {
+            this.lefttext.hide();
+            this.lefttext.remove();
+            this.lefttext.cleanupfull();
+            this.lefttext = null;
+        }
+        if (!(this.righttext == null)) {
+            this.righttext.hide();
+            this.righttext.remove();
+            this.righttext.cleanupfull();
+            this.righttext = null;
+        }
+        if (!(this.slider == null)) {
+            this.slider = null;
+        }
+        if (!(this.sliderbg == null)) {
+            this.sliderbg.hide();
+            this.sliderbg.remove();
+            this.sliderbg.cleanupfull();
+            this.sliderbg = null;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 26) {
+            if (this.type == 2) {
+                this.slidervalue = gceditorslider::checkbuttonstate(this.slider);
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method setrightx(param1) {
+        if (!(this.righttext == null)) {
+            this.righttext.setpos(param1, this.righttext.y1, 0);
+        }
+        return null;
+    }
+    
+    method setrighttext(param1) {
+        if (!(this.righttext == null)) {
+            this.righttext.setstring(param1);
+        }
+        return null;
+    }
+    
+    method getlefttextwidth() {
+        return this.lefttext.getwidth();
+    }
+    
+    method getslidervalue() {
+        if (this.slidervalue == null) {
+            return 0;
+        }
+        else if (this.slidervalue < 44) {
+            return 0;
+        }
+        else {
+            return (this.slidervalue - 144) + 100;
+        }
+        return null;
+    }
+    
+    method check(param1, param2) {
+        if (!(this.lefttext == null)) {
+            if ((param2 > (this.lefttext.y1 - this.halfheight)) && (param2 < (this.lefttext.y1 + this.halfheight))) {
+                if (this.lit == 0) {
+                    sctilefont::setcolor(this.lefttext.font, 255, 255, 0, 255);
+                    if (!(this.righttext == null)) {
+                        sctilefont::setcolor(this.righttext.font, 255, 255, 0, 255);
+                    }
+                    this.lit = 1;
+                    gcstaticsoundsptrarray::playtablesound(1072);
+                }
+            }
+            else if (this.lit) {
+                sctilefont::setcolor(this.lefttext.font, 255, 255, 255, 255);
+                if (!(this.righttext == null)) {
+                    sctilefont::setcolor(this.righttext.font, 255, 255, 255, 255);
+                }
+                this.lit = 0;
+            }
+        }
+        return this.lit;
+    }
+}

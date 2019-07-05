@@ -1,0 +1,69 @@
+class ta07_door {
+    property obj;
+    property id;
+    property name;
+    property up;
+    property uppos;
+    property downpos;
+    
+    method ta07_door(param1) {
+        this.obj = new lego_moveableobject(param1);
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.name = param1;
+        this.up = 1;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.uppos = this.obj.getpoint();
+        this.downpos = new basicpoint(this.uppos.x, this.uppos.y - 10, this.uppos.z);
+        this.obj.settweakable();
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.id = null;
+        this.name = null;
+        this.up = null;
+        return null;
+    }
+    
+    method reset() {
+        this.rase(1);
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+    
+    method rase(param1) {
+        if (param1) {
+            if (!this.up) {
+                this.up = 1;
+                this.obj.interpolate(this.uppos.x, this.uppos.y, this.uppos.z, 2);
+            }
+        }
+        else if (this.up) {
+            this.up = 0;
+            this.obj.interpolate(this.downpos.x, this.downpos.y, this.downpos.z, 0.5);
+        }
+        return null;
+    }
+    
+    method settweakable() {
+        this.obj.settweakable();
+        return null;
+    }
+}

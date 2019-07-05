@@ -1,0 +1,65 @@
+class printmenupic {
+    property image;
+    property highlight;
+    property selectable;
+    
+    method printmenupic(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
+        this.selectable = param11;
+        if (this.selectable) {
+            this.image = new ss_basesprite(param1, __toint(param2 * screenratio), __toint(param3 * screenratio), 0, __toint(param4 * screenratio), __toint(param5 * screenratio));
+            this.highlight = new printmenuhighlight(param6, param7, param8, param9, param10);
+        }
+        return null;
+    }
+    
+    method initfull() {
+        if (this.selectable) {
+            this.image.initfull();
+            this.image.add();
+            this.image.show();
+            this.highlight.initfull();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.image == null)) {
+            this.image.hide();
+            this.image.remove();
+            this.image.cleanupfull();
+            this.image = null;
+        }
+        if (!(this.highlight == null)) {
+            this.highlight.cleanupfull();
+            this.highlight = null;
+        }
+        return null;
+    }
+    
+    method hide() {
+        if (this.selectable) {
+            this.image.hide();
+            this.highlight.image.hide();
+            this.highlight.lit = 0;
+        }
+        return null;
+    }
+    
+    method show() {
+        if (this.selectable) {
+            this.image.show();
+        }
+        return null;
+    }
+    
+    method check(param1, param2) {
+        var var1;
+        if (this.selectable) {
+            var1 = this.highlight.check(param1, param2);
+        }
+        else {
+            var1 = 0;
+        }
+        return var1;
+    }
+}

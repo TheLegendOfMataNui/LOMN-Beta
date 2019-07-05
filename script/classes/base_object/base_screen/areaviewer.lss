@@ -1,0 +1,120 @@
+class areaviewer : base_screen {
+    property filehandle;
+    property bfileexist;
+    property slosi_fname;
+    property slosi_aname;
+    property fname;
+    property aname;
+    property nameoffolder;
+    property nameofarea;
+    property cam;
+    property soundscaper;
+    property rgbval;
+    
+    method areaviewer() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        var var11;
+        var var12;
+        this.filehandle = new slosi_fileio("Root/Data/AreaViewer.txt");
+        this.bfileexist = this.filehandle.fileexist();
+        if (this.bfileexist) {
+            this.filehandle.open();
+            this.fname = this.filehandle.read();
+            this.aname = this.filehandle.read();
+            var1 = this.filehandle.read();
+            var2 = this.filehandle.read();
+            var3 = this.filehandle.read();
+            this.filehandle.close();
+            this.slosi_fname = new slosi_string(this.fname);
+            this.slosi_aname = new slosi_string(this.aname);
+            var4 = new slosi_string(var1);
+            var5 = new slosi_string(var2);
+            var6 = new slosi_string(var3);
+            this.slosi_fname.truncateleft(4);
+            this.slosi_aname.truncateleft(4);
+            var4.truncateleft(4);
+            var5.truncateleft(4);
+            var6.truncateleft(4);
+            var7 = var4.string;
+            var8 = var5.string;
+            var9 = var6.string;
+            debug::print("Red = " + __tostring(var7));
+            debug::print("Green = " + __tostring(var8));
+            debug::print("Blue = " + __tostring(var9));
+            var10 = __toint(var7);
+            var11 = __toint(var8);
+            var12 = __toint(var9);
+            this.rgbval = ((var10 << 16) + (var11 << 8)) + var12;
+            debug::print("rgbval = " + __tostring(this.rgbval));
+            this.nameoffolder = scslosistringfuncs::tolower(this.slosi_fname.string);
+            this.nameofarea = scslosistringfuncs::tolower(this.slosi_aname.string);
+            this.cam = new gs_legocamera(0 - 346.0, 0 - 61.0, 1349.0, 608.4, 0.7, 404.3);
+        }
+        else {
+            this.nameoffolder = "lev1";
+            this.nameofarea = "bech";
+            this.cam = new gs_legocamera(0 - 346.0, 0 - 61.0, 1349.0, 608.4, 0.7, 404.3);
+        }
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        if (!(this.bfileexist == 1)) {
+            gcscripttools::scriptmessagebox("File AreaViewer.txt Doesn't Exist: Loading Lev1 bech if you want to change this Edit the AreaViewer.txt file in you c:\projects\lego\data\ folder");
+        }
+        gcareadirector::setcurrentlevel(this.nameoffolder);
+        gcareadirector::setcurrentarea(this.nameofarea);
+        gclightdirector::toggleconstantlights();
+        this.cam.initfull();
+        this.cam.setaimode(11);
+        this.cam.settweakable();
+        if (this.nameoffolder == "lev1") {
+            var1 = "onua";
+        }
+        else if (this.nameoffolder == "lev2") {
+            var1 = "gali";
+        }
+        else if (this.nameoffolder == "lev3") {
+            var1 = "poha";
+        }
+        else if (this.nameoffolder == "lev4") {
+            var1 = "kopa";
+        }
+        else if (this.nameoffolder == "lev5") {
+            var1 = "onua";
+        }
+        else if (this.nameoffolder == "lev6") {
+            var1 = "tahu";
+        }
+        globalclass.player.setactor("cnt1", var1, 180, 608.4, 0.7, 404.3, "ninp");
+        globalclass.player.actorinitfull();
+        globalclass.hud.add();
+        globalclass.hud.show();
+        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        this.cam.setaimode(11);
+        debug::print("*****rgbval = " + __tostring(this.rgbval));
+        gcareadirector::setfog(this.rgbval, 0 - 500.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        return null;
+    }
+    
+    method input(param1) {
+        this.cam.input(param1);
+        return null;
+    }
+    
+    method process(param1) {
+        this.cam.process(param1);
+        return null;
+    }
+}

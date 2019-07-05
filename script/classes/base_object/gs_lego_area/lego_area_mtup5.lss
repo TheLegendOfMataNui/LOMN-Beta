@@ -1,0 +1,95 @@
+class lego_area_mtup5 : gs_lego_area {
+    property cinema;
+    property call_ev_safe_time_once;
+    
+    method lego_area_mtup5(param1) {
+        this.gs_lego_area("mtup", param1, 0, 0);
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        globalclass.bgmusic.stop();
+        this.call_ev_safe_time_once = 1;
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin1");
+            globalclass.hud.hide();
+            gccinemaengine::play(this.cinema);
+        }
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var1, 2);
+        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(var1, 4);
+        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
+        gchive::setmaxcreatures(var2, 2);
+        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("bats"));
+        gchive::setspawnrate(var2, 4);
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        this.cinema = null;
+        var1 = null;
+        var2 = null;
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 44) {
+            if (this.call_ev_safe_time_once) {
+                if (this.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
+                    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaAmbience");
+                    globalclass.bgmusic.play();
+                }
+                this.call_ev_safe_time_once = 0;
+            }
+        }
+        else if (param1.eventid == 30) {
+            globalclass.player.maskcontrol.changemask(3);
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.hud.show();
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaAmbience");
+            globalclass.bgmusic.play();
+        }
+        else if (param1.eventid == 46) {
+            globalclass.level.cam.setaimode(7);
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.unkill();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (!(this.cinema == null)) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+            param1.button;
+        }
+        return null;
+    }
+}

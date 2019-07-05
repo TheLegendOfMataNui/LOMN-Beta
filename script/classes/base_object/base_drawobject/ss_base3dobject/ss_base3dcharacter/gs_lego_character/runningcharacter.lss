@@ -1,0 +1,321 @@
+class runningcharacter : gs_lego_character {
+    property maintimer;
+    property frequency;
+    property speed;
+    property pathpoint;
+    property patharray;
+    property dataarray;
+    property curentarrayposition;
+    property haspath;
+    property oneway;
+    property paused;
+    property running;
+    property yoffset;
+    
+    method runningcharacter(param1, param2, param3, param4, param5, param6, param7, param8) {
+        this.gs_lego_character(param1, param2, param3, param4, param5, param6, param7, param8);
+        this.pathpoint = new basicpoint();
+        this.patharray = [  ];
+        this.dataarray = [  ];
+        return null;
+    }
+    
+    method init(param1) {
+        this.maintimer = 0.0;
+        this.frequency = 30;
+        this.curentarrayposition = 0;
+        this.running = 0;
+        this.oneway = 1;
+        this.paused = 0;
+        this.speed = 1;
+        this.dataarray = [  ];
+        this.patharray = [  ];
+        this.yoffset = 0;
+        this.initfull();
+        this.fillarray(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.remove();
+        this.charname = null;
+        this.contid = null;
+        this.visstate = null;
+        this.charstring = null;
+        this.contstring = null;
+        this.handle = null;
+        this.angle = null;
+        this.inputstate = null;
+        this.z = null;
+        this.x1 = null;
+        this.y1 = null;
+        this.inputstate = null;
+        this.numanimations = null;
+        this.gepetto = null;
+        this.currentanimation = null;
+        this.area = null;
+        this.areaid = null;
+        this.myname = null;
+        this.id = null;
+        this.maintimer = null;
+        this.frequency = null;
+        this.speed = null;
+        this.pathpoint = null;
+        this.curentarrayposition = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        this.maintimer = param1.deltatime + this.maintimer;
+        if (this.maintimer >= (this.speed / this.frequency)) {
+            if (this.haspath) {
+                if (this.running) {
+                    if (this.paused == 0) {
+                        if (this.oneway) {
+                            var1 = __toint((this.maintimer * this.frequency) * this.speed);
+                            this.doactionsskipped(var1);
+                            if ((this.curentarrayposition + var1) >= (this.patharray.__length - 1)) {
+                                var2 = this.patharray.__length - 1;
+                                this.running = 0;
+                            }
+                            else {
+                                var2 = this.curentarrayposition + var1;
+                            }
+                            this.curentarrayposition = var2;
+                            var3 = this.patharray[this.curentarrayposition];
+                            this.pathpoint = var3[0];
+                        }
+                        else {
+                            var1 = __toint((this.maintimer * this.frequency) * this.speed);
+                            this.doactionsskipped(var1);
+                            this.curentarrayposition = (this.curentarrayposition + var1) % (this.patharray.__length - 1);
+                            var3 = this.patharray[this.curentarrayposition];
+                            this.pathpoint = var3[0];
+                        }
+                        if (this.curentarrayposition < ((this.patharray.__length - 1) - 5)) {
+                            var4 = this.patharray[this.curentarrayposition + 5];
+                            var4 = var4[0];
+                            var5 = var4.x - this.pathpoint.x;
+                            var6 = var4.z - this.pathpoint.z;
+                            var7 = gcscripttools::arctan2(var5, var6);
+                            this.angle = var7 * 57.29578;
+                        }
+                        this.setorientation(this.angle);
+                        this.setpos(this.pathpoint.x, this.yoffset + this.pathpoint.y, this.pathpoint.z);
+                        this.maintimer = 0.0;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method doactionsskipped(param1) {
+        if ((this.curentarrayposition + param1) > (this.patharray.__length - 1)) {
+            this.doactionsfromto(this.curentarrayposition, this.patharray.__length - 1);
+            this.doactionsfromto(0, (this.curentarrayposition + param1) % (this.patharray.__length - 1));
+        }
+        else {
+            this.doactionsfromto(this.curentarrayposition, this.curentarrayposition + param1);
+        }
+        return null;
+    }
+    
+    method doactionsfromto(param1, param2) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = param1;
+        while ((param2 - 1) >= var1) {
+            var2 = this.patharray[var1];
+            if ((var2.__length - 1) > 0) {
+                var3 = 1;
+                while ((var2.__length - 1) >= var3) {
+                    if (!(var2[var3] == null)) {
+                        var4 = new scriptevent(1000, [ var2[var3] ]);
+                        var4.send();
+                    }
+                    var3 = var3 + 1;
+                }
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method startrunning(param1) {
+        this.curentarrayposition = 0;
+        this.maintimer = 0.0;
+        this.running = 1;
+        if (!(param1 == null)) {
+            this.speed = param1;
+        }
+        return null;
+    }
+    
+    method pauserun() {
+        this.paused = 1;
+        return null;
+    }
+    
+    method playrun() {
+        this.maintimer = 0.0;
+        this.paused = 0;
+        return null;
+    }
+    
+    method fillarray(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        var var11;
+        var var12;
+        var var13;
+        var var14;
+        var var15;
+        var var16;
+        var var17;
+        var var18;
+        var var19;
+        if (!(param1 == null)) {
+            var1 = new slosi_fileio(param1);
+            var2 = var1.fileexist();
+            if (var2) {
+                var1.open();
+                var3 = var1.read();
+                var4 = gcscripttools::stringtolonginteger(var3);
+                var5 = var1.read();
+                var5 = new slosi_string(var5);
+                var6 = var5.findword(" ");
+                while (!(var1.iseof() == 1)) {
+                    var7 = [  ];
+                    var8 = null;
+                    var9 = null;
+                    var10 = var5.gettruncateleft(var6);
+                    var11 = gcscripttools::stringtofloat(var10);
+                    var5.truncateright(var5.getlength() - (var6 + 1));
+                    var12 = var5.findword(" ");
+                    var13 = var5.gettruncateleft(var12);
+                    var14 = gcscripttools::stringtofloat(var13);
+                    var5.truncateright(var5.getlength() - (var12 + 1));
+                    var15 = var5.findword(" ");
+                    if (var15 == -1) {
+                        var16 = var5.string;
+                    }
+                    else {
+                        var16 = var5.gettruncateleft(var15);
+                    }
+                    this.z = gcscripttools::stringtofloat(var5.string);
+                    if (!(var15 == -1)) {
+                        var5.truncateright(var5.getlength() - (var15 + 1));
+                        var17 = var5.findword(" ");
+                        if (var17 == -1) {
+                            var8 = var5.string;
+                        }
+                        else {
+                            var8 = var5.gettruncateleft(var17);
+                        }
+                        if (!(var17 == -1)) {
+                            var5.truncateright(var5.getlength() - (var17 + 1));
+                            var18 = var5.findword(" ");
+                            if (var18 == -1) {
+                                var9 = var5.string;
+                            }
+                            else {
+                                var9 = var5.gettruncateleft(var18);
+                            }
+                        }
+                    }
+                    var19 = new basicpoint(var11, var14, this.z);
+                    var7.__append(var19);
+                    var7.__append(var8);
+                    var7.__append(var9);
+                    this.dataarray.__append(var7);
+                    var5 = var1.read();
+                    var5 = new slosi_string(var5);
+                    var6 = var5.findword(" ");
+                }
+                var1.close();
+                this.setuppath();
+            }
+            else {
+                debug::print(("NO DATA FILE LOADED FOR RunningCharacter " + this.charstring) + " !!!");
+            }
+        }
+        return null;
+    }
+    
+    method setuppath() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        this.speed = 1;
+        this.haspath = 1;
+        var1 = this.speed * this.frequency;
+        var2 = 0;
+        while (((this.dataarray.__length - 1) - 1) >= var2) {
+            var3 = var2 + 1;
+            var4 = this.dataarray[var2];
+            var5 = this.dataarray[var3];
+            if (var1 < 1) {
+                var1 = 1;
+            }
+            var6 = 0;
+            while (var1 >= var6) {
+                var7 = gcscripttools::getxdivisionalong3dline(var4[0].x, var4[0].y, var4[0].z, var5[0].x, var5[0].y, var5[0].z, var1, var6);
+                var8 = gcscripttools::getydivisionalong3dline(var4[0].x, var4[0].y, var4[0].z, var5[0].x, var5[0].y, var5[0].z, var1, var6);
+                this.z = gcscripttools::getzdivisionalong3dline(var4[0].x, var4[0].y, var4[0].z, var5[0].x, var5[0].y, var5[0].z, var1, var6);
+                var9 = new basicpoint(var7, var8 + this.yoffset, this.z);
+                if (var6 == 0) {
+                    this.patharray.__append(var4);
+                }
+                else {
+                    this.patharray.__append([ var9 ]);
+                }
+                var6 = var6 + 1;
+            }
+            if ((this.patharray.__length - 1) < 1) {
+                debug::print(this.charstring + " will not follow path, pathArray needs two or more point");
+                this.haspath = 0;
+            }
+            var2 = var2 + 1;
+        }
+        return null;
+    }
+    
+    method oneway(param1) {
+        if (param1 == null) {
+            this.oneway = 1;
+        }
+        else {
+            this.oneway = param1;
+        }
+        return null;
+    }
+    
+    method set_yoffset(param1) {
+        this.yoffset = param1;
+        return null;
+    }
+}

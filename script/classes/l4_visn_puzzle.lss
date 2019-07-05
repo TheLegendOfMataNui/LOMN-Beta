@@ -1,0 +1,210 @@
+class l4_visn_puzzle {
+    property parent;
+    property sbarray;
+    property teleblock;
+    property pushblocks;
+    property showmask;
+    property maskx;
+    property door1t;
+    property door1b;
+    property door2t;
+    property door2b;
+    
+    method l4_visn_puzzle(param1) {
+        var var1;
+        this.parent = param1;
+        var1 = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(50);
+        this.showmask = 1;
+        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mskv"));
+        if (var1) {
+            this.showmask = 0;
+        }
+        if (this.showmask) {
+            this.maskx = new lego_pickup("mskv", 3, 1, "item", 1, 1);
+            this.maskx.initfull();
+            this.maskx.show();
+        }
+        this.sbarray = [ new switchandblock("sw00", "le00", "le01"), 
+            new switchandblock("sw01", "le02", "le03"), 
+            new switchandblock("sw02", "le04", "le05"), 
+            new switchandblock("sw03", "le06", null) ];
+        var1 = 0;
+        while ((this.sbarray.__length - 1) >= var1) {
+            this.sbarray[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.pushblocks = [ new lego_moveableobject("bl00"), 
+            new lego_moveableobject("bl01"), 
+            new lego_moveableobject("bl02"), 
+            new lego_moveableobject("bl03") ];
+        this.teleblock = new lego_moveableobject("tblk");
+        this.door1t = new lego_moveableobject("drt1");
+        this.door1b = new lego_moveableobject("drb1");
+        this.door2t = new lego_moveableobject("drt2");
+        this.door2b = new lego_moveableobject("drb2");
+        var1 = 0;
+        while ((this.pushblocks.__length - 1) >= var1) {
+            this.pushblocks[var1].initfull();
+            this.pushblocks[var1].setresponse(3, 0, 3);
+            var1 = var1 + 1;
+        }
+        this.teleblock.initfull();
+        this.teleblock.setmoveable(1.0, 0.1, 1, 1, 1, 0);
+        this.door1t.initfull();
+        this.door1b.initfull();
+        this.door2t.initfull();
+        this.door2b.initfull();
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        this.teleblock.show();
+        this.teleblock.setmytargetingflags(2);
+        var1 = 0;
+        while ((this.pushblocks.__length - 1) >= var1) {
+            this.pushblocks[var1].show();
+            this.pushblocks[var1].settweakable();
+            if (var1 == 0) {
+                this.pushblocks[var1].setposition(this.pushblocks[var1].getx(), this.pushblocks[var1].gety(), 0 - 171.4);
+            }
+            else if (var1 == 1) {
+                this.pushblocks[var1].setposition(this.pushblocks[var1].getx(), this.pushblocks[var1].gety(), 0 - 158.0);
+            }
+            else if (var1 == 2) {
+                this.pushblocks[var1].setposition(this.pushblocks[var1].getx(), this.pushblocks[var1].gety(), 0 - 175.7);
+            }
+            else if (var1 == 3) {
+                this.pushblocks[var1].setposition(this.pushblocks[var1].getx(), this.pushblocks[var1].gety(), 0 - 157.9);
+            }
+            var1 = var1 + 1;
+        }
+        this.startpushblocks();
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        if (!(this.maskx == null)) {
+            this.maskx.cleanupfull();
+            this.maskx = null;
+        }
+        var1 = 0;
+        while ((this.sbarray.__length - 1) >= var1) {
+            this.sbarray[var1].cleanupfull();
+            this.sbarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.pushblocks.__length - 1) >= var1) {
+            this.pushblocks[var1].cleanupfull();
+            this.pushblocks[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.pushblocks = null;
+        this.teleblock.cleanupfull();
+        this.teleblock = null;
+        this.door1t.cleanupfull();
+        this.door1t = null;
+        this.door1b.cleanupfull();
+        this.door1b = null;
+        this.door2t.cleanupfull();
+        this.door2t = null;
+        this.door2b.cleanupfull();
+        this.door2b = null;
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.sbarray.__length - 1) >= var1) {
+            this.sbarray[var1].process();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.sbarray.__length - 1) >= var1) {
+            this.sbarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 7) {
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
+                gcstaticsoundsptrarray::playtablesound(149);
+            }
+        }
+        else if (param1.eventid == 1) {
+            
+        }
+        return null;
+    }
+    
+    method moveset(param1, param2) {
+        return null;
+    }
+    
+    method movetele(param1) {
+        return null;
+    }
+    
+    method startpushblocks() {
+        var var1;
+        var1 = 0;
+        while ((this.pushblocks.__length - 1) >= var1) {
+            if (var1 == 0) {
+                this.pushblocks[var1].setslidetimer(0.0, 0.0, 13.0, 1.2, -1, 0.3);
+            }
+            else if (var1 == 1) {
+                this.pushblocks[var1].setslidetimer(0.0, 0.0, 0 - 13.0, 1.2, -1, 0.3);
+            }
+            else if (var1 == 2) {
+                this.pushblocks[var1].setslidetimer(0.0, 0.0, 13.0, 1.2, -1, 0.3);
+            }
+            else if (var1 == 3) {
+                this.pushblocks[var1].setslidetimer(0.0, 0.0, 0 - 13.0, 1.2, -1, 0.3);
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method openmaskdoor(param1) {
+        if (param1 == 1) {
+            this.door1t.interpolate(818.544, 52.0423, 0 - 16.2511, 0.7);
+            this.door1b.interpolate(818.544, 25.5522, 0 - 16.2511, 0.7);
+            this.door1b.setresponse(0, 0, 0);
+        }
+        else if (param1 == 0) {
+            this.door1t.interpolate(818.544, 47.0423, 0 - 16.2511, 0.7);
+            this.door1b.interpolate(818.544, 35.5522, 0 - 16.2511, 0.7);
+            this.door1b.setresponse(3, 3, 3);
+        }
+        return null;
+    }
+    
+    method openenddoor() {
+        this.door2t.interpolate(972.562, 55.0423, 0 - 182.87, 5.0);
+        this.door2b.interpolate(972.562, 27.5522, 0 - 182.87, 5.0);
+        this.door2b.setresponse(0, 0, 0);
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

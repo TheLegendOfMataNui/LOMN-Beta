@@ -1,0 +1,65 @@
+class lego_bossprojectile {
+    property handle;
+    property id;
+    
+    method lego_bossprojectile(param1, param2) {
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        if (param2 == null) {
+            param2 = 0;
+        }
+        this.handle = gcbossprojectile::create(this.id, param2);
+        return null;
+    }
+    
+    method init(param1, param2, param3, param4, param5, param6, param7) {
+        gcbossprojectile::setup(this.handle, param1, param2, param3, param4, param5, param6, param7);
+        return null;
+    }
+    
+    method settarget(param1) {
+        gcbossprojectile::settarget(this.handle, param1);
+        return null;
+    }
+    
+    method gettarget() {
+        return gcbossprojectile::gettarget(this.handle);
+    }
+    
+    method setspeed(param1) {
+        gcbossprojectile::setspeed(this.handle, param1);
+        return null;
+    }
+    
+    method getspeed() {
+        return gcbossprojectile::getspeed(this.handle);
+    }
+    
+    method getmaxdistance() {
+        return gcbossprojectile::getmaxdistance(this.handle);
+    }
+    
+    method setmaxdistance(param1) {
+        gcbossprojectile::setmaxdistance(this.handle, param1);
+        return null;
+    }
+    
+    method launch(param1, param2) {
+        gcbossprojectile::launch(this.handle, param1, param2);
+        return null;
+    }
+    
+    method launchfrom(param1) {
+        gcbossprojectile::launchfrom(this.handle, param1.x, param1.y, param1.z);
+        return null;
+    }
+    
+    method kill() {
+        gcbossprojectile::kill(this.handle);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.handle = null;
+        return null;
+    }
+}

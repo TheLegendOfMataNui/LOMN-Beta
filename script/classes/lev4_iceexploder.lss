@@ -1,0 +1,85 @@
+class lev4_iceexploder {
+    property icebitsarray;
+    
+    method lev4_iceexploder() {
+        this.icebitsarray = [ new lego_moveableobject("ibi0"), 
+            new lego_moveableobject("ibi1"), 
+            new lego_moveableobject("ibi2"), 
+            new lego_moveableobject("ibi3"), 
+            new lego_moveableobject("ibi4"), 
+            new lego_moveableobject("ibi5"), 
+            new lego_moveableobject("ibi6"), 
+            new lego_moveableobject("ibi7"), 
+            new lego_moveableobject("ibi8"), 
+            new lego_moveableobject("ibi9"), 
+            new lego_moveableobject("ibia"), 
+            new lego_moveableobject("ibib"), 
+            new lego_moveableobject("ibic"), 
+            new lego_moveableobject("ibid"), 
+            new lego_moveableobject("ibie"), 
+            new lego_moveableobject("ibif") ];
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var1 = 0;
+        while ((this.icebitsarray.__length - 1) >= var1) {
+            this.icebitsarray[var1].initfull("tri1", "Root/data/levels/lev4/snbd", -1, -1, -1, 1, 1, 1);
+            this.icebitsarray[var1].setmoveable(2.0, 1.0, 0, 0, 0, 0);
+            this.icebitsarray[var1].setresponse(4, 4, 4);
+            this.icebitsarray[var1].setposition(0.0, 0.0, 0.0);
+            this.icebitsarray[var1].ignorecollisionswith(scslosifoundation::stringtoidentifier("cnt1"));
+            this.icebitsarray[var1].show();
+            this.icebitsarray[var1].setalpha(0.5);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method explode(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        var var11;
+        debug::print("Blues Explosion! - " + param1.name);
+        var1 = param1.getx();
+        var2 = param1.gety();
+        var3 = param1.getz();
+        var4 = 0;
+        while ((this.icebitsarray.__length - 1) >= var4) {
+            var5 = globalclass.randnum.getrandomfloat(0.2, 1.0);
+            var6 = globalclass.randnum.getrandomfloat(0 - 5.0, 5.0);
+            var7 = globalclass.randnum.getrandomfloat(3.0, 10.0);
+            var8 = globalclass.randnum.getrandomfloat(30.0, 50.0);
+            var9 = globalclass.randnum.getrandomfloat(var1 - 8, var1 + 8);
+            var10 = globalclass.randnum.getrandomfloat(var2, var2 + 10);
+            var11 = var3;
+            this.icebitsarray[var4].setobjscale(var5);
+            this.icebitsarray[var4].setposition(var9, var10, var11);
+            this.icebitsarray[var4].setmoveableflags(1, 1, 0, 1);
+            this.icebitsarray[var4].setvelocity(var6, var7, var8);
+            var4 = var4 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.icebitsarray.__length - 1) >= var1) {
+            this.icebitsarray[var1].cleanupfull();
+            this.icebitsarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.icebitsarray = null;
+        return null;
+    }
+}

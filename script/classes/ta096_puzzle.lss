@@ -1,0 +1,107 @@
+class ta096_puzzle {
+    property parent;
+    property music;
+    property surfboard;
+    property camlocked;
+    
+    method ta096_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.setsurfmode(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        this.surfboard = new lego_moveableobject("surf");
+        this.camlocked = 0;
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        this.setsurfmode(0);
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        if (globalclass.player.actor.getpos().y1 < -275) {
+            if (globalclass.player.actor.getpos().y1 > -355) {
+                this.lockcampitch(1);
+            }
+            else {
+                this.lockcampitch(0);
+            }
+        }
+        return null;
+    }
+    
+    method lockcampitch(param1) {
+        if (param1) {
+            if (this.camlocked == 0) {
+                this.camlocked = 1;
+                globalclass.level.cam.lockpitch(1, 0.7);
+            }
+        }
+        else if (this.camlocked) {
+            this.camlocked = 0;
+            globalclass.level.cam.lockpitch(0, 0);
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            globalclass.bgmusic.stop();
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("t000"));
+            globalclass.player.actor.setinputstate("ninp");
+            globalclass.level.cam.setaimode(11);
+            globalclass.level.cam.lockpitch(0, 0);
+            globalclass.bgmusic.play(1);
+            this.surfboard.show();
+            this.setsurfmode(0);
+        }
+        else if (param1.eventid == 1) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[1] == scslosifoundation::stringtoidentifier("surf"))) {
+                this.setsurfmode(1);
+                this.surfboard.hide();
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method setsurfmode(param1) {
+        if (param1) {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
+            globalclass.bgmusic.play(1);
+            globalclass.player.actor.setsurfingability(2.0, 0.8);
+            globalclass.player.actor.setsurfminspeed(10.0);
+            globalclass.player.actor.setsurfmaxspeed(60.0);
+            globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("surf"));
+            globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t038"));
+        }
+        else {
+            globalclass.player.actor.setsurfingability(0.0, 0.0);
+            globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("????"));
+            globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t000"));
+        }
+        return null;
+    }
+}

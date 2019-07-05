@@ -1,0 +1,107 @@
+class lego_testlanguage_screen : lego_base_screen {
+    property currentitem;
+    property stringtable;
+    property examplestring;
+    
+    method lego_testlanguage_screen() {
+        this.items = [ "ENGLISH", 
+            "GERMAN", 
+            "FRENCH" ];
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var1 = 360;
+        var2 = 200;
+        var3 = var1;
+        var4 = var2;
+        var5 = 0;
+        var6 = 30;
+        var7 = 0;
+        while ((this.items.__length - 1) >= var7) {
+            var8 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.items[var7], var3, var4, 0, 1, 0, 4, 0);
+            this.items[var7] = var8;
+            this.items[var7].initfull();
+            this.items[var7].add();
+            this.items[var7].show();
+            var3 = var3 + var5;
+            var4 = var4 + var6;
+            var7 = var7 + 1;
+        }
+        this.stringtable = new gs_lego_stringtable("Strings");
+        this.examplestring = null;
+        this.currentitem = 0;
+        this.items[this.currentitem].setactive();
+        this.newlanguage();
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 9) {
+            if (param1.event == 2) {
+                this.setpointer(-1);
+            }
+        }
+        if (param1.button == 12) {
+            if (param1.event == 2) {
+                this.setpointer(1);
+            }
+        }
+        if (param1.button == 38) {
+            if (param1.event == 2) {
+                this.setpointer(-1);
+            }
+        }
+        if (param1.button == 40) {
+            if (param1.event == 2) {
+                this.setpointer(1);
+            }
+        }
+        return null;
+    }
+    
+    method setpointer(param1) {
+        this.items[this.currentitem].setinactive();
+        this.currentitem = this.currentitem + param1;
+        if (this.currentitem < 0) {
+            this.currentitem = this.items.__length - 1;
+        }
+        if (this.currentitem > (this.items.__length - 1)) {
+            this.currentitem = 0;
+        }
+        this.items[this.currentitem].setactive();
+        this.newlanguage();
+        return null;
+    }
+    
+    method newlanguage() {
+        if (this.currentitem == 0) {
+            globalclass.setlanguage(0);
+        }
+        else if (this.currentitem == 1) {
+            globalclass.setlanguage(2);
+        }
+        else if (this.currentitem == 2) {
+            globalclass.setlanguage(1);
+        }
+        this.stringtable.initfull();
+        if (this.examplestring == null) {
+            this.examplestring = new gs_lego_languagetext("Root/Data/Art/Fonts/BionicleFont", 0, this.stringtable, 320, 460, 0, 1, 256, 2, 0);
+            this.examplestring.initfull();
+            this.examplestring.add();
+            this.examplestring.show();
+        }
+        else {
+            this.examplestring.setstring(0, this.stringtable);
+        }
+        return null;
+    }
+}

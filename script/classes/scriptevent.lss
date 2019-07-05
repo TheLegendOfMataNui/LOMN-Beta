@@ -1,0 +1,26 @@
+class scriptevent {
+    property eventid;
+    property args;
+    
+    method scriptevent(param1, param2) {
+        if (param1 == null) {
+            this.eventid = -1;
+        }
+        else {
+            this.eventid = param1;
+        }
+        if (param2 == null) {
+            this.args = [  ];
+        }
+        else {
+            this.args = param2;
+        }
+        return null;
+    }
+    
+    method send() {
+        globalclass.onevent(this);
+        screenlist.onevent(this);
+        return null;
+    }
+}

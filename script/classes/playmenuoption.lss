@@ -1,0 +1,149 @@
+class playmenuoption {
+    property playnum;
+    property playtext;
+    property levimage;
+    property levtext;
+    property comptext;
+    property lit;
+    property halfheight;
+    property levsprite;
+    property tokens;
+    property level;
+    property levelname;
+    property newgame;
+    
+    method playmenuoption(param1, param2) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        this.playnum = param1;
+        var1 = __toint((140 + param2) * screenratio);
+        var2 = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("fend"), 1, 60, this.playnum);
+        this.playtext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var2, __toint(200 * screenratio), var1, 0, 1.0 * screenratio, 0, 4, 0, 1);
+        gcsaver::setplayer(this.playnum);
+        gcsaver::initdata();
+        var3 = gcsaver::load();
+        if (var3 == 1) {
+            var4 = gcsaver::getpercentcomplete();
+            this.level = gcsaver::getlevel();
+            this.newgame = 0;
+            var5 = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("fend"), 1, 61, var4);
+        }
+        else {
+            this.tokens = 0;
+            this.level = 0;
+            this.levelname = "lev1";
+            this.newgame = 1;
+            var5 = gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 32);
+        }
+        this.comptext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var5, __toint(440 * screenratio), var1, 0, 1.0 * screenratio, 512, 4, 0, 1);
+        this.lit = 0;
+        if (this.level == 1) {
+            var6 = "Root/data/art/status/stONUA";
+            this.levelname = "lev1";
+        }
+        else if (this.level == 2) {
+            var6 = "Root/data/art/status/stGALI";
+            this.levelname = "lev2";
+        }
+        else if (this.level == 3) {
+            var6 = "Root/data/art/status/stPOHATU";
+            this.levelname = "lev3";
+        }
+        else if (this.level == 4) {
+            var6 = "Root/data/art/status/stKOPAKA";
+            this.levelname = "lev4";
+        }
+        else if (this.level == 5) {
+            var6 = "Root/data/art/status/stLEWA";
+            this.levelname = "lev5";
+        }
+        else if (this.level == 6) {
+            var6 = "Root/data/art/status/stTAHU";
+            this.levelname = "lev6";
+        }
+        else if (this.level == 7) {
+            var6 = "Root/data/art/spriteanims/InfectedMasks/Tahu/Inf_Tahu0000";
+            this.levelname = "lev7";
+        }
+        this.halfheight = __toint(25 * screenratio);
+        if (this.level > 0) {
+            this.levsprite = new ss_basesprite(var6, __toint(275 * screenratio), var1 - this.halfheight, 0, __toint(325 * screenratio), var1 + this.halfheight);
+        }
+        return null;
+    }
+    
+    method initfull() {
+        this.playtext.initfull();
+        this.playtext.add();
+        this.playtext.show();
+        this.comptext.initfull();
+        this.comptext.add();
+        this.comptext.show();
+        if (this.level > 0) {
+            this.levsprite.initfull();
+            this.levsprite.add();
+            this.levsprite.show();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.playtext == null)) {
+            this.playtext.hide();
+            this.playtext.remove();
+            this.playtext.cleanupfull();
+            this.playtext = null;
+        }
+        if (!(this.comptext == null)) {
+            this.comptext.hide();
+            this.comptext.remove();
+            this.comptext.cleanupfull();
+            this.comptext = null;
+        }
+        if (!(this.levsprite == null)) {
+            this.levsprite.hide();
+            this.levsprite.remove();
+            this.levsprite.cleanupfull();
+            this.levsprite = null;
+        }
+        return null;
+    }
+    
+    method eraseentry() {
+        var var1;
+        var1 = gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 32);
+        this.comptext.setstring(var1);
+        this.tokens = 0;
+        this.level = 0;
+        this.levelname = "lev1";
+        this.newgame = 1;
+        gcsaver::erasegame();
+        if (!(this.levsprite == null)) {
+            this.levsprite.hide();
+            this.levsprite.remove();
+            this.levsprite.cleanupfull();
+            this.levsprite = null;
+        }
+        return null;
+    }
+    
+    method check(param1, param2) {
+        if ((param2 > (this.playtext.y1 - this.halfheight)) && (param2 < (this.playtext.y1 + this.halfheight))) {
+            if (this.lit == 0) {
+                sctilefont::setcolor(this.playtext.font, 255, 255, 0, 255);
+                sctilefont::setcolor(this.comptext.font, 255, 255, 0, 255);
+                this.lit = 1;
+            }
+        }
+        else if (this.lit) {
+            sctilefont::setcolor(this.playtext.font, 255, 255, 255, 255);
+            sctilefont::setcolor(this.comptext.font, 255, 255, 255, 255);
+            this.lit = 0;
+        }
+        return this.lit;
+    }
+}

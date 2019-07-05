@@ -1,0 +1,86 @@
+class wthk2_puzzle {
+    property parent;
+    property callsurfonce;
+    
+    method wthk2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
+        globalclass.bgmusic.play();
+        this.callsurfonce = 1;
+        gcareadirector::setnearestmax(8);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.endsurf();
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 4) {
+            if (this.callsurfonce) {
+                this.startsurf();
+                this.callsurfonce = 0;
+            }
+        }
+        else if (param1.eventid == 3) {
+            if (((((param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb01"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb02"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb03"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb04"))) {
+                globalclass.player.kill();
+                this.parent.level.cam.setaimode(7);
+                gcstaticsoundsptrarray::playtablesound(1048);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+        }
+        scslosifoundation::stringtoidentifier("tp02");
+        return null;
+    }
+    
+    method initshort() {
+        this.endsurf();
+        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+        globalclass.player.unkill();
+        globalclass.player.actor.setinputstate("ninp");
+        this.parent.level.cam.setaimode(11);
+        globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb02"), 0);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb03"), 0);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb04"), 0);
+        this.callsurfonce = 1;
+        return null;
+    }
+    
+    method startsurf() {
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g032"));
+        globalclass.player.actor.setsurfingability(0.3, 0.8);
+        globalclass.player.actor.setsurfminspeed(7.0);
+        globalclass.player.actor.setsurfmaxspeed(15.0);
+        return null;
+    }
+    
+    method endsurf() {
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g000"));
+        globalclass.player.actor.setsurfingability(0.0, 0.0);
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

@@ -1,0 +1,321 @@
+class brigpuzzle {
+    property parent;
+    property targetarray;
+    property uppos;
+    property downpos;
+    property pil1uppos;
+    property pil1downpos;
+    property pil2uppos;
+    property pil2downpos;
+    property brg;
+    property pil1;
+    property pil2;
+    property totalhits;
+    property areaid;
+    property timer;
+    property glyph;
+    property founditem;
+    property showpickup;
+    property door;
+    property interpdoor;
+    property doorx;
+    property doory;
+    property doorz;
+    
+    method brigpuzzle(param1) {
+        this.parent = param1;
+        this.showpickup = 1;
+        this.interpdoor = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
+        globalclass.bgmusic.play(1);
+        gcareadirector::setnearestmax(50);
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        this.door = new lego_moveableobject("drs1");
+        this.door.initfull();
+        this.door.setresponse(3, 3, 3);
+        this.founditem = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"));
+        if (this.founditem) {
+            this.showpickup = 0;
+        }
+        if (this.showpickup) {
+            this.glyph = new lego_pickup("glyp", 9, 2, "item", 3, 1);
+            this.glyph.initfull();
+            this.glyph.show();
+        }
+        this.targetarray = [  ];
+        var1 = new target_class("sw00", "tmr0", 60, "gly3", 581.273, 13.378, 70.55, this);
+        var2 = new target_class("sw01", "tmr1", 60, "gly3", 580.566, 24.17, 9.237, this);
+        var3 = new target_class("sw02", "tmr2", 60, "gly3", 611.16, 0 - 2.9, 0 - 9.64, this);
+        var4 = new target_class("sw03", "tmr3", 60, "gly3", 677.7, 24.73, 12.7, this);
+        var5 = new target_class("sw04", "tmr4", 60, "gly3", 676.7, 2.52, 0 - 24.75, this);
+        var6 = new target_class("sw05", "tmr5", 60, "gly3", 656, 0 - 24.4, 49.88, this);
+        var7 = new target_class("sw06", "tmr6", 60, "gly3", 658.6, 11.9, 74, this);
+        this.targetarray.__append(var1);
+        this.targetarray.__append(var2);
+        this.targetarray.__append(var3);
+        this.targetarray.__append(var4);
+        this.targetarray.__append(var5);
+        this.targetarray.__append(var6);
+        this.targetarray.__append(var7);
+        this.brg = new lego_moveableobject("brg3", "gly3");
+        this.pil1 = new lego_moveableobject("sp30", "gly3");
+        this.pil2 = new lego_moveableobject("sp31", "gly3");
+        debug::print("brgPuzzle initfull");
+        var8 = 0;
+        while ((this.targetarray.__length - 1) >= var8) {
+            this.targetarray[var8].initfull();
+            var8 = var8 + 1;
+        }
+        this.brg.initfull();
+        this.brg.settweakable();
+        this.brg.setresponse(1, 0, 1);
+        this.pil1.initfull();
+        this.pil2.initfull();
+        this.uppos = new basicpoint(this.brg.getx(), this.brg.gety(), this.brg.getz());
+        this.downpos = new basicpoint(this.brg.getx(), -14, this.brg.getz());
+        this.pil1uppos = new basicpoint(this.pil1.getx(), this.pil1.gety(), this.pil1.getz());
+        this.pil1downpos = new basicpoint(this.pil1.getx(), this.pil1.gety() - 18.4, this.pil1.getz());
+        this.pil2uppos = new basicpoint(this.pil2.getx(), this.pil2.gety(), this.pil2.getz());
+        this.pil2downpos = new basicpoint(this.pil2.getx(), this.pil2.gety() - 18.4, this.pil2.getz());
+        this.totalhits = 0;
+        this.areaid = scslosifoundation::stringtoidentifier(this.parent.name);
+        this.timer = new lego_timer("timr", 1, 0);
+        this.timer.initfull();
+        this.doorx = this.door.getx();
+        this.doory = this.door.gety();
+        this.doorz = this.door.getz();
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        var1 = 0;
+        while ((this.targetarray.__length - 1) >= var1) {
+            this.targetarray[var1].show();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        if (!(this.glyph == null)) {
+            this.glyph.cleanupfull();
+            this.glyph = null;
+        }
+        this.founditem = null;
+        this.showpickup = null;
+        this.areaid = null;
+        this.totalhits = null;
+        this.brg.cleanupfull();
+        this.brg = null;
+        this.uppos.cleanupfull();
+        this.uppos = null;
+        this.downpos.cleanupfull();
+        this.downpos = null;
+        this.pil1uppos.cleanupfull();
+        this.pil1uppos = null;
+        this.pil1downpos.cleanupfull();
+        this.pil1downpos = null;
+        this.pil2uppos.cleanupfull();
+        this.pil2uppos = null;
+        this.pil2downpos.cleanupfull();
+        this.pil2downpos = null;
+        this.pil1.cleanupfull();
+        this.pil1 = null;
+        this.pil2.cleanupfull();
+        this.pil2 = null;
+        this.timer.cleanupfull();
+        this.timer = null;
+        var1 = 0;
+        while ((this.targetarray.__length - 1) >= var1) {
+            this.targetarray[var1].hide();
+            this.targetarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.targetarray = null;
+        this.totalhits = null;
+        this.areaid = null;
+        this.door.cleanupfull();
+        this.door = null;
+        this.interpdoor = null;
+        this.doorx = null;
+        this.doory = null;
+        this.doorz = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.targetarray.__length - 1) >= var1) {
+            this.targetarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.targetarray.__length - 1) >= var1) {
+            this.targetarray[var1].input(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = 0;
+        while ((this.targetarray.__length - 1) >= var1) {
+            this.targetarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 19) {
+            var1 = 0;
+            while ((this.targetarray.__length - 1) >= var1) {
+                if (param1.args[0] == this.targetarray[var1].obj.id) {
+                    
+                }
+                var1 = var1 + 1;
+            }
+        }
+        else if (param1.eventid == 8) {
+            var2 = param1.args[0];
+            if (var2 == scslosifoundation::stringtoidentifier("timr")) {
+                this.resetb();
+            }
+        }
+        else if (param1.eventid == 3) {
+            var3 = param1.args[0];
+            if (var3 == scslosifoundation::stringtoidentifier("tb00")) {
+                this.reseta();
+            }
+        }
+        else if (param1.eventid == 4) {
+            var3 = param1.args[0];
+            if (var3 == scslosifoundation::stringtoidentifier("tp02")) {
+                if (this.interpdoor) {
+                    this.interpdoor = 0;
+                    this.slamdoor();
+                }
+            }
+        }
+        else if (param1.eventid == 12) {
+            var4 = scslosifoundation::stringtoidentifier("drs1");
+            if (param1.args[0] == var4) {
+                this.parent.level.cam.setaimode(11);
+                globalclass.player.actor.setinputstate("ninp");
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            this.resetc();
+        }
+        return null;
+    }
+    
+    method reseta() {
+        this.parent.parent.cam.setaimode(7);
+        this.timer.reset();
+        this.timer.start();
+        return null;
+    }
+    
+    method resetb() {
+        globalclass.player.kill();
+        return null;
+    }
+    
+    method resetc() {
+        var var1;
+        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+        globalclass.player.unkill();
+        globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
+        globalclass.player.actor.setinputstate("ninp");
+        this.parent.level.cam.setaimode(11);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        var1 = 0;
+        while ((this.targetarray.__length - 1) >= var1) {
+            this.targetarray[var1].targerreset();
+            var1 = var1 + 1;
+        }
+        this.interpdoor = 1;
+        this.door.setpos(this.doorx, this.doory, this.doorz);
+        return null;
+    }
+    
+    method hitatarget() {
+        this.totalhits = this.totalhits + 1;
+        debug::print("Total Hits: " + __tostring(this.totalhits));
+        if (this.totalhits >= 7) {
+            this.lowerbrg();
+        }
+        return null;
+    }
+    
+    method targertback() {
+        this.totalhits = this.totalhits - 1;
+        this.rasebrg();
+        return null;
+    }
+    
+    method lowerbrg() {
+        debug::print("lowering the brg");
+        this.brg.interpolate(this.downpos.x, this.downpos.y, this.downpos.z, 2);
+        this.pil1.interpolate(this.pil1downpos.x, this.pil1downpos.y, this.pil1downpos.z, 2);
+        this.pil2.interpolate(this.pil2downpos.x, this.pil2downpos.y, this.pil2downpos.z, 2);
+        return null;
+    }
+    
+    method slamdoor() {
+        var var1;
+        var var2;
+        globalclass.level.cam.setaimode(0);
+        globalclass.level.cam.setpos(576.43, 0 - 2.96, 22.78);
+        globalclass.player.actor.setinputstate("none");
+        globalclass.player.actor.idle();
+        var1 = this.door.getx();
+        var2 = this.door.getz();
+        this.door.interpolate(var1, 0 - 10.63, var2, 1.5);
+        return null;
+    }
+    
+    method rasebrg() {
+        debug::print("rassing the brg");
+        this.brg.interpolate(this.uppos.x, this.uppos.y, this.uppos.z, 2);
+        this.pil1.interpolate(this.pil1uppos.x, this.pil1uppos.y, this.pil1uppos.z, 2);
+        this.pil2.interpolate(this.pil2uppos.x, this.pil2uppos.y, this.pil2uppos.z, 2);
+        return null;
+    }
+    
+    method startcam() {
+        globalclass.hud.hide();
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

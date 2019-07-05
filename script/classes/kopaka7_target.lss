@@ -1,0 +1,53 @@
+class kopaka7_target {
+    property obj;
+    property x;
+    property y;
+    property z;
+    property shot;
+    property ring;
+    property button;
+    
+    method kopaka7_target(param1, param2, param3, param4) {
+        this.obj = new lego_moveableobject(param1, param2);
+        this.ring = param3;
+        this.button = param4;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.x = gcmoveableobj::getx(this.obj.handle);
+        this.y = gcmoveableobj::gety(this.obj.handle);
+        this.z = gcmoveableobj::getz(this.obj.handle);
+        this.shot = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.ring = null;
+        this.button = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 19) {
+            if ((param1.args[0] == this.obj.id) && (this.shot == 0)) {
+                gcmoveableobj::setslidetimer(this.obj.handle, 1.0, 0.0, 0.0, 1.0, 1, 0.0);
+                this.shot = 1;
+                this.ring.offsety(20.0);
+                this.button.changeposition(0, 20, 0, 1.0);
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method reset() {
+        gcmoveableobj::stopslidetimer(this.obj.handle);
+        gcmoveableobj::setposition(this.obj.handle, this.x, this.y, this.z);
+        this.shot = 0;
+        return null;
+    }
+}

@@ -1,0 +1,269 @@
+class ta126_puzzle {
+    property parent;
+    property pillars;
+    property timers;
+    property origx;
+    property origy;
+    property origz;
+    property music;
+    property halfway;
+    property mask;
+    property showmask;
+    
+    method ta126_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        gcareadirector::setnearestmax(20);
+        this.origx = [  ];
+        this.origy = [  ];
+        this.origz = [  ];
+        this.pillars = [ new lego_moveableobject("pl01"), 
+            new lego_moveableobject("pl02"), 
+            new lego_moveableobject("pl03"), 
+            new lego_moveableobject("pl04"), 
+            new lego_moveableobject("pl05"), 
+            new lego_moveableobject("pl06"), 
+            new lego_moveableobject("pl07"), 
+            new lego_moveableobject("pl08"), 
+            new lego_moveableobject("pl09"), 
+            new lego_moveableobject("pl10"), 
+            new lego_moveableobject("pl11"), 
+            new lego_moveableobject("pl12"), 
+            new lego_moveableobject("pl13"), 
+            new lego_moveableobject("pl14"), 
+            new lego_moveableobject("pl15"), 
+            new lego_moveableobject("pl16"), 
+            new lego_moveableobject("pl17"), 
+            new lego_moveableobject("pl18"), 
+            new lego_moveableobject("pl19"), 
+            new lego_moveableobject("pl20"), 
+            new lego_moveableobject("pl21"), 
+            new lego_moveableobject("pl22"), 
+            new lego_moveableobject("pl23"), 
+            new lego_moveableobject("pl24"), 
+            new lego_moveableobject("pl25"), 
+            new lego_moveableobject("pl26"), 
+            new lego_moveableobject("pl27"), 
+            new lego_moveableobject("pl28"), 
+            new lego_moveableobject("pl29"), 
+            new lego_moveableobject("pl30") ];
+        this.timers = [ new lego_timer("pt01", 7.0, 0), 
+            new lego_timer("pt02", 7.0, 0), 
+            new lego_timer("pt03", 7.0, 0), 
+            new lego_timer("pt04", 7.0, 0), 
+            new lego_timer("pt05", 7.0, 0), 
+            new lego_timer("pt06", 7.0, 0), 
+            new lego_timer("pt07", 7.0, 0), 
+            new lego_timer("pt08", 7.0, 0), 
+            new lego_timer("pt09", 7.0, 0), 
+            new lego_timer("pt10", 7.0, 0), 
+            new lego_timer("pt11", 7.0, 0), 
+            new lego_timer("pt12", 7.0, 0), 
+            new lego_timer("pt13", 7.0, 0), 
+            new lego_timer("pt14", 7.0, 0), 
+            new lego_timer("pt15", 7.0, 0), 
+            new lego_timer("pt16", 17.0, 0), 
+            new lego_timer("pt17", 17.0, 0), 
+            new lego_timer("pt18", 17.0, 0), 
+            new lego_timer("pt19", 15.0, 0), 
+            new lego_timer("pt20", 15.0, 0), 
+            new lego_timer("pt21", 15.0, 0), 
+            new lego_timer("pt22", 15.0, 0), 
+            new lego_timer("pt23", 12.0, 0), 
+            new lego_timer("pt24", 12.0, 0), 
+            new lego_timer("pt25", 12.0, 0), 
+            new lego_timer("pt26", 12.0, 0), 
+            new lego_timer("pt27", 10.0, 0), 
+            new lego_timer("pt28", 10.0, 0), 
+            new lego_timer("pt29", 10.0, 0), 
+            new lego_timer("pt30", 10.0, 0) ];
+        var1 = 0;
+        while ((this.pillars.__length - 1) >= var1) {
+            this.pillars[var1].initfull();
+            this.pillars[var1].setmoveable(3.0, 0.1, 0, 0, 0, 0);
+            this.pillars[var1].setvelocity(0.0, 0.0, 0.0);
+            this.pillars[var1].show();
+            var2 = this.pillars[var1].getx();
+            this.origx.__append(var2);
+            var2 = this.pillars[var1].gety();
+            this.origy.__append(var2);
+            var2 = this.pillars[var1].getz();
+            this.origz.__append(var2);
+            this.pillars[var1].setresponse(0, 0, 0);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.timers.__length - 1) >= var1) {
+            this.timers[var1].initfull();
+            var1 = var1 + 1;
+        }
+        if (!((this.pillars.__length - 1) == (this.timers.__length - 1))) {
+            debug::print("ERROR -- pillars and timers are out of sink (sync) ** ");
+        }
+        this.music = new legomp3player();
+        this.music.setupforplay("Root/Data/sounds/MusicMakutaTheme");
+        this.music.play(1);
+        this.halfway = 0;
+        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mk5a"));
+        if (var1) {
+            this.showmask = 0;
+        }
+        else {
+            this.showmask = 1;
+        }
+        if (this.showmask == 1) {
+            this.mask = new lego_pickup("mk5a", 5, 1, "item", 2, 1);
+            this.mask.initfull();
+            this.mask.show();
+        }
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        if (this.halfway) {
+            globalclass.player.actor.setpos(-281, 0 - 52.3, 350);
+            globalclass.player.actor.setorientation(74);
+            globalclass.level.cam.setaimode(11);
+        }
+        else {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+        }
+        var1 = 0;
+        while ((this.pillars.__length - 1) >= var1) {
+            this.pillars[var1].setvelocity(0, 0, 0);
+            this.pillars[var1].setmoveableflags(0, 0, 0, 0);
+            this.pillars[var1].setpos(this.origx[var1], this.origy[var1], this.origz[var1]);
+            var1 = var1 + 1;
+        }
+        this.music.play(1);
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        var1 = 0;
+        while ((this.pillars.__length - 1) >= var1) {
+            this.pillars[var1].stopinterpolate();
+            var1 = var1 + 1;
+        }
+        this.music.stop();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.pillars.__length - 1) >= var1) {
+            this.pillars[var1].cleanupfull();
+            this.pillars[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.pillars = null;
+        var1 = 0;
+        while ((this.timers.__length - 1) >= var1) {
+            this.timers[var1].cleanupfull();
+            this.timers[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.timers = null;
+        this.origx = null;
+        this.origy = null;
+        this.origz = null;
+        this.music.stop();
+        this.halfway = null;
+        if (!(this.mask == null)) {
+            if (this.mask.objshown == 0) {
+                this.showmask = 0;
+            }
+            this.mask.cleanupfull();
+            this.mask = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.cleanupshort();
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+            globalclass.player.unkill();
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp03")) {
+                this.halfway = 1;
+            }
+        }
+        else if (param1.eventid == 19) {
+            debug::print("YOU HIT A PILLAR " + scslosifoundation::identifiertostring(param1.args[0]));
+            var1 = 0;
+            while ((this.pillars.__length - 1) >= var1) {
+                if (param1.args[0] == this.pillars[var1].id) {
+                    this.pillars[var1].setmoveableflags(1, 0, 0, 1);
+                    this.timers[var1].reset(0);
+                    this.timers[var1].start();
+                }
+                param1.args[0];
+                var1 = var1 + 1;
+            }
+        }
+        else if (param1.eventid == 8) {
+            var1 = 0;
+            while ((this.timers.__length - 1) >= var1) {
+                if (param1.args[0] == this.timers[var1].id) {
+                    var2 = this.pillars[var1].getx();
+                    var3 = this.pillars[var1].gety();
+                    var4 = this.pillars[var1].getz();
+                    this.pillars[var1].interpolate(var2, var3 - 10.0, var4, 3.0);
+                }
+                param1.args[0];
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 89) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        var var1;
+        var1 = 0;
+        while ((this.pillars.__length - 1) >= var1) {
+            this.pillars[var1].setmoveableflags(1, 0, 0, 1);
+            this.timers[var1].reset(0);
+            this.timers[var1].start();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+}

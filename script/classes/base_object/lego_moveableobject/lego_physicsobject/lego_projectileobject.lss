@@ -1,0 +1,37 @@
+class lego_projectileobject : lego_physicsobject {
+    
+    method lego_projectileobject(param1, param2) {
+        this.lego_physicsobject(param1, param2);
+        return null;
+    }
+    
+    method init(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16) {
+        this.initfull(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16);
+        return null;
+    }
+    
+    method setduration(param1) {
+        gcmoveableobj::setprojdur(this.handle, param1);
+        return null;
+    }
+    
+    method throwprojectile(param1, param2, param3, param4) {
+        if (param1 == null) {
+            param1 = 10;
+        }
+        if (param2 == null) {
+            param2 = 1.0;
+        }
+        if (param2 < 0.01) {
+            param2 = 1.0;
+        }
+        if (param3 == null) {
+            param3 = scslosifoundation::stringtoidentifier("cnt1");
+        }
+        if (param4 == null) {
+            param4 = 0;
+        }
+        gcmoveableobj::throwprojectile(this.handle, param3, param1, param2, param4);
+        return null;
+    }
+}

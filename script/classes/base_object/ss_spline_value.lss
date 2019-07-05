@@ -1,0 +1,68 @@
+class ss_spline_value : base_object {
+    property object;
+    property count;
+    property filename;
+    property value;
+    property time;
+    property splinestep;
+    property maxtime;
+    property mintime;
+    
+    method ss_spline_value(param1) {
+        this.filename = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.object = scslosislkcubicspline::create(this.filename);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.object = null;
+        return null;
+    }
+    
+    method getcount() {
+        this.count = scslosislkcubicspline::getcount(this.object);
+        return this.count;
+    }
+    
+    method gettime(param1) {
+        this.time = scslosislkcubicspline::getmintime(this.object, param1);
+        return this.time;
+    }
+    
+    method getmaxtime(param1) {
+        this.maxtime = scslosislkcubicspline::getmaxtime(this.object, param1);
+        return this.maxtime;
+    }
+    
+    method getmintime(param1) {
+        this.mintime = scslosislkcubicspline::getmintime(this.object, param1);
+        return this.mintime;
+    }
+    
+    method getstep(param1, param2) {
+        this.splinestep = (scslosislkcubicspline::getmaxtime(this.object, param1) - scslosislkcubicspline::getmintime(this.object, param1)) / param2;
+        return this.splinestep;
+    }
+    
+    method getvalue(param1) {
+        this.value = scslosislkcubicspline::interpolate(this.object, param1, this.time);
+        return this.value;
+    }
+    
+    method checkprogress() {
+        if (this.maxtime == null) {
+            this.getmaxtime(0);
+        }
+        if (this.time < this.maxtime) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
+        return null;
+    }
+}

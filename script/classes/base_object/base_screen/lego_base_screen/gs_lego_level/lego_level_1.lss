@@ -1,0 +1,77 @@
+class lego_level_1 : gs_lego_level {
+    
+    method lego_level_1() {
+        var var1;
+        this.gs_lego_level("lev1", "onua", "bech");
+        var1 = new lego_area_bech(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_ptv1(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_vllg(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_l1a1(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_pzzl(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_l1a3(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_clf1(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_clf2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_spcv(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_scrp(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_atrm(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_cave(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_l1a7(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_l1a8(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_pzzl(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_shrn(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_bugs(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_hk01(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_mud0(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_tura1(this);
+        this.areas.__append(var1);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_level_initfull();
+        globalclass.player.addmask("fake", 0);
+        if (globalclass.saverloaded) {
+            if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mskc"), scslosifoundation::stringtoidentifier("spcv"))) {
+                globalclass.player.addmask("fake", 7);
+            }
+            if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mskv"), scslosifoundation::stringtoidentifier("pzzl"))) {
+                globalclass.player.addmask("fake", 8);
+            }
+            if (gcsaver::findglypha(scslosifoundation::stringtoidentifier("glyl"), scslosifoundation::stringtoidentifier("hk01"))) {
+                globalclass.player.addelement();
+            }
+            if (gcsaver::finditema(scslosifoundation::stringtoidentifier("claw"), scslosifoundation::stringtoidentifier("l1a1"))) {
+                globalclass.player.setupgrapplinghook();
+                globalclass.player.setgrapplinghookdistance(120);
+            }
+            globalclass.player.initfromsaver();
+        }
+        globalclass.saverloaded = 0;
+        return null;
+    }
+    
+    method initshort() {
+        this.lego_level_initshort();
+        globalclass.player.addmask("fake", 0);
+        return null;
+    }
+}

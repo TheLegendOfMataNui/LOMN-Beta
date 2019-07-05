@@ -1,0 +1,53 @@
+class lego_area_front : gs_lego_area {
+    property frontendmenu;
+    
+    method lego_area_front(param1) {
+        this.gs_lego_area("frnt", param1, 1, 0);
+        this.frontendmenu = new gs_lego_screenfrontend(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.frontendmenu.initfull();
+        gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
+        gcareadirector::setnearestmax(10);
+        gcmodeldirector::setnearestmax(10);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.setupforplay("Root/Data/sounds/MusicGaliAmbience");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.frontendmenu.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.frontendmenu.exit();
+        this.frontendmenu = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.frontendmenu.onevent(param1);
+        return null;
+    }
+    
+    method process(param1) {
+        this.frontendmenu.process(param1);
+        if (globalclass.hud.hidden == 0) {
+            globalclass.hud.hide();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        this.frontendmenu.input(param1);
+        return null;
+    }
+}

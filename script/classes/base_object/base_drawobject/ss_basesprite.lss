@@ -1,0 +1,174 @@
+class ss_basesprite : base_drawobject {
+    property filename;
+    property sprite;
+    property handle;
+    
+    method ss_basesprite(param1, param2, param3, param4, param5, param6, param7) {
+        var var1;
+        this.filename = param1;
+        if (!(param2 == null)) {
+            this.x1 = param2;
+        }
+        else {
+            this.x1 = 0;
+        }
+        if (!(param3 == null)) {
+            this.y1 = param3;
+        }
+        else {
+            this.y1 = 0;
+        }
+        if (!(param5 == null)) {
+            this.x2 = param5;
+        }
+        else {
+            this.x2 = 0;
+        }
+        if (!(param6 == null)) {
+            this.y2 = param6;
+        }
+        else {
+            this.y2 = 0;
+        }
+        if (!(param4 == null)) {
+            this.z = param4;
+        }
+        else {
+            this.z = 0;
+        }
+        if (!(param7 == null)) {
+            this.transval = param7;
+        }
+        else {
+            this.transval = 255;
+        }
+        var1 = 0;
+        return null;
+    }
+    
+    method initfull() {
+        this.sprite = gcbigsprite::loadhudsprite(this.x1, this.y1, this.x2, this.y2, this.filename, 0);
+        gcbigsprite::setzdepth(this.sprite, this.z);
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.handle == null)) {
+            gchuddirector::remove(this.handle);
+        }
+        this.sprite = null;
+        this.handle = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method add() {
+        this.handle = gchuddirector::addbigsprite(this.sprite);
+        return null;
+    }
+    
+    method remove() {
+        if (!(this.handle == null)) {
+            gchuddirector::remove(this.handle);
+            this.handle = null;
+        }
+        return null;
+    }
+    
+    method show() {
+        gchuddirector::show(this.handle);
+        this.onscreen = 1;
+        return null;
+    }
+    
+    method hide() {
+        if (!(this.handle == null)) {
+            gchuddirector::hide(this.handle);
+            this.onscreen = 0;
+        }
+        return null;
+    }
+    
+    method setpos(param1, param2, param3, param4) {
+        if (!(param1 == null)) {
+            this.x1 = param1;
+        }
+        if (!(param3 == null)) {
+            this.x2 = param3;
+        }
+        if (!(param2 == null)) {
+            this.y1 = param2;
+        }
+        if (!(param4 == null)) {
+            this.y2 = param4;
+        }
+        gcbigsprite::sethudposition(this.sprite, this.x1, this.y1, this.x2, this.y2);
+        gcbigsprite::setzdepth(this.sprite, this.z);
+        return null;
+    }
+    
+    method changepos(param1, param2) {
+        if (!(param1 == null)) {
+            this.x1 = this.x1 + param1;
+            this.x2 = this.x2 + param1;
+        }
+        if (!(param2 == null)) {
+            this.y1 = this.y1 + param2;
+            this.y2 = this.y2 + param2;
+        }
+        gcbigsprite::sethudposition(this.sprite, this.x1, this.y1, this.x2, this.y2);
+        return null;
+    }
+    
+    method setzvalue(param1) {
+        if (!(param1 == null)) {
+            this.z = param1;
+        }
+        gcbigsprite::setzdepth(this.sprite, this.z);
+        return null;
+    }
+    
+    method enabletransparency(param1) {
+        var var1;
+        if (!(param1 == null)) {
+            var1 = param1;
+        }
+        else {
+            var1 = 1;
+        }
+        gcbigsprite::enabletransparency(this.sprite, param1);
+        return null;
+    }
+    
+    method settransparency(param1) {
+        this.transval = param1;
+        gcbigsprite::settransparency(this.sprite, this.transval);
+        return null;
+    }
+    
+    method enablealphachannel(param1) {
+        var var1;
+        if (!(param1 == null)) {
+            var1 = param1;
+        }
+        else {
+            var1 = 1;
+        }
+        gcbigsprite::enablealphachannel(this.sprite, param1);
+        return null;
+    }
+    
+    method setcolor(param1, param2, param3, param4) {
+        gcbigsprite::setcolor(this.sprite, param1, param2, param3, param4);
+        return null;
+    }
+}

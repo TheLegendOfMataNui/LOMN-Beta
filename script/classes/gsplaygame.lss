@@ -1,0 +1,265 @@
+class gsplaygame {
+    property parent;
+    property active;
+    property playerarray;
+    property backopt;
+    property nextlevelname;
+    property mousex;
+    property mousey;
+    property curoption;
+    property lockplayer;
+    property loadoptions;
+    property loadcuroption;
+    property sureon;
+    property sureoptions;
+    property surecuroption;
+    
+    method gsplaygame(param1) {
+        this.parent = param1;
+        this.active = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        this.playerarray = [ new playmenuoption(1, 50), 
+            new playmenuoption(2, 100), 
+            new playmenuoption(3, 150), 
+            new playmenuoption(4, 200) ];
+        var1 = 0;
+        while ((this.playerarray.__length - 1) >= var1) {
+            this.playerarray[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.curoption = -1;
+        this.active = 1;
+        this.nextlevelname = "lev1";
+        var2 = scslosifoundation::stringtoidentifier("fend");
+        this.backopt = new loadmenuoption(gcareadirector::getscriptfluffstring(var2, 1, 3), 390);
+        this.backopt.initfull();
+        this.lockplayer = 0;
+        this.loadcuroption = -1;
+        this.loadoptions = [ new loadmenuoption(gcareadirector::getscriptfluffstring(var2, 1, 65), 50), 
+            new loadmenuoption(gcareadirector::getscriptfluffstring(var2, 1, 66), 70), 
+            new loadmenuoption(gcareadirector::getscriptfluffstring(var2, 1, 3), 90) ];
+        var1 = 0;
+        while ((this.loadoptions.__length - 1) >= var1) {
+            this.loadoptions[var1].initfull();
+            this.loadoptions[var1].text.hide();
+            var1 = var1 + 1;
+        }
+        this.sureon = 0;
+        this.surecuroption = -1;
+        this.sureoptions = [ new loadmenuoption(gcareadirector::getscriptfluffstring(var2, 1, 62), 50), 
+            new loadmenuoption(gcareadirector::getscriptfluffstring(var2, 1, 63), 70), 
+            new loadmenuoption(gcareadirector::getscriptfluffstring(var2, 1, 64), 90) ];
+        var1 = 0;
+        while ((this.sureoptions.__length - 1) >= var1) {
+            this.sureoptions[var1].initfull();
+            this.sureoptions[var1].text.hide();
+            var1 = var1 + 1;
+        }
+        this.sureoptions[0].setselectable(0);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.cleanupshort();
+        this.parent = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        this.active = 0;
+        if (!(this.playerarray == null)) {
+            var1 = 0;
+            while ((this.playerarray.__length - 1) >= var1) {
+                this.playerarray[var1].cleanupfull();
+                this.playerarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.playerarray = null;
+        }
+        if (!(this.backopt == null)) {
+            this.backopt.cleanupfull();
+            this.backopt = null;
+        }
+        if (!(this.loadoptions == null)) {
+            var1 = 0;
+            while ((this.loadoptions.__length - 1) >= var1) {
+                this.loadoptions[var1].cleanupfull();
+                this.loadoptions[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.loadoptions = null;
+        }
+        if (!(this.sureoptions == null)) {
+            var1 = 0;
+            while ((this.sureoptions.__length - 1) >= var1) {
+                this.sureoptions[var1].cleanupfull();
+                this.sureoptions[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.sureoptions = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (this.active) {
+            if (param1.eventid == 25) {
+                this.mousebuttonreleased(param1.args[0]);
+            }
+            else if (param1.eventid == 26) {
+                this.mousex = param1.args[0];
+                this.mousey = param1.args[1];
+                this.checkmousepos();
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (this.active) {
+            if (param1.event == 2) {
+                if ((param1.button == 27) || (param1.button == 8)) {
+                    this.back();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method back() {
+        this.cleanupshort();
+        this.parent.back();
+        return null;
+    }
+    
+    method forward() {
+        this.cleanupshort();
+        this.parent.forward();
+        return null;
+    }
+    
+    method checkmousepos() {
+        var var1;
+        if (this.lockplayer == 1) {
+            if (this.sureon == 1) {
+                this.surecuroption = -1;
+                var1 = 1;
+                while ((this.sureoptions.__length - 1) >= var1) {
+                    if (this.sureoptions[var1].check(this.mousex, this.mousey) == 1) {
+                        this.surecuroption = var1;
+                    }
+                    var1 = var1 + 1;
+                }
+            }
+            else {
+                this.loadcuroption = -1;
+                var1 = 0;
+                while ((this.loadoptions.__length - 1) >= var1) {
+                    if (this.loadoptions[var1].check(this.mousex, this.mousey) == 1) {
+                        this.loadcuroption = var1;
+                    }
+                    var1 = var1 + 1;
+                }
+            }
+        }
+        else {
+            this.curoption = -1;
+            var1 = 0;
+            while ((this.playerarray.__length - 1) >= var1) {
+                if (this.playerarray[var1].check(this.mousex, this.mousey) == 1) {
+                    this.curoption = var1;
+                }
+                var1 = var1 + 1;
+            }
+            if (this.backopt.check(this.mousex, this.mousey) == 1) {
+                this.curoption = (this.playerarray.__length - 1) + 1;
+            }
+        }
+        return null;
+    }
+    
+    method mousebuttonreleased(param1) {
+        var var1;
+        if (param1 == 1) {
+            if (this.lockplayer == 1) {
+                if (this.sureon == 1) {
+                    if (this.surecuroption >= 0) {
+                        this.lockplayer = 0;
+                        this.sureon = 0;
+                        var1 = 0;
+                        while ((this.sureoptions.__length - 1) >= var1) {
+                            this.sureoptions[var1].text.hide();
+                            var1 = var1 + 1;
+                        }
+                    }
+                    if (this.surecuroption == 0) {
+                        this.forward();
+                    }
+                    else if (this.surecuroption == 1) {
+                        this.playerarray[this.curoption].eraseentry();
+                    }
+                }
+                else {
+                    if (this.loadcuroption >= 0) {
+                        var1 = 0;
+                        while ((this.loadoptions.__length - 1) >= var1) {
+                            this.loadoptions[var1].text.hide();
+                            var1 = var1 + 1;
+                        }
+                    }
+                    if (this.loadcuroption == 0) {
+                        this.lockplayer = 0;
+                        this.forward();
+                    }
+                    else if (this.loadcuroption == 1) {
+                        this.sureon = 1;
+                        var1 = 0;
+                        while ((this.sureoptions.__length - 1) >= var1) {
+                            this.sureoptions[var1].text.show();
+                            var1 = var1 + 1;
+                        }
+                    }
+                    else if (this.loadcuroption == 2) {
+                        this.lockplayer = 0;
+                    }
+                }
+            }
+            else if ((this.curoption >= 0) && (this.curoption <= (this.playerarray.__length - 1))) {
+                gcsaver::setplayer(this.curoption + 1);
+                gcsaver::initdata();
+                this.nextlevelname = this.playerarray[this.curoption].levelname;
+                if (this.playerarray[this.curoption].newgame == 1) {
+                    globalclass.saverloaded = 0;
+                    this.forward();
+                }
+                else {
+                    gcsaver::load();
+                    globalclass.saverloaded = 1;
+                    this.lockplayer = 1;
+                    var1 = 0;
+                    while ((this.loadoptions.__length - 1) >= var1) {
+                        this.loadoptions[var1].text.show();
+                        var1 = var1 + 1;
+                    }
+                }
+            }
+            else if (this.curoption > (this.playerarray.__length - 1)) {
+                this.back();
+            }
+        }
+        else if (param1 == 2) {
+            this.back();
+        }
+        return null;
+    }
+}

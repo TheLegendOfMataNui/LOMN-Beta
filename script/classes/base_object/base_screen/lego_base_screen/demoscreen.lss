@@ -1,0 +1,90 @@
+class demoscreen : lego_base_screen {
+    property cam;
+    property actor;
+    property puzzle;
+    property lites;
+    property tweak;
+    
+    method demoscreen() {
+        if (0) {
+            this.puzzle = new demopuzzle();
+        }
+        return null;
+    }
+    
+    method initfull() {
+        if (0) {
+            this.cam = new gs_legocamera(0 - 1000.0, 1500.0, 3000.0, 0 - 1000.0, 800.0, 0.0);
+            gcareadirector::setcurrentlevel("tsrm");
+            gcareadirector::loadarea("tsrm", 1);
+            globalclass.player.setactor("cnt1", "onua", 174.0, 0.0, 1.0, 0.0);
+            globalclass.player.addmask("msk2", 7);
+            globalclass.player.addmask("msk3", 8);
+            globalclass.player.addmask("msk1", 0);
+            globalclass.player.addelement(4);
+            globalclass.player.addelement(2);
+            globalclass.player.addelement(3);
+            this.cam.initfull();
+            this.cam.setaimode(5);
+            this.cam.settweakable();
+            globalclass.hud.add();
+            globalclass.hud.show();
+            this.puzzle.initfull();
+        }
+        if (1) {
+            this.cam = new gs_legocamera(0 - 1000.0, 1500.0, 3000.0, 0 - 1000.0, 800.0, 0.0);
+            gcareadirector::setcurrentlevel("lev3");
+            gcareadirector::loadarea("poh3", 1);
+            globalclass.player.setactor("cnt1", "onua", 174.0, 0.0, 1.0, 0.0);
+            globalclass.player.addmask("msk2", 7);
+            globalclass.player.addmask("msk3", 8);
+            globalclass.player.addmask("msk1", 0);
+            globalclass.player.addelement("earthquake");
+            globalclass.player.addelement("vinegrab");
+            globalclass.player.addelement("mudsphere");
+            this.cam.initfull();
+            this.cam.setaimode(5);
+            this.cam.settweakable();
+            globalclass.hud.add();
+            globalclass.hud.show();
+        }
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.cam.process(param1);
+        if (0) {
+            this.puzzle.process(param1);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        this.cam.input(param1);
+        if (0) {
+            this.puzzle.input(param1);
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (0) {
+            this.puzzle.onevent(param1);
+        }
+        return null;
+    }
+}

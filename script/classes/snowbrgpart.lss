@@ -1,0 +1,92 @@
+class snowbrgpart {
+    property obj;
+    property parent;
+    property firsthit;
+    property timer;
+    property area;
+    
+    method snowbrgpart(param1, param2, param3, param4) {
+        this.obj = new platform(param1, param2);
+        this.area = param2;
+        this.timer = param3;
+        this.parent = param4;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.obj.obj.setignoreallcollisions(0);
+        this.firsthit = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        return null;
+    }
+    
+    method show() {
+        this.obj.show();
+        return null;
+    }
+    
+    method hide() {
+        return null;
+    }
+    
+    method process(param1) {
+        this.obj.process(param1);
+        if (this.obj.obj.gety() < -50) {
+            this.obj.obj.setmoveableflags(0, 0, 0, 0);
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        this.obj.onevent(param1);
+        if (param1.eventid == 8) {
+            
+        }
+        else if (param1.eventid == 1) {
+            var1 = param1.args[0];
+            var2 = param1.args[1];
+            if (this.parent.started) {
+                if (var2 == this.obj.id) {
+                    var3 = 0;
+                    while ((this.parent.snowballarray.__length - 1) >= var3) {
+                        if (var1 == this.parent.snowballarray[var3].obj.id) {
+                            this.hit();
+                        }
+                        var3 = var3 + 1;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method hit() {
+        if (this.firsthit) {
+            this.firsthit = 0;
+            this.parent.platformhit();
+            this.obj.drop();
+        }
+        return null;
+    }
+    
+    method drop() {
+        if (this.firsthit) {
+            this.obj.drop();
+        }
+        return null;
+    }
+    
+    method reset() {
+        this.firsthit = 1;
+        this.obj.reset();
+        return null;
+    }
+}

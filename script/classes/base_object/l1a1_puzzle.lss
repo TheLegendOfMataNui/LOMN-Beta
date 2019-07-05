@@ -1,0 +1,64 @@
+class l1a1_puzzle : base_object {
+    property parent;
+    property clawpickup;
+    property hooks;
+    property pickpickup;
+    
+    method l1a1_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        this.hooks = [ new lego_moveableobject("hot2") ];
+        var4 = 0;
+        while ((this.hooks.__length - 1) >= var4) {
+            this.hooks[var4].initfull();
+            this.hooks[var4].setmytargetingflags(1);
+            this.hooks[var4].setresponse(1, 1, 1);
+            var4 = var4 + 1;
+        }
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("claw")) == 0) {
+            this.clawpickup = new lego_pickup("claw", 0, 3, "item", 2, 1);
+            this.clawpickup.initfull();
+            this.clawpickup.show();
+        }
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pic1")) == 0) {
+            this.pickpickup = new lego_pickup("pic1", 0, 5, "item", 9, 1);
+            this.pickpickup.initfull();
+            this.pickpickup.show();
+            this.pickpickup.setcondition(8192);
+            this.pickpickup.setquest(3);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.pickpickup == null)) {
+            this.pickpickup.cleanupfull();
+            this.pickpickup = null;
+        }
+        if (!(this.clawpickup == null)) {
+            this.clawpickup.cleanupfull();
+            this.clawpickup = null;
+        }
+        var1 = 0;
+        while ((this.hooks.__length - 1) >= var1) {
+            this.hooks[var1].cleanupfull();
+            this.hooks[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hooks = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

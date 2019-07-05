@@ -1,0 +1,33 @@
+class lego_area_ta146 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_ta146(param1) {
+        this.gs_lego_area("ta14", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new ta146_puzzle(this);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method exit() {
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+}

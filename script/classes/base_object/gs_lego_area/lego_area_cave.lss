@@ -1,0 +1,61 @@
+class lego_area_cave : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_cave(param1) {
+        this.gs_lego_area("cave", param1, 0, 0);
+        this.puzzle = new dark_tunnels_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gcareadirector::setfog(-16777216, 0 - 75.0, 0 - 200.0, 0.05);
+        gcareadirector::setnearestmax(10);
+        gcmodeldirector::setnearestmax(8);
+        gclightdirector::setcavelighting(1);
+        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg00"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
+        gcmoveableobj::setdig(var1, 0);
+        var1 = null;
+        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg05"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
+        gcmoveableobj::setdig(var1, 0);
+        var1 = null;
+        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg10"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
+        gcmoveableobj::setdig(var1, 0);
+        var1 = null;
+        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg15"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
+        gcmoveableobj::setdig(var1, 0);
+        var1 = null;
+        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg20"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
+        gcmoveableobj::setdig(var1, 0);
+        var1 = null;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+}

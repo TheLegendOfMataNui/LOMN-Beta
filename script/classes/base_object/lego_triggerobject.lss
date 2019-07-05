@@ -1,0 +1,98 @@
+class lego_triggerobject : base_object {
+    property name;
+    property id;
+    property handle;
+    property area;
+    property areaid;
+    property triggertype;
+    property onscreen;
+    property collide;
+    property collidetimer;
+    
+    method lego_triggerobject(param1, param2, param3) {
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(this.name);
+        this.area = param2;
+        this.areaid = scslosifoundation::stringtoidentifier(this.area);
+        if (param3 == null) {
+            this.triggertype = 0;
+        }
+        else {
+            this.triggertype = param3;
+        }
+        this.onscreen = 1;
+        return null;
+    }
+    
+    method initfull() {
+        if (this.triggertype == 0) {
+            this.handle = gccollisionphysicsgroup::gettriggerplane(this.id);
+            if (this.handle == null) {
+                
+            }
+        }
+        this.collide = 0;
+        this.collidetimer = 5;
+        this.setresponse(4, 4);
+        return null;
+    }
+    
+    method cleanupfull() {
+        return null;
+    }
+    
+    method setresponse(param1, param2) {
+        if (this.triggertype == 0) {
+            gctriggerplane::setplaneresponses(this.handle, param1, param2);
+        }
+        return null;
+    }
+    
+    method setcollide() {
+        this.collide = this.collidetimer;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.collide > 0) {
+            this.collide = this.collide - 1;
+        }
+        return null;
+    }
+    
+    method show() {
+        if (this.onscreen == 0) {
+            if (this.triggertype == 0) {
+                gccollisionphysicsgroup::toggletriggerplaneonoff(this.id, 1);
+            }
+            else {
+                gccollisionphysicsgroup::toggletriggerboxonoff(this.id, 1);
+            }
+            this.onscreen = 1;
+        }
+        return null;
+    }
+    
+    method hide() {
+        if (this.onscreen == 1) {
+            if (this.triggertype == 0) {
+                gccollisionphysicsgroup::toggletriggerplaneonoff(this.id, 0);
+            }
+            else {
+                gccollisionphysicsgroup::toggletriggerboxonoff(this.id, 0);
+            }
+            this.onscreen = 0;
+        }
+        return null;
+    }
+    
+    method toggle() {
+        if (this.onscreen == 1) {
+            this.hide();
+        }
+        else {
+            this.show();
+        }
+        return null;
+    }
+}

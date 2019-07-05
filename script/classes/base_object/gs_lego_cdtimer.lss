@@ -1,0 +1,137 @@
+class gs_lego_cdtimer : base_object {
+    property text;
+    property time;
+    property total;
+    property active;
+    property shown;
+    
+    method gs_lego_cdtimer(param1) {
+        this.base_object();
+        this.time = param1;
+        this.total = this.time;
+        this.active = 0;
+        this.shown = 0;
+        return null;
+    }
+    
+    method settime(param1) {
+        this.time = param1;
+        this.total = this.time;
+        return null;
+    }
+    
+    method start() {
+        this.active = 1;
+        return null;
+    }
+    
+    method reset() {
+        this.time = this.total;
+        sctilefont::setcolor(this.text.font, 255, 255, 0, 255);
+        if (this.shown == 0) {
+            this.text.show();
+            this.shown = 1;
+        }
+        return null;
+    }
+    
+    method stop() {
+        this.active = 0;
+        return null;
+    }
+    
+    method finished() {
+        if (this.time > 0.0) {
+            return 0;
+        }
+        else {
+            return 1;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var1 = "Root/Data/Art/Fonts/BionicleFont";
+        this.text = new gs_legotext(var1, "", screenx * 0.5, 55, 0, 1.2, 256, 4, 0, 1);
+        this.text.initfull();
+        sctilefont::setcolor(this.text.font, 255, 255, 0, 255);
+        this.text.add();
+        this.text.show();
+        this.shown = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.text == null)) {
+            this.text.remove();
+            this.text.cleanupfull();
+            this.text = null;
+        }
+        this.time = null;
+        this.total = null;
+        this.active = null;
+        this.shown = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        if ((this.active == 1) && (this.time > 0.0)) {
+            var1 = scprocessmanager::getrealdeltatime();
+            if (var1 < 0.5) {
+                var2 = this.time;
+                this.time = this.time - var1;
+                if ((var2 > 10.0) && (this.time <= 10.0)) {
+                    sctilefont::setcolor(this.text.font, 255, 0, 0, 255);
+                    this.text.scalefont(1.5);
+                }
+                var3 = scslosimath::floor(var2);
+                var4 = scslosimath::floor(this.time);
+                if (!(var3 == var4)) {
+                    gcstaticsoundsptrarray::playtablesound(1087);
+                }
+                if (this.time <= 10.0) {
+                    if (!(var3 == var4)) {
+                        this.text.hide();
+                        this.shown = 0;
+                    }
+                    else if (this.shown == 0) {
+                        this.text.show();
+                        this.shown = 1;
+                    }
+                }
+            }
+            if (this.time < 0.0) {
+                this.time = 0.0;
+            }
+        }
+        if (this.shown) {
+            var5 = this.time / 60.0;
+            var5 = scslosimath::floor(var5);
+            var6 = __tostring(var5);
+            var7 = scslosistringfuncs::find(var6, ".");
+            var6 = scslosistringfuncs::left(var6, var7);
+            var8 = this.time - (60.0 * var5);
+            var8 = scslosimath::floor(var8);
+            var9 = __tostring(var8);
+            var7 = scslosistringfuncs::find(var9, ".");
+            var9 = scslosistringfuncs::left(var9, var7);
+            if (var8 < 10.0) {
+                var9 = "0" + var9;
+            }
+            var10 = (var6 + ":") + var9;
+            this.text.setstring(var10);
+        }
+        return null;
+    }
+}

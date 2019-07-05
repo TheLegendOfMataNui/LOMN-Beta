@@ -1,0 +1,43 @@
+class lego_level_7 : gs_lego_level {
+    
+    method lego_level_7() {
+        var var1;
+        this.gs_lego_level("lev7", "onua", "onua");
+        var1 = new lego_area_onua(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_gali(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_poha(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_kopa(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_lewa(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_tahu(this);
+        this.areas.__append(var1);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_level_initfull();
+        globalclass.player.addmask("fake", 0);
+        globalclass.saverloaded = 0;
+        return null;
+    }
+    
+    method initshort() {
+        this.lego_level_initshort();
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.lego_level_onevent(param1);
+        return null;
+    }
+    
+    method settestforlavacollisions(param1) {
+        var var1;
+        var1 = param1;
+        return null;
+    }
+}

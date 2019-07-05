@@ -1,0 +1,163 @@
+class ss_basecamera : base_drawobject {
+    property tx;
+    property ty;
+    property tz;
+    property handle;
+    property zoom;
+    
+    method ss_basecamera(param1, param2, param3, param4, param5, param6, param7) {
+        if (!(param1 == null)) {
+            this.x1 = param1;
+        }
+        else {
+            this.x1 = 0.0;
+        }
+        if (!(param2 == null)) {
+            this.y1 = param2;
+        }
+        else {
+            this.y1 = 0.0;
+        }
+        if (!(param3 == null)) {
+            this.z = param3;
+        }
+        else {
+            this.z = 0.0;
+        }
+        if (!(param4 == null)) {
+            this.tx = param4;
+        }
+        else {
+            this.tx = 0.0;
+        }
+        if (!(param5 == null)) {
+            this.ty = param5;
+        }
+        else {
+            this.ty = 0.0;
+        }
+        if (!(param6 == null)) {
+            this.tz = param6;
+        }
+        else {
+            this.tz = 0.0;
+        }
+        if (!(param7 == null)) {
+            this.zoom = param7;
+        }
+        else {
+            this.zoom = 75.0;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var1 = gcgame::getmainview();
+        this.handle = gcviewport::getcamera(var1);
+        gclegocamera::setcampos(this.handle, this.x1, this.y1, this.z);
+        gclegocamera::settargpos(this.handle, this.tx, this.ty, this.tz);
+        var1 = null;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.handle = null;
+        return null;
+    }
+    
+    method setpos(param1, param2, param3) {
+        if (!(param1 == null)) {
+            this.x1 = param1;
+        }
+        else {
+            this.x1 = 0.0;
+        }
+        if (!(param2 == null)) {
+            this.y1 = param2;
+        }
+        else {
+            this.y1 = 0.0;
+        }
+        if (!(param3 == null)) {
+            this.z = param3;
+        }
+        else {
+            this.z = 0.0;
+        }
+        gclegocamera::setcampos(this.handle, this.x1, this.y1, this.z);
+        return null;
+    }
+    
+    method changepos(param1, param2, param3) {
+        if (!(param1 == null)) {
+            this.x1 = this.x1 + param1;
+        }
+        if (!(param2 == null)) {
+            this.y1 = this.y1 + param2;
+        }
+        if (!(param3 == null)) {
+            this.z = this.z + param3;
+        }
+        gclegocamera::setcampos(this.handle, this.x1, this.y1, this.z);
+        return null;
+    }
+    
+    method settargetpos(param1, param2, param3) {
+        if (!(param1 == null)) {
+            this.tx = param1;
+        }
+        else {
+            this.tx = 0.0;
+        }
+        if (!(param2 == null)) {
+            this.ty = param2;
+        }
+        else {
+            this.ty = 0.0;
+        }
+        if (!(param3 == null)) {
+            this.tz = param3;
+        }
+        else {
+            this.tz = 0.0;
+        }
+        gclegocamera::settargpos(this.handle, this.tx, this.ty, this.tz);
+        return null;
+    }
+    
+    method changetargetpos(param1, param2, param3) {
+        if (!(param1 == null)) {
+            this.tx = param1 + this.tx;
+        }
+        if (!(param2 == null)) {
+            this.ty = param2 + this.ty;
+        }
+        if (!(param3 == null)) {
+            this.tz = param3 + this.tz;
+        }
+        gclegocamera::settargpos(this.handle, this.tx, this.ty, this.tz);
+        return null;
+    }
+    
+    method setzoomfactor(param1) {
+        if (!(param1 == null)) {
+            this.zoom = param1;
+        }
+        else {
+            this.zoom = 75.0;
+        }
+        gclegocamera::setzoomfactor(this.handle, this.zoom);
+        return null;
+    }
+    
+    method setcameraaioff() {
+        gclegocamera::setcameraaimode(this.handle, 0);
+        return null;
+    }
+    
+    method setcameraaion() {
+        gclegocamera::setcameraaimode(this.handle, 1);
+        return null;
+    }
+}

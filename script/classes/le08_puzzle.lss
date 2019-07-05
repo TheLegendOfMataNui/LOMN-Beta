@@ -1,0 +1,88 @@
+class le08_puzzle {
+    property parent;
+    property thermalarray;
+    
+    method le08_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play();
+        this.thermalarray = [ new thermal("tml4"), 
+            new thermal("tml5"), 
+            new thermal("tml6"), 
+            new thermal("tml7"), 
+            new thermal("tml8"), 
+            new thermal("tml9"), 
+            new thermal("tm10"), 
+            new thermal("tm11"), 
+            new thermal("tm12"), 
+            new thermal("tm13"), 
+            new thermal("tm14"), 
+            new thermal("tm15"), 
+            new thermal("tm16"), 
+            new thermal("tm17"), 
+            new thermal("tm18"), 
+            new thermal("tm19"), 
+            new thermal("tm20"), 
+            new thermal("tm21") ];
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.thermalarray.__length - 1) >= var1) {
+            this.thermalarray[var1].cleanupfull();
+            var1 = var1 + 1;
+        }
+        this.thermalarray = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.thermalarray.__length - 1) >= var1) {
+            this.thermalarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.thermalarray.__length - 1) >= var1) {
+            this.thermalarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                globalclass.level.cam.setaimode(7);
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.unkill();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

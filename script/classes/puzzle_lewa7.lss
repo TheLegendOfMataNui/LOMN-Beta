@@ -1,0 +1,40 @@
+class puzzle_lewa7 {
+    
+    method puzzle_lewa7() {
+        return null;
+    }
+    
+    method initfull(param1) {
+        return null;
+    }
+    
+    method cleanupfull() {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.reseta();
+            }
+        }
+        else if (param1.eventid == 27) {
+            this.resetb();
+        }
+        return null;
+    }
+    
+    method reseta() {
+        globalclass.player.kill();
+        gccollisionphysicsgroup::spinmask(1.2);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        return null;
+    }
+    
+    method resetb() {
+        globalclass.player.unkill();
+        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        globalclass.hud.cdtimer.reset();
+        return null;
+    }
+}

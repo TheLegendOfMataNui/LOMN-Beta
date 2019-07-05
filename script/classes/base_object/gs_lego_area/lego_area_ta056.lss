@@ -1,0 +1,49 @@
+class lego_area_ta056 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_ta056(param1) {
+        this.gs_lego_area("ta05", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new ta056_puzzle(this);
+        this.startingarea = [ 180, 
+            -356, 
+            0 - 51.4, 
+            689 ];
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.enterarea();
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.leavearea();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method exit() {
+        this.puzzle.cleanupfull();
+        this.puzzle = null;
+        return null;
+    }
+}

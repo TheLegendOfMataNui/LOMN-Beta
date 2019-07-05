@@ -1,0 +1,271 @@
+class lego_pickup {
+    property obj;
+    property rotation;
+    property eventlistindex;
+    property processlistindex;
+    property scriptid;
+    property putype;
+    property objshown;
+    property howtostring;
+    property desctext;
+    property deltatimer;
+    property spinspeed;
+    property howtotextarray;
+    property howtolines;
+    property condition;
+    property quest;
+    
+    method lego_pickup(param1, param2, param3, param4, param5, param6) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        this.obj = new lego_moveableobject(param1);
+        this.scriptid = param2;
+        if (param3 == null) {
+            this.putype = 0;
+        }
+        else {
+            this.putype = param3;
+        }
+        var1 = 1.2;
+        if (param4 == null) {
+            var2 = " X X X ";
+        }
+        else {
+            var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier(param4), param5, 0);
+        }
+        this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny - 130, 0, var1, 256, 0, 0);
+        var3 = 1.0;
+        this.howtolines = param6;
+        this.howtotextarray = [  ];
+        if (param6 > 0) {
+            var4 = 0;
+            while ((param6 - 1) >= var4) {
+                if (!(param4 == null)) {
+                    var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier(param4), param5, var4 + 1);
+                }
+                else {
+                    var2 = "Text not localized yet...";
+                }
+                var5 = (screeny - 100) + (20 * var4);
+                this.howtotextarray.__append(new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var2, screenx * 0.5, var5, 0, var3, 256, 0, 0));
+                var4 = var4 + 1;
+            }
+        }
+        this.objshown = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        if (this.objshown) {
+            this.obj.initfull();
+            this.obj.setresponse(4, 4, 4);
+            this.obj.changemainsystem(2);
+            this.eventlistindex = globalclass.addtoeventlist(this);
+            this.processlistindex = globalclass.addtoprocesslist(this);
+            this.rotation = 0;
+            this.desctext.initfull();
+            this.deltatimer = 0.0;
+            this.spinspeed = 10;
+            var1 = 0;
+            while ((this.howtotextarray.__length - 1) >= var1) {
+                this.howtotextarray[var1].initfull();
+                var1 = var1 + 1;
+            }
+            gclightdirector::setpickuplighting(this.obj.id);
+            this.condition = 0;
+            this.quest = 0;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (this.objshown) {
+            globalclass.removefromeventlist(this.eventlistindex);
+            globalclass.removefromprocesslist(this.eventlistindex);
+            gclightdirector::killpickuplighting(this.obj.id);
+            this.objshown = 0;
+        }
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.desctext.cleanupfull();
+        this.desctext = null;
+        this.deltatimer = null;
+        var1 = 0;
+        while ((this.howtotextarray.__length - 1) >= var1) {
+            this.howtotextarray[var1].cleanupfull();
+            var1 = var1 + 1;
+        }
+        this.howtotextarray = null;
+        return null;
+    }
+    
+    method show() {
+        if (this.objshown == 1) {
+            this.obj.show();
+        }
+        return null;
+    }
+    
+    method hide() {
+        if (this.objshown == 1) {
+            this.obj.hide();
+        }
+        return null;
+    }
+    
+    method remove() {
+        if (this.objshown == 1) {
+            this.obj.remove();
+        }
+        return null;
+    }
+    
+    method setcondition(param1) {
+        this.condition = param1;
+        return null;
+    }
+    
+    method setquest(param1) {
+        this.quest = param1;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (this.objshown == 1) {
+            if (param1.eventid == 1) {
+                if ((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[1] == this.obj.id)) {
+                    if (this.putype == 1) {
+                        gcstaticsoundsptrarray::playtablesound(1075);
+                    }
+                    if (this.putype == 2) {
+                        
+                    }
+                    if (this.putype == 3) {
+                        
+                    }
+                    if (this.putype == 4) {
+                        
+                    }
+                    this.pickup();
+                }
+            }
+            else if (param1.eventid == 39) {
+                if (param1.args[0] == this.obj.id) {
+                    this.gotit();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.objshown == 1) {
+            this.deltatimer = this.deltatimer + param1.deltatime;
+            if (this.deltatimer > (1 / this.spinspeed)) {
+                
+            }
+            if (this.rotation >= 360) {
+                this.rotation = 0;
+            }
+            else {
+                this.rotation = this.rotation + 2;
+            }
+            this.obj.setorientation(this.rotation, this.rotation, 0);
+        }
+        return null;
+    }
+    
+    method pickup() {
+        var var1;
+        if (this.objshown == 1) {
+            gcstaticsoundsptrarray::playtablesound(1075);
+            this.obj.disablecollisions();
+            globalclass.player.actor.pickup(this.obj.id);
+            this.desctext.add();
+            this.desctext.show();
+            var1 = 0;
+            while ((this.howtotextarray.__length - 1) >= var1) {
+                this.howtotextarray[var1].add();
+                this.howtotextarray[var1].show();
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method settweakable() {
+        if (this.objshown == 1) {
+            this.obj.settweakable();
+        }
+        return null;
+    }
+    
+    method interpolate(param1, param2, param3, param4) {
+        if (this.objshown == 1) {
+            this.obj.interpolate(param1, param2, param3, param4);
+        }
+        return null;
+    }
+    
+    method gotit() {
+        var var1;
+        if (this.objshown == 1) {
+            if (this.putype == 1) {
+                globalclass.player.addmask("fake", this.scriptid);
+                globalclass.hud.show();
+                gcsaver::pickupmask(this.obj.id);
+            }
+            if (this.putype == 3) {
+                globalclass.player.setupgrapplinghook();
+                gcsaver::pickupitem(this.obj.id);
+                gcsaver::sethookfound();
+            }
+            if (this.putype == 2) {
+                globalclass.player.addelement(this.scriptid);
+                globalclass.hud.show();
+                gcsaver::pickupglyph(this.obj.id);
+                gcsaver::setglyphfound();
+            }
+            if (this.putype == 5) {
+                gcsaver::pickupitem(this.obj.id);
+                gcsaver::setcondition(this.condition, 1);
+                if (globalclass.level.name == "lev1") {
+                    gcsaver::setquest(1, this.quest);
+                }
+                else if (globalclass.level.name == "lev2") {
+                    gcsaver::setquest(2, this.quest);
+                }
+                else if (globalclass.level.name == "lev3") {
+                    gcsaver::setquest(3, this.quest);
+                }
+                else if (globalclass.level.name == "lev4") {
+                    gcsaver::setquest(4, this.quest);
+                }
+                else if (globalclass.level.name == "lev5") {
+                    gcsaver::setquest(5, this.quest);
+                }
+                else if (globalclass.level.name == "lev6") {
+                    gcsaver::setquest(6, this.quest);
+                }
+            }
+            if (this.putype == 4) {
+                gcsaver::pickupitem(this.obj.id);
+            }
+            this.objshown = 0;
+            gclightdirector::killpickuplighting(this.obj.id);
+            this.desctext.hide();
+            var1 = 0;
+            while ((this.howtotextarray.__length - 1) >= var1) {
+                this.howtotextarray[var1].hide();
+                var1 = var1 + 1;
+            }
+            this.obj.hide();
+        }
+        return null;
+    }
+}

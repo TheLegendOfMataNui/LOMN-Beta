@@ -1,0 +1,44 @@
+class lego_area_rkfl : gs_lego_area {
+    property astroypuzzle;
+    property parent;
+    
+    method lego_area_rkfl(param1) {
+        this.parent = param1;
+        this.gs_lego_area("rkfl", param1, 0, 0);
+        this.astroypuzzle = new astroypuzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.astroypuzzle.initfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.astroypuzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.astroypuzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.astroypuzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.astroypuzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.astroypuzzle.exit();
+        return null;
+    }
+}

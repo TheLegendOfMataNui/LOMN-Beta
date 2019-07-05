@@ -1,0 +1,994 @@
+class cheatlist {
+    property minidx;
+    property maxidx;
+    property showidx;
+    property x;
+    property y;
+    property curidx;
+    property visible;
+    property screen;
+    property activemenu;
+    property mainmenutext;
+    property characternames;
+    property masknames;
+    property abilitynames;
+    property letnames;
+    property visualdebugnames;
+    property newlevel;
+    property levelnames;
+    property levelareanames;
+    property realdelta;
+    
+    method cheatlist() {
+        this.activemenu = [  ];
+        this.mainmenutext = [ "WARP TO AREA...", 
+            "GO TO START POSITION...", 
+            "CHANGE CHARACTER...", 
+            "MASKS...", 
+            "ABILITIES...", 
+            "LIFE/ENERGY/TOKENS...", 
+            "VISUAL DEBUGGER..." ];
+        this.characternames = [ "Onua", 
+            "Gali", 
+            "Pohatu", 
+            "Kopaka", 
+            "Lewa", 
+            "Tahu" ];
+        this.masknames = [ "All Masks", 
+            "strength", 
+            "water", 
+            "speed", 
+            "vision", 
+            "levitation", 
+            "time", 
+            "shielding", 
+            "concealment", 
+            "night vision", 
+            "translation", 
+            "animal control", 
+            "telekinesis", 
+            "illusion" ];
+        this.abilitynames = [ "Grappling Hook", 
+            "Elemental Glyph" ];
+        this.letnames = [ "Life", 
+            "Max Life", 
+            "Energy", 
+            "Max Energy", 
+            "Tokens" ];
+        this.visualdebugnames = [ "Wireframe", 
+            "Collision Boxes", 
+            "Trigger Boxes", 
+            "Trigger Planes", 
+            "Cave Lighting", 
+            "HUD" ];
+        this.levelnames = [ "Lev1 - Onua", 
+            "Lev2 - Gali", 
+            "Lev3 - Pohatu", 
+            "Lev4 - Kopaka", 
+            "Lev5 - Lewa", 
+            "Lev6 - Tahu", 
+            "Lev7 - Makuta" ];
+        this.levelareanames = [ [ "bech", 
+                "ptv1", 
+                "vllg", 
+                "tura", 
+                "l1a1", 
+                "atrm", 
+                "pzzl", 
+                "l1a3", 
+                "clf1", 
+                "clf2", 
+                "spcv", 
+                "l1a7", 
+                "scrp", 
+                "cave", 
+                "shrn", 
+                "l1a8", 
+                "hk01", 
+                "bugs", 
+                "mud0" ], 
+            [ "mtup", 
+                "strt", 
+                "vllg", 
+                "tura", 
+                "vlgs", 
+                "hk01", 
+                "mtop", 
+                "vtnl", 
+                "evac", 
+                "ttun", 
+                "mwat", 
+                "shrn", 
+                "wthk", 
+                "gly3", 
+                "takv", 
+                "hydr" ], 
+            [ "mtup", 
+                "vllg", 
+                "tura", 
+                "rkfl", 
+                "xrod", 
+                "bldr", 
+                "blcv", 
+                "blr1", 
+                "blr2", 
+                "ptos", 
+                "shrn", 
+                "gly1", 
+                "gly3", 
+                "bkik", 
+                "boss" ], 
+            [ "strt", 
+                "vllg", 
+                "tura", 
+                "crss", 
+                "maz1", 
+                "maz2", 
+                "brd2", 
+                "tele", 
+                "swrd", 
+                "snbd", 
+                "visn", 
+                "brd3", 
+                "shrn", 
+                "snfl", 
+                "well", 
+                "path", 
+                "brd4", 
+                "boss" ], 
+            [ "mtup", 
+                "le01", 
+                "le02", 
+                "le03", 
+                "vllg", 
+                "tura", 
+                "lep1", 
+                "cave", 
+                "le04", 
+                "lep2", 
+                "hive", 
+                "shrn", 
+                "le08", 
+                "room", 
+                "gly3", 
+                "gly1", 
+                "boss" ], 
+            [ "mtup", 
+                "fvil", 
+                "tvil", 
+                "vllg", 
+                "tura", 
+                "ta01", 
+                "ta02", 
+                "ta03", 
+                "ta04", 
+                "ta05", 
+                "ta07", 
+                "tp01", 
+                "ta11", 
+                "ta09", 
+                "ta08", 
+                "shrn", 
+                "ta12", 
+                "ta13", 
+                "ta14", 
+                "boss" ], 
+            [ "onua", 
+                "gali", 
+                "phtu", 
+                "kpka", 
+                "lewa", 
+                "tahu" ] ];
+        return null;
+    }
+    
+    method initfull() {
+        this.minidx = -1;
+        this.maxidx = -1;
+        this.showidx = 20;
+        this.x = 10;
+        this.y = 80;
+        this.curidx = -1;
+        this.visible = 0;
+        this.screen = -1;
+        this.realdelta = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        this.minidx = null;
+        this.maxidx = null;
+        this.showidx = null;
+        this.x = null;
+        this.y = null;
+        this.curidx = null;
+        this.visible = null;
+        this.screen = null;
+        this.realdelta = null;
+        this.newlevel = null;
+        var1 = this.activemenu.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.activemenu.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.activemenu = null;
+        var1 = this.mainmenutext.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.mainmenutext.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.mainmenutext = null;
+        var1 = this.characternames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.characternames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.characternames = null;
+        var1 = this.masknames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.masknames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.masknames = null;
+        var1 = this.abilitynames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.abilitynames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.abilitynames = null;
+        var1 = this.letnames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.letnames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.letnames = null;
+        var1 = this.visualdebugnames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.visualdebugnames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.visualdebugnames = null;
+        var1 = this.levelnames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.levelnames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.levelnames = null;
+        var1 = this.levelareanames.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.levelareanames.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.levelareanames = null;
+        return null;
+    }
+    
+    method showcheatmenu() {
+        var var1;
+        this.mainmenusetup();
+        var1 = 0;
+        while (this.maxidx >= var1) {
+            this.activemenu[var1].show();
+            var1 = var1 + 1;
+        }
+        this.visible = 1;
+        this.newlevel = null;
+        globalclass.hud.showframerate(1);
+        return null;
+    }
+    
+    method hidecheatmenu() {
+        var var1;
+        globalclass.hud.showframerate(0);
+        this.activemenu[this.curidx].setinactive();
+        var1 = 0;
+        while (this.showidx >= var1) {
+            this.activemenu[this.minidx + var1].hide();
+            var1 = var1 + 1;
+        }
+        this.visible = 0;
+        return null;
+    }
+    
+    method input(param1) {
+        if (this.visible == 1) {
+            if (this.screen == -1) {
+                this.maininput(param1);
+            }
+            else if (this.screen == 1) {
+                this.gotoinput(param1);
+            }
+            else if (this.screen == 0) {
+                this.areainput(param1);
+            }
+            else if (this.screen == 2) {
+                this.charinput(param1);
+            }
+            else if (this.screen == 3) {
+                this.maskinput(param1);
+            }
+            else if (this.screen == 5) {
+                this.abilinput(param1);
+            }
+            else if (this.screen == 6) {
+                this.letinput(param1);
+            }
+            else if (this.screen == 7) {
+                this.visualdebuginput(param1);
+            }
+            else if (this.screen == 99) {
+                this.levelinput(param1);
+            }
+            if ((param1.event == 2) || (param1.event == 4)) {
+                if (param1.button == 34) {
+                    this.scrolldown();
+                }
+                else if (param1.button == 33) {
+                    this.scrollup();
+                }
+            }
+        }
+        else if (param1.event == 2) {
+            if (param1.button == 84) {
+                if (this.realdelta == 0) {
+                    this.realdelta = 1;
+                    debug::print("Frame Skipping ON");
+                }
+                else {
+                    this.realdelta = 0;
+                    debug::print("Frame Skipping OFF");
+                }
+                scprocessmanager::userealdeltatime(this.realdelta);
+            }
+            else if (param1.button == 46) {
+                if (globalclass.tweak.visible == 0) {
+                    this.showcheatmenu();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method maininput(param1) {
+        var var1;
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                if (this.curidx == 0) {
+                    var1 = scslosistringfuncs::right(globalclass.level.name, 1);
+                    this.areamenusetup(__toint(var1) - 1);
+                }
+                else if (this.curidx == 1) {
+                    this.gotomenusetup();
+                }
+                else if (this.curidx == 2) {
+                    this.charactermenusetup();
+                }
+                else if (this.curidx == 3) {
+                    this.maskmenusetup();
+                }
+                else if (this.curidx == 4) {
+                    this.abilitymenusetup();
+                }
+                else if (this.curidx == 5) {
+                    this.letmenusetup();
+                }
+                else if (this.curidx == 6) {
+                    this.visualdebugmenusetup();
+                }
+            }
+            else if (param1.button == 46) {
+                this.hidecheatmenu();
+            }
+        }
+        return null;
+    }
+    
+    method areainput(param1) {
+        var var1;
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                var1 = null;
+                if (this.curidx == 0) {
+                    this.levelmenusetup();
+                }
+                else {
+                    globalclass.player.actor.setunderwater(0);
+                    if (!(this.newlevel == null)) {
+                        gcareadirector::setcurrentlevel(this.newlevel);
+                        gcareadirector::setcurrentarea(scslosistringfuncs::tolower(this.activemenu[this.curidx].string));
+                        globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+                    }
+                    else {
+                        gcareadirector::switchareas(scslosifoundation::stringtoidentifier(scslosistringfuncs::tolower(this.activemenu[this.curidx].string)), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+                    }
+                    this.hidecheatmenu();
+                }
+            }
+            else if (param1.button == 46) {
+                this.mainmenusetup();
+            }
+        }
+        return null;
+    }
+    
+    method levelinput(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                this.newlevel = scslosistringfuncs::toupper(this.activemenu[this.curidx].string);
+                this.newlevel = scslosistringfuncs::left(this.newlevel, 4);
+                this.areamenusetup(this.curidx);
+            }
+            else if (param1.button == 46) {
+                this.areamenusetup();
+            }
+        }
+        return null;
+    }
+    
+    method gotoinput(param1) {
+        var var1;
+        var var2;
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                var1 = "str" + __tostring(this.curidx);
+                var2 = "lok" + __tostring(this.curidx);
+                globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier(var1), scslosifoundation::stringtoidentifier(var2));
+                this.hidecheatmenu();
+            }
+            else if (param1.button == 46) {
+                this.mainmenusetup();
+            }
+        }
+        return null;
+    }
+    
+    method charinput(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                if (this.curidx == 0) {
+                    globalclass.player.changetoa("onua");
+                }
+                else if (this.curidx == 1) {
+                    globalclass.player.changetoa("gali");
+                }
+                else if (this.curidx == 2) {
+                    globalclass.player.changetoa("poha");
+                }
+                else if (this.curidx == 3) {
+                    globalclass.player.changetoa("kopa");
+                }
+                else if (this.curidx == 4) {
+                    globalclass.player.changetoa("lewa");
+                }
+                else if (this.curidx == 5) {
+                    globalclass.player.changetoa("tahu");
+                }
+                this.hidecheatmenu();
+            }
+            else if (param1.button == 46) {
+                if (param1.event == 2) {
+                    this.mainmenusetup();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method maskinput(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                if (this.curidx == 0) {
+                    globalclass.player.addmask("mk0a", 0);
+                    globalclass.player.addmask("mk1a", 1);
+                    globalclass.player.addmask("mk2a", 2);
+                    globalclass.player.addmask("mk3a", 3);
+                    globalclass.player.addmask("mk4a", 4);
+                    globalclass.player.addmask("mk5a", 5);
+                    globalclass.player.addmask("mk6a", 1011);
+                    globalclass.player.addmask("mk7a", 7);
+                    globalclass.player.addmask("mk8a", 8);
+                    globalclass.player.addmask("mk9a", 9);
+                    globalclass.player.addmask("mkaa", 10);
+                    globalclass.player.addmask("mkba", 11);
+                    globalclass.player.addmask("mkca", 12);
+                    this.hidecheatmenu();
+                }
+                else if (this.curidx == 1) {
+                    globalclass.player.addmask("mk0a", 0);
+                }
+                else if (this.curidx == 2) {
+                    globalclass.player.addmask("mk1a", 1);
+                }
+                else if (this.curidx == 3) {
+                    globalclass.player.addmask("mk2a", 2);
+                }
+                else if (this.curidx == 4) {
+                    globalclass.player.addmask("mk3a", 3);
+                }
+                else if (this.curidx == 5) {
+                    globalclass.player.addmask("mk4a", 4);
+                }
+                else if (this.curidx == 6) {
+                    globalclass.player.addmask("mk5a", 5);
+                }
+                else if (this.curidx == 7) {
+                    globalclass.player.addmask("mk6a", 1011);
+                }
+                else if (this.curidx == 8) {
+                    globalclass.player.addmask("mk7a", 7);
+                }
+                else if (this.curidx == 9) {
+                    globalclass.player.addmask("mk8a", 8);
+                }
+                else if (this.curidx == 10) {
+                    globalclass.player.addmask("mk9a", 9);
+                }
+                else if (this.curidx == 11) {
+                    globalclass.player.addmask("mkaa", 10);
+                }
+                else if (this.curidx == 12) {
+                    globalclass.player.addmask("mkba", 11);
+                }
+                else if (this.curidx == 13) {
+                    globalclass.player.addmask("mkca", 12);
+                }
+            }
+            else if (param1.button == 46) {
+                if (param1.event == 2) {
+                    this.mainmenusetup();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method abilinput(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 36) {
+                if (this.curidx == 0) {
+                    globalclass.player.setupgrapplinghook();
+                }
+                else if (this.curidx == 1) {
+                    globalclass.player.addelement(1);
+                }
+                this.hidecheatmenu();
+            }
+            else if (param1.button == 46) {
+                if (param1.event == 2) {
+                    this.mainmenusetup();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method letinput(param1) {
+        if ((param1.event == 2) || (param1.event == 4)) {
+            if (param1.button == 35) {
+                if (this.curidx == 0) {
+                    globalclass.player.removelife(20);
+                }
+                else if (this.curidx == 1) {
+                    globalclass.player.removemaxlife(20);
+                }
+                else if (this.curidx == 2) {
+                    globalclass.player.removeenergy(20);
+                }
+                else if (this.curidx == 3) {
+                    globalclass.player.removeenergy(20);
+                    globalclass.player.removemaxenergy(20);
+                }
+                else if (this.curidx == 4) {
+                    globalclass.player.removetoken(1);
+                }
+            }
+            else if (param1.button == 36) {
+                if (this.curidx == 0) {
+                    globalclass.player.addlife(20);
+                }
+                else if (this.curidx == 1) {
+                    globalclass.player.addmaxlife(20);
+                }
+                else if (this.curidx == 2) {
+                    globalclass.player.addenergy(20);
+                }
+                else if (this.curidx == 3) {
+                    globalclass.player.addmaxenergy(20);
+                }
+                else if (this.curidx == 4) {
+                    globalclass.player.addtoken(1);
+                }
+            }
+            else if (param1.button == 46) {
+                if (param1.event == 2) {
+                    this.mainmenusetup();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method visualdebuginput(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 35) {
+                if (this.curidx == 0) {
+                    lsdebugger::setwireframe(0);
+                }
+                else if (this.curidx == 1) {
+                    lsdebugger::setcollisionboxes(0);
+                }
+                else if (this.curidx == 2) {
+                    lsdebugger::settriggerboxes(0);
+                }
+                else if (this.curidx == 3) {
+                    lsdebugger::settriggerplanes(0);
+                }
+                else if (this.curidx == 4) {
+                    gclightdirector::setcavelighting(0);
+                }
+                else if (this.curidx == 5) {
+                    globalclass.hud.hide();
+                }
+            }
+            else if (param1.button == 36) {
+                if (this.curidx == 0) {
+                    lsdebugger::setwireframe(1);
+                }
+                else if (this.curidx == 1) {
+                    lsdebugger::setcollisionboxes(1);
+                }
+                else if (this.curidx == 2) {
+                    lsdebugger::settriggerboxes(1);
+                }
+                else if (this.curidx == 3) {
+                    lsdebugger::settriggerplanes(1);
+                }
+                else if (this.curidx == 4) {
+                    gclightdirector::setcavelighting(1);
+                }
+                else if (this.curidx == 5) {
+                    globalclass.hud.show();
+                }
+            }
+            else if (param1.button == 46) {
+                this.mainmenusetup();
+            }
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (this.visible == 1) {
+            var1 = 0;
+            while ((this.activemenu.__length - 1) >= var1) {
+                this.activemenu[var1].setstring(scslosistringfuncs::toupper(this.activemenu[var1].string));
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+    
+    method scrolldown() {
+        var var1;
+        if (this.curidx < this.maxidx) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx + 1;
+            this.activemenu[this.curidx].setactive();
+        }
+        else if (this.curidx < (this.activemenu.__length - 1)) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx + 1;
+            this.activemenu[this.curidx].setactive();
+            this.activemenu[this.minidx].hide();
+            this.minidx = this.minidx + 1;
+            this.maxidx = this.maxidx + 1;
+            this.activemenu[this.maxidx].show();
+            var1 = 0;
+            while (this.showidx >= var1) {
+                this.activemenu[this.minidx + var1].setpos(this.x, this.y + (var1 * 12), 0);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method scrollup() {
+        var var1;
+        if (this.curidx > this.minidx) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx - 1;
+            this.activemenu[this.curidx].setactive();
+        }
+        else if (this.curidx > 0) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx - 1;
+            this.activemenu[this.curidx].setactive();
+            this.activemenu[this.maxidx].hide();
+            this.minidx = this.minidx - 1;
+            this.maxidx = this.maxidx - 1;
+            this.activemenu[this.minidx].show();
+            var1 = 0;
+            while (this.showidx >= var1) {
+                this.activemenu[this.minidx + var1].setpos(this.x, this.y + (var1 * 12), 0);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method resetactivemenu() {
+        var var1;
+        var1 = 0;
+        while ((this.activemenu.__length - 1) >= var1) {
+            this.activemenu[var1].hide();
+            var1 = var1 + 1;
+        }
+        this.activemenu = null;
+        this.activemenu = [  ];
+        this.showidx = 20;
+        this.minidx = 0;
+        this.curidx = 0;
+        if (this.maxidx < this.showidx) {
+            this.showidx = this.maxidx;
+        }
+        else {
+            this.maxidx = this.showidx;
+        }
+        this.x = 10;
+        this.y = 80;
+        return null;
+    }
+    
+    method mainmenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.maxidx = this.mainmenutext.__length - 1;
+        this.screen = -1;
+        this.resetactivemenu();
+        var1 = 0;
+        while ((this.mainmenutext.__length - 1) >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.mainmenutext[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method levelmenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.screen = 99;
+        this.maxidx = this.levelnames.__length - 1;
+        this.resetactivemenu();
+        var1 = 0;
+        while (this.maxidx >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.levelnames[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method areamenusetup(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        if (param1 == null) {
+            var1 = globalclass.level.areas;
+        }
+        else {
+            var1 = this.levelareanames[param1];
+        }
+        this.screen = 0;
+        this.maxidx = (var1.__length - 1) + 1;
+        this.resetactivemenu();
+        var2 = 0;
+        var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", "Choose Level", this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+        var3.initfull();
+        var3.add();
+        var3.show();
+        var3.scalefont(1.2);
+        this.activemenu.__append(var3);
+        var4 = 0;
+        while ((var1.__length - 1) >= var4) {
+            var2 = (var4 + 1) * 12;
+            if (param1 == null) {
+                var5 = var1[var4].name;
+            }
+            else {
+                var5 = var1[var4];
+            }
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", var5, this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if ((var4 + 1) <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var4 = var4 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method gotomenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.screen = 1;
+        this.maxidx = 5;
+        this.resetactivemenu();
+        var1 = 0;
+        while (this.maxidx >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", "STR" + __tostring(var1), this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method charactermenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.screen = 2;
+        this.maxidx = this.characternames.__length - 1;
+        this.resetactivemenu();
+        var1 = 0;
+        while ((this.characternames.__length - 1) >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.characternames[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method abilitymenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.screen = 5;
+        this.maxidx = this.abilitynames.__length - 1;
+        this.resetactivemenu();
+        var1 = 0;
+        while ((this.abilitynames.__length - 1) >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.abilitynames[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method maskmenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.screen = 3;
+        this.maxidx = this.masknames.__length - 1;
+        this.resetactivemenu();
+        var1 = 0;
+        while ((this.masknames.__length - 1) >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.masknames[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method letmenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.screen = 6;
+        this.maxidx = this.letnames.__length - 1;
+        this.resetactivemenu();
+        var1 = 0;
+        while ((this.letnames.__length - 1) >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.letnames[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+    
+    method visualdebugmenusetup() {
+        var var1;
+        var var2;
+        var var3;
+        this.screen = 7;
+        this.maxidx = this.visualdebugnames.__length - 1;
+        this.resetactivemenu();
+        var1 = 0;
+        while ((this.visualdebugnames.__length - 1) >= var1) {
+            var2 = var1 * 12;
+            var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.visualdebugnames[var1], this.x, this.y + var2, 0, 1.0, 0, 4, 0);
+            var3.initfull();
+            var3.add();
+            if (var1 <= this.showidx) {
+                var3.show();
+            }
+            var3.scalefont(1.2);
+            this.activemenu.__append(var3);
+            var1 = var1 + 1;
+        }
+        this.activemenu[0].setactive();
+        return null;
+    }
+}

@@ -1,0 +1,222 @@
+class l1a7_puzzlep : base_object {
+    property parent;
+    property plataarray;
+    property platbarray;
+    property platcarray;
+    property door;
+    property camstate;
+    property mycamtimer;
+    property hooks;
+    property lastid;
+    
+    method l1a7_puzzlep(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        this.lastid = scslosifoundation::stringtoidentifier("fake");
+        var1 = 0;
+        this.mycamtimer = new lego_timer("cmtm", 4.0, 0);
+        this.door = new lego_moveableobject("drp0", this.parent.name);
+        this.plataarray = [ new lego_volatileplatform("cla0", this.parent.name), 
+            new lego_volatileplatform("cla1", this.parent.name), 
+            new lego_volatileplatform("cla2", this.parent.name), 
+            new lego_volatileplatform("cla3", this.parent.name), 
+            new lego_volatileplatform("cla4", this.parent.name), 
+            new lego_volatileplatform("cla5", this.parent.name), 
+            new lego_volatileplatform("cla6", this.parent.name), 
+            new lego_volatileplatform("cla7", this.parent.name), 
+            new lego_volatileplatform("cla8", this.parent.name), 
+            new lego_volatileplatform("cla9", this.parent.name), 
+            new lego_volatileplatform("claa", this.parent.name), 
+            new lego_volatileplatform("clab", this.parent.name) ];
+        this.platbarray = [ new lego_volatileplatform("clb0", this.parent.name), 
+            new lego_volatileplatform("clb1", this.parent.name), 
+            new lego_volatileplatform("clb2", this.parent.name), 
+            new lego_volatileplatform("clb3", this.parent.name), 
+            new lego_volatileplatform("clb4", this.parent.name), 
+            new lego_volatileplatform("clb5", this.parent.name), 
+            new lego_volatileplatform("clb6", this.parent.name), 
+            new lego_volatileplatform("clb7", this.parent.name), 
+            new lego_volatileplatform("clb8", this.parent.name), 
+            new lego_volatileplatform("clb9", this.parent.name), 
+            new lego_volatileplatform("clba", this.parent.name), 
+            new lego_volatileplatform("clbb", this.parent.name) ];
+        this.platcarray = [ new lego_volatileplatform("clc0", this.parent.name), 
+            new lego_volatileplatform("clc1", this.parent.name), 
+            new lego_volatileplatform("clc2", this.parent.name), 
+            new lego_volatileplatform("clc3", this.parent.name), 
+            new lego_volatileplatform("clc4", this.parent.name), 
+            new lego_volatileplatform("clc5", this.parent.name), 
+            new lego_volatileplatform("clc6", this.parent.name), 
+            new lego_volatileplatform("clc7", this.parent.name), 
+            new lego_volatileplatform("clc8", this.parent.name), 
+            new lego_volatileplatform("clc9", this.parent.name), 
+            new lego_volatileplatform("clca", this.parent.name), 
+            new lego_volatileplatform("clcb", this.parent.name) ];
+        this.camstate = 1;
+        this.mycamtimer.initfull();
+        this.door.initfull();
+        this.door.settweakable();
+        var2 = 0;
+        while ((this.plataarray.__length - 1) >= var2) {
+            this.plataarray[var2].initfull();
+            this.platbarray[var2].initfull();
+            this.platcarray[var2].initfull();
+            this.plataarray[var2].show();
+            this.platbarray[var2].show();
+            this.platcarray[var2].show();
+            this.plataarray[var2].settimetofall(0);
+            this.platbarray[var2].settimetofall(0);
+            this.platcarray[var2].settimetofall(0);
+            var2 = var2 + 1;
+        }
+        this.hooks = [ new lego_moveableobject("hot0"), 
+            new lego_moveableobject("hot1") ];
+        var2 = 0;
+        while ((this.hooks.__length - 1) >= var2) {
+            this.hooks[var2].initfull();
+            this.hooks[var2].setmytargetingflags(1);
+            this.hooks[var2].setresponse(1, 1, 1);
+            var2 = var2 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        if (param1.eventid == 51) {
+            this.opendoor();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+            this.parent.level.cam.setaimode(11);
+            var1 = 0;
+            while ((this.plataarray.__length - 1) >= var1) {
+                this.plataarray[var1].reset();
+                this.platbarray[var1].reset();
+                this.platcarray[var1].reset();
+                var1 = var1 + 1;
+            }
+            var2 = 1;
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(1.2);
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                var3 = param1.args[1];
+                if (!(var3 == this.lastid)) {
+                    var1 = 0;
+                    while ((this.plataarray.__length - 1) >= var1) {
+                        if (var3 == this.plataarray[var1].id) {
+                            if ((globalclass.player.whichmaskonface() == 7) && (globalclass.player.ismaskpoweron() == 1)) {
+                                
+                            }
+                            else {
+                                this.plataarray[var1].touch();
+                                this.platbarray[var1].touch();
+                                this.platcarray[var1].touch();
+                                this.lastid = var3;
+                            }
+                        }
+                        var1 = var1 + 1;
+                    }
+                }
+            }
+            param1.args[0];
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        if (!(this.plataarray == null)) {
+            var1 = this.plataarray.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.plataarray[var1 - var2].cleanupfull();
+                this.plataarray[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+        }
+        if (!(this.platbarray == null)) {
+            var1 = this.platbarray.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.platbarray[var1 - var2].cleanupfull();
+                this.platbarray[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+        }
+        if (!(this.platcarray == null)) {
+            var1 = this.platcarray.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.platcarray[var1 - var2].cleanupfull();
+                this.platcarray[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+        }
+        this.plataarray = null;
+        this.platbarray = null;
+        this.platcarray = null;
+        if (!(this.door == null)) {
+            this.door.cleanupfull();
+            this.door = null;
+        }
+        if (!(this.mycamtimer == null)) {
+            this.mycamtimer.cleanupfull();
+            this.mycamtimer = null;
+        }
+        this.camstate = null;
+        if (!(this.hooks == null)) {
+            var2 = 0;
+            while ((this.hooks.__length - 1) >= var2) {
+                this.hooks[var2].cleanupfull();
+                this.hooks[var2] = null;
+                var2 = var2 + 1;
+            }
+            this.hooks = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method resetallplats() {
+        var var1;
+        var1 = 0;
+        while ((this.plataarray.__length - 1) >= var1) {
+            this.plataarray[var1].reset();
+            this.platbarray[var1].reset();
+            this.platcarray[var1].reset();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method opendoor() {
+        this.door.interpolate(this.door.getx(), this.door.gety() + 10.0, this.door.getz(), 2.5);
+        return null;
+    }
+}

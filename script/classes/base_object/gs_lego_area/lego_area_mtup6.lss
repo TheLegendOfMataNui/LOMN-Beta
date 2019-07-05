@@ -1,0 +1,74 @@
+class lego_area_mtup6 : gs_lego_area {
+    property parent;
+    property cinema;
+    
+    method lego_area_mtup6(param1) {
+        this.parent = param1;
+        this.gs_lego_area("mtup", param1, 0, 0);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin1");
+            gccinemaengine::play(this.cinema);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.cinema = null;
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (!(this.cinema == null)) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+            param1.button;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 30) {
+            globalclass.bgmusic.play(1);
+            globalclass.player.maskcontrol.changemask(4);
+        }
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("t000"));
+            this.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.parent = null;
+        return null;
+    }
+}

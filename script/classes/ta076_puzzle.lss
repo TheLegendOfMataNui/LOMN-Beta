@@ -1,0 +1,266 @@
+class ta076_puzzle {
+    property parent;
+    property objarray;
+    property numberofbuttonsdown;
+    property stat;
+    property badmask;
+    
+    method ta076_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(20);
+        this.objarray = [ new ta07_door("dr00"), 
+            new ta07_door("dr01"), 
+            new ta07_switch("sw00", this), 
+            new ta07_switch("sw01", this), 
+            new ta07_switch("sw02", this), 
+            new ta07_switch("sw03", this), 
+            new ta07_switch("sw04", this), 
+            new ta07_switch("sw05", this), 
+            new ta07_switch("sw06", this), 
+            new ta07_switch("sw07", this), 
+            new ta07_switch("sw08", this), 
+            new ta07_platform("pl01"), 
+            new ta07_platform("pl02"), 
+            new ta07_platform("pl03"), 
+            new ta07_platform("pl04"), 
+            new ta07_platform("pl05"), 
+            new ta07_platform("pl06"), 
+            new ta07_platform("pl07"), 
+            new ta07_platform("pl08"), 
+            new ta07_platform("pl09") ];
+        var1 = 0;
+        while ((this.objarray.__length - 1) >= var1) {
+            this.objarray[var1].initfull();
+            var1 = var1 + 1;
+        }
+        if (globalclass.player.actor.getposz() > 0.0) {
+            debug::print("entered from the FRONT");
+            this.stat = 1;
+        }
+        else {
+            debug::print("entered from the BACK");
+            this.stat = 8;
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICtahuTheme");
+        this.badmask = new badmask();
+        this.badmask.initfull();
+        this.numberofbuttonsdown = 0;
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        var1 = 2;
+        while ((this.objarray.__length - 1) >= var1) {
+            this.objarray[var1].reset();
+            var1 = var1 + 1;
+        }
+        this.objarray[0].reset();
+        this.objarray[1].reset();
+        this.badmask.reset();
+        this.stat = 1;
+        this.numberofbuttonsdown = 0;
+        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+        globalclass.player.unkill();
+        globalclass.player.actor.setinputstate("ninp");
+        return null;
+    }
+    
+    method cleanupshort() {
+        globalclass.bgmusic.stop();
+        this.badmask.stopfight();
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.objarray.__length - 1) >= var1) {
+            this.objarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        this.badmask.process(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.objarray.__length - 1) >= var1) {
+            this.objarray[var1].cleanupfull();
+            this.objarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.objarray = null;
+        this.numberofbuttonsdown = null;
+        this.stat = null;
+        this.badmask.cleanupfull();
+        this.badmask = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        this.badmask.onevent(param1);
+        var1 = 0;
+        while ((this.objarray.__length - 1) >= var1) {
+            this.objarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 4) {
+            if (this.stat == 1) {
+                this.slamdoor1();
+            }
+        }
+        else if (param1.eventid == 12) {
+            if (param1.args[0] == this.objarray[0].id) {
+                if (this.stat == 2) {
+                    this.slamdoor2();
+                }
+            }
+            if (param1.args[0] == this.objarray[1].id) {
+                if (this.stat == 3) {
+                    this.zoomout_a();
+                }
+            }
+        }
+        else if (param1.eventid == 14) {
+            if (this.stat == 4) {
+                this.zoomout_b();
+            }
+            else if (this.stat == 5) {
+                this.startfight();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.cleanupshort();
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        this.badmask.input(param1);
+        if (param1.button == 88) {
+            if (param1.event == 2) {
+                this.cheatallbuttonsdown();
+            }
+        }
+        return null;
+    }
+    
+    method cheatallbuttonsdown() {
+        this.objarray[2].rase(0);
+        this.objarray[3].rase(0);
+        this.objarray[4].rase(0);
+        this.objarray[5].rase(0);
+        this.objarray[6].rase(0);
+        this.objarray[7].rase(0);
+        this.objarray[8].rase(0);
+        this.objarray[9].rase(0);
+        this.objarray[10].rase(0);
+        return null;
+    }
+    
+    method addtonumberofbuttonsdown(param1) {
+        if (param1) {
+            this.numberofbuttonsdown = this.numberofbuttonsdown + 1;
+        }
+        else {
+            this.numberofbuttonsdown = this.numberofbuttonsdown - 1;
+        }
+        this.testnumberofbuttons();
+        return null;
+    }
+    
+    method testnumberofbuttons() {
+        if (this.stat == 6) {
+            if (this.numberofbuttonsdown >= 9) {
+                this.youwin();
+            }
+            else {
+                this.rasedoors(0);
+            }
+        }
+        return null;
+    }
+    
+    method youwin() {
+        this.rasedoors(1);
+        gcstaticsoundsptrarray::playtablesound(1074);
+        this.stat = 7;
+        globalclass.bgmusic.stop();
+        this.badmask.stopfight();
+        return null;
+    }
+    
+    method rasedoors(param1) {
+        this.objarray[0].rase(param1);
+        this.objarray[1].rase(param1);
+        return null;
+    }
+    
+    method slamdoor1() {
+        this.stat = 2;
+        debug::print("slamDoor1");
+        this.objarray[0].rase(0);
+        gcstaticsoundsptrarray::playtablesound(1105);
+        globalclass.level.cam.setaimode(0);
+        globalclass.level.cam.setpos(-15, 5.6, 46.8);
+        globalclass.level.cam.shakecamera(0.5, 0.15);
+        globalclass.player.actor.setinputstate("none");
+        globalclass.player.actor.idle();
+        return null;
+    }
+    
+    method slamdoor2() {
+        debug::print("slamDoor2");
+        this.stat = 3;
+        this.objarray[1].rase(0);
+        gcstaticsoundsptrarray::playtablesound(1105);
+        globalclass.level.cam.settargetpos(0 - 7.7, 0 - 0.2, 0 - 61.6);
+        globalclass.level.cam.setpos(0 - 12.7, 5.6, 0 - 55.3);
+        globalclass.level.cam.shakecamera(0.5, 0.15);
+        return null;
+    }
+    
+    method zoomout_a() {
+        debug::print("zoomOut_A");
+        this.stat = 4;
+        globalclass.player.actor.setpos(0, 0, 53.6);
+        globalclass.player.actor.setorientation(180);
+        globalclass.level.cam.interpolate(37.8, 21.7, 37.6, 0.6, 15.6, 0 - 59.5, 3);
+        this.badmask.startfight();
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method zoomout_b() {
+        debug::print("zoomOut_B");
+        this.stat = 5;
+        globalclass.level.cam.interpolate(0 - 19.2, 5.6, 63.2, -13, -4, 169, 2);
+        return null;
+    }
+    
+    method startfight() {
+        debug::print("startFight");
+        this.badmask.startfight();
+        this.stat = 6;
+        globalclass.level.cam.setaimode(11);
+        globalclass.player.actor.setinputstate("ninp");
+        return null;
+    }
+}

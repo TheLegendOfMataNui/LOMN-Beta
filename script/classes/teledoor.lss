@@ -1,0 +1,64 @@
+class teledoor {
+    property top;
+    property bottom;
+    property topclosedpos;
+    property bottomclosedpos;
+    property topopenpos;
+    property bottomopenpos;
+    
+    method teledoor() {
+        this.top = new lego_moveableobject("drt1");
+        this.bottom = new lego_moveableobject("drb1");
+        return null;
+    }
+    
+    method initfull() {
+        this.top.initfull();
+        this.bottom.initfull();
+        this.topopenpos = new basicpoint(this.top.getx(), this.top.gety() + 10, this.top.getz());
+        this.bottomopenpos = new basicpoint(this.bottom.getx(), this.bottom.gety() - 10, this.bottom.getz());
+        this.topclosedpos = new basicpoint(this.top.getx(), this.top.gety(), this.top.getz());
+        this.bottomclosedpos = new basicpoint(this.bottom.getx(), this.bottom.gety(), this.bottom.getz());
+        return null;
+    }
+    
+    method open(param1) {
+        if (param1) {
+            this.top.stopinterpolate();
+            this.bottom.stopinterpolate();
+            this.top.interpolate(this.topopenpos.x, this.topopenpos.y, this.topopenpos.z, 5);
+            this.bottom.interpolate(this.bottomopenpos.x, this.bottomopenpos.y, this.bottomopenpos.z, 5);
+        }
+        else {
+            this.top.stopinterpolate();
+            this.bottom.stopinterpolate();
+            this.top.interpolate(this.topclosedpos.x, this.topclosedpos.y, this.topclosedpos.z, 5);
+            this.bottom.interpolate(this.bottomclosedpos.x, this.bottomclosedpos.y, this.bottomclosedpos.z, 5);
+        }
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method cleanupfull() {
+        return null;
+    }
+}

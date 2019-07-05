@@ -1,0 +1,41 @@
+class lego_area_blr2 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_blr2(param1) {
+        this.gs_lego_area("blr2", param1, 0, 0);
+        this.puzzle = new bullrun2(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.init();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanup();
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+}

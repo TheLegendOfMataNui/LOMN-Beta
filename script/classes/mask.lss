@@ -1,0 +1,243 @@
+class mask {
+    property maskname;
+    property maskid;
+    property powerdrainrate;
+    property selectable;
+    
+    method mask(param1, param2) {
+        this.maskid = scslosifoundation::stringtoidentifier(param1);
+        this.maskname = param2;
+        this.powerdrainrate = 0.0;
+        this.selectable = 0;
+        return null;
+    }
+    
+    method add() {
+        gctoa::addmask(globalclass.player.actor.toahandle, this.maskid, "john pruden");
+        if (this.maskname == 7) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask8", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 3;
+        }
+        else if (this.maskname == 0) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask1", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 5;
+        }
+        else if (this.maskname == 8) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask9", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 3;
+        }
+        else if (this.maskname == 9) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask10", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 3;
+        }
+        else if (this.maskname == 1) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask2", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 0.8;
+        }
+        else if (this.maskname == 10) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask11", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 3;
+        }
+        else if (this.maskname == 2) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask3", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 5;
+        }
+        else if (this.maskname == 11) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask12", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 3;
+        }
+        else if (this.maskname == 3) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask4", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 1;
+        }
+        else if (this.maskname == 4) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask5", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 1;
+        }
+        else if (this.maskname == 12) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask13", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 3;
+        }
+        else if (this.maskname == 5) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask6", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 3;
+        }
+        else if (this.maskname == 1011) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask7", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 3;
+        }
+        return null;
+    }
+    
+    method setselectable(param1) {
+        this.selectable = param1;
+        return null;
+    }
+    
+    method setdrainrateofmask(param1) {
+        this.powerdrainrate = param1;
+        return null;
+    }
+    
+    method activate(param1) {
+        var var1;
+        if (param1 == null) {
+            param1 = 1;
+        }
+        if (param1) {
+            
+        }
+        else {
+            gcstaticsoundsptrarray::stoptablesound(1076);
+        }
+        gccharacter::setmaskactive(globalclass.player.actor.handle, param1);
+        if (this.maskname == 7) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF CONCEALMENT");
+                globalclass.player.actor.activateconcealment();
+            }
+            else {
+                globalclass.player.actor.dectivateconcealment();
+            }
+        }
+        else if (this.maskname == 0) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF STRENGTH");
+                globalclass.player.actor.activatestrength();
+            }
+            else {
+                globalclass.player.actor.deactivatestrength();
+            }
+        }
+        else if (this.maskname == 8) {
+            if (param1) {
+                gclightdirector::setnightvisionlighting(1);
+            }
+            else {
+                gclightdirector::setnightvisionlighting(0);
+            }
+        }
+        else if (this.maskname == 9) {
+            gcsaver::setcondition(4194304, param1);
+            gctoa::settranslating(globalclass.player.actor.toahandle, param1);
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF TRANSLATION");
+            }
+        }
+        else if (this.maskname == 1) {
+            if (param1) {
+                gccharacter::setwatertimerlength(globalclass.player.actor.handle, 0);
+                debug::print("YOU HAVE ACTIVATED THE MASK OF WATER");
+            }
+            else {
+                gccharacter::setwatertimerlength(globalclass.player.actor.handle, 10);
+                globalclass.player.actor.replenishair();
+            }
+        }
+        else if (this.maskname == 10) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF ANIMAL CONTROL");
+            }
+            else {
+                debug::print("MofAC Deactivated");
+            }
+        }
+        else if (this.maskname == 2) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF SPEED");
+                globalclass.player.actor.setanimationscalar(1.75);
+            }
+            else {
+                globalclass.player.actor.setanimationscalar(1);
+            }
+        }
+        else if (this.maskname == 11) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF TELEKINESIS");
+                globalclass.player.actor.activatetelekinesis();
+                globalclass.player.actor.disableanim(scslosifoundation::stringtoidentifier("k043"));
+                globalclass.player.actor.disableanim(scslosifoundation::stringtoidentifier("k001"));
+                globalclass.player.actor.disableanim(scslosifoundation::stringtoidentifier("k002"));
+                globalclass.player.actor.disableanim(scslosifoundation::stringtoidentifier("k028"));
+                globalclass.player.actor.disableanim(scslosifoundation::stringtoidentifier("k029"));
+            }
+            else {
+                globalclass.player.actor.deactivatetelekinesis();
+                var1 = new scriptevent(1001);
+                var1.send();
+                globalclass.player.actor.enableanim(scslosifoundation::stringtoidentifier("k043"));
+                globalclass.player.actor.enableanim(scslosifoundation::stringtoidentifier("k001"));
+                globalclass.player.actor.enableanim(scslosifoundation::stringtoidentifier("k002"));
+                globalclass.player.actor.enableanim(scslosifoundation::stringtoidentifier("k028"));
+                globalclass.player.actor.enableanim(scslosifoundation::stringtoidentifier("k029"));
+            }
+        }
+        else if (this.maskname == 3) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF VISION");
+                var1 = new scriptevent(1002, [ 1 ]);
+                var1.send();
+            }
+            else {
+                var1 = new scriptevent(1002, [ 0 ]);
+                var1.send();
+            }
+        }
+        else if (this.maskname == 4) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF LEVITATION");
+                var1 = new scriptevent(1010, [ 1 ]);
+                var1.send();
+                globalclass.player.actor.activatelevitation(1);
+            }
+            else {
+                var1 = new scriptevent(1010, [ 0 ]);
+                var1.send();
+                globalclass.player.actor.activatelevitation(0);
+            }
+        }
+        else if (this.maskname == 12) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF ILLUSION");
+                globalclass.player.actor.activateillusion();
+            }
+            else {
+                debug::print("**** DEACTIVATED");
+                globalclass.player.actor.deactivateillusion();
+            }
+        }
+        else if (this.maskname == 5) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF TIME");
+                debug::print("setting up mask of time");
+                gcbagroup::userealtimefortoa(1);
+                scprocessmanager::userealdeltatime(0);
+                scprocessmanager::setfakedeltatime(0.005);
+            }
+            else {
+                gcbagroup::userealtimefortoa(0);
+                scprocessmanager::userealdeltatime(1);
+                scprocessmanager::setfakedeltatime(0.033333);
+            }
+        }
+        else if (this.maskname == 1011) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF SHIELDING");
+                globalclass.player.actor.activateshield();
+                var1 = new scriptevent(1011, [ 1 ]);
+                var1.send();
+            }
+            else {
+                globalclass.player.actor.deactivateshield();
+                var1 = new scriptevent(1011, [ 0 ]);
+                var1.send();
+            }
+        }
+        return null;
+    }
+    
+    method deactivate() {
+        this.activate(0);
+        return null;
+    }
+}
