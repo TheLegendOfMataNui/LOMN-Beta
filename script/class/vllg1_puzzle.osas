@@ -24,10 +24,6 @@ begin class "vllg1_puzzle"
 		LineNumberAlt1              131, 95
 		GetVariableValue            1                ; local
 		SetThisMemberValueString    "parent"
-		LineNumber                  37300, 4
-		LineNumberAlt1              132, 95
-		PushConstanti8              1
-		SetThisMemberValueString    "showcoindoor"
 		PushNothing
 		Return
 	end ; method
@@ -38,6 +34,8 @@ begin class "vllg1_puzzle"
 		; source: 86 "C:\\projects\\lego\\Scripting\\VBO\\ArtHeaders/Print_Screen_1.h" 66:106
 		MemberFunctionArgumentCheck   1
 		CreateStackVariables          3
+		PushConstanti8                1
+		SetThisMemberValueString      "showcoindoor"
 		LineNumber                    40993, 4
 		LineNumberAlt1                45, 114
 		PushConstantStringString      "cin3"
@@ -45,12 +43,6 @@ begin class "vllg1_puzzle"
 		LineNumber                    40993, 4
 		LineNumberAlt1                45, 114
 		CallGameFunctionString        "gcsaver", "findcinema", 1
-		LineNumber                    30326, 4
-		LineNumberAlt1                106, 83
-		SetVariableValue              1                                            ; local
-		LineNumber                    30327, 4
-		LineNumberAlt1                107, 83
-		GetVariableValue              1                                            ; local
 		CompareAndBranchIfFalseTarget 10, 0
 		; ->
 		LineNumber                    30328, 4
@@ -1678,7 +1670,6 @@ begin class "vllg1_puzzle"
 		; address: 0x64142
 		; source: 95 "C:\\projects\\lego\\Scripting\\VBO\\lev1/Lev1_vllg.vbo" 256:274
 		MemberFunctionArgumentCheck   1
-		CreateStackVariables          3
 		LineNumber                    37424, 4
 		LineNumberAlt1                256, 95
 		PushNothing
@@ -1774,8 +1765,6 @@ begin class "vllg1_puzzle"
 		SetThisMemberValueString      "upgradefruit2"
 		; <-
 		BranchTarget                  3
-		LineNumber                    39555, 4
-		LineNumberAlt1                175, 97
 		GetThisMemberValueString      "upgradefruit3"
 		PushNothing
 		EqualTo
@@ -1795,33 +1784,37 @@ begin class "vllg1_puzzle"
 		SetThisMemberValueString      "upgradefruit3"
 		; <-
 		BranchTarget                  4
-		LineNumber                    37436, 4
-		LineNumberAlt1                268, 95
+		GetThisMemberValueString      "wirlpool"
 		PushNothing
-		SetVariableValue              1                   ; local
-		LineNumber                    37437, 4
-		LineNumberAlt1                269, 95
+		EqualTo
+		Not
+		CompareAndBranchIfFalseTarget 5, 0
+		; ->
+		GetThisMemberValueString      "wirlpool"
+		Dup
+		GetMemberFunctionString       "cleanupfull"
+		JumpAbsolute                  1
+		Pop
 		PushNothing
-		SetVariableValue              2                   ; local
-		LineNumber                    37438, 4
-		LineNumberAlt1                270, 95
+		SetThisMemberValueString      "wirlpool"
+		; <-
+		BranchTarget                  5
 		PushNothing
-		SetVariableValue              3                   ; local
+		SetThisMemberValueString      "showcoindoor"
 		PushNothing
 		SetThisMemberValueString      "deadhives"
 		PushNothing
 		SetThisMemberValueString      "cinema"
-		LineNumber                  54879, 4
-		LineNumberAlt1              123, 143
-		GetThisMemberValueString    "wirlpool"
-		Dup
-		GetMemberFunctionString     "cleanupfull"
-		JumpAbsolute                1
-		Pop
-		LineNumber                  54880, 4
-		LineNumberAlt1              124, 143
 		PushNothing
-		SetThisMemberValueString    "wirlpool"
+		SetThisMemberValueString      "cinema_shown"
+		PushNothing
+		SetThisMemberValueString      "upgradefruit_shown"
+		PushNothing
+		SetThisMemberValueString      "upgradefruit2_shown"
+		PushNothing
+		SetThisMemberValueString      "upgradefruit3_shown"
+		PushNothing
+		SetThisMemberValueString      "orientation"
 		PushNothing
 		Return
 	end ; method

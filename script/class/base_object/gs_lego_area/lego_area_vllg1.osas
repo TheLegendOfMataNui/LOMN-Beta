@@ -90,12 +90,6 @@ begin class "lego_area_vllg1", "gs_lego_area"
 		LineNumber                    17308, 4
 		LineNumberAlt1                46, 225
 		CallGameFunctionString        "gcsaver", "findcinema", 1
-		LineNumber                    17308, 4
-		LineNumberAlt1                46, 225
-		SetVariableValue              1                                            ; local
-		LineNumber                    17309, 4
-		LineNumberAlt1                47, 225
-		GetVariableValue              1                                            ; local
 		PushConstant0
 		EqualTo
 		CompareAndBranchIfFalseTarget 0, 0
@@ -228,21 +222,13 @@ begin class "lego_area_vllg1", "gs_lego_area"
 		EqualTo
 		CompareAndBranchIfFalseTarget 1, 0
 		; ->
-		LineNumber                    65345, 4
-		LineNumberAlt1                153, 166
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
 		GetMemberValueString          "actor"
-		PushConstantStringString      "str0"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    65345, 4
-		LineNumberAlt1                153, 166
-		PushConstantStringString      "lok0"
-		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                    65345, 4
-		LineNumberAlt1                153, 166
+		GetThisMemberValueString      "enterstartid"
+		GetThisMemberValueString      "enterlookid"
 		Pull                          3
-		GetMemberFunctionString       "gotostartpos"
+		GetMemberFunctionString       "gotopos"
 		JumpAbsolute                  3
 		Pop
 		LineNumber                    65346, 4
