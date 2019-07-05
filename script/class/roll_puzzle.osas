@@ -19,19 +19,6 @@ begin class "roll_puzzle"
 		; address: 0xadbd3
 		; source: 197 "C:\\projects\\lego\\Scripting\\VBO\\lev5/Lev5_gly3.vbo" 98:111
 		MemberFunctionArgumentCheck   1
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "bgmusic"
-		PushConstantStringString      "Root/Data/sounds/MusicTechnoSnowboard"
-		Pull                          2
-		GetMemberFunctionString       "changefilename"
-		JumpAbsolute                  2
-		Pop
-		GetVariableValueGlobalString  "globalclass"
-		GetMemberValueString          "bgmusic"
-		Dup
-		GetMemberFunctionString       "play"
-		JumpAbsolute                  1
-		Pop
 		PushConstanti8                1
 		SetThisMemberValueString      "callsurfonce"
 		PushConstanti8                1
@@ -163,6 +150,19 @@ begin class "roll_puzzle"
 		Pop
 		PushConstant0
 		SetThisMemberValueString      "callsurfonce"
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		PushConstantStringString      "Root/Data/sounds/MusicTechnoSnowboard"
+		Pull                          2
+		GetMemberFunctionString       "changefilename"
+		JumpAbsolute                  2
+		Pop
+		GetVariableValueGlobalString  "globalclass"
+		GetMemberValueString          "bgmusic"
+		Dup
+		GetMemberFunctionString       "play"
+		JumpAbsolute                  1
+		Pop
 		; <-
 		BranchTarget                  2
 		BranchAlwaysTarget            4, 0
@@ -201,7 +201,7 @@ begin class "roll_puzzle"
 		GetVariableValueGlobalString  "globalclass"
 		GetMemberValueString          "player"
 		GetMemberValueString          "actor"
-		PushConstantStringString      "o012"
+		PushConstantStringString      "o010"
 		CallGameFunctionString        "scslosifoundation", "stringtoidentifier", 1
 		LineNumber                    9217, 4
 		LineNumberAlt1                188, 197
@@ -228,19 +228,6 @@ begin class "roll_puzzle"
 		; source: 147 "C:\\projects\\lego\\Scripting\\VBO\\lev2/Lev2_wthk.vbo" 160:161
 		; source: 180 "C:\\projects\\lego\\Scripting\\VBO\\lev4/lev4_brd3.vbo" 103:104
 		MemberFunctionArgumentCheck  1
-		LineNumber                   55923, 4
-		LineNumberAlt1               160, 147
-		GetVariableValueGlobalString "globalclass"
-		GetMemberValueString         "player"
-		GetMemberValueString         "actor"
-		PushConstantStringString     "o010"
-		CallGameFunctionString       "scslosifoundation", "stringtoidentifier", 1
-		LineNumber                   55923, 4
-		LineNumberAlt1               160, 147
-		Pull                         2
-		GetMemberFunctionString      "setsplitanimation"
-		JumpAbsolute                 2
-		Pop
 		LineNumber                   55924, 4
 		LineNumberAlt1               161, 147
 		GetVariableValueGlobalString "globalclass"
@@ -257,7 +244,7 @@ begin class "roll_puzzle"
 		GetVariableValueGlobalString "globalclass"
 		GetMemberValueString         "player"
 		GetMemberValueString         "actor"
-		PushConstantf32              7
+		PushConstantf32              30
 		Pull                         2
 		GetMemberFunctionString      "setsurfminspeed"
 		JumpAbsolute                 2
@@ -267,7 +254,7 @@ begin class "roll_puzzle"
 		GetVariableValueGlobalString "globalclass"
 		GetMemberValueString         "player"
 		GetMemberValueString         "actor"
-		PushConstantf32              15
+		PushConstantf32              40
 		Pull                         2
 		GetMemberFunctionString      "setsurfmaxspeed"
 		JumpAbsolute                 2
