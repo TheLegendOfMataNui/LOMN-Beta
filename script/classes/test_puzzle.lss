@@ -1,7 +1,6 @@
 class test_puzzle {
     property parent;
     property callsurfonce;
-    property callunsurfonce;
     
     method test_puzzle(param1) {
         this.parent = param1;
@@ -10,13 +9,11 @@ class test_puzzle {
     
     method initfull() {
         this.callsurfonce = 1;
-        this.callunsurfonce = 1;
         return null;
     }
     
     method cleanupfull() {
         this.callsurfonce = null;
-        this.callunsurfonce = null;
         return null;
     }
     
@@ -33,11 +30,21 @@ class test_puzzle {
         if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
         }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
             globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("o000"));
             globalclass.player.actor.setsurfingability(0.0, 0.0);
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {
@@ -47,15 +54,6 @@ class test_puzzle {
                     globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
                     globalclass.bgmusic.play();
                 }
-            }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp03")) {
-                if (this.callunsurfonce) {
-                    this.stopsurf();
-                    this.callunsurfonce = 0;
-                }
-            }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp04")) {
-                globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("o011"));
             }
         }
         return null;
