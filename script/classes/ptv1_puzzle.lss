@@ -1,0 +1,54 @@
+class ptv1_puzzle {
+    property parent;
+    property vlgr;
+    property hive1handle;
+    property morphobj;
+    
+    method ptv1_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(this.hive1handle, 3);
+        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("lsrp"));
+        if (gcsaver::isconditionset(4194304) == 0) {
+            this.vlgr = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(this.vlgr, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        }
+        else {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        }
+        this.morphobj = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("ptv1"));
+        gcmoveableobj::inittargetmorph(this.morphobj, "lev1", "ptv1");
+        gcmoveableobj::setdig(this.morphobj, 1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.vlgr = null;
+        this.hive1handle = null;
+        this.morphobj = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

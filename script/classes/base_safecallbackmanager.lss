@@ -1,0 +1,28 @@
+class base_safecallbackmanager {
+    property actionitems;
+    
+    method base_safecallbackmanager() {
+        this.actionitems = [  ];
+        return null;
+    }
+    
+    method execute() {
+        var var1;
+        var1 = 0;
+        while ((this.actionitems.__length - 1) >= var1) {
+            this.actionitems[var1].executearguments();
+            var1 = var1 + 1;
+        }
+        this.actionitems = [  ];
+        return null;
+    }
+    
+    method add(param1) {
+        this.actionitems.__append(param1);
+        return null;
+    }
+    
+    method getstate() {
+        return this.actionitems.__length == 0;
+    }
+}

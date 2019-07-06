@@ -1,0 +1,726 @@
+class player {
+    property life;
+    property maxlife;
+    property energy;
+    property maxenergy;
+    property tokens;
+    property ammo;
+    property actor;
+    property actorid;
+    property draintimer;
+    property grapplinghooksetup;
+    property spritedamageamount;
+    property maskcontrol;
+    property elementcontrol;
+    property gotglyph;
+    property glyphpowerdrain;
+    property bshootdragger;
+    property enterstartid;
+    property enterlookid;
+    
+    method player() {
+        return null;
+    }
+    
+    method initfull() {
+        this.life = 60;
+        this.maxlife = 60;
+        this.energy = 60;
+        this.maxenergy = 60;
+        this.tokens = 0;
+        this.actor = null;
+        this.actorid = null;
+        this.draintimer = 0.0;
+        this.grapplinghooksetup = 0;
+        this.spritedamageamount = 5;
+        this.gotglyph = 0;
+        this.maskcontrol = new lego_maskcontroller();
+        this.maskcontrol.initfull();
+        this.gotglyph = 0;
+        this.glyphpowerdrain = 20;
+        this.bshootdragger = 1;
+        return null;
+    }
+    
+    method initshort() {
+        this.life = this.maxlife;
+        this.energy = this.maxenergy;
+        this.tokens = 0;
+        this.draintimer = 0.0;
+        this.grapplinghooksetup = 0;
+        this.maskcontrol.initshort();
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.actor.cleanupfull();
+        this.actor = null;
+        this.maskcontrol.cleanupshort();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.life = null;
+        this.maxlife = null;
+        this.energy = null;
+        this.maxenergy = null;
+        this.tokens = null;
+        if (!(this.actor == null)) {
+            this.actor.cleanupfull();
+            this.actor = null;
+        }
+        this.actorid = null;
+        this.draintimer = null;
+        this.grapplinghooksetup = null;
+        this.spritedamageamount = null;
+        if (!(this.maskcontrol == null)) {
+            this.maskcontrol.cleanupfull();
+            this.maskcontrol = null;
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 238) {
+                this.maskcontrol.changemask(0);
+            }
+            else if (param1.button == 239) {
+                this.maskcontrol.changemask(1);
+            }
+            else if (param1.button == 240) {
+                this.maskcontrol.changemask(2);
+            }
+            else if (param1.button == 241) {
+                this.maskcontrol.changemask(3);
+            }
+            else if (param1.button == 242) {
+                this.maskcontrol.changemask(4);
+            }
+            else if (param1.button == 243) {
+                this.maskcontrol.changemask(5);
+            }
+            else if (param1.button == 244) {
+                this.maskcontrol.changemask(1011);
+            }
+            else if (param1.button == 245) {
+                this.maskcontrol.changemask(7);
+            }
+            else if (param1.button == 246) {
+                this.maskcontrol.changemask(8);
+            }
+            else if (param1.button == 247) {
+                this.maskcontrol.changemask(9);
+            }
+            else if (param1.button == 248) {
+                this.maskcontrol.changemask(10);
+            }
+            else if (param1.button == 249) {
+                this.maskcontrol.changemask(11);
+            }
+            else if (param1.button == 250) {
+                this.maskcontrol.changemask(12);
+            }
+            else if (param1.button == 235) {
+                this.maskcontrol.nextmask(1);
+            }
+            else if (param1.button == 236) {
+                this.maskcontrol.nextmask(0);
+            }
+            else if (param1.button == 237) {
+                if (this.energy > 0) {
+                    this.maskcontrol.toggleactive();
+                }
+            }
+            else if (param1.button == 231) {
+                if (this.grapplinghooksetup) {
+                    if (this.bshootdragger) {
+                        this.actor.shootdragger();
+                    }
+                    else {
+                        debug::print("SORRY, YOU ARE IN THE TRIG BOX YOU CANNOT SHOOT YOUR DRAGGER");
+                    }
+                }
+            }
+            else if (param1.button == 45) {
+                this.tweaktoggle();
+            }
+        }
+        if (this.whichmaskonface() == 11) {
+            this.maskcontrol.input(param1);
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.maskcontrol.isactive()) {
+            this.drainpower(param1);
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        if (!(this.actor == null)) {
+            this.actor.onevent(param1);
+            if (param1.eventid == 40) {
+                if (!(param1.args[1] == null)) {
+                    debug::print("ouch! by " + __tostring(param1.args[1]));
+                }
+                else {
+                    debug::print("ARGS 1 = NOTHING");
+                }
+                if (param1.args[0] == 10) {
+                    this.removelife(this.maxlife);
+                }
+                else {
+                    this.removelife(__toint(param1.args[0]) * 10);
+                }
+            }
+            else if (param1.eventid == 2) {
+                var1 = param1.args[0];
+                var2 = scslosifoundation::identifiertostring(var1);
+                var3 = gcareadirector::getcurrentarea();
+                if (scslosistringfuncs::find(var2, "pe")) {
+                    
+                }
+                else {
+                    gcnolightdirector::hide(var1, var3);
+                    gcstaticsoundsptrarray::playtablesound(1055);
+                    gccollisionphysicsgroup::togglepickuponoff(var1, 0);
+                    this.addenergy(20);
+                }
+                if (scslosistringfuncs::find(var2, "ph")) {
+                    
+                }
+                else {
+                    gcnolightdirector::hide(var1, var3);
+                    gcstaticsoundsptrarray::playtablesound(1060);
+                    gccollisionphysicsgroup::togglepickuponoff(var1, 0);
+                    this.addlife(20);
+                }
+                if (scslosistringfuncs::find(var2, "et")) {
+                    
+                }
+                else {
+                    gcnolightdirector::hide(var1, var3);
+                    gccollisionphysicsgroup::togglepickuponoff(var1, 0);
+                    this.addtoken(1);
+                    gcstaticsoundsptrarray::playtablesound(1043);
+                    gcsaver::pickuptoken(var1);
+                }
+                if (scslosistringfuncs::find(var2, "pa")) {
+                    
+                }
+                else {
+                    this.actor.replenishair();
+                }
+                if (scslosistringfuncs::find(var2, "am")) {
+                    
+                }
+                else {
+                    gcnolightdirector::hide(var1, var3);
+                    gccollisionphysicsgroup::togglepickuponoff(var1, 0);
+                    gcstaticsoundsptrarray::playtablesound(1033);
+                }
+                if (scslosistringfuncs::find(var2, "ar")) {
+                    
+                }
+                else {
+                    gcnolightdirector::hide(var1, var3);
+                    gccollisionphysicsgroup::togglepickuponoff(var1, 0);
+                }
+            }
+            else if (param1.eventid == 7) {
+                if ((this.gotglyph == 1) && (param1.args[2] == scslosifoundation::stringtoidentifier("glyp"))) {
+                    if (gctoa::glyphdone(globalclass.player.actor.toahandle) == 1) {
+                        if (globalclass.player.energy > this.glyphpowerdrain) {
+                            globalclass.player.removeenergy(this.glyphpowerdrain);
+                            gctoa::startglyph(globalclass.player.actor.toahandle);
+                        }
+                    }
+                }
+            }
+            else if (param1.eventid == 46) {
+                if (this.maskcontrol.isactive()) {
+                    this.maskcontrol.toggleactive();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method setactor(param1, param2, param3, param4, param5, param6, param7) {
+        var var1;
+        this.actorid = param2;
+        if (this.actorid == "onua") {
+            this.actor = new onuaclass(param2, param3, param4, param5, param6);
+        }
+        else if (this.actorid == "gali") {
+            this.actor = new galiclass(param2, param3, param4, param5, param6);
+            this.addmaxlife(20);
+            this.addmaxenergy(20);
+        }
+        else if (this.actorid == "poha") {
+            this.actor = new pohatuclass(param2, param3, param4, param5, param6);
+            var1 = 0;
+            while (1 >= var1) {
+                this.addmaxlife(20);
+                this.addmaxenergy(20);
+                var1 = var1 + 1;
+            }
+        }
+        else if (this.actorid == "kopa") {
+            this.actor = new kopakaclass(param2, param3, param4, param5, param6);
+            var1 = 0;
+            while (2 >= var1) {
+                this.addmaxlife(20);
+                this.addmaxenergy(20);
+                var1 = var1 + 1;
+            }
+        }
+        else if (this.actorid == "lewa") {
+            this.actor = new lewaclass(param2, param3, param4, param5, param6);
+            var1 = 0;
+            while (3 >= var1) {
+                this.addmaxlife(20);
+                this.addmaxenergy(20);
+                var1 = var1 + 1;
+            }
+        }
+        else if (this.actorid == "tahu") {
+            this.actor = new tahuclass(param2, param3, param4, param5, param6);
+            var1 = 0;
+            while (4 >= var1) {
+                this.addmaxlife(20);
+                this.addmaxenergy(20);
+                var1 = var1 + 1;
+            }
+        }
+        else if (this.actorid == "akam") {
+            this.actor = new onuaclass(param2, param3, param4, param5, param6);
+        }
+        else if (this.actorid == "wair") {
+            this.actor = new onuaclass(param2, param3, param4, param5, param6);
+        }
+        else if (this.actorid == "nbua") {
+            this.actor = new nobuaclass(param2, param3, param4, param5, param6);
+        }
+        globalclass.hud.tokens.setcolor();
+        globalclass.hud.ammo.setcolor();
+        return null;
+    }
+    
+    method actorinitfull() {
+        var var1;
+        if (!(this.actor == null)) {
+            this.actor.initfull();
+            this.actor.setcodelife(this.life);
+            this.actor.show();
+            this.actor.settweakable();
+            this.actor.initmotionsystem();
+            this.actor.disableallraycollisions();
+            this.actor.setupphysics(1.5, 0.8, 1, 0, 0);
+            if (this.actor.id == scslosifoundation::stringtoidentifier("onua")) {
+                
+            }
+            else if (this.actor.id == scslosifoundation::stringtoidentifier("gali")) {
+                this.addmaxenergy();
+                this.addmaxlife();
+            }
+            else if (this.actor.id == scslosifoundation::stringtoidentifier("poha")) {
+                var1 = 0;
+                while (1 >= var1) {
+                    this.addmaxenergy();
+                    this.addmaxlife();
+                    var1 = var1 + 1;
+                }
+            }
+            else if (this.actor.id == scslosifoundation::stringtoidentifier("kopa")) {
+                var1 = 0;
+                while (2 >= var1) {
+                    this.addmaxenergy();
+                    this.addmaxlife();
+                    var1 = var1 + 1;
+                }
+            }
+            else if (this.actor.id == scslosifoundation::stringtoidentifier("lewa")) {
+                var1 = 0;
+                while (3 >= var1) {
+                    this.addmaxenergy();
+                    this.addmaxlife();
+                    var1 = var1 + 1;
+                }
+            }
+            else if (this.actor.id == scslosifoundation::stringtoidentifier("tahu")) {
+                var1 = 0;
+                while (4 >= var1) {
+                    this.addmaxenergy();
+                    this.addmaxlife();
+                    var1 = var1 + 1;
+                }
+            }
+            else if (this.actor.id == scslosifoundation::stringtoidentifier("nbua")) {
+                
+            }
+        }
+        return null;
+    }
+    
+    method initfromsaver() {
+        this.life = 0;
+        this.maxlife = 0;
+        this.addmaxlife(gcsaver::gethealth());
+        this.energy = 0;
+        this.maxenergy = 0;
+        this.addmaxenergy(gcsaver::getenergy());
+        this.maskcontrol.changemask(gcsaver::getmask());
+        return null;
+    }
+    
+    method savetosaver() {
+        gcsaver::sethealth(this.maxlife);
+        gcsaver::setenergy(this.maxenergy);
+        gcsaver::setmask(this.whichmaskonface());
+        return null;
+    }
+    
+    method removeactor() {
+        this.actor.hide();
+        this.actor.cleanupfull();
+        this.maskcontrol.cleanupfull();
+        this.actor = null;
+        this.actorid = null;
+        return null;
+    }
+    
+    method changetoa(param1) {
+        globalclass.hud.cleanupfull();
+        globalclass.hud.initfull();
+        this.removeactor();
+        this.setactor("cnt1", param1, 0.0, 0.0, 0.0, 0.0, "ninp");
+        this.actorinitfull();
+        this.maskcontrol.initfull();
+        if (param1 == "onua") {
+            this.addmask("fake", 0);
+            this.addmask("fake", 7);
+            this.addmask("fake", 8);
+        }
+        else if (param1 == "gali") {
+            this.addmask("fake", 0);
+            this.addmask("fake", 1);
+            this.addmask("fake", 7);
+            this.addmask("fake", 8);
+            this.addmask("fake", 9);
+        }
+        else if (param1 == "poha") {
+            this.addmask("fake", 0);
+            this.addmask("fake", 1);
+            this.addmask("fake", 2);
+            this.addmask("fake", 7);
+            this.addmask("fake", 8);
+            this.addmask("fake", 9);
+            this.addmask("fake", 10);
+        }
+        else if (param1 == "kopa") {
+            this.addmask("fake", 0);
+            this.addmask("fake", 1);
+            this.addmask("fake", 2);
+            this.addmask("fake", 3);
+            this.addmask("fake", 7);
+            this.addmask("fake", 8);
+            this.addmask("fake", 9);
+            this.addmask("fake", 10);
+            this.addmask("fake", 11);
+        }
+        else if (param1 == "lewa") {
+            this.addmask("fake", 0);
+            this.addmask("fake", 1);
+            this.addmask("fake", 2);
+            this.addmask("fake", 3);
+            this.addmask("fake", 4);
+            this.addmask("fake", 7);
+            this.addmask("fake", 8);
+            this.addmask("fake", 9);
+            this.addmask("fake", 10);
+            this.addmask("fake", 11);
+            this.addmask("fake", 12);
+        }
+        else if (param1 == "tahu") {
+            this.addmask("fake", 0);
+            this.addmask("fake", 1);
+            this.addmask("fake", 2);
+            this.addmask("fake", 3);
+            this.addmask("fake", 4);
+            this.addmask("fake", 5);
+            this.addmask("fake", 1011);
+            this.addmask("fake", 7);
+            this.addmask("fake", 8);
+            this.addmask("fake", 9);
+            this.addmask("fake", 10);
+            this.addmask("fake", 11);
+            this.addmask("fake", 12);
+        }
+        else if (param1 == "nbua") {
+            this.addmask("fake", 1011);
+        }
+        globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+        return null;
+    }
+    
+    method tweaktoggle() {
+        globalclass.tweak.toggleon();
+        return null;
+    }
+    
+    method drainpower(param1) {
+        this.draintimer = this.draintimer + param1.deltatime;
+        if (this.energy <= 0) {
+            if (this.maskcontrol.isactive() == 1) {
+                this.maskcontrol.toggleactive();
+            }
+        }
+        else if (this.draintimer >= 1.0) {
+            this.draintimer = 0.0;
+            if (this.maskcontrol.isactive() == 1) {
+                this.removeenergy(this.maskcontrol.getdrainrate());
+            }
+        }
+        return null;
+    }
+    
+    method addmask(param1, param2) {
+        if (((this.maskcontrol.masks.__length - 1) < 0) || (this.maskcontrol.resetflag == 1)) {
+            this.maskcontrol.addallmasks();
+            this.maskcontrol.setselectable(param2);
+            this.maskcontrol.changemask(param2);
+        }
+        else {
+            this.maskcontrol.setselectable(param2);
+        }
+        return null;
+    }
+    
+    method usemasks(param1) {
+        this.maskcontrol.usemasks(param1);
+        globalclass.hud.showmask(param1);
+        return null;
+    }
+    
+    method setdrainrateofmask(param1, param2) {
+        this.maskcontrol.setdrainrateofmask(param1, param2);
+        return null;
+    }
+    
+    method addelement(param1, param2) {
+        this.gotglyph = 1;
+        gctoa::findglyph(this.actor.toahandle);
+        return null;
+    }
+    
+    method haselement() {
+        return this.gotglyph;
+    }
+    
+    method whichmaskonface() {
+        return this.maskcontrol.getmask();
+    }
+    
+    method whichelementchosen() {
+        return null;
+    }
+    
+    method ismaskpoweron() {
+        return this.maskcontrol.isactive();
+    }
+    
+    method iselementpoweron() {
+        return null;
+    }
+    
+    method kill() {
+        var var1;
+        this.actor.toamustdie();
+        gcstaticsoundsptrarray::playtablesound(1099);
+        var1 = new scriptevent(46);
+        var1.send();
+        globalclass.hud.hide();
+        return null;
+    }
+    
+    method unkill() {
+        this.actor.toaisalive();
+        gcstaticsoundsptrarray::playtablesound(1100);
+        this.addlife(this.maxlife);
+        this.addenergy(this.maxenergy);
+        this.actor.setunderwater(0);
+        globalclass.hud.show();
+        return null;
+    }
+    
+    method addlife(param1) {
+        this.life = this.life + param1;
+        if (this.life > this.maxlife) {
+            this.life = this.maxlife;
+        }
+        globalclass.hud.thingy.setlife(this.life);
+        if (!(this.actor == null)) {
+            if (!(this.actor.toahandle == null)) {
+                this.actor.setcodelife(this.life);
+            }
+        }
+        return null;
+    }
+    
+    method removelife(param1) {
+        if (param1 == null) {
+            param1 = 0;
+        }
+        this.life = this.life - param1;
+        if (this.life <= 0) {
+            this.life = 0;
+            globalclass.hud.thingy.setlife(0);
+            this.kill();
+        }
+        else {
+            globalclass.hud.thingy.setlife(this.life);
+        }
+        if (!(this.actor == null)) {
+            if (!(this.actor.toahandle == null)) {
+                this.actor.setcodelife(this.life);
+            }
+        }
+        return null;
+    }
+    
+    method addmaxlife(param1) {
+        this.maxlife = this.maxlife + param1;
+        globalclass.hud.thingy.setmaxlife(this.maxlife);
+        this.addlife(this.maxlife);
+        return null;
+    }
+    
+    method removemaxlife(param1) {
+        this.maxlife = this.maxlife - param1;
+        globalclass.hud.thingy.setmaxlife(this.maxlife);
+        this.addlife(this.maxlife);
+        return null;
+    }
+    
+    method addenergy(param1) {
+        this.energy = this.energy + param1;
+        if (this.energy > this.maxenergy) {
+            this.energy = this.maxenergy;
+        }
+        globalclass.hud.thingy.setenergy(this.energy);
+        return null;
+    }
+    
+    method removeenergy(param1) {
+        this.energy = this.energy - param1;
+        if (this.energy < 0) {
+            this.energy = 0;
+        }
+        globalclass.hud.thingy.setenergy(this.energy);
+        return null;
+    }
+    
+    method addmaxenergy(param1) {
+        this.maxenergy = this.maxenergy + param1;
+        globalclass.hud.thingy.setmaxenergy(this.maxenergy);
+        this.addenergy(this.maxenergy);
+        return null;
+    }
+    
+    method removemaxenergy(param1) {
+        this.maxenergy = this.maxenergy - param1;
+        globalclass.hud.thingy.setmaxenergy(this.maxenergy);
+        this.addenergy(this.maxenergy);
+        return null;
+    }
+    
+    method getamounttokens() {
+        return this.tokens;
+    }
+    
+    method addtoken(param1) {
+        this.tokens = this.tokens + param1;
+        globalclass.hud.tokens.addtoken(param1);
+        return null;
+    }
+    
+    method removetoken(param1) {
+        this.tokens = this.tokens - param1;
+        globalclass.hud.tokens.removetoken(param1);
+        return null;
+    }
+    
+    method settokens(param1) {
+        this.tokens = param1;
+        globalclass.hud.tokens.settokens(param1);
+        return null;
+    }
+    
+    method setclimbable(param1) {
+        if (param1 == null) {
+            param1 = 1;
+        }
+        this.actor.setclimbable(param1);
+        return null;
+    }
+    
+    method getactorid() {
+        return scslosifoundation::stringtoidentifier(this.actorid);
+    }
+    
+    method getactorstringid() {
+        return this.actorid;
+    }
+    
+    method specalelementpowerbooltotrue() {
+        var var1;
+        var1 = 1;
+        return null;
+    }
+    
+    method specalelementpowerbooltofalse() {
+        var var1;
+        var1 = 0;
+        return null;
+    }
+    
+    method addair(param1) {
+        globalclass.hud.watermeter.addair(param1);
+        return null;
+    }
+    
+    method removeair() {
+        globalclass.hud.watermeter.start();
+        return null;
+    }
+    
+    method setupgrapplinghook() {
+        this.grapplinghooksetup = 1;
+        debug::print("x: " + __tostring(this.actor.getposx()));
+        this.actor.setupgrapplinghook(25, 30, 30);
+        this.setgrapplinghookdistance(120);
+        return null;
+    }
+    
+    method setgrapplinghookdistance(param1) {
+        if (this.grapplinghooksetup) {
+            this.actor.setgrapplinghookdistance(param1);
+        }
+        return null;
+    }
+    
+    method canshootdragger(param1) {
+        if (param1 == null) {
+            param1 = 1;
+        }
+        this.bshootdragger = param1;
+        return null;
+    }
+}

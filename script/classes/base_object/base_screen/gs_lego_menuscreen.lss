@@ -1,0 +1,326 @@
+class gs_lego_menuscreen : base_screen {
+    property menu;
+    property nextscreen;
+    property selected;
+    property temptimer;
+    property screentimer;
+    property fadetimer;
+    property introscreens;
+    property screentext;
+    property skipintro;
+    property menufader;
+    property inputenabled;
+    property returningfromarootscreen;
+    
+    method gs_lego_menuscreen(param1) {
+        this.menu = param1;
+        this.returningfromarootscreen = 0;
+        return null;
+    }
+    
+    method initfull() {
+        globalclass.bgmusic.setupforplay("Root/Data/sounds/MusicGaliAmbience");
+        if (this.menu == null) {
+            this.menu = createmenuobject();
+            this.returningfromarootscreen = 1;
+        }
+        this.introscreens = [  ];
+        this.screentext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "...", screenx / 2, screeny - 80, 0, 1, 256, 4, 0);
+        this.screentext.initfull();
+        this.screentext.add();
+        this.screentext.scalefont(1.5);
+        this.inputenabled = 0;
+        this.screentimer = new lego_timer("mstz", 7.0, 0);
+        this.screentimer.initfull();
+        this.fadetimer = new lego_timer("msfz", 1.7, 0);
+        this.fadetimer.initfull();
+        this.menufader = new fadescreen(0, 1.7);
+        this.menufader.initfull();
+        this.skipintro = 0;
+        this.nextscreen = 0;
+        this.shownextscreen();
+        return null;
+    }
+    
+    method shownextscreen(param1) {
+        if (this.returningfromarootscreen) {
+            this.menu.initfull();
+            this.selected = 0;
+            this.inputenabled = 1;
+        }
+        else {
+            if (!(this.nextscreen == 0)) {
+                this.introscreens[this.nextscreen - 1].hide();
+                this.introscreens[this.nextscreen - 1].cleanupfull();
+                if (param1 == 1) {
+                    this.menufader.setfaderate(1.7);
+                }
+                else {
+                    this.menufader.setfaderate(0.1);
+                }
+                this.menufader.hide();
+            }
+            if ((this.nextscreen > (this.introscreens.__length - 1)) || (this.skipintro == 1)) {
+                this.screentimer.stop();
+                this.screentext.hide();
+                this.menu.initfull();
+                this.selected = 0;
+                this.skipintro = 1;
+                this.inputenabled = 1;
+            }
+            else {
+                this.introscreens[this.nextscreen].initfull();
+                this.introscreens[this.nextscreen].add();
+                this.introscreens[this.nextscreen].show();
+                if (this.nextscreen == 2) {
+                    this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("cinm"), 1, 0));
+                    this.screentext.breakup(40);
+                    this.screentext.show();
+                }
+                else if (this.nextscreen == 3) {
+                    this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("cinm"), 1, 1));
+                    this.screentext.breakup(40);
+                }
+                else if (this.nextscreen == 4) {
+                    this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("cinm"), 1, 2));
+                    this.screentext.breakup(40);
+                }
+                else if (this.nextscreen == 5) {
+                    this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("cinm"), 1, 3));
+                    this.screentext.breakup(40);
+                }
+                else if (this.nextscreen == 6) {
+                    this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("cinm"), 1, 4));
+                    this.screentext.breakup(40);
+                }
+                else if (this.nextscreen == 7) {
+                    this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("cinm"), 1, 5));
+                    this.screentext.breakup(40);
+                }
+                else if (this.nextscreen == 8) {
+                    this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("cinm"), 1, 6));
+                    this.screentext.breakup(40);
+                }
+                else if (this.nextscreen == 9) {
+                    this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("cinm"), 1, 7));
+                    this.screentext.breakup(40);
+                }
+                else if (this.nextscreen == 10) {
+                    this.screentext.setstring("");
+                }
+                this.nextscreen = this.nextscreen + 1;
+                this.screentimer.reset();
+                this.screentimer.start();
+            }
+        }
+        return null;
+    }
+    
+    method fadeout() {
+        this.menufader.setfaderate(1.7);
+        this.menufader.show();
+        this.fadetimer.reset();
+        this.fadetimer.start();
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.menu == null)) {
+            this.menu.cleanupfull();
+            this.menu = null;
+        }
+        if (!(this.menufader == null)) {
+            this.menufader.cleanupfull();
+            this.menufader = null;
+        }
+        if (!(this.screentext == null)) {
+            sctilefont::setcolor(this.screentext.font, 255, 255, 255, 255);
+            this.screentext.hide();
+            this.screentext.cleanupfull();
+            this.screentext = null;
+        }
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.menu.process(param1);
+        this.menufader.process(param1);
+        if (this.selected == 1) {
+            if (this.temptimer > 0.25) {
+                this.navforward();
+            }
+            else {
+                this.temptimer = this.temptimer + param1.deltatime;
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 8) {
+            if (param1.args[0] == this.screentimer.id) {
+                this.fadeout();
+            }
+            if (param1.args[0] == this.fadetimer.id) {
+                this.shownextscreen(1);
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method input(param1) {
+        var var1;
+        if (this.inputenabled) {
+            this.menu.input(param1);
+            if (param1.button == 13) {
+                if (param1.event == 2) {
+                    this.selectobject();
+                }
+            }
+        }
+        else {
+            var1 = this.menufader.getfadetime();
+            if ((this.skipintro == 0) && (var1 <= 0)) {
+                if (param1.event == 2) {
+                    if (param1.button == 32) {
+                        if (this.nextscreen > 2) {
+                            this.screentimer.stop();
+                            this.fadeout();
+                        }
+                    }
+                    else if (param1.button == 251) {
+                        if (this.nextscreen == 1) {
+                            
+                        }
+                        else if (this.nextscreen == 2) {
+                            this.screentimer.stop();
+                            this.fadeout();
+                        }
+                        else {
+                            this.skipintro = 1;
+                            this.screentimer.stop();
+                            this.fadeout();
+                        }
+                        this.nextscreen;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method navforward() {
+        var var1;
+        var var2;
+        this.nextscreen = this.menu.destination;
+        var1 = this.menu.argarray;
+        if (!(this.nextscreen == null)) {
+            var2 = screenlist.getscreen(this.nextscreen);
+            if (!(var1 == null)) {
+                var2.screen.setargs(var1);
+            }
+            screenlist.forward(this.nextscreen);
+        }
+        return null;
+    }
+    
+    method navbackward() {
+        screenlist.backward();
+        return null;
+    }
+    
+    method selectobject() {
+        var var1;
+        var var2;
+        gcstaticsoundsptrarray::playtablesound(1074);
+        var1 = this.menu.destination;
+        if (var1 == 22) {
+            globalclass.setexitflag();
+        }
+        else if (var1 == 23) {
+            this.menufader.setfaderate(0.1);
+            this.menufader.hide();
+            this.selected = 1;
+            this.temptimer = 0;
+            this.menu.hideall();
+            sctilefont::setcolor(this.screentext.font, 255, 255, 0, 255);
+            this.screentext.scalefont(2.0);
+            this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 27) + "...");
+            this.screentext.show();
+            gcsaver::load();
+            var2 = gcsaver::getlevel();
+            if (var2 > 0) {
+                globalclass.saverloaded = 1;
+            }
+            else {
+                globalclass.saverloaded = 0;
+            }
+            if (var2 == 1) {
+                this.menu.destination = 9;
+            }
+            else if (var2 == 2) {
+                this.menu.destination = 10;
+            }
+            else if (var2 == 3) {
+                this.menu.destination = 11;
+            }
+            else if (var2 == 4) {
+                this.menu.destination = 12;
+            }
+            else if (var2 == 5) {
+                this.menu.destination = 13;
+            }
+            else if (var2 == 6) {
+                this.menu.destination = 14;
+            }
+            else if (var2 == 7) {
+                this.menu.destination = 15;
+            }
+            else {
+                debug::print(("[][][] GcSaver returned an invalid level: '" + __tostring(var2)) + "'");
+                this.menu.destination = 9;
+            }
+            var2;
+            if (globalclass.shortinit) {
+                globalclass.initshort();
+            }
+        }
+        else if (var1 == 44) {
+            this.temptimer = 0;
+            this.selected = 1;
+            this.menu.hideall();
+        }
+        else if (var1 == 24) {
+            this.temptimer = 0;
+            this.selected = 1;
+            this.menu.hideall();
+        }
+        else {
+            this.menufader.setfaderate(0.1);
+            this.menufader.hide();
+            this.selected = 1;
+            this.temptimer = 0;
+            this.menu.hideall();
+            if (globalclass.shortinit) {
+                globalclass.initshort();
+            }
+            sctilefont::setcolor(this.screentext.font, 255, 255, 0, 255);
+            this.screentext.scalefont(2.0);
+            this.screentext.setstring(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 27) + "...");
+            this.screentext.show();
+        }
+        var1;
+        return null;
+    }
+}

@@ -1,0 +1,45 @@
+class lego_area_shrn6 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_shrn6(param1) {
+        this.gs_lego_area("shrn", param1, 0, 0);
+        this.puzzle = new shrn6_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method exit() {
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+}

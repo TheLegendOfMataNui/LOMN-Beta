@@ -1,0 +1,138 @@
+class snowman_puzzle {
+    property parent;
+    property icey;
+    property isdead;
+    property stone;
+    property hasstone;
+    
+    method snowman_puzzle(param1) {
+        this.parent = param1;
+        this.icey = null;
+        this.stone = null;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        gcareadirector::setnearestmax(20);
+        globalclass.player.actor.setsurfingability(0.8, 1.0);
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0.1);
+        var1 = scslosifoundation::stringtoidentifier("ston");
+        var2 = gcsaver::finditem(var1);
+        if (var2 == 0) {
+            this.stone = new lego_pickup("ston", 0, 4, "item", 8, 0);
+            this.stone.initfull();
+            this.stone.show();
+            gcareadirector::hide(var1, var1);
+        }
+        this.hasstone = 0;
+        var3 = scslosifoundation::stringtoidentifier("imon");
+        gcmodeldirector::addboss(var3);
+        gcmodeldirector::show(var3, var3);
+        this.icey = gciceboss::geticeboss();
+        this.isdead = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.icey = null;
+        if (this.isdead == 0) {
+            var1 = scslosifoundation::stringtoidentifier("imon");
+            gcmodeldirector::remove(var1, var1);
+        }
+        if (!(this.stone == null)) {
+            this.stone.cleanupfull();
+            this.stone = null;
+        }
+        globalclass.player.maskcontrol.usemasks(1);
+        return null;
+    }
+    
+    method exit() {
+        this.cleanupfull();
+        this.parent = null;
+        return null;
+    }
+    
+    method resetplayer() {
+        var var1;
+        globalclass.player.unkill();
+        globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str1"), scslosifoundation::stringtoidentifier("lok1"));
+        globalclass.player.actor.setsurfingability(0.8, 1.0);
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0.1);
+        gciceboss::reset(this.icey);
+        globalclass.player.actor.setinputstate("ninp");
+        this.parent.level.cam.setaimode(11);
+        var1 = scslosifoundation::stringtoidentifier("tb00");
+        gccollisionphysicsgroup::toggletriggerboxentered(var1, 0);
+        gccollisionphysicsgroup::toggletriggerboxentered(var1 + 1, 0);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        if (param1.eventid == 43) {
+            if (this.isdead == 0) {
+                this.isdead = 1;
+            }
+        }
+        else if (param1.eventid == 3) {
+            var1 = scslosifoundation::stringtoidentifier("tb00");
+            if (param1.args[0] == var1) {
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(2.0);
+                globalclass.player.actor.setinputstate("none");
+            }
+            else if (param1.args[0] == (var1 + 1)) {
+                globalclass.player.actor.setsurfingability(0, 1.0);
+                globalclass.player.actor.idle();
+                gciceboss::start(this.icey);
+            }
+            var2 = param1.args[0] - scslosifoundation::stringtoidentifier("tb01");
+            if ((var2 >= 1) && (var2 <= 5)) {
+                gciceboss::settoaplat(this.icey, var2);
+                gciceboss::settoaonplat(this.icey, param1.args[1]);
+            }
+            else if (((param1.args[0] == scslosifoundation::stringtoidentifier("tb07")) && (this.isdead == 1)) && (this.hasstone == 1)) {
+                globalclass.setnextlevel("lev5", 1);
+            }
+        }
+        else if (param1.eventid == 41) {
+            gciceboss::finishconversation(this.icey);
+        }
+        else if (param1.eventid == 27) {
+            this.resetplayer();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 39) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("ston")) {
+                this.hasstone = 1;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 76) {
+            if (param1.event == 2) {
+                this.warp();
+            }
+        }
+        return null;
+    }
+    
+    method warp() {
+        globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str1"), scslosifoundation::stringtoidentifier("lok1"));
+        return null;
+    }
+}

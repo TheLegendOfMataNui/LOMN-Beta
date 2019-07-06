@@ -1,0 +1,79 @@
+class lego_area_tura1 : gs_lego_area {
+    
+    method lego_area_tura1(param1) {
+        this.gs_lego_area("tura", param1, 0, 0);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        this.playlegend();
+        this.lego_area_show();
+        gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setnearestmax(3);
+        gcmodeldirector::setnearestmax(3);
+        var1 = scslosifoundation::stringtoidentifier("tps9");
+        var2 = gcsaver::portalactive();
+        if (var2 == 1) {
+            gccollisionphysicsgroup::setportal(var1, "root/data/art/portals/onua/shrine_ripple/o_shrn_ptl", 1);
+        }
+        else {
+            gccollisionphysicsgroup::turnoffnextarea(var1);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        return null;
+    }
+    
+    method playlegend() {
+        var var1;
+        if (bettersaver::getbooleanvalue(50) == 0) {
+            if (gcareadirector::getlanguage() == 0) {
+                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVEn.bik", 1);
+                var1 = gcconversationengine::getconversationengine();
+            }
+            if (gcareadirector::getlanguage() == 1) {
+                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVFr.bik", 1);
+                var1 = gcconversationengine::getconversationengine();
+            }
+            if (gcareadirector::getlanguage() == 2) {
+                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVGer.bik", 1);
+                var1 = gcconversationengine::getconversationengine();
+            }
+            if (gcareadirector::getlanguage() == 3) {
+                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVDa.bik", 1);
+                var1 = gcconversationengine::getconversationengine();
+            }
+            if (gcareadirector::getlanguage() == 4) {
+                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVDu.bik", 1);
+                var1 = gcconversationengine::getconversationengine();
+            }
+            if (gcareadirector::getlanguage() == 5) {
+                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVIt.bik", 1);
+                var1 = gcconversationengine::getconversationengine();
+            }
+            if (gcareadirector::getlanguage() == 6) {
+                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVSpa.bik", 1);
+                var1 = gcconversationengine::getconversationengine();
+            }
+            if (gcareadirector::getlanguage() == 7) {
+                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVSwe.bik", 1);
+                var1 = gcconversationengine::getconversationengine();
+            }
+        }
+        return null;
+    }
+}

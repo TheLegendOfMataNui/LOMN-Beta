@@ -1,0 +1,79 @@
+class roll_puzzle {
+    property parent;
+    property callsurfonce;
+    property callunsurfonce;
+    
+    method roll_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.callsurfonce = 1;
+        this.callunsurfonce = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.callsurfonce = null;
+        this.callunsurfonce = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setsurfingability(0.0, 0.0);
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                if (this.callsurfonce) {
+                    this.startsurf();
+                    this.callsurfonce = 0;
+                    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
+                    globalclass.bgmusic.play();
+                }
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp03")) {
+                if (this.callunsurfonce) {
+                    this.stopsurf();
+                    this.callunsurfonce = 0;
+                }
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp04")) {
+                globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("o010"));
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method startsurf() {
+        globalclass.player.actor.setsurfingability(0.3, 0.8);
+        globalclass.player.actor.setsurfminspeed(30.0);
+        globalclass.player.actor.setsurfmaxspeed(40.0);
+        return null;
+    }
+    
+    method stopsurf() {
+        globalclass.player.actor.setsurfingability(0.0, 0.0);
+        return null;
+    }
+}

@@ -1,0 +1,37 @@
+class ss_tiledtextbox : ss_rotatablesprite {
+    property tilewidth;
+    
+    method ss_tiledtextbox(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
+        this.ss_rotatablesprite(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
+        this.tilewidth = param11;
+        this.w = this.w * this.tilewidth;
+        this.h = this.h * this.tilewidth;
+        return null;
+    }
+    
+    method initfull() {
+        this.sprite = gcbigsprite::create(this.w, this.h, this.x1, this.y1, this.z, this.filename, 1);
+        gcbigsprite::facecamera(this.sprite, this.camstate);
+        return null;
+    }
+    
+    method initshort() {
+        this.sprite = gcbigsprite::create(this.w, this.h, this.x1, this.y1, this.z, this.filename, 1);
+        gcbigsprite::facecamera(this.sprite, this.camstate);
+        return null;
+    }
+    
+    method setwh(param1, param2) {
+        this.w = param1 * this.tilewidth;
+        this.h = param2 * this.tilewidth;
+        gcbigsprite::setposition(this.sprite, this.w, this.h, this.x1, this.y1, this.z);
+        return null;
+    }
+    
+    method changewh(param1, param2) {
+        this.w = (param1 * this.tilewidth) + this.w;
+        this.h = (param2 * this.tilewidth) + this.h;
+        gcbigsprite::setposition(this.sprite, this.w, this.h, this.x1, this.y1, this.z);
+        return null;
+    }
+}

@@ -1,0 +1,134 @@
+class tvil6_puzzle {
+    property parent;
+    property upgradefruit;
+    property upgradefruit_shown;
+    property platform1;
+    property platform2;
+    property platform3;
+    property platform4;
+    property platform5;
+    property bridgeState;
+    
+    method tvil6_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(var1, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d003"), -1);
+        gccharacter::setorientation(var1, -18);
+        this.upgradefruit_shown = gcsaver::finditem(scslosifoundation::stringtoidentifier("frut"));
+        if (this.upgradefruit_shown == 0) {
+            this.upgradefruit = new vitality_pickup("frut", 17, 2, "frut", 1, 1);
+            this.upgradefruit.initfull();
+        }
+        if (bettersaver::getbooleanvalue(47) == 1) {
+            var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(var1, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
+            gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d000"), -1);
+        }
+        this.platform1 = new lego_moveableobject("prt1");
+        this.platform1.initfull();
+        this.platform1.settweakable();
+        this.platform2 = new lego_moveableobject("prt2");
+        this.platform2.initfull();
+        this.platform2.settweakable();
+        this.platform3 = new lego_moveableobject("prt3");
+        this.platform3.initfull();
+        this.platform3.settweakable();
+        this.platform4 = new lego_moveableobject("prt4");
+        this.platform4.initfull();
+        this.platform4.settweakable();
+        this.platform5 = new lego_moveableobject("prt5");
+        this.platform5.initfull();
+        this.platform5.settweakable();
+        this.bridgeState = 0;
+        if (bettersaver::getbooleanvalue(64) == 1) {
+            this.platform1.interpolate(-114.491, -71.3708, 385.759, 0.0);
+            this.platform2.interpolate(-125.478, -71.3708, 360.264, 0.0);
+            this.platform3.interpolate(-134.103, -71.3708, 335.037, 0.0);
+            this.platform4.interpolate(-123.733, -71.3708, 309.701, 0.0);
+            this.platform5.interpolate(-111.871, -71.3708, 284.253, 0.0);
+            this.bridgeState = 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.upgradefruit == null)) {
+            this.upgradefruit.cleanupfull();
+            this.upgradefruit = null;
+        }
+        this.platform1.cleanupfull();
+        this.platform2.cleanupfull();
+        this.platform3.cleanupfull();
+        this.platform4.cleanupfull();
+        this.platform5.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) {
+                
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        if (param1.eventid == 41) {
+            if (bettersaver::getbooleanvalue(47)) {
+                this.give_fruit();
+                this.raise_bridge();
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method give_fruit() {
+        if (this.upgradefruit_shown == 0) {
+            this.upgradefruit.obj.setpos(-122.2455, -7.307096, 408.8899);
+            this.upgradefruit_shown = 1;
+        }
+        return null;
+    }
+    
+    method raise_bridge() {
+        if (this.bridgeState == 0) {
+            this.platform1.interpolate(-114.491, -71.3708, 385.759, 6.0);
+            this.platform2.interpolate(-125.478, -71.3708, 360.264, 7.0);
+            this.platform3.interpolate(-134.103, -71.3708, 335.037, 8.0);
+            this.platform4.interpolate(-123.733, -71.3708, 309.701, 9.0);
+            this.platform5.interpolate(-111.871, -71.3708, 284.253, 10.0);
+            bettersaver::setbooleanvalue(64, 1);
+            this.bridgeState = 1;
+        }
+        return null;
+    }
+}

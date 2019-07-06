@@ -1,0 +1,565 @@
+class ss_shoefittersidebar {
+    property background;
+    property title;
+    property menu;
+    property soundarray;
+    property animationarray;
+    property flagarray;
+    property characterarray;
+    property savearray;
+    property definearray;
+    property howtodefinearray;
+    property bonearray;
+    property menustart;
+    property currentwindow;
+    property flagtypearray;
+    property definingargs;
+    property keyboardcapture;
+    property stringidmap;
+    property menupointerarray;
+    property scrollmarkerarray;
+    property saving;
+    property savetext;
+    property showtime;
+    property bonedefine;
+    property flagsset;
+    property parent;
+    
+    method ss_shoefittersidebar(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+        this.background = param1;
+        this.title = param2;
+        this.menustart = param4;
+        this.currentwindow = 0;
+        this.flagtypearray = param6;
+        this.bonearray = param9;
+        this.characterarray = param5;
+        this.soundarray = [ "OOPSTHEME", 
+            "KEELATHEME" ];
+        this.flagarray = param7;
+        this.savearray = param8;
+        this.menu = new ss_shoefittermenu([  ], param3);
+        this.keyboardcapture = new ss_shoefitterkeyboardclass();
+        return null;
+    }
+    
+    method initfull() {
+        this.definearray = [ "No Flag" ];
+        this.animationarray = [ "No Char." ];
+        this.background.initfull();
+        this.title.initfull();
+        this.flagtypearray.initfull();
+        this.background.add();
+        this.title.add();
+        this.flagtypearray.add();
+        this.title.show();
+        this.title.enabletransparency(1);
+        this.flagtypearray.enabletransparency(1);
+        this.title.enablealphachannel(1);
+        this.flagtypearray.enablealphachannel(1);
+        this.menu.initfull();
+        this.resetmenupointerarray();
+        this.setupmenu(this.characterarray, "CHARACTERS", 0);
+        this.bonedefine = 0;
+        this.definingargs = 0;
+        this.keyboardcapture.ss_shoefitterkeyboardinitfull();
+        this.flagsset = 0;
+        this.howtodefinearray = [ "BONE", 
+            "USER DEF" ];
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.definingargs = 0;
+        this.background.hide();
+        this.title.hide();
+        if (this.flagtypearray.items[0].onscreen) {
+            this.flagtypearray.hide();
+        }
+        this.title.remove();
+        this.flagtypearray.remove();
+        this.title.cleanupfull();
+        this.flagtypearray.cleanupfull();
+        this.menu.cleanupfull();
+        this.keyboardcapture.ss_shoefitterkeyboardcleanupfull();
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.menu.process(param1);
+        if (this.saving) {
+            if (this.showtime > 0.2) {
+                this.savetext.hide();
+                this.savetext.remove();
+                this.savetext.cleanupfull();
+                this.saving = 0;
+            }
+            else {
+                this.showtime = this.showtime + param1.deltatime;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1, param2, param3, param4, param5) {
+        if (this.definingargs) {
+            if (param1.event == 2) {
+                this.defineargs(param1.button, param5);
+            }
+        }
+        else {
+            this.menu.input(param1);
+            this.keyboardinput(param1, param2, param3, param4, param5);
+        }
+        return null;
+    }
+    
+    method keyboardinput(param1, param2, param3, param4, param5) {
+        if (param1.button == 13) {
+            if (param1.event == 2) {
+                this.selectitem(param2, param3, param4, param5);
+            }
+        }
+        if (param1.button == 39) {
+            if (param1.event == 2) {
+                this.switchmenus(1, param2, param5);
+            }
+        }
+        if (param1.button == 37) {
+            if (param1.event == 2) {
+                this.switchmenus(-1, param2, param5);
+            }
+        }
+        return null;
+    }
+    
+    method selectitem(param1, param2, param3, param4) {
+        if (this.currentwindow == 0) {
+            this.addcharacter(param1, param2, param3, param4);
+            this.resetmenupointerarray();
+        }
+        else if (this.currentwindow == 1) {
+            if (!(this.menu.destination == 0)) {
+                this.loadanimation(param1, param2, param3, param4);
+            }
+        }
+        else if (this.currentwindow == 2) {
+            this.loadsound(param1, param3, param4);
+        }
+        else if (this.currentwindow == 3) {
+            this.loadflag(param3, param4, param1);
+        }
+        else if (this.currentwindow == 4) {
+            if (!(this.definearray[0] == "No Flag")) {
+                this.setpointerarray(4);
+                this.setupmenu(this.howtodefinearray, "HOW TO DEFINE", 7);
+            }
+        }
+        else if (this.currentwindow == 7) {
+            this.whichargtodefine(param4);
+        }
+        else if (this.currentwindow == 6) {
+            this.checkotheroption(param3, param4, param1);
+        }
+        else if (this.currentwindow == 5) {
+            this.selectbonename(param4);
+        }
+        return null;
+    }
+    
+    method whichargtodefine(param1) {
+        var var1;
+        var1 = [ "Edga", 
+            "Edgd", 
+            "Fprj", 
+            "Eacs", 
+            "Edcs", 
+            "Ethr", 
+            "Emsi", 
+            "Emhi" ];
+        if (this.menu.destination == 0) {
+            this.setpointerarray(0);
+            this.setupmenu(this.bonearray, "WHICH BONE?", 5, null, 1);
+        }
+        else if (this.menu.destination == 1) {
+            this.startargdefine(param1);
+        }
+        else {
+            this.setupmenu([  ], "You Idiot");
+        }
+        this.menu.destination;
+        return null;
+    }
+    
+    method selectbonename(param1) {
+        var var1;
+        var var2;
+        if (param1.pointer >= 0) {
+            var1 = param1.flagarray[param1.pointer].arg_value_array;
+            var2 = this.menu.items[this.menu.pointer];
+            var1[this.menupointerarray[4]] = var2.id;
+            this.switchmenus(-1);
+        }
+        return null;
+    }
+    
+    method checkotheroption(param1, param2, param3) {
+        if (this.menu.pointer == 0) {
+            if (param3.shoefittercharacter.onscreen) {
+                this.saveflags(param1, param2, param3);
+            }
+        }
+        else if (this.menu.pointer == 1) {
+            screenlist.backward();
+        }
+        return null;
+    }
+    
+    method switchmenus(param1, param2, param3) {
+        if (this.currentwindow == 0) {
+            this.setpointerarray(0);
+            if (param1 == -1) {
+                this.setupmenu(this.savearray, "OTHER", 6);
+                param2.setanimationflags(param3.flagarray, param3.soundarray);
+            }
+            else {
+                this.setupmenu(this.animationarray, "ANIMATIONS", 1, param2, 1);
+            }
+        }
+        else if (this.currentwindow == 1) {
+            this.setpointerarray(1);
+            if (param1 == -1) {
+                this.setupmenu(this.characterarray, "CHARACTERS", 0);
+            }
+            else {
+                this.setupmenu(this.soundarray, "SOUNDS", 2);
+            }
+        }
+        else if (this.currentwindow == 2) {
+            this.setpointerarray(2);
+            if (param1 == -1) {
+                this.setupmenu(this.animationarray, "ANIMATIONS", 1, param2, 1);
+            }
+            else {
+                this.setupmenu(this.flagarray, "FLAGS", 3);
+                this.flagtypearray.show();
+                if (!this.flagsset) {
+                    this.definearray = [ "No Flag" ];
+                }
+            }
+        }
+        else if (this.currentwindow == 3) {
+            this.setpointerarray(3);
+            if (param1 == -1) {
+                this.setupmenu(this.soundarray, "SOUNDS", 2);
+            }
+            else {
+                this.setupmenu(this.definearray, "ARGS", 4);
+            }
+            this.flagtypearray.hide();
+        }
+        else if (this.currentwindow == 4) {
+            this.setpointerarray(4);
+            if (param1 == -1) {
+                this.setupmenu(this.flagarray, "FLAGS", 3);
+                this.flagtypearray.show();
+            }
+            else {
+                this.setupmenu(this.savearray, "OTHER", 6);
+                param2.setanimationflags(param3.flagarray, param3.soundarray);
+            }
+        }
+        else if (this.currentwindow == 5) {
+            this.setpointerarray(5);
+            if (param1 == -1) {
+                this.setupmenu(this.definearray, "ARGS", 4);
+            }
+            else {
+                this.setupmenu(this.savearray, "OTHER", 6);
+                param2.setanimationflags(param3.flagarray, param3.soundarray);
+            }
+        }
+        else if (this.currentwindow == 7) {
+            this.setpointerarray(7);
+            if (param1 == -1) {
+                this.setupmenu(this.definearray, "ARGS", 4);
+            }
+            else {
+                this.setupmenu(this.savearray, "OTHER", 6);
+                param2.setanimationflags(param3.flagarray, param3.soundarray);
+            }
+        }
+        else if (this.currentwindow == 6) {
+            this.setpointerarray(6);
+            if (param1 == -1) {
+                this.setupmenu(this.definearray, "ARGS", 4);
+                if (!this.flagsset) {
+                    this.definearray = [ "No Flag" ];
+                }
+            }
+            else {
+                this.setupmenu(this.characterarray, "CHARACTERS", 0);
+            }
+        }
+        return null;
+    }
+    
+    method startargdefine(param1) {
+        var var1;
+        if ((param1.flagarray.__length > 0) && (param1.pointer <= (param1.flagarray.__length - 1))) {
+            this.definingargs = 1;
+            var1 = param1.flagarray[param1.pointer].arg_value_array;
+            this.keyboardcapture.setstring(var1[this.menupointerarray[4]]);
+        }
+        return null;
+    }
+    
+    method defineargs(param1, param2) {
+        var var1;
+        if (param1 == 13) {
+            this.definingargs = 0;
+            var1 = param2.flagarray[param2.pointer].arg_value_array;
+            if (__tostring(__toint(this.keyboardcapture.string)) == this.keyboardcapture.string) {
+                var1[this.menupointerarray[4]] = __toint(this.keyboardcapture.string);
+            }
+            else {
+                var1[this.menupointerarray[4]] = this.keyboardcapture.string;
+            }
+            this.keyboardcapture.setstring("");
+        }
+        else {
+            this.keyboardcapture.capturestring(param1);
+        }
+        return null;
+    }
+    
+    method saveflags(param1, param2, param3) {
+        var var1;
+        var var2;
+        this.savetext = new gs_legotext("Root/Data/Art/Fonts/tech_font_01_hilight", "SAVING", 420, 240, 0, 2);
+        this.savetext.initfull();
+        this.savetext.add();
+        this.savetext.show();
+        this.showtime = 0.0;
+        this.saving = 1;
+        var1 = (("Root/scripting/slks/shoefitter/" + param3.shoefittercharacter.charstring) + "/") + param3.shoefittercharacter.charstring;
+        var2 = new slosi_objectfileio(var1);
+        var2.saveosiobject(param3.animationarray);
+        param3.saveflags(var1);
+        return null;
+    }
+    
+    method loadflag(param1, param2, param3) {
+        var var1;
+        var var2;
+        var var3;
+        if (param1.animationnumber.onscreen) {
+            var1 = this.menu.items[this.menu.pointer];
+            var2 = [ "Edga", 
+                "Edgd", 
+                "Fprj", 
+                "Eacs", 
+                "Edcs", 
+                "Ethr", 
+                "Emsi", 
+                "Emhi" ];
+            var3 = scslosifoundation::stringtoidentifier(var2[this.menu.pointer]);
+            if (param1.animationnumber.onscreen) {
+                param2.addflag(var1, var3, this.menu.pointer, param3.shoefittercharacter.getduration());
+            }
+            this.definearray = param2.flagarray[param2.pointer].arg_name_array;
+        }
+        return null;
+    }
+    
+    method loadsound(param1, param2, param3) {
+        if (param2.animationnumber.onscreen) {
+            param3.addsound(this.menu.items[this.menu.pointer], param1.shoefittercharacter.getduration());
+        }
+        return null;
+    }
+    
+    method loadanimation(param1, param2, param3, param4) {
+        var var1;
+        param1.setanimationflags(param4.flagarray, param4.soundarray);
+        param1.shoefittercharacter.setpos(0, 0, 0);
+        param3.setanimation(this.menu.items[this.menu.pointer]);
+        param3.showanimation();
+        param2.showlabels();
+        param3.hideflags();
+        param1.shoefittercharacter.switchanimation(this.menu.destination);
+        param1.shoefittercharacter.pause();
+        param4.clearallflags();
+        this.flagsset = param4.loadsetflags(param1.animationarray, this.menu.destination, param1.shoefittercharacter.getduration());
+        if (this.flagsset) {
+            this.definearray = [  ];
+            if (param4.flagarray.__length > 0) {
+                var1 = 0;
+                while ((param4.flagarray[param4.pointer].arg_name_array.__length - 1) >= var1) {
+                    this.definearray.__append(param4.flagarray[param4.pointer].arg_name_array[var1]);
+                    var1 = var1 + 1;
+                }
+            }
+        }
+        param4.setanimationlength([ param1.shoefittercharacter.getduration(), 
+            param1.shoefittercharacter.getnumframes() ]);
+        return null;
+    }
+    
+    method addcharacter(param1, param2, param3, param4) {
+        param1.switchcharacter(this.menu.destination);
+        this.animationarray = this.setupanimationarray(param1);
+        param2.hidelabels();
+        param3.hideanimation();
+        param3.hideflags();
+        param4.clearallflags();
+        return null;
+    }
+    
+    method setupanimationarray(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        if (param1.shoefittercharacter.onscreen) {
+            this.stringidmap = scslosistringmapper::create(((("Root/Data/characters/" + param1.shoefittercharacter.charstring) + "/") + param1.shoefittercharacter.charstring) + "_names.slb");
+            var1 = param1.animationarray;
+            var2 = [  ];
+            var3 = 0;
+            while ((var1.__length - 1) >= var3) {
+                var4 = var1[var3];
+                var5 = scslosistringmapper::getstring(this.stringidmap, var4[0]);
+                if (!(var5 == "")) {
+                    var2.__append(var5);
+                }
+                var3 = var3 + 1;
+            }
+            return var2;
+        }
+        else {
+            return [ "No Char." ];
+        }
+        return null;
+    }
+    
+    method setupmenu(param1, param2, param3, param4, param5) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        this.title.setstring(param2);
+        this.currentwindow = param3;
+        if (param5) {
+            var1 = 0.3;
+            var2 = 30;
+        }
+        else {
+            var1 = this.menustart.scale;
+            var2 = 10;
+        }
+        var3 = [  ];
+        var4 = 0;
+        while ((param1.__length - 1) >= var4) {
+            var5 = this.setid(param1[var4], var4, param4);
+            if (scslosistringfuncs::length(param1[var4]) > var2) {
+                var6 = scslosistringfuncs::left(param1[var4], var2);
+            }
+            else {
+                var6 = param1[var4];
+            }
+            var3.__append(new ss_shoefittermenucontainer(new gs_legoactivetext("Root/Data/Art/Fonts/tech_font_01", "Root/Data/Art/Fonts/tech_font_01_hilight", scslosistringfuncs::toupper(var6), this.menustart.x1, this.menustart.y1 + (16 * var4), this.menustart.z, var1), var5));
+            var4 = var4 + 1;
+        }
+        if (!(param3 == null)) {
+            this.menu.switchitems(var3, this.menupointerarray[param3], this.scrollmarkerarray[param3]);
+        }
+        return null;
+    }
+    
+    method setid(param1, param2, param3) {
+        var var1;
+        var var2;
+        if (this.currentwindow == 0) {
+            var1 = [ "onua", 
+                "bugz", 
+                "bspd", 
+                "mudm", 
+                "bull", 
+                "rkmn" ];
+            var2 = var1[param2];
+        }
+        else if (this.currentwindow == 1) {
+            if (param3.shoefittercharacter.onscreen) {
+                var1 = param3.animationarray[param2];
+                var2 = var1[0];
+            }
+            else {
+                var2 = 0;
+            }
+        }
+        else if (this.currentwindow == 2) {
+            var1 = [ "Root/data/interface/battles/sounds/oopstheme", 
+                "Root/data/interface/battles/sounds/keelatheme" ];
+            var2 = var1[param2];
+        }
+        else if (this.currentwindow == 3) {
+            var1 = [ "Edga", 
+                "Edgd", 
+                "Fprj", 
+                "Eacs", 
+                "Edcs", 
+                "Ethr", 
+                "Emsi", 
+                "Emhi" ];
+            var2 = scslosifoundation::stringtoidentifier(var1[param2]);
+        }
+        else if (this.currentwindow == 4) {
+            var2 = param2;
+        }
+        else if (this.currentwindow == 7) {
+            var2 = param2;
+        }
+        else if (this.currentwindow == 5) {
+            var2 = scslosifoundation::hashstring(this.bonearray[param2]);
+        }
+        return var2;
+    }
+    
+    method setpointerarray(param1) {
+        this.menupointerarray[param1] = this.menu.pointer;
+        this.scrollmarkerarray[param1] = this.menu.scrollmarker;
+        return null;
+    }
+    
+    method resetmenupointerarray() {
+        this.menupointerarray = [ 0, 
+            0, 
+            0, 
+            0, 
+            0, 
+            0, 
+            0, 
+            0 ];
+        this.scrollmarkerarray = [ 0, 
+            0, 
+            0, 
+            0, 
+            0, 
+            0, 
+            0, 
+            0 ];
+        return null;
+    }
+}

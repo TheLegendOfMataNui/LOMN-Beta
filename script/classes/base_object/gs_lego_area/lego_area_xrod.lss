@@ -1,0 +1,88 @@
+class lego_area_xrod : gs_lego_area {
+    property discpickup;
+    property hive1handle;
+    property door;
+    
+    method lego_area_xrod(param1) {
+        this.gs_lego_area("xrod", param1, 0, 0);
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        gcareadirector::setnearestmax(50);
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        this.door = new lego_moveableobject("door");
+        this.door.initfull();
+        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc3"));
+        if (var1 == 0) {
+            this.discpickup = new lego_pickup("dsc3", 0, 5, "item", 7, 1);
+            this.discpickup.initfull();
+            this.discpickup.show();
+            this.discpickup.setcondition(32768);
+            this.discpickup.setquest(1);
+        }
+        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
+        gchive::setmaxcreatures(this.hive1handle, 8);
+        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("bats"));
+        gchive::setspawnrate(this.hive1handle, 5);
+        if (globalclass.player.maskcontrol.isselectable(2)) {
+            this.door.hide();
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 3) {
+            if ((((param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) || (param1.args[0] == scslosifoundation::stringtoidentifier("tp01"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tp02"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tp03"))) {
+                this.level.cam.setaimode(7);
+                globalclass.player.kill();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tp00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tp01"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tp02"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tp03"), 0);
+        }
+        else if (param1.eventid == 21) {
+            var1 = this.level.getbull();
+            if (!(var1 == null)) {
+                this.level.destroybull();
+                var1 = null;
+                debug::print("************************************ destroying bully....");
+            }
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.discpickup == null)) {
+            this.discpickup.cleanupfull();
+            this.discpickup = null;
+        }
+        this.hive1handle = null;
+        if (!(this.door == null)) {
+            this.door.cleanupfull();
+            this.door = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+}

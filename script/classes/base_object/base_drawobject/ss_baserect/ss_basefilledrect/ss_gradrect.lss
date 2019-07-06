@@ -1,0 +1,60 @@
+class ss_gradrect : ss_basefilledrect {
+    property topleftcolor;
+    property toprightcolor;
+    property bottomleftcolor;
+    property bottomrightcolor;
+    
+    method ss_gradrect(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+        this.ss_basefilledrect(param1, param2, param3, param4, param5);
+        this.topleftcolor = param6;
+        if (!(param7 == null)) {
+            this.bottomleftcolor = param7;
+        }
+        else {
+            this.bottomleftcolor = this.topleftcolor;
+        }
+        if (!(param8 == null)) {
+            this.toprightcolor = param8;
+        }
+        else {
+            this.toprightcolor = this.topleftcolor;
+        }
+        if (!(param9 == null)) {
+            this.bottomrightcolor = param9;
+        }
+        else if (!(param7 == null)) {
+            this.bottomrightcolor = this.bottomleftcolor;
+        }
+        else {
+            this.bottomrightcolor = this.toprightcolor;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        this.rect = gcfilledrectangle::create();
+        gcfilledrectangle::setposition(this.rect, this.x1, this.y1, this.x2, this.y2);
+        gcfilledrectangle::setvertexcolor(this.rect, 0, this.topleftcolor);
+        gcfilledrectangle::setvertexcolor(this.rect, 1, this.toprightcolor);
+        gcfilledrectangle::setvertexcolor(this.rect, 2, this.bottomrightcolor);
+        gcfilledrectangle::setvertexcolor(this.rect, 3, this.bottomleftcolor);
+        gcfilledrectangle::setzdepth(this.rect, this.z);
+        return null;
+    }
+    
+    method changegrad(param1, param2) {
+        if (param1 == 0) {
+            gcfilledrectangle::setvertexcolor(this.rect, 0, param2);
+        }
+        else if (param1 == 1) {
+            gcfilledrectangle::setvertexcolor(this.rect, 1, param2);
+        }
+        else if (param1 == 2) {
+            gcfilledrectangle::setvertexcolor(this.rect, 2, param2);
+        }
+        else if (param1 == 3) {
+            gcfilledrectangle::setvertexcolor(this.rect, 3, param2);
+        }
+        return null;
+    }
+}

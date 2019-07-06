@@ -1,0 +1,177 @@
+class brd4_puzzle {
+    property parent;
+    property wallarray;
+    property explotion;
+    
+    method brd4_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(50);
+        globalclass.player.actor.setclimb(5);
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0);
+        globalclass.player.actor.setsurfingability(1.0, 0.8);
+        globalclass.player.actor.setsurfminspeed(40.0);
+        globalclass.player.actor.setsurfmaxspeed(60.0);
+        this.wallarray = [ new lego_moveableobject("ic00"), 
+            new lego_moveableobject("ic01"), 
+            new lego_moveableobject("ic02"), 
+            new lego_moveableobject("ic03"), 
+            new lego_moveableobject("ic04"), 
+            new lego_moveableobject("ic05"), 
+            new lego_moveableobject("ic06"), 
+            new lego_moveableobject("ic07"), 
+            new lego_moveableobject("ic08"), 
+            new lego_moveableobject("ic09"), 
+            new lego_moveableobject("ic10"), 
+            new lego_moveableobject("ic11"), 
+            new lego_moveableobject("ic12"), 
+            new lego_moveableobject("ic13"), 
+            new lego_moveableobject("ic14"), 
+            new lego_moveableobject("ic15"), 
+            new lego_moveableobject("ic16"), 
+            new lego_moveableobject("ic17"), 
+            new lego_moveableobject("ic18"), 
+            new lego_moveableobject("ic19") ];
+        var1 = 0;
+        while ((this.wallarray.__length - 1) >= var1) {
+            this.wallarray[var1].initfull();
+            this.wallarray[var1].setmoveable(1, 1, 0, 0, 0, 0);
+            this.wallarray[var1].setresponse(4, 4, 4);
+            this.wallarray[var1].setalpha(0.8);
+            var1 = var1 + 1;
+        }
+        this.explotion = new lev4_iceexploder();
+        this.explotion.initfull();
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0);
+        var1 = 0;
+        while ((this.wallarray.__length - 1) >= var1) {
+            this.wallarray[var1].show();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.wallarray.__length - 1) >= var1) {
+            this.wallarray[var1].cleanupfull();
+            this.wallarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.wallarray = null;
+        this.explotion.cleanupfull();
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        globalclass.player.actor.setsurfingability(0, 1.0);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(1.2);
+                globalclass.player.actor.setinputstate("none");
+            }
+            else {
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(1.2);
+                globalclass.player.actor.setinputstate("none");
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 18) {
+            var1 = new slosi_string(scslosifoundation::identifiertostring(param1.args[0]));
+            var1.truncateleft(2);
+            if (var1.string == "ic") {
+                this.icewallcollision(param1.args[0], 0);
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                var1 = new slosi_string(scslosifoundation::identifiertostring(param1.args[1]));
+                var1.truncateleft(2);
+                if (var1.string == "ic") {
+                    if (globalclass.player.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("k036")) {
+                        this.icewallcollision(param1.args[1], 0);
+                    }
+                    else {
+                        this.icewallcollision(param1.args[1], 1);
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.kill();
+        }
+        else if (param1.eventid == 46) {
+            globalclass.player.unkill();
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            this.initshort();
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+        }
+        else if (param1.eventid == 29) {
+            this.initshort();
+        }
+        else if (param1.eventid == 7) {
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
+                gcstaticsoundsptrarray::playtablesound(149);
+            }
+        }
+        return null;
+    }
+    
+    method icewallcollision(param1, param2) {
+        var var1;
+        var1 = 0;
+        while ((this.wallarray.__length - 1) >= var1) {
+            if (param1 == this.wallarray[var1].id) {
+                this.explode(this.wallarray[var1]);
+                if (param2 == 1) {
+                    
+                }
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method explode(param1) {
+        this.explotion.explode(param1);
+        param1.hide();
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

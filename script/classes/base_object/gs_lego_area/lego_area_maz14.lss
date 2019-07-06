@@ -1,0 +1,66 @@
+class lego_area_maz14 : gs_lego_area {
+    property puzzle;
+    property parent;
+    property discpickup;
+    
+    method lego_area_maz14(param1) {
+        this.parent = param1;
+        this.gs_lego_area("maz1", param1, 0, 0);
+        this.puzzle = new l4_maz1_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.lego_area_show();
+        this.puzzle.initfull();
+        this.puzzle.show();
+        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("disc"));
+        if (var1 == 0) {
+            this.discpickup = new lego_pickup("disc", 0, 5, "item", 7, 1);
+            this.discpickup.initfull();
+            this.discpickup.show();
+            this.discpickup.setcondition(32768);
+            this.discpickup.setquest(1);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.hide();
+        this.puzzle.cleanupfull();
+        if (!(this.discpickup == null)) {
+            this.discpickup.cleanupfull();
+            this.discpickup = null;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method exit() {
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        this.parent = null;
+        return null;
+    }
+}

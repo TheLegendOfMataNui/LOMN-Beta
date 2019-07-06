@@ -1,0 +1,73 @@
+class tahu7_platform : base_object {
+    property obj;
+    property id;
+    property dist;
+    property time;
+    property x;
+    property y;
+    property z;
+    property moveup;
+    
+    method tahu7_platform(param1, param2, param3, param4, param5) {
+        this.base_object();
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.obj = gcareadirector::getmoveableobj(this.id, scslosifoundation::stringtoidentifier(param2));
+        gcmoveableobj::setcharacterresponses(this.obj, 0, 0, 3);
+        this.x = gcmoveableobj::getx(this.obj);
+        this.y = gcmoveableobj::gety(this.obj) - 3.0;
+        this.z = gcmoveableobj::getz(this.obj);
+        this.dist = param4;
+        this.time = param5;
+        return null;
+    }
+    
+    method initfull() {
+        this.moveup = 0;
+        gcmoveableobj::interpolate(this.obj, this.x, this.y + this.dist, this.z, this.time);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj = null;
+        return null;
+    }
+    
+    method offsetposition(param1, param2, param3) {
+        this.x = this.x + param1;
+        this.y = this.y + param2;
+        this.z = this.z + param3;
+        gcmoveableobj::setposition(this.obj, this.x, this.y, this.z);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 12) {
+            if (param1.args[0] == this.id) {
+                if (this.moveup) {
+                    this.moveup = 0;
+                    gcmoveableobj::interpolate(this.obj, this.x, this.y + this.dist, this.z, this.time);
+                }
+                else {
+                    this.moveup = 1;
+                    gcmoveableobj::interpolate(this.obj, this.x, this.y, this.z, this.time);
+                }
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method reset() {
+        gcmoveableobj::cancelinterpolate(this.obj);
+        gcmoveableobj::setposition(this.obj, this.x, this.y, this.z);
+        return null;
+    }
+    
+    method reset2() {
+        this.moveup = 0;
+        gcmoveableobj::cancelinterpolate(this.obj);
+        gcmoveableobj::setposition(this.obj, this.x, this.y, this.z);
+        gcmoveableobj::interpolate(this.obj, this.x, this.y + this.dist, this.z, this.time);
+        return null;
+    }
+}

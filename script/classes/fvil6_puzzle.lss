@@ -1,0 +1,112 @@
+class fvil6_puzzle {
+    property parent;
+    property leverpickup;
+    property hookarray;
+    property coindoor;
+    property coindoortext;
+    property coindoortexttimer;
+    property showcoindoor;
+    
+    method fvil6_puzzle(param1) {
+        this.parent = param1;
+        this.showcoindoor = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("levr"));
+        if (var1 == 0) {
+            this.leverpickup = new lego_pickup("levr", 0, 5, "item", 5, 1);
+            this.leverpickup.initfull();
+            this.leverpickup.setquest(2);
+            this.leverpickup.show();
+            this.leverpickup.setcondition(8192);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        globalclass.player.setgrapplinghookdistance(150);
+        this.hookarray = [ new lego_moveableobject("hot0"), 
+            new lego_moveableobject("hot1"), 
+            new lego_moveableobject("hot2"), 
+            new lego_moveableobject("hot3"), 
+            new lego_moveableobject("hot4") ];
+        var2 = 0;
+        while ((this.hookarray.__length - 1) >= var2) {
+            this.hookarray[var2].initfull();
+            this.hookarray[var2].setmytargetingflags(1);
+            this.hookarray[var2].setresponse(1, 1, 1);
+            this.hookarray[var2].settweakable();
+            var2 = var2 + 1;
+        }
+        this.coindoor = new lego_moveableobject("door");
+        this.coindoor.initfull();
+        if (this.showcoindoor) {
+            this.coindoor.show();
+            this.coindoor.setalpha(0.8);
+        }
+        else {
+            this.coindoor.hide();
+        }
+        var2 = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 10);
+        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
+        this.coindoortext.initfull();
+        this.coindoortext.add();
+        this.coindoortexttimer = 0.0;
+        if (bettersaver::getbooleanvalue(57) == 1) {
+            this.coindoor.hide();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.leverpickup == null)) {
+            this.leverpickup.cleanupfull();
+            this.leverpickup = null;
+        }
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].cleanupfull();
+            this.hookarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hookarray = null;
+        globalclass.player.setgrapplinghookdistance(45);
+        this.coindoortexttimer = null;
+        if (!(this.coindoortext == null)) {
+            this.coindoortext.remove();
+            this.coindoortext.cleanupfull();
+            this.coindoortext = null;
+        }
+        if (!(this.coindoor == null)) {
+            this.coindoor.cleanupfull();
+            this.coindoor = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.coindoortexttimer > 0) {
+            this.coindoortexttimer = this.coindoortexttimer - param1.deltatime;
+        }
+        else if (this.coindoortext.onscreen == 1) {
+            this.coindoortext.hide();
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

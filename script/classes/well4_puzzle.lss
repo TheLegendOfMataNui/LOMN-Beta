@@ -1,0 +1,356 @@
+class well4_puzzle {
+    property parent;
+    property platforms;
+    property printwhichplatformimon;
+    property newplatform;
+    property oldplatform;
+    property rotatetimer;
+    property rotatepoints;
+    property rotatecase;
+    property yvalue;
+    property glyph;
+    property founditem;
+    property showpickup;
+    property starttimeronce;
+    property original_platform_y_coord;
+    property doortop;
+    property doorbottom;
+    property doortopx;
+    property doortopy;
+    property doortopz;
+    property doorbottomx;
+    property doorbottomy;
+    property doorbottomz;
+    
+    method well4_puzzle(param1) {
+        this.parent = param1;
+        this.printwhichplatformimon = 1;
+        this.oldplatform = null;
+        this.newplatform = null;
+        this.showpickup = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(50);
+        this.starttimeronce = 1;
+        this.founditem = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glya"));
+        if (this.founditem) {
+            this.showpickup = 0;
+        }
+        if (this.showpickup) {
+            this.glyph = new lego_pickup("glya", 13, 2, "item", 3, 1);
+            this.glyph.initfull();
+            this.glyph.show();
+        }
+        this.rotatetimer = new lego_timer("rott", 2.0, 0);
+        this.rotatetimer.initfull();
+        this.rotatecase = 0;
+        this.platforms = [ new lego_volatileplatform("pf36"), 
+            new lego_volatileplatform("pf21"), 
+            new lego_volatileplatform("pf22"), 
+            new lego_volatileplatform("pf16"), 
+            new lego_volatileplatform("pf34"), 
+            new lego_volatileplatform("pf37"), 
+            new lego_volatileplatform("pf35"), 
+            new lego_volatileplatform("pf48"), 
+            new lego_volatileplatform("pf50"), 
+            new lego_moveableobject("pf15"), 
+            new lego_moveableobject("pf19"), 
+            new lego_moveableobject("pf18"), 
+            new lego_moveableobject("pf17"), 
+            new lego_moveableobject("pf40"), 
+            new lego_moveableobject("pf41"), 
+            new lego_moveableobject("pf43"), 
+            new lego_moveableobject("pf42"), 
+            new lego_moveableobject("pf44"), 
+            new lego_moveableobject("pf27"), 
+            new lego_moveableobject("pf28"), 
+            new lego_moveableobject("pf29"), 
+            new lego_moveableobject("pf30"), 
+            new lego_moveableobject("pf31"), 
+            new lego_moveableobject("pf38"), 
+            new lego_moveableobject("pf55"), 
+            new lego_moveableobject("pf56"), 
+            new lego_moveableobject("pf57"), 
+            new lego_moveableobject("pf58"), 
+            new lego_moveableobject("pf60") ];
+        this.doortop = new lego_moveableobject("drt1");
+        this.doorbottom = new lego_moveableobject("drb1");
+        this.doortop.initfull();
+        this.doorbottom.initfull();
+        this.doortop.settweakable();
+        this.doorbottom.settweakable();
+        this.doortopx = this.doortop.getx();
+        this.doortopy = this.doortop.gety();
+        this.doortopz = this.doortop.getz();
+        this.doorbottomx = this.doorbottom.getx();
+        this.doorbottomy = this.doorbottom.gety();
+        this.doorbottomz = this.doorbottom.getz();
+        var1 = 0;
+        while (28 >= var1) {
+            this.platforms[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.original_platform_y_coord = this.platforms[25].gety();
+        var1 = 9;
+        while (28 >= var1) {
+            this.platforms[var1].setresponse(1, 0, 1);
+            var1 = var1 + 1;
+        }
+        gcareadirector::setallobjectsalpha(0.0);
+        if (this.showpickup) {
+            this.glyph.obj.setalpha();
+        }
+        this.doortop.setalpha();
+        this.doorbottom.setalpha();
+        if (this.showpickup == 0) {
+            this.doortop.setpos(this.doortopx, 8.23, this.doortopz);
+            this.doorbottom.setpos(this.doorbottomx, 0 - 24.947, this.doorbottomz);
+        }
+        this.rotatepoints = [  ];
+        var1 = 9;
+        while (11 >= var1) {
+            this.rotatepoints.__append(new basicpoint(this.platforms[var1].getx(), this.platforms[var1].gety(), this.platforms[var1].getz()));
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while (8 >= var1) {
+            this.platforms[var1].setshakerotateintensity(0.9);
+            this.platforms[var1].settimetofall(2.5);
+            var1 = var1 + 1;
+        }
+        var1 = 12;
+        while (12 >= var1) {
+            this.platforms[var1].setslidetimer(0 - 20.0, 0.7, 14.0, 2.0, -1, globalclass.randnum.getrandomfloat(0.3, 0.9));
+            var1 = var1 + 1;
+        }
+        var1 = 18;
+        while (23 >= var1) {
+            if ((var1 % 2) == 0) {
+                this.platforms[var1].setslidetimer(0.0, 0.0, 0 - 10.0, 1.5, -1, globalclass.randnum.getrandomfloat(0.3, 0.9));
+            }
+            else {
+                this.platforms[var1].setslidetimer(0.0, 0.0, 10.0, 1.5, -1, globalclass.randnum.getrandomfloat(0.3, 0.9));
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        if (!(this.glyph == null)) {
+            this.glyph.cleanupfull();
+            this.glyph = null;
+        }
+        this.founditem = null;
+        this.showpickup = null;
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].cleanupfull();
+            this.platforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.platforms = null;
+        this.yvalue = null;
+        this.rotatetimer.cleanupfull();
+        this.rotatetimer = null;
+        this.rotatecase = null;
+        this.starttimeronce = null;
+        this.doortop.cleanupfull();
+        this.doortop = null;
+        this.doorbottom.cleanupfull();
+        this.doorbottom = null;
+        this.original_platform_y_coord = null;
+        this.doortop = null;
+        this.doorbottom = null;
+        this.doortopx = null;
+        this.doortopy = null;
+        this.doortopz = null;
+        this.doorbottomx = null;
+        this.doorbottomy = null;
+        this.doorbottomz = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 24;
+        while (28 >= var1) {
+            this.platforms[var1].process();
+            var1 = var1 + 1;
+        }
+        var1 = 24;
+        while (28 >= var1) {
+            if (this.platforms[var1].collide > 0) {
+                debug::print("************Platform collide = " + __tostring(this.platforms[var1].collide));
+            }
+            if (this.platforms[var1].collide <= 0) {
+                if (this.platforms[var1].gety() <= this.original_platform_y_coord) {
+                    this.platforms[var1].interpolate(this.platforms[var1].getx(), this.platforms[var1].gety() + 2, this.platforms[var1].getz(), 0.8);
+                }
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var1 = 0;
+        while (8 >= var1) {
+            this.platforms[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        var1 = 24;
+        while (28 >= var1) {
+            this.platforms[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 44) {
+            if (this.starttimeronce) {
+                this.starttimeronce = 0;
+                this.rotatetimer.reset(0);
+                this.rotatetimer.start();
+            }
+        }
+        else if (param1.eventid == 8) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("rott")) {
+                var1 = 9;
+                while (11 >= var1) {
+                    if (this.rotatecase == 0) {
+                        var2 = ((var1 - 9) + 1) % ((this.rotatepoints.__length - 1) + 1);
+                    }
+                    else if (this.rotatecase == 1) {
+                        var2 = ((var1 - 9) + 2) % ((this.rotatepoints.__length - 1) + 1);
+                    }
+                    else if (this.rotatecase == 2) {
+                        var2 = var1 - 9;
+                    }
+                    this.platforms[var1].interpolate(this.rotatepoints[var2].x, this.rotatepoints[var2].y, this.rotatepoints[var2].z, 1.5);
+                    var1 = var1 + 1;
+                }
+                this.rotatecase = (this.rotatecase + 1) % ((this.rotatepoints.__length - 1) + 1);
+                this.rotatetimer.reset(0);
+                this.rotatetimer.start();
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 1002) {
+            if (param1.args[0] == 1) {
+                gcareadirector::setallobjectsadfade(1);
+            }
+            if (param1.args[0] == 0) {
+                gcareadirector::setallobjectsalpha(0.0);
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (!(param1.args[1] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                    this.newplatform = param1.args[1];
+                    if (!(this.oldplatform == this.newplatform)) {
+                        this.printwhichplatformimon = 1;
+                    }
+                    if (this.printwhichplatformimon) {
+                        this.oldplatform = param1.args[1];
+                        this.printwhichplatformimon = 0;
+                    }
+                }
+            }
+            var1 = 24;
+            while (28 >= var1) {
+                if ((param1.args[1] == this.platforms[var1].id) && (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                    this.yvalue = this.original_platform_y_coord - this.platforms[var1].gety();
+                    if (this.yvalue < 12.0) {
+                        this.platforms[var1].interpolate(this.platforms[var1].getx(), this.platforms[var1].gety() - 2, this.platforms[var1].getz(), 0.8);
+                    }
+                }
+                var1 = var1 + 1;
+            }
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
+                globalclass.player.kill();
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.unkill();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            this.resetplatforms();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 7) {
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
+                gcstaticsoundsptrarray::playtablesound(149);
+            }
+        }
+        else if (param1.eventid == 39) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("glya")) {
+                this.parent.level.cam.setaimode(0);
+                globalclass.level.cam.interpolate(387.75, 0 - 3.183, 0 - 817.7, 392.7, 0 - 8.75, 0 - 899.83, 3.0);
+            }
+        }
+        else if (param1.eventid == 14) {
+            this.doortop.interpolate(this.doortopx, 8.23, this.doortopz, 5.0);
+            this.doorbottom.interpolate(this.doorbottomx, 0 - 24.947, this.doorbottomz, 5.0);
+            debug::print("******************************* OPEN DOOR");
+        }
+        else if (param1.eventid == 12) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("drt1")) {
+                this.parent.level.cam.setaimode(11);
+            }
+        }
+        return null;
+    }
+    
+    method resetplatforms() {
+        var var1;
+        var1 = 0;
+        while (8 >= var1) {
+            this.platforms[var1].reset();
+            var1 = var1 + 1;
+        }
+        var1 = 24;
+        while (28 >= var1) {
+            this.platforms[var1].setpos(this.platforms[var1].getx(), this.original_platform_y_coord, this.platforms[var1].getz());
+            var1 = var1 + 1;
+        }
+        gcareadirector::setallobjectsalpha(0.0);
+        if (this.showpickup) {
+            this.glyph.obj.setalpha();
+        }
+        this.doortop.setalpha();
+        this.doorbottom.setalpha();
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

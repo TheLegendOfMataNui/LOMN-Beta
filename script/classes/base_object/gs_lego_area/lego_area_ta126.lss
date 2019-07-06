@@ -1,0 +1,45 @@
+class lego_area_ta126 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_ta126(param1) {
+        this.gs_lego_area("ta12", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new ta126_puzzle(this);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gcareadirector::setfog(-16777216, 0 - 70.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method exit() {
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+}

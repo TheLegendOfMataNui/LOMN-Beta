@@ -1,0 +1,72 @@
+class grhz_puzzle {
+    property parent;
+    property showmask;
+    property mask;
+    property drownsound;
+    property drownsoundplayed;
+    
+    method grhz_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        globalclass.bgmusic.stop();
+        this.showmask = 1;
+        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("msks"));
+        if (var1) {
+            this.showmask = 0;
+        }
+        if (this.showmask) {
+            this.mask = new lego_pickup("msks", 2, 1, "item", 2, 1);
+            this.mask.initfull();
+            this.mask.show();
+        }
+        this.drownsound = new tablecopysound(1048);
+        this.drownsoundplayed = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.mask == null)) {
+            this.mask.cleanupfull();
+            this.mask = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            globalclass.level.cam.setaimode(7);
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            this.drownsoundplayed = 0;
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        else if (param1.eventid == 42) {
+            if (this.drownsoundplayed == 0) {
+                this.drownsoundplayed = 1;
+                globalclass.player.kill();
+                this.drownsound.play();
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

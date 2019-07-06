@@ -1,0 +1,37 @@
+class base_standardinput {
+    property controller;
+    property button;
+    property event;
+    property xposition;
+    property yposition;
+    
+    method base_standardinput(param1, param2, param3, param4, param5) {
+        this.controller = param1;
+        this.button = param2;
+        this.event = param3;
+        if (!(param4 == null)) {
+            this.xposition = param4;
+        }
+        else {
+            this.xposition = 0;
+        }
+        if (!(param5 == null)) {
+            this.yposition = param5;
+        }
+        else {
+            this.yposition = 0;
+        }
+        return null;
+    }
+    
+    method clearinput() {
+        this.controller = null;
+        this.button = null;
+        this.event = null;
+        return null;
+    }
+    
+    method check(param1, param2) {
+        return (this.button == param1) && (this.event == param2);
+    }
+}

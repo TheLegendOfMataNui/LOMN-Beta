@@ -1,0 +1,28 @@
+class ss_aicamera : ss_basecamera {
+    property splinefilename;
+    property spline;
+    property minzoom;
+    property maxzoom;
+    
+    method ss_aicamera(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+        this.ss_basecamera(param1, param2, param3, param4, param5, param6);
+        this.splinefilename = param7;
+        this.spline = new ss_pointspline(this.splinefilename);
+        this.minzoom = param8;
+        this.maxzoom = param9;
+        return null;
+    }
+    
+    method initfull() {
+        this.handle = gcgame::getcurrentcamera();
+        gclegocamera::settargpos(this.handle, this.tx, this.ty, this.tz);
+        this.spline.initfull();
+        gclegocamera::setcameraaispline(this.handle, this.spline.object, 0, this.minzoom, this.maxzoom);
+        gclegocamera::setcameraaimode(this.handle, 2);
+        return null;
+    }
+    
+    method setzoomfactor() {
+        return null;
+    }
+}

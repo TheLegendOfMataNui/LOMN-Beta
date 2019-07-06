@@ -1,0 +1,99 @@
+class ss_basesound {
+    property sound;
+    property filename;
+    property playtype;
+    property length;
+    property sndid;
+    property restart;
+    
+    method ss_basesound(param1, param2, param3, param4) {
+        this.filename = param1 + ".PCSND";
+        this.sndid = scslosifoundation::stringtoidentifier(param2);
+        if (!(param3 == null)) {
+            this.playtype = param3;
+        }
+        else {
+            this.playtype = 0;
+        }
+        if (!(param4 == null)) {
+            this.restart = param4;
+        }
+        else {
+            this.restart = 0;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        this.sound = gcwavesound::create();
+        this.opensound();
+        this.length = this.getlength();
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.sound = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method opensound() {
+        gcwavesound::openfile(this.sound, this.filename, this.sndid, 0);
+        return null;
+    }
+    
+    method setplaytype(param1) {
+        this.playtype = param1;
+        return null;
+    }
+    
+    method play() {
+        if (this.restart) {
+            gcwavesound::play(this.sound, this.playtype);
+        }
+        else if (!this.isplaying()) {
+            gcwavesound::play(this.sound, this.playtype);
+        }
+        return null;
+    }
+    
+    method pause() {
+        if (this.isplaying()) {
+            gcwavesound::pause(this.sound);
+        }
+        return null;
+    }
+    
+    method stop() {
+        if (this.isplaying()) {
+            gcwavesound::stop(this.sound);
+        }
+        return null;
+    }
+    
+    method getlength() {
+        return gcwavesound::getlength(this.sound);
+    }
+    
+    method isplaying() {
+        return gcwavesound::isplaying(this.sound);
+    }
+    
+    method getvolume() {
+        return gcwavesound::getvolume(this.sound);
+    }
+    
+    method setvolume(param1) {
+        gcwavesound::setvolume(this.sound, param1);
+        return null;
+    }
+}

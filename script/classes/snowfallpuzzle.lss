@@ -1,0 +1,401 @@
+class snowfallpuzzle {
+    property snowballarray;
+    property snowbrgpartarray;
+    property parent;
+    property areaid;
+    property entrancedoora;
+    property entrancedoorb;
+    property exitdoora;
+    property exitdoorb;
+    property thering;
+    property swtch;
+    property numofplatformshit;
+    property started;
+    property switchinterptimer;
+    property boulderintervaltimer;
+    property currentboulder;
+    property hitswitchonce;
+    property musichasstarted;
+    property exitdoorax;
+    property exitdooray;
+    property exitdooraz;
+    property exitdoorbx;
+    property exitdoorby;
+    property exitdoorbz;
+    property entrancedoorax;
+    property entrancedooray;
+    property entrancedooraz;
+    property entrancedoorbx;
+    property entrancedoorby;
+    property entrancedoorbz;
+    property switchx;
+    property switchy;
+    property switchz;
+    property ringy;
+    property ringx;
+    property ringz;
+    
+    method snowfallpuzzle(param1) {
+        this.parent = param1;
+        this.areaid = scslosifoundation::stringtoidentifier(param1.name);
+        this.numofplatformshit = 0;
+        this.started = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(50);
+        this.snowbrgpartarray = [ new snowbrgpart("ch01", this.parent.name, "tmr1", this), 
+            new snowbrgpart("ch02", this.parent.name, "tmr2", this), 
+            new snowbrgpart("ch03", this.parent.name, "tmr3", this), 
+            new snowbrgpart("ch04", this.parent.name, "tmr4", this), 
+            new snowbrgpart("ch05", this.parent.name, "tmr5", this), 
+            new snowbrgpart("ch06", this.parent.name, "tmr6", this), 
+            new snowbrgpart("ch07", this.parent.name, "tmr7", this), 
+            new snowbrgpart("ch08", this.parent.name, "tmr8", this), 
+            new snowbrgpart("ch09", this.parent.name, "tmr9", this), 
+            new snowbrgpart("ch10", this.parent.name, "tm10", this) ];
+        this.entrancedoora = new lego_moveableobject("drt2", this.parent.name);
+        this.entrancedoorb = new lego_moveableobject("drb2", this.parent.name);
+        this.exitdoora = new lego_moveableobject("drt1", this.parent.name);
+        this.exitdoorb = new lego_moveableobject("drb1", this.parent.name);
+        this.swtch = new lego_moveableobject("swch", this.parent.name);
+        this.thering = new lego_moveableobject("ring", this.parent.name);
+        this.entrancedoora.initfull();
+        this.entrancedoorb.initfull();
+        this.exitdoora.initfull();
+        this.exitdoorb.initfull();
+        this.swtch.initfull();
+        this.thering.initfull();
+        this.entrancedoora.settweakable();
+        this.entrancedoorb.settweakable();
+        this.entrancedoorb.setresponse(0, 0, 0);
+        this.swtch.setresponse(0, 0, 0);
+        this.thering.setresponse(0, 0, 0);
+        var1 = 0;
+        while ((this.snowbrgpartarray.__length - 1) >= var1) {
+            this.snowbrgpartarray[var1].initfull();
+            this.snowbrgpartarray[var1].obj.obj.setignoreallcollisions(0);
+            var1 = var1 + 1;
+        }
+        this.snowballarray = [ new snowballclass("blle", this.parent), 
+            new snowballclass("bllf", this.parent), 
+            new snowballclass("bllg", this.parent) ];
+        var1 = 0;
+        while ((this.snowballarray.__length - 1) >= var1) {
+            this.snowballarray[var1].initfull();
+            this.snowballarray[var1].obj.setignoreallcollisions(0);
+            var1 = var1 + 1;
+        }
+        this.parent.parent.cam.makespline("Root/Data/Levels/lev4/snfl/snfl_CAM.slb");
+        this.parent.parent.cam.setspline(0, 4.0, 1, 1);
+        this.parent.parent.cam.settargetspline(3, 1, 1);
+        this.switchinterptimer = new lego_timer("sint", 2.0, 0);
+        this.switchinterptimer.initfull();
+        this.boulderintervaltimer = new lego_timer("bint", 1.0, 0);
+        this.boulderintervaltimer.initfull();
+        this.currentboulder = 0;
+        this.hitswitchonce = 1;
+        this.musichasstarted = 0;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICKOPAKATHEME");
+        this.switchx = this.swtch.getx();
+        this.switchy = this.swtch.gety();
+        this.switchz = this.swtch.getz();
+        this.ringx = this.thering.getx();
+        this.ringy = this.thering.gety();
+        this.ringz = this.thering.getz();
+        this.exitdoorax = this.exitdoora.getx();
+        this.exitdooray = this.exitdoora.gety();
+        this.exitdooraz = this.exitdoora.getz();
+        this.exitdoorbx = this.exitdoorb.getx();
+        this.exitdoorby = this.exitdoorb.gety();
+        this.exitdoorbz = this.exitdoorb.getz();
+        this.entrancedoorax = this.entrancedoora.getx();
+        this.entrancedooray = this.entrancedoora.gety();
+        this.entrancedooraz = this.entrancedoora.getz();
+        this.entrancedoorbx = this.entrancedoorb.getx();
+        this.entrancedoorby = this.entrancedoorb.gety();
+        this.entrancedoorbz = this.entrancedoorb.getz();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.snowbrgpartarray.__length - 1) >= var1) {
+            this.snowbrgpartarray[var1].cleanupfull();
+            this.snowbrgpartarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.snowbrgpartarray = null;
+        var1 = 0;
+        while ((this.snowballarray.__length - 1) >= var1) {
+            this.snowballarray[var1].cleanupfull();
+            this.snowballarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.snowballarray = null;
+        this.areaid = null;
+        this.entrancedoora.cleanupfull();
+        this.entrancedoora = null;
+        this.entrancedoorb.cleanupfull();
+        this.entrancedoorb = null;
+        this.exitdoora.cleanupfull();
+        this.exitdoora = null;
+        this.exitdoorb.cleanupfull();
+        this.exitdoorb = null;
+        this.swtch.cleanupfull();
+        this.swtch = null;
+        this.thering.cleanupfull();
+        this.thering = null;
+        this.exitdoorax = null;
+        this.exitdooray = null;
+        this.exitdooraz = null;
+        this.exitdoorbx = null;
+        this.exitdoorby = null;
+        this.exitdoorbz = null;
+        this.entrancedoorax = null;
+        this.entrancedooray = null;
+        this.entrancedooraz = null;
+        this.entrancedoorbx = null;
+        this.entrancedoorby = null;
+        this.entrancedoorbz = null;
+        this.switchx = null;
+        this.switchy = null;
+        this.switchz = null;
+        this.ringy = null;
+        this.ringx = null;
+        this.ringz = null;
+        this.switchinterptimer.cleanupfull();
+        this.switchinterptimer = null;
+        this.boulderintervaltimer.cleanupfull();
+        this.boulderintervaltimer = null;
+        this.currentboulder = null;
+        this.started = null;
+        this.numofplatformshit = null;
+        this.hitswitchonce = null;
+        this.musichasstarted = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (this.started) {
+            var1 = 0;
+            while ((this.snowballarray.__length - 1) >= var1) {
+                this.snowballarray[var1].process(param1);
+                var1 = var1 + 1;
+            }
+            var1 = 0;
+            while ((this.snowbrgpartarray.__length - 1) >= var1) {
+                this.snowbrgpartarray[var1].process(param1);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        var var1;
+        if (this.started) {
+            var1 = 0;
+            while ((this.snowballarray.__length - 1) >= var1) {
+                this.snowballarray[var1].input(param1);
+                var1 = var1 + 1;
+            }
+        }
+        if (param1.event == 2) {
+            if (param1.button == 89) {
+                this.swtch.hide();
+                this.thering.hide();
+                var1 = 0;
+                while ((this.snowbrgpartarray.__length - 1) >= var1) {
+                    this.snowbrgpartarray[var1].drop();
+                    debug::print("Dropping brg..." + __tostring(var1));
+                    var1 = var1 + 1;
+                }
+            }
+        }
+        if (param1.event == 2) {
+            if (param1.button == 49) {
+                this.swtch.setlocalpos(5, 5);
+                this.thering.setlocalpos(-5, -5);
+                debug::print("***** called setLocalPos");
+            }
+        }
+        if (param1.event == 2) {
+            if (param1.button == 85) {
+                this.hitswitch();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        if (this.started) {
+            var1 = 0;
+            while ((this.snowballarray.__length - 1) >= var1) {
+                this.snowballarray[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
+        var1 = 0;
+        while ((this.snowbrgpartarray.__length - 1) >= var1) {
+            this.snowbrgpartarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 8) {
+            if (scslosifoundation::identifiertostring(param1.args[0]) == "sint") {
+                globalclass.hud.hide();
+                this.parent.parent.cam.setaimode(3);
+            }
+            else if (scslosifoundation::identifiertostring(param1.args[0]) == "bint") {
+                if (this.currentboulder <= 2) {
+                    debug::print("*******************Current Boulder = " + __tostring(this.currentboulder));
+                    this.snowballarray[this.currentboulder].startdropping();
+                    this.currentboulder = this.currentboulder + 1;
+                    this.boulderintervaltimer.reset(0);
+                    this.boulderintervaltimer.start();
+                }
+            }
+            scslosifoundation::identifiertostring(param1.args[0]);
+        }
+        else if (param1.eventid == 1) {
+            var2 = param1.args[0];
+            var3 = param1.args[1];
+            if (var2 == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (var3 == scslosifoundation::stringtoidentifier("swch")) {
+                    this.hitswitch();
+                    return 0;
+                }
+            }
+        }
+        else if (param1.eventid == 3) {
+            var4 = param1.args[0];
+            if (var4 == scslosifoundation::stringtoidentifier("tb00")) {
+                this.reseta();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(0.75);
+        }
+        else if (param1.eventid == 27) {
+            this.resetb();
+        }
+        else if (param1.eventid == 6) {
+            globalclass.player.actor.setorientation(90);
+            this.parent.parent.cam.setaimode(11);
+            globalclass.hud.show();
+            globalclass.player.actor.setinputstate("ninp");
+            this.boulderintervaltimer.reset(0);
+            this.boulderintervaltimer.start();
+            this.started = 1;
+        }
+        return null;
+    }
+    
+    method reseta() {
+        this.parent.parent.cam.setspline(0, 4.0, 1);
+        this.parent.parent.cam.settargetspline(3, 1);
+        this.parent.parent.cam.setaimode(7);
+        globalclass.player.kill();
+        gcstaticsoundsptrarray::playtablesound(1048);
+        return null;
+    }
+    
+    method resetb() {
+        this.parent.parent.cam.setspline(0, 4.0, 1);
+        this.parent.parent.cam.settargetspline(3, 1);
+        globalclass.player.actor.setpos(0 - 139.6, 0.9, -81);
+        globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+        globalclass.player.unkill();
+        globalclass.player.actor.setorientation(180);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        this.parent.parent.cam.setaimode(11);
+        this.reset();
+        this.hitswitchonce = 1;
+        this.currentboulder = 0;
+        return null;
+    }
+    
+    method hitswitch() {
+        if (this.hitswitchonce) {
+            globalclass.player.actor.setinputstate("none");
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+            this.hitswitchonce = 0;
+            this.switchinterptimer.reset(0);
+            this.switchinterptimer.start();
+            this.swtch.interpolate(this.swtch.getx(), this.swtch.gety() - 0.5, this.swtch.getz(), 2);
+            gcstaticsoundsptrarray::playtablesound(1053);
+            this.parent.level.cam.shakecamera(2.0, 0.08);
+            this.entrancedoora.changeposition(0, 0 - 10.75, 0, 3);
+            this.entrancedoorb.changeposition(0, 8.25, 0, 3);
+            this.entrancedoora.setresponse(1, 0, 1);
+            this.entrancedoorb.setresponse(1, 0, 1);
+            this.exitdoora.changeposition(0, 10.75, 0, 240);
+            this.exitdoorb.changeposition(0, 0 - 8.25, 0, 240);
+            if (this.musichasstarted == 0) {
+                this.musichasstarted = 1;
+                globalclass.bgmusic.play(1);
+            }
+        }
+        return null;
+    }
+    
+    method platformhit() {
+        var var1;
+        this.numofplatformshit = this.numofplatformshit + 1;
+        this.swtch.hide();
+        this.thering.hide();
+        var1 = 0;
+        while ((this.snowbrgpartarray.__length - 1) >= var1) {
+            this.snowbrgpartarray[var1].drop();
+            gcstaticsoundsptrarray::playtablesound(441);
+            this.parent.level.cam.shakecamera(1.0, 0.48);
+            debug::print("Dropping brg..." + __tostring(var1));
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method reset() {
+        var var1;
+        this.swtch.show();
+        this.thering.show();
+        this.swtch.setposition(this.switchx, this.switchy, this.switchz);
+        this.thering.setposition(this.ringx, this.ringy, this.ringz);
+        if (this.started == 1) {
+            this.started = 0;
+            this.entrancedoora.stopinterpolate();
+            this.entrancedoorb.stopinterpolate();
+            this.exitdoora.stopinterpolate();
+            this.exitdoorb.stopinterpolate();
+            this.entrancedoora.setposition(this.entrancedoorax, this.entrancedooray, this.entrancedooraz);
+            this.entrancedoorb.setposition(this.entrancedoorbx, this.entrancedoorby, this.entrancedoorbz);
+            this.exitdoora.setposition(this.exitdoorax, this.exitdooray, this.exitdooraz);
+            this.exitdoorb.setposition(this.exitdoorbx, this.exitdoorby, this.exitdoorbz);
+        }
+        this.numofplatformshit = 0;
+        var1 = 0;
+        while ((this.snowbrgpartarray.__length - 1) >= var1) {
+            this.snowbrgpartarray[var1].reset();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.snowballarray.__length - 1) >= var1) {
+            this.snowballarray[var1].stopdropping();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

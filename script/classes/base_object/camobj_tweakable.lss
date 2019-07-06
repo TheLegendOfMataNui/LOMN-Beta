@@ -1,0 +1,54 @@
+class camobj_tweakable : base_object {
+    property obj;
+    property stepamount;
+    property desc;
+    
+    method camobj_tweakable(param1) {
+        this.obj = param1;
+        this.desc = "cam";
+        this.stepamount = 0.0;
+        debug::print("Setting tweakable on " + __tostring(this.desc));
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method setpos(param1, param2, param3) {
+        this.obj.setpos(param1, param2, param3);
+        return null;
+    }
+    
+    method getx() {
+        return this.obj.getpositionx();
+    }
+    
+    method gety() {
+        return this.obj.getpositiony();
+    }
+    
+    method getz() {
+        return this.obj.getpositionz();
+    }
+    
+    method getorientationx() {
+        return 0;
+    }
+    
+    method getorientationy() {
+        return 0;
+    }
+    
+    method getorientationz() {
+        return 0;
+    }
+    
+    method setorientation(param1, param2, param3) {
+        return 0;
+    }
+    
+    method zap() {
+        return null;
+    }
+}

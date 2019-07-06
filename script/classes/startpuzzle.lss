@@ -1,0 +1,234 @@
+class startpuzzle {
+    property parent;
+    property button;
+    property buttonup;
+    property doortop;
+    property doorbottom;
+    property dooropen;
+    property tiggerboxid;
+    property camposnum;
+    property startedfalling;
+    property cinema;
+    property killedbytrigerbox;
+    
+    method startpuzzle(param1) {
+        this.parent = param1;
+        this.buttonup = 1;
+        this.dooropen = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        gcareadirector::setfog(-16777200, 0 - 1.0, 0 - 900.0, 0.15);
+        gcareadirector::setnearestmax(15);
+        this.doortop = new lego_moveableobject("drt1");
+        this.doortop.initfull();
+        this.doorbottom = new lego_moveableobject("drb1");
+        this.doorbottom.initfull();
+        this.button = new lego_moveableobject("sw00");
+        this.button.initfull();
+        this.setupstartingpositions();
+        this.tiggerboxid = 0;
+        this.camposnum = 0;
+        this.startedfalling = 0;
+        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var1, 2);
+        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(var1, 4);
+        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(var2, 2);
+        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(var2, 4);
+        this.killedbytrigerbox = 0;
+        return null;
+    }
+    
+    method initshort() {
+        this.killedbytrigerbox = 0;
+        globalclass.player.unkill();
+        this.resetcharacterposition();
+        gccollisionphysicsgroup::toggletriggerboxentered(this.tiggerboxid, 0);
+        this.parent.level.cam.setaimode(11);
+        globalclass.player.actor.setinputstate("ninp");
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        var1 = null;
+        var2 = null;
+        this.doortop.cleanupfull();
+        this.doortop = null;
+        this.doorbottom.cleanupfull();
+        this.doorbottom = null;
+        this.button.cleanupfull();
+        this.button = null;
+        this.cinema = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 85) {
+            if (param1.event == 2) {
+                this.startdropping();
+            }
+        }
+        if (param1.button == 49) {
+            if (param1.event == 2) {
+                this.startcam();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        if (param1.eventid == 1) {
+            var1 = param1.args[0];
+            var2 = param1.args[1];
+            if (var1 == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (var2 == scslosifoundation::stringtoidentifier("sw00")) {
+                    this.hitswitch();
+                }
+                var2;
+            }
+        }
+        else if (param1.eventid == 3) {
+            var3 = param1.args[0];
+            if (((var3 == scslosifoundation::stringtoidentifier("tb00")) || (var3 == scslosifoundation::stringtoidentifier("tb01"))) || (var3 == scslosifoundation::stringtoidentifier("tb02"))) {
+                this.killedbytrigerbox = 1;
+                this.parent.level.cam.setaimode(7);
+                this.tiggerboxid = var3;
+                gccollisionphysicsgroup::spinmask(1.2);
+            }
+        }
+        else if (param1.eventid == 27) {
+            if (this.killedbytrigerbox) {
+                globalclass.player.kill();
+            }
+            else {
+                this.cleanupshort();
+                this.initshort();
+            }
+        }
+        else if (param1.eventid == 46) {
+            if (this.killedbytrigerbox) {
+                this.cleanupshort();
+                this.initshort();
+            }
+            else {
+                gccollisionphysicsgroup::spinmask(1.0);
+            }
+        }
+        else if (param1.eventid == 14) {
+            if (this.camposnum == 0) {
+                this.camposnum = 1;
+                this.secondcaminterp();
+            }
+            else if (this.camposnum == 1) {
+                this.parent.level.cam.setaimode(11);
+                this.parent.level.cam.resetviewport();
+            }
+            else if (this.camposnum == 10) {
+                this.parent.level.cam.setaimode(11);
+            }
+        }
+        else if (param1.eventid == 7) {
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
+                gcstaticsoundsptrarray::playtablesound(149);
+            }
+        }
+        return null;
+    }
+    
+    method resetcharacterposition() {
+        if (this.tiggerboxid == scslosifoundation::stringtoidentifier("tb00")) {
+            globalclass.player.actor.setpos(146.3, -346, 1683.7);
+            globalclass.player.actor.setorientation(270);
+        }
+        else if (this.tiggerboxid == scslosifoundation::stringtoidentifier("tb01")) {
+            globalclass.player.actor.setpos(203.5, -402, 1887.9);
+            globalclass.player.actor.setorientation(-146);
+        }
+        else if (this.tiggerboxid == scslosifoundation::stringtoidentifier("tb02")) {
+            globalclass.player.actor.setpos(176.1, 0 - 336.1, 1601.4);
+            globalclass.player.actor.setorientation(0 - 174.3);
+        }
+        return null;
+    }
+    
+    method cheat() {
+        return null;
+    }
+    
+    method hitswitch() {
+        if (this.buttonup) {
+            this.buttonup = 0;
+            this.button.changeposition(0, 0 - 1.2, 0, 1);
+            this.button.setresponse(0, 0, 0);
+            this.startcam();
+            globalclass.player.actor.setpos(127.3, -270, 1606);
+            globalclass.player.actor.setorientation(140);
+        }
+        return null;
+    }
+    
+    method startcam() {
+        this.camposnum = 0;
+        this.parent.level.cam.scaletocutscene();
+        this.parent.level.cam.setpos(138.16, 0 - 274.25, 1605.6);
+        this.parent.level.cam.settargetpos(56, -207, 1675);
+        this.parent.level.cam.interpolate(216.8, 0 - 307.7, 1552.7, 226, -320, 1508, 4.0);
+        return null;
+    }
+    
+    method secondcaminterp() {
+        this.parent.level.cam.interpolate(119.96, 0 - 265.92, 1614.7, 226, -320, 1508, 2.0);
+        this.opendoors();
+        return null;
+    }
+    
+    method setupstartingpositions() {
+        if (this.dooropen) {
+            this.button.changeposition(0, 0 - 1.2, 0, 0);
+            this.button.setresponse(0, 0, 0);
+            this.opendoors();
+        }
+        return null;
+    }
+    
+    method opendoors() {
+        this.dooropen = 1;
+        this.doortop.changeposition(0, 7, 0, 3);
+        this.doortop.setresponse(0, 0, 0);
+        this.doorbottom.changeposition(0, -5, 0, 3);
+        this.doorbottom.setresponse(0, 0, 0);
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

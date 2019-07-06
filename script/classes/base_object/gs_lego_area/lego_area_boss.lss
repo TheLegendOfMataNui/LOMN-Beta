@@ -1,0 +1,46 @@
+class lego_area_boss : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_boss(param1) {
+        this.gs_lego_area("boss", param1, 0, 0);
+        this.puzzle = new boss_puzzle(this);
+        this.lego_area_initfull();
+        this.startingarea = [ 180, 
+            1391.3, 
+            26.1, 
+            0 - 486.5 ];
+        return null;
+    }
+    
+    method initfull() {
+        this.puzzle.initfull();
+        this.puzzle.show();
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+}

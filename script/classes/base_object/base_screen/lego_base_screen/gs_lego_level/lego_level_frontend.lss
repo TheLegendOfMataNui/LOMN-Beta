@@ -1,0 +1,28 @@
+class lego_level_frontend : gs_lego_level {
+    property playedonce;
+    
+    method lego_level_frontend(param1) {
+        var var1;
+        this.gs_lego_level("lev0", "onua", "frnt");
+        var1 = new lego_area_front(this);
+        this.areas.__append(var1);
+        this.playedonce = 0;
+        return null;
+    }
+    
+    method initfull() {
+        globalclass.bgmusic.stop();
+        gchuddirector::playcinematic("Root/Data/cinematics/New_LOGO8015.bik", 1);
+        gchuddirector::playcinematic("Root/Data/cinematics/New_Saffirelogo.bik", 1);
+        gchuddirector::playcinematic("Root/Data/cinematics/BIONICLEFMV3.bik", 1);
+        this.lego_level_initfull();
+        globalclass.player.addmask("fake", 0);
+        globalclass.saverloaded = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_level_cleanupfull();
+        return null;
+    }
+}

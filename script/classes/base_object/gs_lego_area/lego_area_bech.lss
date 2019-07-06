@@ -1,0 +1,39 @@
+class lego_area_bech : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_bech(param1) {
+        this.gs_lego_area("bech", param1, 0, 0);
+        this.puzzle = new beach_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+}

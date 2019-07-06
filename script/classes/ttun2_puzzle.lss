@@ -1,0 +1,70 @@
+class ttun2_puzzle {
+    property parent;
+    property enteredbackdoor;
+    property call_ev_safe_time_once;
+    
+    method ttun2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.call_ev_safe_time_once = 1;
+        this.enteredbackdoor = 1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play();
+        gcareadirector::setnearestmax(50);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 44) {
+            if (this.call_ev_safe_time_once) {
+                if (this.parent.enterlookid == scslosifoundation::stringtoidentifier("str1")) {
+                    this.enteredbackdoor = 1;
+                    debug::print("*******************************1 OUT OF WATER");
+                    globalclass.player.actor.setunderwater(0);
+                }
+                else {
+                    this.enteredbackdoor = 0;
+                    debug::print("*******************************1 IN WATER");
+                    globalclass.player.actor.setwaterlevel(1000);
+                }
+                this.call_ev_safe_time_once = 0;
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            if (this.enteredbackdoor) {
+                globalclass.player.actor.setunderwater(0);
+                debug::print("******************************** OUT OF WATER");
+            }
+            else {
+                debug::print("******************************** IN WATER");
+                globalclass.player.actor.setwaterlevel(1000);
+            }
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method cheat() {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

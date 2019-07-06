@@ -1,0 +1,173 @@
+class ss_base3dcharacter : ss_base3dobject {
+    property numanimations;
+    property gepetto;
+    property currentanimation;
+    
+    method ss_base3dcharacter(param1, param2, param3, param4, param5, param6, param7) {
+        this.charstring = param2;
+        this.contstring = param1;
+        if (param3 == null) {
+            this.angle = 0.0;
+        }
+        else {
+            this.angle = param3;
+        }
+        if (param4 == null) {
+            this.x1 = 0.0;
+        }
+        else {
+            this.x1 = param4;
+        }
+        if (param5 == null) {
+            this.y1 = 0.0;
+        }
+        else {
+            this.y1 = param5;
+        }
+        if (param6 == null) {
+            this.z = 0.0;
+        }
+        else {
+            this.z = param6;
+        }
+        if (param7 == null) {
+            this.inputstate = "none";
+        }
+        else {
+            this.inputstate = param7;
+        }
+        this.currentanimation = 0;
+        return null;
+    }
+    
+    method add() {
+        var var1;
+        gcmodeldirector::addcharacter(this.charstring, this.charname, scslosifoundation::stringtoidentifier(this.inputstate), this.contid);
+        this.handle = gcmodeldirector::getcharacter(this.contid);
+        this.setpos(this.x1, this.y1, this.z);
+        this.setorientation(this.angle);
+        this.setinputstate(this.inputstate);
+        var1 = gccharacter::hasgepetto(this.handle);
+        if (var1 == 1) {
+            this.gepetto = gccharacter::getgepetto(this.handle);
+            this.numanimations = this.getnumanimations();
+        }
+        return null;
+    }
+    
+    method setinputstate(param1) {
+        var var1;
+        var1 = scslosifoundation::stringtoidentifier(param1);
+        gcmodeldirector::setinputstate(this.contid, var1);
+        return null;
+    }
+    
+    method getnumanimations() {
+        this.numanimations = gclegogepetto::getnumanims(this.gepetto);
+        return this.numanimations;
+    }
+    
+    method getanimid(param1) {
+        var var1;
+        if ((param1 < this.numanimations) && (param1 >= 0)) {
+            var1 = gclegogepetto::getanimidfromnumber(this.gepetto, param1);
+        }
+        else {
+            var1 = 0;
+        }
+        return var1;
+    }
+    
+    method switchanimation(param1) {
+        gccharacter::switchanimation(this.handle, param1);
+        this.currentanimation = param1;
+        return null;
+    }
+    
+    method disableanimation(param1) {
+        gccharacter::disablecharacteranimation(this.handle, param1);
+        this.currentanimation = param1;
+        return null;
+    }
+    
+    method enableanimation(param1) {
+        gccharacter::enablecharacteranimation(this.handle, param1);
+        this.currentanimation = param1;
+        return null;
+    }
+    
+    method play() {
+        gclegogepetto::play(this.gepetto);
+        return null;
+    }
+    
+    method stop() {
+        gclegogepetto::stop(this.gepetto);
+        return null;
+    }
+    
+    method pause() {
+        gclegogepetto::pause(this.gepetto);
+        return null;
+    }
+    
+    method startattime(param1) {
+        gclegogepetto::startattime(this.gepetto, param1);
+        return null;
+    }
+    
+    method startatframe(param1) {
+        gclegogepetto::startatframe(this.gepetto, param1);
+        return null;
+    }
+    
+    method gettime() {
+        var var1;
+        var1 = gclegogepetto::gettime(this.gepetto);
+        return var1;
+    }
+    
+    method getframe() {
+        var var1;
+        var1 = gclegogepetto::getframe(this.gepetto);
+        return var1;
+    }
+    
+    method getduration() {
+        var var1;
+        var1 = gclegogepetto::getduration(this.gepetto);
+        return var1;
+    }
+    
+    method getnumframes() {
+        var var1;
+        var1 = gclegogepetto::getnumframes(this.gepetto);
+        return var1;
+    }
+    
+    method disablecollisions() {
+        gccharacter::disablecollisions(this.handle);
+        return null;
+    }
+    
+    method getbonepos(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = scslosifoundation::hashstring(param1);
+        var2 = gccharacter::getbonex(this.handle, var1);
+        var3 = gccharacter::getboney(this.handle, var1);
+        var4 = gccharacter::getbonez(this.handle, var1);
+        return new ss_point(var2, var3, var4);
+    }
+    
+    method setteamid(param1) {
+        gccharacter::setteamid(this.handle, param1);
+        return null;
+    }
+    
+    method getteamid() {
+        return gccharacter::getteamid(this.handle);
+    }
+}

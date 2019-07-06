@@ -1,0 +1,72 @@
+class lego_area_kini : gs_lego_area {
+    property parent;
+    
+    method lego_area_kini(param1) {
+        this.parent = param1;
+        this.gs_lego_area("kini", param1, 0, 0);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        this.lego_area_show();
+        this.lego_area_initfull();
+        gcmodeldirector::setnearestmax(15);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+        globalclass.bgmusic.play(1);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"), 0);
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var1, 1.5, 0.8, 1, 0, 0);
+        gccharacter::setorientation(var1, -34);
+        var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("nuju"), 0);
+        gccharacter::setinputstate(var2, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var2, 1.5, 0.8, 1, 0, 0);
+        gccharacter::setorientation(var2, -89);
+        var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"), 0);
+        gccharacter::setinputstate(var3, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var3, 1.5, 0.8, 1, 0, 0);
+        gccharacter::setorientation(var3, -44);
+        var4 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("oewa"), 0);
+        gccharacter::setinputstate(var4, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var4, 1.5, 0.8, 1, 0, 0);
+        gccharacter::setorientation(var4, -146);
+        var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("when"), 0);
+        gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var5, 1.5, 0.8, 1, 0, 0);
+        gccharacter::setorientation(var5, -40);
+        var6 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vaka"), 0);
+        gccharacter::setinputstate(var6, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var6, 1.5, 0.8, 1, 0, 0);
+        gccharacter::setorientation(var6, -145);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.lego_area_cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

@@ -1,0 +1,83 @@
+class hive_puzzle {
+    property parent;
+    property cinema_shown;
+    property cinema;
+    property showmask;
+    property mask;
+    
+    method hive_puzzle(param1) {
+        this.parent = param1;
+        this.cinema_shown = 0;
+        this.showmask = 1;
+        return null;
+    }
+    
+    method initfull() {
+        this.cinema_shown = gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2"));
+        if (this.cinema_shown == 0) {
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin2");
+            gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("shrn"));
+        }
+        if (this.showmask) {
+            this.mask = new lego_pickup("mask", 4, 1, "item", 1, 1);
+            this.mask.initfull();
+            this.mask.show();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.cinema = null;
+        if (!(this.mask == null)) {
+            this.showmask = this.mask.objshown;
+            this.mask.cleanupfull();
+            this.mask = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            globalclass.level.cam.setaimode(7);
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        else if (param1.eventid == 39) {
+            if (param1.args[0] == this.mask.obj.id) {
+                this.playcinema();
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (!(this.cinema == null)) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+            param1.button;
+        }
+        return null;
+    }
+    
+    method playcinema() {
+        if (this.cinema_shown == 0) {
+            globalclass.hud.hide();
+            gccinemaengine::play(this.cinema);
+            this.cinema_shown = 1;
+        }
+        return null;
+    }
+}

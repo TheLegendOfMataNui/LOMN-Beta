@@ -1,0 +1,106 @@
+class legosoundscaper {
+    property handle;
+    property levelid;
+    property areaid;
+    
+    method legosoundscaper(param1, param2) {
+        this.handle = gcsoundscapeeditor::create();
+        this.levelid = param1;
+        this.areaid = param2;
+        return null;
+    }
+    
+    method input(param1) {
+        debug::print("GETTING TO SOUNDSCAPER INPUT");
+        if (param1.event == 2) {
+            if (param1.button == 49) {
+                this.activate(this.levelid, this.areaid);
+            }
+            if (param1.button == 48) {
+                this.deactivate(0);
+            }
+            if (param1.button == 53) {
+                this.save();
+            }
+            if (param1.button == 56) {
+                this.pickfrontest();
+            }
+            if (param1.button == 57) {
+                this.unpick();
+            }
+            if (param1.button == 219) {
+                this.startadjustpicked();
+            }
+            if (param1.button == 221) {
+                this.endadjustpicked();
+            }
+            if (param1.button == 54) {
+                this.addandpick();
+            }
+            if (param1.button == 55) {
+                this.removepicked();
+            }
+        }
+        return null;
+    }
+    
+    method activate(param1, param2) {
+        gcsoundscapeeditor::activate(this.handle, param1, param2);
+        return null;
+    }
+    
+    method deactivate(param1) {
+        gcsoundscapeeditor::deactivate(this.handle, param1);
+        return null;
+    }
+    
+    method save() {
+        gcsoundscapeeditor::saveslkfile(this.handle);
+        return null;
+    }
+    
+    method pickfrontest() {
+        gcsoundscapeeditor::pickfrontestsound(this.handle);
+        return null;
+    }
+    
+    method pickclosest() {
+        gcsoundscapeeditor::pickclosestsound(this.handle);
+        return null;
+    }
+    
+    method unpick() {
+        gcsoundscapeeditor::unpick(this.handle);
+        return null;
+    }
+    
+    method pushpicked(param1) {
+        gcsoundscapeeditor::pushpickedsound(this.handle, param1);
+        return null;
+    }
+    
+    method pullpicked(param1) {
+        gcsoundscapeeditor::pullpickedsound(this.handle, param1);
+        return null;
+    }
+    
+    method startadjustpicked() {
+        gcsoundscapeeditor::startadjustpickedsound(this.handle);
+        return null;
+    }
+    
+    method endadjustpicked() {
+        gcsoundscapeeditor::endadjustpickedsound(this.handle);
+        return null;
+    }
+    
+    method addandpick() {
+        gcsoundscapeeditor::addandpicksound(this.handle);
+        return null;
+    }
+    
+    method removepicked() {
+        gcsoundscapeeditor::removepickedsound(this.handle);
+        return null;
+    }
+}

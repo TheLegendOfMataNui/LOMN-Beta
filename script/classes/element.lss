@@ -1,0 +1,286 @@
+class element {
+    property powerdrainrate;
+    property elementname;
+    property selectable;
+    property funballspritepath;
+    property setup;
+    property active;
+    property kboulder1;
+    property kboulder2;
+    property kboulder3;
+    
+    method element(param1, param2) {
+        this.elementname = param1;
+        this.active = 0;
+        this.funballspritepath = null;
+        this.kboulder1 = null;
+        this.kboulder2 = null;
+        this.kboulder3 = null;
+        this.setup();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.powerdrainrate = null;
+        this.elementname = null;
+        this.selectable = null;
+        this.funballspritepath = null;
+        this.setup = null;
+        this.active = null;
+        if (!(this.kboulder1 == null)) {
+            this.kboulder1.cleanupfull();
+            this.kboulder1 = null;
+        }
+        if (!(this.kboulder2 == null)) {
+            this.kboulder2.cleanupfull();
+            this.kboulder2 = null;
+        }
+        if (!(this.kboulder3 == null)) {
+            this.kboulder3.cleanupfull();
+            this.kboulder3 = null;
+        }
+        return null;
+    }
+    
+    method setup() {
+        if (this.elementname == 1) {
+            if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("onua")) {
+                globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+                this.funballspritepath = "Root/data/art/hud/elemrotate/hppybllonua";
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("gali")) {
+                globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+                this.funballspritepath = "Root/data/art/hud/elemrotate/hppybllonua";
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("poha")) {
+                globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+                this.funballspritepath = "Root/data/art/hud/elemrotate/hppybllpohatu";
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("kopa")) {
+                globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+                this.funballspritepath = "Root/data/art/hud/elemrotate/hppybllkopaka";
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("lewa")) {
+                globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+                this.funballspritepath = "Root/data/art/hud/elemrotate/hppybllonua";
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("tahu")) {
+                globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+                this.funballspritepath = "Root/data/art/hud/elemrotate/hppyblltahu";
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("akam")) {
+                globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+                this.funballspritepath = "Root/data/art/hud/elemrotate/hppyblltahu";
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("wair")) {
+                globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+                this.funballspritepath = "Root/data/art/hud/elemrotate/hppybllgali";
+            }
+            scslosifoundation::stringtoidentifier(globalclass.player.actor.charname);
+            this.powerdrainrate = 0;
+        }
+        else if (this.elementname == 3) {
+            this.powerdrainrate = 5;
+        }
+        else if (this.elementname == 2) {
+            globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+            this.powerdrainrate = 5;
+        }
+        else if (this.elementname == 4) {
+            this.powerdrainrate = 60;
+        }
+        else if (this.elementname == 5) {
+            globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+            this.powerdrainrate = 2;
+        }
+        else if (this.elementname == 6) {
+            this.powerdrainrate = 5;
+        }
+        else if (this.elementname == 7) {
+            this.powerdrainrate = 60;
+        }
+        else if (this.elementname == 8) {
+            globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+            this.powerdrainrate = 1;
+        }
+        else if (this.elementname == 9) {
+            this.powerdrainrate = 2;
+        }
+        else if (this.elementname == 10) {
+            this.kboulder1 = new lego_projectileobject("abld", "valv");
+            this.kboulder2 = new lego_projectileobject("bbld", "valv");
+            this.kboulder3 = new lego_projectileobject("cbld", "valv");
+            this.kboulder1.init(0.5, 0, 0, 0, 0, 1.3, "pbld", "Root/data/characters/poha", 60, 0 - 0.5, 0 - 0.5, 0 - 0.5, 0.5, 0.5, 0.5, 1024);
+            this.kboulder2.init(0.5, 0, 0, 0, 0, 1.3, "pbld", "Root/data/characters/poha", 60, 0 - 0.5, 0 - 0.5, 0 - 0.5, 0.5, 0.5, 0.5, 1024);
+            this.kboulder3.init(0.5, 0, 0, 0, 0, 1.3, "pbld", "Root/data/characters/poha", 60, 0 - 0.5, 0 - 0.5, 0 - 0.5, 0.5, 0.5, 0.5, 1024);
+            this.kboulder1.setresponse(6, 0, 6);
+            this.kboulder2.setresponse(6, 0, 6);
+            this.kboulder3.setresponse(6, 0, 6);
+            this.kboulder1.setposition(0, 0, 0);
+            this.kboulder2.setposition(0, 0, 0);
+            this.kboulder3.setposition(0, 0, 0);
+            this.kboulder1.show();
+            this.kboulder2.show();
+            this.kboulder3.show();
+            this.kboulder1.settweakable();
+            this.kboulder2.settweakable();
+            this.kboulder3.settweakable();
+            this.powerdrainrate = 60;
+        }
+        else if (this.elementname == 11) {
+            globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+            this.powerdrainrate = 2;
+        }
+        else if (this.elementname == 12) {
+            this.powerdrainrate = 2;
+        }
+        else if (this.elementname == 13) {
+            this.powerdrainrate = 60;
+        }
+        else if (this.elementname == 14) {
+            globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+            this.powerdrainrate = 2;
+        }
+        else if (this.elementname == 15) {
+            this.powerdrainrate = 2;
+        }
+        else if (this.elementname == 16) {
+            this.powerdrainrate = 60;
+        }
+        else if (this.elementname == 17) {
+            globalclass.player.actor.setupelementalpower(50.0, 1.0, 4.0, 0.0, 22);
+            this.powerdrainrate = 2;
+        }
+        else if (this.elementname == 18) {
+            this.powerdrainrate = 5;
+        }
+        else if (this.elementname == 19) {
+            this.powerdrainrate = 60;
+        }
+        this.setup = 1;
+        return null;
+    }
+    
+    method add() {
+        var var1;
+        var1 = 1;
+        if (this.elementname == 1) {
+            if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("onua")) {
+                globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppybllonua", 0, 23, var1, 0, 0, 0, 0, 0));
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("gali")) {
+                globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppybllgali", 0, 23, var1, 0, 0, 0, 0, 0));
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("poha")) {
+                globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppybllpohatu", 0, 23, var1, 0, 0, 0, 0, 0));
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("kopa")) {
+                globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppybllkopaka", 0, 23, var1, 0, 0, 0, 0, 0));
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("lewa")) {
+                globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppyblllewa", 0, 23, var1, 0, 0, 0, 0, 0));
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("tahu")) {
+                globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppyblltahu", 0, 23, var1, 0, 0, 0, 0, 0));
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("akam")) {
+                globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppyblltahu", 0, 23, var1, 0, 0, 0, 0, 0));
+            }
+            else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("wair")) {
+                globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppybllgali", 0, 23, var1, 0, 0, 0, 0, 0));
+            }
+            scslosifoundation::stringtoidentifier(globalclass.player.actor.charname);
+        }
+        else if (this.elementname == 2) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hpybllonua", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 3) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/shldonua", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 4) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/erthqk", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 5) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hpybllgali", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 6) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/shldgali", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 7) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/typhoon", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 8) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppybllpohatu", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 9) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/shldpohatu", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 10) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/stonerain", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 11) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppybllkopaka", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 12) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/shldkopaka", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 13) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hailstorm", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 14) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppyblllewa", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 15) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/shldonua", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 16) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/windlewa", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 17) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/hppyblltahu", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 18) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/shldtahu", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        else if (this.elementname == 19) {
+            globalclass.hud.element.addelement(new gs_lego_animatesprite("Root/data/art/hud/elemrotate/brimstone", 0, 23, var1, 0, 0, 0, 0, 0));
+        }
+        return null;
+    }
+    
+    method activate() {
+        if (gctoa::glyphdone(globalclass.player.actor.toahandle) == 1) {
+            if (globalclass.player.energy > this.powerdrainrate) {
+                globalclass.player.removeenergy(this.powerdrainrate);
+                gctoa::startglyph(globalclass.player.actor.toahandle);
+            }
+        }
+        return null;
+    }
+    
+    method deactivate() {
+        if (this.active == 1) {
+            gcstaticsoundsptrarray::stoptablesound(1083);
+            globalclass.player.actor.deactivateshield();
+            this.active = 0;
+        }
+        return null;
+    }
+    
+    method setselectable(param1) {
+        this.selectable = param1;
+        return null;
+    }
+    
+    method isactive() {
+        return this.active;
+    }
+    
+    method isselectable() {
+        return this.selectable;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+}

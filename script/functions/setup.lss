@@ -1,0 +1,19 @@
+function setup() {
+    screenx = gcgame::getresolutionwidth();
+    screeny = gcgame::getresolutionheight();
+    screenratio = screenx / 640;
+    globalclass = new global_class();
+    globalclass.initfull();
+    screenlist = new base_screenlist();
+    setupinterface();
+    if (gcsaver::cheatmenu()) {
+        screenlist.setactive(1);
+        newfrontend = 0;
+    }
+    else {
+        screenlist.setactive(21);
+        newfrontend = 1;
+    }
+    screenlist.initfull();
+    return null;
+}

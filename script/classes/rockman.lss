@@ -1,0 +1,113 @@
+class rockman {
+    property parent;
+    property rocks;
+    property currentrock;
+    property areaid;
+    property rocky;
+    property curstate;
+    property setgravity;
+    property boneindex;
+    
+    method rockman(param1) {
+        this.areaid = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.rocks = [ new sprite_projectile("rk01", "lbld", "Root/data/levels/lev3/boss", 45, 3, 100, 0, 1), 
+            new sprite_projectile("rk02", "lbld", "Root/data/levels/lev3/boss", 45, 3, 100, 0, 1), 
+            new sprite_projectile("rk03", "lbld", "Root/data/levels/lev3/boss", 45, 3, 100, 0, 1), 
+            new sprite_projectile("rk04", "lbld", "Root/data/levels/lev3/boss", 45, 3, 100, 0, 1) ];
+        this.rocky = gcrockboss::createrockboss("rkmn", 1937010290);
+        gcrockboss::setup(this.rocky, 752.0, 0.5, 0 - 429.51, 0);
+        gcmodeldirector::show(1937010290, 0);
+        this.boneindex = gcrockboss::getboneindex(this.rocky, 2063160632);
+        this.currentrock = 0;
+        return null;
+    }
+    
+    method reset() {
+        debug::print("Calling reset");
+        gcrockboss::reset(this.rocky, 752, 0.5, 0 - 429.51, 0);
+        gcmodeldirector::show(1937010290, 0);
+        this.curstate = 3;
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.rocks == null)) {
+            var1 = 0;
+            while ((this.rocks.__length - 1) >= var1) {
+                this.rocks[var1].cleanupfull();
+                this.rocks[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.rocks = null;
+        }
+        this.currentrock = null;
+        this.areaid = null;
+        if (!(this.rocky == null)) {
+            gcmodeldirector::remove(1937010290, 0);
+            this.rocky = null;
+        }
+        this.curstate = null;
+        this.setgravity = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method throwrock() {
+        gcrockboss::throwboulder(this.rocky, this.rocks[this.currentrock].handle, this.boneindex);
+        this.currentrock = this.currentrock + 1;
+        if (this.currentrock > (this.rocks.__length - 1)) {
+            debug::print("Current rock was " + __tostring(this.currentrock));
+            this.currentrock = 0;
+        }
+        return null;
+    }
+    
+    method morph(param1) {
+        if (param1 == 0) {
+            if (this.curstate == 3) {
+                gcstaticsoundsptrarray::playtablesound(525);
+                gcrockboss::morphcharactermid(this.rocky, 4, 1, 2, 1.5, 1);
+                this.curstate = 2;
+            }
+            else if (this.curstate == 2) {
+                gcrockboss::morphcharacter(this.rocky, 2, 3, 0.75, 1);
+                this.curstate = 0;
+            }
+        }
+        else if (param1 == 1) {
+            if (this.curstate == 0) {
+                gcrockboss::morphcharacter(this.rocky, 3, 2, 1.25, 1);
+                this.curstate = 1;
+            }
+            else if (this.curstate == 1) {
+                gcstaticsoundsptrarray::playtablesound(525);
+                gcrockboss::morphcharactermid(this.rocky, 2, 1, 4, 0.25, 1);
+                this.curstate = 3;
+            }
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

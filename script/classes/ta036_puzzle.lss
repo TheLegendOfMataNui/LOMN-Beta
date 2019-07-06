@@ -1,0 +1,122 @@
+class ta036_puzzle {
+    property parent;
+    property mthermals;
+    property mask;
+    property gotmask;
+    property showmask;
+    
+    method ta036_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.mthermals = [ new thermal("tm10"), 
+            new thermal("tm11"), 
+            new thermal("tm12"), 
+            new thermal("tm13"), 
+            new thermal("tm14"), 
+            new thermal("tm15"), 
+            new thermal("tm16"), 
+            new thermal("tm17"), 
+            new thermal("tm18"), 
+            new thermal("tm19"), 
+            new thermal("tm20"), 
+            new thermal("tm21"), 
+            new thermal("tm22"), 
+            new thermal("tm23"), 
+            new thermal("tm24"), 
+            new thermal("tm25"), 
+            new thermal("tm26"), 
+            new thermal("tm27"), 
+            new thermal("tm28"), 
+            new thermal("tm29"), 
+            new thermal("tm30"), 
+            new thermal("tm31"), 
+            new thermal("tm32"), 
+            new thermal("tm33"), 
+            new thermal("tm34"), 
+            new thermal("tm35") ];
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mk6a"))) {
+            this.showmask = 0;
+        }
+        else {
+            this.showmask = 1;
+        }
+        if (this.showmask == 1) {
+            this.mask = new lego_pickup("mk6a", 1011, 1, "item", 1, 1);
+            this.mask.initfull();
+            this.mask.show();
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        globalclass.player.actor.setlevitateparams(19, 15);
+        this.gotmask = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.mthermals.__length - 1) >= var1) {
+            this.mthermals[var1].cleanupfull();
+            var1 = var1 + 1;
+        }
+        this.mthermals = [  ];
+        if (!(this.mask == null)) {
+            if (this.mask.objshown == 0) {
+                this.showmask = 0;
+            }
+            this.mask.cleanupfull();
+            this.mask = null;
+        }
+        this.mthermals.__length - 1;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.mthermals.__length - 1) >= var1) {
+            this.mthermals[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.mthermals.__length - 1) >= var1) {
+            this.mthermals[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 39) {
+            this.gotmask = 1;
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            if (this.gotmask) {
+                globalclass.player.actor.setpos(0 - 232.1, 242.8, 93.7);
+                globalclass.player.actor.setorientation(0 - 22.5);
+            }
+            else {
+                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            }
+            globalclass.player.unkill();
+            globalclass.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

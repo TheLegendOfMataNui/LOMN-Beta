@@ -1,0 +1,100 @@
+class lego_area_vllg1 : gs_lego_area {
+    property cinema;
+    property puzzle;
+    
+    method lego_area_vllg1(param1) {
+        this.gs_lego_area("vllg", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new vllg1_puzzle();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setnearestmax(8);
+        gcmodeldirector::setnearestmax(5);
+        this.puzzle.initfull();
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 0) {
+            gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin2");
+            gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("tura"));
+            gccinemaengine::play(this.cinema);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (!(this.cinema == null)) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+            param1.button;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            this.level.cam.setaimode(11);
+        }
+        if ((param1.eventid == 44) && !(this.cinema == null)) {
+            param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(param1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
+            param1 = null;
+            param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gccharacter::settohunga(param1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk4a"));
+            param1 = null;
+            param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+            gccharacter::settohunga(param1, rgba(39, 38, 39, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mkca"));
+            param1 = null;
+            param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+            gccharacter::settohunga(param1, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mk0a"));
+            param1 = null;
+            param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
+            gccharacter::settohunga(param1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk2a"));
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl02"), 0);
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl03"), 0);
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl04"), 0);
+        }
+        if (param1.eventid == 30) {
+            globalclass.bgmusic.stop();
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        this.cinema = null;
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+}

@@ -1,0 +1,170 @@
+class ss_basetext : base_drawobject {
+    property font;
+    property fontname;
+    property text;
+    property string;
+    property ident;
+    property horizontal;
+    property verticle;
+    property scale;
+    property padadjustment;
+    
+    method ss_basetext(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+        this.fontname = param1;
+        this.string = param2;
+        if (!(param9 == null)) {
+            this.padadjustment = param9;
+        }
+        else {
+            this.padadjustment = 0;
+        }
+        this.x1 = param3;
+        this.y1 = param4 + this.padadjustment;
+        this.z = param5;
+        if (!(param6 == null)) {
+            this.scale = param6;
+        }
+        else {
+            this.scale = 1;
+        }
+        if (!(param7 == null)) {
+            this.horizontal = param7;
+        }
+        else {
+            this.horizontal = 0;
+        }
+        if (!(param8 == null)) {
+            this.verticle = param8;
+        }
+        else {
+            this.verticle = 4;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        this.font = sctilefont::create(this.fontname);
+        this.text = sctextobject::create(this.x1, this.y1, this.z, this.font, this.string);
+        sctextobject::setscale(this.text, this.scale, this.scale);
+        sctilefont::setscale(this.font, this.scale, this.scale);
+        sctextobject::setjustification(this.text, this.horizontal | this.verticle);
+        sctextobject::enablejustification(this.text, 1);
+        return null;
+    }
+    
+    method initshort() {
+        this.font = sctilefont::create(this.fontname);
+        this.text = sctextobject::create(this.x1, this.y1, this.z, this.font, this.string);
+        sctilefont::setscale(this.font, this.scale, this.scale);
+        sctextobject::setjustification(this.text, this.horizontal | this.verticle);
+        sctextobject::enablejustification(this.text, 1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.font = null;
+        this.text = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.font = null;
+        this.text = null;
+        return null;
+    }
+    
+    method enablealphachannel(param1) {
+        return null;
+    }
+    
+    method add() {
+        this.ident = gchuddirector::addtextobject(this.text);
+        return null;
+    }
+    
+    method show() {
+        gchuddirector::show(this.ident);
+        this.onscreen = 1;
+        return null;
+    }
+    
+    method hide() {
+        gchuddirector::hide(this.ident);
+        this.onscreen = 0;
+        return null;
+    }
+    
+    method remove() {
+        gchuddirector::remove(this.ident);
+        return null;
+    }
+    
+    method setpos(param1, param2, param3) {
+        this.x1 = param1;
+        this.y1 = param2 + this.padadjustment;
+        this.z = param3;
+        sctextobject::setposition(this.text, this.x1, this.y1, this.z);
+        return null;
+    }
+    
+    method setjustification(param1, param2) {
+        this.horizontal = param1;
+        this.verticle = param2;
+        sctextobject::setjustification(this.text, this.horizontal | this.verticle);
+        sctextobject::enablejustification(this.text, 1);
+        return null;
+    }
+    
+    method changepos(param1, param2, param3) {
+        if (!(param1 == null)) {
+            this.x1 = param1 + this.x1;
+        }
+        if (!(param2 == null)) {
+            this.y1 = param2 + this.y1;
+        }
+        if (!(param3 == null)) {
+            this.z = param3 + this.z;
+        }
+        sctextobject::setposition(this.text, this.x1, this.y1, this.z);
+        return null;
+    }
+    
+    method setstring(param1) {
+        this.string = param1;
+        sctextobject::setstring(this.text, this.string);
+        return null;
+    }
+    
+    method setfont(param1) {
+        this.fontname = param1;
+        sctilefont::create(this.fontname);
+        sctextobject::setfont(this.text, this.font);
+        return null;
+    }
+    
+    method scalefont(param1) {
+        this.scale = param1;
+        sctilefont::setscale(this.font, this.scale, this.scale);
+        return null;
+    }
+    
+    method getheight() {
+        return sctilefont::getfontheight(this.font);
+    }
+    
+    method getwidth() {
+        return sctilefont::getstrlen(this.font, this.string);
+    }
+    
+    method setkerning(param1) {
+        var var1;
+        var1 = param1;
+        sctilefont::setkerning(this.font, var1);
+        return null;
+    }
+    
+    method settransparency(param1) {
+        sctextobject::settransparency(this.text, param1);
+        return null;
+    }
+}

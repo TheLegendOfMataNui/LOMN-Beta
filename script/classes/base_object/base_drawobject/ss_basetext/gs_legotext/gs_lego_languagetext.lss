@@ -1,0 +1,25 @@
+class gs_lego_languagetext : gs_legotext {
+    property stringtable;
+    property stringindex;
+    
+    method gs_lego_languagetext(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
+        var var1;
+        this.stringtable = param3;
+        this.stringindex = param2;
+        var1 = this.stringtable.languagearray[this.stringindex];
+        var1 = scslosistringfuncs::toupper(var1);
+        this.gs_legotext(param1, var1, param4, param5, param6, param7, param8, param9, param10, param11);
+        return null;
+    }
+    
+    method setstring(param1, param2) {
+        this.stringindex = param1;
+        if (!(param2 == null)) {
+            this.stringtable = param2;
+        }
+        this.string = this.stringtable.languagearray[this.stringindex];
+        this.string = scslosistringfuncs::toupper(this.string);
+        sctextobject::setstring(this.text, this.string);
+        return null;
+    }
+}

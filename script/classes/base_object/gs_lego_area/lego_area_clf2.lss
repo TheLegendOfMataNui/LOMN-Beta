@@ -1,0 +1,43 @@
+class lego_area_clf2 : gs_lego_area {
+    property boulderpuzzle;
+    property parent;
+    
+    method lego_area_clf2(param1) {
+        this.gs_lego_area("clf2", param1, 0, 0);
+        this.boulderpuzzle = new cliffscale_class(this);
+        this.parent = param1;
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        gcareadirector::setnearestmax(10);
+        gcmodeldirector::setnearestmax(6);
+        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        this.boulderpuzzle.initfull();
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.boulderpuzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.boulderpuzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.boulderpuzzle.exit();
+        this.boulderpuzzle = null;
+        this.parent = null;
+        return null;
+    }
+}

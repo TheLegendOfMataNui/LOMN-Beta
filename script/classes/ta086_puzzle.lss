@@ -1,0 +1,115 @@
+class ta086_puzzle {
+    property parent;
+    property checkifsurfingabilityneedstobeset;
+    property setsurfing;
+    property tiggerboxid;
+    
+    method ta086_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        globalclass.settestforlavacollisions(0);
+        this.checkifsurfingabilityneedstobeset = 1;
+        this.setsurfing = 0;
+        this.tiggerboxid = null;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
+        globalclass.bgmusic.play(1);
+        this.setsurfmode(1);
+        return null;
+    }
+    
+    method initshort() {
+        globalclass.player.unkill();
+        gccollisionphysicsgroup::toggletriggerboxentered(this.tiggerboxid, 0);
+        this.parent.level.cam.setaimode(11);
+        this.setsurfmode(1);
+        return null;
+    }
+    
+    method cleanupshort() {
+        return null;
+    }
+    
+    method hide() {
+        this.setsurfmode(0);
+        globalclass.settestforlavacollisions(1);
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t000"));
+        globalclass.player.actor.setforwardvelocity(0.0);
+        this.checkifsurfingabilityneedstobeset = null;
+        this.setsurfing = null;
+        globalclass.player.actor.setlevitateparams(14, 10);
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method setsurfmode(param1) {
+        if (param1) {
+            globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t038"));
+            globalclass.player.actor.setsurfingability(0.9, 0.8);
+            globalclass.player.actor.setsurfminspeed(30.0);
+            globalclass.player.actor.setsurfmaxspeed(60.0);
+            globalclass.player.actor.setsurffallgravity(0.8);
+            globalclass.player.actor.setforwardvelocity(2);
+            globalclass.player.actor.setclimb(5);
+            globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("surf"));
+        }
+        else {
+            globalclass.player.actor.setsurfingability(0.0, 0.0);
+            globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("????"));
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 1) {
+            
+        }
+        else if (param1.eventid == 42) {
+            
+        }
+        else if (param1.eventid == 46) {
+            if (this.tiggerboxid == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            }
+            else if (this.tiggerboxid == scslosifoundation::stringtoidentifier("tb01")) {
+                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            }
+            this.cleanupshort();
+            this.initshort();
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.kill();
+        }
+        else if (param1.eventid == 3) {
+            var1 = param1.args[0];
+            if (var1 == scslosifoundation::stringtoidentifier("tb00")) {
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(1.2);
+                this.tiggerboxid = scslosifoundation::stringtoidentifier("tb00");
+                debug::print("hit 1st trigerBox");
+            }
+            if (var1 == scslosifoundation::stringtoidentifier("tb01")) {
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(1.2);
+                this.tiggerboxid = scslosifoundation::stringtoidentifier("tb01");
+                debug::print("hit 2nd trigerBox");
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

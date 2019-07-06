@@ -1,0 +1,550 @@
+class global_class : base_object {
+    property eventlist;
+    property processlist;
+    property inputlist;
+    property inputenabled;
+    property eventhandles;
+    property processhandles;
+    property inputhandles;
+    property nextid;
+    property hud;
+    property player;
+    property pause;
+    property tweak;
+    property helpscreen;
+    property cheats;
+    property render;
+    property level;
+    property randnum;
+    property bgmusic;
+    property language;
+    property debugstring;
+    property debugtimer;
+    property gamefont;
+    property gamefont2;
+    property gamefont3;
+    property gamefont4;
+    property hittoggletimer;
+    property whatsnext;
+    property testforlavacollisions;
+    property saverloaded;
+    property shortinit;
+    property initlevelok;
+    property newlevel;
+    
+    method global_class() {
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.eventlist = [  ];
+        this.processlist = [  ];
+        this.inputlist = [  ];
+        this.eventhandles = [  ];
+        this.processhandles = [  ];
+        this.inputhandles = [  ];
+        this.inputenabled = 1;
+        this.hittoggletimer = 1;
+        this.nextid = null;
+        this.hud = new hud_class();
+        this.player = new player();
+        this.tweak = new gs_lego_tweakers();
+        this.cheats = new cheatlist();
+        this.pause = new pausescreen();
+        this.helpscreen = new lego_helpscreen();
+        this.render = new renderobjects();
+        this.level = null;
+        this.randnum = new slosi_random(0);
+        this.debugtimer = new lego_timer("zzzz", 5.0, 0);
+        this.debugstring = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", "TEMP", 320, 60, 0, 1, 0, 1, 0);
+        this.language = 0;
+        this.gamefont = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
+        this.gamefont2 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
+        this.gamefont3 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
+        this.gamefont4 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
+        sctilefont::setcolor(this.gamefont2, 255, 255, 0, 255);
+        this.whatsnext = 0;
+        this.testforlavacollisions = 1;
+        scprocessmanager::userealdeltatime(1);
+        this.saverloaded = 0;
+        this.hud.initfull();
+        this.eventlist.__append(this.hud);
+        this.inputlist.__append(this.hud);
+        this.processlist.__append(this.hud);
+        this.player.initfull();
+        this.eventlist.__append(this.player);
+        this.inputlist.__append(this.player);
+        this.processlist.__append(this.player);
+        this.tweak.initfull();
+        this.eventlist.__append(this.tweak);
+        this.inputlist.__append(this.tweak);
+        this.processlist.__append(this.tweak);
+        this.pause.initfull();
+        this.inputlist.__append(this.pause);
+        this.helpscreen.initfull();
+        this.inputlist.__append(this.helpscreen);
+        this.processlist.__append(this.helpscreen);
+        this.render.initfull();
+        this.inputlist.__append(this.render);
+        this.cheats.initfull();
+        this.inputlist.__append(this.cheats);
+        this.processlist.__append(this.cheats);
+        this.debugtimer.initfull();
+        this.debugstring.initfull();
+        var1 = 0;
+        while ((this.eventlist.__length - 1) >= var1) {
+            this.eventhandles.__append(var1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.inputlist.__length - 1) >= var1) {
+            this.inputhandles.__append(var1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.processlist.__length - 1) >= var1) {
+            this.processhandles.__append(var1);
+            var1 = var1 + 1;
+        }
+        this.shortinit = 0;
+        this.initlevelok = 0;
+        this.bgmusic = new legomp3player();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.hud == null)) {
+            this.hud.cleanupfull();
+            this.hud = null;
+        }
+        if (!(this.player == null)) {
+            this.player.cleanupfull();
+            this.player = null;
+        }
+        if (!(this.tweak == null)) {
+            this.tweak.cleanupfull();
+            this.tweak = null;
+        }
+        if (!(this.pause == null)) {
+            this.pause.cleanupfull();
+            this.pause = null;
+        }
+        if (!(this.helpscreen == null)) {
+            this.helpscreen.cleanupfull();
+            this.helpscreen = null;
+        }
+        if (!(this.render == null)) {
+            this.render.cleanupfull();
+            this.render = null;
+        }
+        if (!(this.cheats == null)) {
+            this.cheats.cleanupfull();
+            this.cheats = null;
+        }
+        this.level = null;
+        this.randnum = null;
+        this.language = null;
+        if (!(this.debugstring == null)) {
+            this.debugstring.cleanupfull();
+            this.debugstring = null;
+        }
+        if (!(this.debugtimer == null)) {
+            this.debugtimer.cleanupfull();
+            this.debugtimer = null;
+        }
+        this.gamefont = null;
+        this.gamefont2 = null;
+        this.gamefont3 = null;
+        this.gamefont4 = null;
+        this.hittoggletimer = null;
+        this.whatsnext = null;
+        this.testforlavacollisions = null;
+        this.saverloaded = null;
+        if (!(this.bgmusic == null)) {
+            this.bgmusic.stop();
+            this.bgmusic = null;
+        }
+        var1 = 0;
+        while ((this.eventlist.__length - 1) >= var1) {
+            this.eventlist.__removeat(this.eventlist.__length - 1);
+            var1 = var1 + 1;
+        }
+        this.eventlist = null;
+        var1 = 0;
+        while ((this.processlist.__length - 1) >= var1) {
+            this.processlist.__removeat(this.processlist.__length - 1);
+            var1 = var1 + 1;
+        }
+        this.processlist = null;
+        var1 = 0;
+        while ((this.inputlist.__length - 1) >= var1) {
+            this.inputlist.__removeat(this.inputlist.__length - 1);
+            var1 = var1 + 1;
+        }
+        this.inputlist = null;
+        this.eventhandles = null;
+        this.inputhandles = null;
+        this.processhandles = null;
+        return null;
+    }
+    
+    method initshort() {
+        this.hud.initfull();
+        this.player.initfull();
+        this.shortinit = 0;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.shortinit = 1;
+        if (!(this.level == null)) {
+            this.level.cleanupfull();
+            this.level = null;
+        }
+        this.player.cleanupfull();
+        this.hud.cleanupfull();
+        this.hittoggletimer = 0;
+        this.whatsnext = 0;
+        this.testforlavacollisions = 0;
+        return null;
+    }
+    
+    method exit() {
+        if (!(this.level == null)) {
+            this.level.exit();
+            this.level = null;
+            debug::print("[][][] level clean");
+        }
+        this.cleanupfull();
+        debug::print("[][][] globalclass clean");
+        screenlist.cleanupfull();
+        screenlist = null;
+        debug::print("[][][] screenlist clean");
+        gcgame::quitgame();
+        debug::print("[][][] game quit");
+        return null;
+    }
+    
+    method settestforlavacollisions(param1) {
+        this.testforlavacollisions = param1;
+        return null;
+    }
+    
+    method setexitflag() {
+        this.whatsnext = 3;
+        return null;
+    }
+    
+    method setbackflag() {
+        this.whatsnext = 2;
+        return null;
+    }
+    
+    method setnextlevel(param1, param2) {
+        gcsaver::resetdata();
+        if (param1 == null) {
+            this.newlevel = "lev1";
+        }
+        else {
+            this.newlevel = param1;
+        }
+        this.whatsnext = 1;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (!(this.level == null)) {
+            var1 = 0;
+            while ((this.processlist.__length - 1) >= var1) {
+                if (this.shortinit) {
+                    if (var1 > 1) {
+                        this.processlist[var1].process(param1);
+                    }
+                }
+                else {
+                    this.processlist[var1].process(param1);
+                }
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        var var1;
+        if (!(this.level == null)) {
+            if (param1.event == 2) {
+                if (param1.button == 145) {
+                    this.toggleinput();
+                }
+                param1.button;
+            }
+            if (this.inputenabled) {
+                var1 = 0;
+                while ((this.inputlist.__length - 1) >= var1) {
+                    if (this.shortinit) {
+                        if (var1 > 1) {
+                            this.inputlist[var1].input(param1);
+                        }
+                    }
+                    else {
+                        this.inputlist[var1].input(param1);
+                    }
+                    var1 = var1 + 1;
+                }
+            }
+        }
+        if (param1.event == 2) {
+            if (param1.button == 67) {
+                
+            }
+        }
+        return null;
+    }
+    
+    method toggleinput(param1) {
+        if (!(param1 == null)) {
+            this.inputenabled = param1;
+        }
+        else if (this.inputenabled == 1) {
+            this.inputenabled = 0;
+        }
+        else {
+            this.inputenabled = 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (!(this.level == null)) {
+            var1 = 0;
+            while ((this.eventlist.__length - 1) >= var1) {
+                if (this.shortinit) {
+                    if (var1 > 1) {
+                        this.eventlist[var1].onevent(param1);
+                    }
+                }
+                else {
+                    this.eventlist[var1].onevent(param1);
+                }
+                var1 = var1 + 1;
+            }
+        }
+        if (param1.eventid == 8) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("zzzz")) {
+                this.debugstring.scalefont(1.0);
+                this.debugstring.hide();
+                this.hittoggletimer = 1;
+            }
+        }
+        else if (param1.eventid == 44) {
+            if (this.initlevelok) {
+                this.initlevelok = 0;
+                this.initshort();
+                screenlist.cleanupshort();
+                if (this.newlevel == "fren") {
+                    screenlist.forward(21);
+                }
+                else if (this.newlevel == "lev1") {
+                    screenlist.forward(9);
+                }
+                else if (this.newlevel == "lev2") {
+                    screenlist.forward(10);
+                }
+                else if (this.newlevel == "lev3") {
+                    screenlist.forward(11);
+                }
+                else if (this.newlevel == "lev4") {
+                    screenlist.forward(12);
+                }
+                else if (this.newlevel == "lev5") {
+                    screenlist.forward(13);
+                }
+                else if (this.newlevel == "lev6") {
+                    screenlist.forward(14);
+                }
+                else if (this.newlevel == "lev7") {
+                    screenlist.forward(15);
+                }
+                else if (this.newlevel == "lev8") {
+                    screenlist.forward(16);
+                }
+            }
+            if (this.whatsnext == 2) {
+                this.cleanupshort();
+                if (newfrontend == 1) {
+                    debug::print("[][][] back to front end");
+                    this.initshort();
+                    screenlist.cleanupshort();
+                    screenlist.backward(21);
+                }
+                else {
+                    debug::print("[][][] back to menu screen");
+                    screenlist.backward(1);
+                }
+            }
+            else if (this.whatsnext == 3) {
+                this.exit();
+            }
+            else if (this.whatsnext == 1) {
+                this.initlevelok = 1;
+                this.cleanupshort();
+            }
+        }
+        return null;
+    }
+    
+    method setcurrentlevel(param1) {
+        this.level = param1;
+        return null;
+    }
+    
+    method setlanguage(param1) {
+        this.language = param1;
+        return null;
+    }
+    
+    method scriptmessage(param1, param2) {
+        var var1;
+        var var2;
+        var var3;
+        if (this.hittoggletimer) {
+            if (param2 == null) {
+                var1 = 5;
+            }
+            else {
+                var1 = param2;
+            }
+            var2 = new slosi_string(param1);
+            var3 = var2.getlength();
+            var3 = (var3 * 16) / 2;
+            this.debugstring.setstring(param1);
+            this.debugstring.setpos(320 - var3, 60, 0);
+            this.debugstring.add();
+            this.debugstring.show();
+            this.debugtimer.setduration(var1);
+            this.debugtimer.reset(0);
+            this.debugtimer.start();
+            this.hittoggletimer = 0;
+        }
+        else {
+            var2 = new slosi_string(param1);
+            var3 = var2.getlength();
+            var3 = (var3 * 16) / 2;
+            this.debugstring.setstring(param1);
+            this.debugstring.setpos(320 - var3, 60, 0);
+            this.debugstring.show();
+        }
+        return null;
+    }
+    
+    method getgamefont(param1) {
+        if (param1 == "Root/Data/Art/Fonts/BionicleFont") {
+            return this.gamefont;
+        }
+        else if (param1 == "Root/Data/Art/Fonts/BionicleFontHi") {
+            return this.gamefont2;
+        }
+        else if (param1 == "3") {
+            return this.gamefont3;
+        }
+        else if (param1 == "4") {
+            return this.gamefont4;
+        }
+        return null;
+    }
+    
+    method addtoeventlist(param1) {
+        var var1;
+        this.eventlist.__append(param1);
+        var1 = this.eventhandles[this.eventhandles.__length - 1] + 1;
+        this.eventhandles.__append(var1);
+        return this.eventlist.__length - 1;
+    }
+    
+    method addtoinputlist(param1) {
+        var var1;
+        this.inputlist.__append(param1);
+        var1 = this.inputhandles[this.inputhandles.__length - 1] + 1;
+        this.inputhandles.__append(var1);
+        return this.inputlist.__length - 1;
+    }
+    
+    method addtoprocesslist(param1) {
+        var var1;
+        this.processlist.__append(param1);
+        var1 = this.processhandles[this.processhandles.__length - 1] + 1;
+        this.processhandles.__append(var1);
+        return this.processlist.__length - 1;
+    }
+    
+    method removefromeventlist(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.eventhandles.__length - 1) >= var1) {
+            if (this.eventhandles[var1] == param1) {
+                this.eventhandles.__removeat(var1);
+                this.eventlist.__removeat(var1);
+                return 1;
+            }
+            var1 = var1 + 1;
+        }
+        return 0;
+    }
+    
+    method removefrominputlist(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.inputhandles.__length - 1) >= var1) {
+            if (this.inputhandles[var1] == param1) {
+                this.inputhandles.__removeat(var1);
+                this.inputlist.__removeat(var1);
+                return 1;
+            }
+            var1 = var1 + 1;
+        }
+        return 0;
+    }
+    
+    method removefromprocesslist(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.processhandles.__length - 1) >= var1) {
+            if (this.processhandles[var1] == param1) {
+                this.processhandles.__removeat(var1);
+                this.processlist.__removeat(var1);
+                return 1;
+            }
+            var1 = var1 + 1;
+        }
+        return 0;
+    }
+    
+    method getnewid() {
+        if (this.nextid == null) {
+            this.nextid = 8000;
+        }
+        else {
+            this.nextid = this.nextid + 1;
+        }
+        return scslosifoundation::stringtoidentifier(__tostring(this.nextid));
+    }
+    
+    method loadgame(param1, param2) {
+        if (param1 == null) {
+            this.newlevel = "lev1";
+        }
+        else {
+            this.newlevel = param1;
+        }
+        if (param2 == 1) {
+            
+        }
+        this.whatsnext = 1;
+        return null;
+    }
+}

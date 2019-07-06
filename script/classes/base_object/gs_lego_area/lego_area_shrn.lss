@@ -1,0 +1,50 @@
+class lego_area_shrn : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_shrn(param1) {
+        this.gs_lego_area("shrn", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new shrn1_puzzle(this);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        gcareadirector::setfog(-16777216, 0 - 65.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setnearestmax(15);
+        gcmodeldirector::setnearestmax(3);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+        globalclass.bgmusic.play(1);
+        this.puzzle.initfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+}

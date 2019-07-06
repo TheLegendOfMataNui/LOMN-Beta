@@ -1,0 +1,144 @@
+class ta016_puzzle {
+    property parent;
+    property platformsarray;
+    property fireballarray;
+    
+    method ta016_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        gcareadirector::setnearestmax(50);
+        this.platformsarray = [ new platform("pl12"), 
+            new platform("pl13"), 
+            new platform("pl14"), 
+            new platform("pl15"), 
+            new platform("pl16"), 
+            new platform("pl25"), 
+            new platform("pl26"), 
+            new platform("pl27"), 
+            new platform("pl28"), 
+            new platform("pl29") ];
+        var1 = 0;
+        while ((this.platformsarray.__length - 1) >= var1) {
+            this.platformsarray[var1].initfull();
+            var2 = "tim" + __tostring(var1);
+            this.platformsarray[var1].setupfall(1.0, var2);
+            this.platformsarray[var1].setuptouchshakerotate(1.5, 0.0, 1.5, 0.2);
+            var1 = var1 + 1;
+        }
+        this.fireballarray = [ new ta01_fireball("fb00", 1), 
+            new ta01_fireball("fb01", 1), 
+            new ta01_fireball("fb02", 3), 
+            new ta01_fireball("fb03", 3), 
+            new ta01_fireball("fb04", 5), 
+            new ta01_fireball("fb05", 5), 
+            new ta01_fireball("fb06", 7), 
+            new ta01_fireball("fb07", 7), 
+            new ta01_fireball("fb08", 9), 
+            new ta01_fireball("fb09", 9), 
+            new ta01_fireball("fb10", 11), 
+            new ta01_fireball("fb11", 11), 
+            new ta01_fireball("fb12", 13), 
+            new ta01_fireball("fb13", 13), 
+            new ta01_fireball("fb14", 14), 
+            new ta01_fireball("fb15", 14), 
+            new ta01_fireball("fb16", 14), 
+            new ta01_fireball("fb17", 14), 
+            new ta01_fireball("fb18", 14), 
+            new ta01_fireball("fb99", 3) ];
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        var1 = 0;
+        while ((this.platformsarray.__length - 1) >= var1) {
+            this.platformsarray[var1].reset();
+            var1 = var1 + 1;
+        }
+        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+        globalclass.player.unkill();
+        globalclass.player.actor.setinputstate("ninp");
+        return null;
+    }
+    
+    method cleanupshort() {
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.platformsarray.__length - 1) >= var1) {
+            this.platformsarray[var1].cleanupfull();
+            this.platformsarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.platformsarray = null;
+        this.fireballarray = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.platformsarray.__length - 1) >= var1) {
+            this.platformsarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.fireballarray.__length - 1) >= var1) {
+            this.fireballarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.platformsarray.__length - 1) >= var1) {
+            this.platformsarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.fireballarray.__length - 1) >= var1) {
+            this.fireballarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 1) {
+            if (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) {
+                
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.cleanupshort();
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+        }
+        else if (param1.eventid == 19) {
+            
+        }
+        else if (param1.eventid == 17) {
+            
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

@@ -1,0 +1,97 @@
+class sinker {
+    property obj;
+    property name;
+    property id;
+    property uppos;
+    property downpos;
+    property plase;
+    property nextsinker;
+    property moveing;
+    property upsound;
+    
+    method sinker(param1, param2) {
+        this.obj = new lego_moveableobject(param1);
+        this.obj.initfull();
+        this.obj.setresponse(0, 0, 0);
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.plase = param2;
+        this.uppos = new basicpoint(this.obj.getx(), this.obj.gety(), this.obj.getz());
+        this.downpos = new basicpoint(this.obj.getx(), this.obj.gety() - 12, this.obj.getz());
+        this.nextsinker = null;
+        this.obj.setpos(this.downpos.x, this.downpos.y, this.downpos.z);
+        this.moveing = 2;
+        this.upsound = new tablecopysound(1097);
+        this.upsound.setvolume(50);
+        this.upsound.synctoobject(this.id);
+        return null;
+    }
+    
+    method initfull() {
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.upsound = null;
+        return null;
+    }
+    
+    method link(param1) {
+        this.nextsinker = param1;
+        return null;
+    }
+    
+    method reset() {
+        this.obj.stopinterpolate();
+        this.obj.setpos(this.downpos.x, this.downpos.y, this.downpos.z);
+        this.moveing = 2;
+        return null;
+    }
+    
+    method goup() {
+        this.moveing = 0;
+        this.obj.interpolate(this.uppos.x, this.uppos.y, this.uppos.z, 1.5);
+        this.upsound.play();
+        return null;
+    }
+    
+    method godown() {
+        this.obj.interpolate(this.downpos.x, this.downpos.y, this.downpos.z, 3);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (param1.args[2] == 0) {
+                if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                    if (param1.args[1] == this.id) {
+                        if (this.moveing == 1) {
+                            
+                        }
+                        else {
+                            this.moveing = 1;
+                            this.godown();
+                        }
+                        if (!(this.nextsinker == null)) {
+                            if (this.nextsinker.moveing == 0) {
+                                
+                            }
+                            else {
+                                this.nextsinker.goup();
+                            }
+                        }
+                    }
+                    param1.args[1];
+                }
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+}

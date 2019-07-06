@@ -1,0 +1,145 @@
+class target_class {
+    property obj;
+    property timer;
+    property timername;
+    property parent;
+    property turnedin;
+    property inflag;
+    property rotating;
+    property temp;
+    property rotatetargetsound;
+    
+    method target_class(param1, param2, param3, param4, param5, param6, param7, param8) {
+        this.timername = param2;
+        this.parent = param8;
+        this.obj = new lego_moveableobject(param1, param4);
+        this.timer = new lego_timer(this.timername, param3, 0);
+        return null;
+    }
+    
+    method initfull(param1, param2, param3) {
+        this.obj.initfull();
+        this.timer.initfull();
+        this.turnedin = 0;
+        this.inflag = 0;
+        this.rotating = 0;
+        this.temp = 0;
+        this.rotatetargetsound = new tablecopysound(1038);
+        this.rotatetargetsound.synctoobject(this.obj.id);
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.timer.cleanupfull();
+        this.timer = null;
+        this.timername = null;
+        this.parent = null;
+        this.turnedin = null;
+        this.inflag = null;
+        this.rotating = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (this.rotating) {
+            var1 = this.obj.getorientationy();
+            if (this.turnedin) {
+                if (var1 >= 180) {
+                    this.obj.setorientation(0, 180, 0);
+                    this.rotating = 0;
+                }
+                else {
+                    this.obj.setorientation(0, var1 + 11, 0);
+                }
+            }
+            else if (var1 >= 360) {
+                this.obj.setorientation(0, 0, 0);
+                this.rotating = 0;
+            }
+            else {
+                this.obj.setorientation(0, var1 + 11, 0);
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 79) {
+                this.hit();
+            }
+            if (param1.button == 80) {
+                
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            
+        }
+        else if (param1.eventid == 8) {
+            if (param1.args[0] == this.timer.id) {
+                this.targerreset();
+            }
+        }
+        else if (param1.eventid == 19) {
+            if (param1.args[0] == this.obj.id) {
+                this.hit();
+            }
+        }
+        return null;
+    }
+    
+    method hit() {
+        if (this.turnedin) {
+            debug::print("*********************************************************");
+            debug::print("*********************PLAY THE SOUND TURN OUT SOUND******");
+            debug::print("********************************************************");
+            this.rotatetargetsound.play(0);
+            debug::print("* turning Out");
+            this.rotating = 1;
+            this.turnedin = 0;
+            this.timer.reset();
+            this.timer.start();
+            this.parent.targertback();
+        }
+        else {
+            debug::print("********************************************************");
+            debug::print("*********************PLAY THE SOUND TURN IN SOUND******");
+            debug::print("********************************************************");
+            this.rotatetargetsound.play(0);
+            debug::print("* turning IN");
+            this.turnedin = 1;
+            this.rotating = 1;
+            this.timer.reset();
+            this.timer.start();
+            this.parent.hitatarget();
+        }
+        return null;
+    }
+    
+    method targerreset() {
+        if (this.turnedin) {
+            this.turnedin = 0;
+            debug::print("***** reset turnedIN = false");
+            this.rotating = 1;
+            this.timer.reset();
+            this.parent.targertback();
+        }
+        return null;
+    }
+    
+    method settweakable() {
+        this.obj.settweakable();
+        return null;
+    }
+}

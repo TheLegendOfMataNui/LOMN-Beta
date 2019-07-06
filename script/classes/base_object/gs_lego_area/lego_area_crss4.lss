@@ -1,0 +1,66 @@
+class lego_area_crss4 : gs_lego_area {
+    property puzzle;
+    property parent;
+    property skatespickup;
+    
+    method lego_area_crss4(param1) {
+        this.parent = param1;
+        this.gs_lego_area("crss", param1, 0, 0);
+        this.puzzle = new crosspuzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.lego_area_show();
+        this.puzzle.initfull();
+        this.puzzle.show();
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("skts"));
+        if (var1 == 0) {
+            this.skatespickup = new lego_pickup("skts", 0, 5, "item", 5, 1);
+            this.skatespickup.initfull();
+            this.skatespickup.show();
+            this.skatespickup.setcondition(131072);
+            this.skatespickup.setquest(2);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.hide();
+        this.puzzle.cleanupfull();
+        if (!(this.skatespickup == null)) {
+            this.skatespickup.cleanupfull();
+            this.skatespickup = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method exit() {
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        this.parent = null;
+        return null;
+    }
+}

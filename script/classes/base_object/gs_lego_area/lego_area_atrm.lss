@@ -1,0 +1,94 @@
+class lego_area_atrm : gs_lego_area {
+    property target1;
+    property target2;
+    property target3;
+    property target4;
+    property bugpickup;
+    
+    method lego_area_atrm(param1) {
+        this.gs_lego_area("atrm", param1, 0, 0);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.lego_area_show();
+        gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setnearestmax(15);
+        gcmodeldirector::setnearestmax(15);
+        this.target1 = new lego_moveableobject("hot0");
+        this.target1.initfull();
+        this.target1.setmytargetingflags(1);
+        this.target1.setresponse(1, 1, 1);
+        this.target2 = new lego_moveableobject("hot1");
+        this.target2.initfull();
+        this.target2.setmytargetingflags(1);
+        this.target2.setresponse(1, 1, 1);
+        this.target3 = new lego_moveableobject("hot2");
+        this.target3.initfull();
+        this.target3.setmytargetingflags(1);
+        this.target3.setresponse(1, 1, 1);
+        this.target4 = new lego_moveableobject("hot3");
+        this.target4.initfull();
+        this.target4.setmytargetingflags(1);
+        this.target4.setresponse(1, 1, 1);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setkapura(var1);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("bbug")) == 0) {
+            this.bugpickup = new lego_pickup("bbug", 0, 5, "item", 8, 1);
+            this.bugpickup.initfull();
+            this.bugpickup.show();
+            this.bugpickup.setcondition(131072);
+            this.bugpickup.setquest(2);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.bugpickup == null)) {
+            this.bugpickup.cleanupfull();
+            this.bugpickup = null;
+        }
+        if (!(this.target1 == null)) {
+            this.target1.cleanupfull();
+            this.target1 = null;
+        }
+        if (!(this.target2 == null)) {
+            this.target2.cleanupfull();
+            this.target2 = null;
+        }
+        if (!(this.target3 == null)) {
+            this.target3.cleanupfull();
+            this.target3 = null;
+        }
+        if (!(this.target4 == null)) {
+            this.target4.cleanupfull();
+            this.target4 = null;
+        }
+        this.lego_area_hide();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        return null;
+    }
+}

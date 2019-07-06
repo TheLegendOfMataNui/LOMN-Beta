@@ -1,0 +1,36 @@
+class lego_area_tura5 : gs_lego_area {
+    
+    method lego_area_tura5(param1) {
+        this.gs_lego_area("tura", param1, 0, 0);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        this.lego_area_show();
+        var2 = scslosifoundation::stringtoidentifier("tps9");
+        var3 = gcsaver::portalactive();
+        if (var3 == 1) {
+            gccollisionphysicsgroup::setportal(var2, "root/data/art/portals/lewa/shrine_ripple/l_shrn_ptl", 0);
+        }
+        else {
+            gccollisionphysicsgroup::turnoffnextarea(var2);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        return null;
+    }
+}

@@ -1,0 +1,53 @@
+class ta07_platform {
+    property obj;
+    property id;
+    property name;
+    property up;
+    
+    method ta07_platform(param1) {
+        this.obj = new lego_moveableobject(param1);
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.name = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.obj.setresponse(1, 0, 1);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.id = null;
+        this.name = null;
+        this.up = null;
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method reset() {
+        return null;
+    }
+    
+    method settweakable() {
+        this.obj.settweakable();
+        return null;
+    }
+}

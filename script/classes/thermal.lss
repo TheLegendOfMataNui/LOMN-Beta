@@ -1,0 +1,114 @@
+class thermal {
+    property obj;
+    property id;
+    property name;
+    property levitateup;
+    property curentorient;
+    property rotatetime;
+    property rotatespeed;
+    property windsound;
+    property drifttofull;
+    
+    method thermal(param1) {
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.obj = new lego_moveableobject(param1);
+        this.obj.initfull();
+        this.obj.setresponse(4, 4, 4);
+        this.obj.setalpha();
+        this.levitateup = 0;
+        this.curentorient = 0;
+        this.rotatetime = 0;
+        this.rotatespeed = 9;
+        this.windsound = new tablecopysound(1110);
+        this.windsound.setvolume(0);
+        this.windsound.play(1);
+        this.drifttofull = 0;
+        return null;
+    }
+    
+    method process(param1) {
+        this.obj.process(param1);
+        this.rotatetime = this.rotatetime + param1.deltatime;
+        if (this.rotatespeed > 0) {
+            if (this.rotatetime > (1 / this.rotatespeed)) {
+                this.rotatetime = 0;
+                this.spin();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.obj.onevent(param1);
+        if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == this.obj.id) {
+                    if (param1.args[2] == 1) {
+                        this.switchlevitation(0);
+                        this.sounddriftto_full(0);
+                    }
+                    else {
+                        this.switchlevitation(1);
+                        this.sounddriftto_full(1);
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 1010) {
+            if (param1.args[0] == 1) {
+                if (this.levitateup) {
+                    globalclass.player.actor.insidelevitatevortex(1);
+                }
+            }
+        }
+        return null;
+    }
+    
+    method sounddriftto_full(param1) {
+        if (param1 && (this.drifttofull == 0)) {
+            this.drifttofull = 1;
+            this.windsound.drifttovolume(100, 1);
+        }
+        if ((param1 == 0) && this.drifttofull) {
+            this.drifttofull = 0;
+            this.windsound.drifttovolume(0, 1);
+        }
+        return null;
+    }
+    
+    method switchlevitation(param1) {
+        if (param1 == 1) {
+            if (this.levitateup == 0) {
+                this.levitateup = 1;
+                globalclass.player.actor.insidelevitatevortex(1);
+            }
+        }
+        else if (this.levitateup == 1) {
+            this.levitateup = 0;
+            globalclass.player.actor.insidelevitatevortex(0);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.id = null;
+        this.name = null;
+        this.levitateup = null;
+        this.windsound = null;
+        return null;
+    }
+    
+    method spin() {
+        this.curentorient = this.curentorient + this.rotatespeed;
+        if (this.curentorient > 360) {
+            this.curentorient = this.curentorient - 360;
+        }
+        else {
+            this.obj.setorientation(0, this.curentorient, 0);
+        }
+        return null;
+    }
+}
