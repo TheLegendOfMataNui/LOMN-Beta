@@ -18,8 +18,11 @@ class endgm_puzzle {
         gclightdirector::setcavelighting(0);
         gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
         globalclass.bgmusic.stop();
-        var1 = gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"));
-        if (var1) {
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crb1"));
+        var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cr01"));
+        gccharacter::setscale(var1, 2.0);
+        gccharacter::setscale(var2, 2.0);
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"))) {
             this.cinema_shown = 1;
         }
         else {
@@ -34,15 +37,17 @@ class endgm_puzzle {
         this.glasswall.initfull();
         this.glasswall.setresponse(3, 3);
         this.safecount = 3;
-        var2;
         return null;
     }
     
     method cleanupfull() {
-        var var1;
-        this.glasswall.cleanupfull();
-        this.glasswall = null;
+        if (!(this.glasswall == null)) {
+            this.glasswall.cleanupfull();
+            this.glasswall = null;
+        }
         this.cinema = null;
+        this.cinema_shown = null;
+        this.safecount = null;
         return null;
     }
     
