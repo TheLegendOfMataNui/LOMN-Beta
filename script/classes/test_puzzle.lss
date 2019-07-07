@@ -2,6 +2,7 @@ class test_puzzle {
     property parent;
     property callsurfonce;
 	property miruactive;
+    property musichasstarted;
     
     method test_puzzle(param1) {
         this.parent = param1;
@@ -9,13 +10,14 @@ class test_puzzle {
     }
     
     method initfull() {
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
         this.callsurfonce = 1;
 		this.miruactive = 1;
+        this.musichasstarted = 0;
         return null;
     }
     
     method cleanupfull() {
-        this.callsurfonce = null;
         return null;
     }
     
@@ -54,8 +56,10 @@ class test_puzzle {
                 if (this.callsurfonce) {
                     this.startsurf();
                     this.callsurfonce = 0;
-                    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
-                    globalclass.bgmusic.play();
+                    if (this.musichasstarted == 0) {
+                        this.musichasstarted = 1;
+                        globalclass.bgmusic.play(1);
+                    }
                 }
             }
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {

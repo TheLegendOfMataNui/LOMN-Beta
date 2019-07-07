@@ -69,7 +69,7 @@ script: $(OSI_OUTPUT)
 $(OSI_OUTPUT): $(LSS_SOURCES)
 	@echo Compiling '$@'...
 	@if not exist $(subst /,\,$(dir $@))NUL mkdir $(subst /,\,$(dir $@))
-	@$(LSSTOOL) $(LSSARGS) ./script -o $(subst /,\,$@) > NUL
+	@$(LSSTOOL) $(LSSARGS) ./script -o $(subst /,\,$@) 
 
 # 
 # Data files are copied from data/
