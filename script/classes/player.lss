@@ -308,6 +308,15 @@ class player {
         else if (this.actorid == "nbua") {
             this.actor = new nobuaclass(param2, param3, param4, param5, param6);
         }
+        else if (this.actorid == "viki") {
+            this.actor = new tahuclass(param2, param3, param4, param5, param6);
+            var1 = 0;
+            while (4 >= var1) {
+                this.addmaxlife(40);
+                this.addmaxenergy(40);
+                var1 = var1 + 1;
+            }
+        }
         globalclass.hud.tokens.setcolor();
         globalclass.hud.ammo.setcolor();
         return null;
@@ -465,6 +474,9 @@ class player {
         }
         else if (param1 == "nbua") {
             this.addmask("fake", 1011);
+        }
+        else if (param1 == "viki") {
+            this.addmask("fake", 666);
         }
         globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
         return null;

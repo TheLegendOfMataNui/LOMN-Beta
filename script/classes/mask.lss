@@ -66,6 +66,10 @@ class mask {
             globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask7", 0, 23, 1, 0, 0, 0, 0, 0));
             this.powerdrainrate = 3;
         }
+        else if (this.maskname == 666) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 0;
+        }
         return null;
     }
     
@@ -232,6 +236,47 @@ class mask {
                 globalclass.player.actor.deactivateshield();
                 var1 = new scriptevent(1011, [ 0 ]);
                 var1.send();
+            }
+        }
+        else if (this.maskname == 666) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF ULTIMATE POWER");
+                globalclass.player.actor.activatestrength();
+				globalclass.player.actor.activateconcealment();
+				gcstaticsoundsptrarray::playtablesound(1106);
+				gclightdirector::setnightvisionlighting(1);
+				gcsaver::setcondition(4194304, param1);
+				gctoa::settranslating(globalclass.player.actor.toahandle, param1);
+				gccharacter::setwatertimerlength(globalclass.player.actor.handle, 0);
+				globalclass.player.actor.setanimationscalar(3.0);
+				globalclass.player.actor.activatetelekinesis();
+                var1 = new scriptevent(1002, [ 1 ]);
+                var1.send();
+				globalclass.player.actor.activatelevitation(1);
+				globalclass.player.actor.activateillusion();
+                gcbagroup::userealtimefortoa(1);
+                scprocessmanager::userealdeltatime(0);
+                scprocessmanager::setfakedeltatime(0.005);
+				globalclass.player.actor.activateshield();
+            }
+            else {
+				globalclass.player.actor.dectivateconcealment();
+                globalclass.player.actor.deactivatestrength();
+				gclightdirector::setnightvisionlighting(0);
+                gccharacter::setwatertimerlength(globalclass.player.actor.handle, 10);
+                globalclass.player.actor.replenishair();
+				globalclass.player.actor.setanimationscalar(1);
+				globalclass.player.actor.deactivatetelekinesis();
+				var1 = new scriptevent(1001);
+                var1.send();
+                var1 = new scriptevent(1002, [ 0 ]);
+                var1.send();
+				globalclass.player.actor.activatelevitation(0);
+				globalclass.player.actor.deactivateillusion();
+                gcbagroup::userealtimefortoa(0);
+                scprocessmanager::userealdeltatime(1);
+                scprocessmanager::setfakedeltatime(0.033333);
+				globalclass.player.actor.deactivateshield();
             }
         }
         return null;

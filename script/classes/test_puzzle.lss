@@ -1,6 +1,7 @@
 class test_puzzle {
     property parent;
     property callsurfonce;
+	property miruactive;
     
     method test_puzzle(param1) {
         this.parent = param1;
@@ -9,6 +10,7 @@ class test_puzzle {
     
     method initfull() {
         this.callsurfonce = 1;
+		this.miruactive = 1;
         return null;
     }
     
@@ -56,6 +58,11 @@ class test_puzzle {
                     globalclass.bgmusic.play();
                 }
             }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {
+                if (this.miruactive) {
+                    this.actmiru();
+				}
+            }
         }
         return null;
     }
@@ -66,8 +73,8 @@ class test_puzzle {
     
     method startsurf() {
         globalclass.player.actor.setsurfingability(0.3, 0.8);
-        globalclass.player.actor.setsurfminspeed(300.0);
-        globalclass.player.actor.setsurfmaxspeed(400.0);
+        globalclass.player.actor.setsurfminspeed(50.0);
+        globalclass.player.actor.setsurfmaxspeed(100.0);
         return null;
     }
     
@@ -75,4 +82,11 @@ class test_puzzle {
         globalclass.player.actor.setsurfingability(0.0, 0.0);
         return null;
     }
+
+	method actmiru() {
+		globalclass.player.maskcontrol.changemask(4);
+		globalclass.player.maskcontrol.toggleactive();
+    return null;
+    }
+
 }
