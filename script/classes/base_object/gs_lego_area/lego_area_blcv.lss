@@ -13,7 +13,6 @@ class lego_area_blcv : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.mask_puzzle.initfull();
-        this.mask_puzzle.show();
         return null;
     }
     
@@ -39,7 +38,11 @@ class lego_area_blcv : gs_lego_area {
     }
     
     method exit() {
-        this.mask_puzzle.exit();
+        this.lego_area_cleanupfull();
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         this.parent = null;
         return null;
     }

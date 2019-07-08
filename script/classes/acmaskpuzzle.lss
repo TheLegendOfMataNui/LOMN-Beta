@@ -27,6 +27,7 @@ class acmaskpuzzle {
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICpohatutheme");
         globalclass.bgmusic.play(1);
         var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setkapura(var2);
         gcareadirector::setnearestmax(50);
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
@@ -76,10 +77,6 @@ class acmaskpuzzle {
         this.blockplane = new lego_triggerobject("tp02", "blcv", 0);
         this.blockplane.initfull();
         this.blockplane.setresponse(3, 3);
-        return null;
-    }
-    
-    method show() {
         return null;
     }
     
@@ -137,18 +134,13 @@ class acmaskpuzzle {
     }
     
     method input(param1) {
-        if (param1.event == 2) {
-            if (param1.button == 251) {
-                if (!(this.cinema1 == null)) {
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (!(this.cinema1 == null)) {
                     gccinemaengine::stop(this.cinema1);
-                }
             }
-            if (param1.button == 251) {
-                if (!(this.cinema2 == null)) {
+            if (!(this.cinema2 == null)) {
                     gccinemaengine::stop(this.cinema2);
-                }
             }
-            param1.button;
         }
         return null;
     }
