@@ -71,7 +71,6 @@ class beach_puzzle {
                 globalclass.player.kill();
                 gcstaticsoundsptrarray::playtablesound(1048);
                 this.parent.level.cam.setaimode(7);
-                gccollisionphysicsgroup::spinmask(1.2);
                 globalclass.player.actor.setinputstate("none");
             }
         }
@@ -79,11 +78,12 @@ class beach_puzzle {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
             globalclass.player.actor.setinputstate("ninp");
             this.parent.level.cam.setaimode(11);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
         }
         else if (param1.eventid == 44) {
             if (!(this.cinema == null) && (this.safecount < 3)) {
