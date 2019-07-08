@@ -29,13 +29,10 @@ class lego_area_vllg1 : gs_lego_area {
     
     method input(param1) {
         this.puzzle.input(param1);
-        if (param1.event == 2) {
-            if (param1.button == 251) {
-                if (!(this.cinema == null)) {
-                    gccinemaengine::stop(this.cinema);
-                }
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (!(this.cinema == null)) {
+                gccinemaengine::stop(this.cinema);
             }
-            param1.button;
         }
         return null;
     }
@@ -50,20 +47,17 @@ class lego_area_vllg1 : gs_lego_area {
             globalclass.player.unkill();
             globalclass.player.actor.setinputstate("ninp");
             this.level.cam.setaimode(11);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
         }
-        if ((param1.eventid == 44) && !(this.cinema == null)) {
+        else if ((param1.eventid == 44) && !(this.cinema == null)) {
             param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gccharacter::settohunga(param1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
-            param1 = null;
             param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
             gccharacter::settohunga(param1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk4a"));
-            param1 = null;
             param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
             gccharacter::settohunga(param1, rgba(39, 38, 39, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mkca"));
-            param1 = null;
             param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
             gccharacter::settohunga(param1, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mk0a"));
-            param1 = null;
             param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
             gccharacter::settohunga(param1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk2a"));
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("vlgr"), 0);
@@ -72,10 +66,9 @@ class lego_area_vllg1 : gs_lego_area {
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl03"), 0);
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl04"), 0);
         }
-        if (param1.eventid == 30) {
+        else if (param1.eventid == 30) {
             globalclass.bgmusic.stop();
         }
-        param1.eventid;
         return null;
     }
     
@@ -93,8 +86,10 @@ class lego_area_vllg1 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.puzzle.exit();
-        this.puzzle = null;
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
