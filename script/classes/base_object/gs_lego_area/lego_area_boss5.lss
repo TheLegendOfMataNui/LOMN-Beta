@@ -36,4 +36,13 @@ class lego_area_boss5 : gs_lego_area {
         this.puzzle.input(param1);
         return null;
     }
+
+    method exit() {
+        this.lego_area_cleanupfull();
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        return null;
+    }
 }

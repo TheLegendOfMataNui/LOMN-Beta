@@ -3,15 +3,13 @@ class lego_area_boss6 : gs_lego_area {
     
     method lego_area_boss6(param1) {
         this.gs_lego_area("boss", param1, 0, 0);
-        this.startingarea = [ 180, 
-            -356, 
-            0 - 51.4, 
-            689 ];
+        this.puzzle = new boss6_puzzle(this);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
-        this.puzzle = new boss6_puzzle(this);
+        this.lego_area_show();
         this.puzzle.initfull();
         return null;
     }
@@ -34,6 +32,10 @@ class lego_area_boss6 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

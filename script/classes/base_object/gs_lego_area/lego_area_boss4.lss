@@ -1,25 +1,24 @@
 class lego_area_boss4 : gs_lego_area {
     property puzzle;
-    property parent;
     
     method lego_area_boss4(param1) {
-        this.parent = param1;
         this.gs_lego_area("boss", param1, 0, 0);
         this.puzzle = new snowman_puzzle(this);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
         globalclass.bgmusic.changefilename("Root/Data/Sounds/MUSICKopakaTheme");
         globalclass.bgmusic.play(1);
+        this.lego_area_show();
         this.puzzle.initfull();
         return null;
     }
     
     method cleanupfull() {
-        if (!(this.puzzle == null)) {
-            this.puzzle.cleanupfull();
-        }
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
         return null;
     }
     
@@ -44,7 +43,6 @@ class lego_area_boss4 : gs_lego_area {
             this.puzzle.exit();
             this.puzzle = null;
         }
-        this.parent = null;
         return null;
     }
 }

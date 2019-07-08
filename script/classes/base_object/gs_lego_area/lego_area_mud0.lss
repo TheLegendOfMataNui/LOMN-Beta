@@ -51,8 +51,10 @@ class lego_area_mud0 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.mudpuzzle.exit();
-        this.mudpuzzle = null;
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
