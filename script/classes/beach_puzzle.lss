@@ -45,8 +45,6 @@ class beach_puzzle {
             this.glasswall = null;
         }
         this.cinema = null;
-        this.cinema_shown = null;
-        this.safecount = null;
         return null;
     }
     
@@ -59,14 +57,12 @@ class beach_puzzle {
         var var1;
         if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin1")) && (this.cinema_shown == 0)) {
-                globalclass.hud.hide();
                 gccinemaengine::play(this.cinema);
                 this.cinema_shown = 1;
                 this.safecount = 0;
             }
         }
         else if (param1.eventid == 30) {
-            globalclass.hud.show();
             globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
             globalclass.bgmusic.play(1);
         }
@@ -78,7 +74,6 @@ class beach_puzzle {
                 gccollisionphysicsgroup::spinmask(1.2);
                 globalclass.player.actor.setinputstate("none");
             }
-            param1.args[0];
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
