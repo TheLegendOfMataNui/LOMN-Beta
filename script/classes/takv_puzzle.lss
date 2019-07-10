@@ -35,10 +35,14 @@ class takv_puzzle {
     }
     
     method cleanupfull() {
-        this.door1.cleanupfull();
-        this.door1 = null;
-        this.door2.cleanupfull();
-        this.door2 = null;
+        if (!(this.door1 == null)) {
+            this.door1.cleanupfull();
+            this.door1 = null;
+        }
+        if (!(this.door2 == null)) {
+            this.door2.cleanupfull();
+            this.door2 = null;
+        }
         return null;
     }
     
@@ -65,7 +69,9 @@ class takv_puzzle {
                 
             }
             else {
-                this.opendoor2();
+                if (!(this.door2 == null)) {
+                    this.opendoor2();
+                }
             }
         }
         else if (param1.eventid == 4) {
@@ -73,7 +79,6 @@ class takv_puzzle {
                 debug::print("****** COLLIDING WITH TP02 CLOSING DOORS");
                 this.closedoors();
             }
-            param1.args[0];
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
