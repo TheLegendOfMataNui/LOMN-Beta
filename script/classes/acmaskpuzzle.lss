@@ -22,13 +22,12 @@ class acmaskpuzzle {
     
     method initfull() {
         var var1;
-        var var2;
-        var var3;
-        var var4;
+        var kapura;
+        var bosstext;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICpohatutheme");
         globalclass.bgmusic.play(1);
-        var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::setkapura(var2);
+        kapura = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setkapura(kapura);
         gcareadirector::setnearestmax(50);
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
@@ -79,12 +78,11 @@ class acmaskpuzzle {
         }
         else {
             this.showintro = 1;
-            var3 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 0);
-            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var3, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", bosstext, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
             this.desctext.initfull();
-            var4 = (screeny - 100) + 20;
-            var3 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 1);
-            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var3, screenx * 0.5, var4, 0, 1, 256, 0, 0);
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
         }
         return null;
