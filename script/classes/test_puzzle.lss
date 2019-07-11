@@ -2,6 +2,7 @@ class test_puzzle {
     property parent;
     property callsurfonce;
 	property miruactive;
+	property holedo;
     property musichasstarted;
     
     method test_puzzle(param1) {
@@ -13,6 +14,7 @@ class test_puzzle {
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
         this.callsurfonce = 1;
 		this.miruactive = 1;
+		this.holedo =1;
         this.musichasstarted = 0;
         return null;
     }
@@ -67,6 +69,11 @@ class test_puzzle {
                     this.actmiru();
 				}
             }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                if (this.holedo) {
+                    this.holedo();
+				}
+            }
         }
         return null;
     }
@@ -90,6 +97,16 @@ class test_puzzle {
 	method actmiru() {
 		globalclass.player.maskcontrol.changemask(4);
 		globalclass.player.maskcontrol.toggleactive();
+    return null;
+    }
+
+	method holedo() {
+        var var1;
+        globalclass.player.actor.setsurfingability(0.3, 0.8);
+        globalclass.player.actor.setsurfminspeed(10.0);
+        globalclass.player.actor.setsurfmaxspeed(50.0);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"));
+        gccharacter::setscale(var1, 0.00001);
     return null;
     }
 
