@@ -11,8 +11,8 @@ class beach_puzzle {
     }
     
     method initfull() {
-        var var1;
-        var var2;
+        var crab1;
+        var crab2;
         gcareadirector::setnearestmax(3);
         gcmodeldirector::setnearestmax(3);
         gclightdirector::setcavelighting(0);
@@ -32,10 +32,10 @@ class beach_puzzle {
         this.glasswall.initfull();
         this.glasswall.setresponse(3, 3);
         this.safecount = 3;
-        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crb1"));
-        var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cr01"));
-        gccharacter::setscale(var1, 2.0);
-        gccharacter::setscale(var2, 2.0);
+        crab1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crb1"));
+        crab2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cr01"));
+        gccharacter::setscale(crab1, 2.0);
+        gccharacter::setscale(crab2, 2.0);
         return null;
     }
     
@@ -54,12 +54,16 @@ class beach_puzzle {
     }
     
     method onevent(param1) {
-        var var1;
+        var tohunga;
         if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin1")) && (this.cinema_shown == 0)) {
                 gccinemaengine::play(this.cinema);
                 this.cinema_shown = 1;
                 this.safecount = 0;
+                if (globalclass.player.maskcontrol.isactive()) {
+                    globalclass.player.maskcontrol.toggleactive();
+                    globalclass.hud.mask.hide();
+                }
             }
         }
         else if (param1.eventid == 30) {
@@ -89,8 +93,8 @@ class beach_puzzle {
             if (!(this.cinema == null) && (this.safecount < 3)) {
                 this.safecount = this.safecount + 1;
                 if (this.safecount == 2) {
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-                    gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
+                    tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+                    gccharacter::settohunga(tohunga, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
                 }
             }
         }
