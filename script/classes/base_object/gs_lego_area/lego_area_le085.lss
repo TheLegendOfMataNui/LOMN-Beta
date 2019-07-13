@@ -25,8 +25,11 @@ class lego_area_le085 : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle.exit();
-        this.puzzle = null;
+        this.lego_area_cleanupfull();
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
     
