@@ -1,8 +1,8 @@
 class test_puzzle {
     property parent;
     property callsurfonce;
-	property miruactive;
-	property holedo;
+    property miruactive;
+    property holedo;
     property musichasstarted;
     
     method test_puzzle(param1) {
@@ -11,10 +11,14 @@ class test_puzzle {
     }
     
     method initfull() {
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-16777216, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
         this.callsurfonce = 1;
-		this.miruactive = 1;
-		this.holedo =1;
+        this.miruactive = 1;
+        this.holedo = 1;
         this.musichasstarted = 0;
         return null;
     }
