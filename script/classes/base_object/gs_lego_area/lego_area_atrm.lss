@@ -12,7 +12,7 @@ class lego_area_atrm : gs_lego_area {
     }
     
     method initfull() {
-        var var1;
+        var kapura;
         this.lego_area_show();
         gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
         gclightdirector::setcavelighting(0);
@@ -34,8 +34,8 @@ class lego_area_atrm : gs_lego_area {
         this.target4.initfull();
         this.target4.setmytargetingflags(1);
         this.target4.setresponse(1, 1, 1);
-        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::setkapura(var1);
+        kapura = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setkapura(kapura);
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("bbug")) == 0) {
             this.bugpickup = new lego_pickup("bbug", 0, 5, "item", 8, 1);
             this.bugpickup.initfull();
