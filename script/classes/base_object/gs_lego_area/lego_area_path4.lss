@@ -1,10 +1,7 @@
 class lego_area_path4 : gs_lego_area {
     property puzzle;
-    property parent;
-    property crystalpickup;
     
     method lego_area_path4(param1) {
-        this.parent = param1;
         this.gs_lego_area("path", param1, 0, 0);
         this.puzzle = new pathpuzzle(this);
         this.lego_area_initfull();
@@ -12,17 +9,9 @@ class lego_area_path4 : gs_lego_area {
     }
     
     method initfull() {
-        var var1;
         this.lego_area_show();
         this.puzzle.initfull();
         this.puzzle.show();
-        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("crst"));
-        if (var1 == 0) {
-            this.crystalpickup = new lego_pickup("crst", 0, 5, "item", 6, 1);
-            this.crystalpickup.initfull();
-            this.crystalpickup.show();
-            this.crystalpickup.setcondition(8192);
-        }
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICKOPAKAambience");
         globalclass.bgmusic.play(1);
         return null;
@@ -32,10 +21,6 @@ class lego_area_path4 : gs_lego_area {
         this.lego_area_hide();
         this.puzzle.hide();
         this.puzzle.cleanupfull();
-        if (!(this.crystalpickup == null)) {
-            this.crystalpickup.cleanupfull();
-            this.crystalpickup = null;
-        }
         return null;
     }
     
@@ -55,11 +40,11 @@ class lego_area_path4 : gs_lego_area {
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
         if (!(this.puzzle == null)) {
             this.puzzle.exit();
             this.puzzle = null;
         }
-        this.parent = null;
         return null;
     }
 }
