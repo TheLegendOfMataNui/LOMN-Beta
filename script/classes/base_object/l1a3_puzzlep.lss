@@ -89,7 +89,6 @@ class l1a3_puzzlep : base_object {
                     this.smallplats[10].touch();
                 }
             }
-            param1.args[0];
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
@@ -117,7 +116,7 @@ class l1a3_puzzlep : base_object {
                 globalclass.player.kill();
                 gcstaticsoundsptrarray::playtablesound(1048);
                 this.parent.level.cam.setaimode(7);
-                gccollisionphysicsgroup::spinmask(1.2);
+                globalclass.player.actor.setinputstate("none");
             }
         }
         if (!(this.smallplats == null)) {
@@ -140,7 +139,6 @@ class l1a3_puzzlep : base_object {
     method cleanupfull() {
         var var1;
         var var2;
-        
         if (this.smallplats != null) {
             var1 = this.smallplats.__length - 1;
             var2 = 0;

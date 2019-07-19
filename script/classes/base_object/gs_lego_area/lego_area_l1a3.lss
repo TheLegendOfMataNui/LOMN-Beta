@@ -33,8 +33,10 @@ class lego_area_l1a3 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.puzzle.exit();
-        this.puzzle = null;
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
