@@ -1,9 +1,6 @@
 class l4_maz2_puzzle {
     property parent;
-    property temporient0;
-    property temporient1;
-    property temporient2;
-    property icicles;
+    property swordhook;
     
     method l4_maz2_puzzle(param1) {
         this.parent = param1;
@@ -13,41 +10,30 @@ class l4_maz2_puzzle {
     method initfull() {
         var var1;
         var var2;
-        var var3;
         gcareadirector::setnearestmax(15);
-        this.temporient0 = 0;
-        this.temporient1 = 0;
-        this.temporient2 = 0;
-        this.icicles = [  ];
-        var1 = 0;
-        while ((this.icicles.__length - 1) >= var1) {
-            this.icicles[var1].initfull();
-            var1 = var1 + 1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var1, 2);
+        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("wrat"));
+        gchive::setspawnrate(var1, 4);
+        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
+        gchive::setmaxcreatures(var2, 3);
+        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("ibat"));
+        gchive::setspawnrate(var2, 7);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("swrd")) == 0) {
+            this.swordhook = new lego_pickup("swrd", 0, 3, "item", 9, 1);
+            this.swordhook.initfull();
+            this.swordhook.show();
         }
-        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(var2, 2);
-        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("wrat"));
-        gchive::setspawnrate(var2, 4);
-        var3 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
-        gchive::setmaxcreatures(var3, 3);
-        gchive::setcreaturetype(var3, scslosifoundation::stringtoidentifier("ibat"));
-        gchive::setspawnrate(var3, 7);
         return null;
     }
     
     method cleanupfull() {
-        var var1;
-        var var2;
-        var var3;
-        var1 = 0;
-        while ((this.icicles.__length - 1) >= var1) {
-            this.icicles[var1].cleanupfull();
-            this.icicles[var1] = null;
-            var1 = var1 + 1;
+        if (!(this.swordhook == null)) {
+            this.swordhook.cleanupfull();
+            this.swordhook = null;
         }
-        this.icicles = null;
-        var2 = null;
-        var3 = null;
         return null;
     }
     
@@ -57,16 +43,16 @@ class l4_maz2_puzzle {
                 globalclass.player.kill();
                 gcstaticsoundsptrarray::playtablesound(1048);
                 this.parent.level.cam.setaimode(7);
-                gccollisionphysicsgroup::spinmask(0.5);
+                globalclass.player.actor.setinputstate("none");
             }
-            param1.args[0];
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             globalclass.player.unkill();
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
-            this.parent.parent.cam.setaimode(11);
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
@@ -75,20 +61,10 @@ class l4_maz2_puzzle {
     }
     
     method input(param1) {
-        if (param1.button == 67) {
-            if (param1.event == 2) {
-                this.cheat();
-            }
-        }
         return null;
     }
     
     method process(param1) {
-        return null;
-    }
-    
-    method cheat() {
-        globalclass.player.addmask("msk1", 3);
         return null;
     }
     
