@@ -1,74 +1,52 @@
 class spiderfight_class {
     property parent;
     property spider;
-    property hits;
-    property showspider;
     property mask;
-    property showmask;
     property web1;
-    property statetimer;
     property showintro;
     property desctext;
     property howtotext;
     property door;
-    property starttimer;
     
     method spiderfight_class(param1) {
         this.parent = param1;
-        this.showspider = 1;
         return null;
     }
     
     method initfull() {
-        var var1;
-        var var2;
-        var var3;
-        var var4;
+        var bosstext;
         this.door = new lego_moveableobject("door", this.parent.name);
         this.door.initfull();
         this.web1 = new lego_moveableobject("web1", this.parent.name, [ "weba" ]);
         this.web1.initfull();
+        this.web1.show();
         this.web1.setresponse(3, 3, 3);
-        this.spider = new gs_lego_character("cnyz", "bspd", this.parent.name, 0, 396.0, 0 - 60.0, 0 - 214.0, "aiin");
+        this.spider = new gs_lego_character("cnyz", "bspd", this.parent.name, 0, 380.3, 0 - 60.0, 0 - 195.6, "aiin");
         this.spider.initfull();
         this.spider.add();
         this.spider.aisetattacktype(5);
         this.spider.show();
-        gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("s010"));
-        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mskc"));
-        if (var1) {
-            this.showmask = 0;
-        }
-        else {
-            this.showmask = 1;
-        }
-        if (this.showmask == 1) {
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mskc")) == 0) {
             this.mask = new lego_pickup("mskc", 7, 1, "item", 5, 1);
             this.mask.initfull();
             this.mask.show();
         }
-        if (this.showspider == 1) {
-            this.web1.show();
-        }
         else {
+            this.door.interpolate(this.door.getx(), this.door.gety() + 10.0, this.door.getz(), 0.0);
             this.web1.hide();
         }
-        this.statetimer = 0.0;
-        var2 = gcsaver::isconditionset(536870912);
-        if (var2) {
+        if (gcsaver::isconditionset(536870912)) {
             this.showintro = 0;
         }
         else {
             this.showintro = 1;
-            var3 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 2, 0);
-            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var3, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 2, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", bosstext, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
             this.desctext.initfull();
-            var4 = (screeny - 100) + 20;
-            var3 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 2, 1);
-            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var3, screenx * 0.5, var4, 0, 1, 256, 0, 0);
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 2, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
         }
-        this.starttimer = 0.0;
         return null;
     }
     
@@ -90,9 +68,6 @@ class spiderfight_class {
             this.door = null;
         }
         if (!(this.mask == null)) {
-            if (this.mask.objshown == 0) {
-                this.showmask = 0;
-            }
             this.mask.cleanupfull();
             this.mask = null;
         }
@@ -109,19 +84,10 @@ class spiderfight_class {
     }
     
     method process(param1) {
-        if ((this.starttimer > 3.0) && (this.showintro == 1)) {
-            this.playintro();
-        }
-        else {
-            this.starttimer = this.starttimer + param1.deltatime;
-        }
         return null;
     }
     
     method input(param1) {
-        if (param1.event == 2) {
-            param1.button;
-        }
         return null;
     }
     
@@ -147,7 +113,7 @@ class spiderfight_class {
             }
         }
         else if (param1.eventid == 35) {
-            if ((param1.args[0] == this.web1.id) && (param1.args[1] == 0)) {
+            if ((param1.args[0] == this.web1.id)) {
                 this.web1.hide();
             }
         }
@@ -161,6 +127,11 @@ class spiderfight_class {
             globalclass.player.actor.setinputstate("ninp");
             this.parent.level.cam.setaimode(11);
         }
+        else if (param1.eventid == 44) {
+            if (this.showintro) {
+                this.playintro();
+            }
+        }
         return null;
     }
     
@@ -168,7 +139,7 @@ class spiderfight_class {
         this.parent.level.cam.scaletocutscene();
         this.parent.level.cam.makespline("Root/Data/Levels/lev1/spcv/spcv_CAM.slb");
         this.parent.level.cam.setspline(0, 10.0, 1, 0);
-        this.parent.level.cam.settargetpos(396.0, 0 - 60.0, 0 - 214.0);
+        this.parent.level.cam.settargetpos(380.3, 0 - 60.0, 0 - 205.6);
         this.parent.level.cam.setaimode(2);
         globalclass.hud.hide();
         gcsaver::setcondition(536870912, 1);

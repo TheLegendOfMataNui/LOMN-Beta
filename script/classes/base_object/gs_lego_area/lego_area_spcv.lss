@@ -1,10 +1,10 @@
 class lego_area_spcv : gs_lego_area {
-    property spiderpuzzle;
+    property puzzle;
     
     method lego_area_spcv(param1) {
         this.gs_lego_area("spcv", param1, 0, 0);
         this.lego_area_initfull();
-        this.spiderpuzzle = new spiderfight_class(this);
+        this.puzzle = new spiderfight_class(this);
         return null;
     }
     
@@ -16,35 +16,37 @@ class lego_area_spcv : gs_lego_area {
         gcareadirector::setfog(-16777216, 0 - 30.0, 0 - 80.0, 0.05);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
         globalclass.bgmusic.play(1);
-        this.spiderpuzzle.initfull();
+        this.puzzle.initfull();
         return null;
     }
     
     method process(param1) {
-        this.spiderpuzzle.process(param1);
+        this.puzzle.process(param1);
         return null;
     }
     
     method input(param1) {
-        this.spiderpuzzle.input(param1);
+        this.puzzle.input(param1);
         return null;
     }
     
     method onevent(param1) {
-        this.spiderpuzzle.onevent(param1);
+        this.puzzle.onevent(param1);
         return null;
     }
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.spiderpuzzle.cleanupfull();
+        this.puzzle.cleanupfull();
         return null;
     }
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.spiderpuzzle.exit();
-        this.spiderpuzzle = null;
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
