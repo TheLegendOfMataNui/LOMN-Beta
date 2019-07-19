@@ -140,6 +140,28 @@ class l1a3_puzzlep : base_object {
     method cleanupfull() {
         var var1;
         var var2;
+        
+        if (this.smallplats != null) {
+            var1 = this.smallplats.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.smallplats[var1 - var2].cleanupfull();
+                this.smallplats[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.smallplats = null;
+        }
+        
+        if (this.largeplats != null) {
+            var1 = this.largeplats.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.largeplats[var1 - var2].cleanupfull();
+                this.largeplats[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.largeplats = null;
+        }
     }
     
     method exit() {
