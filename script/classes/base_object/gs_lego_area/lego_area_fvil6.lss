@@ -11,12 +11,11 @@ class lego_area_fvil6 : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        gclightdirector::setcavelighting(0);
-        gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         return null;
     }
     
     method cleanupfull() {
+        this.lego_area_hide();
         this.puzzle.cleanupfull();
         return null;
     }
@@ -37,8 +36,11 @@ class lego_area_fvil6 : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle.exit();
-        this.puzzle = null;
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

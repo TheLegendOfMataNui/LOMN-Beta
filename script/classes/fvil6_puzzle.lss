@@ -15,15 +15,16 @@ class fvil6_puzzle {
     
     method initfull() {
         var var1;
-        var var2;
-        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("levr"));
-        if (var1 == 0) {
+        var door_text;
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("levr")) == 0) {
             this.leverpickup = new lego_pickup("levr", 0, 5, "item", 5, 1);
             this.leverpickup.initfull();
             this.leverpickup.setquest(2);
             this.leverpickup.show();
             this.leverpickup.setcondition(8192);
         }
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
         globalclass.bgmusic.play(1);
         globalclass.player.setgrapplinghookdistance(150);
@@ -32,13 +33,13 @@ class fvil6_puzzle {
             new lego_moveableobject("hot2"), 
             new lego_moveableobject("hot3"), 
             new lego_moveableobject("hot4") ];
-        var2 = 0;
-        while ((this.hookarray.__length - 1) >= var2) {
-            this.hookarray[var2].initfull();
-            this.hookarray[var2].setmytargetingflags(1);
-            this.hookarray[var2].setresponse(1, 1, 1);
-            this.hookarray[var2].settweakable();
-            var2 = var2 + 1;
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].initfull();
+            this.hookarray[var1].setmytargetingflags(1);
+            this.hookarray[var1].setresponse(1, 1, 1);
+            this.hookarray[var1].settweakable();
+            var1 = var1 + 1;
         }
         this.coindoor = new lego_moveableobject("door");
         this.coindoor.initfull();
@@ -46,23 +47,20 @@ class fvil6_puzzle {
             this.coindoor.show();
             this.coindoor.setalpha(0.8);
         }
-        else {
+        else if (bettersaver::getbooleanvalue(57) == 1) {
             this.coindoor.hide();
         }
-        var2 = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 10);
-        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
+        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 10);
+        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
         this.coindoortext.initfull();
         this.coindoortext.add();
         this.coindoortexttimer = 0.0;
-        if (bettersaver::getbooleanvalue(57) == 1) {
-            this.coindoor.hide();
-        }
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        if (!(this.leverpickup == null)) {
+        if (this.leverpickup != null) {
             this.leverpickup.cleanupfull();
             this.leverpickup = null;
         }
@@ -74,13 +72,12 @@ class fvil6_puzzle {
         }
         this.hookarray = null;
         globalclass.player.setgrapplinghookdistance(45);
-        this.coindoortexttimer = null;
-        if (!(this.coindoortext == null)) {
+        if (this.coindoortext != null) {
             this.coindoortext.remove();
             this.coindoortext.cleanupfull();
             this.coindoortext = null;
         }
-        if (!(this.coindoor == null)) {
+        if (this.coindoor != null) {
             this.coindoor.cleanupfull();
             this.coindoor = null;
         }
@@ -101,17 +98,11 @@ class fvil6_puzzle {
         if (param1.eventid == 1) {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("door")) {
                 if (this.showcoindoor == 1) {
-                    if (globalclass.player.tokens >= 8) {
-                        if (globalclass.player.actor.ishookenabled) {
-                            this.coindoor.fadeout(1.5);
-                            gcstaticsoundsptrarray::playtablesound(1084);
-                            this.showcoindoor = 0;
-                            this.coindoortext.hide();
-                        }
-                        else {
-                            this.coindoortext.show();
-                            this.coindoortexttimer = 1.0;
-                        }
+                    if ((globalclass.player.tokens >= 8) && (globalclass.player.actor.ishookenabled)) {
+                        this.coindoor.fadeout(1.5);
+                        gcstaticsoundsptrarray::playtablesound(1084);
+                        this.showcoindoor = 0;
+                        this.coindoortext.hide();
                     }
                     else {
                         this.coindoortext.show();
@@ -133,6 +124,8 @@ class fvil6_puzzle {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
             globalclass.player.actor.setinputstate("ninp");
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("t000"));
+            this.parent.level.cam.setaimode(11);
         }
         return null;
     }
