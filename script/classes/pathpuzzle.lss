@@ -14,6 +14,8 @@ class pathpuzzle {
         var var3;
         var var4;
         var var5;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICKOPAKAambience");
+        globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
         gcmodeldirector::setnearestmax(50);
         this.platformarray = [ new platform("pl01") ];
@@ -76,14 +78,16 @@ class pathpuzzle {
     
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        while ((this.platformarray.__length - 1) >= var1) {
-            this.platformarray[var1].cleanupfull();
-            this.platformarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.platformarray != null) {
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].cleanupfull();
+                this.platformarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platformarray = null;
         }
-        this.platformarray = null;
-        if (!(this.meltpickup == null)) {
+        if (this.meltpickup != null) {
             this.meltpickup.cleanupfull();
             this.meltpickup = null;
         }
@@ -122,7 +126,7 @@ class pathpuzzle {
     
     method onevent(param1) {
         var var1;
-        if (!(this.platformarray == null)) {
+        if (this.platformarray != null) {
             var1 = 0;
             while ((this.platformarray.__length - 1) >= var1) {
                 this.platformarray[var1].onevent(param1);
