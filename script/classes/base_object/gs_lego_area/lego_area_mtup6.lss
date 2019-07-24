@@ -1,9 +1,7 @@
 class lego_area_mtup6 : gs_lego_area {
-    property parent;
     property cinema;
     
     method lego_area_mtup6(param1) {
-        this.parent = param1;
         this.gs_lego_area("mtup", param1, 0, 0);
         this.lego_area_initfull();
         return null;
@@ -28,13 +26,10 @@ class lego_area_mtup6 : gs_lego_area {
     }
     
     method input(param1) {
-        if (param1.event == 2) {
-            if (param1.button == 251) {
-                if (!(this.cinema == null)) {
-                    gccinemaengine::stop(this.cinema);
-                }
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (this.cinema != null) {
+                gccinemaengine::stop(this.cinema);
             }
-            param1.button;
         }
         return null;
     }
@@ -68,7 +63,6 @@ class lego_area_mtup6 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.parent = null;
         return null;
     }
 }
