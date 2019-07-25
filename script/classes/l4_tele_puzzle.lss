@@ -6,10 +6,7 @@ class l4_tele_puzzle {
     property exitdoor;
     property switchuppos;
     property switchdownpos;
-    property collide;
     property hitswitch;
-    property shakeonce;
-    property hittrigerbox;
     
     method l4_tele_puzzle(param1) {
         this.parent = param1;
@@ -17,8 +14,10 @@ class l4_tele_puzzle {
     }
     
     method initfull() {
-        var var1;
-        var var2;
+        var kapura;
+        var hivehandle;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
         if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mtel")) == 0) {
             this.mask = new lego_pickup("mtel", 11, 1, "item", 2, 1);
@@ -39,52 +38,48 @@ class l4_tele_puzzle {
         this.teleblock.setignoreallcollisions(0);
         this.exitdoor = new teledoor();
         this.exitdoor.initfull();
-        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::setkapura(var1);
-        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(var2, 2);
-        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("lsrp"));
-        gchive::setspawnrate(var2, 4);
+        kapura = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setkapura(kapura);
+        hivehandle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hivehandle, 2);
+        gchive::setcreaturetype(hivehandle, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(hivehandle, 4);
         this.hitswitch = 0;
-        this.shakeonce = 1;
-        this.collide = 0;
-        this.hittrigerbox = 0;
         return null;
     }
     
-    method initshort() {
-        globalclass.player.unkill();
-        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-        if (this.hittrigerbox) {
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-            this.parent.level.cam.setaimode(11);
-            this.hittrigerbox = 0;
-        }
-        return null;
-    }
-    
-    method show() {
-        return null;
-    }
-    
-    method hide() {
-        var var1;
-        var1 = null;
-        if (!(this.mask == null)) {
+    method cleanupfull() {
+        if (this.mask != null) {
             this.mask.cleanupfull();
             this.mask = null;
         }
-        this.switch1.cleanupfull();
-        this.switch1 = null;
-        this.teleblock.cleanupfull();
-        this.teleblock = null;
-        this.exitdoor.cleanupfull();
-        this.exitdoor = null;
+        if (this.switch1 != null) {
+            this.switch1.cleanupfull();
+            this.switch1 = null;
+        }
+        if (this.teleblock != null) {
+            this.teleblock.cleanupfull();
+            this.teleblock = null;
+        }
+        if (this.exitdoor != null) {
+            this.exitdoor.cleanupfull();
+            this.exitdoor = null;
+        }
+        if (this.switchuppos != null) {
+            this.switchuppos.cleanupfull();
+            this.switchuppos = null;
+        }
+        if (this.switchdownpos != null) {
+            this.switchdownpos.cleanupfull();
+            this.switchdownpos = null;
+        }
         return null;
     }
     
     method onevent(param1) {
-        this.switch1.onevent(param1);
+        if (this.switch1 != null) {
+            this.switch1.onevent(param1);
+        }
         if (param1.eventid == 1) {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("sw00")) {
                 if (param1.args[2]) {
@@ -94,33 +89,25 @@ class l4_tele_puzzle {
                     this.hitswitch(1);
                 }
             }
-            param1.args[1];
         }
         else if (param1.eventid == 3) {
-            this.hittrigerbox = 1;
-            this.parent.level.cam.setaimode(7);
-            gccollisionphysicsgroup::spinmask(1.2);
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                globalclass.player.actor.setinputstate("none");
+            }
         }
         else if (param1.eventid == 27) {
-            if (this.hittrigerbox) {
-                globalclass.player.kill();
-            }
-            else {
-                this.initshort();
-            }
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 46) {
-            if (this.hittrigerbox) {
-                this.initshort();
-            }
-            else {
-                gccollisionphysicsgroup::spinmask(1.2);
-            }
-        }
-        else if (param1.eventid == 7) {
-            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
-                gcstaticsoundsptrarray::playtablesound(149);
-            }
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         return null;
     }
@@ -148,6 +135,10 @@ class l4_tele_puzzle {
         return null;
     }
     
+    method input(param1) {
+        return null;
+    }
+
     method exit() {
         this.parent = null;
         return null;

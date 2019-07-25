@@ -59,6 +59,30 @@ class teledoor {
     }
     
     method cleanupfull() {
+        if (this.top != null) {
+            this.top.cleanupfull();
+            this.top = null;
+        }
+        if (this.bottom != null) {
+            this.bottom.cleanupfull();
+            this.bottom = null;
+        }
+        if (this.topopenpos != null) {
+            this.topopenpos.cleanupfull();
+            this.topopenpos = null;
+        }
+        if (this.bottomopenpos != null) {
+            this.bottomopenpos.cleanupfull();
+            this.bottomopenpos = null;
+        }
+        if (this.topclosedpos != null) {
+            this.topclosedpos.cleanupfull();
+            this.topclosedpos = null;
+        }
+        if (this.bottomclosedpos != null) {
+            this.bottomclosedpos.cleanupfull();
+            this.bottomclosedpos = null;
+        }
         return null;
     }
 }
