@@ -24,7 +24,7 @@ class vllg1_puzzle {
     
     method initfull() {
         var var1;
-        var var2;
+        var door_text;
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"))) {
             this.cinema_shown = 1;
         }
@@ -37,7 +37,7 @@ class vllg1_puzzle {
             gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("tura"));
         }
         this.deadhives = 0;
-        if (gcsaver::isconditionset(4194304) == 1) {
+        if (gcsaver::isconditionset(4194304)) {
             var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gccharacter::settohunga(var1, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mk6a"));
             gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
@@ -143,11 +143,11 @@ class vllg1_puzzle {
             this.coindoor.show();
             this.coindoor.setalpha(0.5);
         }
-        else {
+        else if (bettersaver::getbooleanvalue(52)) {
             this.coindoor.hide();
         }
-        var2 = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 10);
-        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
+        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 10);
+        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
         this.coindoortext.initfull();
         this.coindoortext.add();
         this.coindoortexttimer = 0.0;
@@ -186,9 +186,6 @@ class vllg1_puzzle {
             gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
             gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d000"), -1);
         }
-        if (bettersaver::getbooleanvalue(52) == 1) {
-            this.coindoor.hide();
-        }
         if (bettersaver::getbooleanvalue(58) == 1) {
             gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 0);
             gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
@@ -201,28 +198,28 @@ class vllg1_puzzle {
     }
     
     method cleanupfull() {
-        if (!(this.coindoortext == null)) {
+        if (this.coindoortext != null) {
             this.coindoortext.remove();
             this.coindoortext.cleanupfull();
             this.coindoortext = null;
         }
-        if (!(this.coindoor == null)) {
+        if (this.coindoor != null) {
             this.coindoor.cleanupfull();
             this.coindoor = null;
         }
-        if (!(this.upgradefruit == null)) {
+        if (this.upgradefruit != null) {
             this.upgradefruit.cleanupfull();
             this.upgradefruit = null;
         }
-        if (!(this.upgradefruit2 == null)) {
+        if (this.upgradefruit2 != null) {
             this.upgradefruit2.cleanupfull();
             this.upgradefruit2 = null;
         }
-        if (!(this.upgradefruit3 == null)) {
+        if (this.upgradefruit3 != null) {
             this.upgradefruit3.cleanupfull();
             this.upgradefruit3 = null;
         }
-        if (!(this.wirlpool == null)) {
+        if (this.wirlpool != null) {
             this.wirlpool.cleanupfull();
             this.wirlpool = null;
         }
@@ -311,7 +308,7 @@ class vllg1_puzzle {
     
     method input(param1) {
         if ((param1.event == 2) && (param1.button == 251)) {
-            if (!(this.cinema == null)) {
+            if (this.cinema != null) {
                 gccinemaengine::stop(this.cinema);
             }
         }
