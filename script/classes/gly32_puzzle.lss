@@ -13,22 +13,18 @@ class gly32_puzzle {
     property numberofdownswitchs;
     property glyph;
     property doorarray;
-    property doorsopen;
     property curentorient;
     property rotating;
     property rotatetime;
     property rotatespeed;
-    property showpickup;
     property desctext;
     property howtotext;
     property distplaytexttimer;
-    property playcutonce;
     property deltatimer1;
     property rotation;
     
     method gly32_puzzle(param1) {
         this.parent = param1;
-        this.showpickup = 1;
         this.switch1_up = 1;
         this.switch2_up = 1;
         this.switch3_up = 1;
@@ -38,32 +34,28 @@ class gly32_puzzle {
     }
     
     method initfull() {
+        var KEVIN;
+        var glyph_text;
         var var1;
-        var var2;
-        var var3;
-        var var4;
         this.rotation = 0;
         this.deltatimer1 = 0.0;
-        this.playcutonce = 1;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gclightdirector::setcavelighting(1);
         globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
         globalclass.bgmusic.play();
         globalclass.player.actor.setwaterlevel(1000);
-        var1 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"));
-        if (var1) {
-            this.showpickup = 0;
-        }
-        if (this.showpickup) {
+        if (gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp")) == 0) {
             this.glyph = new lego_moveableobject("glyp");
             this.glyph.initfull();
             this.glyph.show();
             this.distplaytexttimer = new lego_timer("dspt", 4.0, 0);
             this.distplaytexttimer.initfull();
-            var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 4, 0);
-            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            glyph_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 4, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", glyph_text, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
             this.desctext.initfull();
-            var3 = (screeny - 100) + 20;
-            var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 4, 1);
-            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var2, screenx * 0.5, var3, 0, 1, 256, 0, 0);
+            glyph_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 4, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", glyph_text, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
         }
         this.numberofdownswitchs = 0;
@@ -91,62 +83,65 @@ class gly32_puzzle {
             new lego_moveableobject("g4d2"), 
             new lego_moveableobject("g4d3"), 
             new lego_moveableobject("g4d4") ];
-        var4 = 0;
-        while ((this.doorarray.__length - 1) >= var4) {
-            this.doorarray[var4].initfull();
-            var4 = var4 + 1;
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].initfull();
+            var1 = var1 + 1;
         }
-        this.doorsopen = 0;
         this.curentorient = 0;
         this.rotating = 0;
         this.rotatetime = 0;
         this.rotatespeed = 7;
-        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kevn"));
-        gccharacter::setscale(var1, 15.0);
-        return null;
-    }
-    
-    method show() {
+        KEVIN = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kevn"));
+        gccharacter::setscale(KEVIN, 15.0);
         this.settostartingpositions();
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        if (!(this.desctext == null)) {
+        if (this.doorarray != null) {
+            var1 = 0;
+            while ((this.doorarray.__length - 1) >= var1) {
+                this.doorarray[var1].cleanupfull();
+                this.doorarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.doorarray = null;
+        }
+        if (this.desctext != null) {
             this.desctext.cleanupfull();
             this.desctext = null;
         }
-        if (!(this.howtotext == null)) {
+        if (this.howtotext != null) {
             this.howtotext.cleanupfull();
             this.howtotext = null;
         }
-        this.distplaytexttimer.cleanupfull();
-        this.distplaytexttimer = null;
-        this.switch1.cleanupfull();
-        this.switch1 = null;
-        this.switch2.cleanupfull();
-        this.switch2 = null;
-        this.switch3.cleanupfull();
-        this.switch3 = null;
-        this.switch4.cleanupfull();
-        this.switch4 = null;
-        this.switch5.cleanupfull();
-        this.switch5 = null;
-        this.numberofdownswitchs = null;
-        var1 = 0;
-        while ((this.doorarray.__length - 1) >= var1) {
-            this.doorarray[var1].cleanupfull();
-            this.doorarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.distplaytexttimer != null) {
+            this.distplaytexttimer.cleanupfull();
+            this.distplaytexttimer = null;
         }
-        this.doorarray = null;
-        this.doorsopen = null;
-        this.curentorient = null;
-        this.rotating = null;
-        this.rotatetime = null;
-        this.rotatespeed = null;
-        if (!(this.glyph == null)) {
+        if (this.switch1 != null) {
+            this.switch1.cleanupfull();
+            this.switch1 = null;
+        }
+        if (this.switch2 != null) {
+            this.switch2.cleanupfull();
+            this.switch2 = null;
+        }
+        if (this.switch3 != null) {
+            this.switch3.cleanupfull();
+            this.switch3 = null;
+        }
+        if (this.switch4 != null) {
+            this.switch4.cleanupfull();
+            this.switch4 = null;
+        }
+        if (this.switch5 != null) {
+            this.switch5.cleanupfull();
+            this.switch5 = null;
+        }
+        if (this.glyph != null) {
             this.glyph.cleanupfull();
             this.glyph = null;
         }
@@ -163,7 +158,7 @@ class gly32_puzzle {
         this.glyph.hide();
         globalclass.player.addelement(7);
         globalclass.hud.show();
-        gcsaver::setglyphfound();
+        gcsaver::pickupglyph(this.glyph.id);
         return null;
     }
     
@@ -201,7 +196,17 @@ class gly32_puzzle {
         else {
             this.rotation = this.rotation + 2;
         }
-        this.glyph.setorientation(this.rotation, this.rotation, 0);
+        if (this.glyph != null) {
+            this.glyph.setorientation(this.rotation, this.rotation, 0);
+        }
+        if ((globalclass.player.whichmaskonface() == 8) && (globalclass.player.ismaskpoweron() == 1)) {
+            gcareadirector::setfog(-16777216, 0 - 1.0, 0 - 350.0, 0.05);
+            debug::print("FOG DISPELLED");
+        }
+        else {
+            gcareadirector::setfog(-16777216, 0 - 1.0, 0 - 150.0, 0.05);
+            debug::print("SPOOKY TIME");
+        }
         return null;
     }
     
@@ -224,7 +229,6 @@ class gly32_puzzle {
                 this.removetext();
                 gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier("takv"), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
             }
-            param1.args[0];
         }
         else if (param1.eventid == 1) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("swc1")) {
@@ -276,28 +280,12 @@ class gly32_puzzle {
                 if (param1.args[1] == scslosifoundation::stringtoidentifier("glyp")) {
                     this.showtext();
                 }
-                param1.args[1];
             }
         }
         return null;
     }
     
     method input(param1) {
-        if (param1.button == 89) {
-            if (param1.event == 2) {
-                this.cheaton();
-            }
-        }
-        return null;
-    }
-    
-    method cheaton() {
-        this.switch1_up = 0;
-        this.switch2_up = 0;
-        this.switch3_up = 0;
-        this.switch4_up = 0;
-        this.switch5_up = 0;
-        this.settostartingpositions();
         return null;
     }
     
