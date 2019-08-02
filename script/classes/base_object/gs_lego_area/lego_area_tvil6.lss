@@ -11,7 +11,6 @@ class lego_area_tvil6 : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         return null;
     }
     
@@ -22,7 +21,11 @@ class lego_area_tvil6 : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle.exit();
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
     

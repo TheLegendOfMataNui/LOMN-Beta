@@ -15,24 +15,25 @@ class tvil6_puzzle {
     }
     
     method initfull() {
-        var var1;
+        var bridge_operator;
+        gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPart2LegoUNDERGROUND");
         globalclass.bgmusic.play(1);
-        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::settohunga(var1, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
-        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d003"), -1);
-        gccharacter::setorientation(var1, -18);
+        bridge_operator = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(bridge_operator, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
+        gccharacter::setinputstate(bridge_operator, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(bridge_operator, scslosifoundation::stringtoidentifier("d003"), -1);
+        gccharacter::setorientation(bridge_operator, -18);
         this.upgradefruit_shown = gcsaver::finditem(scslosifoundation::stringtoidentifier("frut"));
         if (this.upgradefruit_shown == 0) {
             this.upgradefruit = new vitality_pickup("frut", 17, 2, "frut", 1, 1);
             this.upgradefruit.initfull();
         }
         if (bettersaver::getbooleanvalue(47) == 1) {
-            var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(var1, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
-            gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d000"), -1);
+            bridge_operator = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(bridge_operator, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
+            gccharacter::setinputstate(bridge_operator, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(bridge_operator, scslosifoundation::stringtoidentifier("d000"), -1);
         }
         this.platform1 = new lego_moveableobject("prt1");
         this.platform1.initfull();
@@ -62,15 +63,30 @@ class tvil6_puzzle {
     }
     
     method cleanupfull() {
-        if (!(this.upgradefruit == null)) {
+        if (this.upgradefruit != null) {
             this.upgradefruit.cleanupfull();
             this.upgradefruit = null;
         }
-        this.platform1.cleanupfull();
-        this.platform2.cleanupfull();
-        this.platform3.cleanupfull();
-        this.platform4.cleanupfull();
-        this.platform5.cleanupfull();
+        if (this.platform1 != null) {
+            this.platform1.cleanupfull();
+            this.platform1 = null;
+        }
+        if (this.platform2 != null) {
+            this.platform2.cleanupfull();
+            this.platform2 = null;
+        }
+        if (this.platform3 != null) {
+            this.platform3.cleanupfull();
+            this.platform3 = null;
+        }
+        if (this.platform4 != null) {
+            this.platform4.cleanupfull();
+            this.platform4 = null;
+        }
+        if (this.platform5 != null) {
+            this.platform5.cleanupfull();
+            this.platform5 = null;
+        }
         return null;
     }
     
@@ -97,13 +113,12 @@ class tvil6_puzzle {
             globalclass.player.unkill();
             globalclass.player.actor.setinputstate("ninp");
         }
-        if (param1.eventid == 41) {
+        else if (param1.eventid == 41) {
             if (bettersaver::getbooleanvalue(47)) {
                 this.give_fruit();
                 this.raise_bridge();
             }
         }
-        param1.eventid;
         return null;
     }
     

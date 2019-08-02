@@ -4,15 +4,15 @@ class lego_area_haka6 : gs_lego_area {
     
     method lego_area_haka6(param1) {
         this.gs_lego_area("mosh", param1, 0, 0);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
-        var var1;
+        this.lego_area_show();
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
         globalclass.bgmusic.play(1);
-        var1 = gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2"));
-        if (var1 == 0) {
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 0) {
             if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
                 this.cinema = gccinemaengine::create();
                 gccinemaengine::load(this.cinema, "cin2");
@@ -25,61 +25,62 @@ class lego_area_haka6 : gs_lego_area {
     }
     
     method cleanupfull() {
+        this.lego_area_hide();
         this.cinema = null;
         return null;
     }
     
     method onevent(param1) {
-        var var1;
-        if ((param1.eventid == 44) && !(this.cinema == null)) {
+        var dancy_bois;
+        if ((param1.eventid == 44) && this.cinema != null) {
             if (this.safecount < 3) {
                 this.safecount = this.safecount + 1;
                 if (this.safecount == 2) {
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-                    gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk9a"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-                    gccharacter::setkapura(var1);
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
-                    gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk2a"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
-                    gccharacter::settohunga(var1, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mk1a"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
-                    gccharacter::settohunga(var1, rgba(255, 0, 13, 255), rgba(255, 0, 13, 255), scslosifoundation::stringtoidentifier("mk4a"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
-                    gccharacter::settohunga(var1, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk8a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk9a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+                    gccharacter::setkapura(dancy_bois);
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk2a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mk1a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(255, 0, 13, 255), rgba(255, 0, 13, 255), scslosifoundation::stringtoidentifier("mk4a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk8a"));
                     gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0), rgba(255, 247, 0, 255), rgba(255, 0, 13, 255), rgba(39, 38, 39, 255));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
-                    gccharacter::settohunga(var1, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkca"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkca"));
                     gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0), rgba(255, 0, 13, 255), rgba(255, 247, 0, 255), rgba(39, 38, 39, 255));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
-                    gccharacter::settohunga(var1, rgba(39, 38, 39, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mk3a"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
-                    gccharacter::settohunga(var1, rgba(255, 0, 13, 255), rgba(255, 0, 13, 255), scslosifoundation::stringtoidentifier("mk2a"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
-                    gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk6a"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0);
-                    gccharacter::settohunga(var1, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(39, 38, 39, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mk3a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(255, 0, 13, 255), rgba(255, 0, 13, 255), scslosifoundation::stringtoidentifier("mk2a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk6a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
                     gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0), rgba(0, 208, 33, 255), rgba(0, 208, 33, 255), rgba(102, 0, 102, 255));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0);
-                    gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mkaa"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0);
-                    gccharacter::settohunga(var1, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk7a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mkaa"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk7a"));
                     gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0), rgba(255, 0, 13, 255), rgba(255, 0, 13, 255), rgba(255, 247, 0, 255));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl13"), 0);
-                    gccharacter::settohunga(var1, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk0a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl13"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk0a"));
                     gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl13"), 0), rgba(39, 38, 39, 255), rgba(255, 0, 13, 255), rgba(255, 92, 1, 255));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0);
-                    gccharacter::settohunga(var1, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk1a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk1a"));
                     gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0), rgba(255, 0, 13, 255), rgba(255, 247, 0, 255), rgba(39, 38, 39, 255));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
-                    gccharacter::settohunga(var1, rgba(255, 0, 13, 255), rgba(39, 38, 39, 0), scslosifoundation::stringtoidentifier("mk6a"));
-                    var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
-                    gccharacter::settohunga(var1, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkba"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(255, 0, 13, 255), rgba(39, 38, 39, 0), scslosifoundation::stringtoidentifier("mk6a"));
+                    dancy_bois = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
+                    gccharacter::settohunga(dancy_bois, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkba"));
                     gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0), rgba(39, 38, 39, 255), rgba(255, 247, 0, 255), rgba(39, 38, 39, 255));
                 }
             }
         }
-        if (param1.eventid == 30) {
+        else if (param1.eventid == 30) {
             globalclass.bgmusic.stop();
         }
         return null;
@@ -87,10 +88,14 @@ class lego_area_haka6 : gs_lego_area {
     
     method input(param1) {
         if ((param1.event == 2) && (param1.button == 251)) {
-            if (!(this.cinema == null)) {
+            if (this.cinema != null) {
                 gccinemaengine::stop(this.cinema);
             }
         }
+        return null;
+    }
+    method exit() {
+        this.lego_area_cleanupfull();
         return null;
     }
 }
