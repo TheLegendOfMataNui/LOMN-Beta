@@ -11,10 +11,6 @@ class lego_area_vllg5 : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        gcmodeldirector::setnearestmax(5);
-        gcareadirector::setnearestmax(8);
-        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 1100.0, 0.01);
-        gclightdirector::setcavelighting(0);
         return null;
     }
     
@@ -26,7 +22,10 @@ class lego_area_vllg5 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.puzzle.exit();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
     
