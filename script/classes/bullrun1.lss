@@ -1,16 +1,18 @@
 class bullrun1 {
-    property parea;
+    property parent;
     property bully;
     property bullmovesound;
     property bullsnortsound;
     property whichplane;
+    property rearup;
+    property starttimer;
     
     method bullrun1(param1) {
-        this.parea = param1;
+        this.parent = param1;
         return null;
     }
     
-    method init() {
+    method initfull() {
         var var1;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
         globalclass.bgmusic.play(1);
@@ -18,8 +20,8 @@ class bullrun1 {
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
         gclightdirector::setcavelighting(0);
-        this.bully = this.parea.level.getbull();
-        var1 = this.parea.name;
+        this.bully = this.parent.level.getbull();
+        var1 = this.parent.name;
         this.bully.changearea(scslosifoundation::stringtoidentifier(var1));
         this.bully.setclimb(5);
         globalclass.player.actor.ride(scslosifoundation::stringtoidentifier(this.bully.contstring), scslosifoundation::stringtoidentifier(this.bully.area), 2063160497);
@@ -28,10 +30,12 @@ class bullrun1 {
         gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("bl09"));
         this.bully.gotostartpos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
         this.whichplane = 0;
+        this.rearup = 1;
+        this.starttimer = 1;
         return null;
     }
     
-    method cleanup() {
+    method cleanupfull() {
         this.bullmovesound.stop();
         this.bullsnortsound.stop();
         this.bullmovesound = null;
@@ -43,6 +47,14 @@ class bullrun1 {
     }
     
     method process(param1) {
+        if ((this.starttimer > 1.5) && (this.rearup)) {
+            this.bully.setsplitanimation(scslosifoundation::stringtoidentifier("bl09"));
+            this.bullsnortsound.play(0);
+            this.rearup = 0;
+        }
+        else {
+            this.starttimer = this.starttimer + param1.deltatime;
+        }
         return null;
     }
     
@@ -86,11 +98,15 @@ class bullrun1 {
                 this.bully.setbullrunmode(45.0);
                 this.bullmovesound.play(1);
             }
-            scslosifoundation::identifiertostring(param1.args[1]);
         }
         else if (param1.eventid == 3) {
             debug::print("****************I HIT TRIGGERBOX***********************" + scslosifoundation::identifiertostring(param1.args[0]));
-            gccollisionphysicsgroup::spinmask(1.2);
+            globalclass.player.kill();
+            this.parent.level.cam.setaimode(7);
+            gcstaticsoundsptrarray::playtablesound(1048);
+            globalclass.player.actor.setinputstate("none");
+            this.bully.hide();
+            this.bullmovesound.stop();
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
@@ -105,10 +121,10 @@ class bullrun1 {
             else if (this.whichplane == 2) {
                 this.bully.gotostartpos(scslosifoundation::stringtoidentifier("str2"), scslosifoundation::stringtoidentifier("lok2"));
             }
+            this.bully.show();
             this.bully.setsplitanimation(scslosifoundation::stringtoidentifier("bl00"));
             this.bully.setbullrunmode(0.0);
             globalclass.player.unkill();
-            this.bullmovesound.stop();
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb02"), 0);
@@ -119,13 +135,13 @@ class bullrun1 {
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb07"), 0);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb08"), 0);
             globalclass.player.actor.setinputstate("ninp");
-            this.parea.level.cam.setaimode(11);
+            this.parent.level.cam.setaimode(11);
         }
         return null;
     }
     
     method exit() {
-        this.parea = null;
+        this.parent = null;
         return null;
     }
 }
