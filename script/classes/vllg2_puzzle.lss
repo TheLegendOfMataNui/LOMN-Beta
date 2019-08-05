@@ -11,8 +11,6 @@ class vllg2_puzzle {
     property testplatformsubound;
     property door2;
     property puzzlesolved;
-    property hive1handle;
-    property hive2handle;
     property deadhives;
     property upgradefruit;
     property upgradefruit2;
@@ -35,13 +33,15 @@ class vllg2_puzzle {
     
     method initfull() {
         var var1;
-        var var2;
-        var var3;
-        var var4;
-        var var5;
-        var var6;
-        var6 = gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"));
-        if (var6) {
+        var door_text;
+        var tohunga;
+        var hive1handle;
+        var hive2handle;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(8);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"))) {
             this.cinema_shown = 1;
         }
         else {
@@ -59,11 +59,11 @@ class vllg2_puzzle {
             this.coindoor.show();
             this.coindoor.setalpha(0.5);
         }
-        else {
+        else if (bettersaver::getbooleanvalue(53)) {
             this.coindoor.hide();
         }
-        var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("door"), 1, 0);
-        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
+        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 14);
+        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
         this.coindoortext.initfull();
         this.coindoortext.add();
         this.coindoortexttimer = 0.0;
@@ -84,94 +84,92 @@ class vllg2_puzzle {
         }
         this.testplatformsubound = this.testplatforms.__length - 1;
         this.puzinc = 1;
-        var2 = null;
         this.canblow = 0;
         this.tempplatform = this.testplatforms[0];
         this.tempplatform.collide = 0;
         this.deadhives = 0;
-        var4 = gcsaver::isconditionset(1073741824);
-        if (var4) {
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkba"));
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d003"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-            gccharacter::settohunga(var5, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk0a"));
+        if (gcsaver::isconditionset(1073741824)) {
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkba"));
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk0a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 60, 91, 255), rgba(72, 117, 174, 255), rgba(0, 0, 255, 255));
-            gccharacter::setorientation(var5, -2);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d003"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk7a"));
-            gccharacter::setorientation(var5, -70);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+            gccharacter::setorientation(tohunga, -2);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk7a"));
+            gccharacter::setorientation(tohunga, -70);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0), rgba(0, 208, 33, 255), rgba(0, 208, 33, 255), rgba(102, 0, 102, 255));
-            gccharacter::setorientation(var5, 10);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
+            gccharacter::setorientation(tohunga, 10);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0), rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), rgba(39, 38, 39, 255));
-            gccharacter::setorientation(var5, 158);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk2a"));
+            gccharacter::setorientation(tohunga, 158);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk2a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0), rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), rgba(0, 0, 255, 255));
-            gccharacter::setorientation(var5, 149);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkca"));
+            gccharacter::setorientation(tohunga, 149);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkca"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0), rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255));
-            gccharacter::setorientation(var5, 44);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
-            gccharacter::settohunga(var5, rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk8a"));
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk2a"));
+            gccharacter::setorientation(tohunga, 44);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
+            gccharacter::settohunga(tohunga, rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk8a"));
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk2a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0), rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), rgba(0, 0, 255, 255));
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk9a"));
-            gccharacter::setorientation(var5, 174);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("hak4"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0);
-            gccharacter::settohunga(var5, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk1a"));
-            gccharacter::setorientation(var5, 60);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("hak4"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkaa"));
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk9a"));
+            gccharacter::setorientation(tohunga, 174);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("hak4"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk1a"));
+            gccharacter::setorientation(tohunga, 60);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("hak4"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkaa"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0), rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), rgba(115, 117, 115, 255));
-            gccharacter::setorientation(var5, 6);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("hak4"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+            gccharacter::setorientation(tohunga, 6);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("hak4"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl13"), 0);
-            gccharacter::settohunga(var5, rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), scslosifoundation::stringtoidentifier("mk6a"));
-            gccharacter::setorientation(var5, 22);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk3a"));
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl13"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), scslosifoundation::stringtoidentifier("mk6a"));
+            gccharacter::setorientation(tohunga, 22);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk3a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255));
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
-            gccharacter::settohunga(var5, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk1a"));
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk1a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255));
-            gccharacter::setorientation(var5, 174);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk9a"));
+            gccharacter::setorientation(tohunga, 174);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk9a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0), rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), rgba(0, 0, 255, 255));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv0"), scslosifoundation::stringtoidentifier("vllg"));
@@ -198,14 +196,14 @@ class vllg2_puzzle {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl15"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl16"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl17"), 0);
-            this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-            gchive::setmaxcreatures(this.hive1handle, 8);
-            gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("crb1"));
-            gchive::setspawnrate(this.hive1handle, 5);
-            this.hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
-            gchive::setmaxcreatures(this.hive2handle, 8);
-            gchive::setcreaturetype(this.hive2handle, scslosifoundation::stringtoidentifier("crb1"));
-            gchive::setspawnrate(this.hive2handle, 5);
+            hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+            gchive::setmaxcreatures(hive1handle, 8);
+            gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("crb1"));
+            gchive::setspawnrate(hive1handle, 5);
+            hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+            gchive::setmaxcreatures(hive2handle, 8);
+            gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("crb1"));
+            gchive::setspawnrate(hive2handle, 5);
             globalclass.bgmusic.changefilename("Root/Data/sounds/Musicgalitheme");
             globalclass.bgmusic.play();
         }
@@ -220,18 +218,18 @@ class vllg2_puzzle {
             this.upgradefruit2.initfull();
         }
         if (bettersaver::getbooleanvalue(35) == 1) {
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkca"));
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkca"));
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
         }
         if (bettersaver::getbooleanvalue(36) == 1) {
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-            gccharacter::settohunga(var5, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk0a"));
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk0a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 0, 40, 255), rgba(150, 174, 255, 255), rgba(0, 0, 255, 255));
-            gccharacter::setorientation(var5, -2);
-            gccharacter::setinputstate(var5, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var5, scslosifoundation::stringtoidentifier("d000"), -1);
+            gccharacter::setorientation(tohunga, -2);
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
         }
         if (bettersaver::getbooleanvalue(59) == 1) {
             gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 0);
@@ -247,43 +245,41 @@ class vllg2_puzzle {
     
     method cleanupfull() {
         var var1;
-        this.hive1handle = null;
-        this.hive2handle = null;
         this.oldplatform = null;
         this.newplatform = null;
-        this.printwhichplatformimon = null;
         this.puzinc = null;
         this.currentlycollidingwith = null;
         this.tempplatform = null;
-        this.canblow = null;
-        var1 = 0;
-        while ((this.testplatforms.__length - 1) >= var1) {
-            this.testplatforms[var1].cleanupfull();
-            this.testplatforms[var1] = null;
-            var1 = var1 + 1;
+        if (this.testplatforms != null) {
+            var1 = 0;
+            while ((this.testplatforms.__length - 1) >= var1) {
+                this.testplatforms[var1].cleanupfull();
+                this.testplatforms[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.testplatforms = null;
         }
-        this.testplatforms = null;
-        if (!(this.upgradefruit == null)) {
+        if (this.upgradefruit != null) {
             this.upgradefruit.cleanupfull();
             this.upgradefruit = null;
         }
-        if (!(this.upgradefruit2 == null)) {
+        if (this.upgradefruit2 != null) {
             this.upgradefruit2.cleanupfull();
             this.upgradefruit2 = null;
         }
-        this.coindoortexttimer = null;
-        if (!(this.coindoortext == null)) {
+        if (this.coindoortext != null) {
             this.coindoortext.remove();
             this.coindoortext.cleanupfull();
             this.coindoortext = null;
         }
-        if (!(this.coindoor == null)) {
+        if (this.coindoor != null) {
             this.coindoor.cleanupfull();
             this.coindoor = null;
         }
-        this.deadhives = null;
-        this.wirlpool.cleanupfull();
-        this.wirlpool = null;
+        if (this.wirlpool != null) {
+            this.wirlpool.cleanupfull();
+            this.wirlpool = null;
+        }
         this.cinema = null;
         return null;
     }
@@ -316,6 +312,10 @@ class vllg2_puzzle {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
                     gccinemaengine::play(this.cinema);
                     this.cinema_shown = 1;
+                    if (globalclass.player.maskcontrol.isactive()) {
+                            globalclass.player.maskcontrol.toggleactive();
+                            globalclass.hud.mask.hide();
+                    }
                 }
             }
         }
@@ -324,7 +324,6 @@ class vllg2_puzzle {
                 bettersaver::setbooleanvalue(53, 1);
                 this.coindoor.hide();
             }
-            param1.eventid;
         }
         else if (param1.eventid == 51) {
             if (param1.args[1] == 1) {
@@ -336,13 +335,12 @@ class vllg2_puzzle {
                     globalclass.bgmusic.play(1);
                 }
             }
-            param1.args[1];
         }
         else if (param1.eventid == 1) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (!(param1.args[1] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                if (param1.args[1] != scslosifoundation::stringtoidentifier("cnt1")) {
                     this.newplatform = param1.args[1];
-                    if (!(this.oldplatform == this.newplatform)) {
+                    if (this.oldplatform != this.newplatform) {
                         this.printwhichplatformimon = 1;
                     }
                     if (this.printwhichplatformimon) {
@@ -379,27 +377,14 @@ class vllg2_puzzle {
                         this.tempplatform.setcollide();
                     }
                 }
-                param1.args[0];
             }
             if (param1.args[1] == scslosifoundation::stringtoidentifier("drs0")) {
                 if (this.showcoindoor == 1) {
-                    if (globalclass.player.tokens >= 14) {
-                        if (globalclass.player.maskcontrol.isselectable(9)) {
-                            if (globalclass.player.actor.ishookenabled) {
-                                this.coindoor.fadeout(1.5);
-                                gcstaticsoundsptrarray::playtablesound(1084);
-                                this.showcoindoor = 0;
-                                this.coindoortext.hide();
-                            }
-                            else {
-                                this.coindoortext.show();
-                                this.coindoortexttimer = 1.0;
-                            }
-                        }
-                        else {
-                            this.coindoortext.show();
-                            this.coindoortexttimer = 1.0;
-                        }
+                    if ((globalclass.player.tokens >= 14) && (globalclass.player.maskcontrol.isselectable(9)) && (globalclass.player.actor.ishookenabled)) {
+                        this.coindoor.fadeout(1.5);
+                        gcstaticsoundsptrarray::playtablesound(1084);
+                        this.showcoindoor = 0;
+                        this.coindoortext.hide();
                     }
                     else {
                         this.coindoortext.show();
@@ -407,7 +392,6 @@ class vllg2_puzzle {
                     }
                 }
             }
-            param1.args[2];
         }
         else if (param1.eventid == 11) {
             if (scslosifoundation::identifiertostring(param1.args[1]) == "g054") {
@@ -419,7 +403,6 @@ class vllg2_puzzle {
                     this.puzzlesolved = 0;
                 }
             }
-            scslosifoundation::identifiertostring(param1.args[1]);
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
@@ -435,7 +418,6 @@ class vllg2_puzzle {
                 globalclass.player.actor.setinputstate("ninp");
                 globalclass.level.cam.setaimode(11);
             }
-            param1.args[0];
         }
         else if (param1.eventid == 41) {
             if (bettersaver::getbooleanvalue(35)) {
@@ -454,7 +436,6 @@ class vllg2_puzzle {
                     globalclass.player.canshootdragger(1);
                 }
             }
-            param1.args[0];
         }
         return null;
     }
@@ -480,13 +461,10 @@ class vllg2_puzzle {
                 this.cheat(3);
             }
         }
-        if (param1.event == 2) {
-            if (param1.button == 251) {
-                if (!(this.cinema == null)) {
-                    gccinemaengine::stop(this.cinema);
-                }
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (this.cinema != null) {
+                gccinemaengine::stop(this.cinema);
             }
-            param1.button;
         }
         return null;
     }
