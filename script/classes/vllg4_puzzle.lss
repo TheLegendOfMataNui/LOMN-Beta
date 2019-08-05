@@ -25,6 +25,10 @@ class vllg4_puzzle {
     method initfull() {
         var tohunga;
         var door_text;
+        gcmodeldirector::setnearestmax(5);
+        gcareadirector::setnearestmax(8);
+        gcareadirector::setfog(-16777200, 0 - 1.0, 0 - 900.0, 0.15);
+        gclightdirector::setcavelighting(0);
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"))) {
             this.cinema_shown = 1;
         }
