@@ -11,10 +11,14 @@ class test_puzzle {
     }
     
     method initfull() {
+        var KEVIN;
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-16777216, 0 - 5.0, 0 - 600.0, 0.01);
         gclightdirector::setcavelighting(0);
+        KEVIN = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kevn"));
+        gccharacter::setscale(KEVIN, 15.0);
+		gccharacter::setanimationscalar(KEVIN, 2.00);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
         this.callsurfonce = 1;
         this.miruactive = 1;
