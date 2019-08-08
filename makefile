@@ -1,7 +1,6 @@
 SHELL = cmd
 BLKTOOL = python tools\blkfile.py
 COMPRESSION = decompressed # can also set to compressed
-BLKARGS = --$(COMPRESSION)
 LSSTOOL = tools\lssc\lssc.exe
 LSSARGS = Compile -y -r
 RELEASETOOL = python tools\releasetool.py
