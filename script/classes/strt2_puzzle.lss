@@ -2,8 +2,6 @@ class strt2_puzzle {
     property parent;
     property gatestone;
     property door;
-    property hive1handle;
-    property hive2handle;
     property upgradefruit3;
     property upgradefruit3_shown;
     
@@ -13,27 +11,34 @@ class strt2_puzzle {
     }
     
     method initfull() {
-        var var1;
-        var var2;
-        var var3;
-        gclightdirector::setcavelighting(0);
+        var x;
+        var y;
+        var z;
+        var tohunga;
+        var hive1handle;
+        var hive2handle;
+        gcmodeldirector::setnearestmax(20);
+        gcareadirector::setnearestmax(20);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
+        globalclass.bgmusic.play();
         this.door = new lego_moveableobject("drs0");
         this.door.initfull();
-        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(this.hive1handle, 8);
-        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("crb1"));
-        gchive::setspawnrate(this.hive1handle, 5);
-        this.hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
-        gchive::setmaxcreatures(this.hive2handle, 8);
-        gchive::setcreaturetype(this.hive2handle, scslosifoundation::stringtoidentifier("crb1"));
-        gchive::setspawnrate(this.hive2handle, 5);
-        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::settohunga(var1, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
-        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setsplitanimation(var1, scslosifoundation::stringtoidentifier("d003"), -1);
-        gccharacter::setorientation(var1, -56);
-        var2 = gcsaver::finditem(scslosifoundation::stringtoidentifier("gstn"));
-        if (var2 == 0) {
+        hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hive1handle, 8);
+        gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(hive1handle, 5);
+        hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(hive2handle, 8);
+        gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(hive2handle, 5);
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setsplitanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
+        gccharacter::setorientation(tohunga, -56);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gstn")) == 0) {
             this.gatestone = new lego_pickup("gstn", 0, 5, "item", 7, 1);
             this.gatestone.initfull();
             this.gatestone.show();
@@ -46,14 +51,14 @@ class strt2_puzzle {
             this.upgradefruit3.initfull();
         }
         if (bettersaver::getbooleanvalue(37) == 1) {
-            var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(var1, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
-            gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d000"), -1);
-            var1 = this.door.getx();
-            var2 = this.door.gety() + 9.0;
-            var3 = this.door.getz();
-            this.door.interpolate(var1, var2, var3, 0.0);
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+            x = this.door.getx();
+            y = this.door.gety() + 9.0;
+            z = this.door.getz();
+            this.door.interpolate(x, y, z, 0.0);
         }
         return null;
     }
@@ -65,18 +70,18 @@ class strt2_puzzle {
     }
     
     method cleanupfull() {
-        if (!(this.gatestone == null)) {
+        if (this.gatestone != null) {
             this.gatestone.cleanupfull();
             this.gatestone = null;
         }
-        if (!(this.upgradefruit3 == null)) {
+        if (this.upgradefruit3 != null) {
             this.upgradefruit3.cleanupfull();
             this.upgradefruit3 = null;
         }
-        this.hive1handle = null;
-        this.hive2handle = null;
-        this.door.cleanupfull();
-        this.door = null;
+        if (this.door != null) {
+            this.door.cleanupfull();
+            this.door = null;
+        }
         return null;
     }
     
@@ -123,13 +128,13 @@ class strt2_puzzle {
     }
     
     method movedoorup() {
-        var var1;
-        var var2;
-        var var3;
-        var1 = this.door.getx();
-        var2 = this.door.gety() + 9.0;
-        var3 = this.door.getz();
-        this.door.interpolate(var1, var2, var3, 1.5);
+        var x;
+        var y;
+        var z;
+        x = this.door.getx();
+        y = this.door.gety() + 9.0;
+        z = this.door.getz();
+        this.door.interpolate(x, y, z, 1.5);
         return null;
     }
     
