@@ -68,9 +68,11 @@ class l1shrn_door {
     }
     
     method cleanupfull() {
-        this.object.cleanupfull();
-        this.object = null;
-        if (!(this.sound == null)) {
+        if (this.object != null) {
+            this.object.cleanupfull();
+            this.object = null;
+        }
+        if (this.sound != null) {
             this.sound = null;
         }
         return null;
@@ -105,7 +107,6 @@ class l1shrn_door {
                 }
             }
         }
-        param1.eventid;
         return null;
     }
 }
