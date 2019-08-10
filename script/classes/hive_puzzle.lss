@@ -82,6 +82,10 @@ class hive_puzzle {
         if (this.cinema_shown == 0) {
             gccinemaengine::play(this.cinema);
             this.cinema_shown = 1;
+			if (globalclass.player.maskcontrol.isactive()) {
+				globalclass.player.maskcontrol.toggleactive();
+				globalclass.hud.mask.hide();
+			}
         }
         return null;
     }
