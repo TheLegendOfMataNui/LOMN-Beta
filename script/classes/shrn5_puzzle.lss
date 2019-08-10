@@ -32,7 +32,7 @@ class shrn5_puzzle {
         else if (bettersaver::getbooleanvalue(69)) {
             this.bossdoor.hide();
         }
-        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("dor1"), 1, 0, 10);
+        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 25);
         this.bossdoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
         this.bossdoortext.initfull();
         this.bossdoortext.add();
@@ -90,7 +90,7 @@ class shrn5_puzzle {
     method onevent(param1) {
         var portal_trigger;
         if (param1.eventid == 35) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("dr00")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("dor1")) {
                 bettersaver::setbooleanvalue(69, 1);
                 this.bossdoor.hide();
             }
@@ -109,7 +109,7 @@ class shrn5_puzzle {
                     if (((((globalclass.player.tokens >= 25) && (globalclass.player.haselement()) && (globalclass.player.actor.ishookenabled) && (globalclass.player.maskcontrol.isselectable(12)) && (globalclass.player.maskcontrol.isselectable(4)))))) {
                         this.bossdoor.fadeout(1.5);
                         gcstaticsoundsptrarray::playtablesound(1084);
-                        this.bosscoindoor = 0;
+                        this.showbossdoor = 0;
                         this.bossdoortext.hide();
                     }
                     else {
