@@ -15,6 +15,12 @@ class spiderfight_class {
     
     method initfull() {
         var bosstext;
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(3);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setfog(-16777216, 0 - 30.0, 0 - 80.0, 0.05);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
+        globalclass.bgmusic.play(1);
         this.door = new lego_moveableobject("door", this.parent.name);
         this.door.initfull();
         this.web1 = new lego_moveableobject("web1", this.parent.name, [ "weba" ]);
@@ -34,6 +40,12 @@ class spiderfight_class {
         else {
             this.door.interpolate(this.door.getx(), this.door.gety() + 10.0, this.door.getz(), 0.0);
             this.web1.hide();
+            globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
+            globalclass.bgmusic.play(1);
+            if (this.spider != null) {
+                this.spider.cleanupfull();
+                this.spider = null;
+            }
         }
         if (gcsaver::isconditionset(536870912)) {
             this.showintro = 0;
@@ -51,27 +63,27 @@ class spiderfight_class {
     }
     
     method cleanupfull() {
-        if (!(this.spider == null)) {
+        if (this.spider != null) {
             this.spider.cleanupfull();
             this.spider = null;
         }
-        if (!(this.desctext == null)) {
+        if (this.desctext != null) {
             this.desctext.cleanupfull();
             this.desctext = null;
         }
-        if (!(this.howtotext == null)) {
+        if (this.howtotext != null) {
             this.howtotext.cleanupfull();
             this.howtotext = null;
         }
-        if (!(this.door == null)) {
+        if (this.door != null) {
             this.door.cleanupfull();
             this.door = null;
         }
-        if (!(this.mask == null)) {
+        if (this.mask != null) {
             this.mask.cleanupfull();
             this.mask = null;
         }
-        if (!(this.web1 == null)) {
+        if (this.web1 != null) {
             this.web1.cleanupfull();
             this.web1 = null;
         }

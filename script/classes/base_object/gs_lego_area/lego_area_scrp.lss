@@ -10,12 +10,6 @@ class lego_area_scrp : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        gcareadirector::setfog(-16777216, 0 - 75.0, 0 - 200.0, 0.05);
-        gclightdirector::setcavelighting(1);
-        gcareadirector::setnearestmax(5);
-        gcmodeldirector::setnearestmax(10);
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
-        globalclass.bgmusic.play(1);
         this.puzzle.initfull();
         return null;
     }
@@ -38,8 +32,10 @@ class lego_area_scrp : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.puzzle.exit();
-        this.puzzle = null;
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
