@@ -25,7 +25,12 @@ class test_puzzle {
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
         tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
         gccharacter::settohunga(tohunga, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
-        this.callsurfonce = 1;
+		gccharacter::addpart(tohunga, "vlgr/it0a", scslosifoundation::stringtoidentifier("disk"));		
+		gccharacter::addpart(tohunga, "vlgr/swrd", scslosifoundation::stringtoidentifier("sord"));		
+		gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setsplitanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
+		gccharacter::setorientation(tohunga, -90);
+		this.callsurfonce = 1;
         this.miruactive = 1;
         this.holedo = 1;
         this.musichasstarted = 0;
@@ -37,7 +42,8 @@ class test_puzzle {
         }
         return null;
     }
-    
+
+
     method cleanupfull() {
         return null;
     }
