@@ -15,6 +15,7 @@ class crosspuzzle {
     property canhitdoor1;
     property canhitdoor2;
     property hookbox;
+    property skatespickup;
     
     method crosspuzzle(param1) {
         this.parent = param1;
@@ -34,6 +35,15 @@ class crosspuzzle {
         var var2;
         var var3;
         gcareadirector::setnearestmax(50);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("skts")) == 0) {
+            this.skatespickup = new lego_pickup("skts", 0, 5, "item", 5, 1);
+            this.skatespickup.initfull();
+            this.skatespickup.show();
+            this.skatespickup.setcondition(131072);
+            this.skatespickup.setquest(2);
+        }
         this.hookbox = new lego_moveableobject("hot0");
         this.hookbox.initfull();
         this.hookbox.setmytargetingflags(1);
@@ -98,37 +108,41 @@ class crosspuzzle {
     
     method cleanupfull() {
         var var1;
-        var var2;
-        var var3;
-        var1 = null;
-        var2 = null;
-        var3 = 0;
-        while ((this.doorarray.__length - 1) >= var3) {
-            this.doorarray[var3].cleanupfull();
-            this.doorarray[var3] = null;
-            var3 = var3 + 1;
+        if (this.doorarray != null) {
+            var1 = 0;
+            while ((this.doorarray.__length - 1) >= var1) {
+                this.doorarray[var1].cleanupfull();
+                this.doorarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.doorarray = null;
         }
-        this.doorarray = null;
-        var3 = 0;
-        while ((this.icearray.__length - 1) >= var3) {
-            this.icearray[var3].cleanupfull();
-            this.icearray[var3] = null;
-            var3 = var3 + 1;
+        if (this.icearray != null) {
+            var1 = 0;
+            while ((this.icearray.__length - 1) >= var1) {
+                this.icearray[var1].cleanupfull();
+                this.icearray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.icearray = null;
         }
-        this.icearray = null;
-        var3 = 0;
-        while ((this.platformarray.__length - 1) >= var3) {
-            this.platformarray[var3].cleanupfull();
-            this.platformarray[var3] = null;
-            var3 = var3 + 1;
+        if (this.platformarray != null) {
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].cleanupfull();
+                this.platformarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platformarray = null;
         }
-        this.platformarray = null;
         this.whichdoor = null;
-        this.canhitdoor1 = null;
-        this.canhitdoor2 = null;
-        if (!(this.hookbox == null)) {
+        if (this.hookbox != null) {
             this.hookbox.cleanupfull();
             this.hookbox = null;
+        }
+        if (this.skatespickup != null) {
+            this.skatespickup.cleanupfull();
+            this.skatespickup = null;
         }
         return null;
     }
@@ -197,11 +211,12 @@ class crosspuzzle {
     method onevent(param1) {
         var var1;
         var var2;
-        var var3;
-        var1 = 0;
-        while ((this.platformarray.__length - 1) >= var1) {
-            this.platformarray[var1].onevent(param1);
-            var1 = var1 + 1;
+        if (this.platformarray != null) {
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
         }
         if (param1.eventid == 1002) {
             if (param1.args[0]) {
@@ -300,21 +315,23 @@ class crosspuzzle {
             }
         }
         else if (param1.eventid == 3) {
-            var3 = param1.args[0];
-            if (var3 == scslosifoundation::stringtoidentifier("tb00")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
                 this.parent.level.cam.setaimode(7);
-                gccollisionphysicsgroup::spinmask(1.2);
+                globalclass.player.actor.setinputstate("none");
             }
         }
         else if (param1.eventid == 27) {
-            globalclass.player.kill();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 46) {
-            globalclass.player.unkill();
-            globalclass.player.actor.setpos(260.88, 0 - 37.88, 14.61);
-            globalclass.player.actor.setorientation(225);
-            this.parent.level.cam.setaimode(11);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         return null;
     }
