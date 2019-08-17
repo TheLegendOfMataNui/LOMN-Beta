@@ -1,0 +1,43 @@
+class nobuaclass : gs_lego_toa {
+    property walkspeed;
+    property runspeed;
+    property standingjumpheight;
+    property standingjumplength;
+    property runningjumpheight;
+    property runningjumplength;
+    property swimingabilty;
+    property bounce;
+    
+    method nobuaclass(param1, param2, param3, param4, param5) {
+        this.gs_lego_toa(param1, param2, param3, param4, param5);
+        this.walkspeed = 4;
+        this.runspeed = 15;
+        this.standingjumpheight = 6;
+        this.standingjumplength = 6;
+        this.runningjumpheight = 4;
+        this.runningjumplength = 8;
+        this.swimingabilty = 0;
+        this.bounce = 0;
+        return null;
+    }
+    
+    method setupgrapplinghook(param1, param2, param3) {
+        this.setdraggerreaction(0);
+        this.setmydraggerreactionanimation(scslosifoundation::stringtoidentifier("d017"));
+        this.restrictdraggercameramode(12);
+        this.setupdraggertip("Root/data/Art/SpriteAnims/nobuadisk", "disk", scslosifoundation::stringtoidentifier("hand"), scslosifoundation::stringtoidentifier("cnt1"));
+        this.setupdraggermaxrange(120);
+        this.setupdraggerspeeds(param2, param3);
+        this.settargeteermaxrange(200);
+        this.settargeteerselectionmode(1);
+        this.settargeteerconeangle(param1);
+        debug::print("GrapplingHook has been setUp.");
+        this.ishookenabled = 1;
+        return null;
+    }
+    
+    method setgrapplinghookdistance(param1) {
+        this.setupdraggermaxrange(param1);
+        return null;
+    }
+}

@@ -1,0 +1,69 @@
+class gly15_puzzle {
+    property parent;
+    property mthermals;
+    
+    method gly15_puzzle(param1) {
+        var var1;
+        this.parent = param1;
+        var1 = 1;
+        return null;
+    }
+    
+    method initfull() {
+        globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+        globalclass.bgmusic.play();
+        this.mthermals = [ new thermal("tm01"), 
+            new thermal("tm02"), 
+            new thermal("tm03"), 
+            new thermal("tm04"), 
+            new thermal("tm05"), 
+            new thermal("tm06"), 
+            new thermal("tm07"), 
+            new thermal("tm08"), 
+            new thermal("tm09"), 
+            new thermal("tm10"), 
+            new thermal("tm11"), 
+            new thermal("tm12"), 
+            new thermal("tm13") ];
+        return null;
+    }
+    
+    method cleanupfull() {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.mthermals.__length - 1) >= var1) {
+            this.mthermals[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var1 = 0;
+        if ((this.mthermals.__length - 1) >= var1) {
+            this.mthermals[var1].onevent(param1);
+            var1 = var1 + 1;
+            if (this.mthermals.__length - 1 == 27) {
+                globalclass.level.cam.setaimode(11);
+                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+                globalclass.player.unkill();
+            }
+        }
+        this.mthermals.__length - 1;
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

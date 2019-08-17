@@ -1,0 +1,576 @@
+class lego_moveableobject : base_object {
+    property name;
+    property id;
+    property handle;
+    property area;
+    property areaid;
+    property anims;
+    property currentanim;
+    property defaultanim;
+    property onscreen;
+    property collide;
+    property collidetimer;
+    property madeonthefly;
+    
+    method lego_moveableobject(param1, param2, param3) {
+        var var1;
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(this.name);
+        this.area = param2;
+        this.madeonthefly = 0;
+        if (this.area == null) {
+            this.area = "fake";
+        }
+        this.areaid = scslosifoundation::stringtoidentifier(this.area);
+        this.anims = param3;
+        if (!(this.anims == null)) {
+            var1 = 0;
+            while ((this.anims.__length - 1) >= var1) {
+                this.anims[var1] = scslosifoundation::stringtoidentifier(this.anims[var1]);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method initfull(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+        var var1;
+        if (param9 == null) {
+            param9 = 2;
+        }
+        if (!(param1 == null)) {
+            this.madeonthefly = 1;
+            var1 = gcmoveableobj::create("dumy", "dummy", "dummy", 0);
+            if (param3 == null) {
+                gcmoveableobj::setdefaultbox(var1, -2, -2, -2, 2, 2, 2);
+            }
+            else {
+                gcmoveableobj::setdefaultbox(var1, param3, param4, param5, param6, param7, param8);
+            }
+            this.handle = gcmoveableobj::create(this.name, param2, param1, param9);
+        }
+        this.moveable_initfull();
+        return null;
+    }
+    
+    method moveable_initfull() {
+        this.handle = gcareadirector::getmoveableobj(this.id, this.areaid);
+        if (this.handle == null) {
+            debug::print(("Object " + this.name) + " returned no handle from SAGE.. this obj may not be in your .slk");
+        }
+        this.currentanim = -1;
+        this.collide = 0;
+        this.collidetimer = 5;
+        this.onscreen = 1;
+        this.setdefault(scslosifoundation::stringtoidentifier("NDef"));
+        this.setresponse(3, 3, 3);
+        this.setcollisionflags();
+        return null;
+    }
+    
+    method cleanupfull() {
+        gcmoveableobj::killanimtexture(this.handle);
+        if (this.madeonthefly) {
+            this.remove();
+        }
+        this.name = null;
+        this.id = null;
+        this.handle = null;
+        this.anims = null;
+        this.currentanim = null;
+        this.defaultanim = null;
+        return null;
+    }
+    
+    method remove() {
+        gcareadirector::remove(this.id, this.areaid);
+        return null;
+    }
+    
+    method setposition(param1, param2, param3) {
+        var var1;
+        var var2;
+        var var3;
+        if ((param2 == null) && (param3 == null)) {
+            var1 = param1.z;
+            var2 = param1.y;
+            var3 = param1.x;
+        }
+        else {
+            var3 = param1;
+            var2 = param2;
+            var1 = param3;
+        }
+        gcmoveableobj::setposition(this.handle, var3, var2, var1);
+        return null;
+    }
+    
+    method setpos(param1, param2, param3) {
+        var var1;
+        var var2;
+        var var3;
+        if (param3 == null) {
+            var1 = param1.z;
+            var2 = param1.y;
+            var3 = param1.x;
+        }
+        else {
+            var3 = param1;
+            var2 = param2;
+            var1 = param3;
+        }
+        gcmoveableobj::setposition(this.handle, var3, var2, var1);
+        return null;
+    }
+    
+    method setlocalpos(param1, param2, param3) {
+        this.setpos(this.getx(), this.gety() + param2, this.getz());
+        gcmoveableobj::slidelocalcoord(this.handle, param1, param3);
+        return null;
+    }
+    
+    method setslidetimer(param1, param2, param3, param4, param5, param6) {
+        gcmoveableobj::setslidetimer(this.handle, param1, param2, param3, param4, param5, param6);
+        return null;
+    }
+    
+    method stopslidetimer() {
+        gcmoveableobj::stopslidetimer(this.handle);
+        return null;
+    }
+    
+    method setorientation(param1, param2, param3) {
+        gcmoveableobj::setorientation(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method getorientationx() {
+        return gcmoveableobj::getorientationx(this.handle);
+    }
+    
+    method getorientationy() {
+        return gcmoveableobj::getorientationy(this.handle);
+    }
+    
+    method getorientationz() {
+        return gcmoveableobj::getorientationz(this.handle);
+    }
+    
+    method changeposition(param1, param2, param3, param4) {
+        var var1;
+        var var2;
+        var var3;
+        var1 = this.getx() + param1;
+        var2 = this.gety() + param2;
+        var3 = this.getz() + param3;
+        if (param4 == null) {
+            this.setposition(var1, var2, var3);
+        }
+        else if (param4 <= 0) {
+            this.setposition(var1, var2, var3);
+        }
+        else {
+            this.interpolate(var1, var2, var3, param4);
+        }
+        return null;
+    }
+    
+    method changemainsystem(param1) {
+        gcmoveableobj::changemainsystem(this.handle, param1);
+        return null;
+    }
+    
+    method getx() {
+        return gcmoveableobj::getx(this.handle);
+    }
+    
+    method gety() {
+        return gcmoveableobj::gety(this.handle);
+    }
+    
+    method getz() {
+        return gcmoveableobj::getz(this.handle);
+    }
+    
+    method setx(param1) {
+        gcmoveableobj::setposition(this.handle, param1, this.gety(), this.getz());
+        return null;
+    }
+    
+    method sety(param1) {
+        gcmoveableobj::setposition(this.handle, this.getx(), param1, this.getz());
+        return null;
+    }
+    
+    method setz(param1) {
+        gcmoveableobj::setposition(this.handle, this.getx(), this.gety(), param1);
+        return null;
+    }
+    
+    method getpoint() {
+        return new basicpoint(this.getx(), this.gety(), this.getz());
+    }
+    
+    method interpolate(param1, param2, param3, param4) {
+        gcmoveableobj::interpolate(this.handle, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method stopinterpolate() {
+        gcmoveableobj::stopinterpolate(this.handle);
+        return null;
+    }
+    
+    method resetinterpolate() {
+        gcmoveableobj::cancelinterpolate(this.handle);
+        return null;
+    }
+    
+    method show() {
+        gcareadirector::show(this.id, this.areaid);
+        this.onscreen = 1;
+        return null;
+    }
+    
+    method hide() {
+        gcareadirector::hide(this.id, this.areaid);
+        this.onscreen = 0;
+        return null;
+    }
+    
+    method toggle() {
+        if (this.onscreen == 1) {
+            this.hide();
+        }
+        else {
+            this.show();
+        }
+        return null;
+    }
+    
+    method setshrinkable(param1) {
+        gcmoveableobj::setshrinkable(this.handle, param1);
+        return null;
+    }
+    
+    method setdefault(param1) {
+        if (param1 == scslosifoundation::stringtoidentifier("NDef")) {
+            if (this.handle == null) {
+                debug::print(("ERROR -- the handle to < " + this.name) + " > is nothing!!");
+                debug::print(("      -- is < " + this.name) + " > in the slk ??");
+            }
+            gcmoveableobj::setdefault(this.handle, scslosifoundation::stringtoidentifier("NDef"));
+            this.defaultanim = -1;
+            return null;
+        }
+        if (param1 <= (this.anims.__length - 1)) {
+            this.defaultanim = param1;
+            gcmoveableobj::setdefault(this.handle, this.anims[this.defaultanim]);
+        }
+        return null;
+    }
+    
+    method setresponse(param1, param2, param3) {
+        gcmoveableobj::setcharacterresponses(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method setprojectileoffset(param1, param2, param3) {
+        gcmoveableobj::setprojectileoffset(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method play(param1, param2) {
+        if (param2 == null) {
+            param2 = 0;
+        }
+        if (param1 == -1) {
+            gcmoveableobj::play(this.handle, this.anims[this.currentanim], param2);
+        }
+        else if (param1 <= (this.anims.__length - 1)) {
+            this.currentanim = param1;
+            gcmoveableobj::play(this.handle, this.anims[this.currentanim], param2);
+        }
+        return null;
+    }
+    
+    method stop() {
+        gcmoveableobj::stop(this.handle);
+        return null;
+    }
+    
+    method isplaying() {
+        var var1;
+        var1 = gcmoveableobj::isplaying(this.handle);
+        return var1;
+    }
+    
+    method setcollide() {
+        this.collide = this.collidetimer;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[1] == this.id)) && (param1.args[2] == 0)) {
+                this.collide = 5;
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (!(this.collide == null)) {
+            if (this.collide > 0) {
+                this.collide = this.collide - 1;
+                if (this.collide == 1) {
+                    var1 = new scriptevent(1, [ scslosifoundation::stringtoidentifier("cnt1"), 
+                        this.id, 
+                        1 ]);
+                    var1.send();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method addanim(param1) {
+        this.anims.__append(scslosifoundation::stringtoidentifier(param1));
+        return null;
+    }
+    
+    method settweakable() {
+        globalclass.tweak.add_moveableobj_tweakable(this);
+        return null;
+    }
+    
+    method disablecollisions() {
+        gcmoveableobj::disablecollisions(this.handle, 255);
+        return null;
+    }
+    
+    method enablecollisions() {
+        gcmoveableobj::enablecollisions(this.handle, 255);
+        return null;
+    }
+    
+    method ignorecollisionswith(param1) {
+        gcmoveableobj::addignorecollisionswith(this.handle, param1);
+        return null;
+    }
+    
+    method setignoreallcollisions(param1) {
+        gcmoveableobj::setignoreallcollisions(this.handle, param1);
+        return null;
+    }
+    
+    method ignoreignorecollisionswith(param1) {
+        gcmoveableobj::addignoreignorecollisionswith(this.handle, param1);
+        return null;
+    }
+    
+    method setcollisionflags() {
+        gcmoveableobj::setcollisionflags(this.handle, 128);
+        return null;
+    }
+    
+    method setconvergetarget(param1, param2, param3, param4) {
+        gcmoveableobj::setconvergetarget(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method setnudgetarget(param1, param2, param3) {
+        gcmoveableobj::setnudgetarget(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method setbouncefactor(param1) {
+        gcmoveableobj::setbouncefactor(this.handle, param1);
+        return null;
+    }
+    
+    method setfriction(param1) {
+        gcmoveableobj::setfriction(this.handle, param1);
+        return null;
+    }
+    
+    method setgroundoffset(param1) {
+        gcmoveableobj::setgroundoffset(this.handle, param1);
+        return null;
+    }
+    
+    method setbounceeventrepoert(param1) {
+        var var1;
+        if (!(param1 == null)) {
+            var1 = param1;
+        }
+        else {
+            var1 = 1;
+        }
+        gcmoveableobj::setbouncereport(this.handle, var1);
+        return null;
+    }
+    
+    method setobjscale(param1) {
+        gcmoveableobj::setscale(this.handle, param1);
+        return null;
+    }
+    
+    method setscale(param1) {
+        gcmoveableobj::setscale(this.handle, param1);
+        return null;
+    }
+    
+    method setmoveable(param1, param2, param3, param4, param5, param6) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        if (param1 == null) {
+            var1 = 5.0;
+        }
+        else {
+            var1 = param1;
+        }
+        if (param2 == null) {
+            var2 = 0.0;
+        }
+        else {
+            var2 = param2;
+        }
+        if (param3 == null) {
+            var3 = 1;
+        }
+        else {
+            var3 = param3;
+        }
+        if (param4 == null) {
+            var4 = 0;
+        }
+        else {
+            var4 = param4;
+        }
+        if (param5 == null) {
+            var5 = 0;
+        }
+        else {
+            var5 = param5;
+        }
+        if (param6 == null) {
+            var6 = 1;
+        }
+        else {
+            var6 = param6;
+        }
+        gcmoveableobj::setupmoveable(this.handle, var1, var2, var3, var4, var5);
+        gcmoveableobj::setbounce(this.handle, var6);
+        return null;
+    }
+    
+    method setmoveableflags(param1, param2, param3, param4) {
+        gcmoveableobj::setmoveableflags(this.handle, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method setstationary() {
+        gcmoveableobj::setupstationary(this.handle);
+        return null;
+    }
+    
+    method setrollangle(param1, param2, param3) {
+        gcmoveableobj::setrollangle(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method setmytargetingflags(param1) {
+        gcmoveableobj::setmytargetingflags(this.handle, param1);
+        return null;
+    }
+    
+    method setfallreset(param1) {
+        gcmoveableobj::setfallreset(this.handle, param1);
+        return null;
+    }
+    
+    method setfalllimit(param1) {
+        gcmoveableobj::setfalllimit(this.handle, param1);
+        return null;
+    }
+    
+    method setfallresetpos(param1, param2, param3) {
+        gcmoveableobj::setfallresetpos(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method setvelocity(param1, param2, param3) {
+        gcmoveableobj::setvelocity(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method fadein(param1) {
+        if ((param1 == 0) || (param1 == null)) {
+            this.setalpha(1.0);
+        }
+        else {
+            gcmoveableobj::fadein(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method fadeout(param1) {
+        if ((param1 == 0) || (param1 == null)) {
+            this.setalpha(0.0);
+        }
+        else {
+            gcmoveableobj::fadeout(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method setalpha(param1) {
+        if (param1 == null) {
+            param1 = 1;
+        }
+        gcmoveableobj::settransparency(this.handle, param1);
+        return null;
+    }
+    
+    method getalpha() {
+        gcmoveableobj::gettransparency(this.handle);
+        return null;
+    }
+    
+    method chasetoa(param1) {
+        gcmoveableobj::chasetoa(this.handle, param1);
+        return null;
+    }
+    
+    method settargettoa(param1) {
+        gcmoveableobj::settargettoa(this.handle, param1);
+        return null;
+    }
+    
+    method setobjgravity(param1) {
+        gcmoveableobj::setlocalgravity(this.handle, param1);
+        return null;
+    }
+    
+    method setanimtexture(param1) {
+        gcmoveableobj::setanimtexture(this.handle, param1);
+        return null;
+    }
+    
+    method setcrushflags(param1, param2, param3, param4, param5, param6) {
+        gcmoveableobj::setcrushflags(this.handle, param1, param2, param3, param4, param5, param6);
+        return null;
+    }
+    
+    method movebboxsides(param1, param2, param3, param4, param5, param6) {
+        gcmoveableobj::movebboxsides(this.handle, param1, param2, param3, param4, param5, param6);
+        return null;
+    }
+}

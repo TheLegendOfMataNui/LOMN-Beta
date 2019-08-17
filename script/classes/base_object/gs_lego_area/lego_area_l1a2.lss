@@ -1,0 +1,56 @@
+class lego_area_l1a2 : gs_lego_area {
+    property parent;
+    
+    method lego_area_l1a2(param1) {
+        this.parent = param1;
+        this.gs_lego_area("l1a2", param1, 0, 0);
+        this.lego_area_initfull();
+        this.startingarea = [ 180, 
+            462.0, 
+            1.6, 
+            38.3 ];
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        gcareadirector::setfog(-14803426, 0 - 85.0, 0 - 200.0, 0.05);
+        gcareadirector::setnearestmax(2);
+        gclightdirector::setcavelighting(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.level.cam.setaimode(7);
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("d000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

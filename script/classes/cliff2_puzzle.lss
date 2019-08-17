@@ -1,0 +1,77 @@
+class cliff2_puzzle {
+    property parent;
+    property targetarray;
+    
+    method cliff2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var1, 5);
+        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(var1, 5);
+        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
+        gchive::setmaxcreatures(var2, 2);
+        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("bats"));
+        gchive::setspawnrate(var2, 2);
+        this.targetarray = [ new lego_moveableobject("hot1", this.parent.name), 
+            new lego_moveableobject("hot2", this.parent.name), 
+            new lego_moveableobject("hot3", this.parent.name), 
+            new lego_moveableobject("hot4", this.parent.name) ];
+        var3 = 0;
+        while ((this.targetarray.__length - 1) >= var3) {
+            this.targetarray[var3].initfull();
+            this.targetarray[var3].setmytargetingflags(1);
+            this.targetarray[var3].setresponse(1, 1, 1);
+            var3 = var3 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.targetarray == null)) {
+            var1 = 0;
+            while ((this.targetarray.__length - 1) >= var1) {
+                this.targetarray[var1].cleanupfull();
+                this.targetarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.targetarray = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+}

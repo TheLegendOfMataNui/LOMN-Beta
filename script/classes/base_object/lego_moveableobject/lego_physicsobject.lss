@@ -1,0 +1,159 @@
+class lego_physicsobject : lego_moveableobject {
+    property friction;
+    property fall;
+    property roll;
+    property rollradius;
+    property slide;
+    property bounce;
+    property maxtimetoconverg;
+    property setbouncereport;
+    property collisiontype;
+    
+    method lego_physicsobject(param1, param2, param3) {
+        this.lego_moveableobject(param1, param2, param3);
+        return null;
+    }
+    
+    method initfull(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16) {
+        var var1;
+        if (param16 == null) {
+            param16 = 2;
+        }
+        if (!(param7 == null) & !(param8 == null)) {
+            this.madeonthefly = 1;
+            var1 = gcmoveableobj::create("dumy", "dummy", "dummy", 0);
+            if (param10 == null) {
+                gcmoveableobj::setdefaultbox(var1, -2, -2, -2, 2, 2, 2);
+            }
+            else {
+                gcmoveableobj::setdefaultbox(var1, param10, param11, param12, param13, param14, param15);
+            }
+            this.createnew(param7, param8, param16);
+        }
+        this.moveable_initfull();
+        if (param1 == null) {
+            this.friction = 0.5;
+        }
+        else {
+            this.friction = param1;
+        }
+        if (param2 == null) {
+            this.fall = 0;
+        }
+        else {
+            this.fall = param2;
+        }
+        if (param3 == null) {
+            this.roll = 0;
+        }
+        else {
+            this.roll = param3;
+        }
+        if (param4 == null) {
+            this.slide = 0;
+        }
+        else {
+            this.slide = param4;
+        }
+        if (param5 == null) {
+            this.bounce = 0;
+        }
+        else {
+            this.bounce = param5;
+        }
+        if (param6 == null) {
+            this.rollradius = 1.0;
+        }
+        else {
+            this.rollradius = param6;
+        }
+        if (param9 == null) {
+            this.maxtimetoconverg = 30;
+        }
+        else {
+            this.maxtimetoconverg = param9;
+        }
+        gcmoveableobj::setupmoveable(this.handle, this.rollradius, this.friction, this.fall, this.roll, this.slide, this.maxtimetoconverg);
+        gcmoveableobj::setbounce(this.handle, this.bounce);
+        return null;
+    }
+    
+    method createnew(param1, param2, param3) {
+        this.handle = gcmoveableobj::create(this.name, param2, param1, param3);
+        if (this.handle == null) {
+            
+        }
+        return null;
+    }
+    
+    method setshrinkable(param1) {
+        gcmoveableobj::setshrinkable(this.handle, param1);
+        return null;
+    }
+    
+    method setpushparams(param1, param2, param3) {
+        gcmoveableobj::setpushparams(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method getscale() {
+        return gcmoveableobj::getscale(this.handle);
+    }
+    
+    method sethitvelocity(param1, param2) {
+        gcmoveableobj::sethitvelocity(this.handle, param1, param2);
+        return null;
+    }
+    
+    method setmoveable(param1) {
+        if (param1) {
+            gcmoveableobj::setupmoveable(this.handle, this.rollradius, this.friction, 1, 1, 1);
+            gcmoveableobj::setbounce(this.handle, 1);
+        }
+        else {
+            gcmoveableobj::setupmoveable(this.handle, this.rollradius, this.friction, 0, 0, 0);
+            gcmoveableobj::setbounce(this.handle, 0);
+        }
+        return null;
+    }
+    
+    method setasshakeobj() {
+        gcmoveableobj::setasshakeobj(this.handle);
+        return null;
+    }
+    
+    method shaketouch() {
+        gcmoveableobj::shaketouch(this.handle);
+        return null;
+    }
+    
+    method settimetofall(param1) {
+        gcmoveableobj::settimetofall(this.handle, param1);
+        return null;
+    }
+    
+    method setfallrotation(param1, param2, param3) {
+        gcmoveableobj::setfallrotation(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method setshakerotateintensity(param1) {
+        gcmoveableobj::setshakerotateintensity(this.handle, param1);
+        return null;
+    }
+    
+    method setshakebobbleintensity(param1) {
+        gcmoveableobj::setshakebobbleintensity(this.handle, param1);
+        return null;
+    }
+    
+    method setshakekillheight(param1) {
+        gcmoveableobj::setshakekillheight(this.handle, param1);
+        return null;
+    }
+    
+    method shakereset() {
+        gcmoveableobj::shakereset(this.handle);
+        return null;
+    }
+}

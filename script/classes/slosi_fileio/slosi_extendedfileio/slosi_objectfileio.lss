@@ -1,0 +1,16 @@
+class slosi_objectfileio : slosi_extendedfileio {
+    
+    method slosi_objectfileio(param1) {
+        this.filename = param1 + ".osd";
+        return null;
+    }
+    
+    method saveosiobject(param1) {
+        scslosifileio::saveosiobject(this.filename, param1);
+        return null;
+    }
+    
+    method loadosiobject() {
+        return scslosifileio::loadosiobject(this.filename);
+    }
+}

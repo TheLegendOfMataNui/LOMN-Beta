@@ -1,0 +1,74 @@
+class brd2_puzzle {
+    property parent;
+    
+    method brd2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        gcareadirector::setnearestmax(5);
+        globalclass.player.actor.setclimb(5);
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0);
+        globalclass.player.actor.setsurfingability(1.0, 0.8);
+        return null;
+    }
+    
+    method initshort() {
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0);
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        globalclass.player.actor.setsurfingability(0, 1.0);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(1.2);
+                globalclass.player.actor.setinputstate("none");
+            }
+            else {
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(1.2);
+                globalclass.player.actor.setinputstate("none");
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+        }
+        else if (param1.eventid == 29) {
+            this.initshort();
+        }
+        else if (param1.eventid == 7) {
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
+                gcstaticsoundsptrarray::playtablesound(149);
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

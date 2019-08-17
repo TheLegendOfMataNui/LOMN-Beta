@@ -1,0 +1,101 @@
+class mtup_class {
+    property parent;
+    property cinema;
+    property door;
+    
+    method mtup_class(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(50);
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(var1, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk8a"));
+        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0), rgba(39, 38, 39, 255), rgba(222, 198, 128, 255), rgba(82, 48, 24, 255));
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setsplitanimation(var1, scslosifoundation::stringtoidentifier("d003"), -1);
+        gccharacter::setorientation(var1, 56);
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin1");
+            globalclass.hud.hide();
+            gccinemaengine::play(this.cinema);
+        }
+        this.door = new lego_moveableobject("door");
+        this.door.initfull();
+        this.door.setresponse(3, 3, 3);
+        this.door.settweakable();
+        if (bettersaver::getbooleanvalue(51) == 1) {
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv0"), scslosifoundation::stringtoidentifier("mtup"));
+            this.door.interpolate(this.door.getx(), 4.0244, this.door.getz(), 5);
+        }
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (!(this.cinema == null)) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+            else if (param1.button == 86) {
+                this.door.interpolate(this.door.getx(), this.door.gety() + 10, this.door.getz(), 2);
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 30) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cin1")) {
+                globalclass.hud.show();
+                globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPohatuAmbience");
+                globalclass.bgmusic.play(1);
+                globalclass.player.maskcontrol.changemask(1);
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 51) {
+            if (param1.args[1] == 1) {
+                bettersaver::setbooleanvalue(51, 1);
+                this.door.interpolate(this.door.getx(), 4.0244, this.door.getz(), 5);
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotostartpos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.cinema = null;
+        this.door.cleanupfull();
+        this.door = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

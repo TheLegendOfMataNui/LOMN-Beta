@@ -1,0 +1,64 @@
+class lego_level_8 : gs_lego_level {
+    
+    method lego_level_8() {
+        var var1;
+        this.gs_lego_level("lev8", "nbua", "kini");
+        var1 = new lego_area_kini(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_illu(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_lep3(this);
+        this.areas.__append(var1);
+        var1 = new lev8_gly1(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_gvlg(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_le10(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_ptv0(this);
+        this.areas.__append(var1);
+        var1 = new lev8_ta04(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_ta06(this);
+        this.areas.__append(var1);
+        var1 = new lev8_tp02(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_tp03(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_l1a2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_tmbl(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_endg(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_ovlg(this);
+        this.areas.__append(var1);
+        var1 = new lev8_tura(this);
+        this.areas.__append(var1);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_level_initfull();
+        globalclass.player.addmask("fake", 1011);
+        globalclass.player.maskcontrol.usemasks(0);
+        if (globalclass.saverloaded) {
+            if (gcsaver::finditema(scslosifoundation::stringtoidentifier("claw"), scslosifoundation::stringtoidentifier("l1a1"))) {
+                globalclass.player.setupgrapplinghook();
+                globalclass.player.setgrapplinghookdistance(120);
+            }
+            if (gcsaver::isconditionset(4194304)) {
+                globalclass.player.setupgrapplinghook();
+                globalclass.player.setgrapplinghookdistance(120);
+            }
+        }
+        globalclass.saverloaded = 0;
+        return null;
+    }
+    
+    method initshort() {
+        this.lego_level_initshort();
+        globalclass.player.addmask("fake", 1011);
+        return null;
+    }
+}

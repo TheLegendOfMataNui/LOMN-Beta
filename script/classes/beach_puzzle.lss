@@ -1,0 +1,112 @@
+class beach_puzzle {
+    property parent;
+    property cinema;
+    property cinema_shown;
+    property glasswall;
+    property safecount;
+    
+    method beach_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var crab1;
+        var crab2;
+        gcareadirector::setnearestmax(3);
+        gcmodeldirector::setnearestmax(3);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
+        globalclass.bgmusic.stop();
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1"))) {
+            this.cinema_shown = 1;
+        }
+        else {
+            this.cinema_shown = 0;
+        }
+        if (this.cinema_shown == 0) {
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin1");
+        }
+        this.glasswall = new lego_triggerobject("tpw0", this.parent.name);
+        this.glasswall.initfull();
+        this.glasswall.setresponse(3, 3);
+        this.safecount = 3;
+        crab1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crb1"));
+        crab2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cr01"));
+        gccharacter::setscale(crab1, 2.0);
+        gccharacter::setscale(crab2, 2.0);
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.glasswall == null)) {
+            this.glasswall.cleanupfull();
+            this.glasswall = null;
+        }
+        this.cinema = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var tohunga;
+        if (param1.eventid == 4) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin1")) && (this.cinema_shown == 0)) {
+                gccinemaengine::play(this.cinema);
+                this.cinema_shown = 1;
+                this.safecount = 0;
+                if (globalclass.player.maskcontrol.isactive()) {
+                    globalclass.player.maskcontrol.toggleactive();
+                    globalclass.hud.mask.hide();
+                }
+            }
+        }
+        else if (param1.eventid == 30) {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
+            globalclass.bgmusic.play(1);
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+        }
+        else if (param1.eventid == 44) {
+            if (!(this.cinema == null) && (this.safecount < 3)) {
+                this.safecount = this.safecount + 1;
+                if (this.safecount == 2) {
+                    tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+                    gccharacter::settohunga(tohunga, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
+                }
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (!(this.cinema == null)) {
+                gccinemaengine::stop(this.cinema);
+            }
+        }
+        return null;
+    }
+}

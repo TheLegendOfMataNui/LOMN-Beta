@@ -1,0 +1,170 @@
+class vtnl2_puzzle {
+    property parent;
+    property oldplatform;
+    property newplatform;
+    property printwhichplatformimon;
+    property caveplatforms;
+    property clonedplatforms;
+    property randomnumber;
+    property hive1handle;
+    property discpickup;
+    property passedtrigplane;
+    
+    method vtnl2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        this.passedtrigplane = 0;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
+        globalclass.bgmusic.play();
+        gcareadirector::setnearestmax(10);
+        this.randomnumber = new slosi_random(0);
+        this.caveplatforms = [ new lego_moveableobject("pf01"), 
+            new lego_moveableobject("pf03"), 
+            new lego_moveableobject("pf04"), 
+            new lego_moveableobject("pf05"), 
+            new lego_moveableobject("pf06"), 
+            new lego_moveableobject("pf07"), 
+            new lego_moveableobject("pf08"), 
+            new lego_moveableobject("pf02") ];
+        this.clonedplatforms = [ new lego_moveableobject("cp00"), 
+            new lego_moveableobject("cp01") ];
+        var1 = 0;
+        while ((this.caveplatforms.__length - 1) >= var1) {
+            this.caveplatforms[var1].initfull();
+            this.caveplatforms[var1].settweakable();
+            this.caveplatforms[var1].setresponse(1, 0, 1);
+            this.caveplatforms[var1].setobjscale(2.0);
+            var1 = var1 + 1;
+        }
+        this.caveplatforms[this.caveplatforms.__length - 1].hide();
+        var1 = 0;
+        while ((this.clonedplatforms.__length - 1) >= var1) {
+            this.clonedplatforms[var1].initfull("pf05", "Root/data/levels/lev2/vtnl", -7, -4, -7, 7, 4, 7);
+            this.clonedplatforms[var1].setresponse(1, 0, 1);
+            this.clonedplatforms[var1].settweakable();
+            this.clonedplatforms[var1].show();
+            this.clonedplatforms[var1].setobjscale(2.0);
+            var1 = var1 + 1;
+        }
+        this.caveplatforms[2].setposition(0 - 187.31, 65.64, 0 - 277.34);
+        this.caveplatforms[6].setposition(0 - 204.52, 65.64, 0 - 221.0);
+        this.caveplatforms[3].setposition(0 - 143.66, 65.64, 0 - 264.4);
+        this.caveplatforms[1].setposition(0 - 108.19, 68.58, 0 - 242.8);
+        this.caveplatforms[4].setposition(0 - 82.68, 68.6, 0 - 219.41);
+        this.clonedplatforms[0].setposition(0 - 152.66, 65.64, 0 - 213.4);
+        this.clonedplatforms[1].setposition(0 - 114.32, 68.58, 0 - 203.63);
+        var1 = 0;
+        while ((this.clonedplatforms.__length - 1) >= var1) {
+            this.clonedplatforms[var1].show();
+            var1 = var1 + 1;
+        }
+        this.caveplatforms[0].setslidetimer(17.0, 0.0, 0 - 30.0, this.randomnumber.getrandomfloat(4.0, 5.0), -1, 0.5);
+        this.caveplatforms[5].setslidetimer(0 - 17.0, 0.0, 25.0, this.randomnumber.getrandomfloat(4.0, 5.0), -1, 0.5);
+        this.caveplatforms[2].setslidetimer(0 - 40.0, 0.0, 50.0, this.randomnumber.getrandomfloat(5.0, 6.5), -1, 0.5);
+        this.caveplatforms[6].setslidetimer(40.0, 0.0, 0 - 50.0, this.randomnumber.getrandomfloat(5.0, 6.5), -1, 0.5);
+        this.caveplatforms[3].setslidetimer(0 - 40.0, 0.0, 60.0, this.randomnumber.getrandomfloat(5.0, 6.5), -1, 0.5);
+        this.clonedplatforms[0].setslidetimer(25.0, 0.0, 0 - 35.0, this.randomnumber.getrandomfloat(5.0, 6.5), -1, 0.5);
+        this.caveplatforms[1].setslidetimer(0 - 20.0, 0.0, 30.0, this.randomnumber.getrandomfloat(5.0, 6.5), -1, 0.5);
+        this.clonedplatforms[1].setslidetimer(20.0, 0.0, 0 - 25.0, this.randomnumber.getrandomfloat(4.0, 5.0), -1, 0.5);
+        this.caveplatforms[4].setslidetimer(0 - 15.0, 0.0, 20.0, this.randomnumber.getrandomfloat(4.0, 5.0), -1, 0.5);
+        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(this.hive1handle, 8);
+        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(this.hive1handle, 5);
+        var2 = gcsaver::finditem(scslosifoundation::stringtoidentifier("disc"));
+        if (var2 == 0) {
+            this.discpickup = new lego_pickup("disc", 0, 5, "item", 8, 1);
+            this.discpickup.initfull();
+            this.discpickup.show();
+            this.discpickup.setcondition(32768);
+            this.discpickup.setquest(1);
+        }
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.hive1handle = null;
+        this.oldplatform = null;
+        this.newplatform = null;
+        this.printwhichplatformimon = null;
+        var1 = 0;
+        while ((this.caveplatforms.__length - 1) >= var1) {
+            this.caveplatforms[var1].cleanupfull();
+            this.caveplatforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.caveplatforms = null;
+        var1 = 0;
+        while ((this.clonedplatforms.__length - 1) >= var1) {
+            this.clonedplatforms[var1].cleanupfull();
+            this.clonedplatforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.clonedplatforms = null;
+        this.randomnumber = null;
+        if (!(this.discpickup == null)) {
+            this.discpickup.cleanupfull();
+            this.discpickup = null;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                debug::print("**************************** TRIGGERPLANE COLLISION");
+                if (param1.args[1] == 1) {
+                    debug::print("******************** TRUE");
+                    this.passedtrigplane = 1;
+                }
+                else if (param1.args[1] == 0) {
+                    debug::print("******************** FALSE");
+                    this.passedtrigplane = 0;
+                }
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.parent.level.cam.setaimode(7);
+                gccollisionphysicsgroup::spinmask(1.2);
+                globalclass.player.actor.setinputstate("none");
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            globalclass.player.actor.setinputstate("none");
+        }
+        else if (param1.eventid == 27) {
+            if (this.passedtrigplane) {
+                globalclass.player.actor.setpos(0 - 259.5, 68.7, 0 - 279.0);
+            }
+            else {
+                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            }
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            globalclass.player.unkill();
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

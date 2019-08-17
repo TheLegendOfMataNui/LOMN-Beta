@@ -1,0 +1,152 @@
+class badmask {
+    property fireballarray;
+    property timer;
+    property fireing;
+    property curentfireball;
+    property fireballround;
+    
+    method badmask() {
+        this.fireballarray = [ new fireball("fb10", 100, 6), 
+            new fireball("fb11", 100, 5), 
+            new fireball("fb12", 100, 7), 
+            new fireball("fb13", 100, 6), 
+            new fireball("fb14", 100, 4), 
+            new fireball("fb15", 100, 5), 
+            new fireball("fb16", 100, 6), 
+            new fireball("fb17", 100, 4), 
+            new fireball("fb18", 100, 5), 
+            new fireball("fb19", 100, 6), 
+            new fireball("fb20", 100, 5) ];
+        return null;
+    }
+    
+    method initfull() {
+        this.timer = 0.0;
+        this.fireing = 0;
+        this.curentfireball = 0;
+        this.fireballround = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.fireballarray.__length - 1) >= var1) {
+            this.fireballarray[var1].cleanupfull();
+            this.fireballarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.fireballarray = null;
+        this.timer = null;
+        this.fireing = null;
+        this.curentfireball = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.fireballarray.__length - 1) >= var1) {
+            this.fireballarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        if (this.fireing) {
+            this.timer = this.timer + param1.deltatime;
+            if (this.timer > 0.4) {
+                this.timer = 0.0;
+                this.firedirector();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.fireballarray.__length - 1) >= var1) {
+            this.fireballarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method reset() {
+        var var1;
+        var1 = 0;
+        while ((this.fireballarray.__length - 1) >= var1) {
+            this.fireballarray[var1].reset();
+            var1 = var1 + 1;
+        }
+        this.fireing = 0;
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 89) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        if (this.fireing) {
+            this.fireing = 0;
+        }
+        else {
+            this.fireing = 1;
+        }
+        return null;
+    }
+    
+    method startfight() {
+        this.fireing = 1;
+        return null;
+    }
+    
+    method stopfight() {
+        this.fireing = 0;
+        this.fireballround = 0;
+        return null;
+    }
+    
+    method firedirector() {
+        var var1;
+        var var2;
+        this.fireballround = this.fireballround + 1;
+        var1 = globalclass.player.actor.getpos();
+        if (this.fireballround <= 14) {
+            var2 = (var1.x1 + 15) - this.fireballround;
+            this.fire(new basicpoint(var2, var1.y1 + 4, var1.z), new basicpoint(2.23, 16.9, 0 - 62.0));
+            var2 = (var1.x1 - 15) + this.fireballround;
+            this.fire(new basicpoint(var2, var1.y1 + 4, var1.z), new basicpoint(0 - 1.8, 16.3, 0 - 61.7));
+        }
+        else if (this.fireballround <= 15) {
+            
+        }
+        else if (this.fireballround <= 17) {
+            this.fire(new basicpoint(var1.x1 + 4, var1.y1 + 4, var1.z), new basicpoint(2.23, 16.9, 0 - 62.0));
+            this.fire(new basicpoint(var1.x1 - 4, var1.y1 + 4, var1.z), new basicpoint(0 - 1.8, 16.3, 0 - 61.7));
+            this.fire(new basicpoint(var1.x1, var1.y1 + 3, var1.z), new basicpoint(0, 13.7, 0 - 60.5));
+        }
+        else if (this.fireballround <= 19) {
+            
+        }
+        else {
+            this.fireballround = 0;
+        }
+        return null;
+    }
+    
+    method fire(param1, param2, param3) {
+        if (this.curentfireball >= (this.fireballarray.__length - 1)) {
+            this.curentfireball = 0;
+        }
+        else {
+            this.curentfireball = this.curentfireball + 1;
+        }
+        this.fireballarray[this.curentfireball].fire(param1, param2);
+        return null;
+    }
+}

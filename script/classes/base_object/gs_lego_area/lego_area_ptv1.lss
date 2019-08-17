@@ -1,0 +1,40 @@
+class lego_area_ptv1 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_ptv1(param1) {
+        this.gs_lego_area("ptv1", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new ptv1_puzzle(this);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(5);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
+        this.puzzle.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        return null;
+    }
+}

@@ -1,0 +1,66 @@
+class pohatu7_target {
+    property obj;
+    property x;
+    property y;
+    property z;
+    property timer;
+    property platforms;
+    property ignore;
+    
+    method pohatu7_target(param1, param2, param3) {
+        this.platforms = param3;
+        this.timer = new lego_timer(param1, 2.0, 0);
+        this.obj = new lego_moveableobject(param1, param2);
+        return null;
+    }
+    
+    method initfull() {
+        this.timer.initfull();
+        this.obj.initfull();
+        this.x = gcmoveableobj::getx(this.obj.handle);
+        this.y = gcmoveableobj::gety(this.obj.handle);
+        this.z = gcmoveableobj::getz(this.obj.handle);
+        this.ignore = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.timer.cleanupfull();
+        this.timer = null;
+        this.obj.cleanupfull();
+        this.obj = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 8) {
+            if (param1.args[0] == this.timer.id) {
+                gcmoveableobj::interpolate(this.obj.handle, this.x, this.y, this.z, 0.25);
+                this.timer.reset();
+                this.ignore = 0;
+            }
+        }
+        else if (param1.eventid == 19) {
+            if ((param1.args[0] == this.obj.id) && (this.ignore == 0)) {
+                gcmoveableobj::interpolate(this.obj.handle, this.x + 0.25, this.y, this.z, 0.25);
+                this.timer.start();
+                var1 = 0;
+                while ((this.platforms.__length - 1) >= var1) {
+                    this.platforms[var1].toggle();
+                    var1 = var1 + 1;
+                }
+                this.ignore = 1;
+            }
+        }
+        return null;
+    }
+    
+    method reset() {
+        gcmoveableobj::cancelinterpolate(this.obj.handle);
+        gcmoveableobj::setposition(this.obj.handle, this.x, this.y, this.z);
+        this.timer.reset();
+        this.ignore = 0;
+        return null;
+    }
+}

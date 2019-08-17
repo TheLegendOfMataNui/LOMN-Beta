@@ -1,0 +1,86 @@
+class gs_lego_area : base_object {
+    property name;
+    property id;
+    property onscreen;
+    property darkarea;
+    property startingarea;
+    property enterstartid;
+    property enterlookid;
+    property level;
+    
+    method gs_lego_area(param1, param2, param3, param4) {
+        this.name = param1;
+        this.level = param2;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        if (param3 == null) {
+            this.onscreen = 0;
+        }
+        else {
+            this.onscreen = param3;
+        }
+        this.startingarea = [ 0, 
+            0, 
+            0, 
+            0 ];
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method lego_area_initfull() {
+        return null;
+    }
+    
+    method show() {
+        this.lego_area_show();
+        return null;
+    }
+    
+    method lego_area_show() {
+        return null;
+    }
+    
+    method hide() {
+        this.lego_area_hide();
+        return null;
+    }
+    
+    method lego_area_hide() {
+        if (globalclass.player.maskcontrol.isactive()) {
+            globalclass.player.maskcontrol.toggleactive();
+            globalclass.hud.mask.hide();
+        }
+        return null;
+    }
+    
+    method setcurrent() {
+        gcareadirector::setcurrentarea(this.name);
+        return null;
+    }
+    
+    method createemmiter(param1, param2, param3, param4) {
+        return gcareadirector::createemitter(param1, param2, param3, param4);
+    }
+    
+    method releaseemmiter(param1, param2) {
+        return gcareadirector::releaseemitter(param1, param2);
+    }
+    
+    method cleanupfull() {
+        this.lego_area_cleanupfull();
+        return null;
+    }
+    
+    method lego_area_cleanupfull() {
+        this.startingarea = null;
+        this.level = null;
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+}

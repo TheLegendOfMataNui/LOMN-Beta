@@ -1,0 +1,141 @@
+class fadescreen : ss_basesprite {
+    property faderectangle;
+    property faderate;
+    property fadetimeleft;
+    property incrementor;
+    property decrementor;
+    property blnshow;
+    property blnhide;
+    
+    method fadescreen(param1, param2) {
+        var var1;
+        if (param1 == null) {
+            param1 = 0;
+        }
+        if (param1 == 0) {
+            var1 = "Root/data/art/hud/Black";
+        }
+        else if (param1 == 1) {
+            var1 = "Root/data/art/hud/White";
+        }
+        else if (param1 == 2) {
+            var1 = "Root/data/art/hud/Blue";
+        }
+        this.faderectangle = new ss_basesprite(var1, 0, 0, 0, screenx, screeny, 0);
+        this.faderate = param2;
+        return null;
+    }
+    
+    method initfull() {
+        this.faderectangle.initfull();
+        this.initshort();
+        return null;
+    }
+    
+    method initshort() {
+        this.incrementor = 0;
+        this.decrementor = 255;
+        this.blnshow = 0;
+        return null;
+    }
+    
+    method getfadetime() {
+        if (this.fadetimeleft == null) {
+            return 0;
+        }
+        else {
+            return this.fadetimeleft;
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.faderectangle == null)) {
+            this.faderectangle.cleanupfull();
+            this.faderectangle = null;
+        }
+        this.faderate = null;
+        this.fadetimeleft = null;
+        this.incrementor = null;
+        this.decrementor = null;
+        this.blnshow = null;
+        this.blnhide = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.blnshow) {
+            this.fadetimeleft = this.fadetimeleft - param1.deltatime;
+            if (this.fadetimeleft <= 0) {
+                this.fadetimeleft = 0;
+            }
+            this.setincrementvalue();
+        }
+        if (this.blnhide) {
+            this.fadetimeleft = this.fadetimeleft - param1.deltatime;
+            if (this.fadetimeleft <= 0) {
+                this.fadetimeleft = 0;
+            }
+            this.setdecrementvalue();
+        }
+        return null;
+    }
+    
+    method setincrementvalue() {
+        this.incrementor = 255 - (255 * (this.fadetimeleft / this.faderate));
+        this.faderectangle.settransparency(this.incrementor);
+        if (this.incrementor == 255) {
+            this.incrementor = 0;
+            this.blnshow = 0;
+        }
+        return null;
+    }
+    
+    method setdecrementvalue() {
+        this.decrementor = 255 * (this.fadetimeleft / this.faderate);
+        this.faderectangle.settransparency(this.decrementor);
+        if (this.decrementor == 0) {
+            this.faderectangle.hide();
+            this.blnhide = 0;
+            globalclass.hud.show();
+        }
+        return null;
+    }
+    
+    method setfaderate(param1) {
+        this.faderate = param1;
+        return null;
+    }
+    
+    method show() {
+        this.faderectangle.add();
+        this.faderectangle.enablealphachannel(1);
+        this.faderectangle.enabletransparency(1);
+        this.faderectangle.show();
+        this.blnshow = 1;
+        this.blnhide = 0;
+        globalclass.hud.hide();
+        this.fadetimeleft = this.faderate;
+        return null;
+    }
+    
+    method hide() {
+        this.decrementor = 255;
+        this.faderectangle.add();
+        this.faderectangle.enablealphachannel(1);
+        this.faderectangle.enabletransparency(1);
+        this.faderectangle.show();
+        this.blnhide = 1;
+        this.blnshow = 0;
+        this.fadetimeleft = this.faderate;
+        return null;
+    }
+}

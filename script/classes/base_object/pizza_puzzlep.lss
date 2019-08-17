@@ -1,0 +1,61 @@
+class pizza_puzzlep : base_object {
+    property parent;
+    property mask;
+    
+    method pizza_puzzlep(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var digging_wall1;
+        var digging_wall2;
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mskv")) == 0) {
+            this.mask = new lego_pickup("mskv", 8, 1, "item", 4, 1);
+            this.mask.initfull();
+            this.mask.show();
+        }
+        digging_wall1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("pzzl"));
+        gcmoveableobj::inittargetmorph(digging_wall1, "lev1", "pzzl");
+        gcmoveableobj::setdig(digging_wall1, 1);
+        digging_wall2 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig5"), scslosifoundation::stringtoidentifier("pzzl"));
+        gcmoveableobj::inittargetmorph(digging_wall2, "lev1", "pzzl");
+        gcmoveableobj::setdig(digging_wall2, 1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.mask == null)) {
+            this.mask.cleanupfull();
+            this.mask = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

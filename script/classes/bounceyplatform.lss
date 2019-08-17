@@ -1,0 +1,128 @@
+class bounceyplatform {
+    property obj;
+    property id;
+    property stat;
+    property originalpos;
+    property waspaused;
+    property sinksound;
+    
+    method bounceyplatform(param1) {
+        this.obj = new lego_moveableobject(param1);
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.obj.setresponse(0, 0, 0);
+        this.id = this.obj.id;
+        this.originalpos = new basicpoint(this.obj.getx(), this.obj.gety(), this.obj.getz());
+        this.stat = 0;
+        this.sinksound = new tablecopysound(1097);
+        this.sinksound.synctoobject(this.id);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.id = null;
+        this.stat = null;
+        this.originalpos = null;
+        this.waspaused = null;
+        this.sinksound = null;
+        return null;
+    }
+    
+    method initshort() {
+        this.stat = 0;
+        this.obj.stopinterpolate();
+        this.obj.setpos(this.originalpos.x, this.originalpos.y, this.originalpos.z);
+        return null;
+    }
+    
+    method setignoreallcollisions(param1) {
+        this.obj.setignoreallcollisions(param1);
+        return null;
+    }
+    
+    method ignoreignorecollisionswith(param1) {
+        this.obj.ignoreignorecollisionswith(param1);
+        return null;
+    }
+    
+    method show() {
+        this.obj.show();
+        return null;
+    }
+    
+    method hide() {
+        this.obj.hide();
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 12) {
+            if (param1.args[0] == this.id) {
+                if (this.stat == 1) {
+                    this.stat = 2;
+                    this.obj.interpolate(this.originalpos.x, this.originalpos.y + 0.5, this.originalpos.z, 0.2);
+                }
+                else if (this.stat == 2) {
+                    this.stat = 3;
+                    this.obj.interpolate(this.originalpos.x, this.originalpos.y - 4, this.originalpos.z, 2);
+                }
+                else if (this.stat == 3) {
+                    if (this.waspaused) {
+                        this.waspaused = 0;
+                        this.stat = 4;
+                        this.obj.interpolate(this.originalpos.x, this.originalpos.y + 0.5, this.originalpos.z, 2);
+                        this.sinksound.play();
+                    }
+                    else {
+                        this.waspaused = 1;
+                        this.obj.interpolate(this.originalpos.x, this.originalpos.y - 4, this.originalpos.z, 20);
+                    }
+                }
+                else if (this.stat == 4) {
+                    this.stat = 5;
+                    this.obj.interpolate(this.originalpos.x, this.originalpos.y - 0.5, this.originalpos.z, 0.2);
+                }
+                else if (this.stat == 5) {
+                    this.stat = 6;
+                    this.obj.interpolate(this.originalpos.x, this.originalpos.y, this.originalpos.z, 0.2);
+                }
+                else if (this.stat == 6) {
+                    this.stat = 0;
+                }
+            }
+        }
+        else if (param1.eventid == 1) {
+            if ((param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[0] == this.id)) {
+                this.startsink();
+            }
+        }
+        return null;
+    }
+    
+    method startsink() {
+        if (this.stat == 0) {
+            this.stat = 1;
+            this.obj.interpolate(this.originalpos.x, this.originalpos.y - 0.5, this.originalpos.z, 0.2);
+            this.sinksound.play();
+        }
+        return null;
+    }
+    
+    method settweakable() {
+        this.obj.settweakable();
+        return null;
+    }
+}

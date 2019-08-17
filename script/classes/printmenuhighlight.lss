@@ -1,0 +1,42 @@
+class printmenuhighlight {
+    property image;
+    property lit;
+    
+    method printmenuhighlight(param1, param2, param3, param4, param5) {
+        this.image = new ss_basesprite(param1, __toint(param2 * screenratio), __toint(param3 * screenratio), 0, __toint(param4 * screenratio), __toint(param5 * screenratio));
+        this.lit = 0;
+        return null;
+    }
+    
+    method initfull() {
+        this.image.initfull();
+        this.image.add();
+        this.image.show();
+        this.image.hide();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.image == null)) {
+            this.image.hide();
+            this.image.remove();
+            this.image.cleanupfull();
+            this.image = null;
+        }
+        return null;
+    }
+    
+    method check(param1, param2) {
+        if ((((param2 > this.image.y1) && (param2 < this.image.y2)) && (param1 > this.image.x1)) && (param1 < this.image.x2)) {
+            if (this.lit == 0) {
+                this.image.show();
+                this.lit = 1;
+            }
+        }
+        else if (this.lit) {
+            this.image.hide();
+            this.lit = 0;
+        }
+        return this.lit;
+    }
+}

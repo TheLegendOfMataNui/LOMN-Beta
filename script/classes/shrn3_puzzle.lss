@@ -1,0 +1,199 @@
+class shrn3_puzzle {
+    property parent;
+    property bkikbossdoor_up;
+    property gly3door_up;
+    property hasenoughtokens;
+    property callev_safe_time_once;
+    property camefromglyph3area;
+    property checkforglyph3areaentranceonce;
+    property canhitgly3triggerplane;
+    property bkikbossdoor;
+    property gly3door;
+    property portalactive;
+    property testforbossdoorproximity;
+    property bossdoorx;
+    property bossdoorz;
+    
+    method shrn3_puzzle(param1) {
+        this.parent = param1;
+        this.bkikbossdoor_up = 1;
+        this.gly3door_up = 1;
+        this.hasenoughtokens = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+        globalclass.bgmusic.play(1);
+        gcareadirector::setnearestmax(50);
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        this.bkikbossdoor = new lego_moveableobject("drs0", "fake");
+        this.gly3door = new lego_moveableobject("drs4", "fake");
+        this.bkikbossdoor.initfull();
+        this.bkikbossdoor.setalpha(0.7);
+        this.gly3door.initfull();
+        this.bkikbossdoor.setresponse(3, 3, 3);
+        this.gly3door.setresponse(3, 3, 3);
+        this.gly3door.settweakable();
+        this.bossdoorx = this.bkikbossdoor.getx();
+        this.bossdoorz = this.bkikbossdoor.getz();
+        this.callev_safe_time_once = 1;
+        this.camefromglyph3area = 0;
+        this.checkforglyph3areaentranceonce = 1;
+        this.canhitgly3triggerplane = 0;
+        this.testforbossdoorproximity = 0;
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("oewa"), 0);
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var1, 1.5, 0.8, 1, 0, 0);
+        var2 = scslosifoundation::stringtoidentifier("tps9");
+        this.portalactive = gcsaver::portalactive();
+        if (this.portalactive == 1) {
+            gccollisionphysicsgroup::setportal(var2, "root/data/art/portals/poha/village_ripple/p_prtl", 1);
+        }
+        else {
+            gccollisionphysicsgroup::turnoffnextarea(var2);
+        }
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        this.bkikbossdoor.cleanupfull();
+        this.bkikbossdoor = null;
+        this.gly3door.cleanupfull();
+        this.gly3door = null;
+        this.bkikbossdoor_up = null;
+        this.gly3door_up = null;
+        this.hasenoughtokens = null;
+        this.callev_safe_time_once = null;
+        this.camefromglyph3area = null;
+        this.checkforglyph3areaentranceonce = null;
+        this.canhitgly3triggerplane = null;
+        this.testforbossdoorproximity = null;
+        this.bossdoorx = null;
+        this.bossdoorz = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var var2;
+        if (this.checkforglyph3areaentranceonce) {
+            this.checkforglyph3areaentranceonce = 0;
+        }
+        if (this.testforbossdoorproximity) {
+            var1 = globalclass.player.actor.getposx();
+            var2 = globalclass.player.actor.getposz();
+            if (var1 >= (this.bossdoorx - 10)) {
+                if (var1 <= (this.bossdoorx + 10)) {
+                    if (var2 >= (this.bossdoorz - 10)) {
+                        if (var2 <= (this.bossdoorz + 10)) {
+                            this.openbkikdoor();
+                            this.testforbossdoorproximity = 0;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        if (param1.eventid == 41) {
+            if (this.portalactive == 0) {
+                var1 = scslosifoundation::stringtoidentifier("tps9");
+                gccollisionphysicsgroup::turnonnextarea(var1, scslosifoundation::stringtoidentifier("tura"));
+                gccollisionphysicsgroup::setportal(var1, "root/data/art/portals/poha/village_ripple/p_prtl", 1);
+                this.portalactive = 1;
+            }
+        }
+        else if (param1.eventid == 21) {
+            debug::print("***************_event.args[2] = " + scslosifoundation::identifiertostring(param1.args[2]));
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("lok1")) {
+                this.camefromglyph3area = 1;
+                this.canhitgly3triggerplane = 1;
+                this.gly3door.setpos(this.gly3door.getx(), 0 - 0.7459, this.gly3door.getz());
+                debug::print("***********CAME IN FROM GLYPH 3 AREA");
+            }
+        }
+        else if (param1.eventid == 44) {
+            if (this.callev_safe_time_once) {
+                if (globalclass.player.getamounttokens() >= 40) {
+                    this.hasenoughtokens = 1;
+                }
+                if (this.hasenoughtokens) {
+                    if (globalclass.player.actor.ishookenabled) {
+                        debug::print("****** HOOK IS ENABLED YOU ARE HALF WAY THERE");
+                        if (globalclass.player.maskcontrol.isselectable(10)) {
+                            debug::print("***** YOU HAVE THE MASK OF ANIMAL CONTROL");
+                            if (globalclass.player.maskcontrol.isselectable(2)) {
+                                debug::print("******* YOU HAVE THE MASK OF SPEED");
+                                this.testforbossdoorproximity = 1;
+                                this.callev_safe_time_once = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 35) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("drs0")) {
+                if (param1.args[1] == 0) {
+                    this.bkikbossdoor.hide();
+                }
+                param1.args[1];
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 4) {
+            var2 = param1.args[0];
+            debug::print("$$$$$$$$$$$$$$$$$$$$$ You hit triggerplane:" + scslosifoundation::identifiertostring(param1.args[0]));
+            if (var2 == scslosifoundation::stringtoidentifier("tp04")) {
+                if (this.canhitgly3triggerplane) {
+                    this.canhitgly3triggerplane = 0;
+                    this.shutgly3door();
+                }
+            }
+        }
+        else if (param1.eventid == 12) {
+            var3 = scslosifoundation::stringtoidentifier("drs4");
+            if (param1.args[0] == var3) {
+                this.parent.level.cam.setaimode(11);
+                globalclass.player.actor.setinputstate("ninp");
+            }
+        }
+        return null;
+    }
+    
+    method openbkikdoor() {
+        this.bkikbossdoor.fadeout(2.0);
+        return null;
+    }
+    
+    method shutgly3door() {
+        var var1;
+        var var2;
+        globalclass.level.cam.setaimode(0);
+        globalclass.level.cam.setpos(421.78, 0 - 7.13, 0 - 185.12);
+        globalclass.player.actor.setinputstate("none");
+        globalclass.player.actor.idle();
+        var1 = this.gly3door.getx();
+        var2 = this.gly3door.getz();
+        this.gly3door.interpolate(var1, 0 - 7.7459, var2, 1.5);
+        return null;
+    }
+}

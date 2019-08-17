@@ -1,0 +1,107 @@
+class ta046_puzzle {
+    property parent;
+    property hookarray;
+    property draintimer;
+    property shild_on;
+    
+    method ta046_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        this.hookarray = [ new lego_moveableobject("hk01"), 
+            new lego_moveableobject("hk02"), 
+            new lego_moveableobject("hk03"), 
+            new lego_moveableobject("hk04"), 
+            new lego_moveableobject("hk05"), 
+            new lego_moveableobject("hk06"), 
+            new lego_moveableobject("hk07"), 
+            new lego_moveableobject("hk08"), 
+            new lego_moveableobject("hk09"), 
+            new lego_moveableobject("hk10"), 
+            new lego_moveableobject("hk11"), 
+            new lego_moveableobject("hk12") ];
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].initfull();
+            this.hookarray[var1].setmytargetingflags(1);
+            this.hookarray[var1].setresponse(1, 1, 1);
+            this.hookarray[var1].settweakable();
+            var1 = var1 + 1;
+        }
+        globalclass.player.setgrapplinghookdistance(100);
+        this.draintimer = 0.0;
+        this.shild_on = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].cleanupfull();
+            this.hookarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hookarray = null;
+        globalclass.player.setgrapplinghookdistance(45);
+        this.draintimer = null;
+        this.shild_on = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        this.lavakiller(param1);
+        return null;
+    }
+    
+    method lavakiller(param1) {
+        if (globalclass.player.actor.getposz() < 153) {
+            if (this.shild_on == 0) {
+                this.drainpower(param1);
+            }
+        }
+        return null;
+    }
+    
+    method drainpower(param1) {
+        this.draintimer = this.draintimer + param1.deltatime;
+        if (this.draintimer > 0.5) {
+            this.draintimer = 0;
+            globalclass.player.actor.react(0.5);
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        else if (param1.eventid == 1011) {
+            if (param1.args[0]) {
+                this.shild_on = 1;
+            }
+            else {
+                this.shild_on = 0;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

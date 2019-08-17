@@ -1,0 +1,472 @@
+class gs_lego_tweakers : base_objectarray {
+    property minidx;
+    property maxidx;
+    property showidx;
+    property tcount;
+    property x;
+    property y;
+    property yoff;
+    property curidx;
+    property visible;
+    property toview;
+    property screen;
+    property stepamount;
+    property tweakobjects;
+    property actionlistarray;
+    property activemenu;
+    property objindex;
+    property actionindex;
+    property wate;
+    
+    method gs_lego_tweakers() {
+        this.minidx = -1;
+        this.maxidx = -1;
+        this.showidx = 9;
+        this.tcount = -1;
+        this.x = 10;
+        this.y = 80;
+        this.yoff = 15;
+        this.curidx = 0;
+        this.visible = 0;
+        this.tweakobjects = [  ];
+        this.toview = 0;
+        this.screen = 0;
+        this.actionlistarray = [ "step: ", 
+            "X: ", 
+            "Y: ", 
+            "Z: ", 
+            "OrntX: ", 
+            "OrntY: ", 
+            "OrntZ: ", 
+            "ZAP" ];
+        this.activemenu = [  ];
+        this.objindex = 0;
+        this.stepamount = 1;
+        this.wate = 0;
+        return null;
+    }
+    
+    method initfull() {
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        this.minidx = null;
+        this.maxidx = null;
+        this.showidx = null;
+        this.tcount = null;
+        this.x = null;
+        this.y = null;
+        this.yoff = null;
+        this.curidx = null;
+        this.visible = null;
+        this.toview = null;
+        this.screen = null;
+        this.objindex = null;
+        this.stepamount = null;
+        this.wate = null;
+        var1 = this.tweakobjects.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.tweakobjects.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.tweakobjects = null;
+        var1 = this.actionlistarray.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.actionlistarray.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.actionlistarray = null;
+        var1 = this.activemenu.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.activemenu.__removeat(var1 - var2);
+            var2 = var2 + 1;
+        }
+        this.activemenu = null;
+        return null;
+    }
+    
+    method add_moveableobj_tweakable(param1) {
+        var var1;
+        var1 = new moveableobj_tweakable(param1);
+        this.tweakobjects.__append(var1);
+        return null;
+    }
+    
+    method add_characterobj_tweakable(param1) {
+        var var1;
+        var1 = new characterobj_tweakable(param1);
+        this.tweakobjects.__append(var1);
+        return null;
+    }
+    
+    method add_camobj_tweakable(param1) {
+        var var1;
+        var1 = new camobj_tweakable(param1);
+        this.tweakobjects.__append(var1);
+        return null;
+    }
+    
+    method show() {
+        return null;
+    }
+    
+    method hide() {
+        this.hidemainlist();
+        this.hidesecondlist();
+        return null;
+    }
+    
+    method hidemainlist() {
+        var var1;
+        if (this.minidx > -1) {
+            this.activemenu[this.curidx].setinactive();
+            var1 = 0;
+            while (this.showidx >= var1) {
+                if ((this.minidx + var1) <= (this.activemenu.__length - 1)) {
+                    this.activemenu[this.minidx + var1].hide();
+                }
+                var1 = var1 + 1;
+            }
+        }
+        this.visible = 0;
+        return null;
+    }
+    
+    method hidesecondlist() {
+        var var1;
+        var1 = 0;
+        while ((this.activemenu.__length - 1) >= var1) {
+            this.activemenu[var1].hide();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method showmainlist() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        this.activemenu = null;
+        this.activemenu = [  ];
+        this.screen = 0;
+        if (this.tweakobjects.__length > 0) {
+            this.tcount = this.tweakobjects.__length;
+            var1 = [  ];
+            this.showidx = 9;
+            var2 = 0;
+            while ((this.tcount - 1) >= var2) {
+                var3 = this.tweakobjects[var2].desc;
+                var4 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", var3, this.x, this.y, 0, 1.0, 0, 4, 0);
+                var4.initfull();
+                var4.add();
+                this.activemenu.__append(var4);
+                var2 = var2 + 1;
+            }
+            this.base_objectarray(this.activemenu);
+            if (this.tcount > 0) {
+                this.minidx = 0;
+            }
+            else {
+                this.minidx = -1;
+            }
+            this.curidx = this.minidx;
+            this.maxidx = this.tcount - 1;
+            if (this.maxidx < this.showidx) {
+                this.showidx = this.maxidx;
+            }
+            else {
+                this.maxidx = this.showidx;
+            }
+            if (this.minidx > -1) {
+                this.activemenu[this.curidx].setactive();
+                var2 = 0;
+                while (this.showidx >= var2) {
+                    var5 = var2 * this.yoff;
+                    this.activemenu[this.minidx + var2].setpos(this.x, this.y + var5, 0);
+                    this.activemenu[this.minidx + var2].show();
+                    var2 = var2 + 1;
+                }
+            }
+            this.visible = 1;
+            this.toview = 1;
+        }
+        return null;
+    }
+    
+    method showsecondlist() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        this.activemenu = null;
+        this.activemenu = [  ];
+        this.screen = 1;
+        this.curidx = 0;
+        if (this.actionlistarray.__length > 0) {
+            var1 = 0;
+            while ((this.actionlistarray.__length - 1) >= var1) {
+                var2 = this.actionlistarray[var1];
+                var3 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", var2, this.x, this.y, 0, 1.0, 0, 4, 0);
+                var3.initfull();
+                var3.add();
+                this.activemenu.__append(var3);
+                var1 = var1 + 1;
+            }
+            this.activemenu[this.curidx].setactive();
+            var1 = 0;
+            while ((this.activemenu.__length - 1) >= var1) {
+                var4 = var1 * this.yoff;
+                this.activemenu[var1].setpos(this.x, this.y + var4, 0);
+                this.activemenu[var1].show();
+                var1 = var1 + 1;
+            }
+            this.visible = 1;
+            this.toview = 1;
+        }
+        return null;
+    }
+    
+    method toggleon() {
+        if (this.visible == 1) {
+            this.hide();
+        }
+        else {
+            this.showmainlist();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (this.wate) {
+            this.wate = 0;
+            if ((this.minidx > -1) && (this.visible == 1)) {
+                if (this.screen == 0) {
+                    this.maininput(param1);
+                }
+                else if (this.screen == 1) {
+                    this.secondinput(param1);
+                }
+            }
+        }
+        else {
+            this.wate = 1;
+        }
+        return null;
+    }
+    
+    method maininput(param1) {
+        if ((param1.event == 2) || (param1.event == 4)) {
+            if (param1.button == 34) {
+                this.scrolldown();
+            }
+            if (param1.button == 33) {
+                this.scrollup();
+            }
+            if (param1.button == 36) {
+                this.objindex = this.curidx;
+                this.hidemainlist();
+                this.showsecondlist();
+            }
+            if (param1.button == 35) {
+                this.hidemainlist();
+                this.toggleon();
+            }
+        }
+        if (param1.event == 2) {
+            if (param1.button == 46) {
+                
+            }
+        }
+        return null;
+    }
+    
+    method secondinput(param1) {
+        var var1;
+        if ((param1.event == 2) || (param1.event == 4)) {
+            if (param1.button == 34) {
+                this.scrolldownsecondlist();
+            }
+            if (param1.button == 33) {
+                this.scrollupsecondlist();
+            }
+            if (param1.button == 36) {
+                this.actionindex = this.curidx;
+                this.tweakobjects[this.objindex].input(param1);
+                var1 = this.tweakobjects[this.objindex];
+                if (this.actionindex == 0) {
+                    if (this.stepamount > 100.0) {
+                        this.stepamount = 1000.0;
+                    }
+                    else {
+                        this.stepamount = this.stepamount * 10;
+                    }
+                }
+                else if (this.actionindex == 1) {
+                    var1.setpos(var1.getx() + this.stepamount, var1.gety(), var1.getz());
+                }
+                else if (this.actionindex == 2) {
+                    var1.setpos(var1.getx(), var1.gety() + this.stepamount, var1.getz());
+                }
+                else if (this.actionindex == 3) {
+                    var1.setpos(var1.getx(), var1.gety(), var1.getz() + this.stepamount);
+                }
+                else if (this.actionindex == 4) {
+                    var1.setorientation(var1.getorientationx() + this.stepamount, var1.getorientationy(), var1.getorientationz());
+                }
+                else if (this.actionindex == 5) {
+                    var1.setorientation(var1.getorientationx(), var1.getorientationy() + this.stepamount, var1.getorientationz());
+                }
+                else if (this.actionindex == 6) {
+                    var1.setorientation(var1.getorientationx(), var1.getorientationy(), var1.getorientationz() + this.stepamount);
+                }
+                else if (this.actionindex == 7) {
+                    var1.zap();
+                }
+            }
+            if (param1.button == 35) {
+                this.actionindex = this.curidx;
+                var1 = this.tweakobjects[this.objindex];
+                if (this.actionindex == 0) {
+                    if (this.stepamount < 0.01) {
+                        this.stepamount = 0.001;
+                    }
+                    else {
+                        this.stepamount = this.stepamount / 10.0;
+                    }
+                }
+                else if (this.actionindex == 1) {
+                    var1.setpos(var1.getx() - this.stepamount, var1.gety(), var1.getz());
+                }
+                else if (this.actionindex == 2) {
+                    var1.setpos(var1.getx(), var1.gety() - this.stepamount, var1.getz());
+                }
+                else if (this.actionindex == 3) {
+                    var1.setpos(var1.getx(), var1.gety(), var1.getz() - this.stepamount);
+                }
+                else if (this.actionindex == 4) {
+                    var1.setorientation(var1.getorientationx() - this.stepamount, var1.getorientationy(), var1.getorientationz());
+                }
+                else if (this.actionindex == 5) {
+                    var1.setorientation(var1.getorientationx(), var1.getorientationy() - this.stepamount, var1.getorientationz());
+                }
+                else if (this.actionindex == 6) {
+                    var1.setorientation(var1.getorientationx(), var1.getorientationy(), var1.getorientationz() - this.stepamount);
+                }
+            }
+        }
+        if (param1.event == 2) {
+            if (param1.button == 46) {
+                
+            }
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (this.visible == 1) {
+            if (this.toview == 0) {
+                
+            }
+            if (this.screen == 1) {
+                var1 = this.tweakobjects[this.objindex];
+                this.activemenu[0].setstring("step: " + __tostring(this.stepamount));
+                this.activemenu[1].setstring(__tostring("X:   " + __tostring(var1.getx())));
+                this.activemenu[2].setstring(__tostring("Y:   " + __tostring(var1.gety())));
+                this.activemenu[3].setstring(__tostring("Z:   " + __tostring(var1.getz())));
+                this.activemenu[4].setstring(__tostring("OrntX: " + __tostring(var1.getorientationx())));
+                this.activemenu[5].setstring(__tostring("OrntY: " + __tostring(var1.getorientationy())));
+                this.activemenu[6].setstring(__tostring("OrntZ: " + __tostring(var1.getorientationz())));
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+    
+    method scrolldownsecondlist() {
+        if (this.curidx < (this.activemenu.__length - 1)) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx + 1;
+            this.activemenu[this.curidx].setactive();
+        }
+        else {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = 0;
+            this.activemenu[this.curidx].setactive();
+        }
+        return null;
+    }
+    
+    method scrollupsecondlist() {
+        if (this.curidx > 0) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx - 1;
+            this.activemenu[this.curidx].setactive();
+        }
+        else {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.activemenu.__length - 1;
+            this.activemenu[this.curidx].setactive();
+        }
+        return null;
+    }
+    
+    method scrolldown() {
+        var var1;
+        if (this.curidx < this.maxidx) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx + 1;
+            this.activemenu[this.curidx].setactive();
+        }
+        else if (this.curidx < (this.tcount - 1)) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx + 1;
+            this.activemenu[this.curidx].setactive();
+            this.activemenu[this.minidx].hide();
+            this.minidx = this.minidx + 1;
+            this.maxidx = this.maxidx + 1;
+            this.activemenu[this.maxidx].show();
+            var1 = 0;
+            while (this.showidx >= var1) {
+                this.activemenu[this.minidx + var1].setpos(this.x, this.y + (var1 * this.yoff), 0);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method scrollup() {
+        var var1;
+        if (this.curidx > this.minidx) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx - 1;
+            this.activemenu[this.curidx].setactive();
+        }
+        else if (this.curidx > 0) {
+            this.activemenu[this.curidx].setinactive();
+            this.curidx = this.curidx - 1;
+            this.activemenu[this.curidx].setactive();
+            this.activemenu[this.maxidx].hide();
+            this.minidx = this.minidx - 1;
+            this.maxidx = this.maxidx - 1;
+            this.activemenu[this.minidx].show();
+            var1 = 0;
+            while (this.showidx >= var1) {
+                this.activemenu[this.minidx + var1].setpos(this.x, this.y + (var1 * this.yoff), 0);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+}

@@ -1,0 +1,185 @@
+class ss_controlcamera : ss_basecamera {
+    property fontunactive;
+    property fontactive;
+    property oncam;
+    property change;
+    property camarray;
+    property tararray;
+    property helpcamarray;
+    property helptararray;
+    property target;
+    property active;
+    
+    method ss_controlcamera(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+        var var1;
+        this.ss_basecamera(param1, param2, param3, param4, param5, param6, param7);
+        this.fontunactive = param8;
+        this.fontactive = param9;
+        this.oncam = 1;
+        this.active = 0;
+        this.change = 10;
+        this.helpcamarray = [ new ss_activetext(this.fontunactive, this.fontactive, "CAMERA POSITION", 50, 80, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, "CHANGE ", 50, 100, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, "X POS ", 50, 120, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, "Y POS ", 50, 140, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, "Z POS ", 50, 160, 0, 0.5) ];
+        this.helptararray = [ new ss_activetext(this.fontunactive, this.fontactive, "TARGET POSITION", 300, 80, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, "CHANGE ", 300, 100, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, "X POS ", 300, 120, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, "Y POS ", 300, 140, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, "Z POS ", 300, 160, 0, 0.5) ];
+        this.camarray = [ new ss_activetext(this.fontunactive, this.fontactive, this.change, 150, 100, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, param1, 150, 120, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, param2, 150, 140, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, param3, 150, 160, 0, 0.5) ];
+        this.tararray = [ new ss_activetext(this.fontunactive, this.fontactive, this.change, 400, 100, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, param4, 400, 120, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, param5, 400, 140, 0, 0.5), 
+            new ss_activetext(this.fontunactive, this.fontactive, param6, 400, 160, 0, 0.5) ];
+        var1 = 0;
+        while ((this.camarray.__length - 1) >= var1) {
+            this.camarray[var1].initfull();
+            this.camarray[var1].add();
+            this.camarray[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.tararray.__length - 1) >= var1) {
+            this.tararray[var1].initfull();
+            this.tararray[var1].add();
+            this.tararray[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.helpcamarray.__length - 1) >= var1) {
+            this.helpcamarray[var1].initfull();
+            this.helpcamarray[var1].setactive();
+            this.helpcamarray[var1].add();
+            this.helpcamarray[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.helptararray.__length - 1) >= var1) {
+            this.helptararray[var1].initfull();
+            this.helptararray[var1].add();
+            this.helptararray[var1].show();
+            var1 = var1 + 1;
+        }
+        this.target = new ss_rotatablesprite("Root/data/interface/basescreen/help_button_x", 100, 100, param4, param5, param6);
+        this.target.initfull();
+        return null;
+    }
+    
+    method movecam(param1, param2, param3) {
+        if (this.oncam == 1) {
+            this.campos(param1, param2, param3);
+        }
+        else {
+            this.targetpos(param1, param2, param3);
+        }
+        return null;
+    }
+    
+    method campos(param1, param2, param3) {
+        this.changepos(param1, param2, param3);
+        this.camarray[0].setstring(this.change);
+        this.camarray[1].setstring(this.x1);
+        this.camarray[2].setstring(this.y1);
+        this.camarray[3].setstring(this.z);
+        return null;
+    }
+    
+    method targetpos(param1, param2, param3) {
+        this.changetargetpos(param1, param2, param3);
+        this.target.changepos(param1, param2, param3);
+        this.tararray[0].setstring(this.change);
+        this.tararray[1].setstring(this.tx);
+        this.tararray[2].setstring(this.ty);
+        this.tararray[3].setstring(this.tz);
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 4) {
+            if (param1.event == 2) {
+                this.change_oncam();
+            }
+        }
+        if (param1.button == 10) {
+            if (param1.event == 4) {
+                this.movecam(0 - this.change, 0, 0);
+            }
+        }
+        if (param1.button == 11) {
+            if (param1.event == 4) {
+                this.movecam(this.change, 0, 0);
+            }
+        }
+        if (param1.button == 9) {
+            if (param1.event == 4) {
+                this.movecam(0, 0, 0 - this.change);
+            }
+        }
+        if (param1.button == 12) {
+            if (param1.event == 4) {
+                this.movecam(0, 0, this.change);
+            }
+        }
+        if (param1.button == 18) {
+            if (param1.event == 2) {
+                this.change(10);
+            }
+        }
+        if (param1.button == 20) {
+            if (param1.event == 2) {
+                this.change(-10);
+            }
+        }
+        if (param1.button == 3) {
+            if (param1.event == 4) {
+                this.movecam(0, this.change, 0);
+            }
+        }
+        if (param1.button == 6) {
+            if (param1.event == 4) {
+                this.movecam(0, 0 - this.change, 0);
+            }
+        }
+        return null;
+    }
+    
+    method active(param1) {
+        this.active = param1;
+        return null;
+    }
+    
+    method change(param1) {
+        this.change = this.change + param1;
+        this.camarray[0].setstring(this.change);
+        this.tararray[0].setstring(this.change);
+        return null;
+    }
+    
+    method change_oncam() {
+        var var1;
+        if (this.oncam == 1) {
+            this.oncam = 0;
+            var1 = 0;
+            while ((this.helpcamarray.__length - 1) >= var1) {
+                this.helpcamarray[var1].setinactive();
+                this.helptararray[var1].setactive();
+                var1 = var1 + 1;
+            }
+        }
+        else {
+            this.oncam = 1;
+            var1 = 0;
+            while ((this.helpcamarray.__length - 1) >= var1) {
+                this.helpcamarray[var1].setactive();
+                this.helptararray[var1].setinactive();
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+}

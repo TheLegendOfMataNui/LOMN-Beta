@@ -1,0 +1,298 @@
+class mudmonster_puzzle {
+    property parea;
+    property mudmonster;
+    property mudtimer;
+    property mudpos;
+    property mudhits;
+    property attacking;
+    property reacting;
+    property thrown;
+    property titletext1;
+    property titletext2;
+    property turaga;
+    property mudmandead;
+    property stone;
+    
+    method mudmonster_puzzle(param1) {
+        this.parea = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.mudmonster = new mudmonster(this);
+        this.mudmonster.init();
+        this.turaga = new gs_lego_character("when", "when", "fake", -90, 995, 0, 212, "aiin");
+        this.turaga.initfull();
+        this.turaga.add();
+        this.turaga.hide();
+        this.turaga.settweakable();
+        this.mudmandead = 0;
+        gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tpm1"));
+        var1 = gccollisionphysicsgroup::gettriggerplane(scslosifoundation::stringtoidentifier("tpm1"));
+        gctriggerplane::setplaneresponses(var1, 3, 3);
+        var1 = gccollisionphysicsgroup::gettriggerplane(scslosifoundation::stringtoidentifier("tpm2"));
+        gctriggerplane::setplaneresponses(var1, 3, 3);
+        this.stone = new lego_pickup("ston", 0, 4, "item", 11, 0);
+        this.stone.initfull();
+        this.stone.obj.setpos(0, 0, 0);
+        this.initshort();
+        return null;
+    }
+    
+    method initshort() {
+        this.mudmonster.initshort();
+        this.setupstrings();
+        this.mudpos = 1;
+        this.mudhits = 0;
+        this.mudtimer = 0;
+        this.attacking = 0;
+        this.reacting = 0;
+        return null;
+    }
+    
+    method exit() {
+        this.parea = null;
+        return null;
+    }
+    
+    method cleanupfull() {
+        debug::print("Cleaning up mud puzzle");
+        if (!(this.mudmonster == null)) {
+            this.mudmonster.cleanupfull();
+            this.mudmonster = null;
+        }
+        this.mudtimer = null;
+        this.mudpos = null;
+        this.mudhits = null;
+        this.attacking = null;
+        this.reacting = null;
+        if (!(this.stone == null)) {
+            this.stone.cleanupfull();
+            this.stone = null;
+        }
+        if (!(this.turaga == null)) {
+            this.turaga.remove();
+            this.turaga.cleanupfull();
+            this.turaga = null;
+        }
+        return null;
+    }
+    
+    method setupstrings() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = gcareadirector::getscriptstring(1651471219, 3, 0);
+        var2 = gcareadirector::getscriptstring(1651471219, 3, 1);
+        var3 = (screeny - 100) + 20;
+        var4 = (screeny - 100) + 40;
+        this.titletext1 = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var1, screenx * 0.5, var3, 0, 2.0, 256, 0, 0);
+        this.titletext2 = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var2, screenx * 0.5, var4, 0, 2.0, 256, 0, 0);
+        return null;
+    }
+    
+    method showstrings() {
+        this.titletext1.initfull();
+        this.titletext2.initfull();
+        this.titletext1.add();
+        this.titletext2.add();
+        this.titletext1.show();
+        this.titletext2.show();
+        return null;
+    }
+    
+    method cleanupstrings() {
+        this.titletext1.remove();
+        this.titletext2.remove();
+        this.titletext1.cleanupfull();
+        this.titletext2.cleanupfull();
+        this.titletext1 = null;
+        this.titletext2 = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        this.mudtimer = this.mudtimer + param1.deltatime;
+        if (this.mudmonster.mudstate == 6) {
+            if (this.mudtimer > 3) {
+                globalclass.bgmusic.play(1);
+                var1 = gcmudboss::getpositionx(this.mudmonster.mudman);
+                var2 = gcmudboss::getpositiony(this.mudmonster.mudman);
+                var3 = gcmudboss::getpositionz(this.mudmonster.mudman);
+                var4 = 30;
+                var5 = 10;
+                this.parea.level.cam.interpolate(var1 - var4, var2 + var5, var3, var1, var2 + var5, var3, 3);
+                this.mudmonster.mudstate = 5;
+            }
+        }
+        else if (this.mudmonster.mudstate == 7) {
+            if (this.mudtimer > 2) {
+                this.parea.level.cam.setaimode(11);
+                this.mudtimer = 0;
+                this.mudmonster.mudstate = 11;
+                gcmudboss::setdoprocess(this.mudmonster.mudman, 1);
+                this.cleanupstrings();
+            }
+        }
+        else if (this.mudmonster.mudstate == 10) {
+            
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        if (!(this.mudmonster == null)) {
+            this.mudmonster.onevent(param1);
+        }
+        if (param1.eventid == 7) {
+            if (param1.args[0] == 1836409945) {
+                if (param1.args[2] == scslosifoundation::stringtoidentifier("Fprj")) {
+                    this.mudmonster.releasemudball(this.mudhits);
+                    this.thrown = 1;
+                }
+            }
+        }
+        else if (param1.eventid == 11) {
+            if ((param1.args[1] == 1831874864) || (param1.args[1] == 1831874617)) {
+                if (this.mudmonster.mudstate == 5) {
+                    this.mudtimer = 0;
+                    this.mudmonster.mudstate = 7;
+                    debug::print("setting mudstate to ready");
+                }
+            }
+            else if ((param1.args[1] == 1831874611) && (this.mudmonster.mudstate == 10)) {
+                gcmudboss::morph(this.mudmonster.mudman, 5, 3.5);
+            }
+        }
+        else if (param1.eventid == 14) {
+            this.parea.level.cam.setaimode(0);
+            if (this.mudmonster.mudstate == 10) {
+                gcmudboss::setsplitanimation(this.mudmonster.mudman, 1831874611, -1);
+            }
+            else {
+                this.attacking = 0;
+                gcmudboss::morph(this.mudmonster.mudman, 3, 2.0);
+                gcmodeldirector::show(1836409945, 1836409945);
+                this.mudtimer = 0;
+                this.showstrings();
+            }
+        }
+        else if (param1.eventid == 13) {
+            if (this.mudmonster.mudstate == 5) {
+                var1 = gcmodeldirector::getcharacter(1836409945);
+                gccharacter::setsplitanimation(var1, 1831874864, -1);
+                var1 = null;
+                this.mudtimer = 0;
+                gcmudboss::setdoprocess(this.mudmonster.mudman, 0);
+            }
+            else if (this.mudmonster.mudstate == 10) {
+                this.endarea();
+            }
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tpm0")) {
+                debug::print("Setting next level to 2");
+                globalclass.setnextlevel("lev2");
+            }
+        }
+        else if (param1.eventid == 43) {
+            if (!(this.mudmonster == null)) {
+                this.mudmonster.mudstate = 10;
+                this.mudtimer = 0;
+                var2 = gcmudboss::getpositionx(this.mudmonster.mudman);
+                var3 = gcmudboss::getpositiony(this.mudmonster.mudman);
+                var4 = gcmudboss::getpositionz(this.mudmonster.mudman);
+                var5 = gcmudboss::getcamposx(this.mudmonster.mudman);
+                var6 = gcmudboss::getcamposy(this.mudmonster.mudman);
+                var7 = gcmudboss::getcamposz(this.mudmonster.mudman);
+                this.parea.level.cam.interpolate(var5, var6 + 10, var7, var2, var3 + 10, var4, 3);
+            }
+        }
+        else if (param1.eventid == 46) {
+            this.resetarea();
+        }
+        else if (param1.eventid == 35) {
+            if ((param1.args[0] == 2003330414) && (param1.args[1] == 1)) {
+                this.startconversation();
+            }
+        }
+        else if (param1.eventid == 41) {
+            this.finishconversation();
+        }
+        else if (param1.eventid == 39) {
+            
+        }
+        return null;
+    }
+    
+    method resetarea() {
+        gccollisionphysicsgroup::spinmask(1.2);
+        this.initshort();
+        globalclass.player.actor.gotopos(this.parea.enterstartid, this.parea.enterlookid);
+        globalclass.player.unkill();
+        globalclass.player.actor.idle();
+        globalclass.player.actor.setinputstate("ninp");
+        gcmudboss::reset(this.mudmonster.mudman, 995, 0, 212, -90);
+        return null;
+    }
+    
+    method endarea() {
+        var var1;
+        gctransdirector::hide(scslosifoundation::stringtoidentifier("mwf0"), 0);
+        gcmodeldirector::hide(1836409945, 0);
+        this.parea.endarea();
+        var1 = gccollisionphysicsgroup::gettriggerplane(scslosifoundation::stringtoidentifier("tpm2"));
+        gctriggerplane::setplaneresponses(var1, 4, 4);
+        this.parea.level.cam.setpos(991, 2, 212);
+        this.parea.level.cam.settargetpos(995, 1, 212);
+        this.turaga.setpos(995, 0, 212);
+        this.turaga.show();
+        gccharacter::settransparency(this.turaga.handle, 0.0);
+        this.turaga.fadein(1.5);
+        this.turaga.disableai();
+        globalclass.player.usemasks(1);
+        this.mudtimer = 0;
+        this.mudmonster.mudstate = 10;
+        return null;
+    }
+    
+    method startconversation() {
+        var var1;
+        this.parea.level.cam.setaimode(11);
+        var1 = gcconversationengine::getconversationengine();
+        gcconversationengine::forceconversation(var1, 2003330414);
+        return null;
+    }
+    
+    method finishconversation() {
+        var var1;
+        var var2;
+        var var3;
+        gcareadirector::show(1937010542, 0);
+        var1 = globalclass.player.actor.getposx();
+        var2 = globalclass.player.actor.getposy();
+        var3 = globalclass.player.actor.getposz();
+        this.stone.obj.setpos(var1, var2, var3);
+        globalclass.bgmusic.play(0);
+        gcmodeldirector::hide(2003330414, 0);
+        return null;
+    }
+}

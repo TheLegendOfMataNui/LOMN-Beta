@@ -1,0 +1,112 @@
+class l1shrn_door {
+    property isopen;
+    property object;
+    property name;
+    property sound;
+    property closewhendone;
+    property speed;
+    property moving;
+    
+    method l1shrn_door(param1) {
+        this.isopen = 0;
+        this.object = null;
+        this.name = param1;
+        this.sound = null;
+        this.speed = 5.0;
+        this.moving = 0;
+        this.closewhendone = 0;
+        return null;
+    }
+    
+    method open(param1) {
+        if ((this.isopen == 0) && (this.moving == 0)) {
+            if (param1 == null) {
+                param1 = 5.0;
+            }
+            this.object.interpolate(this.object.getx(), this.object.gety() + 10.0, this.object.getz(), param1);
+            this.isopen = 1;
+            this.moving = 1;
+        }
+        return null;
+    }
+    
+    method close(param1) {
+        if ((this.isopen == 1) && (this.moving == 0)) {
+            if (param1 == null) {
+                param1 = 4;
+            }
+            this.object.interpolate(this.object.getx(), this.object.gety() - 10.0, this.object.getz(), param1);
+            this.isopen = 0;
+            this.moving = 1;
+        }
+        return null;
+    }
+    
+    method openclose(param1, param2) {
+        var var1;
+        if ((this.isopen == 0) && (this.moving == 0)) {
+            if (param1 == null) {
+                var1 = 5.0;
+            }
+            if (param2 == null) {
+                param2 = 4;
+            }
+            this.speed = param2;
+            this.closewhendone = 1;
+            this.object.interpolate(this.object.getx(), this.object.gety() + 10.0, this.object.getz(), param1);
+            this.isopen = 1;
+            this.moving = 1;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        this.object = new lego_moveableobject(this.name, "shrn");
+        this.object.initfull();
+        this.speed = 5.0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.object != null) {
+            this.object.cleanupfull();
+            this.object = null;
+        }
+        if (this.sound != null) {
+            this.sound = null;
+        }
+        return null;
+    }
+    
+    method show() {
+        this.object.show();
+        return null;
+    }
+    
+    method hide() {
+        this.object.hide();
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (this.closewhendone == 2) {
+            this.closewhendone = 3;
+        }
+        if (this.closewhendone == 3) {
+            this.close(this.speed);
+            this.closewhendone = 0;
+        }
+        if (param1.eventid == 12) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier(this.name)) {
+                this.moving = 0;
+                if (this.isopen) {
+                    
+                }
+                if (this.closewhendone == 1) {
+                    this.closewhendone = 2;
+                }
+            }
+        }
+        return null;
+    }
+}

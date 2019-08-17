@@ -1,0 +1,52 @@
+class pohatu7_platform : base_object {
+    property obj;
+    property id;
+    property dist;
+    property time;
+    property x;
+    property y;
+    property z;
+    property moveup;
+    
+    method pohatu7_platform(param1, param2, param3, param4, param5) {
+        this.base_object();
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.obj = gcareadirector::getmoveableobj(this.id, scslosifoundation::stringtoidentifier(param2));
+        gcmoveableobj::setcharacterresponses(this.obj, 0, 0, 3);
+        this.x = gcmoveableobj::getx(this.obj);
+        this.y = gcmoveableobj::gety(this.obj);
+        this.z = gcmoveableobj::getz(this.obj);
+        this.dist = param4;
+        this.time = param5;
+        return null;
+    }
+    
+    method initfull() {
+        this.moveup = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj = null;
+        return null;
+    }
+    
+    method toggle() {
+        if (this.moveup) {
+            this.moveup = 0;
+            gcmoveableobj::interpolate(this.obj, this.x, this.y + this.dist, this.z, this.time);
+        }
+        else {
+            this.moveup = 1;
+            gcmoveableobj::interpolate(this.obj, this.x, this.y, this.z, this.time);
+        }
+        return null;
+    }
+    
+    method reset() {
+        this.moveup = 1;
+        gcmoveableobj::cancelinterpolate(this.obj);
+        gcmoveableobj::setposition(this.obj, this.x, this.y, this.z);
+        return null;
+    }
+}

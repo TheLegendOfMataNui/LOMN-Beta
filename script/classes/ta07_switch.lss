@@ -1,0 +1,79 @@
+class ta07_switch {
+    property parent;
+    property obj;
+    property id;
+    property name;
+    property up;
+    
+    method ta07_switch(param1, param2) {
+        this.obj = new lego_moveableobject(param1);
+        this.parent = param2;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.name = param1;
+        this.up = 1;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.obj.setresponse(0, 0, 0);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.id = null;
+        this.name = null;
+        this.up = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (((param1.args[1] == this.id) && (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1"))) && (param1.args[2] == 0)) {
+                if (this.up) {
+                    this.rase(0);
+                }
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method reset() {
+        this.rase(1);
+        return null;
+    }
+    
+    method rase(param1) {
+        if (param1) {
+            if (!this.up) {
+                this.up = 1;
+                this.obj.changeposition(0, 0.5, 0, 0.5);
+                this.parent.addtonumberofbuttonsdown(0);
+            }
+        }
+        else if (this.up) {
+            this.up = 0;
+            gcstaticsoundsptrarray::playtablesound(1085);
+            this.obj.changeposition(0, 0 - 0.5, 0, 0.5);
+            this.parent.addtonumberofbuttonsdown(1);
+        }
+        return null;
+    }
+    
+    method settweakable() {
+        this.obj.settweakable();
+        return null;
+    }
+}

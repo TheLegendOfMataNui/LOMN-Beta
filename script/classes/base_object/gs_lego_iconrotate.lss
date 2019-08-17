@@ -1,0 +1,79 @@
+class gs_lego_iconrotate : base_object {
+    property enabled;
+    property rotate;
+    property hidden;
+    
+    method gs_lego_iconrotate(param1, param2, param3) {
+        this.rotate = param1;
+        this.enabled = param2;
+        this.hidden = 0;
+        return null;
+    }
+    
+    method initfull() {
+        this.rotate.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.rotate == null)) {
+            this.rotate.cleanupfull();
+            this.rotate = null;
+        }
+        return null;
+    }
+    
+    method add() {
+        this.rotate.add();
+        return null;
+    }
+    
+    method show() {
+        this.hidden = 0;
+        this.rotate.show();
+        return null;
+    }
+    
+    method remove() {
+        this.rotate.remove();
+        return null;
+    }
+    
+    method hide() {
+        this.hidden = 1;
+        this.rotate.hide();
+        return null;
+    }
+    
+    method enablealphachannel(param1) {
+        this.rotate.enablealphachannel(param1);
+        return null;
+    }
+    
+    method setpos(param1, param2, param3, param4) {
+        this.rotate.setpos(param1, param2, param3, param4);
+        return null;
+    }
+    
+    method enableicon(param1) {
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.enabled == 1) {
+            this.rotate.process(param1);
+        }
+        return null;
+    }
+    
+    method animate(param1) {
+        if (param1 == 1) {
+            this.rotate.startanimate();
+        }
+        else {
+            this.rotate.gotoframe(0, 1);
+        }
+        this.enabled = param1;
+        return null;
+    }
+}

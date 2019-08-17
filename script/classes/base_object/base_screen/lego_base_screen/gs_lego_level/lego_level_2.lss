@@ -1,0 +1,118 @@
+class lego_level_2 : gs_lego_level {
+    
+    method lego_level_2() {
+        var var1;
+        this.gs_lego_level("lev2", "gali", "mtup");
+        var1 = new lego_area_mtup2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_strt2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_hk012(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_mtop2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_evac2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_takv2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_ttun2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_mwat2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_wthk2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_vllg2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_tura2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_vlgs2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_shrn2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_vtnl2(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_gly32(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_hydr2(this);
+        this.areas.__append(var1);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_level_initfull();
+        globalclass.player.addmask("fake", 0);
+        globalclass.player.addmask("fake", 7);
+        globalclass.player.addmask("fake", 8);
+        if (globalclass.saverloaded) {
+            if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mk9a"), scslosifoundation::stringtoidentifier("mtop"))) {
+                globalclass.player.addmask("fake", 9);
+            }
+            if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mask"), scslosifoundation::stringtoidentifier("mwat"))) {
+                globalclass.player.addmask("fake", 1);
+            }
+            if (gcsaver::findglypha(scslosifoundation::stringtoidentifier("glyp"), scslosifoundation::stringtoidentifier("gly3"))) {
+                globalclass.player.addelement();
+            }
+            if (gcsaver::finditema(scslosifoundation::stringtoidentifier("hook"), scslosifoundation::stringtoidentifier("vlgs"))) {
+                globalclass.player.setupgrapplinghook();
+                globalclass.player.setgrapplinghookdistance(120);
+            }
+            globalclass.player.initfromsaver();
+        }
+        globalclass.saverloaded = 0;
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.lego_level_onevent(param1);
+        if (param1.eventid == 54) {
+            if (param1.args[0] == 1) {
+                globalclass.player.canshootdragger(0);
+            }
+            else if (param1.args[0] == 0) {
+                globalclass.player.canshootdragger(1);
+            }
+        }
+        else if (param1.eventid == 15) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
+                gcstaticsoundsptrarray::playtablesound(1092);
+            }
+        }
+        else if (param1.eventid == 47) {
+            if (param1.args[0] == 5) {
+                globalclass.debugstring.scalefont(3.0);
+                globalclass.scriptmessage("5", 0.8);
+                gcstaticsoundsptrarray::playtablesound(1090);
+            }
+            else if (param1.args[0] == 4) {
+                globalclass.debugstring.scalefont(3.0);
+                globalclass.scriptmessage("4", 0.8);
+            }
+            else if (param1.args[0] == 3) {
+                globalclass.debugstring.scalefont(3.0);
+                globalclass.scriptmessage("3", 0.8);
+            }
+            else if (param1.args[0] == 2) {
+                globalclass.debugstring.scalefont(3.0);
+                globalclass.scriptmessage("2", 0.8);
+                gcstaticsoundsptrarray::playtablesound(1090);
+            }
+            else if (param1.args[0] == 1) {
+                globalclass.debugstring.scalefont(3.0);
+                globalclass.scriptmessage("1", 0.8);
+            }
+            else if (param1.args[0] == 0) {
+                globalclass.player.kill();
+            }
+        }
+        return null;
+    }
+    
+    method initshort() {
+        this.lego_level_initshort();
+        globalclass.player.addmask("fake", 0);
+        globalclass.player.addmask("fake", 7);
+        globalclass.player.addmask("fake", 8);
+        return null;
+    }
+}

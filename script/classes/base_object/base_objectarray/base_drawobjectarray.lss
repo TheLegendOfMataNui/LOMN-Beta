@@ -1,0 +1,59 @@
+class base_drawobjectarray : base_objectarray {
+    
+    method base_drawobjectarray(param1) {
+        this.items = param1;
+        return null;
+    }
+    
+    method enablealphachannel(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].enablealphachannel(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method enabletransparency(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].enabletransparency(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method settransparentvalue(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].settransparentvalue(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method transitionin(param1) {
+        var var1;
+        var var2;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            var2 = this.items[var1].transitionin();
+            var1 = var1 + 1;
+        }
+        return var2;
+    }
+    
+    method transitionout(param1) {
+        var var1;
+        var var2;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            var2 = this.items[var1].transitionout();
+            var1 = var1 + 1;
+        }
+        return var2;
+    }
+}

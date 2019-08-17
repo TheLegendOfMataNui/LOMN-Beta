@@ -1,0 +1,146 @@
+class shrn6_puzzle {
+    property parent;
+    property doorarray;
+    property cinema;
+    property bossdoorshone;
+    property portalactive;
+    
+    method shrn6_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        gcareadirector::setnearestmax(15);
+        this.doorarray = [ new lego_moveableobject("drs2"), 
+            new lego_moveableobject("drs3"), 
+            new lego_moveableobject("drs4") ];
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].initfull();
+            this.doorarray[var1].show();
+            var1 = var1 + 1;
+        }
+        this.doorarray[0].hide();
+        if (globalclass.player.haselement()) {
+            this.doorarray[1].hide();
+        }
+        this.doorarray[2].fadein();
+        this.bossdoorshone = 1;
+        var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vaka"), 0);
+        gccharacter::setinputstate(var2, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var2, 1.5, 0.8, 1, 0, 0);
+        var3 = scslosifoundation::stringtoidentifier("tps9");
+        this.portalactive = gcsaver::portalactive();
+        if (this.portalactive == 1) {
+            gccollisionphysicsgroup::setportal(var3, "root/data/art/portals/tahu/village_ripple/t_prtl", 1);
+        }
+        else {
+            gccollisionphysicsgroup::turnoffnextarea(var3);
+        }
+        if (globalclass.player.actor.getposx() > 50) {
+            if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
+                this.cinema = gccinemaengine::create();
+                gccinemaengine::load(this.cinema, "cin3");
+                globalclass.hud.hide();
+                if (globalclass.player.maskcontrol.isactive() == 1) {
+                    globalclass.player.maskcontrol.toggleactive();
+                }
+                gccinemaengine::play(this.cinema);
+            }
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].cleanupfull();
+            this.doorarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.doorarray = null;
+        this.cinema = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 41) {
+            if (this.portalactive == 0) {
+                var1 = scslosifoundation::stringtoidentifier("tps9");
+                gccollisionphysicsgroup::turnonnextarea(var1, scslosifoundation::stringtoidentifier("tura"));
+                gccollisionphysicsgroup::setportal(var1, "root/data/art/portals/tahu/village_ripple/t_prtl", 1);
+                this.portalactive = 1;
+            }
+        }
+        else if (param1.eventid == 30) {
+            globalclass.hud.show();
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+            globalclass.bgmusic.play(1);
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        else if (param1.eventid == 27) {
+            
+        }
+        else if (param1.eventid == 1) {
+            if ((param1.args[1] == scslosifoundation::stringtoidentifier("drs4")) && (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                if (this.bossdoorshone) {
+                    if (globalclass.player.tokens >= 60) {
+                        if (globalclass.player.maskcontrol.isselectable(5)) {
+                            if (globalclass.player.maskcontrol.isselectable(1011)) {
+                                if (globalclass.player.actor.ishookenabled) {
+                                    if (globalclass.player.haselement()) {
+                                        this.doorarray[2].fadeout(1.5);
+                                        gcstaticsoundsptrarray::playtablesound(1084);
+                                        this.bossdoorshone = 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 35) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("drs4")) && (param1.args[1] == 0)) {
+                this.doorarray[2].hide();
+            }
+        }
+        else if (param1.eventid == 21) {
+            
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (2 == 2) {
+            if (param1.button == 251) {
+                if (!(this.cinema == null)) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+            param1.button;
+        }
+        return null;
+    }
+}

@@ -1,0 +1,81 @@
+class sprite_projectile {
+    property handle;
+    property id;
+    property name;
+    property path;
+    property speed;
+    property spritesize;
+    property lifespan;
+    property detonateradius;
+    
+    method sprite_projectile(param1, param2, param3, param4, param5, param6, param7, param8) {
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.name = param1;
+        this.path = param3;
+        this.handle = null;
+        if (param4 == null) {
+            this.speed = 50;
+        }
+        else {
+            this.speed = param4;
+        }
+        if (param5 == null) {
+            this.spritesize = 2;
+        }
+        else {
+            this.spritesize = param5;
+        }
+        if (param6 == null) {
+            this.lifespan = 3;
+        }
+        else {
+            this.lifespan = param6;
+        }
+        if (param8 == null) {
+            param8 = 0;
+        }
+        this.detonateradius = this.spritesize;
+        this.handle = gcvectorprojectile::create(this.id, this.path, param2, this.speed, this.spritesize, this.lifespan, this.detonateradius, param7, param8);
+        if (this.handle == null) {
+            debug::print(("ERROR --- handle of Sprite_Projectile " + this.name) + " is nothing.");
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.handle = null;
+        this.id = null;
+        this.name = null;
+        this.path = null;
+        this.speed = null;
+        this.spritesize = null;
+        this.lifespan = null;
+        this.detonateradius = null;
+        return null;
+    }
+    
+    method launch(param1, param2) {
+        if (this.handle == null) {
+            debug::print("*** handle is nothing");
+        }
+        gcvectorprojectile::launch(this.handle, param2.x, param2.y, param2.z, param1.x, param1.y, param1.z);
+        return null;
+    }
+    
+    method hasdied() {
+        return gcvectorprojectile::hasdied(this.handle);
+    }
+    
+    method detonate() {
+        gcvectorprojectile::detonate(this.handle);
+        return null;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+}

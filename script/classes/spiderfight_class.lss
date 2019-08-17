@@ -1,0 +1,165 @@
+class spiderfight_class {
+    property parent;
+    property spider;
+    property mask;
+    property web1;
+    property showintro;
+    property desctext;
+    property howtotext;
+    property door;
+    
+    method spiderfight_class(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var bosstext;
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(3);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setfog(-16777216, 0 - 30.0, 0 - 80.0, 0.05);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
+        globalclass.bgmusic.play(1);
+        this.door = new lego_moveableobject("door", this.parent.name);
+        this.door.initfull();
+        this.web1 = new lego_moveableobject("web1", this.parent.name, [ "weba" ]);
+        this.web1.initfull();
+        this.web1.show();
+        this.web1.setresponse(3, 3, 3);
+        this.spider = new gs_lego_character("cnyz", "bspd", this.parent.name, 0, 380.3, 0 - 60.0, 0 - 195.6, "aiin");
+        this.spider.initfull();
+        this.spider.add();
+        this.spider.aisetattacktype(5);
+        this.spider.show();
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mskc")) == 0) {
+            this.mask = new lego_pickup("mskc", 7, 1, "item", 5, 1);
+            this.mask.initfull();
+            this.mask.show();
+        }
+        else {
+            this.door.interpolate(this.door.getx(), this.door.gety() + 10.0, this.door.getz(), 0.0);
+            this.web1.hide();
+            globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
+            globalclass.bgmusic.play(1);
+            if (this.spider != null) {
+                this.spider.cleanupfull();
+                this.spider = null;
+            }
+        }
+        if (gcsaver::isconditionset(536870912)) {
+            this.showintro = 0;
+        }
+        else {
+            this.showintro = 1;
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 2, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", bosstext, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            this.desctext.initfull();
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 2, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
+            this.howtotext.initfull();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.spider != null) {
+            this.spider.cleanupfull();
+            this.spider = null;
+        }
+        if (this.desctext != null) {
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        if (this.howtotext != null) {
+            this.howtotext.cleanupfull();
+            this.howtotext = null;
+        }
+        if (this.door != null) {
+            this.door.cleanupfull();
+            this.door = null;
+        }
+        if (this.mask != null) {
+            this.mask.cleanupfull();
+            this.mask = null;
+        }
+        if (this.web1 != null) {
+            this.web1.cleanupfull();
+            this.web1 = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 6) {
+            this.parent.level.cam.setaimode(11);
+            this.parent.level.cam.resetviewport();
+            globalclass.hud.show();
+            this.desctext.hide();
+            this.howtotext.hide();
+        }
+        else if (param1.eventid == 39) {
+            this.door.interpolate(this.door.getx(), this.door.gety() + 10.0, this.door.getz(), 4.0);
+        }
+        else if (param1.eventid == 43) {
+            if (param1.args[0] == this.spider.id) {
+                this.web1.fadeout(3.0);
+                this.web1.setresponse(4, 4, 4);
+                this.spider.cleanupfull();
+                this.spider = null;
+                globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
+                globalclass.bgmusic.play(1);
+            }
+        }
+        else if (param1.eventid == 35) {
+            if ((param1.args[0] == this.web1.id)) {
+                this.web1.hide();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+        }
+        else if (param1.eventid == 44) {
+            if (this.showintro) {
+                this.playintro();
+            }
+        }
+        return null;
+    }
+    
+    method playintro() {
+        this.parent.level.cam.scaletocutscene();
+        this.parent.level.cam.makespline("Root/Data/Levels/lev1/spcv/spcv_CAM.slb");
+        this.parent.level.cam.setspline(0, 10.0, 1, 0);
+        this.parent.level.cam.settargetpos(380.3, 0 - 60.0, 0 - 205.6);
+        this.parent.level.cam.setaimode(2);
+        globalclass.hud.hide();
+        gcsaver::setcondition(536870912, 1);
+        this.desctext.add();
+        this.desctext.show();
+        this.howtotext.add();
+        this.howtotext.show();
+        this.showintro = 0;
+        return null;
+    }
+}

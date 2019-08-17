@@ -1,0 +1,53 @@
+class base_safeevent {
+    property obj;
+    property functionpointer;
+    property arguments;
+    
+    method base_safeevent(param1, param2, param3) {
+        this.obj = param1;
+        this.functionpointer = param2;
+        if (param3 == null) {
+            this.arguments = [  ];
+        }
+        else {
+            this.arguments = param3;
+        }
+        return null;
+    }
+    
+    method execute() {
+        this.obj.$(this.functionpointer)();
+        return null;
+    }
+    
+    method executearguments() {
+        if (this.arguments.__length == 0) {
+            this.obj.$(this.functionpointer)();
+        }
+        else if (this.arguments.__length == 1) {
+            this.obj.$(this.functionpointer)(this.arguments[0]);
+        }
+        else if (this.arguments.__length == 2) {
+            this.obj.$(this.functionpointer)(this.arguments[0], this.arguments[1]);
+        }
+        else if (this.arguments.__length == 3) {
+            this.obj.$(this.functionpointer)(this.arguments[0], this.arguments[1], this.arguments[2]);
+        }
+        else if (this.arguments.__length == 4) {
+            this.obj.$(this.functionpointer)(this.arguments[0], this.arguments[1], this.arguments[2], this.arguments[3]);
+        }
+        else if (this.arguments.__length == 5) {
+            this.obj.$(this.functionpointer)(this.arguments[0], this.arguments[1], this.arguments[2], this.arguments[3], this.arguments[4]);
+        }
+        else if (this.arguments.__length == 6) {
+            this.obj.$(this.functionpointer)(this.arguments[0], this.arguments[1], this.arguments[2], this.arguments[3], this.arguments[4], this.arguments[5]);
+        }
+        else if (this.arguments.__length == 7) {
+            this.obj.$(this.functionpointer)(this.arguments[0], this.arguments[1], this.arguments[2], this.arguments[3], this.arguments[4], this.arguments[5], this.arguments[6]);
+        }
+        else if (this.arguments.__length == 8) {
+            this.obj.$(this.functionpointer)(this.arguments[0], this.arguments[1], this.arguments[2], this.arguments[3], this.arguments[4], this.arguments[5], this.arguments[6], this.arguments[7]);
+        }
+        return null;
+    }
+}

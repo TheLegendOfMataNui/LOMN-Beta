@@ -1,0 +1,34 @@
+class slosi_random {
+    property randid;
+    property seed;
+    
+    method slosi_random(param1, param2) {
+        if (param1 == null) {
+            param1 = "dltr";
+        }
+        if (__isstring(param1)) {
+            this.randid = scslosifoundation::stringtoidentifier(param1);
+        }
+        else {
+            this.randid = param1;
+        }
+        if (!(param2 == null)) {
+            this.seed = param2;
+            this.setseed(param2);
+        }
+        return null;
+    }
+    
+    method getrandomnumber(param1, param2) {
+        return scslosirandom::randomminmax(param1, param2, this.randid);
+    }
+    
+    method setseed(param1) {
+        scslosirandom::setrandomseed(param1, this.randid);
+        return null;
+    }
+    
+    method getrandomfloat(param1, param2) {
+        return scslosirandom::randomminmaxfloat(param1, param2, this.randid);
+    }
+}

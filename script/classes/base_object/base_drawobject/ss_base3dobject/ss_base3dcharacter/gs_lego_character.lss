@@ -1,0 +1,713 @@
+class gs_lego_character : ss_base3dcharacter {
+    property area;
+    property areaid;
+    property myname;
+    property id;
+    property charspline;
+    
+    method gs_lego_character(param1, param2, param3, param4, param5, param6, param7, param8) {
+        this.ss_base3dcharacter(param1, param2, param4, param5, param6, param7, param8);
+        this.area = param3;
+        this.areaid = scslosifoundation::stringtoidentifier(this.area);
+        this.myname = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        return null;
+    }
+    
+    method add(param1) {
+        var var1;
+        if (param1 == null) {
+            param1 = 1;
+        }
+        if (param1) {
+            gcmodeldirector::addcharacter(this.charstring, this.charname, this.areaid, scslosifoundation::stringtoidentifier(this.inputstate), this.contid);
+        }
+        this.handle = gcmodeldirector::getcharacter(this.contid, this.areaid);
+        if (param1) {
+            this.setpos(this.x1, this.y1, this.z);
+            this.setorientation(this.angle);
+            this.setinputstate(this.inputstate);
+        }
+        var1 = gccharacter::hasgepetto(this.handle);
+        if (var1 == 1) {
+            this.gepetto = gccharacter::getgepetto(this.handle);
+            this.numanimations = this.getnumanimations();
+        }
+        return null;
+    }
+    
+    method getposx() {
+        return gccharacter::getpositionx(this.handle);
+    }
+    
+    method getposy() {
+        return gccharacter::getpositiony(this.handle);
+    }
+    
+    method getposz() {
+        return gccharacter::getpositionz(this.handle);
+    }
+    
+    method setscale(param1) {
+        gccharacter::setscale(this.handle, param1);
+        return null;
+    }
+    
+    method show() {
+        gcmodeldirector::show(this.contid, this.areaid);
+        this.onscreen = 1;
+        return null;
+    }
+    
+    method hide() {
+        gcmodeldirector::hide(this.contid, this.areaid);
+        this.onscreen = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.remove();
+        this.charname = null;
+        this.contid = null;
+        this.visstate = null;
+        this.charstring = null;
+        this.contstring = null;
+        this.handle = null;
+        this.angle = null;
+        this.inputstate = null;
+        this.z = null;
+        this.x1 = null;
+        this.y1 = null;
+        this.inputstate = null;
+        this.numanimations = null;
+        this.gepetto = null;
+        this.currentanimation = null;
+        this.area = null;
+        this.areaid = null;
+        this.myname = null;
+        this.id = null;
+        this.charspline = null;
+        return null;
+    }
+    
+    method remove() {
+        gcmodeldirector::remove(this.contid, this.areaid);
+        return null;
+    }
+    
+    method aienablepatrolonspline() {
+        gccharacter::aienablepatrolonspline(this.handle);
+        return null;
+    }
+    
+    method aidisablepatrolonspline() {
+        gccharacter::aidisablepatrolonspline(this.handle);
+        return null;
+    }
+    
+    method aisetattacktype(param1) {
+        gccharacter::aisetattacktype(this.handle, param1);
+        return null;
+    }
+    
+    method aisetspline(param1, param2) {
+        this.charspline = scslosislkcubicspline::create(param1);
+        if (!(this.charspline == null)) {
+            gccharacter::aisetsplinepaths(this.handle, this.charspline, param2);
+        }
+        return null;
+    }
+    
+    method setinputstate(param1) {
+        var var1;
+        var1 = scslosifoundation::stringtoidentifier(param1);
+        gcmodeldirector::setinputstate(this.contid, this.areaid, var1);
+        return null;
+    }
+    
+    method disablecollisions() {
+        gccharacter::disablecollisions(this.handle, 255);
+        return null;
+    }
+    
+    method enablecollisions() {
+        gccharacter::enablecollisions(this.handle, 255);
+        return null;
+    }
+    
+    method ignorecollisionswith(param1) {
+        gccharacter::addignorecollisionswith(this.handle, param1);
+        return null;
+    }
+    
+    method setignoreallcollisions(param1) {
+        gcmoveableobj::setignoreallcollisions(this.handle, param1);
+        return null;
+    }
+    
+    method ignoreignorecollisionswith(param1) {
+        gccharacter::addignoreignorecollisionswith(this.handle, param1);
+        return null;
+    }
+    
+    method getcurrentanimationid() {
+        return gccharacter::getcurrentanimationid(this.handle);
+    }
+    
+    method getmaterial() {
+        gccharacter::getclimbmaterial(this.handle);
+        return null;
+    }
+    
+    method inittargetmorph(param1) {
+        gccharacter::inittargetmorph(this.handle, param1);
+        return null;
+    }
+    
+    method morphcharacter(param1, param2, param3, param4) {
+        gccharacter::morphcharacter(this.handle, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method morphmidcharacter(param1, param2, param3, param4, param5) {
+        gccharacter::morphcharactermid(this.handle, param1, param2, param3, param4, param5);
+        return null;
+    }
+    
+    method settweakable() {
+        globalclass.tweak.add_characterobj_tweakable(this);
+        return null;
+    }
+    
+    method initmotionsystem() {
+        gccharacter::initmotionsystem(this.handle);
+        return null;
+    }
+    
+    method setlocalgravity(param1) {
+        gccharacter::setlocalgravity(this.handle, param1);
+        return null;
+    }
+    
+    method setupphysics(param1, param2, param3, param4, param5) {
+        gccharacter::setupmoveable(this.handle, param1, param2, param3, param4, param5);
+        gccharacter::setbounce(this.handle, 0);
+        return null;
+    }
+    
+    method setphysicsflags(param1, param2, param3, param4) {
+        gccharacter::setmoveableflags(this.handle, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method changeorientation(param1) {
+        this.angle = this.getorientation();
+        debug::print((("angle = " + __tostring(this.angle)) + " / deg = ") + __tostring(param1));
+        this.setorientation(this.angle + param1);
+        return null;
+    }
+    
+    method interporientation(param1, param2) {
+        gccharacter::aisetamounttoturn(this.handle, param1, param2);
+        return null;
+    }
+    
+    method setvelocity(param1, param2, param3) {
+        gccharacter::setvelocity(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method setclimbable(param1) {
+        gccharacter::setclimbable(this.handle, param1);
+        return null;
+    }
+    
+    method enableallraycollisions() {
+        gccharacter::enableallraycollisions(this.handle);
+        return null;
+    }
+    
+    method disableallraycollisions() {
+        gccharacter::disableallraycollisions(this.handle);
+        return null;
+    }
+    
+    method enablewallcollisions() {
+        gccharacter::enablewallcollisions(this.handle);
+        return null;
+    }
+    
+    method disablewallcollisions() {
+        gccharacter::disablewallcollisions(this.handle);
+        return null;
+    }
+    
+    method enablegroundcollisions() {
+        gccharacter::enablegroundcollisions(this.handle);
+        return null;
+    }
+    
+    method disablegroundcollisions() {
+        gccharacter::disablegroundcollisions(this.handle);
+        return null;
+    }
+    
+    method setsplitanimation(param1, param2) {
+        if (param2 == null) {
+            param2 = -1;
+        }
+        gccharacter::setsplitanimation(this.handle, param1, param2);
+        return null;
+    }
+    
+    method switchanimation(param1) {
+        gccharacter::switchanimation(this.handle, param1);
+        return null;
+    }
+    
+    method settargeteerconeangle(param1) {
+        gccharacter::settargeteerconeangle(this.handle, param1);
+        return null;
+    }
+    
+    method isjumping() {
+        return gccharacter::isjumping(this.handle);
+    }
+    
+    method settargeteerselectionmode(param1) {
+        gccharacter::settargeteerselectionmode(this.handle, param1);
+        return null;
+    }
+    
+    method settargeteermaxrange(param1) {
+        gccharacter::settargeteermaxrange(this.handle, param1);
+        return null;
+    }
+    
+    method settargeteerautotarget(param1) {
+        gccharacter::settargeteerautotarget(this.handle, param1);
+        return null;
+    }
+    
+    method settargeteertarget(param1, param2) {
+        gccharacter::settargeteertarget(this.handle, param1, param2);
+        return null;
+    }
+    
+    method setanimationscalar(param1) {
+        gccharacter::setanimationscalar(this.handle, param1);
+        return null;
+    }
+    
+    method gettargeteervectorxtotarget() {
+        return gccharacter::gettargeteervectorxtotarget(this.handle);
+    }
+    
+    method gettargeteervectorytotarget() {
+        return gccharacter::gettargeteervectorytotarget(this.handle);
+    }
+    
+    method gettargeteervectorztotarget() {
+        return gccharacter::gettargeteervectorztotarget(this.handle);
+    }
+    
+    method gettargeteertargetpositionx() {
+        return gccharacter::gettargeteertargetpositionx(this.handle);
+    }
+    
+    method gettargeteertargetpositiony() {
+        return gccharacter::gettargeteertargetpositiony(this.handle);
+    }
+    
+    method gettargeteertargetpositionz() {
+        return gccharacter::gettargeteertargetpositionz(this.handle);
+    }
+    
+    method gettargeteertargetobjectid() {
+        return gccharacter::gettargeteertargetobjectid(this.handle);
+    }
+    
+    method deactivateattackcollisions() {
+        gccharacter::deactivateattackcollisions(this.handle);
+        return null;
+    }
+    
+    method activateattackcollisions() {
+        gccharacter::activateattackcollisions(this.handle);
+        return null;
+    }
+    
+    method run(param1) {
+        gccharacter::run(this.handle, param1);
+        return null;
+    }
+    
+    method setsurfingability(param1, param2) {
+        gccharacter::setsurfingability(this.handle, param1, param2);
+        return null;
+    }
+    
+    method setsurfdrag(param1) {
+        gccharacter::setsurfdrag(this.handle, param1);
+        return null;
+    }
+    
+    method setsurfmaxspeed(param1) {
+        gccharacter::setsurfmaxspeed(this.handle, param1);
+        return null;
+    }
+    
+    method setsurfminspeed(param1) {
+        gccharacter::setsurfminspeed(this.handle, param1);
+        return null;
+    }
+    
+    method setsurffallgravity(param1) {
+        gccharacter::setsurffallgravity(this.handle, param1);
+        return null;
+    }
+    
+    method switchsecondmask(param1) {
+        gccharacter::switchsecondmask(this.handle, param1);
+        return null;
+    }
+    
+    method sethellpos(param1) {
+        gccharacter::sethellpos(this.handle, param1);
+        return null;
+    }
+    
+    method sethelltime(param1) {
+        gccharacter::sethelltime(this.handle, param1);
+        return null;
+    }
+    
+    method react(param1, param2, param3, param4) {
+        if (param2 == null) {
+            param2 = 0;
+        }
+        if (param3 == null) {
+            param3 = 0;
+        }
+        if (param4 == null) {
+            param4 = 1.2;
+        }
+        gccharacter::react(this.handle, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method inithaka() {
+        gccharacter::inithaka(this.handle);
+        return null;
+    }
+    
+    method playhakasequence(param1) {
+        gccharacter::playhakasequence(this.handle, param1);
+        return null;
+    }
+    
+    method playhakafull() {
+        gccharacter::playhakafull(this.handle);
+        return null;
+    }
+    
+    method recordhakasequence() {
+        gccharacter::recordhakasequence(this.handle);
+        return null;
+    }
+    
+    method stoprecordinghaka() {
+        gccharacter::stoprecordinghaka(this.handle);
+        return null;
+    }
+    
+    method ishakarecording() {
+        return gccharacter::ishakarecording(this.handle);
+    }
+    
+    method ishakaplaying() {
+        return gccharacter::ishakaplaying(this.handle);
+    }
+    
+    method ride(param1, param2, param3) {
+        gccharacter::setholder(this.handle, param1, param2, param3);
+        gccharacter::ride(this.handle);
+        return null;
+    }
+    
+    method unride() {
+        gccharacter::releaseholder(this.handle);
+        return null;
+    }
+    
+    method changearea(param1) {
+        gccharacter::setarea(this.handle, param1);
+        return null;
+    }
+    
+    method idle() {
+        gccharacter::idle(this.handle);
+        return null;
+    }
+    
+    method disableanim(param1) {
+        gccharacter::disablecharacteranimation(this.handle, param1);
+        return null;
+    }
+    
+    method enableanim(param1) {
+        gccharacter::enablecharacteranimation(this.handle, param1);
+        return null;
+    }
+    
+    method setforwardvelocity(param1) {
+        gccharacter::setconstantforwardvelocity(this.handle, param1);
+        return null;
+    }
+    
+    method disableai() {
+        gccharacter::aidisabledefault(this.handle);
+        return null;
+    }
+    
+    method enableai() {
+        gccharacter::aienabledefault(this.handle);
+        return null;
+    }
+    
+    method fadeout(param1) {
+        if ((param1 == 0) || (param1 == null)) {
+            param1 = 0.1;
+        }
+        else {
+            gccharacter::fadeout(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method fadein(param1) {
+        if ((param1 == 0) || (param1 == null)) {
+            param1 = 0.1;
+        }
+        else {
+            gccharacter::fadein(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method aipatrol() {
+        gccharacter::aipatrol(this.handle);
+        return null;
+    }
+    
+    method aiidle() {
+        gccharacter::aiidle(this.handle);
+        return null;
+    }
+    
+    method aistun(param1) {
+        gccharacter::aistun(this.handle, param1);
+        return null;
+    }
+    
+    method aidie(param1) {
+        gccharacter::aidie(this.handle, param1);
+        return null;
+    }
+    
+    method aitoainsights() {
+        return gccharacter::aitoainsights(this.handle);
+    }
+    
+    method aisethandlereaction(param1) {
+        gccharacter::aisethandlereaction(this.handle, param1);
+        return null;
+    }
+    
+    method aisetbecomeshappy(param1) {
+        gccharacter::aisetbecomeshappy(this.handle, param1);
+        return null;
+    }
+    
+    method aisetamounttoturn(param1, param2) {
+        gccharacter::aisetamounttoturn(this.handle, param1, param2);
+        return null;
+    }
+    
+    method ailand(param1, param2) {
+        gccharacter::ailand(this.handle, param1, param2);
+        return null;
+    }
+    
+    method aitakeoff() {
+        gccharacter::aitakeoff(this.handle);
+        return null;
+    }
+    
+    method aireact(param1, param2, param3, param4) {
+        if (param2 == null) {
+            param2 = 0;
+        }
+        if (param1 == null) {
+            param1 = 1;
+        }
+        if (param4 == null) {
+            param4 = 1.2;
+        }
+        gccharacter::aireact(this.handle, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method aiattack(param1) {
+        if (param1 == null) {
+            param1 = 1;
+        }
+        gccharacter::aiattackcurrenttarget(this.handle, param1);
+        return null;
+    }
+    
+    method aichasetarget() {
+        gccharacter::aichasetarget(this.handle);
+        return null;
+    }
+    
+    method setclimb(param1) {
+        gccharacter::setslopeclimbability(this.handle, param1);
+        return null;
+    }
+    
+    method disableallai() {
+        gcmodeldirector::aialldisabledefault();
+        return null;
+    }
+    
+    method enableallai() {
+        gcmodeldirector::aiallenabledefault();
+        return null;
+    }
+    
+    method aisettriggerboxstate(param1) {
+        gccharacter::aisettriggerboxstate(this.handle, param1);
+        return null;
+    }
+    
+    method setevil(param1) {
+        gccharacter::setevil(this.handle, param1);
+        return null;
+    }
+    
+    method setevilpermanent(param1) {
+        gccharacter::setevilpermanent(this.handle, param1);
+        return null;
+    }
+    
+    method gotostartpos(param1, param2) {
+        gccollisionphysicsgroup::setcharacterposition(this.contid, param1, param2);
+        if (this.contid == scslosifoundation::stringtoidentifier("cnt1")) {
+            globalclass.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method setorientationrange(param1, param2) {
+        gccharacter::setorientationrange(this.handle, param1, param2);
+        return null;
+    }
+    
+    method physicson(param1) {
+        gccharacter::enablemotionsystem(this.handle, param1);
+        return null;
+    }
+    
+    method animatetexture(param1) {
+        if (param1 == null) {
+            param1 = 1;
+        }
+        gccharacter::settexturestate(this.handle, param1);
+        return null;
+    }
+    
+    method setnudgetarget(param1, param2, param3) {
+        gccharacter::setnudgetarget(this.handle, param1, param2, param3);
+        return null;
+    }
+    
+    method getbasicpoint() {
+        var var1;
+        var1 = this.getpos();
+        return new basicpoint(var1.x1, var1.y1, var1.z);
+    }
+    
+    method setbasicpoint(param1) {
+        this.setpos(param1.x, param1.y, param1.z);
+        return null;
+    }
+    
+    method activatelevitation(param1) {
+        gccharacter::activatelevitation(this.handle, param1);
+        return null;
+    }
+    
+    method setlevitateparams(param1, param2) {
+        gccharacter::setlevitateparams(this.handle, param1, param2);
+        return null;
+    }
+    
+    method insidelevitatevortex(param1) {
+        gccharacter::insidelevitatevortex(this.handle, param1);
+        return null;
+    }
+    
+    method addpart(param1, param2) {
+        gccharacter::addpart(this.handle, param1, param2);
+        return null;
+    }
+    
+    method removepart(param1) {
+        gccharacter::removepart(this.handle, param1);
+        return null;
+    }
+    
+    method interpolate(param1, param2, param3, param4) {
+        gccharacter::interpolate(this.handle, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method watch() {
+        gccharacter::aiwatchtarget(this.handle);
+        return null;
+    }
+    
+    method setcrushfromtop(param1) {
+        gccharacter::setcrushfromtop(this.handle, param1);
+        return null;
+    }
+    
+    method setbullrunmode(param1) {
+        gccharacter::setbullrunmode(this.handle, param1);
+        return null;
+    }
+    
+    method setisboss(param1) {
+        gccharacter::setisboss(this.handle, param1);
+        return null;
+    }
+    
+    method setattackraycastable(param1) {
+        gccharacter::setattackraycastable(this.handle, param1);
+        return null;
+    }
+    
+    method setsecondarybclreport(param1) {
+        if (param1 == null) {
+            param1 = 1;
+        }
+        gccharacter::setsecondarybclreport(this.handle, param1);
+        return null;
+    }
+    
+    method setwaterlevel(param1) {
+        gccharacter::setwaterlevel(this.handle, param1);
+        return null;
+    }
+}

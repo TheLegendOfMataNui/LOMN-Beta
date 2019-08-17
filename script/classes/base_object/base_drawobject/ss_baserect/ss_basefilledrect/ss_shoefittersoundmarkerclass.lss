@@ -1,0 +1,98 @@
+class ss_shoefittersoundmarkerclass : ss_basefilledrect {
+    property startspot;
+    property endspot;
+    property filename;
+    property soundfile;
+    property moveamount;
+    property arg_name_array;
+    property arg_value_array;
+    property blueincr;
+    
+    method ss_shoefittersoundmarkerclass(param1, param2, param3, param4) {
+        var var1;
+        this.startspot = 0.0;
+        if (!(param3 == null)) {
+            this.filename = param3.name.string;
+        }
+        this.blueincr = 25;
+        if (!(param4 == null)) {
+            if (param4 < 10) {
+                var1 = "0" + __tostring(param4);
+            }
+            else {
+                var1 = __tostring(param4);
+            }
+            this.soundfile = new ss_basesound(param3.id, "sd" + var1);
+        }
+        if (!(param1 == null)) {
+            this.ss_basefilledrect(43, param1, 43, param2, 0, rgba(255, 255, 0, 255));
+        }
+        return null;
+    }
+    
+    method markerinitfull(param1) {
+        this.soundfile.initfull();
+        this.endspot = this.startspot + this.soundfile.length;
+        this.x2 = 43 + ((this.soundfile.length / param1) * 532);
+        this.moveamount = 532 / (param1 * 100);
+        this.initfull();
+        this.add();
+        this.show();
+        this.createargarrays();
+        return null;
+    }
+    
+    method markercleanupfull() {
+        this.hide();
+        this.remove();
+        this.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.pulsate();
+        return null;
+    }
+    
+    method pulsate() {
+        if (((this.mycolor.__blue + this.blueincr) <= 250) && ((this.mycolor.__blue + this.blueincr) >= 0)) {
+            this.changecolor(null, null, this.blueincr, null);
+        }
+        else {
+            this.blueincr = 0 - this.blueincr;
+        }
+        return null;
+    }
+    
+    method moveflag(param1) {
+        if (((this.x2 + (this.moveamount * param1)) <= 575) && ((this.startspot + (param1 * 0.01)) >= 0)) {
+            this.changepos(this.moveamount * param1);
+            this.startspot = this.startspot + (param1 * 0.01);
+            this.endspot = this.endspot + (param1 * 0.01);
+        }
+        return null;
+    }
+    
+    method createargarrays() {
+        if (this.arg_name_array == null) {
+            this.arg_name_array = [ "User0", 
+                "User1", 
+                "User2", 
+                "User3", 
+                "User4" ];
+        }
+        if (this.arg_value_array == null) {
+            this.arg_value_array = [ this.filename, 
+                "0", 
+                "0", 
+                "0", 
+                "0" ];
+        }
+        return null;
+    }
+    
+    method setargvalues(param1, param2) {
+        this.arg_value_array[param2] = param1;
+        return null;
+    }
+}

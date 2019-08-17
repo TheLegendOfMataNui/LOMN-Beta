@@ -1,0 +1,123 @@
+class ss_textarray : ss_activetext {
+    property textarray;
+    property chararray;
+    property currentitem;
+    
+    method ss_textarray(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
+        this.chararray = param3;
+        this.ss_activetext(param1, param2, param3[0], param4, param5, param6, param7, param8, param9, param10);
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        this.textarray = [  ];
+        this.currentitem = 0;
+        var1 = 0;
+        while ((this.chararray.__length - 1) >= var1) {
+            var2 = new ss_activetext(this.fontname, this.fontname2, this.chararray[0], this.x1, this.y1, this.z, this.scale, this.horizontal, this.verticle, this.padadjustment);
+            this.textarray.__append(var2);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.textarray.__length - 1) >= var1) {
+            this.textarray[var1].initfull();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.textarray = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        var1 = 0;
+        while ((this.textarray.__length - 1) >= var1) {
+            this.textarray[var1].hide();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method add() {
+        var var1;
+        var1 = 0;
+        while ((this.textarray.__length - 1) >= var1) {
+            this.textarray[var1].add();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method remove() {
+        var var1;
+        var1 = 0;
+        while ((this.textarray.__length - 1) >= var1) {
+            this.textarray[var1].remove();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method showcurrent() {
+        this.textarray[this.currentitem].show();
+        return null;
+    }
+    
+    method hidecurrent() {
+        this.textarray[this.currentitem].hide();
+        return null;
+    }
+    
+    method get(param1) {
+        if ((param1 >= 0) && (param1 <= (this.textarray.__length - 1))) {
+            return this.textarray[param1];
+        }
+        else {
+            return this.textarray[this.currentitem];
+        }
+        return null;
+    }
+    
+    method getcurrent() {
+        return this.currentitem;
+    }
+    
+    method setcurrent(param1) {
+        if ((param1 <= (this.textarray.__length - 1)) && (param1 >= 0)) {
+            this.currentitem = param1;
+        }
+        return null;
+    }
+    
+    method getsize() {
+        return this.textarray.__length;
+    }
+    
+    method getlbound() {
+        return 0;
+    }
+    
+    method getubound() {
+        return this.textarray.__length - 1;
+    }
+    
+    method setactive(param1) {
+        this.textarray[this.currentitem].setactive(param1);
+        return null;
+    }
+    
+    method setinactive(param1) {
+        this.textarray[this.currentitem].setinactive(param1);
+        return null;
+    }
+}

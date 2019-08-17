@@ -1,0 +1,93 @@
+class wirlpool {
+    property name;
+    property id;
+    property obj;
+    property nextarea;
+    property startbox;
+    property lookbox;
+    property pos;
+    property curentorient;
+    property rotatetime;
+    property rotatespeed;
+    
+    method wirlpool(param1, param2, param3, param4) {
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.obj = new lego_moveableobject(param1);
+        this.obj.initfull();
+        this.nextarea = param2;
+        this.startbox = param3;
+        this.lookbox = param4;
+        this.curentorient = 0;
+        this.rotatetime = 0;
+        this.rotatespeed = 9;
+        this.pos = new basicpoint(this.obj.getx(), this.obj.gety(), this.obj.getz());
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        return null;
+    }
+    
+    method show() {
+        this.obj.show();
+        return null;
+    }
+    
+    method hide() {
+        this.obj.hide();
+        return null;
+    }
+    
+    method process(param1) {
+        this.obj.process(param1);
+        this.rotatetime = this.rotatetime + param1.deltatime;
+        if (this.rotatespeed > 0) {
+            if (this.rotatetime > (1 / this.rotatespeed)) {
+                this.rotatetime = 0;
+                this.spin();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.obj.onevent(param1);
+        if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == this.id) {
+                    globalclass.player.actor.setnudgetarget(this.pos.x, this.pos.y, 3);
+                }
+                param1.args[1];
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 16) {
+            debug::print("**** NUDGE FINISHED EVENT GAVE ME " + scslosifoundation::identifiertostring(param1.args[0]));
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                debug::print("*********** GOT THE NUDGE FINISHED EVENT FOR CNT1");
+                gccollisionphysicsgroup::spinmask(1.2);
+                gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier(this.nextarea), scslosifoundation::stringtoidentifier(this.startbox), scslosifoundation::stringtoidentifier(this.lookbox));
+            }
+            param1.args[0];
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        this.obj.input(param1);
+        return null;
+    }
+    
+    method spin() {
+        this.curentorient = this.curentorient + this.rotatespeed;
+        if (this.curentorient > 360) {
+            this.curentorient = this.curentorient - 360;
+        }
+        else {
+            this.obj.setorientation(0, this.curentorient, 0);
+        }
+        return null;
+    }
+}

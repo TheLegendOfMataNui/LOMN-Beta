@@ -1,0 +1,111 @@
+class puzzle_poha7 {
+    property platforms;
+    property targets;
+    
+    method puzzle_poha7() {
+        return null;
+    }
+    
+    method initfull(param1) {
+        var var1;
+        this.platforms = [ new pohatu7_platform("pf01", param1, [  ], 4.5, 1.0), 
+            new pohatu7_platform("pf02", param1, [  ], 11.0, 1.0), 
+            new pohatu7_platform("pf03", param1, [  ], 18.5, 1.0), 
+            new pohatu7_platform("pf04", param1, [  ], 26.0, 1.0), 
+            new pohatu7_platform("pf05", param1, [  ], 33.5, 1.0), 
+            new pohatu7_platform("pf06", param1, [  ], 40.0, 1.0), 
+            new pohatu7_platform("pf07", param1, [  ], 46.5, 1.0), 
+            new pohatu7_platform("pf08", param1, [  ], 51.0, 1.0), 
+            new pohatu7_platform("pf09", param1, [  ], 55.5, 1.0) ];
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.targets = [ new pohatu7_target("tg01", param1, [ this.platforms[1], 
+                this.platforms[2] ]), 
+            new pohatu7_target("tg02", param1, [ this.platforms[5], 
+                this.platforms[7] ]), 
+            new pohatu7_target("tg03", param1, [ this.platforms[1], 
+                this.platforms[8] ]), 
+            new pohatu7_target("tg04", param1, [ this.platforms[0], 
+                this.platforms[3] ]), 
+            new pohatu7_target("tg05", param1, [ this.platforms[4], 
+                this.platforms[7] ]), 
+            new pohatu7_target("tg06", param1, [ this.platforms[3], 
+                this.platforms[6] ]) ];
+        var1 = 0;
+        while ((this.targets.__length - 1) >= var1) {
+            this.targets[var1].initfull();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].cleanupfull();
+            this.platforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.platforms = null;
+        var1 = 0;
+        while ((this.targets.__length - 1) >= var1) {
+            this.targets[var1].cleanupfull();
+            this.targets[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.targets = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.reseta();
+            }
+        }
+        else if (param1.eventid == 27) {
+            this.resetb();
+        }
+        var1 = 0;
+        while ((this.targets.__length - 1) >= var1) {
+            this.targets[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method reseta() {
+        globalclass.level.cam.setaimode(7);
+        globalclass.player.kill();
+        gccollisionphysicsgroup::spinmask(1.2);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        return null;
+    }
+    
+    method resetb() {
+        globalclass.player.unkill();
+        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        globalclass.hud.cdtimer.reset();
+        return null;
+    }
+    
+    method resetpuzzle() {
+        var var1;
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].reset();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.targets.__length - 1) >= var1) {
+            this.targets[var1].reset();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+}

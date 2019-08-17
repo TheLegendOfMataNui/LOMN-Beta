@@ -1,0 +1,177 @@
+class pathpuzzle {
+    property parent;
+    property platformarray;
+    property meltpickup;
+    
+    method pathpuzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICKOPAKAambience");
+        globalclass.bgmusic.play(1);
+        gcareadirector::setnearestmax(50);
+        gcmodeldirector::setnearestmax(50);
+        this.platformarray = [ new platform("pl01") ];
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].initfull();
+            this.platformarray[var1].obj.setobjscale(0.4);
+            this.platformarray[var1].settweakable();
+            this.platformarray[0].obj.setalpha(0.1);
+            var1 = var1 + 1;
+        }
+        this.platformarray[0].setuppath([ new basicpoint(416, -293, 1229), 
+            new basicpoint(416, -293, 1229), 
+            new basicpoint(403, -311, 1231), 
+            new basicpoint(371, -311, 1322), 
+            new basicpoint(494, -311, 1346), 
+            new basicpoint(494, -243, 1346), 
+            new basicpoint(494, -246, 1312), 
+            new basicpoint(494, -246, 1312), 
+            new basicpoint(494, -243, 1346), 
+            new basicpoint(494, -311, 1346), 
+            new basicpoint(371, -311, 1322), 
+            new basicpoint(403, -311, 1231) ], [ 2, 
+            10, 
+            10, 
+            10, 
+            10, 
+            10, 
+            2, 
+            10, 
+            10, 
+            10, 
+            10, 
+            10 ]);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("crst")) == 0) {
+            this.meltpickup = new lego_pickup("crst", 0, 5, "item", 6, 1);
+            this.meltpickup.initfull();
+            this.meltpickup.show();
+            this.meltpickup.setcondition(8192);
+            this.meltpickup.setquest(3);
+        }
+        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var2, 2);
+        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("bugz"));
+        gchive::setspawnrate(var2, 4);
+        var3 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(var3, 2);
+        gchive::setcreaturetype(var3, scslosifoundation::stringtoidentifier("bugz"));
+        gchive::setspawnrate(var3, 4);
+        var4 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv2"));
+        gchive::setmaxcreatures(var4, 2);
+        gchive::setcreaturetype(var4, scslosifoundation::stringtoidentifier("bugz"));
+        gchive::setspawnrate(var4, 4);
+        var5 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv2"));
+        gchive::setmaxcreatures(var5, 2);
+        gchive::setcreaturetype(var5, scslosifoundation::stringtoidentifier("bugz"));
+        gchive::setspawnrate(var5, 4);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (this.platformarray != null) {
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].cleanupfull();
+                this.platformarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platformarray = null;
+        }
+        if (this.meltpickup != null) {
+            this.meltpickup.cleanupfull();
+            this.meltpickup = null;
+        }
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].show();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].hide();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (this.platformarray != null) {
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 1002) {
+            if (param1.args[0]) {
+                this.platformarray[0].obj.setalpha(1);
+            }
+            else {
+                this.platformarray[0].obj.setalpha(0.1);
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 1) {
+            
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

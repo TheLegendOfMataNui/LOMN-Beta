@@ -1,0 +1,230 @@
+class gs_lego_screenmenu : base_object {
+    property items;
+    property pointer;
+    property destination;
+    property argarray;
+    property bgart;
+    property startx;
+    property starty;
+    property xchange;
+    property ychange;
+    property maxlines;
+    property lineposition;
+    
+    method gs_lego_screenmenu(param1) {
+        this.items = param1;
+        this.bgart = new ss_basesprite("Root/Data/Art/MenuArt/LUKE", 0, 0, 3, screenx, screeny);
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        this.bgart.initfull();
+        this.bgart.add();
+        this.bgart.show();
+        this.startx = screenx * 0.56;
+        this.starty = screeny * 0.41;
+        var1 = this.startx;
+        var2 = this.starty;
+        this.xchange = 0;
+        this.ychange = 40;
+        this.maxlines = 6;
+        var3 = 0;
+        while ((this.items.__length - 1) >= var3) {
+            var4 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.items[var3], var1, var2, 1, 2.0, 0, 4, 0);
+            this.items[var3] = var4;
+            this.items[var3].initfull();
+            this.items[var3].add();
+            var1 = var1 + this.xchange;
+            var2 = var2 + this.ychange;
+            var3 = var3 + 3;
+        }
+        if ((this.items.__length / 3) < this.maxlines) {
+            this.maxlines = this.items.__length / 3;
+        }
+        var3 = 0;
+        while ((this.maxlines - 1) >= var3) {
+            var5 = var3 * 3;
+            this.items[var5].show();
+            var3 = var3 + 1;
+        }
+        this.pointer = 0;
+        this.destination = this.items[1];
+        this.argarray = this.items[2];
+        this.lineposition = 0;
+        this.items[this.pointer].setactive();
+        var6 = 1;
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        if (!(this.bgart == null)) {
+            this.bgart.hide();
+            this.bgart.remove();
+            this.bgart.cleanupfull();
+            this.bgart = null;
+        }
+        if (!(this.items == null)) {
+            var1 = this.items.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                if (__isinstance(this.items[var1 - var2])) {
+                    this.items[var1 - var2].cleanupfull();
+                }
+                this.items[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 9) {
+            if (param1.event == 2) {
+                this.setpointer(-1);
+            }
+        }
+        if (param1.button == 12) {
+            if (param1.event == 2) {
+                this.setpointer(1);
+            }
+        }
+        if (param1.button == 38) {
+            if (param1.event == 2) {
+                this.setpointer(-1);
+            }
+        }
+        if (param1.button == 40) {
+            if (param1.event == 2) {
+                this.setpointer(1);
+            }
+        }
+        return null;
+    }
+    
+    method setpointer(param1) {
+        this.items[this.pointer].setinactive();
+        if (((this.pointer + (3 * param1)) <= ((this.items.__length - 1) - 1)) && ((this.pointer + (3 * param1)) >= 0)) {
+            this.lineposition = this.lineposition + param1;
+            if ((this.lineposition == this.maxlines) || (this.lineposition == -1)) {
+                this.lineposition = this.lineposition - param1;
+                this.scroll(param1);
+            }
+            this.pointer = this.pointer + (3 * param1);
+        }
+        else {
+            if (param1 == -1) {
+                this.lineposition = this.maxlines - 1;
+                this.setscroll(((this.items.__length - 1) / 3) - (this.maxlines - 1));
+                this.pointer = (this.items.__length - 1) - 2;
+            }
+            else {
+                this.lineposition = 0;
+                this.setscroll(0);
+                this.pointer = 0;
+            }
+            param1;
+        }
+        this.setforscreen();
+        this.items[this.pointer].setactive();
+        gcstaticsoundsptrarray::playtablesound(1072);
+        return null;
+    }
+    
+    method setforscreen() {
+        this.destination = this.items[this.pointer + 1];
+        this.argarray = this.items[this.pointer + 2];
+        return null;
+    }
+    
+    method scroll(param1) {
+        var var1;
+        if (param1 == 1) {
+            this.items[this.pointer - ((this.maxlines - 1) * 3)].hide();
+            var1 = 0;
+            while ((this.items.__length - 1) >= var1) {
+                this.items[var1].changepos(0 - this.xchange, 0 - this.ychange, 0);
+                var1 = var1 + 3;
+            }
+            this.items[this.pointer + 3].show();
+        }
+        else {
+            this.items[this.pointer + ((this.maxlines - 1) * 3)].hide();
+            var1 = 0;
+            while ((this.items.__length - 1) >= var1) {
+                this.items[var1].changepos(this.xchange, this.ychange, 0);
+                var1 = var1 + 3;
+            }
+            this.items[this.pointer - 3].show();
+        }
+        return null;
+    }
+    
+    method setscroll(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].hide();
+            var1 = var1 + 3;
+        }
+        var2 = this.startx - (param1 * this.xchange);
+        var3 = this.starty - (param1 * this.ychange);
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].setpos(var2, var3, 0);
+            var2 = var2 + this.xchange;
+            var3 = var3 + this.ychange;
+            var1 = var1 + 3;
+        }
+        var1 = param1;
+        while ((param1 + (this.maxlines - 1)) >= var1) {
+            var4 = var1 * 3;
+            this.items[var4].show();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method hidenonselected() {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            if (!(var1 == this.pointer)) {
+                this.items[var1].hide();
+            }
+            var1 = var1 + 3;
+        }
+        return null;
+    }
+    
+    method hideall() {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].hide();
+            var1 = var1 + 3;
+        }
+        this.bgart.hide();
+        return null;
+    }
+}

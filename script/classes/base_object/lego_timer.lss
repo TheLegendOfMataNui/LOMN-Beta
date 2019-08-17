@@ -1,0 +1,78 @@
+class lego_timer : base_object {
+    property handle;
+    property id;
+    property duration;
+    property startnow;
+    
+    method lego_timer(param1, param2, param3) {
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.startnow = param3;
+        this.duration = param2;
+        return null;
+    }
+    
+    method initfull() {
+        if (this.startnow == null) {
+            this.startnow = 0;
+        }
+        this.handle = gctimer::create(this.id, this.startnow, this.duration);
+        if (this.handle == null) {
+            debug::print(("Tried to create a timer " + scslosifoundation::identifiertostring(this.id)) + " and it didn't work!!!!");
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.stop();
+        this.handle = null;
+        return null;
+    }
+    
+    method start() {
+        gctimer::start(this.handle);
+        return null;
+    }
+    
+    method stop() {
+        gctimer::stop(this.handle);
+        return null;
+    }
+    
+    method reset(param1) {
+        if (param1 == null) {
+            this.startnow = 0;
+        }
+        else {
+            this.startnow = param1;
+        }
+        gctimer::reset(this.handle, this.startnow);
+        return null;
+    }
+    
+    method deactivate() {
+        gctimer::deactivate(this.handle);
+        return null;
+    }
+    
+    method setduration(param1) {
+        this.duration = param1;
+        gctimer::settargettime(this.handle, param1);
+        return null;
+    }
+    
+    method getduration() {
+        return this.duration;
+    }
+    
+    method durationpeek() {
+        return gctimer::durationpeek();
+    }
+    
+    method durationlast() {
+        return gctimer::durationpeek();
+    }
+    
+    method durationaverage() {
+        return gctimer::durationaverage();
+    }
+}

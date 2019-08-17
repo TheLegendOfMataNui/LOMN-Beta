@@ -1,0 +1,200 @@
+class level1arealoader : base_object {
+    property arty;
+    property artyid;
+    property beec;
+    property beecid;
+    property clr1;
+    property clr1id;
+    property clr2;
+    property clr2id;
+    property clr3;
+    property clr3id;
+    property cov1;
+    property cov1id;
+    property lizt;
+    property liztid;
+    property spik;
+    property spikid;
+    property trib;
+    property tribid;
+    property uppp;
+    property upppid;
+    property vilp;
+    property vilpid;
+    
+    method level1arealoader() {
+        this.artyid = scslosifoundation::stringtoidentifier("arty");
+        this.beecid = scslosifoundation::stringtoidentifier("beec");
+        this.clr1id = scslosifoundation::stringtoidentifier("clr1");
+        this.clr2id = scslosifoundation::stringtoidentifier("clr2");
+        this.clr3id = scslosifoundation::stringtoidentifier("clr3");
+        this.cov1id = scslosifoundation::stringtoidentifier("cov1");
+        this.liztid = scslosifoundation::stringtoidentifier("lizt");
+        this.spikid = scslosifoundation::stringtoidentifier("spik");
+        this.tribid = scslosifoundation::stringtoidentifier("trib");
+        this.upppid = scslosifoundation::stringtoidentifier("uppp");
+        this.vilpid = scslosifoundation::stringtoidentifier("vilp");
+        return null;
+    }
+    
+    method initfull() {
+        gcareadirector::setcurrentlevel("lev1");
+        gcareadirector::loadarea("arty", 0, 0);
+        this.arty = 0;
+        gcareadirector::loadarea("beec", 1, 0);
+        this.beec = 1;
+        gcareadirector::loadarea("clr1", 0, 0);
+        this.clr1 = 0;
+        gcareadirector::loadarea("clr2", 0, 0);
+        this.clr2 = 0;
+        gcareadirector::loadarea("clr3", 0, 0);
+        this.clr3 = 0;
+        gcareadirector::loadarea("cov1", 0, 0);
+        this.cov1 = 0;
+        gcareadirector::loadarea("lizt", 0, 0);
+        this.lizt = 0;
+        gcareadirector::loadarea("spik", 0, 0);
+        this.spik = 0;
+        gcareadirector::loadarea("trib", 0, 0);
+        this.trib = 0;
+        gcareadirector::loadarea("uppp", 1, 0);
+        this.uppp = 1;
+        gcareadirector::loadarea("vilp", 0, 0);
+        this.vilp = 0;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        if (param1.eventid == 3) {
+            var1 = param1.args[0];
+            var2 = param1.args[1];
+            if (var2 == 1) {
+                if (var1 == scslosifoundation::stringtoidentifier("tb00")) {
+                    this.vilp = this.hide(this.vilp, this.vilpid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb01")) {
+                    this.vilp = this.show(this.vilp, this.vilpid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb02")) {
+                    this.beec = this.hide(this.beec, this.beecid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb03")) {
+                    this.beec = this.show(this.beec, this.beecid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb04")) {
+                    this.arty = this.show(this.arty, this.artyid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb05")) {
+                    this.arty = this.hide(this.arty, this.artyid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb06")) {
+                    this.vilp = this.hide(this.vilp, this.vilpid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb07")) {
+                    this.vilp = this.show(this.vilp, this.vilpid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb08")) {
+                    this.cov1 = this.hide(this.cov1, this.cov1id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb09")) {
+                    this.cov1 = this.show(this.cov1, this.cov1id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb10")) {
+                    this.clr1 = this.hide(this.clr1, this.clr1id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb11")) {
+                    this.clr1 = this.show(this.clr1, this.clr1id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb12")) {
+                    this.arty = this.show(this.arty, this.artyid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb13")) {
+                    this.arty = this.hide(this.arty, this.artyid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb14")) {
+                    this.arty = this.show(this.arty, this.artyid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb15")) {
+                    this.arty = this.hide(this.arty, this.artyid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb16")) {
+                    this.trib = this.show(this.trib, this.tribid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb17")) {
+                    this.trib = this.hide(this.trib, this.tribid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb18")) {
+                    this.clr1 = this.hide(this.clr1, this.clr1id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb19")) {
+                    this.clr1 = this.show(this.clr1, this.clr1id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb20")) {
+                    this.clr2 = this.show(this.clr2, this.clr2id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb21")) {
+                    this.clr2 = this.hide(this.clr2, this.clr2id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb22")) {
+                    this.clr3 = this.show(this.clr3, this.clr3id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb23")) {
+                    this.clr3 = this.hide(this.clr3, this.clr3id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb24")) {
+                    this.trib = this.hide(this.trib, this.tribid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb25")) {
+                    this.trib = this.show(this.trib, this.tribid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb26")) {
+                    this.lizt = this.show(this.lizt, this.liztid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb27")) {
+                    this.lizt = this.hide(this.lizt, this.liztid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb28")) {
+                    this.clr2 = this.hide(this.clr2, this.clr2id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb29")) {
+                    this.clr2 = this.show(this.clr2, this.clr2id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb30")) {
+                    this.clr3 = this.hide(this.clr3, this.clr3id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb31")) {
+                    this.clr3 = this.show(this.clr3, this.clr3id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb32")) {
+                    this.spik = this.show(this.spik, this.spikid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb33")) {
+                    this.spik = this.hide(this.spik, this.spikid);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb34")) {
+                    this.clr3 = this.hide(this.clr3, this.clr3id);
+                }
+                if (var1 == scslosifoundation::stringtoidentifier("tb35")) {
+                    this.clr3 = this.show(this.clr3, this.clr3id);
+                }
+            }
+        }
+        return null;
+    }
+    
+    method show(param1, param2) {
+        if (param1 == 0) {
+            gcareadirector::showarea(param2);
+        }
+        return 1;
+    }
+    
+    method hide(param1, param2) {
+        if (param1 == 1) {
+            gcareadirector::hidearea(param2);
+        }
+        return 0;
+    }
+}

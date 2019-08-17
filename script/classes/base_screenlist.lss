@@ -1,0 +1,306 @@
+class base_screenlist {
+    property screens;
+    property currentscreen;
+    property killlist;
+    property backstack;
+    property screennums;
+    property goingback;
+    
+    method base_screenlist() {
+        this.screens = [  ];
+        this.currentscreen = [  ];
+        this.killlist = [  ];
+        this.backstack = [  ];
+        this.screennums = [  ];
+        this.goingback = 0;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.currentscreen.__length - 1) >= var1) {
+            if (this.currentscreen[var1].state == 1) {
+                if (this.currentscreen[var1].screen.transitionin(param1)) {
+                    this.currentscreen[var1].setstate(this.currentscreen[var1].state & ~1);
+                }
+            }
+            if (this.currentscreen[var1].state & 2) {
+                if (this.currentscreen[var1].screen.transitionout(param1)) {
+                    this.currentscreen[var1].setstate(this.currentscreen[var1].state & ~2);
+                    this.killlist.__append(var1);
+                }
+            }
+            if (this.currentscreen[var1].state == 0) {
+                this.currentscreen[var1].screen.process(param1);
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method safecallback() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = this.currentscreen.__length - 1;
+        var2 = 0;
+        var3 = var2;
+        while (var1 >= var3) {
+            if (this.goingback) {
+                var4 = var1 - var3;
+            }
+            else {
+                var4 = var3;
+            }
+            if (this.currentscreen[var4].state & 8192) {
+                this.currentscreen[var4].setstate(this.currentscreen[var4].state & ~8192);
+                this.currentscreen[var4].screen.initfull();
+            }
+            if (this.currentscreen[var4].state & 4096) {
+                this.currentscreen[var4].setstate(this.currentscreen[var4].state & ~4096);
+                this.currentscreen[var4].screen.initshort();
+            }
+            if (this.currentscreen[var4].state == 512) {
+                this.currentscreen[var4].setstate(this.currentscreen[var4].state & ~512);
+                this.currentscreen[var4].screen.cleanupfull();
+            }
+            if (this.currentscreen[var4].state == 256) {
+                this.currentscreen[var4].setstate(this.currentscreen[var4].state & ~256);
+                this.currentscreen[var4].screen.cleanupshort();
+            }
+            var3 = var3 + 1;
+        }
+        var3 = 0;
+        while ((this.currentscreen.__length - 1) >= var3) {
+            this.currentscreen[var4].screen.safecallback();
+            var3 = var3 + 1;
+        }
+        if (this.killlist.__length > 0) {
+            var3 = 0;
+            while ((this.killlist.__length - 1) >= var3) {
+                this.currentscreen.__removeat(this.killlist[var3]);
+                var3 = var3 + 1;
+            }
+            this.killlist = [  ];
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        var var1;
+        var var2;
+        var1 = 0;
+        var2 = 0;
+        while ((this.currentscreen.__length - 1) >= var2) {
+            if (!(this.currentscreen[var2].state == 0)) {
+                var1 = var1 + 1;
+            }
+            var2 = var2 + 1;
+        }
+        var2 = 0;
+        while ((this.currentscreen.__length - 1) >= var2) {
+            if (var1 == 0) {
+                this.currentscreen[var2].screen.input(param1);
+            }
+            var2 = var2 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var1 = 0;
+        var2 = 0;
+        while ((this.currentscreen.__length - 1) >= var2) {
+            if (!(this.currentscreen[var2].state == 0)) {
+                var1 = var1 + 1;
+            }
+            var2 = var2 + 1;
+        }
+        var2 = 0;
+        while ((this.currentscreen.__length - 1) >= var2) {
+            if (var1 == 0) {
+                this.currentscreen[var2].screen.onevent(param1);
+            }
+            var2 = var2 + 1;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var1 = 0;
+        while ((this.currentscreen.__length - 1) >= var1) {
+            this.currentscreen[var1].screen.initfull();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        var1 = 0;
+        while ((this.currentscreen.__length - 1) >= var1) {
+            this.currentscreen[var1].screen.initshort();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        var1 = this.currentscreen.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.currentscreen[var1 - var2].screen.cleanupfull();
+            this.currentscreen[var1 - var2] = null;
+            var2 = var2 + 1;
+        }
+        var1 = this.screens.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.screens[var1 - var2].screen.cleanupfull();
+            this.screens[var1 - var2] = null;
+            var2 = var2 + 1;
+        }
+        this.killlist = null;
+        this.backstack = null;
+        this.screennums = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        var1 = 0;
+        while ((this.currentscreen.__length - 1) >= var1) {
+            this.currentscreen[var1].screen.cleanupshort();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method addscreen(param1, param2) {
+        var var1;
+        var1 = new base_screencontainer(param1, param2);
+        this.screens.__append(var1);
+        this.screennums.__append(param2);
+        return null;
+    }
+    
+    method getscreen(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.screens.__length - 1) >= var1) {
+            if (this.screens[var1].id == param1) {
+                return this.screens[var1];
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method setactive(param1) {
+        var var1;
+        var1 = this.getscreen(param1);
+        if (!(var1 == null)) {
+            var1.setstate(var1.state | 1);
+            this.currentscreen.__append(var1);
+            return null;
+        }
+        return null;
+    }
+    
+    method appendstack() {
+        var var1;
+        var1 = 0;
+        while ((this.currentscreen.__length - 1) >= var1) {
+            this.backstack.__append(this.currentscreen[var1].id);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method forward(param1, param2, param3) {
+        var var1;
+        var var2;
+        this.goingback = 0;
+        var1 = 0;
+        while ((this.currentscreen.__length - 1) >= var1) {
+            this.currentscreen[var1].setstate((this.currentscreen[var1].state | 2) | 256);
+            var1 = var1 + 1;
+        }
+        if (param3 == null) {
+            if ((param2 == null) || (param2 == 1)) {
+                this.appendstack();
+            }
+        }
+        if (!(param3 == null)) {
+            if (__isinstance(param3)) {
+                var2 = new base_screencontainer(param3, 99999999);
+            }
+        }
+        else {
+            var2 = this.getscreen(param1);
+        }
+        if (!(var2 == null)) {
+            var2.setstate((var2.state | 1) | 8192);
+            this.currentscreen.__append(var2);
+            return null;
+        }
+        return null;
+    }
+    
+    method backward(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        if (this.backstack.__length > 0) {
+            this.goingback = 1;
+            var1 = 0;
+            while ((this.currentscreen.__length - 1) >= var1) {
+                this.currentscreen[var1].setstate((this.currentscreen[var1].state | 2) | 512);
+                var1 = var1 + 1;
+            }
+            if (!(param1 == null)) {
+                var2 = this.backstack.__length - 1;
+                var3 = [  ];
+                var4 = this.backstack.__length - 1;
+                var1 = 0;
+                while ((this.backstack.__length - 1) >= var1) {
+                    if (this.backstack[var2] == param1) {
+                        var5 = this.backstack[var2];
+                        var4 = var2 + 1;
+                    }
+                    var2 = var2 - 1;
+                    var1 = var1 + 1;
+                }
+                var6 = this.backstack.__length - 1;
+                var1 = var4;
+                while (var6 >= var1) {
+                    var3.__insertat(0, this.backstack[this.backstack.__length - 1]);
+                    this.backstack.__removeat(this.backstack.__length - 1);
+                    var1 = var1 + 1;
+                }
+            }
+            else {
+                var5 = this.backstack[this.backstack.__length - 1];
+            }
+            var7 = this.getscreen(var5);
+            if (!(var7 == null)) {
+                var7.state = (var7.state | 1) | 4096;
+                this.currentscreen.__append(var7);
+                this.backstack.__removeat(this.backstack.__length - 1);
+                return null;
+            }
+        }
+        return null;
+    }
+}

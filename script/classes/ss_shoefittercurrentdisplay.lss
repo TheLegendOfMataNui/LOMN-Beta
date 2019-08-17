@@ -1,0 +1,101 @@
+class ss_shoefittercurrentdisplay {
+    property currentlabel;
+    property framelabel;
+    property timelabel;
+    property cframe;
+    property ctime;
+    
+    method ss_shoefittercurrentdisplay(param1, param2, param3, param4, param5) {
+        this.currentlabel = param1;
+        this.framelabel = param2;
+        this.timelabel = param3;
+        this.cframe = param4;
+        this.ctime = param5;
+        return null;
+    }
+    
+    method initfull() {
+        this.currentlabel.initfull();
+        this.framelabel.initfull();
+        this.timelabel.initfull();
+        this.cframe.initfull();
+        this.ctime.initfull();
+        this.currentlabel.add();
+        this.framelabel.add();
+        this.timelabel.add();
+        this.cframe.add();
+        this.ctime.add();
+        this.cframe.setstring("0");
+        this.ctime.setstring("0.0");
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.currentlabel.onscreen) {
+            this.currentlabel.hide();
+        }
+        if (this.framelabel.onscreen) {
+            this.framelabel.hide();
+        }
+        if (this.timelabel.onscreen) {
+            this.timelabel.hide();
+        }
+        if (this.cframe.onscreen) {
+            this.cframe.hide();
+        }
+        if (this.ctime.onscreen) {
+            this.ctime.hide();
+        }
+        this.currentlabel.remove();
+        this.framelabel.remove();
+        this.timelabel.remove();
+        this.cframe.remove();
+        this.ctime.remove();
+        this.currentlabel.cleanupfull();
+        this.framelabel.cleanupfull();
+        this.timelabel.cleanupfull();
+        this.cframe.cleanupfull();
+        this.ctime.cleanupfull();
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method process(param1, param2) {
+        if (this.cframe.onscreen) {
+            this.cframe.setstring(__tostring(param2.getframe()));
+            this.ctime.setstring(scslosistringfuncs::left(__tostring(param2.gettime()), 6));
+        }
+        return null;
+    }
+    
+    method showlabels() {
+        if (!this.currentlabel.onscreen) {
+            this.currentlabel.show();
+            this.framelabel.show();
+            this.timelabel.show();
+            this.cframe.show();
+            this.ctime.show();
+        }
+        return null;
+    }
+    
+    method hidelabels() {
+        if (this.currentlabel.onscreen) {
+            this.currentlabel.hide();
+            this.framelabel.hide();
+            this.timelabel.hide();
+            this.cframe.hide();
+            this.ctime.hide();
+        }
+        return null;
+    }
+}

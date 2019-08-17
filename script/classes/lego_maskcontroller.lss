@@ -1,0 +1,307 @@
+class lego_maskcontroller {
+    property masks;
+    property currentmask;
+    property currentidx;
+    property active;
+    property resetflag;
+    property disabled;
+    
+    method lego_maskcontroller() {
+        return null;
+    }
+    
+    method initfull() {
+        this.masks = [  ];
+        this.active = 0;
+        this.currentmask = null;
+        this.currentidx = null;
+        this.resetflag = 0;
+        this.disabled = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        if (!(this.masks == null)) {
+            var1 = this.masks.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.masks[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.masks = null;
+        }
+        this.active = null;
+        this.currentmask = null;
+        this.currentidx = null;
+        this.resetflag = null;
+        return null;
+    }
+    
+    method initshort() {
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        if (!(this.masks == null)) {
+            var1 = 0;
+            while ((this.masks.__length - 1) >= var1) {
+                this.masks[var1].setselectable(0);
+                var1 = var1 + 1;
+            }
+        }
+        this.currentmask = null;
+        this.currentidx = null;
+        this.active = 0;
+        this.resetflag = 1;
+        return null;
+    }
+    
+    method usemasks(param1) {
+        if (param1) {
+            this.disabled = 0;
+        }
+        else {
+            this.disabled = 1;
+        }
+        return null;
+    }
+    
+    method addallmasks() {
+        var var1;
+        this.resetflag = 0;
+        if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("onua")) {
+            this.masks.__append(new mask("mk0a", 0));
+            this.masks.__append(new mask("mk7a", 7));
+            this.masks.__append(new mask("mk8a", 8));
+        }
+        else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("gali")) {
+            this.masks.__append(new mask("mk0a", 0));
+            this.masks.__append(new mask("mk1a", 1));
+            this.masks.__append(new mask("mk7a", 7));
+            this.masks.__append(new mask("mk8a", 8));
+            this.masks.__append(new mask("mk9a", 9));
+        }
+        else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("poha")) {
+            this.masks.__append(new mask("mk0a", 0));
+            this.masks.__append(new mask("mk1a", 1));
+            this.masks.__append(new mask("mk2a", 2));
+            this.masks.__append(new mask("mk7a", 7));
+            this.masks.__append(new mask("mk8a", 8));
+            this.masks.__append(new mask("mk9a", 9));
+            this.masks.__append(new mask("mkaa", 10));
+        }
+        else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("kopa")) {
+            this.masks.__append(new mask("mk0a", 0));
+            this.masks.__append(new mask("mk1a", 1));
+            this.masks.__append(new mask("mk2a", 2));
+            this.masks.__append(new mask("mk3a", 3));
+            this.masks.__append(new mask("mk7a", 7));
+            this.masks.__append(new mask("mk8a", 8));
+            this.masks.__append(new mask("mk9a", 9));
+            this.masks.__append(new mask("mkaa", 10));
+            this.masks.__append(new mask("mkba", 11));
+        }
+        else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("lewa")) {
+            this.masks.__append(new mask("mk0a", 0));
+            this.masks.__append(new mask("mk1a", 1));
+            this.masks.__append(new mask("mk2a", 2));
+            this.masks.__append(new mask("mk3a", 3));
+            this.masks.__append(new mask("mk4a", 4));
+            this.masks.__append(new mask("mk7a", 7));
+            this.masks.__append(new mask("mk8a", 8));
+            this.masks.__append(new mask("mk9a", 9));
+            this.masks.__append(new mask("mkaa", 10));
+            this.masks.__append(new mask("mkba", 11));
+            this.masks.__append(new mask("mkca", 12));
+        }
+        else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("tahu")) {
+            this.masks.__append(new mask("mk0a", 0));
+            this.masks.__append(new mask("mk1a", 1));
+            this.masks.__append(new mask("mk2a", 2));
+            this.masks.__append(new mask("mk3a", 3));
+            this.masks.__append(new mask("mk4a", 4));
+            this.masks.__append(new mask("mk5a", 5));
+            this.masks.__append(new mask("mk6a", 1011));
+            this.masks.__append(new mask("mk7a", 7));
+            this.masks.__append(new mask("mk8a", 8));
+            this.masks.__append(new mask("mk9a", 9));
+            this.masks.__append(new mask("mkaa", 10));
+            this.masks.__append(new mask("mkba", 11));
+            this.masks.__append(new mask("mkca", 12));
+        }
+        else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("nbua")) {
+            this.masks.__append(new mask("mk6a", 1011));
+		}
+        else if (scslosifoundation::stringtoidentifier(globalclass.player.actor.charname) == scslosifoundation::stringtoidentifier("viki")) {
+            this.masks.__append(new mask("mkua", 666));
+        }
+        scslosifoundation::stringtoidentifier(globalclass.player.actor.charname);
+        var1 = 0;
+        while ((this.masks.__length - 1) >= var1) {
+            this.masks[var1].add();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (this.currentmask == 11) {
+            if (this.active == 1) {
+                if (param1.event == 4) {
+                    if (param1.button == 227) {
+                        globalclass.player.actor.telekineticpush(0.5);
+                    }
+                    else if (param1.button == 228) {
+                        globalclass.player.actor.telekineticpull(0.5);
+                    }
+                }
+            }
+        }
+        this.currentmask;
+        return null;
+    }
+    
+    method getmask() {
+        return this.currentmask;
+    }
+    
+    method getdrainrate() {
+        if (!(this.currentmask == null)) {
+            return this.masks[this.currentidx].powerdrainrate;
+        }
+        else {
+            return 0;
+        }
+        return null;
+    }
+    
+    method isactive() {
+        return this.active;
+    }
+    
+    method toggleactive() {
+        if (!(this.currentidx == null) && (this.disabled == 0)) {
+            if (this.active == 0) {
+                this.masks[this.currentidx].activate();
+                this.active = 1;
+                globalclass.hud.mask.animate(1);
+            }
+            else {
+                this.masks[this.currentidx].deactivate();
+                this.active = 0;
+                globalclass.hud.mask.animate(0);
+            }
+        }
+        return null;
+    }
+    
+    method setselectable(param1, param2) {
+        var var1;
+        if ((this.masks.__length - 1) >= 0) {
+            if (param2 == null) {
+                param2 = 1;
+            }
+            var1 = 0;
+            while ((this.masks.__length - 1) >= var1) {
+                if (this.masks[var1].maskname == param1) {
+                    this.masks[var1].setselectable(param2);
+                    if (this.currentmask == null) {
+                        this.changemask(param1);
+                    }
+                }
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method isselectable(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.masks.__length - 1) >= var1) {
+            if (this.masks[var1].selectable) {
+                if (this.masks[var1].maskname == param1) {
+                    return 1;
+                }
+            }
+            var1 = var1 + 1;
+        }
+        return 0;
+    }
+    
+    method setdrainrateofmask(param1, param2) {
+        var var1;
+        if ((this.masks.__length - 1) >= 0) {
+            var1 = 0;
+            while ((this.masks.__length - 1) >= var1) {
+                if (this.masks[var1].maskname == param1) {
+                    this.masks[var1].setdrainrateofmask(param2);
+                }
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method changemask(param1) {
+        var var1;
+        if ((this.masks.__length - 1) >= 0) {
+            var1 = 0;
+            while ((this.masks.__length - 1) >= var1) {
+                if (this.masks[var1].maskname == param1) {
+                    if (this.masks[var1].selectable == 1) {
+                        if (!(this.currentidx == null) && (this.active == 1)) {
+                            this.masks[this.currentidx].deactivate();
+                        }
+                        this.active = 0;
+                        this.currentidx = var1;
+                        if (!(this.currentmask == param1)) {
+                            this.currentmask = param1;
+                        }
+                        globalclass.hud.mask.selectmask(this.currentidx);
+                        gctoa::switchmask(globalclass.player.actor.toahandle, this.masks[this.currentidx].maskid);
+                        globalclass.hud.show();
+                        return 1;
+                    }
+                    else {
+                        return 0;
+                    }
+                }
+                var1 = var1 + 1;
+            }
+        }
+        return 0;
+    }
+    
+    method nextmask(param1) {
+        var var1;
+        var var2;
+        var var3;
+        if (param1 == null) {
+            var1 = 1;
+        }
+        if (!(this.currentidx == null)) {
+            var2 = this.currentidx;
+            var3 = 0;
+            do {
+                if (param1 == 1) {
+                    var2 = var2 + 1;
+                    if (var2 > (this.masks.__length - 1)) {
+                        var2 = 0;
+                    }
+                }
+                else {
+                    var2 = var2 - 1;
+                    if (var2 < 0) {
+                        var2 = this.masks.__length - 1;
+                    }
+                }
+                var3 = var3 + 1;
+            } while (!!((this.changemask(this.masks[var2].maskname) == 0) && (var3 < 20)))
+        }
+        return null;
+    }
+}

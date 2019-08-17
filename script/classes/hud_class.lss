@@ -1,0 +1,211 @@
+class hud_class {
+    property itemsarray;
+    property thingy;
+    property tokens;
+    property mask;
+    property ammo;
+    property debuginfo;
+    property showdebuginfo;
+    property screenfader;
+    property hidden;
+    property added;
+    property cdtimer;
+    
+    method hud_class() {
+        this.hidden = 0;
+        this.added = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.itemsarray = [  ];
+        this.thingy = new hudthingy();
+        this.tokens = new hudtokens();
+        this.mask = new hudmask();
+        this.ammo = new hudammo();
+        this.itemsarray.__append(this.thingy);
+        this.itemsarray.__append(this.tokens);
+        this.itemsarray.__append(this.ammo);
+        this.itemsarray.__append(this.mask);
+        this.debuginfo = new huddebuginfo();
+        this.showdebuginfo = 0;
+        this.screenfader = new fadescreen(0, 1.0);
+        this.hidden = 0;
+        this.added = 0;
+        this.cdtimer = new gs_lego_cdtimer(15.0);
+        var1 = 0;
+        while ((this.itemsarray.__length - 1) >= var1) {
+            this.itemsarray[var1].initfull();
+            this.itemsarray[var1].add();
+            var1 = var1 + 1;
+        }
+        this.added = 1;
+        this.debuginfo.initfull();
+        this.screenfader.initfull();
+        this.hide();
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        var1 = 0;
+        while ((this.itemsarray.__length - 1) >= var1) {
+            this.itemsarray[var1].initshort();
+            var1 = var1 + 1;
+        }
+        this.screenfader.initshort();
+        this.debuginfo.initshort();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        if (!(this.cdtimer == null)) {
+            this.cdtimer.cleanupfull();
+            this.cdtimer = null;
+        }
+        if (!(this.screenfader == null)) {
+            this.screenfader.cleanupfull();
+            this.screenfader = null;
+        }
+        if (!(this.debuginfo == null)) {
+            this.debuginfo.cleanupfull();
+            this.debuginfo = null;
+        }
+        if (!(this.itemsarray == null)) {
+            var1 = this.itemsarray.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.itemsarray[var1 - var2].cleanupfull();
+                this.itemsarray[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.itemsarray = null;
+        }
+        this.mask = null;
+        this.tokens = null;
+        this.ammo = null;
+        this.thingy = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        var1 = 0;
+        while ((this.itemsarray.__length - 1) >= var1) {
+            this.itemsarray[var1].cleanupshort();
+            var1 = var1 + 1;
+        }
+        this.screenfader.cleanupshort();
+        this.debuginfo.cleanupshort();
+        return null;
+    }
+    
+    method add() {
+        this.added = 1;
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        if ((this.added == 1) && (this.hidden == 1)) {
+            if (!(globalclass.level == null)) {
+                if (!(globalclass.level.cam.getaimode() == 9)) {
+                    this.hidden = 0;
+                    var1 = 0;
+                    while ((this.itemsarray.__length - 1) >= var1) {
+                        this.itemsarray[var1].show();
+                        var1 = var1 + 1;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method showmask(param1) {
+        this.mask.setshow(param1);
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        if ((this.added == 1) && (this.hidden == 0)) {
+            this.hidden = 1;
+            var1 = 0;
+            while ((this.itemsarray.__length - 1) >= var1) {
+                this.itemsarray[var1].hide();
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method slideall(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (this.added == 1) {
+            this.thingy.onevent(param1);
+            if (param1.eventid == 32) {
+                this.hide();
+            }
+            else if (param1.eventid == 33) {
+                this.show();
+            }
+            else if (param1.eventid == 50) {
+                this.ammo.setammo(param1.args[0]);
+            }
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (!(param1.deltatime == 0) && (this.added == 1)) {
+            if (!(this.cdtimer.active == null)) {
+                this.cdtimer.process(param1);
+            }
+            if (this.showdebuginfo == 1) {
+                this.debuginfo.process(param1);
+            }
+            if (this.hidden == 0) {
+                var1 = 0;
+                while ((this.itemsarray.__length - 1) >= var1) {
+                    this.itemsarray[var1].process(param1);
+                    var1 = var1 + 1;
+                }
+            }
+            this.screenfader.process(param1);
+        }
+        return null;
+    }
+    
+    method showframerate(param1) {
+        this.showdebuginfo = param1;
+        if (param1) {
+            this.debuginfo.show();
+        }
+        else {
+            this.debuginfo.hide();
+        }
+        return null;
+    }
+    
+    method fadeoutscreen() {
+        this.screenfader.show();
+        return null;
+    }
+    
+    method fadeinscreen() {
+        this.screenfader.hide();
+        return null;
+    }
+}

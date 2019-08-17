@@ -1,0 +1,79 @@
+class lego_area_strt4 : gs_lego_area {
+    property cinema;
+    property puzzle;
+    property parent;
+    
+    method lego_area_strt4(param1) {
+        this.parent = param1;
+        this.gs_lego_area("strt", param1, 0, 0);
+        this.puzzle = new startpuzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.lego_area_show();
+        this.puzzle.initfull();
+        this.puzzle.show();
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicKopakaAmbience");
+        globalclass.bgmusic.play(1);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(var1, rgba(255, 255, 255, 255), rgba(122, 254, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
+        gccharacter::setorientation(var1, -42);
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d003"), -1);
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin1");
+            globalclass.hud.hide();
+            gccinemaengine::play(this.cinema);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        this.cinema = null;
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (!(this.cinema == null)) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+            param1.button;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        if (param1.eventid == 30) {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicKopakaAmbience");
+            globalclass.bgmusic.play(3);
+            globalclass.player.maskcontrol.changemask(3);
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method exit() {
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        this.parent = null;
+        return null;
+    }
+}

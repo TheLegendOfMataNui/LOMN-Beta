@@ -1,0 +1,375 @@
+class crosspuzzle {
+    property parent;
+    property icearray;
+    property platformarray;
+    property doorarray;
+    property iceup0;
+    property iceup1;
+    property iceup2;
+    property iceup3;
+    property iceup4;
+    property iceup5;
+    property doorgone1;
+    property doorgone2;
+    property whichdoor;
+    property canhitdoor1;
+    property canhitdoor2;
+    property hookbox;
+    property skatespickup;
+    
+    method crosspuzzle(param1) {
+        this.parent = param1;
+        this.iceup0 = 1;
+        this.iceup1 = 1;
+        this.iceup2 = 1;
+        this.iceup3 = 1;
+        this.iceup4 = 1;
+        this.iceup5 = 1;
+        this.doorgone1 = 0;
+        this.doorgone2 = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        gcareadirector::setnearestmax(50);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("skts")) == 0) {
+            this.skatespickup = new lego_pickup("skts", 0, 5, "item", 5, 1);
+            this.skatespickup.initfull();
+            this.skatespickup.show();
+            this.skatespickup.setcondition(131072);
+            this.skatespickup.setquest(2);
+        }
+        this.hookbox = new lego_moveableobject("hot0");
+        this.hookbox.initfull();
+        this.hookbox.setmytargetingflags(1);
+        this.hookbox.setresponse(1, 1, 1);
+        this.doorarray = [ new lego_moveableobject("dor1"), 
+            new lego_moveableobject("id02") ];
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.icearray = [ new lego_moveableobject("ic00"), 
+            new lego_moveableobject("ic01"), 
+            new lego_moveableobject("ic02"), 
+            new lego_moveableobject("ic03"), 
+            new lego_moveableobject("ic04"), 
+            new lego_moveableobject("ic05") ];
+        var1 = 0;
+        while ((this.icearray.__length - 1) >= var1) {
+            this.icearray[var1].initfull();
+            this.icearray[var1].show();
+            this.icearray[var1].settweakable();
+            this.icearray[var1].setresponse(1, 0, 1);
+            var1 = var1 + 1;
+        }
+        this.platformarray = [ new platform("plt0"), 
+            new platform("plt1") ];
+        this.platformarray[0].initfull("pl00", "Root/data/levels/lev4/crss");
+        this.platformarray[0].obj.setobjscale(0.4);
+        this.platformarray[0].obj.setalpha(0.09);
+        this.platformarray[0].setuppath([ new basicpoint(225, -41, 32.3), 
+            new basicpoint(225, -41, 32.3), 
+            new basicpoint(210.3, 2.5, 16.8), 
+            new basicpoint(210.3, 2.5, 16.8) ], [ 2, 
+            2, 
+            2, 
+            2 ]);
+        this.platformarray[1].initfull("pl00", "Root/data/levels/lev4/crss");
+        this.platformarray[1].obj.setobjscale(0.4);
+        this.platformarray[1].obj.setalpha(0.09);
+        this.platformarray[1].setuppath([ new basicpoint(154, -40, -157), 
+            new basicpoint(154, -40, -157), 
+            new basicpoint(132, -13, -93), 
+            new basicpoint(132, -13, -93) ], [ 2, 
+            2, 
+            2, 
+            2 ]);
+        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var2, 2);
+        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(var2, 4);
+        var3 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
+        gchive::setmaxcreatures(var3, 2);
+        gchive::setcreaturetype(var3, scslosifoundation::stringtoidentifier("ibat"));
+        gchive::setspawnrate(var3, 4);
+        gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("k038"));
+        this.whichdoor = "none";
+        this.canhitdoor1 = 1;
+        this.canhitdoor2 = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (this.doorarray != null) {
+            var1 = 0;
+            while ((this.doorarray.__length - 1) >= var1) {
+                this.doorarray[var1].cleanupfull();
+                this.doorarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.doorarray = null;
+        }
+        if (this.icearray != null) {
+            var1 = 0;
+            while ((this.icearray.__length - 1) >= var1) {
+                this.icearray[var1].cleanupfull();
+                this.icearray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.icearray = null;
+        }
+        if (this.platformarray != null) {
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].cleanupfull();
+                this.platformarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platformarray = null;
+        }
+        this.whichdoor = null;
+        if (this.hookbox != null) {
+            this.hookbox.cleanupfull();
+            this.hookbox = null;
+        }
+        if (this.skatespickup != null) {
+            this.skatespickup.cleanupfull();
+            this.skatespickup = null;
+        }
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        this.setstartingpos();
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.icearray.__length - 1) >= var1) {
+            this.icearray[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].show();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].hide();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.icearray.__length - 1) >= var1) {
+            this.icearray[var1].hide();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].hide();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.icearray.__length - 1) >= var1) {
+            this.icearray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        if (this.platformarray != null) {
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
+        if (param1.eventid == 1002) {
+            if (param1.args[0]) {
+                var1 = 0;
+                while ((this.platformarray.__length - 1) >= var1) {
+                    this.platformarray[var1].obj.setalpha(1);
+                    var1 = var1 + 1;
+                }
+            }
+            else {
+                var1 = 0;
+                while ((this.platformarray.__length - 1) >= var1) {
+                    this.platformarray[var1].obj.setalpha(0.1);
+                    var1 = var1 + 1;
+                }
+            }
+        }
+        else if (param1.eventid == 19) {
+            var2 = param1.args[0];
+            if (var2 == scslosifoundation::stringtoidentifier("ic00")) {
+                if (this.iceup0) {
+                    this.iceup0 = 0;
+                    this.icearray[0].interpolate(this.icearray[0].getx(), 0 - 94.7, this.icearray[0].getz(), 2);
+                }
+            }
+            if (var2 == scslosifoundation::stringtoidentifier("ic01")) {
+                if (this.iceup1) {
+                    this.iceup1 = 0;
+                    this.icearray[1].interpolate(this.icearray[1].getx(), 0 - 91.33, this.icearray[1].getz(), 2);
+                }
+            }
+            if (var2 == scslosifoundation::stringtoidentifier("ic02")) {
+                if (this.iceup2) {
+                    this.iceup2 = 0;
+                    this.icearray[2].interpolate(this.icearray[2].getx(), 0 - 94.9, this.icearray[2].getz(), 2);
+                }
+            }
+            if (var2 == scslosifoundation::stringtoidentifier("ic03")) {
+                if (this.iceup3) {
+                    this.iceup3 = 0;
+                    this.icearray[3].interpolate(this.icearray[3].getx(), 0 - 99.5, this.icearray[3].getz(), 2);
+                }
+            }
+            if (var2 == scslosifoundation::stringtoidentifier("ic04")) {
+                if (this.iceup4) {
+                    this.iceup4 = 0;
+                    this.icearray[4].interpolate(this.icearray[4].getx(), 0 - 95.3, this.icearray[4].getz(), 2);
+                }
+            }
+            if (var2 == scslosifoundation::stringtoidentifier("ic05")) {
+                if (this.iceup5) {
+                    this.iceup5 = 0;
+                    this.icearray[5].interpolate(this.icearray[5].getx(), 0 - 90.6, this.icearray[5].getz(), 2);
+                }
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("dor1")) {
+                    if (this.canhitdoor1) {
+                        this.canhitdoor1 = 0;
+                        globalclass.player.actor.setinputstate("none");
+                        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k038"), 0.1);
+                        this.whichdoor = "door1";
+                    }
+                }
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("id02")) {
+                    if (this.canhitdoor2) {
+                        this.canhitdoor2 = 0;
+                        globalclass.player.actor.setinputstate("none");
+                        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k038"), 0.1);
+                        this.whichdoor = "door2";
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 7) {
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
+                debug::print("PLAY THE CUTTING SOUND =======================================");
+                gcstaticsoundsptrarray::playtablesound(149);
+            }
+        }
+        else if (param1.eventid == 11) {
+            debug::print("****************************************** 1");
+            if (scslosifoundation::identifiertostring(param1.args[1]) == "k038") {
+                debug::print("****************************************** 2");
+                globalclass.player.actor.setinputstate("ninp");
+                if (this.whichdoor == "door1") {
+                    this.doorarray[0].hide();
+                    this.doorgone1 = 1;
+                }
+                else if (this.whichdoor == "door2") {
+                    this.doorarray[1].hide();
+                    this.doorgone2 = 1;
+                }
+            }
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method setstartingpos() {
+        if (this.iceup0) {
+            this.icearray[0].setpos(this.icearray[0].getx(), 65.3, this.icearray[0].getz());
+        }
+        if (this.iceup1) {
+            this.icearray[1].setpos(this.icearray[1].getx(), 80, this.icearray[1].getz());
+        }
+        if (this.iceup2) {
+            this.icearray[2].setpos(this.icearray[2].getx(), 88, this.icearray[2].getz());
+        }
+        if (this.iceup3) {
+            this.icearray[3].setpos(this.icearray[3].getx(), 94, this.icearray[3].getz());
+        }
+        if (this.iceup4) {
+            this.icearray[4].setpos(this.icearray[4].getx(), 85, this.icearray[4].getz());
+        }
+        if (this.iceup5) {
+            this.icearray[5].setpos(this.icearray[5].getx(), 82, this.icearray[5].getz());
+        }
+        if (this.doorgone1) {
+            this.doorarray[0].hide();
+        }
+        if (this.doorgone2) {
+            this.doorarray[1].hide();
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

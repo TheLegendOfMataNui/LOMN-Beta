@@ -1,0 +1,143 @@
+class fvil6_puzzle {
+    property parent;
+    property leverpickup;
+    property hookarray;
+    property coindoor;
+    property coindoortext;
+    property coindoortexttimer;
+    property showcoindoor;
+    
+    method fvil6_puzzle(param1) {
+        this.parent = param1;
+        this.showcoindoor = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var door_text;
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("levr")) == 0) {
+            this.leverpickup = new lego_pickup("levr", 0, 5, "item", 5, 1);
+            this.leverpickup.initfull();
+            this.leverpickup.setquest(2);
+            this.leverpickup.show();
+            this.leverpickup.setcondition(8192);
+        }
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        globalclass.player.setgrapplinghookdistance(150);
+        this.hookarray = [ new lego_moveableobject("hot0"), 
+            new lego_moveableobject("hot1"), 
+            new lego_moveableobject("hot2"), 
+            new lego_moveableobject("hot3"), 
+            new lego_moveableobject("hot4") ];
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].initfull();
+            this.hookarray[var1].setmytargetingflags(1);
+            this.hookarray[var1].setresponse(1, 1, 1);
+            this.hookarray[var1].settweakable();
+            var1 = var1 + 1;
+        }
+        this.coindoor = new lego_moveableobject("door");
+        this.coindoor.initfull();
+        if (this.showcoindoor) {
+            this.coindoor.show();
+            this.coindoor.setalpha(0.8);
+        }
+        else if (bettersaver::getbooleanvalue(57)) {
+            this.coindoor.hide();
+        }
+        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 8);
+        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
+        this.coindoortext.initfull();
+        this.coindoortext.add();
+        this.coindoortexttimer = 0.0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (this.leverpickup != null) {
+            this.leverpickup.cleanupfull();
+            this.leverpickup = null;
+        }
+        if (this.hookarray != null) {
+            var1 = 0;
+            while ((this.hookarray.__length - 1) >= var1) {
+                this.hookarray[var1].cleanupfull();
+                this.hookarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.hookarray = null;
+        }
+        globalclass.player.setgrapplinghookdistance(45);
+        if (this.coindoortext != null) {
+            this.coindoortext.remove();
+            this.coindoortext.cleanupfull();
+            this.coindoortext = null;
+        }
+        if (this.coindoor != null) {
+            this.coindoor.cleanupfull();
+            this.coindoor = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.coindoortexttimer > 0) {
+            this.coindoortexttimer = this.coindoortexttimer - param1.deltatime;
+        }
+        else if (this.coindoortext.onscreen == 1) {
+            this.coindoortext.hide();
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (param1.args[1] == scslosifoundation::stringtoidentifier("door")) {
+                if (this.showcoindoor == 1) {
+                    if ((globalclass.player.tokens >= 8) && (globalclass.player.actor.ishookenabled)) {
+                        this.coindoor.fadeout(1.5);
+                        gcstaticsoundsptrarray::playtablesound(1084);
+                        this.showcoindoor = 0;
+                        this.coindoortext.hide();
+                    }
+                    else {
+                        this.coindoortext.show();
+                        this.coindoortexttimer = 1.0;
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 35) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("door")) {
+                bettersaver::setbooleanvalue(57, 1);
+                this.coindoor.hide();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("t000"));
+            this.parent.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

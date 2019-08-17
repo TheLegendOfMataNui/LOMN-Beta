@@ -1,0 +1,63 @@
+class lego_area_le015 : gs_lego_area {
+    property launcherpickup;
+    
+    method lego_area_le015(param1) {
+        this.gs_lego_area("le01", param1, 0, 0);
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaDrumAndBass");
+        globalclass.bgmusic.play();
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setkapura(var1);
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        var2 = gcsaver::finditem(scslosifoundation::stringtoidentifier("volu"));
+        if (var2 == 0) {
+            this.launcherpickup = new lego_pickup("volu", 0, 5, "item", 6, 1);
+            this.launcherpickup.initfull();
+            this.launcherpickup.show();
+            this.launcherpickup.setcondition(131072);
+            this.launcherpickup.setquest(2);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.launcherpickup == null)) {
+            this.launcherpickup.cleanupfull();
+            this.launcherpickup = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            globalclass.level.cam.setaimode(7);
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.unkill();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

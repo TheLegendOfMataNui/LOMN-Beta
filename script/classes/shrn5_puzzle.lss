@@ -1,0 +1,156 @@
+class shrn5_puzzle {
+    property parent;
+    property cinema;
+    property bossdoor;
+    property portalactive;
+    property bossdoortext;
+    property bossdoortexttimer;
+    property showbossdoor;
+    
+    method shrn5_puzzle(param1) {
+        this.parent = param1;
+        this.showbossdoor = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var turaga;
+        var portal_trigger;
+        var door_text;
+        gcmodeldirector::setnearestmax(5);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+        globalclass.bgmusic.play();
+        this.bossdoor = new lego_moveableobject("dor1", "shrn");
+        this.bossdoor.initfull();
+        if (this.showbossdoor) {
+            this.bossdoor.show();
+            this.bossdoor.setalpha(0.6);
+        }
+        else if (bettersaver::getbooleanvalue(69)) {
+            this.bossdoor.hide();
+        }
+        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 25);
+        this.bossdoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
+        this.bossdoortext.initfull();
+        this.bossdoortext.add();
+        this.bossdoortexttimer = 0.0;
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2"))) {
+            if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
+                this.cinema = gccinemaengine::create();
+                gccinemaengine::load(this.cinema, "cin3");
+                gccinemaengine::play(this.cinema);
+            }
+        }
+        turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"), 0);
+        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(turaga, 1.5, 0.8, 1, 0, 0);
+        portal_trigger = scslosifoundation::stringtoidentifier("tps9");
+        this.portalactive = gcsaver::portalactive();
+        if (this.portalactive == 1) {
+            gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/lewa/village_ripple/l_prtl", 1);
+        }
+        else {
+            gccollisionphysicsgroup::turnoffnextarea(portal_trigger);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.bossdoortext != null) {
+            this.bossdoortext.remove();
+            this.bossdoortext.cleanupfull();
+            this.bossdoortext = null;
+        }
+        if (this.bossdoor != null) {
+            this.bossdoor.cleanupfull();
+            this.bossdoor = null;
+        }
+        this.cinema = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.bossdoortexttimer > 0) {
+            this.bossdoortexttimer = this.bossdoortexttimer - param1.deltatime;
+        }
+        else if (this.bossdoortext.onscreen == 1) {
+            this.bossdoortext.hide();
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var portal_trigger;
+        if (param1.eventid == 35) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("dor1")) {
+                bettersaver::setbooleanvalue(69, 1);
+                this.bossdoor.hide();
+            }
+        }
+        else if (param1.eventid == 41) {
+            if (this.portalactive == 0) {
+                portal_trigger = scslosifoundation::stringtoidentifier("tps9");
+                gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
+                gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/lewa/village_ripple/l_prtl", 1);
+                this.portalactive = 1;
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[1] == scslosifoundation::stringtoidentifier("dor1")) {
+                if (this.showbossdoor == 1) {
+                    if (((((globalclass.player.tokens >= 25) && (globalclass.player.haselement()) && (globalclass.player.actor.ishookenabled) && (globalclass.player.maskcontrol.isselectable(12)) && (globalclass.player.maskcontrol.isselectable(4)))))) {
+                        this.bossdoor.fadeout(1.5);
+                        gcstaticsoundsptrarray::playtablesound(1084);
+                        this.showbossdoor = 0;
+                        this.bossdoortext.hide();
+                    }
+                    else {
+                        this.bossdoortext.show();
+                        this.bossdoortexttimer = 1.0;
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 30) {
+		    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+            globalclass.bgmusic.play(1);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("l000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (this.cinema != null) {
+                gccinemaengine::stop(this.cinema);
+            }
+        }
+        return null;
+    }
+}

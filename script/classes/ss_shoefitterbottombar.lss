@@ -1,0 +1,425 @@
+class ss_shoefitterbottombar {
+    property background;
+    property sidescrollbar;
+    property bottomscrollbar;
+    property horizontalbar;
+    property horizontalgrid;
+    property animslider;
+    property flagtypearray;
+    property framenumber;
+    property flagarray;
+    property soundarray;
+    property pointer;
+    property movepause;
+    property animationlength;
+    property onflag;
+    property onsound;
+    property parent;
+    
+    method ss_shoefitterbottombar(param1, param2, param3, param4, param5, param6, param7) {
+        this.background = param1;
+        this.sidescrollbar = param2;
+        this.bottomscrollbar = param3;
+        this.horizontalbar = param4;
+        this.animslider = param5;
+        this.flagtypearray = param6;
+        this.framenumber = param7;
+        return null;
+    }
+    
+    method initfull() {
+        this.background.initfull();
+        this.sidescrollbar.initfull();
+        this.animslider.initfull();
+        this.framenumber.initfull();
+        this.background.add();
+        this.sidescrollbar.add();
+        this.animslider.add();
+        this.framenumber.add();
+        this.background.show();
+        this.sidescrollbar.show();
+        this.animslider.show();
+        this.framenumber.show();
+        this.background.enabletransparency(1);
+        this.sidescrollbar.enabletransparency(1);
+        this.animslider.enabletransparency(1);
+        this.background.enablealphachannel(1);
+        this.sidescrollbar.enablealphachannel(1);
+        this.animslider.enablealphachannel(1);
+        this.flagarray = [  ];
+        this.soundarray = [  ];
+        this.animationlength = [ 0.0, 
+            0 ];
+        this.onflag = 0;
+        this.onsound = 0;
+        this.pointer = this.flagarray.__length - 1;
+        this.movepause = 0.0;
+        this.horizontalgrid = [ [  ], 
+            [  ] ];
+        this.horizontalbar.w = this.horizontalbar.x2 == this.horizontalbar.x1;
+        this.moveslider(26);
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.background.hide();
+        this.sidescrollbar.hide();
+        this.animslider.hide();
+        this.framenumber.hide();
+        this.background.remove();
+        this.sidescrollbar.remove();
+        this.animslider.remove();
+        this.framenumber.remove();
+        this.background.cleanupfull();
+        this.sidescrollbar.cleanupfull();
+        this.animslider.cleanupfull();
+        this.framenumber.cleanupfull();
+        this.clearallflags();
+        this.flagarray = null;
+        this.soundarray = null;
+        this.animationlength = null;
+        this.pointer = null;
+        this.movepause = null;
+        this.horizontalgrid = null;
+        this.horizontalbar.w = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method input(param1, param2, param3) {
+        this.keyboardinput(param1, param2, param3);
+        if (param1.event == 2) {
+            this.resetpause();
+        }
+        return null;
+    }
+    
+    method keyboardinput(param1, param2, param3) {
+        if (param1.button == 38) {
+            if (param1.event == 2) {
+                this.movepointer(-1);
+            }
+        }
+        if (param1.button == 40) {
+            if (param1.event == 2) {
+                this.movepointer(1);
+            }
+        }
+        if (param1.button == 39) {
+            if (param1.event == 2) {
+                this.moveflag(1, param2);
+            }
+        }
+        if (param1.button == 37) {
+            if (param1.event == 2) {
+                this.moveflag(-1, param2);
+            }
+        }
+        if (this.movepause >= 0.2) {
+            if (param1.button == 38) {
+                if (param1.event == 4) {
+                    this.movepointer(-1);
+                }
+            }
+            if (param1.button == 40) {
+                if (param1.event == 4) {
+                    this.movepointer(1);
+                }
+            }
+            if (param1.button == 39) {
+                if (param1.event == 4) {
+                    this.moveflag(1, param2);
+                }
+            }
+            if (param1.button == 37) {
+                if (param1.event == 4) {
+                    this.moveflag(-1, param2);
+                }
+            }
+        }
+        if (param1.button == 46) {
+            if (param1.event == 2) {
+                this.killmarker(param3);
+            }
+        }
+        if (param1.button == 13) {
+            if (param1.event == 2) {
+                this.leavebottombar();
+            }
+        }
+        return null;
+    }
+    
+    method leavebottombar() {
+        this.onflag = 0;
+        this.onsound = 0;
+        return null;
+    }
+    
+    method resetpause() {
+        this.movepause = 0.0;
+        return null;
+    }
+    
+    method process(param1, param2) {
+        this.movepause = this.movepause + param1.deltatime;
+        if (this.onflag) {
+            this.flagarray[this.pointer].process(param1);
+            param2.setflags(this.flagarray[this.pointer].markername, this.flagarray[this.pointer].startspot);
+        }
+        if (this.onsound) {
+            this.soundarray[this.pointer].process(param1);
+            param2.setflags(this.soundarray[this.pointer].filename, this.soundarray[this.pointer].startspot, this.soundarray[this.pointer].endspot);
+        }
+        param2.showflags(this.onsound);
+        return null;
+    }
+    
+    method movepointer(param1) {
+        if (this.onflag) {
+            if ((this.pointer + param1) >= 0) {
+                this.flagarray[this.pointer].settransparency(150);
+                if ((this.pointer + param1) <= (this.flagarray.__length - 1)) {
+                    this.pointer = this.pointer + param1;
+                }
+                else if (this.soundarray.__length > 0) {
+                    this.pointer = 0;
+                    this.onflag = 0;
+                    this.onsound = 1;
+                }
+            }
+        }
+        else if (this.onsound) {
+            if ((this.pointer + param1) <= (this.soundarray.__length - 1)) {
+                this.soundarray[this.pointer].setcolor(null, null, 0);
+                if ((this.pointer + param1) >= 0) {
+                    this.pointer = this.pointer + param1;
+                }
+                else if (this.flagarray.__length > 0) {
+                    this.pointer = this.flagarray.__length - 1;
+                    this.onflag = 1;
+                    this.onsound = 0;
+                }
+            }
+        }
+        return null;
+    }
+    
+    method moveflag(param1, param2) {
+        if (this.onflag) {
+            if (((this.flagarray[this.pointer].startspot + (param1 * 0.01)) >= 0) && ((this.flagarray[this.pointer].startspot + (param1 * 0.01)) <= param2.shoefittercharacter.getduration())) {
+                this.flagarray[this.pointer].moveflag(param1);
+            }
+        }
+        else {
+            this.soundarray[this.pointer].moveflag(param1);
+        }
+        return null;
+    }
+    
+    method killmarker(param1) {
+        if (this.onflag) {
+            this.killflag(param1);
+        }
+        else if (this.onsound) {
+            this.killsound(param1);
+        }
+        return null;
+    }
+    
+    method killflag(param1) {
+        this.clearflag(this.pointer);
+        this.pointer = this.pointer - 1;
+        if (this.flagarray.__length == 0) {
+            this.onflag = 0;
+            if (this.soundarray.__length > 0) {
+                this.onsound = 1;
+                this.pointer = this.soundarray.__length - 1;
+            }
+            else {
+                param1.hideflags();
+                this.pointer = 0;
+            }
+        }
+        else if (this.pointer < 0) {
+            this.pointer = 0;
+        }
+        return null;
+    }
+    
+    method killsound(param1) {
+        this.clearsound(this.pointer);
+        this.pointer = this.pointer - 1;
+        if (this.soundarray.__length == 0) {
+            this.onsound = 0;
+            if (this.flagarray.__length > 0) {
+                this.onflag = 1;
+                this.pointer = this.flagarray.__length - 1;
+            }
+            else {
+                param1.hideflags();
+                this.pointer = 0;
+            }
+        }
+        else if (this.pointer < 0) {
+            this.pointer = 0;
+        }
+        return null;
+    }
+    
+    method addflag(param1, param2, param3, param4) {
+        this.flagarray.__append(new ss_shoefittermarkerclass(this.flagtypearray[param3].filename, this.animslider.x1, 250, this.flagtypearray[param3].z, this.animslider.x1 + (this.flagtypearray[param3].x2 - this.flagtypearray[param3].x1), 250 + (this.flagtypearray[param3].y2 - this.flagtypearray[param3].y1), this.parent.characterwindow.shoefittercharacter.gettime(), param1.name.string, param2));
+        this.flagarray[this.flagarray.__length - 1].markerinitfull(param4);
+        this.pointer = this.flagarray.__length - 1;
+        this.onflag = 1;
+        return null;
+    }
+    
+    method addsound(param1, param2) {
+        var var1;
+        if (this.soundarray.__length == 0) {
+            var1 = 300;
+        }
+        else {
+            var1 = this.soundarray[this.soundarray.__length - 1].y2 + 2;
+        }
+        this.soundarray.__append(new ss_shoefittersoundmarkerclass(var1, var1 + 10, param1, this.soundarray.__length));
+        this.soundarray[this.soundarray.__length - 1].markerinitfull(param2);
+        this.pointer = this.soundarray.__length - 1;
+        this.onsound = 1;
+        return null;
+    }
+    
+    method clearallflags() {
+        var var1;
+        var var2;
+        var var3;
+        var1 = this.flagarray.__length - 1;
+        var2 = 0;
+        while (var1 >= var2) {
+            this.clearflag(this.flagarray.__length - 1);
+            var2 = var2 + 1;
+        }
+        var3 = this.soundarray.__length - 1;
+        var2 = 0;
+        while (var3 >= var2) {
+            this.clearsound(this.soundarray.__length - 1);
+            var2 = var2 + 1;
+        }
+        return null;
+    }
+    
+    method clearflag(param1) {
+        this.flagarray[param1].markercleanupfull();
+        this.flagarray.__removeat(param1);
+        return null;
+    }
+    
+    method clearsound(param1) {
+        this.soundarray[param1].markercleanupfull();
+        this.soundarray.__removeat(param1);
+        return null;
+    }
+    
+    method setanimationlength(param1) {
+        this.animationlength = param1;
+        return null;
+    }
+    
+    method loadsetflags(param1, param2, param3) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var1 = 0;
+        while ((param1.__length - 1) >= var1) {
+            var2 = param1[var1];
+            if (var2[0] == param2) {
+                var3 = var1;
+                var1 = (param1.__length - 1) + 1;
+            }
+            var1 = var1 + 1;
+        }
+        if (param1[var3].__length > 1) {
+            var4 = param1[var3];
+            this.flagarray = var4[1];
+            this.pointer = this.flagarray.__length - 1;
+            var5 = 1;
+        }
+        else {
+            this.flagarray = [  ];
+            var5 = 0;
+        }
+        var1 = 0;
+        while ((this.flagarray.__length - 1) >= var1) {
+            this.flagarray[var1].markerinitfull(param3);
+            var1 = var1 + 1;
+        }
+        return var5;
+    }
+    
+    method moveslider(param1) {
+        this.animslider.changepos(param1 - this.animslider.x1);
+        return null;
+    }
+    
+    method animationrunning(param1, param2) {
+        if (!(this.animationlength[0] == 0)) {
+            this.moveslider(26 + ((param2.shoefittercharacter.gettime() / this.animationlength[0]) * 534));
+        }
+        return null;
+    }
+    
+    method setupgrid() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = 0;
+        while ((this.horizontalgrid.__length - 1) >= var1) {
+            var2 = this.horizontalgrid[var1];
+            var1 = 0;
+            while ((var2.__length - 1) >= var1) {
+                var2.hide();
+                var2.remove();
+                var2.cleanupfull();
+                var1 = var1 + 1;
+            }
+            var1 = var1 + 1;
+        }
+        this.horizontalgrid = [ [  ], 
+            [  ] ];
+        var3 = this.animationlength[1] / 10;
+        var4 = 534 / var3;
+        var1 = 0;
+        while ((var3 - 1) >= var1) {
+            this.horizontalgrid[0].__append(new ss_basesprite(this.horizontalbar.filename, 26 + (var4 * var1), this.horizontalbar.y1, this.horizontalbar.z, (26 + (var4 * var1)) + this.horizontalbar.w, this.horizontalbar.y2));
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.horizontalgrid.__length - 1) >= var1) {
+            var2 = this.horizontalgrid[var1];
+            var1 = 0;
+            while ((var2.__length - 1) >= var1) {
+                var2.hide();
+                var2.remove();
+                var2.cleanupfull();
+                var2.enabletransparency(1);
+                var2.enablealphachannel(1);
+                var1 = var1 + 1;
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+}

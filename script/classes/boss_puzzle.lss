@@ -1,0 +1,703 @@
+class boss_puzzle {
+    property parent;
+    property rocker;
+    property state;
+    property miniboulders1;
+    property miniboulders2;
+    property miniboulders3;
+    property resetmboulders1;
+    property resetmboulders2;
+    property resetmboulders3;
+    property currentmboulder;
+    property shakeonce;
+    property platarray;
+    property platprocess;
+    property setwatch;
+    property startcam;
+    property titletext1;
+    property titletext2;
+    property rocktimer;
+    property oldstate;
+    property rockmandead;
+    property turaga;
+    property explodesound;
+    property stone;
+    property usemini1;
+    property usemini2;
+    property usemini3;
+    property havestone;
+    property ending;
+    
+    method boss_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPohatuTheme");
+        gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tp00"));
+        var1 = gccollisionphysicsgroup::gettriggerplane(scslosifoundation::stringtoidentifier("tp00"));
+        gctriggerplane::setplaneresponses(var1, 3, 3);
+        this.rocker = new rockman(this.parent.name);
+        gccharactermoveinterpreter::checkanimdone(1919627320);
+        gccharactermoveinterpreter::checkanimdone(1919627321);
+        gccharactermoveinterpreter::checkanimdone(1919627315);
+        gccharactermoveinterpreter::checkanimdone(1919627571);
+        this.explodesound = new tablecopysound(1081);
+        this.turaga = new gs_lego_character("oewa", "oewa", "fake", 0, 752, 1.0, 0 - 350.51, "aiin");
+        this.turaga.initfull();
+        this.turaga.add();
+        this.turaga.hide();
+        this.turaga.settweakable();
+        this.resetmboulders1 = new lego_timer("rmb1", 12.0, 0);
+        this.resetmboulders2 = new lego_timer("rmb2", 12.0, 0);
+        this.resetmboulders3 = new lego_timer("rmb3", 12.0, 0);
+        this.miniboulders1 = [ new lego_projectileobject("mb01", this.parent.name), 
+            new lego_projectileobject("mb02", this.parent.name), 
+            new lego_projectileobject("mb03", this.parent.name), 
+            new lego_projectileobject("mb04", this.parent.name), 
+            new lego_projectileobject("mb05", this.parent.name), 
+            new lego_projectileobject("mb06", this.parent.name), 
+            new lego_projectileobject("mb07", this.parent.name) ];
+        this.miniboulders2 = [ new lego_projectileobject("mb08", this.parent.name), 
+            new lego_projectileobject("mb09", this.parent.name), 
+            new lego_projectileobject("mb10", this.parent.name), 
+            new lego_projectileobject("mb11", this.parent.name), 
+            new lego_projectileobject("mb12", this.parent.name), 
+            new lego_projectileobject("mb13", this.parent.name), 
+            new lego_projectileobject("mb14", this.parent.name) ];
+        this.miniboulders3 = [ new lego_projectileobject("mb15", this.parent.name), 
+            new lego_projectileobject("mb16", this.parent.name), 
+            new lego_projectileobject("mb17", this.parent.name), 
+            new lego_projectileobject("mb18", this.parent.name), 
+            new lego_projectileobject("mb19", this.parent.name), 
+            new lego_projectileobject("mb20", this.parent.name), 
+            new lego_projectileobject("mb21", this.parent.name) ];
+        this.platarray = [ new platform("flr1", this.parent.name), 
+            new platform("flr2", this.parent.name), 
+            new platform("flr3", this.parent.name), 
+            new platform("flr4", this.parent.name), 
+            new platform("flr5", this.parent.name), 
+            new platform("flr6", this.parent.name), 
+            new platform("flr7", this.parent.name), 
+            new platform("flr8", this.parent.name), 
+            new platform("flr9", this.parent.name) ];
+        this.rockmandead = 0;
+        gcareadirector::setnearestmax(50);
+        this.stone = new lego_pickup("ston", 0, 4, "item", 8, 0);
+        this.stone.initfull();
+        this.stone.obj.setpos(0, 0, 0);
+        this.resetmboulders1.initfull();
+        this.resetmboulders2.initfull();
+        this.resetmboulders3.initfull();
+        var2 = 0;
+        while ((this.miniboulders1.__length - 1) >= var2) {
+            this.miniboulders1[var2].init(0.1, 0, 0, 0, 0, 0.8, "lbld", "Root/data/levels/lev3/boss", 60, -1, -1, -1, 1, 1, 1, 1024);
+            this.miniboulders1[var2].setresponse(4, 4, 4);
+            this.miniboulders1[var2].setposition(0.0, 0.0, 0.0);
+            this.miniboulders1[var2].ignorecollisionswith(1937010290);
+            var2 = var2 + 1;
+        }
+        this.miniboulders1[0].setresponse(3, 3, 3);
+        var2 = 0;
+        while ((this.miniboulders2.__length - 1) >= var2) {
+            this.miniboulders2[var2].init(0.1, 0, 0, 0, 0, 0.8, "lbld", "Root/data/levels/lev3/boss", 60, -1, -1, -1, 1, 1, 1, 1024);
+            this.miniboulders2[var2].setresponse(4, 4, 4);
+            this.miniboulders2[var2].setposition(0.0, 0.0, 0.0);
+            this.miniboulders2[var2].ignorecollisionswith(1937010290);
+            var2 = var2 + 1;
+        }
+        this.miniboulders2[0].setresponse(3, 3, 3);
+        var2 = 0;
+        while ((this.miniboulders3.__length - 1) >= var2) {
+            this.miniboulders3[var2].init(0.1, 0, 0, 0, 0, 0.8, "lbld", "Root/data/levels/lev3/boss", 60, -1, -1, -1, 1, 1, 1, 1024);
+            this.miniboulders3[var2].setresponse(4, 4, 4);
+            this.miniboulders3[var2].setposition(0.0, 0.0, 0.0);
+            this.miniboulders3[var2].ignorecollisionswith(1937010290);
+            var2 = var2 + 1;
+        }
+        this.miniboulders3[0].setresponse(3, 3, 3);
+        var2 = 0;
+        while ((this.platarray.__length - 1) >= var2) {
+            this.platarray[var2].initfull();
+            var3 = "plt" + __tostring(var2);
+            this.platarray[var2].setupfall(2.0, var3);
+            this.platarray[var2].setuptouchshakerotate(1.5, 0.0, 1.5, 0.2);
+            var2 = var2 + 1;
+        }
+        this.rocker = new rockman(this.parent.name);
+        this.rocker.initfull();
+        gcareadirector::setnearestmaxdist(1000);
+        gcareadirector::setnearestmax(255);
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::hide(scslosifoundation::stringtoidentifier("lbld"), 0);
+        this.reset();
+        return null;
+    }
+    
+    method setupstrings() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = gcareadirector::getscriptstring(1651471219, 2, 0);
+        var2 = gcareadirector::getscriptstring(1651471219, 2, 1);
+        var3 = (screeny - 100) + 20;
+        var4 = (screeny - 100) + 40;
+        this.titletext1 = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var1, screenx * 0.5, var3, 0, 2.0, 256, 0, 0);
+        this.titletext2 = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var2, screenx * 0.5, var4, 0, 2.0, 256, 0, 0);
+        return null;
+    }
+    
+    method showstrings() {
+        this.titletext1.initfull();
+        this.titletext2.initfull();
+        this.titletext1.add();
+        this.titletext2.add();
+        this.titletext1.show();
+        this.titletext2.show();
+        return null;
+    }
+    
+    method cleanupstrings() {
+        this.titletext1.remove();
+        this.titletext2.remove();
+        this.titletext1.cleanupfull();
+        this.titletext2.cleanupfull();
+        this.titletext1 = null;
+        this.titletext2 = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        if (this.platprocess) {
+            var1 = 0;
+            while ((this.platarray.__length - 1) >= var1) {
+                this.platarray[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
+        if (param1.eventid == 19) {
+            var1 = 0;
+            while ((this.rocker.rocks.__length - 1) >= var1) {
+                if (param1.args[1] == this.rocker.rocks[var1].id) {
+                    this.explode(this.rocker.rocks[var1], 0);
+                }
+                var1 = var1 + 1;
+            }
+            if (param1.args[1] == 1835151409) {
+                this.usemini1 = 1;
+                debug::print("Using mini 1");
+            }
+            else if (param1.args[1] == 1835151416) {
+                this.usemini2 = 1;
+                debug::print("Using mini 2");
+            }
+            else if (param1.args[1] == 1835151669) {
+                this.usemini3 = 1;
+                debug::print("Using mini 3");
+            }
+        }
+        else if (param1.eventid == 7) {
+            if (param1.args[0] == 1937010290) {
+                if ((param1.args[1] == 1919627571) || (param1.args[1] == 1919627315)) {
+                    gcstaticsoundsptrarray::playtablesound(524);
+                }
+            }
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("eBEG")) {
+                gcrockboss::emitterbegin(this.rocker.rocky, param1.args[4], param1.args[5]);
+            }
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("eEND")) {
+                gcrockboss::emitterend(this.rocker.rocky, param1.args[4], param1.args[5]);
+            }
+        }
+        else if (param1.eventid == 11) {
+            if (param1.args[1] == 1919627571) {
+                if (this.state == 4) {
+                    this.state = 6;
+                }
+            }
+            else if (param1.args[1] == 1919627320) {
+                this.rocker.throwrock();
+            }
+        }
+        else if (param1.eventid == 13) {
+            if (this.rocker.curstate == 2) {
+                this.rocker.morph(0);
+            }
+            else if (this.rocker.curstate == 0) {
+                gcrockboss::setsplitanimation(this.rocker.rocky, 1919627571, -1);
+            }
+            else if (this.rocker.curstate == 1) {
+                this.state = 9;
+                gcrockboss::setdisplaymorphmodel(this.rocker.rocky, 2);
+                this.rocktimer = 0;
+            }
+            else if (this.rocker.curstate == 3) {
+                gcrockboss::setdisplaymorphmodel(this.rocker.rocky, 4);
+                var1 = 0;
+                while ((this.platarray.__length - 1) >= var1) {
+                    this.platarray[var1].drop();
+                    var1 = var1 + 1;
+                }
+                this.explode(this.rocker.rocky, 1);
+                this.rocktimer = 2;
+                this.state = 11;
+            }
+        }
+        else if (param1.eventid == 53) {
+            if (param1.args[0] == 1835151409) {
+                this.usemini1 = 0;
+            }
+            else if (param1.args[0] == 1835151416) {
+                this.usemini2 = 0;
+            }
+            else if (param1.args[0] == 1835151669) {
+                this.usemini3 = 0;
+            }
+        }
+        else if (param1.eventid == 14) {
+            if (this.state == 10) {
+                this.rocker.morph(1);
+                this.rockmandead = 1;
+                this.platprocess = 1;
+                globalclass.player.actor.idle();
+                this.parent.level.cam.setaimode(0);
+            }
+            else {
+                this.rocker.morph(0);
+                this.showstrings();
+            }
+            this.parent.level.cam.setaimode(0);
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {
+                if (this.startcam == 1) {
+                    var2 = 752.0;
+                    var3 = 0.5;
+                    var4 = 0 - 429.51;
+                    this.parent.level.cam.interpolate(var2, var3 + 10, var4 + 30, var2, var3 + 10, var4, 3);
+                    globalclass.bgmusic.play(1);
+                    this.startcam = 0;
+                }
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                globalclass.setnextlevel("lev4");
+            }
+        }
+        else if (param1.eventid == 52) {
+            gcrockboss::kickboulder(this.rocker.rocky, param1.args[0]);
+        }
+        else if (param1.eventid == 43) {
+            if (this.rockmandead == 0) {
+                this.rockmandead = 1;
+                this.parent.level.cam.interpolate(752.0, 0.5 + 10, (0 - 429.51) + 30, 752.0, 0.5 + 10, 0 - 429.51, 2.0);
+                this.state = 10;
+                debug::print("Starting camera interpolate");
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.state = 4;
+            this.oldstate = 0;
+            debug::print("Resetting to NO_STATE from PLAYER_IS_DEAD");
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.idle();
+            globalclass.bgmusic.stop();
+            if (this.rockmandead == 0) {
+                this.reset();
+            }
+            else if (this.havestone == 0) {
+                this.state = 11;
+                this.rocktimer = 5;
+            }
+            else {
+                globalclass.player.actor.setpos(765, 0 - 43.4, -435);
+            }
+        }
+        else if (param1.eventid == 35) {
+            if ((param1.args[0] == 1868920673) && (param1.args[1] == 1)) {
+                this.startconversation();
+            }
+        }
+        else if (param1.eventid == 41) {
+            this.finishconversation();
+        }
+        else if (param1.eventid == 39) {
+            this.havestone = 1;
+        }
+        return null;
+    }
+    
+    method startconversation() {
+        var var1;
+        this.parent.level.cam.setaimode(11);
+        var1 = gcconversationengine::getconversationengine();
+        gcconversationengine::forceconversation(var1, 1868920673);
+        globalclass.bgmusic.stop();
+        return null;
+    }
+    
+    method finishconversation() {
+        var var1;
+        var var2;
+        var var3;
+        gcareadirector::show(1937010542, 0);
+        var1 = globalclass.player.actor.getposx();
+        var2 = globalclass.player.actor.getposy();
+        var3 = globalclass.player.actor.getposz();
+        this.stone.obj.setpos(var1, var2, var3);
+        globalclass.bgmusic.changefilename("Root/Data/Sounds/PohatuCompletionMusic");
+        globalclass.bgmusic.play(0);
+        gcmodeldirector::hide(1868920673, 0);
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (!(this.rocktimer == null)) {
+            this.rocktimer = this.rocktimer + param1.deltatime;
+            if (this.state == 6) {
+                if (this.rocktimer > 3) {
+                    this.parent.level.cam.setaimode(11);
+                    this.state = 0;
+                    gcrockboss::setdoprocess(this.rocker.rocky, 1);
+                    this.cleanupstrings();
+                }
+            }
+            else if (this.state == 11) {
+                if (this.ending == 0) {
+                    if (this.rocktimer > 5) {
+                        debug::print("showing the turaga");
+                        this.parent.level.cam.setpos(752, 3.0, 0 - 346.51);
+                        this.parent.level.cam.settargetpos(752, 2.0, 0 - 350.51);
+                        this.turaga.show();
+                        gccharacter::settransparency(this.turaga.handle, 0.0);
+                        this.turaga.fadein(1.5);
+                        this.turaga.disableai();
+                        var1 = 0;
+                        while ((this.platarray.__length - 1) >= var1) {
+                            this.platarray[var1].hide();
+                            var1 = var1 + 1;
+                        }
+                        this.platprocess = 0;
+                        this.ending = 1;
+                    }
+                }
+                else {
+                    this.state = 0;
+                }
+            }
+            else if (this.state == 9) {
+                if (this.rocktimer > 2.5) {
+                    this.rocker.morph(1);
+                    this.state = 8;
+                    this.rocktimer = 0;
+                }
+            }
+            this.oldstate = this.state;
+            if (this.platprocess) {
+                var1 = 0;
+                while ((this.platarray.__length - 1) >= var1) {
+                    this.platarray[var1].process(param1);
+                    var1 = var1 + 1;
+                }
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method reset() {
+        var var1;
+        this.setupstrings();
+        var1 = 0;
+        while ((this.miniboulders1.__length - 1) >= var1) {
+            this.miniboulders1[var1].setposition(0.0, 0.0, 0.0);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.miniboulders2.__length - 1) >= var1) {
+            this.miniboulders2[var1].setposition(0.0, 0.0, 0.0);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.miniboulders3.__length - 1) >= var1) {
+            this.miniboulders3[var1].setposition(0.0, 0.0, 0.0);
+            var1 = var1 + 1;
+        }
+        this.currentmboulder = 1;
+        this.state = 4;
+        this.startcam = 1;
+        this.setwatch = 1;
+        this.shakeonce = 1;
+        this.rocktimer = 0;
+        this.platprocess = 0;
+        this.oldstate = 0;
+        debug::print("Resetting to NO_STATE");
+        this.usemini1 = 1;
+        this.usemini2 = 1;
+        this.usemini3 = 1;
+        this.rocker.reset();
+        this.ending = 0;
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        var1 = 0;
+        while ((this.miniboulders1.__length - 1) >= var1) {
+            this.miniboulders1[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.miniboulders2.__length - 1) >= var1) {
+            this.miniboulders2[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.miniboulders3.__length - 1) >= var1) {
+            this.miniboulders3[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.platarray.__length - 1) >= var1) {
+            this.platarray[var1].show();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.state = null;
+        this.shakeonce = null;
+        this.setwatch = null;
+        this.startcam = null;
+        this.rocktimer = null;
+        this.oldstate = null;
+        this.rockmandead = null;
+        if (!(this.turaga == null)) {
+            this.turaga.cleanupfull();
+            this.turaga = null;
+        }
+        if (!(this.rocker == null)) {
+            this.rocker.cleanupfull();
+            this.rocker = null;
+        }
+        if (!(this.miniboulders1 == null)) {
+            var1 = 0;
+            while ((this.miniboulders1.__length - 1) >= var1) {
+                this.miniboulders1[var1].cleanupfull();
+                this.miniboulders1[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.miniboulders1 = null;
+        }
+        if (!(this.miniboulders2 == null)) {
+            var1 = 0;
+            while ((this.miniboulders2.__length - 1) >= var1) {
+                this.miniboulders2[var1].cleanupfull();
+                this.miniboulders2[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.miniboulders2 = null;
+        }
+        if (!(this.miniboulders3 == null)) {
+            var1 = 0;
+            while ((this.miniboulders3.__length - 1) >= var1) {
+                this.miniboulders3[var1].cleanupfull();
+                this.miniboulders3[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.miniboulders3 = null;
+        }
+        if (!(this.resetmboulders1 == null)) {
+            this.resetmboulders1.cleanupfull();
+            this.resetmboulders1 = null;
+        }
+        if (!(this.resetmboulders2 == null)) {
+            this.resetmboulders2.cleanupfull();
+            this.resetmboulders2 = null;
+        }
+        if (!(this.resetmboulders3 == null)) {
+            this.resetmboulders3.cleanupfull();
+            this.resetmboulders3 = null;
+        }
+        this.shakeonce = null;
+        if (!(this.platarray == null)) {
+            var1 = 0;
+            while ((this.platarray.__length - 1) >= var1) {
+                this.platarray[var1].cleanupfull();
+                this.platarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platarray = null;
+        }
+        this.platprocess = null;
+        if (!(this.stone == null)) {
+            this.stone.cleanupfull();
+            this.stone = null;
+        }
+        return null;
+    }
+    
+    method cheat() {
+        return null;
+    }
+    
+    method explode(param1, param2) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        var var11;
+        if (param2) {
+            var1 = 752.0;
+            var2 = 0.5;
+            var3 = 0 - 429.51;
+            var4 = 0;
+            while ((this.miniboulders1.__length - 1) >= var4) {
+                var5 = globalclass.randnum.getrandomfloat(3.0, 5.0);
+                var6 = globalclass.randnum.getrandomfloat(0 - 40.0, 40.0);
+                var7 = globalclass.randnum.getrandomfloat(10.0, 20.0);
+                var8 = globalclass.randnum.getrandomfloat(0 - 40.0, 40.0);
+                var9 = globalclass.randnum.getrandomfloat(var1, var1 + 10.0);
+                var10 = globalclass.randnum.getrandomfloat(var2, var2 + 10.0);
+                var11 = globalclass.randnum.getrandomfloat(var3, var3 + 10.0);
+                this.miniboulders1[var4].setobjscale(var5);
+                this.miniboulders1[var4].setposition(var9, var10, var11);
+                this.miniboulders1[var4].setmoveableflags(1, 1, 0, 1);
+                this.miniboulders1[var4].setvelocity(var6, var7, var8);
+                var4 = var4 + 1;
+            }
+            gcmodeldirector::hide(1937010290, 0);
+            this.resetmboulders1.reset(0);
+            this.resetmboulders1.start();
+        }
+        else {
+            var1 = gcrockboss::getboulderx(this.rocker.rocky, param1.handle);
+            var2 = gcrockboss::getbouldery(this.rocker.rocky, param1.handle);
+            var3 = gcrockboss::getboulderz(this.rocker.rocky, param1.handle);
+            this.explodesound.synctocharacter(scslosifoundation::stringtoidentifier("cnt1"));
+            this.explodesound.play();
+            if (this.currentmboulder == 1) {
+                var4 = 0;
+                while ((this.miniboulders1.__length - 1) >= var4) {
+                    var5 = 1.0;
+                    if (var4 > 0) {
+                        var5 = globalclass.randnum.getrandomfloat(0.1, 0.5);
+                    }
+                    else {
+                        this.miniboulders1[var4].show();
+                    }
+                    var6 = globalclass.randnum.getrandomfloat(0 - 15.0, 15.0);
+                    var7 = globalclass.randnum.getrandomfloat(0.0, 5.0);
+                    var8 = globalclass.randnum.getrandomfloat(0 - 15.0, 15.0);
+                    var9 = globalclass.randnum.getrandomfloat(var1, var1 + 1.0);
+                    var10 = globalclass.randnum.getrandomfloat(var2, var2 + 1.0);
+                    var11 = globalclass.randnum.getrandomfloat(var3, var3 + 1.0);
+                    if ((var4 > 0) || (this.usemini1 == 1)) {
+                        this.miniboulders1[var4].setobjscale(var5);
+                        this.miniboulders1[var4].setposition(var9, var10, var11);
+                        this.miniboulders1[var4].setmoveableflags(1, 1, 0, 1);
+                        this.miniboulders1[var4].setvelocity(var6, var7, var8);
+                    }
+                    var4 = var4 + 1;
+                }
+                this.resetmboulders1.reset(0);
+                this.resetmboulders1.start();
+                this.shakeonce = 1;
+            }
+            else if (this.currentmboulder == 2) {
+                var4 = 0;
+                while ((this.miniboulders2.__length - 1) >= var4) {
+                    var5 = 1.0;
+                    if (var4 > 0) {
+                        var5 = globalclass.randnum.getrandomfloat(0.1, 0.5);
+                    }
+                    else {
+                        this.miniboulders2[var4].show();
+                    }
+                    var6 = globalclass.randnum.getrandomfloat(0 - 15.0, 15.0);
+                    var7 = globalclass.randnum.getrandomfloat(0.0, 5.0);
+                    var8 = globalclass.randnum.getrandomfloat(0 - 15.0, 15.0);
+                    var9 = globalclass.randnum.getrandomfloat(var1, var1 + 1.0);
+                    var10 = globalclass.randnum.getrandomfloat(var2, var2 + 1.0);
+                    var11 = globalclass.randnum.getrandomfloat(var3, var3 + 1.0);
+                    if ((var4 > 0) || (this.usemini2 == 1)) {
+                        this.miniboulders2[var4].setobjscale(var5);
+                        this.miniboulders2[var4].setposition(var9, var10, var11);
+                        this.miniboulders2[var4].setmoveableflags(1, 1, 0, 1);
+                        this.miniboulders2[var4].setvelocity(var6, var7, var8);
+                    }
+                    var4 = var4 + 1;
+                }
+                this.resetmboulders2.reset(0);
+                this.resetmboulders2.start();
+                this.shakeonce = 1;
+            }
+            else if (this.currentmboulder == 3) {
+                var4 = 0;
+                while ((this.miniboulders3.__length - 1) >= var4) {
+                    var5 = 1.0;
+                    if (var4 > 0) {
+                        var5 = globalclass.randnum.getrandomfloat(0.1, 0.5);
+                    }
+                    else {
+                        this.miniboulders3[var4].show();
+                    }
+                    var6 = globalclass.randnum.getrandomfloat(0 - 15.0, 15.0);
+                    var7 = globalclass.randnum.getrandomfloat(0.0, 5.0);
+                    var8 = globalclass.randnum.getrandomfloat(0 - 15.0, 15.0);
+                    var9 = globalclass.randnum.getrandomfloat(var1, var1 + 1.0);
+                    var10 = globalclass.randnum.getrandomfloat(var2, var2 + 1.0);
+                    var11 = globalclass.randnum.getrandomfloat(var3, var3 + 1.0);
+                    if ((var4 > 0) || (this.usemini3 == 1)) {
+                        this.miniboulders3[var4].setobjscale(var5);
+                        this.miniboulders3[var4].setposition(var9, var10, var11);
+                        this.miniboulders3[var4].setmoveableflags(1, 1, 0, 1);
+                        this.miniboulders3[var4].setvelocity(var6, var7, var8);
+                    }
+                    var4 = var4 + 1;
+                }
+                this.resetmboulders3.reset(0);
+                this.resetmboulders3.start();
+                this.shakeonce = 1;
+            }
+            this.currentmboulder = this.currentmboulder + 1;
+            if (this.currentmboulder > 3) {
+                this.currentmboulder = 1;
+            }
+        }
+        return null;
+    }
+    
+    method shake() {
+        this.parent.level.cam.shakecamera(0.1, 0.3);
+        return null;
+    }
+}

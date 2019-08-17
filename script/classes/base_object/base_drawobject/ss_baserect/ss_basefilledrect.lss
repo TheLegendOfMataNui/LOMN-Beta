@@ -1,0 +1,101 @@
+class ss_basefilledrect : ss_baserect {
+    
+    method ss_basefilledrect(param1, param2, param3, param4, param5, param6) {
+        this.ss_baserect(param1, param2, param3, param4, param5, param6);
+        return null;
+    }
+    
+    method initfull() {
+        this.rect = gcfilledrectangle::create();
+        gcfilledrectangle::setposition(this.rect, this.x1, this.y1, this.x2, this.y2);
+        gcfilledrectangle::setcolor(this.rect, this.mycolor);
+        gcfilledrectangle::setzdepth(this.rect, this.z);
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method add() {
+        this.rident = gchuddirector::addfilledrectangle(this.rect);
+        return null;
+    }
+    
+    method setpos(param1, param2, param3, param4) {
+        if (!(this.x1 == null)) {
+            this.x1 = param1;
+        }
+        if (!(this.y1 == null)) {
+            this.y1 = param2;
+        }
+        if (!(this.x2 == null)) {
+            this.x2 = param3;
+        }
+        if (!(this.y2 == null)) {
+            this.y2 = param4;
+        }
+        gcfilledrectangle::setposition(this.rect, this.x1, this.y1, this.x2, this.y2);
+        return null;
+    }
+    
+    method setzvalue(param1) {
+        if (!(param1 == null)) {
+            this.z = param1;
+        }
+        gcfilledrectangle::setzdepth(this.rect, this.z);
+        return null;
+    }
+    
+    method changepos(param1, param2) {
+        if (!(param1 == null)) {
+            this.x1 = this.x1 + param1;
+        }
+        if (!(param2 == null)) {
+            this.y1 = this.y1 + param2;
+        }
+        if (!(param1 == null)) {
+            this.x2 = this.x2 + param1;
+        }
+        if (!(param2 == null)) {
+            this.y2 = this.y2 + param2;
+        }
+        gcfilledrectangle::setposition(this.rect, this.x1, this.y1, this.x2, this.y2);
+        return null;
+    }
+    
+    method setcolor(param1, param2, param3, param4) {
+        if (!(param1 == null)) {
+            this.mycolor = this.mycolor.__withred(param1);
+        }
+        if (!(param2 == null)) {
+            this.mycolor = this.mycolor.__withgreen(param2);
+        }
+        if (!(param3 == null)) {
+            this.mycolor = this.mycolor.__withblue(param3);
+        }
+        if (!(param4 == null)) {
+            this.mycolor = this.mycolor.__withalpha(param4);
+        }
+        gcfilledrectangle::setcolor(this.rect, this.mycolor);
+        return null;
+    }
+    
+    method changecolor(param1, param2, param3, param4) {
+        if (!(param1 == null)) {
+            this.mycolor = this.mycolor.__withred(this.mycolor.__red + param1);
+        }
+        if (!(param2 == null)) {
+            this.mycolor = this.mycolor.__withgreen(this.mycolor.__green + param2);
+        }
+        if (!(param3 == null)) {
+            this.mycolor = this.mycolor.__withblue(this.mycolor.__blue + param3);
+        }
+        if (!(param4 == null)) {
+            this.mycolor = this.mycolor.__withalpha(this.mycolor.__alpha + param4);
+        }
+        gcfilledrectangle::setcolor(this.rect, this.mycolor);
+        return null;
+    }
+}

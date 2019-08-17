@@ -1,0 +1,166 @@
+class ss_baserect : base_drawobject {
+    property rect;
+    property rident;
+    property mycolor;
+    
+    method ss_baserect(param1, param2, param3, param4, param5, param6) {
+        if (!(param1 == null)) {
+            this.x1 = param1;
+        }
+        else {
+            this.x1 = 0;
+        }
+        if (!(param2 == null)) {
+            this.y1 = param2;
+        }
+        else {
+            this.y1 = 0;
+        }
+        if (!(param3 == null)) {
+            this.x2 = param3;
+        }
+        else {
+            this.x2 = 0;
+        }
+        if (!(param4 == null)) {
+            this.y2 = param4;
+        }
+        else {
+            this.y2 = 0;
+        }
+        if (!(param6 == null)) {
+            this.mycolor = param6;
+        }
+        else {
+            this.mycolor = rgba(255, 255, 255, 255);
+        }
+        if (!(param5 == null)) {
+            this.z = param5;
+        }
+        else {
+            this.z = 0;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        this.rect = gcrectangle::create();
+        gcrectangle::setposition(this.rect, this.x1, this.y1, this.x2, this.y2);
+        gcrectangle::setcolor(this.rect, this.mycolor);
+        gcrectangle::setzdepth(this.rect, this.z);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.rect = null;
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method add() {
+        this.rident = gchuddirector::addrectangle(this.rect);
+        return null;
+    }
+    
+    method show() {
+        gchuddirector::show(this.rident);
+        this.onscreen = 1;
+        return null;
+    }
+    
+    method hide() {
+        gchuddirector::hide(this.rident);
+        this.onscreen = 0;
+        return null;
+    }
+    
+    method remove() {
+        gchuddirector::remove(this.rident);
+        return null;
+    }
+    
+    method setpos(param1, param2, param3, param4) {
+        if (!(this.x1 == null)) {
+            this.x1 = param1;
+        }
+        if (!(this.y1 == null)) {
+            this.y1 = param2;
+        }
+        if (!(this.x2 == null)) {
+            this.x2 = param3;
+        }
+        if (!(this.y2 == null)) {
+            this.y2 = param4;
+        }
+        gcrectangle::setposition(this.rect, this.x1, this.y1, this.x2, this.y2);
+        return null;
+    }
+    
+    method setzvalue(param1) {
+        if (!(param1 == null)) {
+            this.z = param1;
+        }
+        gcrectangle::setzdepth(this.rect, this.z);
+        return null;
+    }
+    
+    method changepos(param1, param2) {
+        if (!(param1 == null)) {
+            this.x1 = this.x1 + param1;
+        }
+        if (!(param2 == null)) {
+            this.y1 = this.y1 + param2;
+        }
+        if (!(param1 == null)) {
+            this.x2 = this.x2 + param1;
+        }
+        if (!(param2 == null)) {
+            this.y2 = this.y2 + param2;
+        }
+        gcrectangle::setposition(this.rect, this.x1, this.y1, this.x2, this.y2);
+        return null;
+    }
+    
+    method setcolor(param1, param2, param3, param4) {
+        if (!(param1 == null)) {
+            this.mycolor = this.mycolor.__withred(param1);
+        }
+        if (!(param2 == null)) {
+            this.mycolor = this.mycolor.__withgreen(param2);
+        }
+        if (!(param3 == null)) {
+            this.mycolor = this.mycolor.__withblue(param3);
+        }
+        if (!(param4 == null)) {
+            this.mycolor = this.mycolor.__withalpha(param4);
+        }
+        gcrectangle::setcolor(this.rect, this.mycolor);
+        return null;
+    }
+    
+    method changecolor(param1, param2, param3, param4) {
+        if (!(param1 == null)) {
+            this.mycolor = this.mycolor.__withred(this.mycolor.__red + param1);
+        }
+        if (!(param2 == null)) {
+            this.mycolor = this.mycolor.__withgreen(this.mycolor.__green + param2);
+        }
+        if (!(param3 == null)) {
+            this.mycolor = this.mycolor.__withblue(this.mycolor.__blue + param3);
+        }
+        if (!(param4 == null)) {
+            this.mycolor = this.mycolor.__withalpha(this.mycolor.__alpha + param4);
+        }
+        gcrectangle::setcolor(this.rect, this.mycolor);
+        return null;
+    }
+}

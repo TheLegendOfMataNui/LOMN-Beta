@@ -1,0 +1,202 @@
+class cliff1_puzzle : base_object {
+    property parent;
+    property button;
+    property buttonpos;
+    property ledge1;
+    property ledge1pos;
+    property ledge2;
+    property ledge2pos;
+    property savecam;
+    property buttonpressed;
+    property cutscenetimer;
+    property splineon;
+    
+    method cliff1_puzzle(param1) {
+        this.parent = param1;
+        this.buttonpressed = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        gcareadirector::setnearestmax(8);
+        gcmodeldirector::setnearestmax(15);
+        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
+        globalclass.bgmusic.play(1);
+        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var1, 3);
+        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("lsrp"));
+        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(var2, 3);
+        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("lsrp"));
+        var3 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv2"));
+        gchive::setmaxcreatures(var3, 3);
+        gchive::setcreaturetype(var3, scslosifoundation::stringtoidentifier("lsrp"));
+        this.button = new lego_moveableobject("lbtn", this.parent.name, [  ]);
+        this.ledge1 = new lego_moveableobject("led1", this.parent.name, [  ]);
+        this.ledge2 = new lego_moveableobject("led2", this.parent.name, [  ]);
+        var4 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("clf1"));
+        gcmoveableobj::inittargetmorph(var4, "lev1", "clf1");
+        gcmoveableobj::setdig(var4, 1);
+        this.cutscenetimer = new lego_timer("tim0", 1.5, 0);
+        this.splineon = 0;
+        this.button.initfull();
+        this.button.setresponse(0, 0, 3);
+        this.buttonpos = [ this.button.getx(), 
+            this.button.gety(), 
+            this.button.getz() ];
+        this.ledge1.initfull();
+        this.ledge1.setresponse(4, 4, 4);
+        this.ledge1pos = [ this.ledge1.getx(), 
+            this.ledge1.gety(), 
+            this.ledge1.getz() ];
+        this.ledge2.initfull();
+        this.ledge2.setresponse(4, 4, 4);
+        this.ledge2pos = [ this.ledge2.getx(), 
+            this.ledge2.gety(), 
+            this.ledge2.getz() ];
+        this.cutscenetimer.initfull();
+        if (gcsaver::isconditionset(8388608)) {
+            this.skipcinematic();
+            this.buttonpressed = 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.button != null) {
+            this.button.cleanupfull();
+            this.button = null;
+        }
+        if (this.ledge1 != null) {
+            this.ledge1.cleanupfull();
+            this.ledge1 = null;
+        }
+        if (this.ledge2 != null) {
+            this.ledge2.cleanupfull();
+            this.ledge2 = null;
+        }
+        if (this.cutscenetimer != null) {
+            this.cutscenetimer.cleanupfull();
+            this.cutscenetimer = null;
+        }
+        this.buttonpos = null;
+        this.ledge1pos = null;
+        this.ledge2pos = null;
+        this.savecam = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
+                if (this.buttonpressed == 0) {
+                    this.buttonpressed = 1;
+                    gcstaticsoundsptrarray::playtablesound(1086);
+                    this.runcinematic();
+                }
+            }
+        }
+        else if (param1.eventid == 12) {
+            if (param1.args[0] == this.button.id) {
+                var1 = this.parent.level.cam;
+                this.savecam = [ var1.x1, 
+                    var1.y1, 
+                    var1.z, 
+                    var1.tx, 
+                    var1.ty, 
+                    var1.tz ];
+                var1.scaletocutscene();
+                var1.makespline("Root/Data/Levels/lev1/clf1/clf1_CAM.slb");
+                var1.setspline(0, 4.0, 1, 0);
+                var1.settargetspline(3, 1, 0);
+                var1.settargetpos(-133, -61, -223);
+                var1.setaimode(3);
+                this.splineon = 1;
+                this.ledge1.setresponse(0, 0, 3);
+                this.ledge2.setresponse(0, 0, 3);
+                this.ledge1.interpolate(0 - 171.9185, this.ledge1pos[1], 0 - 259.285, 3.0);
+                this.ledge2.interpolate(0 - 81.96168, this.ledge2pos[1], 0 - 191.5045, 3.0);
+                gcstaticsoundsptrarray::playtablesound(1053);
+            }
+        }
+        else if (param1.eventid == 6) {
+            this.parent.level.cam.setaimode(0);
+            this.splineon = 0;
+            this.cutscenetimer.start();
+        }
+        else if (param1.eventid == 8) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tim0")) {
+                var1 = this.parent.level.cam;
+                var1.setaimode(11);
+                var1.setpos(this.savecam[0], this.savecam[1], this.savecam[2]);
+                var1.settargetpos(this.savecam[3], this.savecam[4], this.savecam[5]);
+                var1.resetviewport();
+                globalclass.hud.show();
+                globalclass.player.actor.setinputstate("ninp");
+                scprocessmanager::pausecreatures(0);
+                this.cutscenetimer.reset();
+            }
+        }
+        return null;
+    }
+    
+    method runcinematic() {
+        scprocessmanager::pausecreatures(1);
+        globalclass.hud.hide();
+        this.button.interpolate(this.buttonpos[0], 0 - 63.269, this.buttonpos[2], 1.0);
+        this.buttonpressed = 1;
+        this.parent.level.cam.shakecamera(1.0, 0.08);
+        globalclass.player.actor.setinputstate("none");
+        globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+        gcsaver::setcondition(8388608, 1);
+        return null;
+    }
+    
+    method skipcinematic() {
+        this.buttonpressed = 1;
+        this.button.setposition(this.buttonpos[0], 0 - 63.269, this.buttonpos[2]);
+        this.ledge1.setresponse(0, 0, 3);
+        this.ledge2.setresponse(0, 0, 3);
+        this.ledge1.setposition(0 - 171.9185, this.ledge1pos[1], 0 - 259.285);
+        this.ledge2.setposition(0 - 81.96168, this.ledge2pos[1], 0 - 191.5045);
+        return null;
+    }
+    
+    method resetcinematic() {
+        this.buttonpressed = 0;
+        this.button.setposition(this.buttonpos[0], this.buttonpos[1], this.buttonpos[2]);
+        this.ledge1.setposition(this.ledge1pos[0], this.ledge1pos[1], this.ledge1pos[2]);
+        this.ledge2.setposition(this.ledge2pos[0], this.ledge2pos[1], this.ledge2pos[2]);
+        this.splineon = 0;
+        return null;
+    }
+}

@@ -1,0 +1,52 @@
+class base_screen : base_object {
+    property items;
+    
+    method base_screen(param1) {
+        this.items = param1;
+        return null;
+    }
+    
+    method initfull() {
+        if (!(this.items == null)) {
+            this.items.initfull();
+            this.items.add();
+            this.items.show();
+        }
+        return null;
+    }
+    
+    method initshort() {
+        if (!(this.items == null)) {
+            this.items.initshort();
+            this.items.add();
+            this.items.show();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.items == null)) {
+            this.items.hide();
+            this.items.remove();
+            this.items.cleanupfull();
+        }
+        return null;
+    }
+    
+    method cleanupshort() {
+        if (!(this.items == null)) {
+            this.items.hide();
+            this.items.remove();
+            this.items.cleanupshort();
+        }
+        return null;
+    }
+    
+    method transitionin(param1) {
+        return 1;
+    }
+    
+    method transitionout(param1) {
+        return 1;
+    }
+}

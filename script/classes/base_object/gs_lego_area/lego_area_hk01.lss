@@ -1,0 +1,52 @@
+class lego_area_hk01 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_hk01(param1) {
+        this.gs_lego_area("hk01", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new grapplinghook2_puzzle_class(this);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gcareadirector::setfog(-15724528, 0 - 1.0, 0 - 200.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setnearestmax(15);
+        gcmodeldirector::setnearestmax(8);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.puzzle.cleanupfull();
+        this.lego_area_hide();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        return null;
+    }
+}

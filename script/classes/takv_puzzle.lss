@@ -1,0 +1,197 @@
+class takv_puzzle {
+    property parent;
+    property door1;
+    property door2;
+    property killedcharacters;
+    property call_ev_safe_time_once;
+    property showintro;
+    property desctext;
+    property howtotext;
+    
+    method takv_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var bosstext;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play();
+        this.killedcharacters = 0;
+        this.call_ev_safe_time_once = 1;
+        globalclass.player.actor.setunderwater(1);
+        this.door1 = new lego_moveableobject("drs0");
+        this.door1.initfull();
+        this.door1.settweakable();
+        this.door2 = new lego_moveableobject("drs1");
+        this.door2.initfull();
+        this.door2.settweakable();
+        this.opendoors();
+        if (gcsaver::isconditionset(536870912)) {
+            this.showintro = 0;
+        }
+        else {
+            this.showintro = 1;
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", bosstext, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            this.desctext.initfull();
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
+            this.howtotext.initfull();
+        }
+        return null;
+    }
+    
+    method initshort() {
+        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+        globalclass.player.unkill();
+        globalclass.player.actor.setunderwater(1);
+        this.opendoors();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.door1 == null)) {
+            this.door1.cleanupfull();
+            this.door1 = null;
+        }
+        if (!(this.door2 == null)) {
+            this.door2.cleanupfull();
+            this.door2 = null;
+        }
+        if (!(this.desctext == null)) {
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        if (!(this.howtotext == null)) {
+            this.howtotext.cleanupfull();
+            this.howtotext = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 44) {
+            if (this.call_ev_safe_time_once) {
+                if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
+                    this.closedoor1();
+                    this.closedoor2();
+                    globalclass.player.actor.setunderwater(0);
+                }
+            }
+        }
+        else if (param1.eventid == 43) {
+            this.killedcharacters = this.killedcharacters + 1;
+            debug::print("****** The Number of characters you have killed in this area is " + __tostring(this.killedcharacters));
+            if (this.killedcharacters == 3) {
+                globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+                globalclass.bgmusic.play();
+                if (!(this.door2 == null)) {
+                    this.opendoor2();
+                }
+            }
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                debug::print("****** COLLIDING WITH TP02 CLOSING DOORS");
+                this.closedoors();
+                if (this.showintro) {
+                    globalclass.bgmusic.changefilename("Root/Data/sounds/Musicgalitheme");
+                    globalclass.bgmusic.play();
+                    this.playintro();
+                }
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+        }
+        else if (param1.eventid == 6) {
+            this.parent.level.cam.setaimode(11);
+            this.parent.level.cam.resetviewport();
+            globalclass.hud.show();
+            this.desctext.hide();
+            this.howtotext.hide();
+        }
+        return null;
+    }
+    
+    method opendoors() {
+        this.opendoor1();
+        this.opendoor2();
+        return null;
+    }
+    
+    method closedoors() {
+        this.closedoor1();
+        this.closedoor2();
+        return null;
+    }
+    
+    method opendoor1() {
+        debug::print("**** OPENING DOOR NUMBER 1");
+        this.door1.interpolate(0.0, 12.0, 88.1, 1.0);
+        return null;
+    }
+    
+    method opendoor2() {
+        debug::print("**** OPENING DOOR NUMBER 2");
+        this.door2.interpolate(0.0, 12.0, 0 - 78.0, 1.0);
+        return null;
+    }
+    
+    method closedoor1() {
+        debug::print("**** CLOSING DOOR NUMBER 1");
+        this.door1.interpolate(0.0, 4.1, 88.1, 1.0);
+        return null;
+    }
+    
+    method closedoor2() {
+        debug::print("**** CLOSING DOOR NUMBER 2");
+        this.door2.interpolate(0.0, 4.96, 0 - 78.0, 1.0);
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 90) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        var var1;
+        var1 = new scriptevent(43, [ scslosifoundation::stringtoidentifier("takv") ]);
+        var1.send();
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+
+    method playintro() {
+        this.parent.level.cam.scaletocutscene();
+        this.parent.level.cam.makespline("Root/Data/Levels/lev2/takv/takv_CAM.slb");
+        this.parent.level.cam.setspline(0, 10.0, 1, 0);
+        this.parent.level.cam.settargetpos(-15.0, 6.0, 20.0);
+        this.parent.level.cam.setaimode(2);
+        globalclass.hud.hide();
+        gcsaver::setcondition(536870912, 1);
+        this.desctext.add();
+        this.desctext.show();
+        this.howtotext.add();
+        this.howtotext.show();
+        this.showintro = 0;
+        return null;
+    }
+}

@@ -1,0 +1,182 @@
+class lep1_puzzle {
+    property parent;
+    property gern;
+    property hookarray;
+    property spider;
+    property firstprocess;
+    property secondprocess;
+    property startpatroltimer;
+    property setupgernai;
+    property showintro;
+    property desctext;
+    property howtotext;
+    
+    method lep1_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var bosstext;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaDrumandBass");
+        globalclass.bgmusic.play();
+        this.setupgernai = 1;
+        this.firstprocess = 1;
+        this.secondprocess = 0;
+        this.startpatroltimer = new lego_timer("ptrl", 5.0, 0);
+        this.startpatroltimer.initfull();
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("spdr")) == 0) {
+            this.spider = new lego_pickup("spdr", 0, 5, "item", 5, 1);
+            this.spider.initfull();
+            this.spider.setcondition(8192);
+            this.spider.setquest(3);
+        }
+        this.hookarray = [ new lego_moveableobject("hk01"), 
+            new lego_moveableobject("hk02"), 
+            new lego_moveableobject("hk03") ];
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].initfull();
+            this.hookarray[var1].setmytargetingflags(1);
+            this.hookarray[var1].setresponse(1, 1, 1);
+            var1 = var1 + 1;
+        }
+        this.gern = new gs_lego_character("rptl", "rptl", "fake", 0, -19, -6, -85, "aiin");
+        this.gern.initfull();
+        this.gern.add(0);
+        this.gern.show();
+        this.gern.aisetspline("Root/Data/Levels/lev5/lep1/lep1_spline.slb", 0);
+        this.gern.aisetbecomeshappy(0);
+        globalclass.player.setgrapplinghookdistance(55);
+        gcmodeldirector::setnearestmaxdist(1000.0);
+        if (gcsaver::isconditionset(536870912)) {
+            this.showintro = 0;
+        }
+        else {
+            this.showintro = 1;
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", bosstext, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            this.desctext.initfull();
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
+            this.howtotext.initfull();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (this.spider != null) {
+            this.spider.cleanupfull();
+            this.spider = null;
+        }
+        if (this.startpatroltimer != null) {
+            this.startpatroltimer.cleanupfull();
+            this.startpatroltimer = null;
+        }
+        if (this.hookarray != null) {
+            var1 = 0;
+            while ((this.hookarray.__length - 1) >= var1) {
+                    this.hookarray[var1].cleanupfull();
+                this.hookarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.hookarray = null;
+        }
+        if (this.gern != null) {
+            this.gern.cleanupfull();
+            this.gern = null;
+        }
+        if (this.desctext != null) {
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        if (this.howtotext != null) {
+            this.howtotext.cleanupfull();
+            this.howtotext = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.setupgernai) {
+            this.gern.aisethandlereaction(0);
+            this.setupgernai = 0;
+        }
+        if (this.firstprocess) {
+            debug::print("1");
+            this.gern.aidisablepatrolonspline();
+            this.firstprocess = 0;
+            this.secondprocess = 1;
+        }
+        else if (this.secondprocess) {
+            debug::print("2");
+            this.startpatroltimer.reset(0);
+            this.startpatroltimer.start();
+            this.secondprocess = 0;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 8) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("ptrl")) {
+                debug::print("3");
+                this.gern.aienablepatrolonspline();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("l000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        else if (param1.eventid == 6) {
+            this.parent.level.cam.setaimode(11);
+            this.parent.level.cam.resetviewport();
+            globalclass.hud.show();
+            this.desctext.hide();
+            this.howtotext.hide();
+        }
+        else if (param1.eventid == 44) {
+            if (this.showintro) {
+                this.playintro();
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+
+    method playintro() {
+        this.parent.level.cam.scaletocutscene();
+        this.parent.level.cam.makespline("Root/Data/Levels/lev5/lep1/lep1_CAM.slb");
+        this.parent.level.cam.setspline(0, 10.0, 1, 0);
+        this.parent.level.cam.settargetpos(-8.731759, -0.129909, -100.761093);
+        this.parent.level.cam.setaimode(2);
+        globalclass.hud.hide();
+        gcsaver::setcondition(536870912, 1);
+        this.desctext.add();
+        this.desctext.show();
+        this.howtotext.add();
+        this.howtotext.show();
+        this.showintro = 0;
+        return null;
+    }
+}

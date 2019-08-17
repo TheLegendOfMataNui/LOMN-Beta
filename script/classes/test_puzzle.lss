@@ -1,0 +1,177 @@
+class test_puzzle {
+    property parent;
+    property callsurfonce;
+    property miruactive;
+    property holedo;
+    property musichasstarted;
+	property boulderarray;
+    
+    method test_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+		var var1;
+        var KEVIN;
+		var tohunga;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-16777216, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        KEVIN = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kevn"));
+        gccharacter::setscale(KEVIN, 15.0);
+		gccharacter::setanimationscalar(KEVIN, 2.00);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(tohunga, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
+		gccharacter::addpart(tohunga, "vlgr/it0a", scslosifoundation::stringtoidentifier("disk"));		
+		gccharacter::addpart(tohunga, "vlgr/swrd", scslosifoundation::stringtoidentifier("sord"));		
+		gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setsplitanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
+		gccharacter::setorientation(tohunga, -90);
+		this.callsurfonce = 1;
+        this.miruactive = 1;
+        this.holedo = 1;
+        this.musichasstarted = 0;
+        this.boulderarray = [ new bldr_boulder("bld0", this, 0 - 55.1, 80.2, 0 - 101.1, 2.8, 1) ]; 
+        var1 = 0;
+        while ((this.boulderarray.__length - 1) >= var1) {
+            this.boulderarray[var1].initfull();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+
+
+    method cleanupfull() {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.boulderarray.__length - 1) >= var1) {
+            this.boulderarray[var1].process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setsurfingability(0.0, 0.0);
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
+            this.callsurfonce = 1;
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {
+                if (this.callsurfonce) {
+                    this.startsurf();
+                    this.callsurfonce = 0;
+                    if (this.musichasstarted == 0) {
+                        this.musichasstarted = 1;
+                        globalclass.bgmusic.play(1);
+                    }
+                }
+            }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {
+                if (this.miruactive) {
+                    this.actmiru();
+				}
+            }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                if (this.holedo) {
+                    this.holedo();
+				}
+            }
+        }
+
+        var var1;
+        if (param1.eventid == 31) {
+            var1 = 0;
+            while ((this.boulderarray.__length - 1) >= var1) {
+                if (param1.args[0] == this.boulderarray[var1].id) {
+                    this.boulderarray[var1].resettostart();
+                }
+                var1 = var1 + 1;
+            }
+        }
+        else if (param1.eventid == 1) {
+            var1 = 0;
+            while ((this.boulderarray.__length - 1) >= var1) {
+                if (param1.args[0] == this.boulderarray[var1].id) {
+                    if (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) {
+                        globalclass.player.actor.react(0, 4, this.boulderarray[var1].id);
+                    }
+                }
+                var1 = var1 + 1;
+            }
+        }
+        var1 = 0;
+        while ((this.boulderarray.__length - 1) >= var1) {
+            this.boulderarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.boulderarray.__length - 1) >= var1) {
+            this.boulderarray[var1].input(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method startsurf() {
+        globalclass.player.actor.setsurfingability(0.3, 0.8);
+        globalclass.player.actor.setsurfminspeed(100.0);
+        globalclass.player.actor.setsurfmaxspeed(200.0);
+        return null;
+    }
+    
+    method stopsurf() {
+        globalclass.player.actor.setsurfingability(0.0, 0.0);
+        return null;
+    }
+
+	method actmiru() {
+		globalclass.player.maskcontrol.changemask(4);
+		globalclass.player.maskcontrol.toggleactive();
+    return null;
+    }
+
+	method holedo() {
+        var var1;
+        globalclass.player.actor.setsurfingability(0.3, 0.8);
+        globalclass.player.actor.setsurfminspeed(10.0);
+        globalclass.player.actor.setsurfmaxspeed(50.0);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"));
+        gccharacter::setscale(var1, 0.00001);
+    return null;
+    }
+
+}

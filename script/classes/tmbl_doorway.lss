@@ -1,0 +1,25 @@
+class tmbl_doorway {
+    property startid;
+    property lookid;
+    property trigger;
+    property gotodoor;
+    
+    method tmbl_doorway(param1, param2, param3, param4) {
+        this.startid = scslosifoundation::stringtoidentifier(param1);
+        this.lookid = scslosifoundation::stringtoidentifier(param2);
+        this.trigger = new lego_triggerobject(param3, param4, 0);
+        this.gotodoor = -1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.trigger.cleanupfull();
+        this.trigger = null;
+        return null;
+    }
+    
+    method setgotodoor(param1) {
+        this.gotodoor = param1;
+        return null;
+    }
+}

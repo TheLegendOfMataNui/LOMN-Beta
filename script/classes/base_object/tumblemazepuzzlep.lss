@@ -1,0 +1,164 @@
+class tumblemazepuzzlep : base_object {
+    property doors;
+    property nextdoor;
+    property glyph;
+    property showglyph;
+    property area;
+    property dead;
+    
+    method tumblemazepuzzlep(param1) {
+        this.area = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        gcareadirector::setnearestmax(50);
+        this.dead = 0;
+        var1 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("gly0"));
+        if (var1) {
+            this.showglyph = 0;
+        }
+        else {
+            this.showglyph = 1;
+        }
+        if (this.showglyph) {
+            this.glyph = new lego_pickup("gly0", 3, 2, "item", 7, 1);
+            this.glyph.initfull();
+        }
+        this.doors = [  ];
+        this.doors.__append(new tmbl_doorway("stre", "loke", "tpt1", this.area.name));
+        this.doors.__append(new tmbl_doorway("strd", "lokd", "tpt2", this.area.name));
+        this.doors.__append(new tmbl_doorway("strc", "lokc", "tpt3", this.area.name));
+        this.doors.__append(new tmbl_doorway("str0", "lok0", "tpt0", this.area.name));
+        this.doors.__append(new tmbl_doorway("str1", "lok1", "tpt8", this.area.name));
+        this.doors.__append(new tmbl_doorway("str4", "lok4", "tpt7", this.area.name));
+        this.doors.__append(new tmbl_doorway("str3", "lok3", "tpt6", this.area.name));
+        this.doors.__append(new tmbl_doorway("str2", "lok2", "tpt5", this.area.name));
+        this.doors.__append(new tmbl_doorway("str8", "lok8", "tptc", this.area.name));
+        this.doors.__append(new tmbl_doorway("str7", "lok7", "tptb", this.area.name));
+        this.doors.__append(new tmbl_doorway("str6", "lok6", "tpta", this.area.name));
+        this.doors.__append(new tmbl_doorway("str5", "lok5", "tpt9", this.area.name));
+        this.doors.__append(new tmbl_doorway("str9", "lok9", "tptf", this.area.name));
+        this.doors.__append(new tmbl_doorway("strb", "lokb", "tpte", this.area.name));
+        this.doors.__append(new tmbl_doorway("stra", "loka", "tptd", this.area.name));
+        this.doors[0].setgotodoor(2);
+        this.doors[1].setgotodoor(6);
+        this.doors[2].setgotodoor(3);
+        this.doors[3].setgotodoor(3);
+        this.doors[4].setgotodoor(3);
+        this.doors[5].setgotodoor(7);
+        this.doors[6].setgotodoor(7);
+        this.doors[7].setgotodoor(9);
+        this.doors[8].setgotodoor(3);
+        this.doors[9].setgotodoor(3);
+        this.doors[10].setgotodoor(12);
+        this.doors[11].setgotodoor(5);
+        this.doors[12].setgotodoor(8);
+        this.doors[13].setgotodoor(10);
+        this.doors[14].setgotodoor(15);
+        var2 = 0;
+        while ((this.doors.__length - 1) >= var2) {
+            this.doors[var2].trigger.initfull();
+            this.doors[var2].trigger.setresponse(3, 4);
+            var2 = var2 + 1;
+        }
+        var2 = 0;
+        while ((this.doors.__length - 1) >= var2) {
+            this.doors[var2].trigger.show();
+            var2 = var2 + 1;
+        }
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = this.doors.__length - 1;
+        while (var1 >= 0) {
+            this.doors[var1].cleanupfull();
+            this.doors[var1] = null;
+            var1 = var1 - 1;
+        }
+        if (!(this.glyph == null)) {
+            if (this.glyph.objshown == 0) {
+                this.showglyph = 0;
+            }
+            this.glyph.cleanupfull();
+            this.glyph = null;
+        }
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.area = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.doors.__length - 1) >= var1) {
+            this.doors[var1].trigger.process(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 67) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.dead = 1;
+        }
+        else if (param1.eventid == 27) {
+            if (this.dead == 1) {
+                globalclass.player.unkill();
+                globalclass.player.actor.gotopos(this.area.enterstartid, this.area.enterlookid);
+                this.dead = 0;
+            }
+            else if (this.nextdoor == 15) {
+                gcareadirector::switchareas(scslosifoundation::stringtoidentifier("shrn"), scslosifoundation::stringtoidentifier("str2"), scslosifoundation::stringtoidentifier("lok0"));
+            }
+            else if (!(this.nextdoor == -1)) {
+                globalclass.player.actor.gotopos(this.doors[this.nextdoor].startid, this.doors[this.nextdoor].lookid);
+            }
+        }
+        else if (param1.eventid == 4) {
+            var1 = 0;
+            while ((this.doors.__length - 1) >= var1) {
+                if (param1.args[0] == this.doors[var1].trigger.id) {
+                    this.nextdoor = this.doors[var1].gotodoor;
+                    gccollisionphysicsgroup::spinmask(0.7);
+                }
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        this.nextdoor = 13;
+        gccollisionphysicsgroup::spinmask(0.7);
+        return null;
+    }
+}

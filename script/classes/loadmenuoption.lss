@@ -1,0 +1,48 @@
+class loadmenuoption {
+    property text;
+    property halfheight;
+    property lit;
+    property selectable;
+    
+    method loadmenuoption(param1, param2) {
+        this.text = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", param1, __toint(320 * screenratio), __toint(param2 * screenratio), 0, 1.0 * screenratio, 256, 4, 0, 1);
+        this.lit = 0;
+        this.selectable = 1;
+        return null;
+    }
+    
+    method initfull() {
+        this.text.initfull();
+        this.text.add();
+        this.text.show();
+        this.halfheight = this.text.getheight() * 0.5;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.text.hide();
+        this.text.remove();
+        this.text.cleanupfull();
+        this.text = null;
+        return null;
+    }
+    
+    method setselectable(param1) {
+        this.selectable = param1;
+        return null;
+    }
+    
+    method check(param1, param2) {
+        if (((this.selectable == 1) && (param2 > (this.text.y1 - this.halfheight))) && (param2 < (this.text.y1 + this.halfheight))) {
+            if (this.lit == 0) {
+                sctilefont::setcolor(this.text.font, 255, 255, 0, 255);
+                this.lit = 1;
+            }
+        }
+        else if ((this.selectable == 1) && this.lit) {
+            sctilefont::setcolor(this.text.font, 255, 255, 255, 255);
+            this.lit = 0;
+        }
+        return this.lit;
+    }
+}

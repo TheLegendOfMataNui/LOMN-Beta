@@ -1,0 +1,161 @@
+class rescuetohunga_puzzlep : base_object {
+    property parent;
+    property scorpion;
+    property showintro;
+    property desctext;
+    property howtotext;
+    property spikedoortop;
+    property spikedoorbottom;
+    
+    method rescuetohunga_puzzlep(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var hive1handle;
+        var hive2handle;
+        var boss_text;
+        gcareadirector::setfog(-16777216, 0 - 75.0, 0 - 200.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(10);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
+        globalclass.bgmusic.play(1);
+        hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hive1handle, 1);
+        gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(hive1handle, 5);
+        hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(hive2handle, 1);
+        gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(hive2handle, 5);
+        gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("a005"));
+        this.scorpion = new gs_lego_character("chia", "bsrp", "scrp", 0, 0 - 170.4, 0 - 71.6, 0 - 543.9, "aiin");
+        this.spikedoortop = new lego_moveableobject("drtp", "shrn");
+        this.spikedoortop.initfull();
+        this.spikedoorbottom = new lego_moveableobject("drbm", "shrn");
+        this.spikedoorbottom.initfull();
+        this.scorpion.initfull();
+        this.scorpion.add();
+        this.scorpion.show();
+        this.scorpion.aisetattacktype(5);
+        this.scorpion.setscale(3.0);
+        if (gcsaver::isconditionset(1073741824)) {
+            this.showintro = 0;
+        }
+        else {
+            this.showintro = 1;
+            boss_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", boss_text, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            this.desctext.initfull();
+            boss_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", boss_text, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
+            this.howtotext.initfull();
+        }
+        if (bettersaver::getbooleanvalue(71)) {
+            this.spikedoortop.interpolate(this.spikedoortop.getx(), this.spikedoortop.gety() + 15, this.spikedoortop.getz(), 0.0);
+            this.spikedoorbottom.interpolate(this.spikedoorbottom.getx(), this.spikedoorbottom.gety() - 25, this.spikedoorbottom.getz(), 0.0);
+            globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+            globalclass.bgmusic.play(1);
+            if (this.scorpion != null) {
+                this.scorpion.cleanupfull();
+                this.scorpion = null;
+            }
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.desctext != null) {
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        if (this.howtotext != null) {
+            this.howtotext.cleanupfull();
+            this.howtotext = null;
+        }
+        if (this.scorpion != null) {
+            this.scorpion.cleanupfull();
+            this.scorpion = null;
+        }
+        if (this.spikedoortop != null) {
+            this.spikedoortop.cleanupfull();
+            this.spikedoortop = null;
+        }
+        if (this.spikedoorbottom != null) {
+            this.spikedoorbottom.cleanupfull();
+            this.spikedoorbottom = null;
+        }
+        return null;
+    }
+    
+    method openexit(param1) {
+        this.spikedoortop.interpolate(this.spikedoortop.getx(), this.spikedoortop.gety() + 15, this.spikedoortop.getz(), 5.0);
+        this.spikedoorbottom.interpolate(this.spikedoorbottom.getx(), this.spikedoorbottom.gety() - 25, this.spikedoorbottom.getz(), 5.0);
+        bettersaver::setbooleanvalue(71, 1);
+        return null;
+    }
+    
+    method playintro() {
+        this.parent.level.cam.scaletocutscene();
+        this.parent.level.cam.makespline("Root/Data/Levels/lev1/scrp/scrp_CAM.slb");
+        this.parent.level.cam.setspline(0, 10.0, 1, 0);
+        this.parent.level.cam.settargetpos(0 - 170.4, 0 - 71.6, 0 - 543.9);
+        this.parent.level.cam.setaimode(2);
+        globalclass.hud.hide();
+        gcsaver::setcondition(1073741824, 1);
+        this.desctext.add();
+        this.desctext.show();
+        this.howtotext.add();
+        this.howtotext.show();
+        this.showintro = 0;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 44) {
+            if (this.showintro) {
+                this.playintro();
+            }
+        }
+        else if (param1.eventid == 6) {
+            this.parent.level.cam.setaimode(11);
+            this.parent.level.cam.resetviewport();
+            globalclass.hud.show();
+            this.desctext.hide();
+            this.howtotext.hide();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 43) {
+            if (this.scorpion != null) {
+                if (param1.args[0] == this.scorpion.id) {
+                    globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+                    globalclass.bgmusic.play(1);
+                    this.scorpion.cleanupfull();
+                    this.scorpion = null;
+                    this.openexit();
+                }
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

@@ -1,0 +1,81 @@
+class gs_lego_animsprite : base_objectarray {
+    property def;
+    property cur;
+    property animate;
+    property rate;
+    property frame;
+    
+    method gs_lego_animsprite(param1, param2, param3) {
+        this.base_objectarray(param1);
+        if (!(param2 == null)) {
+            this.rate = param2;
+        }
+        else {
+            this.rate = 1;
+        }
+        this.frame = 0;
+        if (!(param3 == null)) {
+            this.def = param3;
+        }
+        else {
+            this.def = 0;
+        }
+        this.cur = this.def;
+        this.animate = 0;
+        return null;
+    }
+    
+    method show() {
+        this.items[this.def].show();
+        return null;
+    }
+    
+    method hide() {
+        this.items[this.cur].hide();
+        return null;
+    }
+    
+    method enablealphachannel(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].enablealphachannel(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method setdefault(param1) {
+        this.def = param1;
+        return null;
+    }
+    
+    method play() {
+        this.animate = 1;
+        this.cur = this.def;
+        return null;
+    }
+    
+    method stop() {
+        this.items[this.cur].hide();
+        this.items[this.def].show();
+        this.animate = 0;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.animate == 1) {
+            this.frame = this.frame + 1;
+            if (this.frame == this.rate) {
+                this.items[this.cur].hide();
+                this.cur = this.cur + 1;
+                if (this.cur > (this.items.__length - 1)) {
+                    this.cur = 0;
+                }
+                this.items[this.cur].show();
+                this.frame = 0;
+            }
+        }
+        return null;
+    }
+}

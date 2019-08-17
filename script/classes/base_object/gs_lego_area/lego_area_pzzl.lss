@@ -1,0 +1,52 @@
+class lego_area_pzzl : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_pzzl(param1) {
+        this.gs_lego_area("pzzl", param1, 0, 0);
+        this.puzzle = new pizza_puzzlep(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(10);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setfog(-16777216, 0 - 30.0, 0 - 80.0, 0.05);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        this.puzzle.initfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        return null;
+    }
+}
