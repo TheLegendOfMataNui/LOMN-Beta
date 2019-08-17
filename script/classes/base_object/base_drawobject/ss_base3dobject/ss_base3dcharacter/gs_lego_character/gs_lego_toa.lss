@@ -44,6 +44,28 @@ class gs_lego_toa : gs_lego_character {
         this.handle = gcmodeldirector::getcharacter(this.contid, this.areaid);
         var1 = 1;
         this.ishookenabled = 0;
+        if (this.charname == "onua") {
+            globalclass.unlockdirector.unlocks.played_onua = true;
+        }
+        else if (this.charname == "gali") {
+            globalclass.unlockdirector.unlocks.played_gali = true;
+        }
+        else if (this.charname == "poha") {
+            globalclass.unlockdirector.unlocks.played_gali = true;
+        }
+        else if (this.charname == "kopa") {
+            globalclass.unlockdirector.unlocks.played_kopaka = true;
+        }
+        else if (this.charname == "lewa") {
+            globalclass.unlockdirector.unlocks.played_lewa = true;
+        }
+        else if (this.charname == "tahu") {
+            globalclass.unlockdirector.unlocks.played_tahu = true;
+        }
+        else {
+            debug::print("Playing as '" + this.charname + "'!");
+        }
+        globalclass.unlockdirector.save();
         return null;
     }
     

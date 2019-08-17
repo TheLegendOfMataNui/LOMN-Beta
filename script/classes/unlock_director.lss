@@ -1,0 +1,23 @@
+class unlock_director {
+    property filename;
+    property file;
+    property unlocks;
+
+    method unlock_director() {
+        this.filename = "Root/data/unlocks";
+        this.file = new slosi_objectfileio(this.filename);
+        if (this.file.fileexist()) {
+            debug::print("Loading unlocks from file...");
+            this.unlocks = this.file.loadosiobject();
+        }
+        else {
+            debug::print("No unlocks file, loading defaults...");
+            this.unlocks = new unlocks();
+        }
+        debug::print("Played onua:" + __tostring(this.unlocks.played_onua));
+    }
+
+    method save() {
+        this.file.saveosiobject(this.unlocks);
+    }
+}
