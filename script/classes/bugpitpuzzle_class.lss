@@ -20,6 +20,12 @@ class bugpitpuzzle_class {
     }
     
     method initfull() {
+        gcareadirector::setfog(-15066598, 0 - 1.0, 0 - 400.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(15);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
         this.trapdoortimer = new lego_timer("trap", 2.0, 0);
         this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
         gchive::setmaxcreatures(this.hive1handle, 0);
@@ -65,19 +71,19 @@ class bugpitpuzzle_class {
     }
     
     method cleanupfull() {
-        if (!(this.door_trap == null)) {
+        if (this.door_trap != null) {
             this.door_trap.cleanupfull();
             this.door_trap = null;
         }
-        if (!(this.door_goal_a == null)) {
+        if (this.door_goal_a != null) {
             this.door_goal_a.cleanupfull();
             this.door_goal_a = null;
         }
-        if (!(this.door_goal_b == null)) {
+        if (this.door_goal_b != null) {
             this.door_goal_b.cleanupfull();
             this.door_goal_b = null;
         }
-        if (!(this.trapdoortimer == null)) {
+        if (this.trapdoortimer != null) {
             this.trapdoortimer.cleanupfull();
             this.trapdoortimer = null;
         }
@@ -101,10 +107,6 @@ class bugpitpuzzle_class {
         this.trapdoortimer.reset();
         this.trapdoortimer.stop();
         this.trapdoorshut = 0;
-        return null;
-    }
-    
-    method hide() {
         return null;
     }
     
@@ -141,10 +143,14 @@ class bugpitpuzzle_class {
             }
         }
         else if (param1.eventid == 46) {
-            this.reseta();
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
-            this.resetb();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            this.cleanupshort();
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 51) {
             if (param1.args[1] == 1) {
@@ -188,18 +194,6 @@ class bugpitpuzzle_class {
         }
         this.door_goal_a.changeposition(0 - var1, 0.0, var1, 0.0);
         this.door_goal_b.changeposition(var1, 0.0, 0 - var1, 0.0);
-        return null;
-    }
-    
-    method reseta() {
-        gccollisionphysicsgroup::spinmask(1.2);
-        return null;
-    }
-    
-    method resetb() {
-        globalclass.player.actor.gotostartpos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-        this.cleanupshort();
-        globalclass.player.unkill();
         return null;
     }
 }
