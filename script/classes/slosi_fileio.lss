@@ -1,0 +1,41 @@
+class slosi_fileio {
+    property filename;
+    property handle;
+    
+    method slosi_fileio(param1) {
+        this.filename = param1;
+        return null;
+    }
+    
+    method create() {
+        this.handle = scslosifileio::create(this.filename);
+        return null;
+    }
+    
+    method open() {
+        this.handle = scslosifileio::open(this.filename);
+        return null;
+    }
+    
+    method close() {
+        this.handle = null;
+        return null;
+    }
+    
+    method write(param1) {
+        scslosifileio::write(this.handle, param1 + "\n");
+        return null;
+    }
+    
+    method read() {
+        return scslosifileio::read(this.handle);
+    }
+    
+    method fileexist() {
+        return scslosifileio::doesfileexist(this.filename);
+    }
+    
+    method iseof() {
+        return scslosifileio::iseof(this.handle);
+    }
+}

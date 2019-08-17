@@ -1,0 +1,81 @@
+class le03_puzzle {
+    property parent;
+    property hook;
+    
+    method le03_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaAmbience");
+        globalclass.bgmusic.play();
+        var1 = 1;
+        var2 = gcsaver::finditem(scslosifoundation::stringtoidentifier("axe1"));
+        if (var2) {
+            var1 = 0;
+        }
+        if (var1) {
+            debug::print("******************************** SHOWING THE CLAWPICKUP");
+            this.hook = new lego_pickup("axe1", 0, 3, "item", 9, 1);
+            this.hook.initfull();
+        }
+        var3 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
+        gchive::setmaxcreatures(var3, 2);
+        gchive::setcreaturetype(var3, scslosifoundation::stringtoidentifier("bats"));
+        gchive::setspawnrate(var3, 4);
+        var4 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(var4, rgba(0, 150, 121, 255), rgba(0, 150, 121, 255), scslosifoundation::stringtoidentifier("mk4a"));
+        gccharacter::setinputstate(var4, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(var4, scslosifoundation::stringtoidentifier("d000"), -1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        var1 = null;
+        var2 = null;
+        if (!(this.hook == null)) {
+            this.hook.cleanupfull();
+            this.hook = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                globalclass.level.cam.setaimode(7);
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.unkill();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

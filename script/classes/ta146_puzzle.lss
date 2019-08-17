@@ -1,0 +1,60 @@
+class ta146_puzzle {
+    property parent;
+    property discpickup;
+    property glyph;
+    
+    method ta146_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+        globalclass.bgmusic.play(1);
+        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc6"));
+        if (var1 == 0) {
+            this.discpickup = new lego_pickup("dsc6", 0, 5, "item", 7, 1);
+            this.discpickup.initfull();
+            this.discpickup.show();
+            this.discpickup.setcondition(32768);
+            this.discpickup.setquest(1);
+        }
+        var2 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"));
+        if (var2 == 0) {
+            this.glyph = new lego_pickup("glyp", 16, 2, "item", 3, 1);
+            this.glyph.initfull();
+            this.glyph.show();
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.discpickup == null)) {
+            this.discpickup.hide();
+            this.discpickup = null;
+        }
+        if (!(this.glyph == null)) {
+            this.glyph.hide();
+            this.glyph = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        return null;
+    }
+}

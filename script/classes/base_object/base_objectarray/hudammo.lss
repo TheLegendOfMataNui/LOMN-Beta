@@ -1,0 +1,155 @@
+class hudammo : base_objectarray {
+    property count;
+    property spriteidx;
+    property textidx;
+    property ready;
+    
+    method hudammo() {
+        return null;
+    }
+    
+    method initfull() {
+        this.items = null;
+        return null;
+    }
+    
+    method setcolor() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var1 = screenx - 180;
+        var2 = screeny - 84;
+        var3 = gcareadirector::getcurrentlevel();
+        if (var3 == scslosifoundation::stringtoidentifier("lev1")) {
+            var4 = "Root/data/art/hud/elemrotate/genhfbonua";
+        }
+        else if (var3 == scslosifoundation::stringtoidentifier("lev2")) {
+            var4 = "Root/data/art/hud/elemrotate/genhfbgali";
+        }
+        else if (var3 == scslosifoundation::stringtoidentifier("lev3")) {
+            var4 = "Root/data/art/hud/elemrotate/genhfbpohatu";
+        }
+        else if (var3 == scslosifoundation::stringtoidentifier("lev4")) {
+            var4 = "Root/data/art/hud/elemrotate/genhfbkopaka";
+        }
+        else if (var3 == scslosifoundation::stringtoidentifier("lev5")) {
+            var4 = "Root/data/art/hud/elemrotate/genhfbonua";
+        }
+        else if (var3 == scslosifoundation::stringtoidentifier("lev6")) {
+            var4 = "Root/data/art/hud/elemrotate/genhfbtahu";
+        }
+        else {
+            var4 = "Root/data/art/hud/elemrotate/genhfbtahu";
+        }
+        var3;
+        this.base_objectarray([ new gs_lego_animatesprite(var4, 0, 12, 1, var1, var2, 0, var1 + 64, var2 + 64), 
+            new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "X", (var1 + 64) + 5, var2 + 32, 0, 1.2, 0, 4, 0), 
+            new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "0", ((var1 + 64) + 5) + 32, var2 + 32, 0, 1.7, 0, 4, 0) ]);
+        this.spriteidx = 0;
+        this.textidx = 2;
+        this.items[0].initfull();
+        this.items[1].initfull();
+        this.items[2].initfull();
+        var5 = gcsaver::getammo();
+        if (var5 == null) {
+            this.setammo(999);
+        }
+        else {
+            this.setammo(var5);
+        }
+        this.add();
+        this.show();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        if (!(this.items == null)) {
+            var1 = this.items.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.items[var1 - var2].hide();
+                this.items[var1 - var2].remove();
+                this.items[var1 - var2].cleanupfull();
+                this.items[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.items = null;
+        }
+        return null;
+    }
+    
+    method initshort() {
+        this.count = 0;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.hide();
+        return null;
+    }
+    
+    method add() {
+        if (!(this.items == null)) {
+            this.items[0].add();
+            this.items[1].add();
+            this.items[2].add();
+        }
+        return null;
+    }
+    
+    method show() {
+        if (globalclass.hud.hidden == 0) {
+            if (!(this.items == null)) {
+                this.items[0].show();
+                this.items[1].show();
+                this.items[2].show();
+                this.items[this.spriteidx].enablealphachannel(1);
+                this.items[this.spriteidx].startanimate();
+            }
+        }
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        if (!(this.items == null)) {
+            var1 = 0;
+            while ((this.items.__length - 1) >= var1) {
+                this.items[var1].hide();
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method setammo(param1) {
+        if (!(this.items == null)) {
+            this.count = param1;
+            if (this.count < 10) {
+                this.items[this.textidx].setstring("00" + __tostring(this.count));
+            }
+            else if (this.count < 100) {
+                this.items[this.textidx].setstring("0" + __tostring(this.count));
+            }
+            else {
+                this.items[this.textidx].setstring(__tostring(this.count));
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method process(param1) {
+        if (!(this.items == null)) {
+            this.items[this.spriteidx].process(param1);
+        }
+        return null;
+    }
+}

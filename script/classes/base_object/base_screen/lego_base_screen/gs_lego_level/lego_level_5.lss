@@ -1,0 +1,87 @@
+class lego_level_5 : gs_lego_level {
+    
+    method lego_level_5() {
+        var var1;
+        this.gs_lego_level("lev5", "lewa", "mtup");
+        var1 = new lego_area_mtup5(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_le015(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_le025(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_le035(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_le045(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_cave5(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_lep15(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_vllg5(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_lep25(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_hive5(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_gly15(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_gly35(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_shrn5(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_le085(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_boss5(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_room5(this);
+        this.areas.__append(var1);
+        var1 = new lego_area_tura5(this);
+        this.areas.__append(var1);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_level_initfull();
+        globalclass.player.addmask("fake", 0);
+        globalclass.player.addmask("fake", 1);
+        globalclass.player.addmask("fake", 2);
+        globalclass.player.addmask("fake", 3);
+        globalclass.player.addmask("fake", 7);
+        globalclass.player.addmask("fake", 8);
+        globalclass.player.addmask("fake", 9);
+        globalclass.player.addmask("fake", 10);
+        globalclass.player.addmask("fake", 11);
+        if (globalclass.saverloaded) {
+            if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mski"), scslosifoundation::stringtoidentifier("cave"))) {
+                globalclass.player.addmask("fake", 12);
+            }
+            if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mask"), scslosifoundation::stringtoidentifier("hive"))) {
+                globalclass.player.addmask("fake", 4);
+            }
+            if (gcsaver::findglypha(scslosifoundation::stringtoidentifier("glyp"), scslosifoundation::stringtoidentifier("room"))) {
+                globalclass.player.addelement();
+            }
+            if (gcsaver::finditema(scslosifoundation::stringtoidentifier("axe1"), scslosifoundation::stringtoidentifier("le03"))) {
+                globalclass.player.setupgrapplinghook();
+                globalclass.player.setgrapplinghookdistance(120);
+            }
+            globalclass.player.initfromsaver();
+        }
+        globalclass.saverloaded = 0;
+        return null;
+    }
+    
+    method initshort() {
+        this.lego_level_initshort();
+        globalclass.player.addmask("fake", 0);
+        globalclass.player.addmask("fake", 1);
+        globalclass.player.addmask("fake", 2);
+        globalclass.player.addmask("fake", 3);
+        globalclass.player.addmask("fake", 7);
+        globalclass.player.addmask("fake", 8);
+        globalclass.player.addmask("fake", 9);
+        globalclass.player.addmask("fake", 10);
+        globalclass.player.addmask("fake", 11);
+        return null;
+    }
+}

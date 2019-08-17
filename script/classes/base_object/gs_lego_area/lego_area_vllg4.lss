@@ -1,0 +1,161 @@
+class lego_area_vllg4 : gs_lego_area {
+    property coindoor;
+    property deadhives;
+    property doorshone;
+    
+    method lego_area_vllg4(param1) {
+        this.level = param1;
+        this.gs_lego_area("vllg", param1, 0, 0);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        gcmodeldirector::setnearestmax(5);
+        this.deadhives = 0;
+        var1 = gcsaver::isconditionset(1073741824);
+        if (var1) {
+            var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(var2, rgba(131, 141, 181, 255), rgba(255, 255, 255, 255), scslosifoundation::stringtoidentifier("mk3a"));
+            var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gccharacter::settohunga(var2, rgba(131, 141, 181, 255), rgba(255, 255, 255, 255), scslosifoundation::stringtoidentifier("mk3a"));
+            var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+            gccharacter::settohunga(var2, rgba(131, 141, 181, 255), rgba(255, 255, 255, 255), scslosifoundation::stringtoidentifier("mk3a"));
+            var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+            gccharacter::settohunga(var2, rgba(131, 141, 181, 255), rgba(255, 255, 255, 255), scslosifoundation::stringtoidentifier("mk3a"));
+            var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
+            gccharacter::settohunga(var2, rgba(131, 141, 181, 255), rgba(255, 255, 255, 255), scslosifoundation::stringtoidentifier("mk3a"));
+            var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
+            gccharacter::settohunga(var2, rgba(131, 141, 181, 255), rgba(255, 255, 255, 255), scslosifoundation::stringtoidentifier("mk3a"));
+            var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
+            gccharacter::settohunga(var2, rgba(131, 141, 181, 255), rgba(255, 255, 255, 255), scslosifoundation::stringtoidentifier("mk3a"));
+            var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
+            gccharacter::settohunga(var2, rgba(131, 141, 181, 255), rgba(131, 141, 181, 255), scslosifoundation::stringtoidentifier("mk3a"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv0"), scslosifoundation::stringtoidentifier("vllg"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv1"), scslosifoundation::stringtoidentifier("vllg"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("fhv0"), scslosifoundation::stringtoidentifier("vllg"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("fhv1"), scslosifoundation::stringtoidentifier("vllg"));
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+            globalclass.bgmusic.play(1);
+        }
+        else {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl02"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl03"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl04"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl05"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl06"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl07"), 0);
+            globalclass.bgmusic.changefilename("Root/Data/Sounds/MUSICKopakaTheme");
+            globalclass.bgmusic.play(1);
+        }
+        this.coindoor = new lego_moveableobject("door");
+        this.coindoor.initfull();
+        this.coindoor.setalpha(0.6);
+        this.doorshone = 1;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var1 = null;
+        var2 = null;
+        var3 = null;
+        var4 = null;
+        this.startingarea = null;
+        this.coindoor.cleanupfull();
+        this.coindoor = null;
+        var5 = null;
+        var6 = null;
+        var7 = null;
+        var8 = null;
+        var9 = null;
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        var1 = 0;
+        globalclass.player.unkill();
+        globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+        this.level.cam.setaimode(11);
+        globalclass.player.actor.setinputstate("ninp");
+        return null;
+    }
+    
+    method cleanupshort() {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 35) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("door")) && (param1.args[1] == 0)) {
+                this.coindoor.hide();
+            }
+        }
+        else if (param1.eventid == 27) {
+            this.cleanupshort();
+            this.initshort();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.5);
+        }
+        else if (param1.eventid == 27) {
+            this.cleanupshort();
+            this.initshort();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.5);
+        }
+        else if (param1.eventid == 51) {
+            if (param1.args[1] == 1) {
+                this.deadhives = this.deadhives + 1;
+                if (this.deadhives >= 4) {
+                    gcsaver::setcondition(1073741824, 1);
+                    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+                    globalclass.bgmusic.play(1);
+                }
+            }
+            param1.args[1];
+        }
+        else if (param1.eventid == 1) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[1] == scslosifoundation::stringtoidentifier("door"))) {
+                if (this.doorshone) {
+                    if (globalclass.player.tokens >= 15) {
+                        this.coindoor.fadeout(1.5);
+                        gcstaticsoundsptrarray::playtablesound(1084);
+                        this.doorshone = 0;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method opencoindoor() {
+        this.coindoor.fadeout(2.0);
+        return null;
+    }
+    
+    method exit() {
+        if (!(this.level == null)) {
+            this.level = null;
+        }
+        return null;
+    }
+}

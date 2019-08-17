@@ -7,7 +7,6 @@ Prerequisites
 -------------
 
 To build LOMN, you need:
- - [sage-js](https://github.com/TheLegendOfMataNui/sage-js) on your `PATH` for compiling the scripts (get it by installing [NodeJS](https://nodejs.org/en/download/) and using `npm install -g @sage-js/cli`)
  - [Python 2 (Not 3!)](https://www.python.org/downloads/) on your `PATH` for packaging the blockfiles
 
 Building
@@ -28,5 +27,5 @@ If you modify or add a file in a blockfile, running `make` will rebuild that blo
 Script Development
 ------------------
 
-If you are working frequently on the `.osas` script files, you probably want the VS-OSI Visual Studio extension that adds code folding, syntax coloring, autocomplete suggestions, and more.  
-You can find VS-OSI [here](https://github.com/TheLegendOfMataNui/VS-OSI).
+Because LSS has been introduced, quite recently, there is currently no text editing support for it.
+However, you can get a pretty decent approximation by using the C# or Java language modes of your text editor.

@@ -1,0 +1,684 @@
+class gsprintmenu {
+    property parent;
+    property printer;
+    property active;
+    property background1;
+    property backopt1;
+    property imagelist;
+    property subon;
+    property background2;
+    property backopt2;
+    property image2;
+    property optlist;
+    property idx;
+    property printlock;
+    property printtext;
+    
+    method gsprintmenu(param1) {
+        this.parent = param1;
+        this.active = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.active = 1;
+        this.subon = 0;
+        this.background1 = new ss_basesprite("Root/data/art/PrintMenu/BACKGROUND01", __toint(0 * screenratio), __toint(0 * screenratio), 0, __toint(640 * screenratio), __toint(480 * screenratio));
+        this.background1.initfull();
+        this.background1.add();
+        this.background1.show();
+        this.backopt1 = new printmenuhighlight("Root/data/art/PrintMenu/HL_ARROW01", 531, 353, 627, 481);
+        this.backopt1.initfull();
+        this.imagelist = [ new printmenupic("Root/data/art/PrintMenu/fgs1", 38, 48, 102, 112, "Root/data/art/PrintMenu/HL01", 22, 37, 118, 133, 1), 
+            new printmenupic("Root/data/art/PrintMenu/fis1", 139, 49, 203, 113, "Root/data/art/PrintMenu/HL02", 122, 37, 218, 133, 1), 
+            new printmenupic("Root/data/art/PrintMenu/gas1", 238, 48, 302, 112, "Root/data/art/PrintMenu/HL03", 221, 37, 317, 133, 1), 
+            new printmenupic("Root/data/art/PrintMenu/gcs1", 338, 48, 402, 112, "Root/data/art/PrintMenu/HL04", 322, 37, 418, 133, 1), 
+            new printmenupic("Root/data/art/PrintMenu/gms1", 438, 48, 502, 112, "Root/data/art/PrintMenu/HL05", 422, 37, 518, 133, 1), 
+            new printmenupic("Root/data/art/PrintMenu/gps1", 538, 48, 602, 112, "Root/data/art/PrintMenu/HL06", 522, 37, 618, 133, 1), 
+            new printmenupic("Root/data/art/PrintMenu/kas1", 38, 128, 102, 192, "Root/data/art/PrintMenu/HL07", 22, 117, 118, 213, 1), 
+            new printmenupic("Root/data/art/PrintMenu/kms1", 139, 129, 203, 193, "Root/data/art/PrintMenu/HL08", 122, 117, 218, 213, 1), 
+            new printmenupic("Root/data/art/PrintMenu/kps1", 237, 129, 301, 193, "Root/data/art/PrintMenu/HL09", 221, 117, 317, 213, 1), 
+            new printmenupic("Root/data/art/PrintMenu/las1", 338, 128, 402, 192, "Root/data/art/PrintMenu/HL10", 322, 117, 418, 213, 1), 
+            new printmenupic("Root/data/art/PrintMenu/lms1", 439, 128, 503, 192, "Root/data/art/PrintMenu/HL11", 422, 117, 518, 213, 1), 
+            new printmenupic("Root/data/art/PrintMenu/lps1", 538, 128, 602, 192, "Root/data/art/PrintMenu/HL12", 522, 117, 618, 213, 1), 
+            new printmenupic("Root/data/art/PrintMenu/oas1", 39, 208, 103, 272, "Root/data/art/PrintMenu/HL13", 22, 197, 118, 293, 1), 
+            new printmenupic("Root/data/art/PrintMenu/oms1", 139, 208, 203, 272, "Root/data/art/PrintMenu/HL14", 122, 197, 218, 293, 1), 
+            new printmenupic("Root/data/art/PrintMenu/ops1", 238, 208, 302, 272, "Root/data/art/PrintMenu/HL15", 221, 197, 317, 293, 1), 
+            new printmenupic("Root/data/art/PrintMenu/pcs1", 338, 208, 402, 272, "Root/data/art/PrintMenu/HL16", 322, 197, 418, 293, 1), 
+            new printmenupic("Root/data/art/PrintMenu/pms1", 438, 209, 502, 273, "Root/data/art/PrintMenu/HL17", 422, 197, 518, 293, 1), 
+            new printmenupic("Root/data/art/PrintMenu/pps1", 539, 209, 603, 273, "Root/data/art/PrintMenu/HL18", 522, 197, 618, 293, 1), 
+            new printmenupic("Root/data/art/PrintMenu/tas1", 38, 289, 102, 353, "Root/data/art/PrintMenu/HL19", 22, 277, 118, 373, 1), 
+            new printmenupic("Root/data/art/PrintMenu/tcs1", 139, 289, 203, 353, "Root/data/art/PrintMenu/HL20", 123, 277, 219, 373, 1), 
+            new printmenupic("Root/data/art/PrintMenu/tms1", 237, 289, 301, 353, "Root/data/art/PrintMenu/HL21", 221, 277, 317, 373, 1), 
+            new printmenupic("Root/data/art/PrintMenu/tps1", 339, 289, 403, 353, "Root/data/art/PrintMenu/HL22", 322, 277, 418, 373, 1), 
+            new printmenupic("Root/data/art/PrintMenu/INSTRUCT01", 439, 289, 503, 353, "Root/data/art/PrintMenu/HL23", 422, 277, 518, 373, 1), 
+            new printmenupic("Root/data/art/PrintMenu/INSTRUCT02", 539, 289, 603, 353, "Root/data/art/PrintMenu/HL24", 522, 277, 618, 373, 1), 
+            new printmenupic("Root/data/art/PrintMenu/INSTRUCT03", 39, 369, 103, 433, "Root/data/art/PrintMenu/HL25", 22, 358, 118, 454, 1), 
+            new printmenupic("Root/data/art/PrintMenu/INSTRUCT04", 139, 369, 203, 433, "Root/data/art/PrintMenu/HL26", 122, 358, 218, 454, 1), 
+            new printmenupic("Root/data/art/PrintMenu/INSTRUCT05", 238, 369, 302, 433, "Root/data/art/PrintMenu/HL27", 221, 358, 317, 454, 1), 
+            new printmenupic("Root/data/art/PrintMenu/INSTRUCT06", 339, 369, 403, 433, "Root/data/art/PrintMenu/HL28", 322, 358, 418, 454, 1) ];
+        var1 = 0;
+        while ((this.imagelist.__length - 1) >= var1) {
+            this.imagelist[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.printer = scprinter::create();
+        this.printlock = 0;
+        this.printtext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "Printing...", __toint(320 * screenratio), __toint(460 * screenratio), 0, 1.0 * screenratio, 256, 4, 0, 1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.cleanupshort();
+        this.parent = null;
+        this.printer = null;
+        if (!(this.printtext == null)) {
+            this.printtext.hide();
+            this.printtext.remove();
+            this.printtext.cleanupfull();
+            this.printtext = null;
+        }
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        this.active = 0;
+        if (!(this.background1 == null)) {
+            this.background1.hide();
+            this.background1.remove();
+            this.background1.cleanupfull();
+            this.background1 = null;
+        }
+        if (!(this.backopt1 == null)) {
+            this.backopt1.cleanupfull();
+            this.backopt1 = null;
+        }
+        if (!(this.imagelist == null)) {
+            var1 = 0;
+            while ((this.imagelist.__length - 1) >= var1) {
+                this.imagelist[var1].cleanupfull();
+                this.imagelist[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.imagelist = null;
+        }
+        if (!(this.background2 == null)) {
+            this.background2.hide();
+            this.background2.remove();
+            this.background2.cleanupfull();
+            this.background2 = null;
+        }
+        if (!(this.backopt2 == null)) {
+            this.backopt2.cleanupfull();
+            this.backopt2 = null;
+        }
+        if (!(this.image2 == null)) {
+            this.image2.hide();
+            this.image2.remove();
+            this.image2.cleanupfull();
+            this.image2 = null;
+        }
+        if (!(this.optlist == null)) {
+            var1 = 0;
+            while ((this.optlist.__length - 1) >= var1) {
+                this.optlist[var1].cleanupfull();
+                this.optlist[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.optlist = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.printlock) {
+            if (scprinter::isdone(this.printer)) {
+                this.printlock = 0;
+                this.printtext.hide();
+                this.printtext.remove();
+                this.printtext.cleanupfull();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (this.active && (this.printlock == 0)) {
+            if (param1.eventid == 25) {
+                this.mousebuttonreleased(param1.args[0]);
+            }
+            else if (param1.eventid == 26) {
+                this.checkmousepos(param1.args[0], param1.args[1]);
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (this.active && (this.printlock == 0)) {
+            if (param1.event == 2) {
+                if ((param1.button == 27) || (param1.button == 8)) {
+                    this.back();
+                }
+            }
+        }
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        this.background1.hide();
+        this.backopt1.image.hide();
+        this.backopt1.lit = 0;
+        var1 = 0;
+        while ((this.imagelist.__length - 1) >= var1) {
+            this.imagelist[var1].hide();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        this.background1.show();
+        var1 = 0;
+        while ((this.imagelist.__length - 1) >= var1) {
+            this.imagelist[var1].show();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method back() {
+        this.cleanupshort();
+        this.parent.back();
+        return null;
+    }
+    
+    method forward() {
+        this.cleanupshort();
+        this.parent.forward();
+        return null;
+    }
+    
+    method checkmousepos(param1, param2) {
+        var var1;
+        var var2;
+        var1 = 0;
+        if (this.subon) {
+            if (this.backopt2.check(param1, param2)) {
+                var1 = 1;
+            }
+            var2 = 0;
+            while ((this.optlist.__length - 1) >= var2) {
+                if (var1) {
+                    this.optlist[var2].check(0, 0);
+                }
+                else if (this.optlist[var2].check(param1, param2)) {
+                    var1 = 1;
+                }
+                var2 = var2 + 1;
+            }
+        }
+        else {
+            if (this.backopt1.check(param1, param2)) {
+                var1 = 1;
+            }
+            var2 = 0;
+            while ((this.imagelist.__length - 1) >= var2) {
+                if (var1) {
+                    this.imagelist[var2].check(0, 0);
+                }
+                else if (this.imagelist[var2].check(param1, param2)) {
+                    var1 = 1;
+                }
+                var2 = var2 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method mousebuttonreleased(param1) {
+        var var1;
+        if (param1 == 1) {
+            if (this.subon) {
+                if (this.backopt2.lit) {
+                    this.switchtomenu();
+                }
+                else {
+                    var1 = 0;
+                    while ((this.optlist.__length - 1) >= var1) {
+                        if (this.optlist[var1].lit) {
+                            this.print(var1);
+                        }
+                        var1 = var1 + 1;
+                    }
+                }
+            }
+            else if (this.backopt1.lit) {
+                this.back();
+            }
+            else {
+                var1 = 0;
+                while ((this.imagelist.__length - 1) >= var1) {
+                    if (this.imagelist[var1].selectable) {
+                        if (this.imagelist[var1].highlight.lit) {
+                            this.switchtoprint(var1);
+                        }
+                    }
+                    var1 = var1 + 1;
+                }
+            }
+        }
+        else if (param1 == 2) {
+            this.back();
+        }
+        return null;
+    }
+    
+    method switchtoprint(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        debug::print("Switching to print...");
+        this.subon = 1;
+        this.hide();
+        this.background2 = new ss_basesprite("Root/data/art/PrintMenu/BACKGROUND02", __toint(0 * screenratio), __toint(0 * screenratio), 0, __toint(640 * screenratio), __toint(480 * screenratio));
+        this.background2.initfull();
+        this.background2.add();
+        this.background2.show();
+        this.backopt2 = new printmenuhighlight("Root/data/art/PrintMenu/HL_ARROW02", 547, 358, 643, 486);
+        this.backopt2.initfull();
+        this.idx = param1 + 1;
+        if (this.idx == 1) {
+            var1 = "Root/data/art/PrintMenu/fgs2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 2) {
+            var1 = "Root/data/art/PrintMenu/fis2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 3) {
+            var1 = "Root/data/art/PrintMenu/gas2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 4) {
+            var1 = "Root/data/art/PrintMenu/gcs2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 5) {
+            var1 = "Root/data/art/PrintMenu/gms2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 6) {
+            var1 = "Root/data/art/PrintMenu/gps2";
+            var2 = 48;
+            var3 = 49;
+            var4 = 432;
+            var5 = 433;
+        }
+        else if (this.idx == 7) {
+            var1 = "Root/data/art/PrintMenu/kas2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 8) {
+            var1 = "Root/data/art/PrintMenu/kms2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 9) {
+            var1 = "Root/data/art/PrintMenu/kps2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 10) {
+            var1 = "Root/data/art/PrintMenu/las2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 11) {
+            var1 = "Root/data/art/PrintMenu/lms2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 12) {
+            var1 = "Root/data/art/PrintMenu/lps2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 13) {
+            var1 = "Root/data/art/PrintMenu/oas2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 14) {
+            var1 = "Root/data/art/PrintMenu/oms2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 15) {
+            var1 = "Root/data/art/PrintMenu/ops2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 16) {
+            var1 = "Root/data/art/PrintMenu/pcs2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 17) {
+            var1 = "Root/data/art/PrintMenu/pms2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 18) {
+            var1 = "Root/data/art/PrintMenu/pps2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 19) {
+            var1 = "Root/data/art/PrintMenu/tas2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 20) {
+            var1 = "Root/data/art/PrintMenu/tcs2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 21) {
+            var1 = "Root/data/art/PrintMenu/tms2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 22) {
+            var1 = "Root/data/art/PrintMenu/tps2";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 23) {
+            var1 = "Root/data/art/PrintMenu/2INSTRUCT01";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 24) {
+            var1 = "Root/data/art/PrintMenu/2INSTRUCT02";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 25) {
+            var1 = "Root/data/art/PrintMenu/2INSTRUCT03";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 26) {
+            var1 = "Root/data/art/PrintMenu/2INSTRUCT04";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 27) {
+            var1 = "Root/data/art/PrintMenu/2INSTRUCT05";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        else if (this.idx == 28) {
+            var1 = "Root/data/art/PrintMenu/2INSTRUCT06";
+            var2 = 48;
+            var3 = 48;
+            var4 = 432;
+            var5 = 432;
+        }
+        if ((param1 >= 0) && (param1 <= (this.imagelist.__length - 1))) {
+            this.image2 = new ss_basesprite(var1, __toint(var2 * screenratio), __toint(var3 * screenratio), 0, __toint(var4 * screenratio), __toint(var5 * screenratio));
+            this.image2.initfull();
+            this.image2.add();
+            this.image2.show();
+        }
+        this.optlist = [ new printmenuhighlight("Root/data/art/PrintMenu/HIGHLIGHT_1", 442, 51, 506, 115), 
+            new printmenuhighlight("Root/data/art/PrintMenu/HIGHLIGHT_2", 445, 112, 509, 208), 
+            new printmenuhighlight("Root/data/art/PrintMenu/HIGHLIGHT_3", 445, 192, 509, 288), 
+            new printmenuhighlight("Root/data/art/PrintMenu/HIGHLIGHT_6", 445, 270, 509, 366), 
+            new printmenuhighlight("Root/data/art/PrintMenu/HIGHLIGHT_8", 445, 347, 509, 443) ];
+        var6 = 0;
+        while ((this.optlist.__length - 1) >= var6) {
+            this.optlist[var6].initfull();
+            var6 = var6 + 1;
+        }
+        return null;
+    }
+    
+    method switchtomenu() {
+        var var1;
+        this.subon = 0;
+        this.show();
+        this.background2.hide();
+        this.background2.remove();
+        this.background2.cleanupfull();
+        this.background2 = null;
+        this.backopt2.cleanupfull();
+        this.backopt2 = null;
+        if (!(this.image2 == null)) {
+            this.image2.hide();
+            this.image2.remove();
+            this.image2.cleanupfull();
+            this.image2 = null;
+        }
+        if (!(this.optlist == null)) {
+            var1 = 0;
+            while ((this.optlist.__length - 1) >= var1) {
+                this.optlist[var1].cleanupfull();
+                this.optlist[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.optlist = null;
+        }
+        return null;
+    }
+    
+    method print(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        debug::print("Printing...");
+        var1 = 1;
+        if (this.idx == 0) {
+            var1 = 1;
+        }
+        else if (this.idx == 1) {
+            var1 = 2;
+        }
+        else if (this.idx == 2) {
+            var1 = 3;
+        }
+        else if (this.idx == 3) {
+            var1 = 6;
+        }
+        else if (this.idx == 4) {
+            var1 = 8;
+        }
+        if (this.idx == 1) {
+            var2 = "fg.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 2) {
+            var2 = "fi.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 3) {
+            var2 = "ga.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 4) {
+            var2 = "gc.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 5) {
+            var2 = "gm.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 6) {
+            var2 = "gp.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 7) {
+            var2 = "ka.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 8) {
+            var2 = "km.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 9) {
+            var2 = "kp.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 10) {
+            var2 = "la.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 11) {
+            var2 = "lm.jpg";
+            var3 = "Wind monster concept art";
+        }
+        else if (this.idx == 12) {
+            var2 = "lp.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 13) {
+            var2 = "oa.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 14) {
+            var2 = "om.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 15) {
+            var2 = "op.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 16) {
+            var2 = "pc.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 17) {
+            var2 = "pm.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 18) {
+            var2 = "pp.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 19) {
+            var2 = "ta.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 20) {
+            var2 = "tc.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 21) {
+            var2 = "tm.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 22) {
+            var2 = "tp.jpg";
+            var3 = "";
+        }
+        else if (this.idx == 23) {
+            var2 = "tp.jpg";
+            var3 = "desc";
+        }
+        else if (this.idx == 24) {
+            var2 = "tp.jpg";
+            var3 = "desc";
+        }
+        else if (this.idx == 25) {
+            var2 = "tp.jpg";
+            var3 = "desc";
+        }
+        else if (this.idx == 26) {
+            var2 = "tp.jpg";
+            var3 = "desc";
+        }
+        else if (this.idx == 27) {
+            var2 = "tp.jpg";
+            var3 = "desc";
+        }
+        else if (this.idx == 28) {
+            var2 = "tp.jpg";
+            var3 = "desc";
+        }
+        if ((param1 >= 0) && (param1 <= (this.imagelist.__length - 1))) {
+            var4 = scprinter::printfile(this.printer, var2, var3, var1);
+            this.printlock = 1;
+            this.printtext.initfull();
+            this.printtext.add();
+            this.printtext.show();
+        }
+        return null;
+    }
+}

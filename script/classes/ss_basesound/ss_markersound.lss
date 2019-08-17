@@ -1,0 +1,44 @@
+class ss_markersound : ss_basesound {
+    property enableevents;
+    
+    method ss_markersound(param1, param2, param3, param4) {
+        this.filename = param1 + ".PCSND";
+        this.sndid = scslosifoundation::stringtoidentifier(param2);
+        if (!(param3 == null)) {
+            this.enableevents = param3;
+        }
+        else {
+            this.enableevents = 0;
+        }
+        if (!(param4 == null)) {
+            this.restart = param4;
+        }
+        else {
+            this.restart = 0;
+        }
+        return null;
+    }
+    
+    method opensound() {
+        gcwavesound::openfile(this.sound, this.filename, this.sndid, this.enableevents);
+        return null;
+    }
+    
+    method playatmarker(param1) {
+        var var1;
+        if (__isstring(param1)) {
+            var1 = scslosifoundation::stringtoidentifier(param1);
+        }
+        else {
+            var1 = param1;
+        }
+        gcwavesound::playmarker(this.sound, var1);
+        return null;
+    }
+    
+    method seteventstate(param1) {
+        this.enableevents = param1;
+        gcwavesound::enableevents(this.enableevents);
+        return null;
+    }
+}

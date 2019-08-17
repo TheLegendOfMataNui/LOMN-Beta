@@ -1,0 +1,115 @@
+class boulderclass {
+    property obj;
+    property stringid;
+    property parent;
+    property scale;
+    property id;
+    property rockhitsound;
+    
+    method boulderclass(param1, param2) {
+        this.parent = param2;
+        this.stringid = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.obj = new lego_projectileobject(this.stringid, this.parent.name);
+        this.scale = 1.0;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.init(0.5, 0, 0, 0, 0, 2.3, "bld0", "Root/data/levels/lev3/rkfl", 60);
+        this.obj.setbouncefactor(0.75);
+        this.obj.settweakable();
+        this.obj.show();
+        this.rockhitsound = new tablecopysound(1038);
+        this.rockhitsound.synctoobject(this.id);
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.obj.gety() < -50) {
+            this.startdropping();
+        }
+        return null;
+    }
+    
+    method show() {
+        this.obj.show();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.hide();
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.stringid = null;
+        this.parent = null;
+        this.scale = null;
+        this.rockhitsound.cleanupfull();
+        this.rockhitsound = null;
+        this.id = null;
+        return null;
+    }
+    
+    method startdropping() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        this.obj.show();
+        var1 = globalclass.randnum.getrandomnumber(3, 17.5);
+        var2 = globalclass.randnum.getrandomnumber(-185, -125);
+        var3 = globalclass.randnum.getrandomnumber(250, 400);
+        this.scale = var3 * 0.01;
+        this.obj.setobjscale(this.scale);
+        this.obj.setposition(var1, 115, var2);
+        this.obj.setnudgetarget(-200, var2, 2.75);
+        this.obj.setmoveableflags(1, 1, 0, 1);
+        this.obj.setvelocity(0.0, 0.0, 0.0);
+        var4 = globalclass.randnum.getrandomnumber(0, 5);
+        this.obj.setvelocity(var4, 0, 0);
+        return null;
+    }
+    
+    method stopdropping() {
+        this.obj.setvelocity(0, 0, 0);
+        this.obj.setmoveableflags(0, 0, 0, 0);
+        this.obj.setposition(1000, 0, 0);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 19) {
+            if ((param1.args[1] == scslosifoundation::stringtoidentifier("bllf")) || (param1.args[1] == scslosifoundation::stringtoidentifier("bllg"))) {
+                
+            }
+            else if (param1.args[0] == this.obj.id) {
+                this.hit();
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method hit() {
+        var var1;
+        this.rockhitsound.play(0);
+        var1 = this.obj.getscale();
+        debug::print((("curentScale of " + __tostring(this.stringid)) + " is ") + __tostring(var1));
+        if (var1 < 2.5) {
+            this.startdropping();
+        }
+        else {
+            this.obj.setobjscale(var1 - 1);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 79) {
+                this.hit();
+            }
+        }
+        return null;
+    }
+}

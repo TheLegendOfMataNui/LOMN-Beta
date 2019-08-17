@@ -1,0 +1,89 @@
+class brgpart {
+    property obj;
+    property parent;
+    property firsthit;
+    property timer;
+    property area;
+    
+    method brgpart(param1, param2, param3, param4) {
+        this.obj = new platform(param1, param2);
+        this.area = param2;
+        this.timer = param3;
+        this.parent = param4;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.firsthit = 1;
+        return null;
+    }
+    
+    method show() {
+        this.obj.show();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.parent = null;
+        this.firsthit = null;
+        this.timer = null;
+        this.area = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        this.obj.onevent(param1);
+        if (param1.eventid == 8) {
+            
+        }
+        else if (param1.eventid == 1) {
+            var1 = param1.args[0];
+            var2 = param1.args[1];
+            if (this.parent.started) {
+                if (var2 == this.obj.id) {
+                    var3 = 0;
+                    while ((this.parent.boulderarray.__length - 1) >= var3) {
+                        if (var1 == this.parent.boulderarray[var3].obj.id) {
+                            this.hit();
+                        }
+                        var3 = var3 + 1;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method hit() {
+        if (this.firsthit) {
+            debug::print("************************************ hit platform " + this.obj.name);
+            this.firsthit = 0;
+            this.parent.platformhit();
+            this.obj.drop();
+        }
+        return null;
+    }
+    
+    method drop() {
+        if (this.firsthit) {
+            this.obj.drop();
+        }
+        return null;
+    }
+    
+    method reset() {
+        this.firsthit = 1;
+        this.obj.reset();
+        return null;
+    }
+}

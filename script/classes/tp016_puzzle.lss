@@ -1,0 +1,88 @@
+class tp016_puzzle {
+    property parent;
+    property smallplatform;
+    property largeplatform;
+    property door;
+    property glyph;
+    property music;
+    
+    method tp016_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.glyph = new lego_pickup("glyp", 17, 2, "item", 4, 1);
+        this.glyph.initfull();
+        this.largeplatform = new lego_moveableobject("pl00");
+        this.smallplatform = new lego_moveableobject("pl01");
+        this.door = new lego_moveableobject("drs1");
+        this.largeplatform.initfull();
+        this.smallplatform.initfull();
+        this.door.initfull();
+        this.largeplatform.setresponse(1, 0, 1);
+        this.smallplatform.setresponse(1, 0, 1);
+        this.music = new legomp3player();
+        this.music.setupforplay("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        this.music.play(1);
+        this.door.hide();
+        return null;
+    }
+    
+    method hide() {
+        this.smallplatform.cleanupfull();
+        this.smallplatform = null;
+        this.largeplatform.cleanupfull();
+        this.largeplatform = null;
+        this.door.cleanupfull();
+        this.door = null;
+        this.music.stop();
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.music.stop();
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.idle();
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            this.music.play(1);
+            var1 = 1;
+        }
+        else if (param1.eventid == 43) {
+            
+        }
+        else if (param1.eventid == 14) {
+            
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 67) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        return null;
+    }
+}

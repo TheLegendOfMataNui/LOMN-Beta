@@ -1,0 +1,73 @@
+class lego_area_vllg6 : gs_lego_area {
+    property swrd;
+    
+    method lego_area_vllg6(param1) {
+        this.gs_lego_area("vllg", param1, 0, 0);
+        this.lego_area_initfull();
+        this.startingarea = [ 180, 
+            -356, 
+            0 - 51.4, 
+            689 ];
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcmodeldirector::setnearestmax(5);
+        gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+        globalclass.bgmusic.play(1);
+        if (!(gcsaver::finditem(scslosifoundation::stringtoidentifier("swrd")) == 1)) {
+            this.swrd = new lego_pickup("swrd", 0, 3, "item", 9, 1);
+            this.swrd.initfull();
+            this.swrd.show();
+        }
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setkapura(var1);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+        gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 0, 13, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+        gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+        gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mk7a"));
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
+        gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mk7a"));
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d000"), -1);
+        gccharacter::setorientation(var1, -49);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
+        gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(0, 0, 0, 255), scslosifoundation::stringtoidentifier("mk7a"));
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
+        gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(0, 0, 0, 255), scslosifoundation::stringtoidentifier("mk7a"));
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
+        gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 0, 13, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
+        gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mk7a"));
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
+        gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.swrd == null)) {
+            this.swrd.cleanupfull();
+            this.swrd = null;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.unkill();
+        }
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+}

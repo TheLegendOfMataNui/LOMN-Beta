@@ -1,0 +1,126 @@
+class lep1_puzzle {
+    property parent;
+    property gern;
+    property hookarray;
+    property spider;
+    property firstprocess;
+    property secondprocess;
+    property startpatroltimer;
+    property setupgernai;
+    
+    method lep1_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        this.setupgernai = 1;
+        this.firstprocess = 1;
+        this.secondprocess = 0;
+        this.startpatroltimer = new lego_timer("ptrl", 5.0, 0);
+        this.startpatroltimer.initfull();
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
+        globalclass.bgmusic.play();
+        this.spider = null;
+        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("spdr"));
+        if (var1 == 0) {
+            debug::print("************************ SHOWING THE SPIDER");
+            this.spider = new lego_pickup("spdr", 0, 5, "item", 5, 1);
+            this.spider.initfull();
+            this.spider.setcondition(16384);
+            this.spider.setquest(3);
+        }
+        this.hookarray = [ new lego_moveableobject("hk01"), 
+            new lego_moveableobject("hk02"), 
+            new lego_moveableobject("hk03") ];
+        var2 = 0;
+        while ((this.hookarray.__length - 1) >= var2) {
+            this.hookarray[var2].initfull();
+            this.hookarray[var2].setmytargetingflags(1);
+            this.hookarray[var2].setresponse(1, 1, 1);
+            var2 = var2 + 1;
+        }
+        this.gern = new gs_lego_character("rptl", "rptl", "fake", 0, -19, -6, -85, "aiin");
+        this.gern.initfull();
+        this.gern.add(0);
+        this.gern.show();
+        this.gern.aisetspline("Root/Data/Levels/lev5/lep1/lep1_spline.slb", 0);
+        this.gern.aisetbecomeshappy(0);
+        globalclass.player.setgrapplinghookdistance(55);
+        gcmodeldirector::setnearestmaxdist(1000.0);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.spider == null)) {
+            this.spider.cleanupfull();
+            this.spider = null;
+        }
+        if (!(this.startpatroltimer == null)) {
+            this.startpatroltimer.cleanupfull();
+            this.startpatroltimer = null;
+        }
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].cleanupfull();
+            this.hookarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hookarray = null;
+        if (!(this.gern == null)) {
+            this.gern.cleanupfull();
+            this.gern = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.setupgernai) {
+            this.gern.aisethandlereaction(0);
+            this.setupgernai = 0;
+        }
+        if (this.firstprocess) {
+            debug::print("1");
+            this.gern.aidisablepatrolonspline();
+            this.firstprocess = 0;
+            this.secondprocess = 1;
+        }
+        else if (this.secondprocess) {
+            debug::print("2");
+            this.startpatroltimer.reset(0);
+            this.startpatroltimer.start();
+            this.secondprocess = 0;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 8) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("ptrl")) {
+                debug::print("3");
+                this.gern.aienablepatrolonspline();
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

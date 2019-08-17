@@ -1,0 +1,41 @@
+class lego_area_brd24 : gs_lego_area {
+    property puzzle;
+    property parent;
+    
+    method lego_area_brd24(param1) {
+        this.parent = param1;
+        this.gs_lego_area("brd2", param1, 0, 0);
+        this.puzzle = new brd2_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        this.puzzle.show();
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.hide();
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method exit() {
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        this.parent = null;
+        return null;
+    }
+}

@@ -1,0 +1,39 @@
+class lego_area_boss5 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_boss5(param1) {
+        this.gs_lego_area("boss", param1, 0, 0);
+        this.puzzle = new boss5_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+}

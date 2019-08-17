@@ -1,0 +1,220 @@
+class grapplinghook2_puzzle_class {
+    property parent;
+    property exitdoor;
+    property resetpoint;
+    property oreantation;
+    property areaid;
+    property temptriggername;
+    property glyph;
+    property showglyph;
+    property ledgearray;
+    property targetarray;
+    property target0;
+    property target1;
+    property target2;
+    property target3;
+    property target4;
+    property target5;
+    property target6;
+    property target7;
+    property target8;
+    property target9;
+    property targeta;
+    property targetb;
+    property watchtimer;
+    property halfway;
+    
+    method grapplinghook2_puzzle_class(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        this.halfway = 0;
+        this.exitdoor = new lego_moveableobject("dr02", this.parent.name);
+        this.exitdoor.initfull();
+        var1 = 0;
+        this.resetpoint = new basicpoint(0.0, 0.0, 0.0);
+        this.areaid = scslosifoundation::stringtoidentifier(this.parent.name);
+        this.temptriggername = null;
+        this.ledgearray = [  ];
+        var2 = new lego_volatileplatform("hld0", this.parent.name);
+        var3 = new lego_volatileplatform("hld1", this.parent.name);
+        var4 = new lego_volatileplatform("hld2", this.parent.name);
+        var5 = new lego_volatileplatform("hld3", this.parent.name);
+        var6 = new lego_volatileplatform("hld4", this.parent.name);
+        var7 = new lego_volatileplatform("hld5", this.parent.name);
+        this.ledgearray.__append(var2);
+        this.ledgearray.__append(var3);
+        this.ledgearray.__append(var4);
+        this.ledgearray.__append(var5);
+        this.ledgearray.__append(var6);
+        this.ledgearray.__append(var7);
+        this.targetarray = [  ];
+        this.target0 = new lego_moveableobject("hot0", this.parent.name);
+        this.target3 = new lego_moveableobject("hot3", this.parent.name);
+        this.target4 = new lego_moveableobject("hot4", this.parent.name);
+        this.target6 = new lego_moveableobject("hot6", this.parent.name);
+        this.target7 = new lego_moveableobject("hot7", this.parent.name);
+        this.target8 = new lego_moveableobject("hot8", this.parent.name);
+        this.targetarray.__append(this.target0);
+        this.targetarray.__append(this.target3);
+        this.targetarray.__append(this.target4);
+        this.targetarray.__append(this.target6);
+        this.targetarray.__append(this.target7);
+        this.targetarray.__append(this.target8);
+        this.watchtimer = new lego_timer("wtim", 1, 0);
+        var8 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("gly1"));
+        if (var8) {
+            this.showglyph = 0;
+        }
+        else {
+            this.showglyph = 1;
+        }
+        if (this.showglyph) {
+            this.glyph = new lego_pickup("glyl", 4, 2, "item", 6, 1);
+            this.glyph.initfull();
+        }
+        var9 = 0;
+        while ((this.ledgearray.__length - 1) >= var9) {
+            this.ledgearray[var9].initfull();
+            this.ledgearray[var9].settimetofall(15.0);
+            this.ledgearray[var9].show();
+            var9 = var9 + 1;
+        }
+        var9 = 0;
+        while ((this.targetarray.__length - 1) >= var9) {
+            this.targetarray[var9].initfull();
+            this.targetarray[var9].setresponse(1, 1, 1);
+            var9 = var9 + 1;
+        }
+        this.watchtimer.initfull();
+        var9 = 0;
+        while ((this.targetarray.__length - 1) >= var9) {
+            this.targetarray[var9].show();
+            this.targetarray[var9].setmytargetingflags(1);
+            var9 = var9 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.exitdoor == null)) {
+            this.exitdoor.cleanupfull();
+            this.exitdoor = null;
+        }
+        if (!(this.watchtimer == null)) {
+            this.watchtimer.cleanupfull();
+            this.watchtimer = null;
+        }
+        if (!(this.targetarray == null)) {
+            var1 = 0;
+            while ((this.targetarray.__length - 1) >= var1) {
+                this.targetarray[var1].cleanupfull();
+                this.targetarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.targetarray = null;
+        }
+        if (!(this.ledgearray == null)) {
+            var1 = 0;
+            while ((this.ledgearray.__length - 1) >= var1) {
+                this.ledgearray[var1].cleanupfull();
+                this.ledgearray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.ledgearray = null;
+        }
+        if (!(this.glyph == null)) {
+            if (this.glyph.objshown == 0) {
+                this.showglyph = 0;
+            }
+            this.glyph.cleanupfull();
+            this.glyph = null;
+        }
+        this.resetpoint = null;
+        this.temptriggername = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var1 = 0;
+        while ((this.ledgearray.__length - 1) >= var1) {
+            this.ledgearray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 39) {
+            this.exitdoor.interpolate(this.exitdoor.getx(), this.exitdoor.gety() + 10, this.exitdoor.getz(), 7);
+        }
+        else if (param1.eventid == 8) {
+            
+        }
+        else if (param1.eventid == 3) {
+            this.parent.level.cam.setaimode(7);
+            gcstaticsoundsptrarray::playtablesound(1048);
+            globalclass.player.kill();
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.watchtimer.reset();
+            this.watchtimer.start();
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                this.halfway = 1;
+            }
+        }
+        else if (param1.eventid == 27) {
+            if (this.halfway) {
+                if (this.parent.enterlookid == scslosifoundation::stringtoidentifier("lok0")) {
+                    var2 = scslosifoundation::stringtoidentifier("lok1");
+                }
+                else {
+                    var2 = scslosifoundation::stringtoidentifier("lok0");
+                }
+                globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str2"), var2);
+            }
+            else {
+                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            }
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            var1 = 0;
+            while ((this.ledgearray.__length - 1) >= var1) {
+                this.ledgearray[var1].reset();
+                var1 = var1 + 1;
+            }
+            this.parent.level.cam.setaimode(11);
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+}

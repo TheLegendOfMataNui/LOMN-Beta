@@ -1,0 +1,178 @@
+class vllg_puzzle {
+    property parent;
+    property discpickup;
+    property deadhives;
+    property coindoor;
+    property doorx;
+    property doorz;
+    property testfordoorproximity;
+    property callev_safe_time_once;
+    
+    method vllg_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        this.callev_safe_time_once = 1;
+        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc5"));
+        if (var1 == 0) {
+            this.discpickup = new lego_pickup("dsc5", 0, 5, "item", 7, 1);
+            this.discpickup.initfull();
+            this.discpickup.show();
+            this.discpickup.setcondition(8192);
+            this.discpickup.setquest(1);
+        }
+        this.deadhives = 0;
+        var2 = gcsaver::isconditionset(1073741824);
+        if (var2) {
+            debug::print("**************************** FREEING THE VLLG **************************************");
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(var3, rgba(255, 247, 0, 255), rgba(0, 150, 121, 255), scslosifoundation::stringtoidentifier("mk4a"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gccharacter::settohunga(var3, rgba(0, 150, 121, 255), rgba(1, 127, 30, 255), scslosifoundation::stringtoidentifier("mk4a"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+            gccharacter::settohunga(var3, rgba(255, 247, 0, 255), rgba(1, 127, 30, 255), scslosifoundation::stringtoidentifier("mk4a"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+            gccharacter::settohunga(var3, rgba(0, 150, 121, 255), rgba(187, 231, 133, 255), scslosifoundation::stringtoidentifier("mkca"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
+            gccharacter::settohunga(var3, rgba(255, 247, 0, 255), rgba(187, 231, 133, 255), scslosifoundation::stringtoidentifier("mkca"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
+            gccharacter::settohunga(var3, rgba(0, 150, 121, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mkca"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
+            gccharacter::settohunga(var3, rgba(255, 247, 0, 255), rgba(255, 92, 1, 255), scslosifoundation::stringtoidentifier("mkca"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
+            gccharacter::settohunga(var3, rgba(0, 150, 121, 255), rgba(187, 231, 133, 255), scslosifoundation::stringtoidentifier("mkca"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
+            gccharacter::settohunga(var3, rgba(255, 247, 0, 255), rgba(0, 150, 121, 255), scslosifoundation::stringtoidentifier("mk4a"));
+            var3 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
+            gccharacter::settohunga(var3, rgba(0, 150, 121, 255), rgba(0, 150, 121, 255), scslosifoundation::stringtoidentifier("mk4a"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("fhv0"), scslosifoundation::stringtoidentifier("vllg"));
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+            globalclass.bgmusic.play(1);
+        }
+        else {
+            debug::print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! VLLG IS NOT FREED");
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl02"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl03"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl04"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl05"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl06"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl07"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl08"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl09"), 0);
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaTheme");
+            globalclass.bgmusic.play();
+        }
+        this.testfordoorproximity = 0;
+        this.coindoor = new lego_moveableobject("door");
+        this.coindoor.initfull();
+        this.coindoor.setalpha(0.7);
+        this.doorx = this.coindoor.getx();
+        this.doorz = this.coindoor.getz();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.coindoor == null)) {
+            this.coindoor.cleanupfull();
+            this.coindoor = null;
+        }
+        if (!(this.discpickup == null)) {
+            this.discpickup.cleanupfull();
+            this.discpickup = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var var2;
+        if (this.testfordoorproximity) {
+            var1 = globalclass.player.actor.getposx();
+            var2 = globalclass.player.actor.getposz();
+            if (var1 >= (this.doorx - 10)) {
+                if (var1 <= (this.doorx + 10)) {
+                    if (var2 >= (this.doorz - 10)) {
+                        if (var2 <= (this.doorz + 10)) {
+                            this.openvllgdoor();
+                            this.testfordoorproximity = 0;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 44) {
+            if (this.callev_safe_time_once) {
+                if (globalclass.player.getamounttokens() >= 15) {
+                    debug::print("****** YOU HAVE ENOUGHT TOKENS!!");
+                    if (globalclass.player.actor.ishookenabled) {
+                        debug::print("***** YOU HAVE THE MASK OF TRANSLATION CONGRATS YOU WIN");
+                        this.testfordoorproximity = 1;
+                        this.callev_safe_time_once = 0;
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 35) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("door")) {
+                if (param1.args[1] == 0) {
+                    this.coindoor.hide();
+                }
+                param1.args[1];
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 51) {
+            if (param1.args[1] == 1) {
+                this.deadhives = this.deadhives + 1;
+                if (this.deadhives >= 1) {
+                    debug::print("******************* SETTING THE CONDITION FOR THE VLLG TO BE FREE **********************");
+                    gcsaver::setcondition(1073741824, 1);
+                    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+                    globalclass.bgmusic.play(1);
+                }
+            }
+            param1.args[1];
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                globalclass.level.cam.setaimode(7);
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method openvllgdoor() {
+        this.coindoor.fadeout(2.0);
+        return null;
+    }
+}

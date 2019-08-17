@@ -1,0 +1,165 @@
+class hydr_lev2_puzzle {
+    property parent;
+    property hydr;
+    property isdead;
+    property stone;
+    property hasstone;
+    
+    method hydr_lev2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        gcareadirector::setnearestmax(20);
+        var1 = scslosifoundation::stringtoidentifier("ston");
+        var2 = gcsaver::finditem(var1);
+        if (var2 == 0) {
+            this.stone = new lego_pickup("ston", 0, 4, "item", 9, 0);
+            this.stone.initfull();
+            this.stone.show();
+            gcareadirector::hide(var1, var1);
+        }
+        this.hasstone = 0;
+        var3 = scslosifoundation::stringtoidentifier("hydr");
+        gcmodeldirector::addboss(var3);
+        gcmodeldirector::show(var3, var3);
+        this.hydr = gchydraboss::gethydraboss();
+        this.isdead = 0;
+        globalclass.player.maskcontrol.usemasks(0);
+        var4 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("hv01"));
+        gchive::setcreaturetype(var4, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(var4, 240);
+        var5 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("hv02"));
+        gchive::setcreaturetype(var5, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(var5, 240);
+        return null;
+    }
+    
+    method playintro() {
+        return null;
+    }
+    
+    method playextro() {
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.hydr = null;
+        if (this.isdead == 0) {
+            var1 = scslosifoundation::stringtoidentifier("hydr");
+            gcmodeldirector::remove(var1, var1);
+        }
+        if (!(this.stone == null)) {
+            this.stone.cleanupfull();
+            this.stone = null;
+        }
+        globalclass.player.maskcontrol.usemasks(1);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method initshort() {
+        return null;
+    }
+    
+    method resetplayer() {
+        globalclass.player.unkill();
+        globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        gchydraboss::reset(this.hydr);
+        globalclass.player.actor.setinputstate("ninp");
+        this.parent.level.cam.setaimode(11);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 7) {
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("eBEG")) {
+                gcbaseboss::emitterbegin(gcmodeldirector::getboss(scslosifoundation::stringtoidentifier("hydr")), param1.args[4], param1.args[5]);
+            }
+            if (param1.args[2] == scslosifoundation::stringtoidentifier("eEND")) {
+                gcbaseboss::emitterend(gcmodeldirector::getboss(scslosifoundation::stringtoidentifier("hydr")), param1.args[4], param1.args[5]);
+            }
+        }
+        else if (param1.eventid == 43) {
+            if (this.isdead == 0) {
+                this.isdead = 1;
+            }
+        }
+        else if (param1.eventid == 41) {
+            gchydraboss::finishconversation(this.hydr);
+        }
+        else if (param1.eventid == 27) {
+            this.resetplayer();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 39) {
+            this.hasstone = 1;
+            globalclass.setnextlevel("lev3", 1);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method hitbldr(param1) {
+        return null;
+    }
+    
+    method suck() {
+        return null;
+    }
+    
+    method getinmybelly() {
+        return null;
+    }
+    
+    method shootgaly_a() {
+        return null;
+    }
+    
+    method shootgaly_b() {
+        return null;
+    }
+    
+    method startfight() {
+        return null;
+    }
+    
+    method atack() {
+        return null;
+    }
+    
+    method spit(param1) {
+        return null;
+    }
+    
+    method splat(param1) {
+        return null;
+    }
+    
+    method physics(param1) {
+        return null;
+    }
+    
+    method intro_interpcam() {
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+}

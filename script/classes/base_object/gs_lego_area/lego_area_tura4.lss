@@ -1,0 +1,40 @@
+class lego_area_tura4 : gs_lego_area {
+    property parent;
+    
+    method lego_area_tura4(param1) {
+        this.parent = param1;
+        this.gs_lego_area("tura", param1, 0, 0);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        this.lego_area_show();
+        this.lego_area_initfull();
+        var2 = scslosifoundation::stringtoidentifier("tps9");
+        var3 = gcsaver::portalactive();
+        if (var3 == 1) {
+            gccollisionphysicsgroup::setportal(var2, "root/data/art/portals/kopa/shrine_ripple/k_shrn_ptl", 1);
+        }
+        else {
+            gccollisionphysicsgroup::turnoffnextarea(var2);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.lego_area_cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

@@ -1,0 +1,219 @@
+class mudmonster {
+    property mudman;
+    property ppuzzle;
+    property mudstate;
+    property mudballs;
+    property curmudball;
+    property miniboulders;
+    property resetmboulders;
+    property shakeonce;
+    property boulderuse;
+    property projoffsetx;
+    property projoffsety;
+    property projoffsetz;
+    property boneindex;
+    
+    method mudmonster(param1) {
+        this.ppuzzle = param1;
+        this.mudman = gcmudboss::createmudboss("mudm", 1836409945);
+        this.boneindex = gcmudboss::getboneindex(this.mudman, 2063160759);
+        this.mudballs = [ new sprite_projectile("mbb0", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb1", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb2", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb3", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb4", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb5", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb6", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb7", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb8", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1), 
+            new sprite_projectile("mbb9", "bld0", "Root/data/levels/lev1/mud0", 45, 1, 100, 0, 1) ];
+        this.miniboulders = [ new lego_projectileobject("smb1", this.ppuzzle.parea.name), 
+            new lego_projectileobject("smb2", this.ppuzzle.parea.name), 
+            new lego_projectileobject("smb3", this.ppuzzle.parea.name), 
+            new lego_projectileobject("smb4", this.ppuzzle.parea.name), 
+            new lego_projectileobject("smb5", this.ppuzzle.parea.name), 
+            new lego_projectileobject("smb6", this.ppuzzle.parea.name), 
+            new lego_projectileobject("smb7", this.ppuzzle.parea.name), 
+            new lego_projectileobject("smb8", this.ppuzzle.parea.name) ];
+        this.resetmboulders = new lego_timer("mbt9", 5.1, 0);
+        this.shakeonce = 1;
+        return null;
+    }
+    
+    method init() {
+        var var1;
+        this.projoffsetx = 11;
+        this.projoffsety = 12;
+        this.projoffsetz = 10;
+        this.resetmboulders.initfull();
+        var1 = 0;
+        while ((this.miniboulders.__length - 1) >= var1) {
+            this.miniboulders[var1].init(0.1, 0, 0, 0, 0, 0.8, "bld0", "Root/data/levels/lev1/mud0", 60);
+            this.miniboulders[var1].setresponse(4, 4, 4);
+            this.miniboulders[var1].setposition(0.0, 0.0, 0.0);
+            this.miniboulders[var1].ignorecollisionswith(1836409945);
+            this.miniboulders[var1].show();
+            this.miniboulders[var1].setbounceeventrepoert(1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        this.mudstate = 6;
+        this.curmudball = 0;
+        this.resetmboulders.reset();
+        var1 = 0;
+        while ((this.miniboulders.__length - 1) >= var1) {
+            this.miniboulders[var1].setposition(0.0, 0.0, 0.0);
+            var1 = var1 + 1;
+        }
+        gcmudboss::setup(this.mudman, 995, 0, 212, -90, 40);
+        this.boulderuse = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        debug::print("Calling cleanup full for the mudmonster");
+        if (!(this.miniboulders == null)) {
+            var1 = 0;
+            while ((this.miniboulders.__length - 1) >= var1) {
+                this.miniboulders[var1].cleanupfull();
+                this.miniboulders[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.miniboulders = null;
+        }
+        debug::print("Cleaning up miniboulders");
+        if (!(this.mudballs == null)) {
+            var1 = 0;
+            while ((this.mudballs.__length - 1) >= var1) {
+                this.mudballs[var1].cleanupfull();
+                this.mudballs[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.mudballs = null;
+        }
+        debug::print("Cleaning up mudballs");
+        if (!(this.mudman == null)) {
+            gcmodeldirector::remove(1836409945, 0);
+            this.mudman = null;
+        }
+        debug::print("Cleaning up the mudman");
+        this.curmudball = null;
+        this.mudstate = null;
+        this.boulderuse = null;
+        if (!(this.resetmboulders == null)) {
+            this.resetmboulders.cleanupfull();
+            this.resetmboulders = null;
+        }
+        debug::print("Cleaning up resetBoulders");
+        this.shakeonce = null;
+        this.projoffsetx = null;
+        this.projoffsety = null;
+        this.projoffsetz = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 19) {
+            var1 = 0;
+            while ((this.mudballs.__length - 1) >= var1) {
+                if (param1.args[1] == this.mudballs[var1].id) {
+                    if (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) {
+                        globalclass.player.actor.react(0, 1, this.mudballs[var1].id);
+                    }
+                    this.explode(this.mudballs[var1]);
+                }
+                var1 = var1 + 1;
+            }
+        }
+        else if (param1.eventid == 17) {
+            var1 = 0;
+            while ((this.miniboulders.__length - 1) >= var1) {
+                if (param1.args[0] == this.miniboulders[var1].id) {
+                    this.miniboulders[var1].fadeout(1.0);
+                }
+                var1 = var1 + 1;
+            }
+        }
+        else if (param1.eventid == 1) {
+            var1 = 0;
+            while ((this.miniboulders.__length - 1) >= var1) {
+                if (param1.args[0] == this.miniboulders[var1].id) {
+                    if (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) {
+                        globalclass.player.actor.react(0, 1, this.mudballs[var1].id);
+                    }
+                }
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method releasemudball(param1) {
+        gcmudboss::throwmudball(this.mudman, this.mudballs[this.curmudball].handle, this.boneindex);
+        this.curmudball = this.curmudball + 1;
+        if (this.curmudball > (this.mudballs.__length - 1)) {
+            this.curmudball = 0;
+        }
+        return null;
+    }
+    
+    method explode(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        var var11;
+        var1 = gcmudboss::getmudballx(this.mudman, param1.handle);
+        var2 = gcmudboss::getmudbally(this.mudman, param1.handle);
+        var3 = gcmudboss::getmudballz(this.mudman, param1.handle);
+        var4 = 0;
+        while ((this.miniboulders.__length - 1) >= var4) {
+            var5 = globalclass.randnum.getrandomfloat(0.05, 0.3);
+            var6 = globalclass.randnum.getrandomfloat(0 - 5.0, 5.0);
+            var7 = globalclass.randnum.getrandomfloat(0.0, 5.0);
+            var8 = globalclass.randnum.getrandomfloat(0 - 5.0, 5.0);
+            var9 = globalclass.randnum.getrandomfloat(var1, var1 + 1.0);
+            var10 = globalclass.randnum.getrandomfloat(var2, var2 + 1.0);
+            var11 = globalclass.randnum.getrandomfloat(var3, var3 + 1.0);
+            this.miniboulders[var4].setobjscale(var5);
+            this.miniboulders[var4].setposition(var9, var10, var11);
+            this.miniboulders[var4].setalpha(0.9);
+            this.miniboulders[var4].setmoveableflags(1, 0, 0, 0);
+            this.miniboulders[var4].setvelocity(var6, var7, var8);
+            var4 = var4 + 1;
+        }
+        this.resetmboulders.reset(0);
+        this.resetmboulders.start();
+        this.shakeonce = 1;
+        return null;
+    }
+    
+    method shrink() {
+        gcmudboss::shrink(this.mudman, 0.2);
+        this.projoffsetx = this.projoffsetx - 2;
+        this.projoffsety = this.projoffsety - 2;
+        this.projoffsetz = this.projoffsetz - 2;
+        return null;
+    }
+}

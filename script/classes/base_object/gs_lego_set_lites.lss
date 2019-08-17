@@ -1,0 +1,69 @@
+class gs_lego_set_lites : base_object {
+    property handle_lite;
+    property active_lite;
+    property pulsate_color;
+    
+    method gs_lego_set_lites() {
+        return null;
+    }
+    
+    method initfull() {
+        this.handle_lite = gclegolite::create();
+        this.createnewlite();
+        this.active_lite = 0;
+        this.pulsate_color = rgba(250, 10, 10, 0);
+        return null;
+    }
+    
+    method createnewlite() {
+        gclegolite::createlight(this.handle_lite, rgba(178, 76, 0, 0), rgba(0, 0, 0, 0), 2.8, 0.0, 0.0, 0.0, 10.0);
+        gclegolite::createlight(this.handle_lite, rgba(178, 0, 0, 0), rgba(0, 0, 0, 0), 2.8, 0 - 150.0, 50.0, 300.0, 500.0);
+        gclegolite::createlight(this.handle_lite, rgba(0, 100, 0, 0), rgba(10, 20, 10, 0), 2.8, 0 - 150.0, 80.0, 0 - 300.0, 5);
+        gclegolite::createlight(this.handle_lite, rgba(51, 51, 51, 0), rgba(0, 0, 0, 0), 2.8, 0.0, 0.0, 0.0, 300);
+        gclegolite::setglobalambient(this.handle_lite, rgba(80, 80, 80, 0));
+        gclegolite::lightoff(this.handle_lite, 1);
+        gclegolite::lightoff(this.handle_lite, 2);
+        gclegolite::lightoff(this.handle_lite, 3);
+        return null;
+    }
+    
+    method togglelite(param1) {
+        gclegolite::togglelight(this.handle_lite, param1);
+        return null;
+    }
+    
+    method toggleactivelite() {
+        gclegolite::togglelite(this.handle_lite, this.active_lite);
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 86) {
+                this.active_lite = 0;
+                this.togglelite(0);
+            }
+            if (param1.button == 66) {
+                this.active_lite = 1;
+                this.togglelite(1);
+            }
+            if (param1.button == 78) {
+                this.active_lite = 2;
+                this.togglelite(2);
+            }
+            if (param1.button == 77) {
+                this.active_lite = 3;
+                this.togglelite(3);
+            }
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        gclegolite::fire(this.handle_lite, 0);
+        gclegolite::lightning(this.handle_lite, 1);
+        gclegolite::orbit(this.handle_lite, 2);
+        gclegolite::pulsate(this.handle_lite, 3, this.pulsate_color, 0.05);
+        return null;
+    }
+}

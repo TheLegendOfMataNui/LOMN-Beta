@@ -1,0 +1,61 @@
+class characterobj_tweakable : base_object {
+    property obj;
+    property stepamount;
+    property desc;
+    
+    method characterobj_tweakable(param1) {
+        this.obj = param1;
+        if (this.obj.myname == null) {
+            this.desc = "char";
+        }
+        else {
+            this.desc = this.obj.myname;
+        }
+        this.stepamount = 0.0;
+        debug::print("Setting tweakable on " + __tostring(this.desc));
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method setpos(param1, param2, param3) {
+        this.obj.setpos(param1, param2, param3);
+        return null;
+    }
+    
+    method getx() {
+        return this.obj.getpos().x1;
+    }
+    
+    method gety() {
+        return this.obj.getpos().y1;
+    }
+    
+    method getz() {
+        return this.obj.getpos().z;
+    }
+    
+    method getorientationx() {
+        return 0;
+    }
+    
+    method getorientationy() {
+        return this.obj.getorientation();
+    }
+    
+    method getorientationz() {
+        return 0;
+    }
+    
+    method setorientation(param1, param2, param3) {
+        this.obj.setorientation(param2);
+        return null;
+    }
+    
+    method zap() {
+        globalclass.level.cam.setpos(this.getx(), this.gety(), this.getz());
+        return null;
+    }
+}

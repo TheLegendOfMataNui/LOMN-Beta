@@ -1,0 +1,134 @@
+class boss5_puzzle {
+    property mparent;
+    property mwindy;
+    property isdead;
+    property stone;
+    property hasstone;
+    property mshowintro;
+    property playing;
+    
+    method boss5_puzzle(param1) {
+        this.mparent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var1 = scslosifoundation::stringtoidentifier("ston");
+        if (gcsaver::finditem(var1) == 0) {
+            this.stone = new lego_pickup("ston", 0, 4, "item", 8, 0);
+            this.stone.initfull();
+            this.stone.show();
+            gcareadirector::hide(var1, var1);
+        }
+        this.hasstone = 0;
+        var2 = scslosifoundation::stringtoidentifier("wind");
+        gcmodeldirector::addboss(var2);
+        gcmodeldirector::show(var2, var2);
+        this.mwindy = gcwindboss::getwindboss();
+        this.isdead = 0;
+        this.mshowintro = gcwindboss::needsintro(this.mwindy);
+        this.playing = 0;
+        globalclass.player.maskcontrol.usemasks(0);
+        return null;
+    }
+    
+    method reset() {
+        globalclass.player.actor.gotopos(this.mparent.enterstartid, this.mparent.enterlookid);
+        globalclass.player.unkill();
+        gcwindboss::reset(this.mwindy);
+        globalclass.player.actor.setinputstate("ninp");
+        this.mparent.level.cam.setaimode(11);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        this.playing = 0;
+        return null;
+    }
+    
+    method playintro() {
+        this.mparent.level.cam.makespline("Root/Data/Levels/lev5/boss/boss_CAM.slb");
+        this.mparent.level.cam.setspline(0, 10.0, 1, 0);
+        this.mparent.level.cam.setaimode(2);
+        this.mparent.level.cam.settargetpos(0.0, 10.0, 4.2);
+        this.mparent.level.cam.scaletocutscene();
+        globalclass.hud.hide();
+        this.mshowintro = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.mwindy = null;
+        if (this.isdead == 0) {
+            var1 = scslosifoundation::stringtoidentifier("wind");
+            gcmodeldirector::remove(var1, var1);
+        }
+        if (!(this.stone == null)) {
+            this.stone.cleanupfull();
+            this.stone = null;
+        }
+        globalclass.player.maskcontrol.usemasks(1);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                if (this.isdead == 1) {
+                    if (this.hasstone == 1) {
+                        globalclass.setnextlevel("lev6", 1);
+                    }
+                }
+                else {
+                    this.mparent.level.cam.setaimode(7);
+                    gccollisionphysicsgroup::spinmask(1.2);
+                    globalclass.player.actor.setinputstate("none");
+                }
+            }
+        }
+        else if (param1.eventid == 27) {
+            this.reset();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 43) {
+            if (this.isdead == 0) {
+                this.isdead = 1;
+            }
+        }
+        else if (param1.eventid == 41) {
+            gcwindboss::finishconversation(this.mwindy);
+        }
+        else if (param1.eventid == 39) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("ston")) {
+                this.hasstone = 1;
+            }
+        }
+        else if (param1.eventid == 6) {
+            debug::print("***************** CAMERA IS AT THE END OF THE SPLINE");
+            this.mparent.level.cam.setaimode(11);
+            this.mparent.level.cam.resetviewport();
+            globalclass.hud.show();
+            gcwindboss::introfinished(this.mwindy);
+        }
+        else if (param1.eventid == 4) {
+            if (this.playing == 0) {
+                if (this.mshowintro == 1) {
+                    this.playintro();
+                }
+                gcwindboss::start(this.mwindy);
+                this.playing = 1;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

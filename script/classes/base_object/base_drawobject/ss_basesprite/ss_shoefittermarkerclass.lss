@@ -1,0 +1,80 @@
+class ss_shoefittermarkerclass : ss_basesprite {
+    property startspot;
+    property markername;
+    property transparencyincr;
+    property eventtype;
+    property arg_name_array;
+    property arg_value_array;
+    property moveamount;
+    
+    method ss_shoefittermarkerclass(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+        this.ss_basesprite(param1, param2, param3, param4, param5, param6);
+        this.startspot = param7;
+        this.markername = param8;
+        this.transparencyincr = 25;
+        this.eventtype = param9;
+        return null;
+    }
+    
+    method markerinitfull(param1) {
+        this.initfull();
+        this.add();
+        this.show();
+        this.enablealphachannel(1);
+        this.enabletransparency(1);
+        this.createargarrays();
+        this.settransparency(150);
+        this.moveamount = 534 / (param1 * 100);
+        return null;
+    }
+    
+    method markercleanupfull() {
+        this.hide();
+        this.remove();
+        this.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.pulsate();
+        return null;
+    }
+    
+    method pulsate() {
+        this.transval = this.transval + this.transparencyincr;
+        this.settransparency(this.transval);
+        if ((this.transval >= 250) || (this.transval <= 150)) {
+            this.transparencyincr = 0 - this.transparencyincr;
+        }
+        return null;
+    }
+    
+    method moveflag(param1) {
+        this.changepos(this.moveamount * param1);
+        this.startspot = this.startspot + (param1 * 0.01);
+        return null;
+    }
+    
+    method createargarrays() {
+        if (this.arg_name_array == null) {
+            this.arg_name_array = [ "User0", 
+                "User1", 
+                "User2", 
+                "User3", 
+                "User4" ];
+        }
+        if (this.arg_value_array == null) {
+            this.arg_value_array = [ 0, 
+                0, 
+                0, 
+                0, 
+                0 ];
+        }
+        return null;
+    }
+    
+    method setargvalues(param1, param2) {
+        this.arg_value_array[param2] = param1;
+        return null;
+    }
+}

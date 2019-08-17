@@ -1,0 +1,163 @@
+class bldr_boulder {
+    property boulder;
+    property stringid;
+    property id;
+    property parent;
+    property scale;
+    property startx;
+    property starty;
+    property startz;
+    property resetboulder;
+    property nx;
+    property nz;
+    property vx;
+    property vy;
+    property vz;
+    property shakeonce;
+    property hitgroundsound;
+    property soundonce;
+    
+    method bldr_boulder(param1, param2, param3, param4, param5, param6, param7) {
+        this.parent = param2;
+        this.stringid = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.boulder = new lego_projectileobject(param1, "dumb");
+        this.scale = param6;
+        this.startx = param3;
+        this.starty = param4;
+        this.startz = param5;
+        this.resetboulder = param7;
+        this.shakeonce = 1;
+        this.soundonce = 1;
+        return null;
+    }
+    
+    method initfull() {
+        this.boulder.init(1.0, 1, 1, 0, 1, this.scale, "bld0", "Root/data/levels/lev3/bldr", 60);
+        this.boulder.setfallreset(1);
+        this.boulder.setfalllimit(0 - 19.0);
+        this.boulder.setbouncefactor(0.25);
+        this.boulder.setbounceeventrepoert(1);
+        this.boulder.setresponse(5, 0, 5);
+        this.hitgroundsound = new tablecopysound(1038);
+        this.hitgroundsound.synctoobject(this.id);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method show() {
+        this.boulder.onscreen = 0;
+        this.boulder.show();
+        this.resettostart();
+        return null;
+    }
+    
+    method hide() {
+        this.stringid = null;
+        this.id = null;
+        this.parent = null;
+        this.scale = null;
+        this.startx = null;
+        this.starty = null;
+        this.startz = null;
+        this.resetboulder = null;
+        this.nx = null;
+        this.nz = null;
+        this.vx = null;
+        this.vy = null;
+        this.vz = null;
+        this.shakeonce = null;
+        this.boulder.cleanupfull();
+        this.boulder = null;
+        this.parent = null;
+        return null;
+    }
+    
+    method roll() {
+        this.boulder.setmoveableflags(1, 1, 0, 1);
+        return null;
+    }
+    
+    method stop() {
+        this.boulder.setmoveableflags(0, 0, 0, 0);
+        return null;
+    }
+    
+    method resettostart() {
+        this.boulder.setposition(this.startx, this.starty, this.startz);
+        this.shakeonce = 1;
+        this.soundonce = 1;
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 80) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        if (param1.eventid == 1) {
+            var1 = param1.args[0];
+            var2 = param1.args[1];
+            var3 = scslosifoundation::identifiertostring(var1);
+            var4 = scslosifoundation::identifiertostring(var2);
+            if (var3 == this.stringid) {
+                if (var4 == "cnt1") {
+                    
+                }
+            }
+            return 0;
+        }
+        if (param1.eventid == 17) {
+            if (param1.args[0] == this.id) {
+                if (this.soundonce) {
+                    this.soundonce = 0;
+                    this.hitgroundsound.play(0);
+                    debug::print("*************CRACK GOES THE BOULDER**************");
+                }
+            }
+            if (this.shakeonce) {
+                if (param1.args[1] > 20.0) {
+                    var5 = globalclass.player.actor.getpos();
+                    var6 = var5.x1;
+                    var7 = var5.y1;
+                    var8 = var5.z;
+                    if ((param1.args[2] > (var6 - 12.0)) && (param1.args[2] < (var6 + 12.0))) {
+                        if ((param1.args[3] > (var7 - 3.0)) && (param1.args[3] < (var7 + 5.0))) {
+                            if ((param1.args[4] > (var8 - 12.0)) && (param1.args[4] < (var8 + 12.0))) {
+                                this.shakeonce = 0;
+                                this.shake();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method shake() {
+        this.parent.parent.level.cam.shakecamera(0.1, 0.08);
+        return null;
+    }
+    
+    method cheat() {
+        this.resettostart();
+        return null;
+    }
+}

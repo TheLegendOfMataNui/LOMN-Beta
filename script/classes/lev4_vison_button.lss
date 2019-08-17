@@ -1,0 +1,33 @@
+class lev4_vison_button {
+    property obj;
+    property id;
+    property name;
+    property uppos;
+    property downpos;
+    
+    method lev4_vison_button(param1) {
+        this.obj = new lego_moveableobject(param1);
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.obj.setresponse(0, 0, 0);
+        this.obj.setignoreallcollisions(0);
+        this.uppos = new basicpoint(this.obj.getx(), this.obj.gety(), this.obj.getz());
+        this.downpos = new basicpoint(this.obj.getx(), this.obj.gety() - 0.8, this.obj.getz());
+        return null;
+    }
+    
+    method triggerd(param1) {
+        if (param1) {
+            this.obj.setpos(this.downpos);
+        }
+        else {
+            this.obj.setpos(this.uppos);
+        }
+        return null;
+    }
+}

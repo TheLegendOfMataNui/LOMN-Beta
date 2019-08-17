@@ -1,0 +1,75 @@
+class pizza_puzzlep : base_object {
+    property parent;
+    property mask;
+    property showmask;
+    
+    method pizza_puzzlep(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mskv"));
+        if (var1) {
+            this.showmask = 0;
+            debug::print("* cnt1 has mask");
+        }
+        else {
+            this.showmask = 1;
+            debug::print("* mask show");
+        }
+        if (this.showmask) {
+            this.mask = new lego_pickup("mskv", 8, 1, "item", 4, 1);
+            this.mask.initfull();
+            this.mask.show();
+        }
+        var2 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("pzzl"));
+        gcmoveableobj::inittargetmorph(var2, "lev1", "pzzl");
+        gcmoveableobj::setdig(var2, 1);
+        var2 = null;
+        var3 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig5"), scslosifoundation::stringtoidentifier("pzzl"));
+        gcmoveableobj::inittargetmorph(var3, "lev1", "pzzl");
+        gcmoveableobj::setdig(var3, 1);
+        var3 = null;
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.mask == null)) {
+            this.showmask = this.mask.objshown;
+            this.mask.cleanupfull();
+            this.mask = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

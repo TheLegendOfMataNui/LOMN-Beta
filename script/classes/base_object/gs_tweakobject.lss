@@ -1,0 +1,28 @@
+class gs_tweakobject : base_object {
+    property value;
+    property desc;
+    property obj;
+    property func;
+    property stepamount;
+    
+    method gs_tweakobject(param1, param2, param3, param4, param5) {
+        this.value = param1;
+        this.desc = param2;
+        this.obj = param3;
+        this.func = param4;
+        this.stepamount = param5;
+        return null;
+    }
+    
+    method incvalue() {
+        this.value = this.value + this.stepamount;
+        this.obj.$(this.func)(this.value);
+        return this.value;
+    }
+    
+    method decvalue() {
+        this.value = this.value - this.stepamount;
+        this.obj.$(this.func)(this.value);
+        return this.value;
+    }
+}

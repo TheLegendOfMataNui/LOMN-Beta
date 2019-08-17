@@ -1,0 +1,205 @@
+class bugpitpuzzle_class {
+    property parent;
+    property trapdoortimer;
+    property deadhives;
+    property door_trap;
+    property door_goal_a;
+    property door_goal_b;
+    property trapdoorshut;
+    property door_trap_original;
+    property door_goal_a_original;
+    property door_goal_b_original;
+    property hive1handle;
+    property hive2handle;
+    property hive3handle;
+    property hive4handle;
+    
+    method bugpitpuzzle_class(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.trapdoortimer = new lego_timer("trap", 2.0, 0);
+        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(this.hive1handle, 0);
+        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("bugz"));
+        gchive::setspawnrate(this.hive1handle, 30);
+        this.hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv2"));
+        gchive::setmaxcreatures(this.hive2handle, 0);
+        gchive::setcreaturetype(this.hive2handle, scslosifoundation::stringtoidentifier("bugz"));
+        gchive::setspawnrate(this.hive2handle, 30);
+        this.hive3handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv3"));
+        gchive::setmaxcreatures(this.hive3handle, 0);
+        gchive::setcreaturetype(this.hive3handle, scslosifoundation::stringtoidentifier("bugz"));
+        gchive::setspawnrate(this.hive3handle, 30);
+        this.hive4handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv4"));
+        gchive::setmaxcreatures(this.hive4handle, 0);
+        gchive::setcreaturetype(this.hive4handle, scslosifoundation::stringtoidentifier("bugz"));
+        gchive::setspawnrate(this.hive4handle, 30);
+        this.deadhives = 0;
+        this.door_trap = new lego_moveableobject("dor3", this.parent.name);
+        this.door_goal_a = new lego_moveableobject("dor7", this.parent.name);
+        this.door_goal_b = new lego_moveableobject("dor8", this.parent.name);
+        this.trapdoorshut = 0;
+        this.trapdoortimer.initfull();
+        this.door_trap.initfull();
+        this.door_goal_a.initfull();
+        this.door_goal_b.initfull();
+        this.door_trap_original = new basicpoint(this.door_trap.getx(), this.door_trap.gety(), this.door_trap.getz());
+        this.door_goal_a_original = new basicpoint(this.door_goal_a.getx(), this.door_goal_a.gety(), this.door_goal_a.getz());
+        this.door_goal_b_original = new basicpoint(this.door_goal_b.getx(), this.door_goal_b.gety(), this.door_goal_b.getz());
+        this.door_goal_a.ignorecollisionswith(this.door_goal_b.id);
+        this.door_goal_b.ignorecollisionswith(this.door_goal_a.id);
+        this.door_trap.setresponse(3, 3, 3);
+        this.door_goal_a.setresponse(3, 3, 3);
+        this.door_goal_b.setresponse(3, 3, 3);
+        gcstaticsoundsptrarray::playtablesound(1042);
+        gcsaver::setcondition(33554432, 1);
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.door_trap == null)) {
+            this.door_trap.cleanupfull();
+            this.door_trap = null;
+        }
+        if (!(this.door_goal_a == null)) {
+            this.door_goal_a.cleanupfull();
+            this.door_goal_a = null;
+        }
+        if (!(this.door_goal_b == null)) {
+            this.door_goal_b.cleanupfull();
+            this.door_goal_b = null;
+        }
+        if (!(this.trapdoortimer == null)) {
+            this.trapdoortimer.cleanupfull();
+            this.trapdoortimer = null;
+        }
+        this.hive1handle = null;
+        this.hive2handle = null;
+        this.hive3handle = null;
+        this.hive4handle = null;
+        this.deadhives = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.door_trap.setpos(this.door_trap_original);
+        this.door_goal_a.setpos(this.door_goal_a_original);
+        this.door_goal_b.setpos(this.door_goal_b_original);
+        this.trapdoortimer.reset();
+        this.trapdoortimer.stop();
+        this.trapdoorshut = 0;
+        return null;
+    }
+    
+    method hide() {
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        if (param1.eventid == 4) {
+            var1 = param1.args[0];
+            if (var1 == scslosifoundation::stringtoidentifier("tp00")) {
+                if (this.trapdoorshut == 0) {
+                    this.trapdooraction();
+                }
+            }
+        }
+        else if (param1.eventid == 8) {
+            var2 = param1.args[0];
+            if (var2 == scslosifoundation::stringtoidentifier("trap")) {
+                this.parent.parent.cam.setaimode(11);
+                globalclass.player.actor.setinputstate("ninp");
+                globalclass.player.actor.idle();
+                scprocessmanager::pausecreatures(0);
+                gchive::setmaxcreatures(this.hive1handle, 3);
+                gchive::setspawnrate(this.hive1handle, 3);
+                gchive::setmaxcreatures(this.hive2handle, 3);
+                gchive::setspawnrate(this.hive2handle, 3);
+                gchive::setmaxcreatures(this.hive3handle, 3);
+                gchive::setspawnrate(this.hive3handle, 3);
+                gchive::setmaxcreatures(this.hive4handle, 3);
+                gchive::setspawnrate(this.hive4handle, 3);
+            }
+        }
+        else if (param1.eventid == 46) {
+            this.reseta();
+        }
+        else if (param1.eventid == 27) {
+            this.resetb();
+        }
+        else if (param1.eventid == 51) {
+            if (param1.args[1] == 1) {
+                this.killedahive();
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method trapdooraction() {
+        scprocessmanager::pausecreatures(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
+        globalclass.bgmusic.play(1);
+        this.trapdoortimer.start();
+        gcstaticsoundsptrarray::playtablesound(1105);
+        this.door_trap.changeposition(0.0, 0 - 15.0, 0.0, 0.5);
+        this.trapdoorshut = 1;
+        this.parent.parent.cam.setaimode(0);
+        this.parent.parent.cam.settargetpos(888.3, 9.4, 126.5);
+        this.parent.parent.cam.setpos(886.6, 7.0, 117.8);
+        this.parent.parent.cam.shakecamera(1.5, 0.15);
+        globalclass.player.actor.setinputstate("none");
+        globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+        return null;
+    }
+    
+    method killedahive() {
+        var var1;
+        this.deadhives = this.deadhives + 1;
+        if (this.deadhives == 4) {
+            var1 = 5.5;
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+            globalclass.bgmusic.play(1);
+        }
+        else {
+            var1 = this.deadhives * 0.5;
+        }
+        this.door_goal_a.changeposition(0 - var1, 0.0, var1, 0.0);
+        this.door_goal_b.changeposition(var1, 0.0, 0 - var1, 0.0);
+        return null;
+    }
+    
+    method reseta() {
+        gccollisionphysicsgroup::spinmask(1.2);
+        return null;
+    }
+    
+    method resetb() {
+        globalclass.player.actor.gotostartpos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        this.cleanupshort();
+        globalclass.player.unkill();
+        return null;
+    }
+}

@@ -1,0 +1,135 @@
+class ss_base3dobject : base_drawobject {
+    property charname;
+    property contid;
+    property visstate;
+    property charstring;
+    property contstring;
+    property handle;
+    property angle;
+    property inputstate;
+    
+    method ss_base3dobject(param1, param2, param3, param4, param5, param6) {
+        this.charstring = param2;
+        this.contstring = param1;
+        if (param3 == null) {
+            this.angle = 0.0;
+        }
+        else {
+            this.angle = param3;
+        }
+        if (param4 == null) {
+            this.x1 = 0.0;
+        }
+        else {
+            this.x1 = param4;
+        }
+        if (param5 == null) {
+            this.y1 = 0.0;
+        }
+        else {
+            this.y1 = param5;
+        }
+        if (param6 == null) {
+            this.z = 0.0;
+        }
+        else {
+            this.z = param6;
+        }
+        this.onscreen = 0;
+        return null;
+    }
+    
+    method initfull() {
+        this.contid = scslosifoundation::stringtoidentifier(this.contstring);
+        this.charname = scslosifoundation::stringtoidentifier(this.charstring);
+        return null;
+    }
+    
+    method add() {
+        gcmodeldirector::addcharacter(this.charstring, this.charname, this.inputstate, this.contid);
+        this.handle = gcmodeldirector::getcharacter(this.contid);
+        this.setpos(this.x1, this.y1, this.z);
+        this.setorientation(this.angle);
+        this.setinputstate("none");
+        return null;
+    }
+    
+    method setinputstate(param1) {
+        var var1;
+        var1 = scslosifoundation::stringtoidentifier(param1);
+        gcmodeldirector::setinputstate(this.contid, var1);
+        return null;
+    }
+    
+    method show() {
+        gcmodeldirector::show(this.contid);
+        this.onscreen = 1;
+        return null;
+    }
+    
+    method hide() {
+        gcmodeldirector::hide(this.contid);
+        this.onscreen = 0;
+        return null;
+    }
+    
+    method remove() {
+        gcmodeldirector::remove(this.contid);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.handle = null;
+        return null;
+    }
+    
+    method enablealphachannel(param1) {
+        return null;
+    }
+    
+    method setpos(param1, param2, param3) {
+        if (!(param1 == null)) {
+            this.x1 = param1;
+        }
+        if (!(param1 == null)) {
+            this.y1 = param2;
+        }
+        if (!(param1 == null)) {
+            this.z = param3;
+        }
+        gccharacter::setposition(this.handle, this.x1, this.y1, this.z);
+        return null;
+    }
+    
+    method changepos(param1, param2, param3) {
+        if (!(param1 == null)) {
+            this.x1 = param1 + this.x1;
+        }
+        if (!(param1 == null)) {
+            this.y1 = param2 + this.y1;
+        }
+        if (!(param1 == null)) {
+            this.z = param3 + this.z;
+        }
+        gccharacter::setposition(this.handle, this.x1, this.y1, this.z);
+        return null;
+    }
+    
+    method getpos() {
+        this.x1 = gccharacter::getpositionx(this.handle);
+        this.y1 = gccharacter::getpositiony(this.handle);
+        this.z = gccharacter::getpositionz(this.handle);
+        return new ss_point(this.x1, this.y1, this.z);
+    }
+    
+    method setorientation(param1) {
+        this.angle = param1;
+        gccharacter::setorientation(this.handle, this.angle);
+        return null;
+    }
+    
+    method getorientation() {
+        this.angle = gccharacter::getorientation(this.handle);
+        return this.angle;
+    }
+}

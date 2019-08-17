@@ -1,0 +1,537 @@
+class ss_shoefittercharacterwindow {
+    property shoefittercharacter;
+    property shoefittercamera;
+    property controller;
+    property currentcharacter;
+    property rotatepause;
+    property animationarray;
+    property rewindpause;
+    property frameadvpause;
+    property shoefittercollisionbox;
+    property cameraoffset;
+    property playing;
+    property parent;
+    
+    method ss_shoefittercharacterwindow() {
+        this.controller = 1;
+        this.currentcharacter = "onua";
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.shoefittercharacter = new gs_lego_character("cnt" + __tostring(this.controller), this.currentcharacter, "bech", 0, 0, 0, 0, "ninp");
+        this.shoefittercamera = new gs_legocamera(0, 0, 30, 0, 0, 0);
+        this.shoefittercamera.initfull();
+        this.shoefittercamera.setaimode(0);
+        this.shoefittercamera.settweakable();
+        this.rotatepause = 0.0;
+        this.rewindpause = 0.0;
+        this.frameadvpause = 0.0;
+        var1 = 0;
+        this.animationarray = [  ];
+        this.playing = 0;
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.shoefittercamera.cleanupfull();
+        this.shoefittercamera = null;
+        if (this.shoefittercharacter.onscreen) {
+            this.shoefittercharacter.hide();
+            this.shoefittercharacter.remove();
+        }
+        this.shoefittercharacter.cleanupfull();
+        this.shoefittercharacter = null;
+        this.rotatepause = null;
+        this.rewindpause = null;
+        this.frameadvpause = null;
+        var1 = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method rotateclockwise() {
+        var var1;
+        var1 = this.shoefittercharacter.angle - 15;
+        if (var1 <= 360) {
+            var1 = var1 - 360;
+        }
+        this.shoefittercharacter.setorientation(var1);
+        return null;
+    }
+    
+    method rotatecounterclockwise() {
+        var var1;
+        var1 = this.shoefittercharacter.angle + 15;
+        if (var1 < 0) {
+            var1 = var1 + 360;
+        }
+        this.shoefittercharacter.setorientation(var1);
+        return null;
+    }
+    
+    method process(param1) {
+        this.rewindpause = this.rewindpause + param1.deltatime;
+        this.rotatepause = this.rotatepause + param1.deltatime;
+        this.frameadvpause = this.frameadvpause + param1.deltatime;
+        if (this.shoefittercharacter.onscreen) {
+            this.setcamerapos();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (this.shoefittercharacter.onscreen) {
+            this.keyboardinput(param1);
+        }
+        if (param1.event == 2) {
+            this.resetpause();
+        }
+        this.shoefittercamera.input(param1);
+        return null;
+    }
+    
+    method keyboardinput(param1) {
+        if (param1.button == 97) {
+            if (param1.event == 2) {
+                this.rotateclockwise();
+            }
+        }
+        if (param1.button == 99) {
+            if (param1.event == 2) {
+                this.rotatecounterclockwise();
+            }
+        }
+        if (this.rotatepause >= 0.25) {
+            if (param1.button == 97) {
+                if (param1.event == 4) {
+                    this.rotateclockwise();
+                }
+            }
+            if (param1.button == 99) {
+                if (param1.event == 4) {
+                    this.rotatecounterclockwise();
+                }
+            }
+        }
+        if (!(this.shoefittercharacter.currentanimation == 0)) {
+            if (param1.button == 102) {
+                if (param1.event == 2) {
+                    this.frameadv();
+                }
+            }
+            if (this.frameadvpause >= 0.1) {
+                if (param1.button == 102) {
+                    if (param1.event == 4) {
+                        this.play();
+                    }
+                }
+            }
+            if (param1.button == 102) {
+                if (param1.event == 1) {
+                    this.pause();
+                }
+            }
+            if (param1.button == 100) {
+                if (param1.event == 2) {
+                    this.rewind();
+                }
+            }
+            if (this.rewindpause >= 0.1) {
+                if (param1.button == 100) {
+                    if (param1.event == 4) {
+                        this.rewind();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method play() {
+        this.shoefittercharacter.play();
+        this.playing = 1;
+        return null;
+    }
+    
+    method pause() {
+        this.shoefittercharacter.pause();
+        this.playing = 0;
+        return null;
+    }
+    
+    method resetpause() {
+        this.rotatepause = 0.0;
+        this.rewindpause = 0.0;
+        this.frameadvpause = 0.0;
+        return null;
+    }
+    
+    method frameadv() {
+        var var1;
+        var1 = this.shoefittercharacter.getframe() + 1;
+        if (var1 > this.shoefittercharacter.getnumframes()) {
+            var1 = 0;
+        }
+        this.shoefittercharacter.startatframe(var1);
+        return null;
+    }
+    
+    method rewind() {
+        var var1;
+        var1 = this.shoefittercharacter.getframe() - 1;
+        if (var1 < 0) {
+            var1 = this.shoefittercharacter.getnumframes();
+        }
+        this.shoefittercharacter.startatframe(var1);
+        return null;
+    }
+    
+    method checkcamerapos() {
+        return null;
+    }
+    
+    method setcamerapos() {
+        return null;
+    }
+    
+    method switchcharacter(param1) {
+        if (this.shoefittercharacter.onscreen) {
+            this.shoefittercharacter.hide();
+            this.shoefittercharacter.remove();
+            this.shoefittercharacter.cleanupfull();
+        }
+        this.currentcharacter = param1;
+        if (this.currentcharacter == "zaug") {
+            this.shoefittercamera.setpos(0, 0, 1900);
+        }
+        else {
+            this.shoefittercamera.setpos(0, 0, 30);
+        }
+        this.shoefittercamera.settargetpos(0, 0, 0);
+        this.addcharacter();
+        return null;
+    }
+    
+    method addcharacter() {
+        this.shoefittercharacter = new gs_lego_character("cnt" + __tostring(this.controller), this.currentcharacter, "cnt1", 0, 0, 0, 0, "ninp");
+        this.shoefittercharacter.initfull();
+        this.shoefittercharacter.add();
+        this.shoefittercharacter.show();
+        gccharacter::settweakable(this.shoefittercharacter.handle);
+        this.setanimations();
+        this.checkcamerapos();
+        return null;
+    }
+    
+    method setanimations() {
+        var var1;
+        var var2;
+        this.animationarray = [  ];
+        var1 = 0;
+        while ((this.shoefittercharacter.numanimations - 1) >= var1) {
+            this.animationarray.__append([ this.shoefittercharacter.getanimid(var1) ]);
+            var1 = var1 + 1;
+        }
+        var2 = this.checkoldflags();
+        if (__isarray(var2)) {
+            this.loadoldflags(var2);
+        }
+        return null;
+    }
+    
+    method checkoldflags() {
+        var var1;
+        var var2;
+        var var3;
+        var1 = -1;
+        var2 = (("Root/scripting/slks/shoefitter/" + this.shoefittercharacter.charstring) + "/") + this.shoefittercharacter.charstring;
+        var3 = new slosi_objectfileio(var2);
+        if (var3.fileexist()) {
+            var1 = var3.loadosiobject();
+        }
+        return var1;
+    }
+    
+    method loadoldflags(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = 0;
+        while ((param1.__length - 1) >= var1) {
+            var2 = param1[var1];
+            var3 = 0;
+            while ((this.animationarray.__length - 1) >= var3) {
+                var4 = this.animationarray[var3];
+                if (var2[0] == var4[0]) {
+                    this.animationarray[var3] = var2;
+                    var3 = (this.animationarray.__length - 1) + 1;
+                }
+                var3 = var3 + 1;
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method setanimationflags(param1, param2) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var1 = 0;
+        while ((this.animationarray.__length - 1) >= var1) {
+            var2 = this.animationarray[var1];
+            if (var2[0] == this.shoefittercharacter.currentanimation) {
+                var3 = this.createsaveableflags(param1);
+                var4 = this.createsaveablesounds(param2);
+                if (var2.__length > 1) {
+                    var5 = var2.__length - 1;
+                    var6 = 1;
+                    while (var5 >= var6) {
+                        var2.__removeat(var2.__length - 1);
+                        var6 = var6 + 1;
+                    }
+                }
+                var2.__append(var3);
+                var2.__append(var4);
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method createsaveableflags(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = [  ];
+        var2 = 0;
+        while ((param1.__length - 1) >= var2) {
+            var1.__append(new ss_shoefittermarkerclass(param1[var2].filename, param1[var2].x1, param1[var2].y1, param1[var2].z, param1[var2].x2, param1[var2].y2, param1[var2].startspot, param1[var2].markername, param1[var2].eventtype));
+            var1[var1.__length - 1].createargarrays();
+            var3 = param1[var2].arg_value_array;
+            var4 = 0;
+            while ((var3.__length - 1) >= var4) {
+                if (__isstring(var3[var4])) {
+                    if (__tostring(__toint(var3[var4])) == var3[var4]) {
+                        var3[var4] = __toint(var3[var4]);
+                    }
+                }
+                var1[var1.__length - 1].setargvalues(var3[var4], var4);
+                var4 = var4 + 1;
+            }
+            var2 = var2 + 1;
+        }
+        return var1;
+    }
+    
+    method createsaveablesounds(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var1 = [  ];
+        var2 = 0;
+        while ((param1.__length - 1) >= var2) {
+            var3 = new ss_shoefittersoundmarkerclass();
+            var3.startspot = param1[var2].startspot;
+            var3.endspot = param1[var2].endspot;
+            var3.filename = param1[var2].filename;
+            var3.arg_name_array = param1[var2].arg_name_array;
+            var3.arg_value_array = param1[var2].arg_value_array;
+            var3.x1 = param1[var2].x1;
+            var3.x2 = param1[var2].x2;
+            var3.y1 = param1[var2].y1;
+            var3.y2 = param1[var2].y2;
+            var1.__append(var3);
+            var1[var1.__length - 1].createargarrays();
+            var4 = param1[var2].arg_value_array;
+            var5 = 0;
+            while ((var4.__length - 1) >= var5) {
+                if (__isstring(var4[var5])) {
+                    if (__tostring(__toint(var4[var5])) == var4[var5]) {
+                        var4[var5] = __toint(var4[var5]);
+                    }
+                }
+                var1[var1.__length - 1].setargvalues(var4[var5], var5);
+                var5 = var5 + 1;
+            }
+            var2 = var2 + 1;
+        }
+        return var1;
+    }
+    
+    method saveflags(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        var var11;
+        var var12;
+        var var13;
+        var var14;
+        var var15;
+        var1 = new slosi_extendedfileio(param1 + ".slk");
+        var1.create();
+        var2 = [ "ID;PWXL;N;E", 
+            "P;PGeneral", 
+            "P;P0", 
+            "P;P0.00", 
+            "P;P#,##0", 
+            "P;P#,##0.00", 
+            "P;P#,##0_);;\(#,##0\)", 
+            "P;P#,##0_);;[Red]\(#,##0\)", 
+            "P;P#,##0.00_);;\(#,##0.00\)", 
+            "P;P#,##0.00_);;[Red]\(#,##0.00\)", 
+            "P;P\"$\"#,##0_);;\(\"$\"#,##0\)", 
+            "P;P\"$\"#,##0_);;[Red]\(\"$\"#,##0\)", 
+            "P;P\"$\"#,##0.00_);;\(\"$\"#,##0.00\)", 
+            "P;P\"$\"#,##0.00_);;[Red]\(\"$\"#,##0.00\)", 
+            "P;P0%", 
+            "P;P0.00%", 
+            "P;P0.00E+00", 
+            "P;P##0.0E+0", 
+            "P;P#\ ?/?", 
+            "P;P#\ ??/??", 
+            "P;Pm/d/yy", 
+            "P;Pd\-mmm\-yy", 
+            "P;Pd\-mmm", 
+            "P;Pmmm\-yy", 
+            "P;Ph:mm\ AM/PM", 
+            "P;Ph:mm:ss\ AM/PM", 
+            "P;Ph:mm", 
+            "P;Ph:mm:ss", 
+            "P;Pm/d/yy\ h:mm", 
+            "P;Pmm:ss", 
+            "P;Pmm:ss.0", 
+            "P;P@", 
+            "P;P[h]:mm:ss", 
+            "P;P_(\"$\"* #,##0_);;_(\"$\"* \(#,##0\);;_(\"$\"* \"-\"_);;_(@_)", 
+            "P;P_(* #,##0_);;_(* \(#,##0\);;_(* \"-\"_);;_(@_)", 
+            "P;P_(\"$\"* #,##0.00_);;_(\"$\"* \(#,##0.00\);;_(\"$\"* \"-\"??_);;_(@_)", 
+            "P;P_(* #,##0.00_);;_(* \(#,##0.00\);;_(* \"-\"??_);;_(@_)", 
+            "P;FArial;M200", 
+            "P;FArial;M200", 
+            "P;FArial;M200", 
+            "P;FArial;M200", 
+            "F;P0;DG0G8;M255", 
+            "O;L;D;V0;K47;G100 0.001" ];
+        var3 = 0;
+        while ((var2.__length - 1) >= var3) {
+            var1.writeln(var2[var3]);
+            var3 = var3 + 1;
+        }
+        var4 = this.shoefittercharacter.charname;
+        var1.writeln("C;Y1;X1;K\"#includeSlk\"");
+        var1.writeln("C;X2;K\"..\\..\\animations\\globals\\global_trigger.slk\"");
+        var1.writeln("C;Y3;X1;K\"DATA\"");
+        var5 = 4;
+        var3 = 0;
+        while ((this.animationarray.__length - 1) >= var3) {
+            var6 = this.animationarray[var3];
+            var7 = var6[0];
+            if (var6.__length > 1) {
+                var8 = var6[1];
+                var9 = this.sortflags(var8);
+                var10 = 0;
+                while ((var8.__length - 1) >= var10) {
+                    var11 = var8[var9[var10]];
+                    var5 = var5 + 1;
+                    var1.writeln(("C;Y" + __tostring(var5)) + ";X2;K\"trigger\"");
+                    var1.writeln("C;X3;K\"eventType\"");
+                    var1.writeln("C;X4;K3");
+                    var1.writeln("C;X5;K\"//(kAnimationEvent)\"");
+                    var5 = var5 + 1;
+                    var1.writeln(("C;Y" + __tostring(var5)) + ";X3;K\"eventObj\"");
+                    var1.writeln(("C;X4;K" + __tostring(this.shoefittercharacter.charname)) + "");
+                    var1.writeln(("C;X5;K\"//" + this.currentcharacter) + "\"");
+                    var5 = var5 + 1;
+                    var1.writeln(("C;Y" + __tostring(var5)) + ";X3;K\"animationID\"");
+                    var1.writeln("C;X4;K" + __tostring(var7));
+                    var12 = this.parent.sidebar.animationarray[var3];
+                    var13 = ((("//" + var12) + " (") + scslosifoundation::identifiertostring(var7)) + ")";
+                    var1.writeln(("C;X5;K\"" + var13) + "\"");
+                    var5 = var5 + 1;
+                    var1.writeln(("C;Y" + __tostring(var5)) + ";X3;K\"animationEventType\"");
+                    var1.writeln("C;X4;K" + __tostring(var11.eventtype));
+                    var14 = ((("//" + var11.markername) + " (") + scslosifoundation::identifiertostring(var11.eventtype)) + ")";
+                    var1.writeln(("C;X5;K\"" + var14) + "\"");
+                    var5 = var5 + 1;
+                    var1.writeln(("C;Y" + __tostring(var5)) + ";X3;K\"eventTime\"");
+                    var1.writeln("C;X4;K" + __tostring(var11.startspot));
+                    var5 = var5 + 1;
+                    var15 = 0;
+                    while ((var11.arg_value_array.__length - 1) >= var15) {
+                        var1.writeln(((("C;Y" + __tostring(var5)) + ";X3;K\"") + var11.arg_name_array[var15]) + "\"");
+                        if (__isstring(var11.arg_value_array[var15])) {
+                            var1.writeln(("C;X4;K\"" + var11.arg_value_array[var15]) + "\"");
+                        }
+                        else {
+                            var1.writeln("C;X4;K" + __tostring(var11.arg_value_array[var15]));
+                        }
+                        var5 = var5 + 1;
+                        var15 = var15 + 1;
+                    }
+                    var10 = var10 + 1;
+                }
+            }
+            var3 = var3 + 1;
+        }
+        var5 = var5 + 2;
+        var1.writeln(("C;Y" + __tostring(var5)) + ";X1;K\"END\"");
+        var5 = var5 + 1;
+        var1.writeln("E");
+        var1.close();
+        return null;
+    }
+    
+    method sortflags(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = [  ];
+        var2 = 0;
+        while ((param1.__length - 1) >= var2) {
+            var1.__append(var2);
+            var2 = var2 + 1;
+        }
+        var2 = 0;
+        while ((param1.__length - 1) >= var2) {
+            var3 = 0;
+            while ((param1.__length - 1) >= var3) {
+                if (param1[var1[var2]].startspot < param1[var1[var3]].startspot) {
+                    var4 = var1[var2];
+                    var1[var2] = var1[var3];
+                    var1[var3] = var4;
+                }
+                var3 = var3 + 1;
+            }
+            var2 = var2 + 1;
+        }
+        return var1;
+    }
+}

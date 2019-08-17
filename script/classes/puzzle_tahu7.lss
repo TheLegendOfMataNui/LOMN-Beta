@@ -1,0 +1,149 @@
+class puzzle_tahu7 {
+    property button;
+    property buttonpos;
+    property buttonpressed;
+    property platforms;
+    property platforms2;
+    
+    method puzzle_tahu7() {
+        return null;
+    }
+    
+    method initfull(param1) {
+        var var1;
+        this.button = new lego_moveableobject("lbtn", param1, [  ]);
+        this.button.initfull();
+        this.button.setresponse(0, 0, 3);
+        this.buttonpos = [ this.button.getx(), 
+            this.button.gety(), 
+            this.button.getz() ];
+        this.buttonpressed = 0;
+        this.platforms = [ new tahu7_platform("pt01", param1, [  ], 8.0, 4.0), 
+            new tahu7_platform("pt02", param1, [  ], 9.0, 5.0), 
+            new tahu7_platform("pt03", param1, [  ], 10.0, 6.0), 
+            new tahu7_platform("pt04", param1, [  ], 9.0, 5.0), 
+            new tahu7_platform("pt05", param1, [  ], 8.0, 4.0), 
+            new tahu7_platform("pt06", param1, [  ], 9.0, 3.0), 
+            new tahu7_platform("pt07", param1, [  ], 10.0, 4.0), 
+            new tahu7_platform("pt08", param1, [  ], 9.0, 5.0), 
+            new tahu7_platform("pt09", param1, [  ], 8.0, 6.0), 
+            new tahu7_platform("pt10", param1, [  ], 9.0, 5.0), 
+            new tahu7_platform("pt11", param1, [  ], 10.0, 4.0), 
+            new tahu7_platform("pt12", param1, [  ], 9.0, 3.0), 
+            new tahu7_platform("pt13", param1, [  ], 8.0, 2.0), 
+            new tahu7_platform("pt14", param1, [  ], 9.0, 3.0), 
+            new tahu7_platform("pt18", param1, [  ], 10.0, 5.0), 
+            new tahu7_platform("pt19", param1, [  ], 9.0, 4.0), 
+            new tahu7_platform("pt20", param1, [  ], 8.0, 3.0), 
+            new tahu7_platform("pt21", param1, [  ], 9.0, 2.0), 
+            new tahu7_platform("pt22", param1, [  ], 10.0, 3.0) ];
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.platforms2 = [ new tahu7_platform("pt15", param1, [  ], 8.0, 3.5), 
+            new tahu7_platform("pt16", param1, [  ], 7.0, 4.0), 
+            new tahu7_platform("pt17", param1, [  ], 10.0, 4.5) ];
+        var1 = 0;
+        while ((this.platforms2.__length - 1) >= var1) {
+            this.platforms2[var1].offsetposition(0.0, 0 - 3.0, 0.0);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.button.cleanupfull();
+        this.button = null;
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].cleanupfull();
+            this.platforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.platforms = null;
+        var1 = 0;
+        while ((this.platforms2.__length - 1) >= var1) {
+            this.platforms2[var1].cleanupfull();
+            this.platforms2[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.platforms2 = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.reseta();
+            }
+        }
+        else if (param1.eventid == 27) {
+            this.resetb();
+        }
+        else if (param1.eventid == 1) {
+            if (this.buttonpressed == 0) {
+                if ((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[1] == this.button.id)) {
+                    this.buttonpressed = 1;
+                    this.button.interpolate(this.buttonpos[0], this.buttonpos[1] - 0.6, this.buttonpos[2], 1.0);
+                    var1 = 0;
+                    while ((this.platforms2.__length - 1) >= var1) {
+                        this.platforms2[var1].initfull();
+                        var1 = var1 + 1;
+                    }
+                }
+            }
+        }
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (this.buttonpressed) {
+            var1 = 0;
+            while ((this.platforms2.__length - 1) >= var1) {
+                this.platforms2[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method reseta() {
+        globalclass.level.cam.setaimode(7);
+        globalclass.player.kill();
+        gccollisionphysicsgroup::spinmask(1.2);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        return null;
+    }
+    
+    method resetb() {
+        globalclass.player.unkill();
+        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        globalclass.hud.cdtimer.reset();
+        this.resetpuzzle();
+        return null;
+    }
+    
+    method resetpuzzle() {
+        var var1;
+        if (this.buttonpressed) {
+            this.buttonpressed = 0;
+            this.button.interpolate(this.buttonpos[0], this.buttonpos[1], this.buttonpos[2], 0.2);
+            var1 = 0;
+            while ((this.platforms2.__length - 1) >= var1) {
+                this.platforms2[var1].reset();
+                var1 = var1 + 1;
+            }
+        }
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].reset2();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+}

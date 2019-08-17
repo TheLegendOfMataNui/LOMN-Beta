@@ -1,0 +1,79 @@
+class legomp3player {
+    property handle;
+    
+    method legomp3player() {
+        this.handle = gcgame::getmp3player();
+        return null;
+    }
+    
+    method setupforplay(param1) {
+        if (!(this.handle == null)) {
+            gcmp3player::setupforplay(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method cleanupfordestroy() {
+        return null;
+    }
+    
+    method play(param1) {
+        if (param1 == null) {
+            param1 = 1;
+        }
+        if (!(this.handle == null)) {
+            gcmp3player::play(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method isplaying() {
+        if (!(this.handle == null)) {
+            return gcmp3player::isplaying(this.handle);
+        }
+        return null;
+    }
+    
+    method pause() {
+        if (!(this.handle == null)) {
+            gcmp3player::pause(this.handle);
+        }
+        return null;
+    }
+    
+    method stop() {
+        if (!(this.handle == null)) {
+            gcmp3player::stop(this.handle);
+        }
+        return null;
+    }
+    
+    method setvolume(param1) {
+        if (!(this.handle == null)) {
+            gcmp3player::setvolume(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method setbalance(param1) {
+        if (!(this.handle == null)) {
+            gcmp3player::setbalance(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method changefilename(param1) {
+        if (!(this.handle == null)) {
+            gcmp3player::changefilename(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method exit() {
+        if (!(this.handle == null)) {
+            gcmp3player::stop(this.handle);
+            this.handle = null;
+        }
+        return null;
+    }
+}

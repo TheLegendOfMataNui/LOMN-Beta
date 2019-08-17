@@ -1,0 +1,172 @@
+class ss_shoefitterselecteddisplay {
+    property animationname;
+    property animationnumber;
+    property selectedlabel;
+    property selecteditem;
+    property startlabel;
+    property endlabel;
+    property startnumber;
+    property endnumber;
+    
+    method ss_shoefitterselecteddisplay(param1, param2, param3, param4, param5, param6, param7, param8) {
+        this.animationname = param1;
+        this.animationnumber = param2;
+        this.selectedlabel = param3;
+        this.selecteditem = param4;
+        this.startlabel = param5;
+        this.endlabel = param6;
+        this.startnumber = param7;
+        this.endnumber = param8;
+        return null;
+    }
+    
+    method initfull() {
+        this.animationname.initfull();
+        this.animationnumber.initfull();
+        this.selectedlabel.initfull();
+        this.selecteditem.initfull();
+        this.startlabel.initfull();
+        this.endlabel.initfull();
+        this.startnumber.initfull();
+        this.endnumber.initfull();
+        this.animationname.add();
+        this.animationnumber.add();
+        this.selectedlabel.add();
+        this.selecteditem.add();
+        this.startlabel.add();
+        this.endlabel.add();
+        this.startnumber.add();
+        this.endnumber.add();
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.animationname.onscreen) {
+            this.animationname.hide();
+        }
+        if (this.animationnumber.onscreen) {
+            this.animationnumber.hide();
+        }
+        if (this.selectedlabel.onscreen) {
+            this.selectedlabel.hide();
+        }
+        if (this.selecteditem.onscreen) {
+            this.selecteditem.hide();
+        }
+        if (this.startlabel.onscreen) {
+            this.startlabel.hide();
+        }
+        if (this.endlabel.onscreen) {
+            this.endlabel.hide();
+        }
+        if (this.startnumber.onscreen) {
+            this.startnumber.hide();
+        }
+        if (this.endnumber.onscreen) {
+            this.endnumber.hide();
+        }
+        this.animationname.remove();
+        this.animationnumber.remove();
+        this.selectedlabel.remove();
+        this.selecteditem.remove();
+        this.startlabel.remove();
+        this.endlabel.remove();
+        this.startnumber.remove();
+        this.endnumber.remove();
+        this.animationname.cleanupfull();
+        this.animationnumber.cleanupfull();
+        this.selectedlabel.cleanupfull();
+        this.selecteditem.cleanupfull();
+        this.startlabel.cleanupfull();
+        this.endlabel.cleanupfull();
+        this.startnumber.cleanupfull();
+        this.endnumber.cleanupfull();
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method setanimation(param1) {
+        this.animationnumber.setstring(__tostring(param1.id));
+        return null;
+    }
+    
+    method showanimation() {
+        if (!this.animationname.onscreen) {
+            this.animationnumber.show();
+        }
+        return null;
+    }
+    
+    method hideanimation() {
+        if (this.animationnumber.onscreen) {
+            this.animationnumber.hide();
+        }
+        return null;
+    }
+    
+    method setflags(param1, param2, param3) {
+        this.selecteditem.setstring(scslosistringfuncs::toupper(param1));
+        this.startnumber.setstring(__tostring(param2));
+        if (!(param3 == null)) {
+            this.endnumber.setstring(__tostring(param3));
+        }
+        return null;
+    }
+    
+    method showflags(param1) {
+        if (!this.selectedlabel.onscreen) {
+            this.selectedlabel.show();
+        }
+        if (!this.selecteditem.onscreen) {
+            this.selecteditem.show();
+        }
+        if (!this.startlabel.onscreen) {
+            this.startlabel.show();
+        }
+        if (!this.startnumber.onscreen) {
+            this.startnumber.show();
+        }
+        if (param1) {
+            if (!this.endlabel.onscreen) {
+                this.endlabel.show();
+            }
+        }
+        if (param1) {
+            if (!this.endnumber.onscreen) {
+                this.endnumber.show();
+            }
+        }
+        return null;
+    }
+    
+    method hideflags() {
+        if (this.selectedlabel.onscreen) {
+            this.selectedlabel.hide();
+        }
+        if (this.selecteditem.onscreen) {
+            this.selecteditem.hide();
+        }
+        if (this.startlabel.onscreen) {
+            this.startlabel.hide();
+        }
+        if (this.endlabel.onscreen) {
+            this.endlabel.hide();
+        }
+        if (this.startnumber.onscreen) {
+            this.startnumber.hide();
+        }
+        if (this.endnumber.onscreen) {
+            this.endnumber.hide();
+        }
+        return null;
+    }
+}

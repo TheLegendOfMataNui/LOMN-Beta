@@ -1,0 +1,128 @@
+class huddebuginfo {
+    property framecount;
+    property frametime;
+    property starttime;
+    property firstpass;
+    property text;
+    property textfps;
+    property textarea;
+    
+    method huddebuginfo() {
+        return null;
+    }
+    
+    method initfull() {
+        this.framecount = 0;
+        this.frametime = 0.0;
+        this.firstpass = 1;
+        this.text = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "clock", screenx * 0.5, screeny - 40, 0, 1.0, 256, 4, 0);
+        this.textfps = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", "fps", screenx * 0.5, screeny - 25, 0, 1.0, 256, 4, 0);
+        this.textarea = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "area", screenx * 0.5, screeny - 10, 0, 1.0, 256, 4, 0);
+        this.text.initfull();
+        this.textfps.initfull();
+        this.textarea.initfull();
+        this.text.add();
+        this.textfps.add();
+        this.textarea.add();
+        return null;
+    }
+    
+    method initshort() {
+        this.initfull();
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.text == null)) {
+            this.text.cleanupfull();
+            this.text = null;
+        }
+        if (!(this.textfps == null)) {
+            this.textfps.cleanupfull();
+            this.textfps = null;
+        }
+        if (!(this.textarea == null)) {
+            this.textarea.cleanupfull();
+            this.textarea = null;
+        }
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.cleanupfull();
+        return null;
+    }
+    
+    method show() {
+        this.text.show();
+        this.textfps.show();
+        this.textarea.show();
+        return null;
+    }
+    
+    method hide() {
+        this.text.hide();
+        this.textfps.hide();
+        this.textarea.hide();
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        var var11;
+        if (this.firstpass == 1) {
+            this.firstpass = 0;
+            this.starttime = param1.currenttime;
+        }
+        var1 = param1.currenttime - this.starttime;
+        var2 = var1 / 60.0;
+        var2 = scslosimath::floor(var2);
+        var3 = __tostring(var2);
+        var4 = scslosistringfuncs::find(var3, ".");
+        var3 = scslosistringfuncs::left(var3, var4);
+        var5 = var1 - (60.0 * var2);
+        var5 = scslosimath::floor(var5);
+        var6 = __tostring(var5);
+        var4 = scslosistringfuncs::find(var6, ".");
+        var6 = scslosistringfuncs::left(var6, var4);
+        if (var5 < 10.0) {
+            var6 = "0" + var6;
+        }
+        var7 = (var3 + ":") + var6;
+        this.text.setstring(var7);
+        var8 = scprocessmanager::getrealdeltatime();
+        this.frametime = this.frametime + var8;
+        this.framecount = this.framecount + 1;
+        if (this.frametime > 3.0) {
+            var9 = this.framecount / this.frametime;
+            var10 = __tostring(var9);
+            var4 = scslosistringfuncs::find(var10, ".");
+            var10 = scslosistringfuncs::left(var10, var4);
+            this.textfps.setstring(var10);
+            this.frametime = 0;
+            this.framecount = 0;
+        }
+        var11 = gcareadirector::getcurrentarea();
+        if (!(var11 == 1061109567)) {
+            this.textarea.setstring(scslosifoundation::identifiertostring(var11));
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

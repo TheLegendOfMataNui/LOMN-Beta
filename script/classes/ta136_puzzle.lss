@@ -1,0 +1,388 @@
+class ta136_puzzle {
+    property parent;
+    property g1array;
+    property g1timer;
+    property g1incrementor;
+    property g1stopincrementing;
+    property g2array;
+    property g2timer;
+    property g2incrementor;
+    property g2stopincrementing;
+    property g3array;
+    property g3timer;
+    property g3incrementor;
+    property g3stopincrementing;
+    property g4array;
+    property g4timer;
+    property g4incrementor;
+    property g4stopincrementing;
+    property hookarray;
+    property resetpoint;
+    property resetorent;
+    property music;
+    
+    method ta136_puzzle(param1) {
+        this.parent = param1;
+        this.resetpoint = new basicpoint(0 - 228.2, 18.0, 21.5);
+        this.resetorent = 8.0;
+        return null;
+    }
+    
+    method maininitfull() {
+        this.initfull();
+        this.music = new legomp3player();
+        this.music.setupforplay("Root/Data/sounds/MusicMakutaTheme");
+        this.music.play(1);
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(15);
+        this.g1array = [ new lego_moveableobject("pl00"), 
+            new lego_moveableobject("pl01"), 
+            new lego_moveableobject("pl02"), 
+            new lego_moveableobject("pl03"), 
+            new lego_moveableobject("pl09"), 
+            new lego_moveableobject("pl10"), 
+            new lego_moveableobject("pl11"), 
+            new lego_moveableobject("pl12"), 
+            new lego_moveableobject("pl13") ];
+        this.g1timer = new lego_timer("tim1", 0.5, 0);
+        this.g1timer.initfull();
+        this.g1incrementor = 0;
+        this.g1stopincrementing = 0;
+        var1 = 0;
+        while ((this.g1array.__length - 1) >= var1) {
+            this.g1array[var1].initfull();
+            this.g1array[var1].setresponse(3, 0, 3);
+            this.g1array[var1].settweakable();
+            var1 = var1 + 1;
+        }
+        this.g2array = [ new lego_moveableobject("pl14"), 
+            new lego_moveableobject("pl15"), 
+            new lego_moveableobject("pl16"), 
+            new lego_moveableobject("pl17"), 
+            new lego_moveableobject("pl18"), 
+            new lego_moveableobject("pl19"), 
+            new lego_moveableobject("pl20"), 
+            new lego_moveableobject("pl21"), 
+            new lego_moveableobject("pl22") ];
+        this.g2timer = new lego_timer("tim2", 0.5, 0);
+        this.g2timer.initfull();
+        this.g2incrementor = 0;
+        this.g2stopincrementing = 0;
+        var1 = 0;
+        while ((this.g2array.__length - 1) >= var1) {
+            this.g2array[var1].initfull();
+            this.g2array[var1].setresponse(3, 0, 3);
+            this.g2array[var1].settweakable();
+            var1 = var1 + 1;
+        }
+        this.g3array = [ new lego_moveableobject("pl31"), 
+            new lego_moveableobject("pl32"), 
+            new lego_moveableobject("pl33"), 
+            new lego_moveableobject("pl34"), 
+            new lego_moveableobject("pl35"), 
+            new lego_moveableobject("pl36"), 
+            new lego_moveableobject("pl37") ];
+        this.g3timer = new lego_timer("tim3", 0.5, 0);
+        this.g3timer.initfull();
+        this.g3incrementor = 0;
+        this.g3stopincrementing = 0;
+        var1 = 0;
+        while ((this.g3array.__length - 1) >= var1) {
+            this.g3array[var1].initfull();
+            this.g3array[var1].setresponse(3, 0, 3);
+            this.g3array[var1].settweakable();
+            var1 = var1 + 1;
+        }
+        this.g4array = [ new lego_moveableobject("pl38"), 
+            new lego_moveableobject("pl39"), 
+            new lego_moveableobject("pl40"), 
+            new lego_moveableobject("pl41"), 
+            new lego_moveableobject("pl42"), 
+            new lego_moveableobject("pl43"), 
+            new lego_moveableobject("pl44"), 
+            new lego_moveableobject("pl45"), 
+            new lego_moveableobject("pl46"), 
+            new lego_moveableobject("pl47") ];
+        this.g4timer = new lego_timer("tim4", 0.5, 0);
+        this.g4timer.initfull();
+        this.g4incrementor = 0;
+        this.g4stopincrementing = 0;
+        var1 = 0;
+        while ((this.g4array.__length - 1) >= var1) {
+            this.g4array[var1].initfull();
+            this.g4array[var1].setresponse(3, 0, 3);
+            this.g4array[var1].settweakable();
+            var1 = var1 + 1;
+        }
+        globalclass.player.setgrapplinghookdistance(100);
+        this.hookarray = [ new lego_moveableobject("hot0"), 
+            new lego_moveableobject("hot1"), 
+            new lego_moveableobject("hot2"), 
+            new lego_moveableobject("hot3"), 
+            new lego_moveableobject("hot4") ];
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].initfull();
+            this.hookarray[var1].setmytargetingflags(1);
+            this.hookarray[var1].setresponse(1, 1, 1);
+            this.hookarray[var1].settweakable();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        var1 = 0;
+        while ((this.g1array.__length - 1) >= var1) {
+            this.g1array[var1].sety(0 - 3.8);
+            var1 = var1 + 1;
+        }
+        this.g1array[0].setslidetimer(0, 13.4, 0, 1.0, -1, 0.3);
+        this.g1incrementor = 1;
+        this.g1timer.reset(0);
+        this.g1timer.start();
+        var1 = 0;
+        while ((this.g2array.__length - 1) >= var1) {
+            this.g2array[var1].sety(0 - 3.8);
+            var1 = var1 + 1;
+        }
+        this.g2array[0].setslidetimer(0, 13.4, 0, 1.0, -1, 0.3);
+        this.g2incrementor = 1;
+        this.g2timer.reset(0);
+        this.g2timer.start();
+        var1 = 0;
+        while ((this.g3array.__length - 1) >= var1) {
+            this.g3array[var1].sety(0 - 3.8);
+            var1 = var1 + 1;
+        }
+        this.g3array[0].setslidetimer(0, 13.4, 0, 1.0, -1, 0.3);
+        this.g3incrementor = 1;
+        this.g3timer.reset(0);
+        this.g3timer.start();
+        var1 = 0;
+        while ((this.g4array.__length - 1) >= var1) {
+            this.g4array[var1].sety(0 - 3.8);
+            var1 = var1 + 1;
+        }
+        this.g4array[0].setslidetimer(0, 13.4, 0, 1.0, -1, 0.3);
+        this.g4incrementor = 1;
+        this.g4timer.reset(0);
+        this.g4timer.start();
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        var1 = 0;
+        while ((this.g1array.__length - 1) >= var1) {
+            this.g1array[var1].stopslidetimer();
+            this.g1array[var1].cleanupfull();
+            this.g1array[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.g1array = null;
+        this.g1timer.cleanupfull();
+        this.g1timer = null;
+        this.g1incrementor = null;
+        this.g1stopincrementing = null;
+        var1 = 0;
+        while ((this.g2array.__length - 1) >= var1) {
+            this.g2array[var1].stopslidetimer();
+            this.g2array[var1].cleanupfull();
+            this.g2array[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.g2array = null;
+        this.g2timer.cleanupfull();
+        this.g2timer = null;
+        this.g2incrementor = null;
+        this.g2stopincrementing = null;
+        var1 = 0;
+        while ((this.g3array.__length - 1) >= var1) {
+            this.g3array[var1].stopslidetimer();
+            this.g3array[var1].cleanupfull();
+            this.g3array[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.g3array = null;
+        this.g3timer.cleanupfull();
+        this.g3timer = null;
+        this.g3incrementor = null;
+        this.g3stopincrementing = null;
+        var1 = 0;
+        while ((this.g4array.__length - 1) >= var1) {
+            this.g4array[var1].stopslidetimer();
+            this.g4array[var1].cleanupfull();
+            this.g4array[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.g4array = null;
+        this.g4timer.cleanupfull();
+        this.g4timer = null;
+        this.g4incrementor = null;
+        this.g4stopincrementing = null;
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].cleanupfull();
+            this.hookarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hookarray = null;
+        globalclass.player.setgrapplinghookdistance(45);
+        return null;
+    }
+    
+    method mainhide() {
+        this.music.stop();
+        this.hide();
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            this.hide();
+            this.initfull();
+            this.show();
+            globalclass.player.unkill();
+            globalclass.player.actor.setpos(this.resetpoint.x, this.resetpoint.y, this.resetpoint.z);
+            globalclass.player.actor.setorientation(this.resetorent);
+            debug::print((((("** set to X:" + __tostring(this.resetpoint.x)) + " Y:") + __tostring(this.resetpoint.y)) + " Z:") + __tostring(this.resetpoint.z));
+            globalclass.level.cam.setaimode(11);
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                this.resetpoint.setto(373.5, 38.9, 724.6);
+                var1 = 119.7;
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp03")) {
+                this.resetpoint.setto(0 - 232.9, 38.9, 582.2);
+                var1 = 0 - 16.9;
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp04")) {
+                
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp05")) {
+                this.resetpoint.setto(49.0, 1.9, 447.8);
+                var1 = 0 - 45.8;
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp06")) {
+                
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp07")) {
+                this.resetpoint.setto(0 - 23.1, 18.0, 209.4);
+                var1 = 13.7;
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp08")) {
+                
+            }
+        }
+        else if (param1.eventid == 8) {
+            if (param1.args[0] == this.g1timer.id) {
+                if (this.g1stopincrementing == 0) {
+                    this.g1array[this.g1incrementor].setslidetimer(0, 13.4, 0, 1.0, -1, 0.3);
+                    this.g1incrementor = this.g1incrementor + 1;
+                    if (this.g1incrementor > (this.g1array.__length - 1)) {
+                        this.g1incrementor = 0;
+                        this.g1stopincrementing = 1;
+                    }
+                    this.g1timer.reset(0);
+                    this.g1timer.start();
+                }
+            }
+            else if (param1.args[0] == this.g2timer.id) {
+                if (this.g2stopincrementing == 0) {
+                    if (this.g2incrementor == 2) {
+                        this.g2array[this.g2incrementor].setslidetimer(0, 32.4, 0, 1.0, -1, 0.3);
+                    }
+                    else {
+                        this.g2array[this.g2incrementor].setslidetimer(0, 13.4, 0, 1.0, -1, 0.3);
+                    }
+                    this.g2incrementor;
+                    this.g2incrementor = this.g2incrementor + 1;
+                    if (this.g2incrementor > (this.g2array.__length - 1)) {
+                        this.g2incrementor = 0;
+                        this.g2stopincrementing = 1;
+                    }
+                    this.g2timer.reset(0);
+                    this.g2timer.start();
+                }
+            }
+            else if (param1.args[0] == this.g3timer.id) {
+                if (this.g4stopincrementing == 0) {
+                    if (this.g4incrementor == 3) {
+                        this.g3array[this.g3incrementor].setslidetimer(0, 32.4, 0, 1.0, -1, 0.3);
+                    }
+                    else if (this.g4incrementor == 6) {
+                        this.g3array[this.g3incrementor].setslidetimer(0, 32.4, 0, 1.0, -1, 0.3);
+                    }
+                    else {
+                        this.g3array[this.g3incrementor].setslidetimer(0, 13.4, 0, 1.0, -1, 0.3);
+                    }
+                    this.g4incrementor;
+                    this.g3incrementor = this.g3incrementor + 1;
+                    if (this.g3incrementor > (this.g3array.__length - 1)) {
+                        this.g3incrementor = 0;
+                        this.g3stopincrementing = 1;
+                    }
+                    this.g3timer.reset(0);
+                    this.g3timer.start();
+                }
+            }
+            else if (param1.args[0] == this.g4timer.id) {
+                if (this.g4stopincrementing == 0) {
+                    if (this.g4incrementor == 9) {
+                        this.g4array[this.g4incrementor].setslidetimer(0, 32.4, 0, 1.0, -1, 0.3);
+                    }
+                    else {
+                        this.g4array[this.g4incrementor].setslidetimer(0, 13.4, 0, 1.0, -1, 0.3);
+                    }
+                    this.g4incrementor;
+                    this.g4incrementor = this.g4incrementor + 1;
+                    if (this.g4incrementor > (this.g4array.__length - 1)) {
+                        this.g4incrementor = 0;
+                        this.g4stopincrementing = 1;
+                    }
+                    this.g4timer.reset(0);
+                    this.g4timer.start();
+                }
+            }
+        }
+        else if (param1.eventid == 1) {
+            
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 89) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        debug::print("*****SWITCHING NEXT DOOR IN SHRN TO OPEN");
+        screenlist.screens[9].screen.areas[12].puzzle.switchit(0);
+        return null;
+    }
+}

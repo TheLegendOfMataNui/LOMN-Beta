@@ -1,0 +1,61 @@
+class lego_area_mud0 : gs_lego_area {
+    property mudpuzzle;
+    
+    method lego_area_mud0(param1) {
+        this.gs_lego_area("mud0", param1, 0, 0);
+        this.mudpuzzle = new mudmonster_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setfog(-14145496, 0 - 20.0, 0 - 175.0, 0.05);
+        gcareadirector::setnearestmax(15);
+        gcmodeldirector::setnearestmax(5);
+        this.mudpuzzle.initfull();
+        globalclass.player.usemasks(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method initshort() {
+        globalclass.bgmusic.stop();
+        return null;
+    }
+    
+    method process(param1) {
+        this.mudpuzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.mudpuzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.mudpuzzle.onevent(param1);
+        return null;
+    }
+    
+    method endarea() {
+        globalclass.bgmusic.changefilename("Root/Data/Sounds/OnuaCompletionMusic");
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.mudpuzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        this.mudpuzzle.exit();
+        this.mudpuzzle = null;
+        return null;
+    }
+}

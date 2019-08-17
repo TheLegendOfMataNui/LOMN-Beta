@@ -1,0 +1,46 @@
+class tvil6_puzzle {
+    property parent;
+    
+    method tvil6_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
+        globalclass.bgmusic.play(1);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(var1, rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("d000"), -1);
+        gccharacter::setorientation(var1, -9);
+        return null;
+    }
+    
+    method cleanupfull() {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) {
+                
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        return null;
+    }
+}

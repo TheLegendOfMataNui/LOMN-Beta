@@ -1,0 +1,43 @@
+class ss_boxfittext : ss_basetext {
+    
+    method ss_boxfittext(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
+        this.x2 = param5;
+        this.y2 = param6;
+        this.ss_basetext(param1, param2, param3, param4, param7, param8, param9, param10, param11);
+        return null;
+    }
+    
+    method initfull() {
+        this.font = sctilefont::create(this.fontname);
+        this.text = sctextobject::createtextobject(this.x1, this.y1, this.x2, this.y2, this.z, this.font, this.string);
+        sctextobject::enableboxfit(this.text, 1);
+        return null;
+    }
+    
+    method initshort() {
+        this.font = sctilefont::create(this.fontname);
+        this.text = sctextobject::createtextobject(this.x1, this.y1, this.x2, this.y2, this.z, this.font, this.string);
+        sctextobject::enableboxfit(this.text, 1);
+        return null;
+    }
+    
+    method setpos(param1, param2, param3, param4) {
+        this.x1 = param1;
+        this.y1 = param2;
+        this.x2 = param3;
+        this.y2 = param4;
+        sctextobject::setboxposition(this.text, this.x1, this.y1, this.x2, this.y2, this.z);
+        sctextobject::enableboxfit(this.text, 1);
+        return null;
+    }
+    
+    method changepos(param1, param2, param3, param4) {
+        this.x1 = param1 + this.x1;
+        this.y1 = param2 + this.y1;
+        this.x2 = param3 + this.x2;
+        this.y2 = param4 + this.y2;
+        sctextobject::setboxposition(this.text, this.x1, this.y1, this.x2, this.y2, this.z);
+        sctextobject::enableboxfit(this.text, 1);
+        return null;
+    }
+}

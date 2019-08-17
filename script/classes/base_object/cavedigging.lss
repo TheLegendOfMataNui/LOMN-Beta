@@ -1,0 +1,134 @@
+class cavedigging : base_object {
+    property dig1;
+    property dig1id;
+    property dig1flag;
+    property dig2;
+    property dig2id;
+    property dig2flag;
+    property dig3;
+    property dig3id;
+    property dig3flag;
+    property dig4;
+    property dig4id;
+    property dig4flag;
+    property dig5;
+    property dig5id;
+    property dig5flag;
+    
+    method cavedigging() {
+        this.dig1 = "dig1";
+        this.dig2 = "dig2";
+        this.dig3 = "dig3";
+        this.dig4 = "dig4";
+        this.dig5 = "dig5";
+        this.dig1id = scslosifoundation::stringtoidentifier(this.dig1);
+        this.dig2id = scslosifoundation::stringtoidentifier(this.dig2);
+        this.dig3id = scslosifoundation::stringtoidentifier(this.dig3);
+        this.dig4id = scslosifoundation::stringtoidentifier(this.dig4);
+        this.dig5id = scslosifoundation::stringtoidentifier(this.dig5);
+        this.dig1flag = 1;
+        this.dig2flag = 1;
+        this.dig3flag = 1;
+        this.dig4flag = 1;
+        this.dig5flag = 1;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        if (param1.eventid == 1) {
+            var1 = param1.args[0];
+            var2 = param1.args[1];
+            if (var1 == scslosifoundation::stringtoidentifier("onua")) {
+                debug::print("Got collision with Onua");
+                debug::print("Object ID = " + scslosifoundation::identifiertostring(var2));
+                if (var2 == this.dig1id) {
+                    if (this.dig1flag == 1) {
+                        gcareadirector::hide(var2);
+                        this.dig1flag = 0;
+                        debug::print("Hid object");
+                    }
+                }
+                if (var2 == this.dig2id) {
+                    if (this.dig2flag == 1) {
+                        gcareadirector::hide(var2);
+                        this.dig2flag = 0;
+                        debug::print("Hid object");
+                    }
+                }
+                if (var2 == this.dig3id) {
+                    if (this.dig3flag == 1) {
+                        gcareadirector::hide(var2);
+                        this.dig3flag = 0;
+                        debug::print("Hid object");
+                    }
+                }
+                if (var2 == this.dig4id) {
+                    if (this.dig4flag == 1) {
+                        gcareadirector::hide(var2);
+                        this.dig4flag = 0;
+                        debug::print("Hid object");
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 120) {
+            this.dig1flag = 1;
+            this.dig2flag = 1;
+            this.dig3flag = 1;
+            this.dig4flag = 1;
+            gcareadirector::show(this.dig1id, 0);
+            gcareadirector::show(this.dig2id, 0);
+            gcareadirector::show(this.dig3id, 0);
+            gcareadirector::show(this.dig4id, 0);
+        }
+        if (param1.event == 2) {
+            if (param1.button == 49) {
+                if (this.dig1flag == 1) {
+                    gcareadirector::hide(this.dig1id);
+                    this.dig1flag = 0;
+                }
+                else {
+                    gcareadirector::show(this.dig1id, 0);
+                    this.dig1flag = 1;
+                }
+            }
+            if (param1.button == 50) {
+                if (this.dig2flag == 1) {
+                    gcareadirector::hide(this.dig2id);
+                    this.dig2flag = 0;
+                }
+                else {
+                    gcareadirector::show(this.dig2id, 0);
+                    this.dig2flag = 1;
+                }
+            }
+            if (param1.button == 51) {
+                if (this.dig3flag == 1) {
+                    gcareadirector::hide(this.dig3id);
+                    this.dig3flag = 0;
+                }
+                else {
+                    gcareadirector::show(this.dig3id, 0);
+                    this.dig3flag = 1;
+                }
+            }
+            if (param1.button == 52) {
+                if (this.dig4flag == 1) {
+                    gcareadirector::hide(this.dig4id);
+                    this.dig4flag = 0;
+                }
+                else {
+                    gcareadirector::show(this.dig4id, 0);
+                    this.dig4flag = 1;
+                }
+            }
+        }
+        return null;
+    }
+}

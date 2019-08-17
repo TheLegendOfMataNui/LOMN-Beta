@@ -1,0 +1,130 @@
+class strt2_puzzle {
+    property parent;
+    property door;
+    property killedcharacters;
+    property callev_safe_time_once;
+    property hiveinc;
+    property hive1handle;
+    property hive2handle;
+    
+    method strt2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        this.killedcharacters = 0;
+        this.hiveinc = 0;
+        gclightdirector::setcavelighting(0);
+        this.door = new lego_moveableobject("drs0");
+        this.door.initfull();
+        this.callev_safe_time_once = 1;
+        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(this.hive1handle, 8);
+        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(this.hive1handle, 5);
+        this.hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(this.hive2handle, 8);
+        gchive::setcreaturetype(this.hive2handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(this.hive2handle, 5);
+        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(var1, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk7a"));
+        gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::setupmoveable(var1, 1.5, 0.8, 1, 0, 0);
+        gccharacter::setsplitanimation(var1, scslosifoundation::stringtoidentifier("d000"), -1);
+        gccharacter::setorientation(var1, 250);
+        return null;
+    }
+    
+    method initshort() {
+        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+        globalclass.player.unkill();
+        this.callev_safe_time_once = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.hive1handle = null;
+        this.hive2handle = null;
+        this.door.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = globalclass.player.actor.getposy();
+        if (var1 < (0 - 38.0)) {
+            globalclass.player.kill();
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 44) {
+            if (this.callev_safe_time_once) {
+                if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
+                    this.movedoorup();
+                }
+                this.callev_safe_time_once = 0;
+            }
+        }
+        else if (param1.eventid == 51) {
+            if (param1.args[1] == 1) {
+                this.hiveinc = this.hiveinc + 1;
+                if (this.hiveinc >= 2) {
+                    debug::print("**** CONGRATS PUZZLE SOLVED");
+                    this.movedoorup();
+                }
+            }
+            else if (param1.args[1] == 0) {
+                debug::print("********* YEAH YOU HAVE KILLED A HIVE!!");
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(0.7);
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 90) {
+            if (param1.event == 2) {
+                this.movedoorup();
+            }
+        }
+        if (param1.button == 88) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        var var1;
+        var1 = new scriptevent(51, [ 0, 
+            1 ]);
+        var1.send();
+        return null;
+    }
+    
+    method movedoorup() {
+        var var1;
+        var var2;
+        var var3;
+        var1 = this.door.getx();
+        var2 = this.door.gety() + 9.0;
+        var3 = this.door.getz();
+        this.door.interpolate(var1, var2, var3, 1.5);
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

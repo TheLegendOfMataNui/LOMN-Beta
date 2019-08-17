@@ -1,0 +1,106 @@
+class gs_legotext : ss_basetext {
+    property newfont;
+    
+    method gs_legotext(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
+        if (param10 == null) {
+            this.newfont = 0;
+        }
+        else {
+            this.newfont = param10;
+        }
+        this.fontname = param1;
+        this.string = param2;
+        if (!(param9 == null)) {
+            this.padadjustment = param9;
+        }
+        else {
+            this.padadjustment = 0;
+        }
+        this.x1 = param3;
+        this.y1 = param4 + this.padadjustment;
+        this.z = param5;
+        if (!(param6 == null)) {
+            this.scale = param6;
+        }
+        else {
+            this.scale = 1;
+        }
+        if (!(param7 == null)) {
+            this.horizontal = param7;
+        }
+        else {
+            this.horizontal = 0;
+        }
+        if (!(param8 == null)) {
+            this.verticle = param8;
+        }
+        else {
+            this.verticle = 4;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        if (this.newfont == 1) {
+            this.font = sctilefont::create(this.fontname);
+        }
+        else {
+            this.font = globalclass.getgamefont(this.fontname);
+        }
+        this.text = sctextobject::create(this.x1, this.y1, this.z, this.font, this.string);
+        sctextobject::setscale(this.text, this.scale, this.scale);
+        sctextobject::setjustification(this.text, this.horizontal | this.verticle);
+        sctextobject::enablejustification(this.text, 1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.font = null;
+        this.text = null;
+        return null;
+    }
+    
+    method initshort() {
+        if (this.newfont == 1) {
+            this.font = sctilefont::create(this.fontname);
+        }
+        else {
+            this.font = globalclass.getgamefont(this.fontname);
+        }
+        this.text = sctextobject::create(this.x1, this.y1, this.z, this.font, this.string);
+        sctextobject::setscale(this.text, this.scale, this.scale);
+        sctextobject::setjustification(this.text, this.horizontal | this.verticle);
+        sctextobject::enablejustification(this.text, 1);
+        return null;
+    }
+    
+    method breakup(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        if (scslosistringfuncs::length(this.string) > param1) {
+            var1 = scslosistringfuncs::left(this.string, param1);
+            var2 = scslosistringfuncs::findrev(var1, " ");
+            var1 = scslosistringfuncs::left(this.string, var2);
+            var3 = scslosistringfuncs::right(this.string, (scslosistringfuncs::length(this.string) - var2) - 1);
+            if (scslosistringfuncs::length(var3) > param1) {
+                this.string = var3;
+                var3 = scslosistringfuncs::left(this.string, param1);
+                var2 = scslosistringfuncs::findrev(var3, " ");
+                var3 = scslosistringfuncs::left(this.string, var2);
+                var4 = scslosistringfuncs::right(this.string, (scslosistringfuncs::length(this.string) - var2) - 1);
+                var3 = (var3 + "\n") + var4;
+            }
+            this.string = (var1 + "\n") + var3;
+            this.setstring(this.string);
+        }
+        return null;
+    }
+    
+    method scalefont(param1) {
+        this.scale = param1;
+        sctextobject::setscale(this.text, this.scale, this.scale);
+        return null;
+    }
+}

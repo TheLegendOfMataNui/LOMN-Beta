@@ -1,0 +1,359 @@
+class ta026_puzzle {
+    property parent;
+    property state;
+    property platformarray;
+    property hotobjarray;
+    property coldobjarray;
+    property doorarray;
+    property secretdoorshow;
+    property secreetdoorgone;
+    property boardpickup;
+    property urnsound;
+    property cinema;
+    property cinemadone;
+    property safetimercounter;
+    property lowpoint;
+    
+    method ta026_puzzle(param1) {
+        this.parent = param1;
+        this.secreetdoorgone = 0;
+        this.lowpoint = 10000;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        gcareadirector::setnearestmaxdist(1000);
+        gcareadirector::setnearestmax(50);
+        this.secretdoorshow = 0;
+        this.platformarray = [ new bounceyplatform("pl00"), 
+            new bounceyplatform("pl02"), 
+            new bounceyplatform("pl05"), 
+            new bounceyplatform("pl06"), 
+            new bounceyplatform("pl07"), 
+            new bounceyplatform("pl10"), 
+            new bounceyplatform("pl11"), 
+            new bounceyplatform("pl12"), 
+            new bounceyplatform("pl16"), 
+            new bounceyplatform("pl18"), 
+            new bounceyplatform("pl19"), 
+            new bounceyplatform("pl20"), 
+            new bounceyplatform("pl21"), 
+            new bounceyplatform("pl25"), 
+            new bounceyplatform("pl26"), 
+            new bounceyplatform("pl27"), 
+            new bounceyplatform("pl28"), 
+            new bounceyplatform("pl29"), 
+            new bounceyplatform("pl31"), 
+            new bounceyplatform("pl34"), 
+            new bounceyplatform("pl35"), 
+            new bounceyplatform("pl40"), 
+            new bounceyplatform("pl43"), 
+            new bounceyplatform("pl44"), 
+            new bounceyplatform("pl45"), 
+            new bounceyplatform("pl46"), 
+            new bounceyplatform("pl47") ];
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].initfull();
+            this.platformarray[var1].setignoreallcollisions(1);
+            this.platformarray[var1].ignoreignorecollisionswith(scslosifoundation::stringtoidentifier("cnt1"));
+            var1 = var1 + 1;
+        }
+        this.cinemadone = 1;
+        this.hotobjarray = [ new lego_moveableobject("lav2"), 
+            new lego_moveableobject("lfal") ];
+        var1 = 0;
+        while ((this.hotobjarray.__length - 1) >= var1) {
+            this.hotobjarray[var1].initfull();
+            this.hotobjarray[var1].setresponse(4, 4, 4);
+            var1 = var1 + 1;
+        }
+        this.hotobjarray[1].setcrushflags(1, 1, 1, 1, 1, 1);
+        this.coldobjarray = [ new lego_moveableobject("lav6"), 
+            new lego_moveableobject("add2"), 
+            new lego_moveableobject("bldr"), 
+            new lego_moveableobject("adon") ];
+        var1 = 0;
+        while ((this.coldobjarray.__length - 1) >= var1) {
+            this.coldobjarray[var1].initfull();
+            this.coldobjarray[var1].setresponse(4, 4, 4);
+            var1 = var1 + 1;
+        }
+        this.coldobjarray[1].setresponse(0, 0, 3);
+        if (gcsaver::isconditionset(8388608)) {
+            this.secreetdoorgone = 1;
+        }
+        else {
+            this.secreetdoorgone = 0;
+        }
+        this.doorarray = [ new lego_moveableobject("dr01"), 
+            new lego_moveableobject("dr00") ];
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.doorarray[0].setalpha();
+        this.doorarray[1].setalpha();
+        if (this.secreetdoorgone) {
+            this.doorarray[0].hide();
+            this.doorarray[1].hide();
+        }
+        else {
+            this.doorarray[0].hide();
+            this.doorarray[1].show();
+        }
+        if (gcsaver::isconditionset(4194304)) {
+            this.state = 1;
+        }
+        else {
+            this.state = 0;
+        }
+        this.setup_hot_or_cold();
+        var2 = gcsaver::finditem(scslosifoundation::stringtoidentifier("sled"));
+        if (var2 == 0) {
+            this.boardpickup = new lego_pickup("sled", 0, 5, "item", 6, 1);
+            this.boardpickup.initfull();
+            this.boardpickup.show();
+            this.boardpickup.setcondition(131072);
+            this.boardpickup.setquest(3);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
+        globalclass.bgmusic.play(1);
+        if (this.state == 1) {
+            if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin5")) == 0) {
+                this.cinema = gccinemaengine::create();
+                gccinemaengine::load(this.cinema, "cin5");
+                globalclass.hud.hide();
+                if (globalclass.player.maskcontrol.isactive() == 1) {
+                    globalclass.player.maskcontrol.toggleactive();
+                }
+                this.cinemadone = 0;
+                gccinemaengine::play(this.cinema);
+                globalclass.bgmusic.stop();
+                debug::print("play cinema cin5 for ta02");
+            }
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.boardpickup == null)) {
+            this.boardpickup.cleanupfull();
+            this.boardpickup = null;
+        }
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].cleanupfull();
+            this.platformarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.platformarray = null;
+        var1 = 0;
+        while ((this.hotobjarray.__length - 1) >= var1) {
+            this.hotobjarray[var1].cleanupfull();
+            this.hotobjarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hotobjarray = null;
+        var1 = 0;
+        while ((this.coldobjarray.__length - 1) >= var1) {
+            this.coldobjarray[var1].cleanupfull();
+            this.coldobjarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.coldobjarray = null;
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].cleanupfull();
+            this.doorarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.doorarray = null;
+        this.state = null;
+        this.secretdoorshow = null;
+        this.secreetdoorgone = null;
+        this.cinema = null;
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].initshort();
+            var1 = var1 + 1;
+        }
+        globalclass.player.actor.setpos(0 - 261.3, 222.3, 470.6);
+        globalclass.player.actor.setorientation(31.9);
+        globalclass.player.unkill();
+        this.parent.level.cam.setaimode(11);
+        return null;
+    }
+    
+    method cleanupshort() {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.cinemadone) {
+            if (globalclass.player.actor.getpos().y1 < 220.1) {
+                globalclass.level.burnsound.play();
+                globalclass.level.cam.setaimode(7);
+                globalclass.player.kill();
+            }
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        if (param1.eventid == 1002) {
+            if (this.secreetdoorgone == 0) {
+                if (param1.args[0]) {
+                    this.doorarray[0].show();
+                    this.doorarray[1].hide();
+                    this.secretdoorshow = 1;
+                }
+                else {
+                    this.doorarray[1].show();
+                    this.doorarray[0].hide();
+                    this.secretdoorshow = 0;
+                }
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if ((param1.args[1] == this.doorarray[0].id) && this.secretdoorshow) {
+                    globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t051"), 0.1);
+                    this.secreetdoorgone = 1;
+                    this.doorarray[0].hide();
+                    this.secreetdoorgone = 1;
+                    gcsaver::setcondition(8388608, 1);
+                    globalclass.player.actor.setpos(0 - 123.4, 222, 594.5);
+                    globalclass.player.actor.setorientation(0);
+                }
+            }
+        }
+        else if (param1.eventid == 40) {
+            globalclass.level.burnsound.play();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.cleanupshort();
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+        }
+        else if (param1.eventid == 30) {
+            globalclass.hud.show();
+            globalclass.player.actor.setpos(0 - 261.3, 222.3, 470.6);
+            globalclass.player.actor.setorientation(31.9);
+            this.cinemadone = 1;
+            globalclass.bgmusic.play(1);
+            globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("????"));
+        }
+        else if (param1.eventid == 44) {
+            
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (!(this.cinema == null)) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+            param1.button;
+        }
+        if (param1.button == 89) {
+            if (param1.event == 2) {
+                this.cheat(1);
+            }
+        }
+        if (param1.button == 85) {
+            if (param1.event == 2) {
+                this.cheat(0);
+            }
+        }
+        return null;
+    }
+    
+    method cheat(param1) {
+        if (param1) {
+            this.state = 0;
+        }
+        else {
+            this.state = 1;
+        }
+        this.setup_hot_or_cold();
+        return null;
+    }
+    
+    method setup_hot_or_cold() {
+        var var1;
+        if (this.state == 0) {
+            debug::print("********* ta02 is HOT state");
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].hide();
+                var1 = var1 + 1;
+            }
+            var1 = 0;
+            while ((this.hotobjarray.__length - 1) >= var1) {
+                this.hotobjarray[var1].show();
+                var1 = var1 + 1;
+            }
+            var1 = 0;
+            while ((this.coldobjarray.__length - 1) >= var1) {
+                this.coldobjarray[var1].hide();
+                var1 = var1 + 1;
+            }
+        }
+        else {
+            debug::print("******* ta02 is COOL state");
+            var1 = 0;
+            while ((this.platformarray.__length - 1) >= var1) {
+                this.platformarray[var1].show();
+                var1 = var1 + 1;
+            }
+            var1 = 0;
+            while ((this.hotobjarray.__length - 1) >= var1) {
+                this.hotobjarray[var1].hide();
+                var1 = var1 + 1;
+            }
+            var1 = 0;
+            while ((this.coldobjarray.__length - 1) >= var1) {
+                this.coldobjarray[var1].show();
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method setstate(param1) {
+        this.state = param1;
+        if (this.state == 0) {
+            gcsaver::setcondition(4194304, 0);
+        }
+        else {
+            gcsaver::setcondition(4194304, 1);
+        }
+        return null;
+    }
+}

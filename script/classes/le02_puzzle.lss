@@ -1,0 +1,59 @@
+class le02_puzzle {
+    property parent;
+    
+    method le02_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaAmbience");
+        globalclass.bgmusic.play();
+        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var1, 2);
+        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("tspd"));
+        gchive::setspawnrate(var1, 2);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.level.cam.setaimode(7);
+                globalclass.player.kill();
+                gccollisionphysicsgroup::spinmask(1.2);
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.unkill();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        }
+        else if (param1.eventid == 46) {
+            globalclass.level.cam.setaimode(7);
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

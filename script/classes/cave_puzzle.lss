@@ -1,0 +1,75 @@
+class cave_puzzle {
+    property parent;
+    property showmask;
+    property maskx;
+    
+    method cave_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play();
+        this.showmask = 1;
+        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mask"));
+        if (var1) {
+            this.showmask = 0;
+        }
+        if (this.showmask) {
+            this.maskx = new lego_pickup("mski", 12, 1, "item", 2, 1);
+            this.maskx.initfull();
+            this.maskx.show();
+        }
+        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(var2, 2);
+        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(var2, 4);
+        var3 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(var3, 2);
+        gchive::setcreaturetype(var3, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(var3, 4);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        var1 = null;
+        var2 = null;
+        if (!(this.maskx == null)) {
+            this.maskx.cleanupfull();
+            this.maskx = null;
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            globalclass.level.cam.setaimode(7);
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.level.cam.setaimode(11);
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

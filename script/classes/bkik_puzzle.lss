@@ -1,0 +1,143 @@
+class bkik_puzzle {
+    property parent;
+    property incme;
+    property doorswitch;
+    property door;
+    property hitswitch;
+    property hidetimer;
+    property doorswitchtimer;
+    property grapplingpivots;
+    
+    method bkik_puzzle(param1) {
+        this.parent = param1;
+        this.hitswitch = 0;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPohatuAmbience");
+        globalclass.bgmusic.play(1);
+        gcareadirector::setnearestmax(50);
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        this.hidetimer = new lego_timer("char", 3.5, 0);
+        this.doorswitch = new lego_moveableobject("sw00", this.parent.name);
+        this.door = new lego_moveableobject("door", this.parent.name);
+        this.grapplingpivots = [ new lego_moveableobject("hot0"), 
+            new lego_moveableobject("hot1"), 
+            new lego_moveableobject("hot2"), 
+            new lego_moveableobject("hot3"), 
+            new lego_moveableobject("hot4"), 
+            new lego_moveableobject("hot5") ];
+        this.incme = 0;
+        this.doorswitch.initfull();
+        this.doorswitch.setresponse(0, 0, 0);
+        this.doorswitch.movebboxsides(2, 1, 2, -2, -1, -2);
+        this.door.initfull();
+        this.hidetimer.initfull();
+        this.doorswitchtimer = new lego_timer("drst", 2.0, 0);
+        this.doorswitchtimer.initfull();
+        var1 = 0;
+        while ((this.grapplingpivots.__length - 1) >= var1) {
+            this.grapplingpivots[var1].initfull();
+            this.grapplingpivots[var1].setmytargetingflags(1);
+            this.grapplingpivots[var1].setresponse(1, 1, 1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        if (param1.eventid == 35) {
+            
+        }
+        else if (param1.eventid == 8) {
+            if (scslosifoundation::identifiertostring(param1.args[0]) == "drst") {
+                globalclass.level.cam.interpolate(0 - 62.13, 21.37, 0 - 291.6, 0 - 73.37, 9.75, 0 - 331.96, 5.0);
+                var1 = this.door.getx();
+                var2 = this.door.gety() + 20.0;
+                var3 = this.door.getz();
+                this.door.interpolate(var1, var2, var3, 5.0);
+            }
+            scslosifoundation::identifiertostring(param1.args[0]);
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("sw00")) {
+                    if (this.hitswitch == 0) {
+                        this.doorswitch.interpolate(this.doorswitch.getx(), this.doorswitch.gety() - 0.75, this.doorswitch.getz(), 2);
+                        this.doorswitchtimer.reset(0);
+                        this.doorswitchtimer.start();
+                        this.hitswitch = 1;
+                    }
+                }
+                param1.args[1];
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 3) {
+            debug::print("You hit triggerbox: " + scslosifoundation::identifiertostring(param1.args[0]));
+            this.parent.level.cam.setaimode(7);
+            globalclass.player.actor.setinputstate("none");
+            globalclass.player.kill();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method show() {
+        this.doorswitch.show();
+        this.door.show();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.doorswitchtimer.cleanupfull();
+        this.doorswitchtimer = null;
+        this.incme = null;
+        this.doorswitch.cleanupfull();
+        this.doorswitch = null;
+        this.door.cleanupfull();
+        this.door = null;
+        this.hitswitch = null;
+        this.hidetimer.cleanupfull();
+        this.hidetimer = null;
+        var1 = 0;
+        while ((this.grapplingpivots.__length - 1) >= var1) {
+            this.grapplingpivots[var1].cleanupfull();
+            this.grapplingpivots[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.grapplingpivots = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

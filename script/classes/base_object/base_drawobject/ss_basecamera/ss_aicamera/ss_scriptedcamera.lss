@@ -1,0 +1,16 @@
+class ss_scriptedcamera : ss_aicamera {
+    
+    method ss_scriptedcamera(param1, param2, param3, param4, param5, param6, param7) {
+        this.ss_aicamera(param1, param2, param3, param4, param5, param6, param7, 0, 0);
+        return null;
+    }
+    
+    method initfull() {
+        this.handle = gcgame::getcurrentcamera();
+        gclegocamera::settargpos(this.handle, this.tx, this.ty, this.tz);
+        this.spline.initfull();
+        gclegocamera::setcameraaispline(this.handle, this.spline.object, 0, this.minzoom, this.maxzoom);
+        gclegocamera::setcameraaimode(this.handle, 1);
+        return null;
+    }
+}

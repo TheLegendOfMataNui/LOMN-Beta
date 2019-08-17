@@ -1,0 +1,426 @@
+class gs_legocamera : ss_basecamera {
+    property ismanual;
+    property ishead;
+    property iswatch;
+    property speedycam;
+    property moveplayer;
+    property cameraspline;
+    property camsplineindex;
+    property targetsplineindex;
+    property splineduration;
+    property popback;
+    property viewport;
+    property vx;
+    property vy;
+    property vh;
+    property vw;
+    property tvx;
+    property tvy;
+    property tvh;
+    property tvw;
+    property scaleview;
+    property tvduration;
+    property tvcurr;
+    property aimode;
+    
+    method gs_legocamera(param1, param2, param3, param4, param5, param6, param7) {
+        this.ss_basecamera(param1, param2, param3, param4, param5, param6, param7);
+        this.ismanual = 0;
+        this.ishead = 0;
+        this.speedycam = 1;
+        this.iswatch = 0;
+        this.moveplayer = 0;
+        this.cameraspline = null;
+        this.camsplineindex = 0;
+        this.targetsplineindex = 0;
+        this.splineduration = 0;
+        this.popback = 1;
+        this.vx = 0;
+        this.vy = 0;
+        this.vh = gcgame::getresolutionheight();
+        this.vw = gcgame::getresolutionwidth();
+        this.scaleview = 0;
+        return null;
+    }
+    
+    method initfull() {
+        this.viewport = gcgame::getmainview();
+        this.handle = gcviewport::getcamera(this.viewport);
+        gclegocamera::setcampos(this.handle, this.x1, this.y1, this.z);
+        gclegocamera::settargpos(this.handle, this.tx, this.ty, this.tz);
+        gc3dsound::synclistenertocamera();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.handle = null;
+        return null;
+    }
+    
+    method input(param1) {
+        var var1;
+        if (param1.check(111, 2)) {
+            this.togglemanualcamera();
+            this.speedycam = 1;
+        }
+        if (param1.check(191, 2)) {
+            if (this.ismanual) {
+                this.moveplayer = 1;
+            }
+        }
+        if (this.ismanual == 1) {
+            if (param1.event == 2) {
+                if (param1.button == 101) {
+                    if (this.speedycam >= 7) {
+                        this.speedycam = 1;
+                    }
+                    else {
+                        this.speedycam = this.speedycam + 3;
+                    }
+                    globalclass.scriptmessage("speed " + __tostring(this.speedycam));
+                }
+            }
+            if ((param1.event == 2) || (param1.event == 4)) {
+                if (param1.button == 98) {
+                    var1 = 0;
+                    while (this.speedycam >= var1) {
+                        gclegocamera::movebackward(this.handle);
+                        var1 = var1 + 1;
+                    }
+                }
+                if (param1.button == 104) {
+                    var1 = 0;
+                    while (this.speedycam >= var1) {
+                        gclegocamera::moveforward(this.handle);
+                        var1 = var1 + 1;
+                    }
+                }
+                if (param1.button == 100) {
+                    var1 = 0;
+                    while (this.speedycam >= var1) {
+                        gclegocamera::yawleft(this.handle);
+                        var1 = var1 + 1;
+                    }
+                }
+                if (param1.button == 102) {
+                    var1 = 0;
+                    while (this.speedycam >= var1) {
+                        gclegocamera::yawright(this.handle);
+                        var1 = var1 + 1;
+                    }
+                }
+                if (param1.button == 97) {
+                    var1 = 0;
+                    while (this.speedycam >= var1) {
+                        gclegocamera::moveleft(this.handle);
+                        var1 = var1 + 1;
+                    }
+                }
+                if (param1.button == 99) {
+                    var1 = 0;
+                    while (this.speedycam >= var1) {
+                        gclegocamera::moveright(this.handle);
+                        var1 = var1 + 1;
+                    }
+                }
+                if (param1.button == 109) {
+                    var1 = 0;
+                    while (this.speedycam >= var1) {
+                        gclegocamera::moveup(this.handle);
+                        var1 = var1 + 1;
+                    }
+                }
+                if (param1.button == 107) {
+                    var1 = 0;
+                    while (this.speedycam >= var1) {
+                        gclegocamera::movedown(this.handle);
+                        var1 = var1 + 1;
+                    }
+                }
+                if (param1.button == 110) {
+                    this.setaimode(7);
+                    this.ismanual = 0;
+                    this.iswatch = 1;
+                }
+            }
+            return 0;
+        }
+        if (this.iswatch == 1) {
+            if (param1.event == 2) {
+                if (param1.button == 106) {
+                    this.iswatch = 0;
+                    this.ismanual = 1;
+                    this.setaimode(1);
+                }
+            }
+            return 0;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        if (this.moveplayer > 0) {
+            var1 = gcgame::maincharacterid();
+            var2 = gcmodeldirector::getcharacter(var1);
+            if (this.moveplayer == 1) {
+                gccharacter::disablecollisions(var2);
+                gccharacter::setposition(var2, this.getpositionx(), this.getpositiony(), this.getpositionz());
+                this.moveplayer = 2;
+            }
+            else {
+                gccharacter::enablecollisions(var2);
+                this.moveplayer = 0;
+            }
+        }
+        if (this.scaleview == 1) {
+            this.tvcurr = this.tvcurr + param1.deltatime;
+            if (this.tvcurr > this.tvduration) {
+                this.tvcurr = this.tvduration;
+                this.vx = this.vx + this.tvx;
+                this.vy = this.vy + this.tvy;
+                this.vw = this.vw + this.tvw;
+                this.vh = this.vh + this.tvh;
+                gcviewport::setboxsize(this.viewport, this.vx, this.vy, this.vw, this.vh);
+                this.scaleview = 0;
+            }
+            else {
+                var3 = this.tvcurr / this.tvduration;
+                var4 = this.vx + (this.tvx * var3);
+                var5 = this.vy + (this.tvy * var3);
+                var6 = this.vw + (this.tvw * var3);
+                var7 = this.vh + (this.tvh * var3);
+                gcviewport::setboxsize(this.viewport, var4, var5, var6, var7);
+            }
+        }
+        return null;
+    }
+    
+    method getforwardx() {
+        return gclegocamera::getforwardx(this.handle);
+    }
+    
+    method getforwardy() {
+        return gclegocamera::getforwardy(this.handle);
+    }
+    
+    method getforwardz() {
+        return gclegocamera::getforwardz(this.handle);
+    }
+    
+    method getpositionx() {
+        return gclegocamera::getcamx(this.handle);
+    }
+    
+    method getpositiony() {
+        return gclegocamera::getcamy(this.handle);
+    }
+    
+    method getpositionz() {
+        return gclegocamera::getcamz(this.handle);
+    }
+    
+    method setaimode(param1) {
+        this.aimode = param1;
+        gclegocamera::setcameraaimode(this.handle, param1);
+        return null;
+    }
+    
+    method addyaw(param1) {
+        gclegocamera::addyaw(this.handle, param1);
+        return null;
+    }
+    
+    method settweakable() {
+        globalclass.tweak.add_camobj_tweakable(this);
+        return null;
+    }
+    
+    method shakecamera(param1, param2) {
+        gclegocamera::shakecamera(this.handle, param1, param2);
+        return null;
+    }
+    
+    method getaimode() {
+        this.aimode = gclegocamera::getcameraaimode(this.handle);
+        return this.aimode;
+    }
+    
+    method togglemanualcamera() {
+        this.ismanual = gclegocamera::togglemanualcamera(this.handle);
+        this.iswatch = 0;
+        this.ishead = 0;
+        return this.ismanual;
+    }
+    
+    method togglewatchcamera() {
+        if (this.iswatch == 0) {
+            this.setaimode(7);
+            this.ismanual = 0;
+            this.iswatch = 1;
+        }
+        else {
+            this.setaimode(5);
+            this.ismanual = 0;
+            this.iswatch = 0;
+        }
+        return this.iswatch;
+    }
+    
+    method lockpitch(param1, param2) {
+        gclegocamera::lockpitch(this.handle, param1, param2);
+        return null;
+    }
+    
+    method interpolate(param1, param2, param3, param4, param5, param6, param7) {
+        gclegocamera::interpolate(this.handle, param1, param2, param3, param4, param5, param6, param7);
+        return null;
+    }
+    
+    method makespline(param1) {
+        this.cameraspline = scslosislkcubicspline::create(param1);
+        return null;
+    }
+    
+    method setspline(param1, param2, param3, param4) {
+        if (this.cameraspline == null) {
+            return 1;
+        }
+        if (param1 == null) {
+            param1 = 0;
+        }
+        if (param2 == null) {
+            param2 = 1.0;
+        }
+        if (param4 == null) {
+            param4 = 1;
+        }
+        this.camsplineindex = param1;
+        this.splineduration = param2;
+        gclegocamera::setcameraspline(this.handle, this.cameraspline, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method settargetspline(param1, param2, param3) {
+        if (param1 == null) {
+            param1 = 0;
+        }
+        if (param3 == null) {
+            param3 = 1;
+        }
+        this.targetsplineindex = param1;
+        gclegocamera::settargetspline(this.handle, this.cameraspline, this.camsplineindex, this.targetsplineindex, this.splineduration, param2, param3);
+        return null;
+    }
+    
+    method togglepopback() {
+        var var1;
+        if (this.popback == 1) {
+            var1 = 0;
+        }
+        else {
+            var1 = 1;
+        }
+        this.setpopback(var1);
+        return null;
+    }
+    
+    method setpopback(param1) {
+        if (param1 == this.popback) {
+            return 1;
+        }
+        this.popback = param1;
+        gclegocamera::setusepopback(this.handle, this.popback);
+        return null;
+    }
+    
+    method setviewsize(param1, param2, param3, param4) {
+        if (!(param1 == null)) {
+            this.vx = param1;
+        }
+        if (!(param2 == null)) {
+            this.vy = param2;
+        }
+        if (!(param3 == null)) {
+            this.vw = param3;
+        }
+        if (!(param4 == null)) {
+            this.vh = param4;
+        }
+        gcviewport::setboxsize(this.viewport, this.vx, this.vy, this.vw, this.vh);
+        return null;
+    }
+    
+    method resetviewport() {
+        this.vx = 0;
+        this.vy = 0;
+        this.vw = gcgame::getresolutionwidth();
+        this.vh = gcgame::getresolutionheight();
+        gcviewport::setboxsize(this.viewport, this.vx, this.vy, this.vw, this.vh);
+        return null;
+    }
+    
+    method scaleviewport(param1, param2, param3, param4, param5) {
+        if (param1 == null) {
+            this.tvx = this.vx;
+        }
+        else {
+            this.tvx = param1;
+        }
+        if (param2 == null) {
+            this.tvy = this.vy;
+        }
+        else {
+            this.tvy = param2;
+        }
+        if (param3 == null) {
+            this.tvw = this.vw;
+        }
+        else {
+            this.tvw = param3;
+        }
+        if (param4 == null) {
+            this.tvh = this.vh;
+        }
+        else {
+            this.tvh = param4;
+        }
+        if (param5 == null) {
+            this.tvduration = 1.0;
+        }
+        else {
+            this.tvduration = param5;
+        }
+        this.tvcurr = 0.0;
+        this.tvx = this.tvx - this.vx;
+        this.tvy = this.tvy - this.vy;
+        this.tvw = this.tvw - this.vw;
+        this.tvh = this.tvh - this.vh;
+        this.scaleview = 1;
+        return null;
+    }
+    
+    method scaletocutscene() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var1 = gcgame::getresolutionwidth();
+        var2 = scslosimath::round(var1 / 1.85);
+        var3 = gcgame::getresolutionheight();
+        var4 = scslosimath::round(var3 - var2);
+        this.scaleviewport(0, 0, var1, var3 - var4, 0.5);
+        return null;
+    }
+    
+    method invertmouse(param1) {
+        gclegocamera::setinvertmouse(this.handle, param1);
+        return null;
+    }
+}

@@ -1,0 +1,40 @@
+class gs_lego_eyes : base_object {
+    property handle;
+    property eyecolor;
+    property eyetexture;
+    
+    method gs_lego_eyes(param1, param2, param3) {
+        var var1;
+        var1 = scslosifoundation::stringtoidentifier(param1);
+        this.handle = gcmodeldirector::getcharacter(var1, var1);
+        this.eyecolor = param2;
+        this.eyetexture = param3;
+        return null;
+    }
+    
+    method initfull() {
+        gccharacter::seteyecolor(this.handle, this.eyetexture, this.eyecolor);
+        return null;
+    }
+    
+    method setcolor(param1) {
+        this.eyecolor = param1;
+        gccharacter::seteyecolor(this.handle, this.eyetexture, this.eyecolor);
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 82) {
+                this.setcolor(rgba(255, 1, 1, 255));
+            }
+            if (param1.button == 71) {
+                this.setcolor(rgba(1, 255, 1, 255));
+            }
+            if (param1.button == 66) {
+                this.setcolor(rgba(1, 1, 255, 255));
+            }
+        }
+        return null;
+    }
+}

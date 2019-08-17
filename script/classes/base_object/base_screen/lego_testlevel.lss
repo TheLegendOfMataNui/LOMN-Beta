@@ -1,0 +1,55 @@
+class lego_testlevel : base_screen {
+    property cam;
+    property hud;
+    property rock;
+    property level;
+    property waterfallsound;
+    property ambientsound;
+    property sounddirector;
+    property digpuzzle;
+    
+    method lego_testlevel() {
+        this.level = new level1arealoader();
+        this.digpuzzle = new cavedigging();
+        return null;
+    }
+    
+    method initfull() {
+        this.cam = new gs_legocamera(0 - 1000.0, 1500.0, 3000.0, 0 - 1000.0, 800.0, 0.0);
+        this.level.initfull();
+        globalclass.player.setactor("cnt1", "onua", 180, -300, 0 - 50.0, 1200, "ninp");
+        this.cam.initfull();
+        this.cam.setaimode(5);
+        globalclass.hud.add();
+        globalclass.hud.show();
+        this.sounddirector = new lego_sounddirector();
+        this.sounddirector.initfull();
+        this.waterfallsound = this.sounddirector.addsound("Root/data/sounds/waterfall", 3);
+        this.sounddirector.setsoundposition(this.waterfallsound, 0 - 385.0, 0 - 47.0, 300.0);
+        this.sounddirector.setsoundconeorientation(this.waterfallsound, 1.0, 0.0, 0.0);
+        this.sounddirector.setsoundconeangles(this.waterfallsound, 30, 200);
+        this.sounddirector.setsoundconeoutsidevolume(this.waterfallsound, -10000);
+        this.sounddirector.setsoundmindistance(this.waterfallsound, 25.0);
+        this.sounddirector.playsound(this.waterfallsound, 1);
+        this.ambientsound = this.sounddirector.addsound("Root/data/sounds/AMBTRAK", 1);
+        this.sounddirector.setsoundvolume(this.ambientsound, -1200);
+        this.sounddirector.playsound(this.ambientsound, 1);
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        this.cam.input(param1);
+        this.digpuzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.level.onevent(param1);
+        this.digpuzzle.onevent(param1);
+        return null;
+    }
+}

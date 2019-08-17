@@ -1,0 +1,362 @@
+class glyph3_lev4_puzzle {
+    property parent;
+    property switch1_up;
+    property switch2_up;
+    property switch3_up;
+    property switch4_up;
+    property switch5_up;
+    property switch1;
+    property switch2;
+    property switch3;
+    property switch4;
+    property switch5;
+    property numberofdownswitchs;
+    property glyph;
+    property doorarray;
+    property doorsopen;
+    property curentorient;
+    property rotating;
+    property rotatetime;
+    property rotatespeed;
+    property showpickup;
+    property desctext;
+    property howtotext;
+    property distplaytexttimer;
+    property playcutonce;
+    property deltatimer1;
+    property rotation;
+    
+    method glyph3_lev4_puzzle(param1) {
+        this.parent = param1;
+        this.showpickup = 1;
+        this.switch1_up = 1;
+        this.switch2_up = 1;
+        this.switch3_up = 1;
+        this.switch4_up = 1;
+        this.switch5_up = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        this.rotation = 0;
+        this.deltatimer1 = 0.0;
+        this.playcutonce = 1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play();
+        globalclass.player.actor.setwaterlevel(1000);
+        var1 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"));
+        if (var1) {
+            this.showpickup = 0;
+        }
+        if (this.showpickup) {
+            this.glyph = new lego_moveableobject("glyp");
+            this.glyph.initfull();
+            this.glyph.show();
+            this.distplaytexttimer = new lego_timer("dspt", 4.0, 0);
+            this.distplaytexttimer.initfull();
+            var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 4, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            this.desctext.initfull();
+            var3 = (screeny - 100) + 20;
+            var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 4, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var2, screenx * 0.5, var3, 0, 1, 256, 0, 0);
+            this.howtotext.initfull();
+        }
+        this.numberofdownswitchs = 0;
+        this.switch1 = new lego_moveableobject("swc1");
+        this.switch1.initfull();
+        this.switch1.settweakable();
+        this.switch1.setresponse(0, 0, 0);
+        this.switch2 = new lego_moveableobject("swc2");
+        this.switch2.initfull();
+        this.switch2.settweakable();
+        this.switch2.setresponse(0, 0, 0);
+        this.switch3 = new lego_moveableobject("swc3");
+        this.switch3.initfull();
+        this.switch3.settweakable();
+        this.switch3.setresponse(0, 0, 0);
+        this.switch4 = new lego_moveableobject("swc4");
+        this.switch4.initfull();
+        this.switch4.settweakable();
+        this.switch4.setresponse(0, 0, 0);
+        this.switch5 = new lego_moveableobject("swc5");
+        this.switch5.initfull();
+        this.switch5.settweakable();
+        this.switch5.setresponse(0, 0, 0);
+        this.doorarray = [ new lego_moveableobject("g4d1"), 
+            new lego_moveableobject("g4d2"), 
+            new lego_moveableobject("g4d3"), 
+            new lego_moveableobject("g4d4") ];
+        var4 = 0;
+        while ((this.doorarray.__length - 1) >= var4) {
+            this.doorarray[var4].initfull();
+            var4 = var4 + 1;
+        }
+        this.doorsopen = 0;
+        this.curentorient = 0;
+        this.rotating = 0;
+        this.rotatetime = 0;
+        this.rotatespeed = 7;
+        return null;
+    }
+    
+    method show() {
+        this.settostartingpositions();
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.desctext == null)) {
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        if (!(this.howtotext == null)) {
+            this.howtotext.cleanupfull();
+            this.howtotext = null;
+        }
+        this.distplaytexttimer.cleanupfull();
+        this.distplaytexttimer = null;
+        this.switch1.cleanupfull();
+        this.switch1 = null;
+        this.switch2.cleanupfull();
+        this.switch2 = null;
+        this.switch3.cleanupfull();
+        this.switch3 = null;
+        this.switch4.cleanupfull();
+        this.switch4 = null;
+        this.switch5.cleanupfull();
+        this.switch5 = null;
+        this.numberofdownswitchs = null;
+        var1 = 0;
+        while ((this.doorarray.__length - 1) >= var1) {
+            this.doorarray[var1].cleanupfull();
+            this.doorarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.doorarray = null;
+        this.doorsopen = null;
+        this.curentorient = null;
+        this.rotating = null;
+        this.rotatetime = null;
+        this.rotatespeed = null;
+        if (!(this.glyph == null)) {
+            this.glyph.cleanupfull();
+            this.glyph = null;
+        }
+        return null;
+    }
+    
+    method showtext() {
+        this.desctext.add();
+        this.desctext.show();
+        this.howtotext.add();
+        this.howtotext.show();
+        this.distplaytexttimer.reset(0);
+        this.distplaytexttimer.start();
+        this.glyph.hide();
+        globalclass.player.addelement(7);
+        globalclass.hud.show();
+        gcsaver::setglyphfound();
+        return null;
+    }
+    
+    method removetext() {
+        if (!(this.desctext == null)) {
+            this.desctext.hide();
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        if (!(this.howtotext == null)) {
+            this.howtotext.hide();
+            this.howtotext.cleanupfull();
+            this.howtotext = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.rotating) {
+            this.rotatetime = this.rotatetime + param1.deltatime;
+            if (this.rotatespeed > 0) {
+                if (this.rotatetime > (1 / this.rotatespeed)) {
+                    this.rotatetime = 0;
+                    this.opendoors();
+                }
+            }
+        }
+        this.deltatimer1 = this.deltatimer1 + param1.deltatime;
+        if (this.deltatimer1 > 0) {
+            
+        }
+        if (this.rotation >= 360) {
+            this.rotation = 0;
+        }
+        else {
+            this.rotation = this.rotation + 2;
+        }
+        this.glyph.setorientation(this.rotation, this.rotation, 0);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 8) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
+                this.removetext();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setunderwater(1);
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.removetext();
+                gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier("takv"), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("swc1")) {
+                if (this.switch1_up) {
+                    gcstaticsoundsptrarray::playtablesound(1085);
+                    this.switch1.setlocalpos(0, -1, 0);
+                    this.numberofdownswitchs = this.numberofdownswitchs + 1;
+                    this.switch1_up = 0;
+                    this.test();
+                }
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("swc2")) {
+                if (this.switch2_up) {
+                    gcstaticsoundsptrarray::playtablesound(1085);
+                    this.switch2.setlocalpos(0, -1, 0);
+                    this.numberofdownswitchs = this.numberofdownswitchs + 1;
+                    this.switch2_up = 0;
+                    this.test();
+                }
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("swc3")) {
+                if (this.switch3_up) {
+                    gcstaticsoundsptrarray::playtablesound(1085);
+                    this.switch3.setlocalpos(0, -1, 0);
+                    this.numberofdownswitchs = this.numberofdownswitchs + 1;
+                    this.switch3_up = 0;
+                    this.test();
+                }
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("swc4")) {
+                if (this.switch4_up) {
+                    gcstaticsoundsptrarray::playtablesound(1085);
+                    this.switch4.setlocalpos(0, -1, 0);
+                    this.numberofdownswitchs = this.numberofdownswitchs + 1;
+                    this.switch4_up = 0;
+                    this.test();
+                }
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("swc5")) {
+                if (this.switch5_up) {
+                    gcstaticsoundsptrarray::playtablesound(1085);
+                    this.switch5.setlocalpos(0, -1, 0);
+                    this.numberofdownswitchs = this.numberofdownswitchs + 1;
+                    this.switch5_up = 0;
+                    this.test();
+                }
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("glyp")) {
+                    this.showtext();
+                }
+                param1.args[1];
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 89) {
+            if (param1.event == 2) {
+                this.cheaton();
+            }
+        }
+        return null;
+    }
+    
+    method cheaton() {
+        this.switch1_up = 0;
+        this.switch2_up = 0;
+        this.switch3_up = 0;
+        this.switch4_up = 0;
+        this.switch5_up = 0;
+        this.settostartingpositions();
+        return null;
+    }
+    
+    method settostartingpositions() {
+        if (this.switch1_up == 0) {
+            this.switch1.setlocalpos(0, -1, 0);
+            this.numberofdownswitchs = this.numberofdownswitchs + 1;
+        }
+        if (this.switch2_up == 0) {
+            this.switch2.setlocalpos(0, -1, 0);
+            this.numberofdownswitchs = this.numberofdownswitchs + 1;
+        }
+        if (this.switch3_up == 0) {
+            this.switch3.setlocalpos(0, -1, 0);
+            this.numberofdownswitchs = this.numberofdownswitchs + 1;
+        }
+        if (this.switch4_up == 0) {
+            this.switch4.setlocalpos(0, -1, 0);
+            this.numberofdownswitchs = this.numberofdownswitchs + 1;
+        }
+        if (this.switch5_up == 0) {
+            this.switch5.setlocalpos(0, -1, 0);
+            this.numberofdownswitchs = this.numberofdownswitchs + 1;
+        }
+        this.test();
+        return null;
+    }
+    
+    method test() {
+        var var1;
+        var var2;
+        var var3;
+        if (this.numberofdownswitchs >= 5) {
+            this.rotating = 1;
+            globalclass.level.cam.setaimode(0);
+            globalclass.level.cam.setpos(0 - 349.1, 0 - 252.7, 0 - 175.4);
+            var1 = this.doorarray[0].getx();
+            var2 = this.doorarray[0].gety();
+            var3 = this.doorarray[0].getz();
+            globalclass.level.cam.settargetpos(var1, var2, var3);
+        }
+        return null;
+    }
+    
+    method opendoors() {
+        this.curentorient = this.curentorient + 1;
+        if (this.curentorient > 100) {
+            globalclass.level.cam.setaimode(11);
+            this.rotating = 0;
+        }
+        else {
+            this.doorarray[0].setorientation(0, this.curentorient, 0);
+            this.doorarray[1].setorientation(0, 0 - this.curentorient, 0);
+            this.doorarray[2].setorientation(0, this.curentorient, 0);
+            this.doorarray[3].setorientation(0, 0 - this.curentorient, 0);
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

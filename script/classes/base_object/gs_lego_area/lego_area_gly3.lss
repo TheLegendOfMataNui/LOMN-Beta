@@ -1,0 +1,45 @@
+class lego_area_gly3 : gs_lego_area {
+    property brigpuzzle;
+    property parent;
+    
+    method lego_area_gly3(param1) {
+        this.parent = param1;
+        this.gs_lego_area("gly3", param1, 0, 0);
+        this.brigpuzzle = new brigpuzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.brigpuzzle.initfull();
+        this.brigpuzzle.show();
+        return null;
+    }
+    
+    method process(param1) {
+        this.brigpuzzle.process(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.brigpuzzle.input(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.brigpuzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.brigpuzzle.hide();
+        return null;
+    }
+    
+    method exit() {
+        this.brigpuzzle.exit();
+        return null;
+    }
+}

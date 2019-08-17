@@ -1,0 +1,320 @@
+class gs_lego_toa : gs_lego_character {
+    property toahandle;
+    property mapperhandle;
+    property ishookenabled;
+    
+    method gs_lego_toa(param1, param2, param3, param4, param5) {
+        this.charname = param1;
+        if (param2 == null) {
+            this.angle = 0.0;
+        }
+        else {
+            this.angle = param2;
+        }
+        if (param3 == null) {
+            this.x1 = 0.0;
+        }
+        else {
+            this.x1 = param3;
+        }
+        if (param4 == null) {
+            this.y1 = 0.0;
+        }
+        else {
+            this.y1 = param4;
+        }
+        if (param5 == null) {
+            this.z = 0.0;
+        }
+        else {
+            this.z = param5;
+        }
+        this.onscreen = 0;
+        this.area = "cnt1";
+        this.areaid = scslosifoundation::stringtoidentifier("cnt1");
+        this.mapperhandle = gcgame::getkeymapper();
+        return null;
+    }
+    
+    method lego_toa_initfull() {
+        var var1;
+        gcmodeldirector::addtoa(this.charname);
+        this.toahandle = gcmodeldirector::gettoa();
+        this.contid = scslosifoundation::stringtoidentifier("cnt1");
+        this.handle = gcmodeldirector::getcharacter(this.contid, this.areaid);
+        var1 = 1;
+        this.ishookenabled = 0;
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_toa_initfull();
+        return null;
+    }
+    
+    method lego_toa_cleanupfull() {
+        this.remove();
+        this.charname = null;
+        this.contid = null;
+        this.visstate = null;
+        this.charstring = null;
+        this.contstring = null;
+        this.handle = null;
+        this.angle = null;
+        this.inputstate = null;
+        this.z = null;
+        this.x1 = null;
+        this.y1 = null;
+        this.inputstate = null;
+        this.numanimations = null;
+        this.gepetto = null;
+        this.currentanimation = null;
+        this.area = null;
+        this.areaid = null;
+        this.myname = null;
+        this.id = null;
+        this.toahandle = null;
+        this.charname = null;
+        this.mapperhandle = null;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_toa_cleanupfull();
+        return null;
+    }
+    
+    method initshort() {
+        return null;
+    }
+    
+    method cleanupshort() {
+        return null;
+    }
+    
+    method add() {
+        this.setpos(this.x1, this.y1, this.z);
+        this.setorientation(this.angle);
+        return null;
+    }
+    
+    method setclimbable(param1) {
+        gctoa::setclimbable(this.toahandle, param1);
+        return null;
+    }
+    
+    method setupdraggertipgeometry(param1, param2, param3, param4) {
+        gctoa::setupdraggertipgeometry(this.toahandle, param1, param2, param3, param4);
+        return null;
+    }
+    
+    method setupdraggertip(param1, param2, param3, param4, param5, param6, param7) {
+        if (param5 == null) {
+            param5 = 1.0;
+        }
+        if (param6 == null) {
+            param6 = 12;
+        }
+        if (param7 == null) {
+            param7 = 1;
+        }
+        gctoa::setupdraggertip(this.toahandle, param1, param2, param3, param4, param5, param6, param7);
+        return null;
+    }
+    
+    method setupdraggerspeeds(param1, param2) {
+        gctoa::setupdraggerspeeds(this.toahandle, param1, param2);
+        return null;
+    }
+    
+    method setupdraggermaxrange(param1) {
+        gctoa::setupdraggermaxrange(this.toahandle, param1);
+        return null;
+    }
+    
+    method setdraggerreaction(param1) {
+        gctoa::setdraggerreaction(this.toahandle, param1);
+        return null;
+    }
+    
+    method setmydraggerreactionanimation(param1) {
+        gctoa::setmydraggerreactionanimationid(this.toahandle, param1);
+        return null;
+    }
+    
+    method restrictdraggercameramode(param1) {
+        gctoa::restrictdraggercameramode(this.toahandle, param1);
+        return null;
+    }
+    
+    method shootdragger() {
+        gctoa::shootdragger(this.toahandle);
+        return null;
+    }
+    
+    method deactivatedragger() {
+        if (gctoa::isdraggeractivate()) {
+            gctoa::deactivatedragger();
+        }
+        return null;
+    }
+    
+    method setupelementalpower(param1, param2, param3, param4, param5) {
+        gctoa::setupelementalpower(this.toahandle, param1, param2, param3, param4, param5);
+        return null;
+    }
+    
+    method launchelementalpower(param1, param2) {
+        gctoa::launchelementalpower(this.toahandle, param1, param2);
+        return null;
+    }
+    
+    method idle() {
+        gctoa::idle(this.toahandle);
+        return null;
+    }
+    
+    method gotopos(param1, param2) {
+        if (param1 == null) {
+            gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        }
+        else {
+            gccollisionphysicsgroup::settoaposition(param1, param2);
+        }
+        return null;
+    }
+    
+    method activateconcealment() {
+        gctoa::activateconcealment(this.toahandle);
+        return null;
+    }
+    
+    method dectivateconcealment() {
+        gctoa::deactivateconcealment(this.toahandle);
+        return null;
+    }
+    
+    method activateshield() {
+        gctoa::activateshield(this.toahandle, 1);
+        return null;
+    }
+    
+    method deactivateshield() {
+        gctoa::deactivateshield(this.toahandle);
+        return null;
+    }
+    
+    method activatetelekinesis() {
+        gctoa::activatetelekinesis(this.toahandle);
+        return null;
+    }
+    
+    method deactivatetelekinesis() {
+        gctoa::deactivatetelekinesis(this.toahandle);
+        return null;
+    }
+    
+    method telekineticgrab() {
+        gctoa::telekineticgrab(this.toahandle);
+        return null;
+    }
+    
+    method telekineticdrop() {
+        gctoa::telekineticdrop(this.toahandle);
+        return null;
+    }
+    
+    method telekineticpush(param1) {
+        gctoa::telekineticpush(this.toahandle, param1);
+        return null;
+    }
+    
+    method telekineticpull(param1) {
+        gctoa::telekineticpull(this.toahandle, param1);
+        return null;
+    }
+    
+    method pickup(param1) {
+        gctoa::liftobject(this.toahandle, param1);
+        return null;
+    }
+    
+    method compareagainstsequence(param1) {
+        return gctoa::compareagainstsequence(this.toahandle, param1);
+    }
+    
+    method toamustdie() {
+        gctoa::toamustdie(this.toahandle);
+        return null;
+    }
+    
+    method toaisalive() {
+        gctoa::toaisalive(this.toahandle);
+        return null;
+    }
+    
+    method setswimming(param1) {
+        var var1;
+        if (param1 == null) {
+            var1 = 1;
+        }
+        else {
+            var1 = param1;
+        }
+        if (!(this.toahandle == null)) {
+            gccharacter::setswimming(this.toahandle, var1);
+        }
+        else {
+            debug::print("TOA HANDLE DOESN'T EQUAL ANYTHING DUHHH!!!!");
+        }
+        return null;
+    }
+    
+    method setunderwater(param1) {
+        if (param1 == null) {
+            param1 = 1;
+        }
+        gccharacter::setunderwater(this.handle, param1);
+        return null;
+    }
+    
+    method setcodelife(param1) {
+        gctoa::setcodelife(this.toahandle, param1);
+        return null;
+    }
+    
+    method replenishair() {
+        gccharacter::replenishair(this.handle);
+        return null;
+    }
+    
+    method userealtime(param1) {
+        gctoa::userealtime(this.toahandle, param1);
+        return null;
+    }
+    
+    method activateillusion() {
+        gctoa::activateillusion(this.toahandle);
+        return null;
+    }
+    
+    method deactivateillusion() {
+        gctoa::deactivateillusion(this.toahandle);
+        return null;
+    }
+    
+    method activatestrength() {
+        gctoa::activatestrength(this.toahandle);
+        return null;
+    }
+    
+    method deactivatestrength() {
+        gctoa::deactivatestrength(this.toahandle);
+        return null;
+    }
+    
+    method setclimbability(param1) {
+        gccharacter::setslopeclimbability(this.handle, param1);
+        return null;
+    }
+}

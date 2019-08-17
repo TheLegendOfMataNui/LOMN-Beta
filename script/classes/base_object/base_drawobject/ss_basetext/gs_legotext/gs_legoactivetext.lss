@@ -1,0 +1,93 @@
+class gs_legoactivetext : gs_legotext {
+    property fontname2;
+    property font2;
+    property curfont;
+    property basex;
+    property pad;
+    
+    method gs_legoactivetext(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
+        this.gs_legotext(param1, param3, param4, param5, param6, param7, param8, param9, param11);
+        this.string = param3;
+        this.fontname2 = param2;
+        this.curfont = 0;
+        if (param10 == null) {
+            this.pad = -11;
+        }
+        else {
+            this.pad = param10;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        this.font = globalclass.getgamefont(this.fontname);
+        this.font2 = globalclass.getgamefont(this.fontname2);
+        if (this.curfont == 0) {
+            this.text = sctextobject::create(this.x1, this.y1, this.z, this.font, this.string);
+        }
+        else {
+            this.text = sctextobject::create(this.x1, this.y1, this.z, this.font2, this.string);
+        }
+        this.scalefont(this.scale);
+        this.setjustification(this.horizontal, this.verticle);
+        sctilefont::enabletransparency(this.font, 1);
+        return null;
+    }
+    
+    method initshort() {
+        this.font = globalclass.getgamefont(this.fontname);
+        this.font2 = globalclass.getgamefont(this.fontname2);
+        if (this.curfont == 0) {
+            this.text = sctextobject::create(this.x1, this.y1, this.z, this.font, this.string);
+        }
+        else {
+            this.text = sctextobject::create(this.x1, this.y1, this.z, this.font2, this.string);
+        }
+        this.scalefont(this.scale);
+        this.setjustification(this.horizontal, this.verticle);
+        sctilefont::enabletransparency(this.font, 1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.font = null;
+        this.font2 = null;
+        this.text = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        this.font = null;
+        this.font2 = null;
+        this.text = null;
+        return null;
+    }
+    
+    method setactive(param1) {
+        if (!(this.curfont == 1)) {
+            sctextobject::setfont(this.text, this.font2);
+            this.setpos(this.x1 + (this.pad * this.scale), this.y1 - this.padadjustment, this.z);
+            this.curfont = 1;
+        }
+        return null;
+    }
+    
+    method setinactive() {
+        if (!(this.curfont == 0)) {
+            sctextobject::setfont(this.text, this.font);
+            this.curfont = 0;
+            this.setpos(this.x1 - (this.pad * this.scale), this.y1 - this.padadjustment, this.z);
+        }
+        return null;
+    }
+    
+    method getactive() {
+        return this.curfont;
+    }
+    
+    method scalefont(param1) {
+        this.scale = param1;
+        sctextobject::setscale(this.text, this.scale, this.scale);
+        return null;
+    }
+}

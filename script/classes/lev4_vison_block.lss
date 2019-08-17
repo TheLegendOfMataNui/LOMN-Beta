@@ -1,0 +1,33 @@
+class lev4_vison_block {
+    property obj;
+    property id;
+    property name;
+    property inpos;
+    property outpos;
+    
+    method lev4_vison_block(param1) {
+        this.obj = new lego_moveableobject(param1);
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(param1);
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.inpos = new basicpoint(this.obj.getx(), this.obj.gety(), this.obj.getz());
+        this.outpos = new basicpoint(this.obj.getx(), this.obj.gety(), this.obj.getz() + 20);
+        return null;
+    }
+    
+    method triggerd(param1) {
+        if (param1) {
+            this.obj.stopinterpolate();
+            this.obj.interpolate(this.outpos.x, this.outpos.y, this.outpos.z, 1);
+        }
+        else {
+            this.obj.stopinterpolate();
+            this.obj.interpolate(this.inpos.x, this.inpos.y, this.inpos.z, 1);
+        }
+        return null;
+    }
+}

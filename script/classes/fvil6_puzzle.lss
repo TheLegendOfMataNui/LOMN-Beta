@@ -1,0 +1,118 @@
+class fvil6_puzzle {
+    property parent;
+    property leverpickup;
+    property hookarray;
+    property elmdoor;
+    property elmdoorshone;
+    
+    method fvil6_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("levr"));
+        if (var1 == 0) {
+            this.leverpickup = new lego_pickup("levr", 0, 5, "item", 5, 1);
+            this.leverpickup.initfull();
+            this.leverpickup.setquest(2);
+            this.leverpickup.show();
+            this.leverpickup.setcondition(8192);
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
+        globalclass.player.setgrapplinghookdistance(150);
+        this.hookarray = [ new lego_moveableobject("hot0"), 
+            new lego_moveableobject("hot1"), 
+            new lego_moveableobject("hot2"), 
+            new lego_moveableobject("hot3"), 
+            new lego_moveableobject("hot4") ];
+        var2 = 0;
+        while ((this.hookarray.__length - 1) >= var2) {
+            this.hookarray[var2].initfull();
+            this.hookarray[var2].setmytargetingflags(1);
+            this.hookarray[var2].setresponse(1, 1, 1);
+            this.hookarray[var2].settweakable();
+            var2 = var2 + 1;
+        }
+        this.elmdoor = new lego_moveableobject("door");
+        this.elmdoor.initfull();
+        this.elmdoor.setalpha(0.8);
+        this.elmdoorshone = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.leverpickup == null)) {
+            this.leverpickup.cleanupfull();
+            this.leverpickup = null;
+        }
+        var1 = 0;
+        while ((this.hookarray.__length - 1) >= var1) {
+            this.hookarray[var1].cleanupfull();
+            this.hookarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hookarray = null;
+        globalclass.player.setgrapplinghookdistance(45);
+        this.elmdoor.cleanupfull();
+        this.elmdoor = null;
+        return null;
+    }
+    
+    method initshort() {
+        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+        globalclass.player.unkill();
+        globalclass.player.actor.setinputstate("ninp");
+        return null;
+    }
+    
+    method cleanupshort() {
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if ((param1.args[1] == scslosifoundation::stringtoidentifier("door")) && (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                if (this.elmdoorshone) {
+                    if (globalclass.player.tokens >= 8) {
+                        if (globalclass.player.actor.ishookenabled) {
+                            this.elmdoor.fadeout(1.5);
+                            gcstaticsoundsptrarray::playtablesound(1084);
+                            this.elmdoorshone = 0;
+                        }
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 35) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("door")) && (param1.args[1] == 0)) {
+                this.elmdoor.hide();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.cleanupshort();
+        }
+        else if (param1.eventid == 27) {
+            this.initshort();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

@@ -1,0 +1,1062 @@
+class gs_lego_screenfrontend {
+    property parent;
+    property pointer;
+    property destination;
+    property argarray;
+    property point;
+    property startx;
+    property starty;
+    property xchange;
+    property ychange;
+    property maxlines;
+    property lineposition;
+    property activemenu;
+    property backmenu;
+    property activebutton;
+    property screentimer;
+    property advancescreen;
+    property backscreen;
+    property curscreen;
+    property minidx;
+    property maxidx;
+    property showidx;
+    property x;
+    property y;
+    property curidx;
+    property mainmenutext;
+    property optiontext;
+    property languagetext;
+    property controlstext;
+    property tempmx;
+    property tempmy;
+    property mousex;
+    property mousey;
+    property startnewscreen;
+    property reallyback;
+    property menuactive;
+    property ingame;
+    property options_graphics;
+    property options_credits;
+    property options_sound;
+    property playgame;
+    property printmenu;
+    property glossary;
+    property curspline;
+    property cameramode;
+    property rotateval;
+    property rotatedir;
+    
+    method gs_lego_screenfrontend(param1) {
+        this.parent = param1;
+        this.curscreen = 10;
+        this.screentimer = 0;
+        return null;
+    }
+    
+    method setupmainscreen() {
+        this.mainmenutext = [ [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 58), 
+                400, 
+                320, 
+                32, 
+                639, 
+                359 ], 
+            [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 35), 
+                400, 
+                360, 
+                33, 
+                639, 
+                399 ], 
+            [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 41), 
+                400, 
+                400, 
+                34, 
+                639, 
+                439 ] ];
+        return null;
+    }
+    
+    method setupoptionscreen() {
+        var var1;
+        this.optiontext = [  ];
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 48), 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 21), 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 25), 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 20), 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 40), 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 7), 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        var1 = [ "Controls", 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 3), 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        return null;
+    }
+    
+    method setuplanguagescreen() {
+        var var1;
+        this.languagetext = [  ];
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 13), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 16), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 50), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 24), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 12), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 19), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 8), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 55), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 3), 
+            50, 
+            50 + (40 * this.languagetext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.languagetext.__append(var1);
+        return null;
+    }
+    
+    method setupcontrolsscreen() {
+        var var1;
+        this.controlstext = [  ];
+        var1 = [ "Keyboard + MouseLook", 
+            50, 
+            50 + (40 * this.controlstext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.controlstext.__append(var1);
+        var1 = [ "Keyboard + Numpad", 
+            50, 
+            50 + (40 * this.controlstext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.controlstext.__append(var1);
+        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 3), 
+            50, 
+            50 + (40 * this.controlstext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.controlstext.__append(var1);
+        return null;
+    }
+    
+    method setupoutsidescreens() {
+        this.playgame = new gsplaygame(this);
+        this.options_credits = new creditsscreen(this);
+        this.options_sound = new soundoptions(this);
+        this.options_graphics = new graphicsoptions(this);
+        this.printmenu = new gsprintmenu(this);
+        this.glossary = new gsglossary(this);
+        return null;
+    }
+    
+    method initfull() {
+        this.point = new ss_basesprite("Root/Data/Art/MenuArt/cursor0000", 50, 50, 0, 82, 82);
+        this.point.initfull();
+        this.point.add();
+        this.point.show();
+        this.point.hide();
+        this.point.enablealphachannel(1);
+        this.minidx = 0;
+        this.showidx = 10;
+        this.curidx = 0;
+        this.screentimer = 0;
+        this.advancescreen = 0;
+        this.backscreen = 0;
+        this.activemenu = [  ];
+        this.backmenu = [  ];
+        this.activebutton = [  ];
+        this.startnewscreen = 0;
+        this.reallyback = 0;
+        this.menuactive = 0;
+        this.ingame = 0;
+        this.setupmainscreen();
+        this.setupoptionscreen();
+        this.setuplanguagescreen();
+        this.setupcontrolsscreen();
+        this.setupoutsidescreens();
+        globalclass.level.cam.makespline("Root/Data/Levels/lev0/frnt/frnt_CAM.slb");
+        this.curspline = 0;
+        this.adjustcamera(0, 1, 1, 5.0);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        if (!(this.argarray == null)) {
+            var1 = this.argarray.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.argarray[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.argarray = null;
+        }
+        if (!(this.point == null)) {
+            this.point.hide();
+            this.point.remove();
+            this.point.cleanupfull();
+            this.point = null;
+        }
+        if (!(this.activemenu == null)) {
+            var1 = this.activemenu.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.activemenu[var1 - var2].hide();
+                this.activemenu[var1 - var2].remove();
+                this.activemenu[var1 - var2].cleanupfull();
+                this.activemenu[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.activemenu = null;
+        }
+        if (!(this.backmenu == null)) {
+            var1 = this.backmenu.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.backmenu[var1 - var2].hide();
+                this.backmenu[var1 - var2].remove();
+                this.backmenu[var1 - var2].cleanupfull();
+                this.backmenu[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.backmenu = null;
+        }
+        this.activebutton = null;
+        if (!(this.mainmenutext == null)) {
+            var1 = this.mainmenutext.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.mainmenutext[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.mainmenutext = null;
+        }
+        if (!(this.optiontext == null)) {
+            var1 = this.optiontext.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.optiontext[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.optiontext = null;
+        }
+        if (!(this.languagetext == null)) {
+            var1 = this.languagetext.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.languagetext[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.languagetext = null;
+        }
+        if (!(this.controlstext == null)) {
+            var1 = this.controlstext.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.controlstext[var1 - var2] = null;
+                var2 = var2 + 1;
+            }
+            this.controlstext = null;
+        }
+        if (!(this.options_graphics == null)) {
+            this.options_graphics.cleanupfull();
+            this.options_graphics = null;
+        }
+        if (!(this.options_sound == null)) {
+            this.options_sound.cleanupfull();
+            this.options_sound = null;
+        }
+        if (!(this.options_credits == null)) {
+            this.options_credits.cleanupfull();
+            this.options_credits = null;
+        }
+        if (!(this.playgame == null)) {
+            this.playgame.cleanupfull();
+            this.playgame = null;
+        }
+        if (!(this.glossary == null)) {
+            this.glossary.cleanupfull();
+            this.glossary = null;
+        }
+        if (!(this.printmenu == null)) {
+            this.printmenu.cleanupfull();
+            this.printmenu = null;
+        }
+        this.curscreen = 10;
+        this.screentimer = 0;
+        this.cameramode = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 26) {
+            this.mousex = param1.args[0];
+            this.mousey = param1.args[1];
+            this.setmenupointer();
+        }
+        else if (param1.eventid == 6) {
+            this.resetcamera();
+            this.point.show();
+        }
+        if (this.curscreen == 8) {
+            this.options_graphics.onevent(param1);
+        }
+        else if (this.curscreen == 7) {
+            this.options_credits.onevent(param1);
+        }
+        else if (this.curscreen == 1) {
+            this.options_sound.onevent(param1);
+        }
+        else if (this.curscreen == 9) {
+            this.playgame.onevent(param1);
+        }
+        else if (this.curscreen == 4) {
+            this.glossary.onevent(param1);
+        }
+        else if (this.curscreen == 5) {
+            this.printmenu.onevent(param1);
+        }
+        else if (param1.eventid == 25) {
+            this.mousebuttonreleased(param1.args[0]);
+        }
+        else if (param1.eventid == 26) {
+            this.checkhighlites();
+        }
+        this.curscreen;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.screentimer > 0.25) {
+            if (this.advancescreen == 1) {
+                this.screentimer = 0;
+                this.advancetonextarea(this.curidx);
+                this.resetactivemenu();
+                this.advancescreen = 0;
+            }
+            else if (this.backscreen == 1) {
+                this.screentimer = 0;
+                this.backtolastarea();
+                this.resetactivemenu();
+                this.backscreen = 0;
+                this.reallyback = 1;
+            }
+        }
+        else if ((this.advancescreen == 1) || (this.backscreen == 1)) {
+            this.screentimer = this.screentimer + param1.deltatime;
+        }
+        if (this.startnewscreen == 1) {
+            if (this.reallyback == 1) {
+                this.backtolastscreen();
+                this.reallyback = 0;
+            }
+            else {
+                this.advancetonextscreen(this.curidx);
+            }
+            this.startnewscreen = 0;
+        }
+        if (this.cameramode == 0) {
+            this.addyaw();
+        }
+        if (this.curscreen == 7) {
+            this.options_credits.process(param1);
+        }
+        else if (this.curscreen == 5) {
+            this.printmenu.process(param1);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (this.menuactive == 1) {
+            if (param1.button == 9) {
+                if (param1.event == 2) {
+                    this.scrollup();
+                }
+            }
+            if (param1.button == 12) {
+                if (param1.event == 2) {
+                    this.scrolldown();
+                }
+            }
+            if (param1.button == 38) {
+                if (param1.event == 2) {
+                    this.scrollup();
+                }
+            }
+            if (param1.button == 40) {
+                if (param1.event == 2) {
+                    this.scrolldown();
+                }
+            }
+            if (param1.button == 13) {
+                this.forward();
+            }
+            else if (param1.button == 27) {
+                if (!(this.curscreen == -1) && !(this.curscreen == 10)) {
+                    this.back();
+                }
+            }
+            else if (param1.button == 8) {
+                if (!(this.curscreen == -1) && !(this.curscreen == 10)) {
+                    this.back();
+                }
+            }
+        }
+        if (this.curscreen == 8) {
+            this.options_graphics.input(param1);
+        }
+        else if (this.curscreen == 7) {
+            this.options_credits.input(param1);
+        }
+        else if (this.curscreen == 1) {
+            this.options_sound.input(param1);
+        }
+        else if (this.curscreen == 9) {
+            this.playgame.input(param1);
+        }
+        else if (this.curscreen == 4) {
+            this.glossary.input(param1);
+        }
+        else if (this.curscreen == 5) {
+            this.printmenu.input(param1);
+        }
+        return null;
+    }
+    
+    method updatestrings() {
+        this.setupmainscreen();
+        this.setupoptionscreen();
+        this.setuplanguagescreen();
+        this.setupcontrolsscreen();
+        return null;
+    }
+    
+    method mousebuttonreleased(param1) {
+        var var1;
+        var var2;
+        if (this.menuactive == 1) {
+            if (param1 == 1) {
+                if (this.curscreen == -1) {
+                    var1 = 0;
+                    while ((this.mainmenutext.__length - 1) >= var1) {
+                        var2 = this.activemenu[var1].getactive();
+                        if (var2 == 1) {
+                            gcstaticsoundsptrarray::playtablesound(1073);
+                            this.forward();
+                        }
+                        var1 = var1 + 1;
+                    }
+                }
+                else if (this.curscreen == 0) {
+                    var1 = 0;
+                    while ((this.optiontext.__length - 1) >= var1) {
+                        var2 = this.activemenu[var1].getactive();
+                        if (var2 == 1) {
+                            if (var1 == (this.optiontext.__length - 1)) {
+                                gcstaticsoundsptrarray::playtablesound(1073);
+                                this.back();
+                            }
+                            else {
+                                gcstaticsoundsptrarray::playtablesound(1073);
+                                this.forward();
+                            }
+                        }
+                        var1 = var1 + 1;
+                    }
+                }
+                else if (this.curscreen == 3) {
+                    if (this.curidx == 0) {
+                        gckeymapper::setkeyoption(gcgame::getkeymapper(), 1);
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 1) {
+                        gckeymapper::setkeyoption(gcgame::getkeymapper(), 2);
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 2) {
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                }
+                else if (this.curscreen == 6) {
+                    if (this.curidx == 0) {
+                        gcareadirector::setlanguage(0);
+                        this.updatestrings();
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 1) {
+                        gcareadirector::setlanguage(1);
+                        this.updatestrings();
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 2) {
+                        gcareadirector::setlanguage(6);
+                        this.updatestrings();
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 3) {
+                        gcareadirector::setlanguage(5);
+                        this.updatestrings();
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 4) {
+                        gcareadirector::setlanguage(4);
+                        this.updatestrings();
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 5) {
+                        gcareadirector::setlanguage(2);
+                        this.updatestrings();
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 6) {
+                        gcareadirector::setlanguage(3);
+                        this.updatestrings();
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 7) {
+                        gcareadirector::setlanguage(7);
+                        this.updatestrings();
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                    else if (this.curidx == 8) {
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
+                }
+            }
+            else if (((param1 == 2) && !(this.curscreen == -1)) && !(this.curscreen == 10)) {
+                gcstaticsoundsptrarray::playtablesound(1073);
+                this.back();
+            }
+        }
+        return null;
+    }
+    
+    method forward() {
+        this.menuactive = 0;
+        this.screentimer = 0;
+        this.advancescreen = 1;
+        this.backscreen = 0;
+        return null;
+    }
+    
+    method back() {
+        this.screentimer = 0;
+        this.advancescreen = 0;
+        this.backscreen = 1;
+        return null;
+    }
+    
+    method startgame() {
+        return null;
+    }
+    
+    method adjustcamera(param1, param2, param3, param4) {
+        if (param1 == 0) {
+            globalclass.level.cam.setspline(0, 4.0, param2, param3);
+            globalclass.level.cam.settargetspline(3, 1, 1);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 2) {
+            globalclass.level.cam.setspline(6, 5.0, param2, param3);
+            globalclass.level.cam.settargetspline(9, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 4) {
+            globalclass.level.cam.setspline(12, 5.0, param2, param3);
+            globalclass.level.cam.settargetspline(15, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 6) {
+            globalclass.level.cam.setspline(18, 3.0, param2, param3);
+            globalclass.level.cam.settargetspline(21, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 8) {
+            globalclass.level.cam.setspline(24, 3.0, param2, param3);
+            globalclass.level.cam.settargetspline(27, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 10) {
+            globalclass.level.cam.setspline(42, 3.0, param2, param3);
+            globalclass.level.cam.settargetspline(45, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 12) {
+            globalclass.level.cam.setspline(36, param4, param2, param3);
+            globalclass.level.cam.settargetspline(39, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 14) {
+            globalclass.level.cam.setspline(42, param4, param2, param3);
+            globalclass.level.cam.settargetspline(45, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 16) {
+            globalclass.level.cam.setspline(48, 4.0, param2, param3);
+            globalclass.level.cam.settargetspline(51, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 18) {
+            globalclass.level.cam.setspline(54, 5.0, param2, param3);
+            globalclass.level.cam.settargetspline(57, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 20) {
+            globalclass.level.cam.setspline(0, param4, 0, param3);
+            globalclass.level.cam.settargetspline(3, 0, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 22) {
+            globalclass.level.cam.setspline(36, 4.0, param2, param3);
+            globalclass.level.cam.settargetspline(39, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        this.cameramode = 1;
+        return null;
+    }
+    
+    method setcameraback() {
+        globalclass.level.cam.setaimode(0);
+        this.rotateval = 0;
+        this.cameramode = 0;
+        return null;
+    }
+    
+    method addyaw() {
+        var var1;
+        if (this.rotatedir == 1) {
+            var1 = scslosimath::abs(this.rotateval);
+            globalclass.level.cam.addyaw(0.5 * ((75 - var1) / 75));
+            this.rotateval = this.rotateval + 0.5;
+        }
+        else {
+            var1 = scslosimath::abs(this.rotateval);
+            globalclass.level.cam.addyaw(0 - (0.5 * ((75 - var1) / 75)));
+            this.rotateval = this.rotateval - 0.5;
+        }
+        if (this.rotateval > 75) {
+            this.rotatedir = 0;
+        }
+        if (this.rotateval < -75) {
+            this.rotatedir = 1;
+        }
+        return null;
+    }
+    
+    method advancetonextscreen(param1) {
+        if (this.curscreen == -1) {
+            if (param1 == 0) {
+                this.playgame.initfull();
+                this.gotodifferentscreen(null, 9);
+            }
+            else if (param1 == 1) {
+                this.gotodifferentscreen(this.optiontext, 0);
+            }
+            else if (param1 == 2) {
+                globalclass.setexitflag();
+            }
+        }
+        else if (this.curscreen == 0) {
+            if (param1 == 0) {
+                this.options_sound.initfull();
+                this.gotodifferentscreen(null, 1);
+            }
+            else if (param1 == 1) {
+                this.options_graphics.initfull();
+                this.gotodifferentscreen(null, 8);
+            }
+            else if (param1 == 2) {
+                this.gotodifferentscreen(this.languagetext, 6);
+            }
+            else if (param1 == 3) {
+                
+            }
+            else if (param1 == 4) {
+                
+            }
+            else if (param1 == 5) {
+                this.options_credits.initfull();
+                this.gotodifferentscreen(null, 7);
+            }
+            else if (param1 == 6) {
+                this.gotodifferentscreen(this.controlstext, 3);
+            }
+        }
+        else if (this.curscreen == 1) {
+            
+        }
+        else if (this.curscreen == 9) {
+            globalclass.loadgame(this.playgame.nextlevelname);
+        }
+        else {
+            this.gotodifferentscreen(this.mainmenutext, -1);
+        }
+        this.curscreen;
+        return null;
+    }
+    
+    method advancetonextarea(param1) {
+        if (this.curscreen == 10) {
+            this.adjustcamera(0, 1, 1, 5.0);
+        }
+        else if (this.curscreen == -1) {
+            if (param1 == 0) {
+                this.adjustcamera(16, 1, 1, 7.0);
+            }
+            else if (param1 == 1) {
+                this.adjustcamera(2, 1, 1, 7.0);
+            }
+            else if (param1 == 2) {
+                this.adjustcamera(20, 1, 1, 4.0);
+            }
+        }
+        else if (this.curscreen == 0) {
+            if (param1 == 0) {
+                this.adjustcamera(6, 1, 1, 2.0);
+            }
+            else if (param1 == 1) {
+                this.adjustcamera(4, 1, 1, 2.0);
+            }
+            else if (param1 == 2) {
+                this.adjustcamera(10, 1, 1, 2.0);
+            }
+            else if (param1 == 3) {
+                this.glossary.initfull();
+                this.gotodifferentscreen(null, 4);
+            }
+            else if (param1 == 4) {
+                this.printmenu.initfull();
+                this.gotodifferentscreen(null, 5);
+            }
+            else if (param1 == 5) {
+                this.adjustcamera(22, 1, 1, 2.0);
+            }
+            else if (param1 == 6) {
+                this.adjustcamera(8, 1, 1, 2.0);
+            }
+        }
+        else if (this.curscreen == 1) {
+            param1;
+        }
+        else if (this.curscreen == 9) {
+            this.adjustcamera(18, 1, 1, 3.0);
+        }
+        return null;
+    }
+    
+    method backtolastscreen() {
+        if (this.curscreen == 0) {
+            this.gotodifferentscreen(this.mainmenutext, -1);
+        }
+        else if (this.curscreen == 9) {
+            this.gotodifferentscreen(this.mainmenutext, -1);
+        }
+        else if (this.curscreen == 1) {
+            this.gotodifferentscreen(this.optiontext, 0);
+        }
+        else if (this.curscreen == 8) {
+            this.gotodifferentscreen(this.optiontext, 0);
+        }
+        else if (this.curscreen == 6) {
+            this.gotodifferentscreen(this.optiontext, 0);
+        }
+        else if (this.curscreen == 3) {
+            this.gotodifferentscreen(this.optiontext, 0);
+        }
+        else if (this.curscreen == 7) {
+            this.gotodifferentscreen(this.optiontext, 0);
+        }
+        else if (this.curscreen == 4) {
+            this.gotodifferentscreen(this.optiontext, 0);
+        }
+        else if (this.curscreen == 5) {
+            this.gotodifferentscreen(this.optiontext, 0);
+        }
+        return null;
+    }
+    
+    method backtolastarea() {
+        if (this.curscreen == 0) {
+            this.adjustcamera(2, 0, 1, 5.0);
+        }
+        else if (this.curscreen == 1) {
+            this.adjustcamera(6, 0, 1, 2.0);
+        }
+        else if (this.curscreen == 8) {
+            this.adjustcamera(4, 0, 1, 2.0);
+        }
+        else if (this.curscreen == 6) {
+            this.adjustcamera(10, 0, 1, 2.0);
+        }
+        else if (this.curscreen == 3) {
+            this.adjustcamera(8, 0, 1, 2.0);
+        }
+        else if (this.curscreen == 7) {
+            this.adjustcamera(22, 0, 1, 2.0);
+        }
+        else if (this.curscreen == 4) {
+            this.resetcamera();
+        }
+        else if (this.curscreen == 5) {
+            this.resetcamera();
+        }
+        else if (this.curscreen == 9) {
+            this.adjustcamera(16, 0, 1, 5.0);
+        }
+        return null;
+    }
+    
+    method resetactivemenu() {
+        var var1;
+        var1 = 0;
+        while ((this.activemenu.__length - 1) >= var1) {
+            this.activemenu[var1].hide();
+            this.backmenu[var1].hide();
+            var1 = var1 + 1;
+        }
+        this.activemenu = null;
+        this.activemenu = [  ];
+        this.backmenu = null;
+        this.backmenu = [  ];
+        var1 = 0;
+        while ((this.activebutton.__length - 1) >= var1) {
+            gceditorslider::setactive(this.activebutton[var1], 0);
+            var1 = var1 + 1;
+        }
+        this.activebutton = null;
+        this.activebutton = [  ];
+        this.minidx = 0;
+        return null;
+    }
+    
+    method gotodifferentscreen(param1, param2) {
+        var var1;
+        var var2;
+        this.curscreen = param2;
+        if (!(param1 == null)) {
+            this.maxidx = param1.__length - 1;
+            var1 = 0;
+            while (this.maxidx >= var1) {
+                var2 = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", param1[var1][0], param1[var1][1], param1[var1][2], 0, 2.0, 0, 4, 0, 1);
+                var2.initfull();
+                var2.add();
+                if (var1 <= this.showidx) {
+                    var2.show();
+                }
+                this.backmenu.__append(var2);
+                var2 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", param1[var1][0], param1[var1][1], param1[var1][2], 0, 2.0, 0, 4, 0, 0);
+                var2.initfull();
+                var2.add();
+                if (var1 <= this.showidx) {
+                    var2.show();
+                }
+                this.activemenu.__append(var2);
+                var1 = var1 + 1;
+            }
+            this.activemenu[0].setactive();
+            this.menuactive = 1;
+        }
+        else {
+            this.menuactive = 0;
+        }
+        this.curidx = 0;
+        return null;
+    }
+    
+    method resetcamera() {
+        if (this.ingame == 0) {
+            this.setcameraback();
+        }
+        this.startnewscreen = 1;
+        return null;
+    }
+    
+    method setthecursor() {
+        return null;
+    }
+    
+    method scrolldown() {
+        return null;
+    }
+    
+    method scrollup() {
+        return null;
+    }
+    
+    method checkrealhighlights(param1, param2) {
+        var var1;
+        if (this.menuactive == 1) {
+            var1 = param1[param2];
+            if ((this.mousex > var1[1]) && (this.mousex < (var1[1] + 300))) {
+                if ((this.mousey > var1[2]) && (this.mousey < (var1[2] + 20))) {
+                    if (((this.activemenu.__length - 1) + 1) > param2) {
+                        if (this.activemenu[param2].getactive() == 0) {
+                            this.activemenu[this.curidx].setinactive();
+                            this.curidx = param2;
+                            this.activemenu[this.curidx].setactive();
+                            gcstaticsoundsptrarray::playtablesound(1072);
+                        }
+                    }
+                }
+                else if (((this.activemenu.__length - 1) + 1) > param2) {
+                    this.activemenu[param2].setinactive();
+                }
+            }
+            else if (((this.activemenu.__length - 1) + 1) > param2) {
+                this.activemenu[param2].setinactive();
+            }
+        }
+        return null;
+    }
+    
+    method checkhighlites() {
+        var var1;
+        if (this.curscreen == -1) {
+            var1 = 0;
+            while ((this.mainmenutext.__length - 1) >= var1) {
+                this.checkrealhighlights(this.mainmenutext, var1);
+                var1 = var1 + 1;
+            }
+        }
+        else if (this.curscreen == 0) {
+            var1 = 0;
+            while ((this.optiontext.__length - 1) >= var1) {
+                this.checkrealhighlights(this.optiontext, var1);
+                var1 = var1 + 1;
+            }
+        }
+        else if (this.curscreen == 6) {
+            var1 = 0;
+            while ((this.languagetext.__length - 1) >= var1) {
+                this.checkrealhighlights(this.languagetext, var1);
+                var1 = var1 + 1;
+            }
+        }
+        else if (this.curscreen == 3) {
+            var1 = 0;
+            while ((this.controlstext.__length - 1) >= var1) {
+                this.checkrealhighlights(this.controlstext, var1);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method setmenupointer() {
+        this.point.setpos(this.mousex - 16, this.mousey - 16, this.mousex + 16, this.mousey + 16);
+        return null;
+    }
+}

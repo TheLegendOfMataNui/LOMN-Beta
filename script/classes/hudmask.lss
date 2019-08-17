@@ -1,0 +1,155 @@
+class hudmask {
+    property allmasksarray;
+    property currentmask;
+    property showmask;
+    property onscreen;
+    property timeonscreen;
+    property movement;
+    property animating;
+    property offx;
+    property ydiff;
+    
+    method hudmask() {
+        return null;
+    }
+    
+    method initfull() {
+        this.ydiff = screeny - 480;
+        this.currentmask = null;
+        this.allmasksarray = [  ];
+        this.animating = 0;
+        this.showmask = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var var2;
+        if (!(this.allmasksarray == null)) {
+            var1 = this.allmasksarray.__length - 1;
+            if (var1 >= 0) {
+                var2 = 0;
+                while (var1 >= var2) {
+                    this.allmasksarray[var1 - var2].hide();
+                    this.allmasksarray[var1 - var2].remove();
+                    this.allmasksarray[var1 - var2].cleanupfull();
+                    this.allmasksarray[var1 - var2] = null;
+                    var2 = var2 + 1;
+                }
+            }
+            this.allmasksarray = null;
+        }
+        return null;
+    }
+    
+    method initshort() {
+        this.currentmask = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        this.hide();
+        var1 = this.allmasksarray.__length - 1;
+        while (var1 >= 0) {
+            this.allmasksarray[var1].cleanupfull();
+            this.allmasksarray[var1] = null;
+            var1 = var1 - 1;
+        }
+        this.currentmask = null;
+        return null;
+    }
+    
+    method setshow(param1) {
+        this.showmask = param1;
+        if (this.showmask == 1) {
+            this.show();
+        }
+        else {
+            this.hide();
+        }
+        return null;
+    }
+    
+    method add() {
+        return null;
+    }
+    
+    method addmask(param1) {
+        this.addmasktoarray(new gs_lego_iconrotate(param1, 0, 1));
+        return null;
+    }
+    
+    method removemask() {
+        return null;
+    }
+    
+    method addmasktoarray(param1) {
+        this.allmasksarray.__append(param1);
+        param1.initfull();
+        param1.add();
+        param1.hide();
+        param1.setpos(20, 396 + this.ydiff, 84, 460 + this.ydiff);
+        return null;
+    }
+    
+    method selectmask(param1) {
+        if (this.showmask) {
+            if (!(this.currentmask == null)) {
+                this.allmasksarray[this.currentmask].animate(0);
+                this.allmasksarray[this.currentmask].hide();
+            }
+            this.currentmask = param1;
+            this.show();
+        }
+        return null;
+    }
+    
+    method show() {
+        if (globalclass.hud.hidden == 0) {
+            if (this.showmask) {
+                if (!(this.currentmask == null)) {
+                    this.allmasksarray[this.currentmask].show();
+                    this.allmasksarray[this.currentmask].enablealphachannel(1);
+                }
+            }
+        }
+        return null;
+    }
+    
+    method hide() {
+        if (!(this.currentmask == null)) {
+            this.allmasksarray[this.currentmask].hide();
+        }
+        return null;
+    }
+    
+    method changepos(param1) {
+        return null;
+    }
+    
+    method setxpos(param1) {
+        return null;
+    }
+    
+    method animate(param1) {
+        if (this.showmask) {
+            this.animating = param1;
+            this.allmasksarray[this.currentmask].animate(param1);
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (!(this.currentmask == null)) {
+            if (!(this.currentmask == null)) {
+                this.allmasksarray[this.currentmask].process(param1);
+            }
+        }
+        return null;
+    }
+    
+    method slide(param1) {
+        return null;
+    }
+}

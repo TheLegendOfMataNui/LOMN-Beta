@@ -1,0 +1,199 @@
+class ta01_fireball {
+    property obj;
+    property name;
+    property id;
+    property timefromlastdrop;
+    property timetodrop;
+    property dropzoneflag;
+    property burningsound;
+    property burningsoundcleanedup;
+    property explodesound;
+    
+    method ta01_fireball(param1, param2) {
+        this.name = param1;
+        this.id = scslosifoundation::stringtoidentifier(this.name);
+        this.dropzoneflag = param2;
+        this.obj = new sprite_projectile(this.name, "firebll", "Root/Data/art/SpriteAnims/fireBall/", 45, 15, 100, 24);
+        this.timetodrop = 0;
+        this.timefromlastdrop = 0;
+        this.explodesound = new tablecopysound(1058);
+        this.explodesound.synctoprojectile(this.obj.handle);
+        this.explodesound.setlistenerrollofffactor(0.5);
+        this.burningsoundcleanedup = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.name = null;
+        var1 = null;
+        if (this.burningsoundcleanedup == 0) {
+            this.burningsound.cleanupfull();
+            this.burningsound = null;
+            this.burningsoundcleanedup = 1;
+        }
+        this.explodesound.cleanupfull();
+        this.explodesound = null;
+        return null;
+    }
+    
+    method process(param1) {
+        this.obj.process(param1);
+        this.timefromlastdrop = this.timefromlastdrop + param1.deltatime;
+        if (this.timefromlastdrop > this.timetodrop) {
+            this.drop();
+            this.timefromlastdrop = 0;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 19) {
+            if (param1.args[1] == this.id) {
+                this.detonate(param1.args[2], param1.args[3], param1.args[4], param1.args[0]);
+            }
+        }
+        param1.eventid;
+        return null;
+    }
+    
+    method detonate(param1, param2, param3, param4) {
+        if (this.burningsoundcleanedup == 0) {
+            this.burningsound.cleanupfull();
+            this.burningsound = null;
+            this.burningsoundcleanedup = 1;
+        }
+        if (param4 == scslosifoundation::stringtoidentifier("cnt1")) {
+            this.explodesound.setvolume(100);
+            globalclass.level.cam.shakecamera(0.5, 0.08);
+        }
+        else {
+            this.explodesound.setvolume(50);
+        }
+        this.explodesound.play(0);
+        return null;
+    }
+    
+    method drop() {
+        var var1;
+        var var2;
+        var1 = this.dropzone();
+        var2 = this.ysubtract(var1, 150);
+        this.obj.launch(var2, var1);
+        this.timetodrop = globalclass.randnum.getrandomfloat(4.0, 7.0);
+        this.burningsoundcleanedup = 0;
+        this.burningsound = new tablecopysound(1057);
+        this.burningsound.synctoprojectile(this.obj.handle);
+        this.burningsound.setmindistance(1.5);
+        this.burningsound.setlistenerrollofffactor(0.5);
+        this.burningsound.play(1);
+        return null;
+    }
+    
+    method dropzone() {
+        var var1;
+        var var2;
+        if (this.dropzoneflag == null) {
+            if (globalclass.randnum.getrandomnumber(1, 2) == 1) {
+                var1 = globalclass.randnum.getrandomfloat(35, 80);
+                var2 = globalclass.randnum.getrandomfloat(30, 170);
+            }
+            else if (globalclass.randnum.getrandomnumber(1, 2) == 2) {
+                var1 = globalclass.randnum.getrandomfloat(-200, -100);
+                var2 = globalclass.randnum.getrandomfloat(200, 380);
+            }
+            else if (globalclass.randnum.getrandomnumber(1, 2) == 3) {
+                var1 = 49.0;
+                var2 = 108.0;
+            }
+            else if (globalclass.randnum.getrandomnumber(1, 2) == 4) {
+                var1 = 0 - 155.0;
+                var2 = 310.0;
+            }
+            else if (globalclass.randnum.getrandomnumber(1, 2) == 5) {
+                var1 = 0 - 57.0;
+                var2 = globalclass.randnum.getrandomfloat(180, 345);
+            }
+            else if (globalclass.randnum.getrandomnumber(1, 2) == 6) {
+                var1 = globalclass.randnum.getrandomfloat(-100, 0);
+                var2 = 280.0;
+            }
+            else if (globalclass.randnum.getrandomnumber(1, 2) == 7) {
+                var1 = globalclass.randnum.getrandomfloat(-100, -10);
+                var2 = 345.0;
+            }
+            else if (globalclass.randnum.getrandomnumber(1, 2) == 8) {
+                var1 = globalclass.randnum.getrandomfloat(408, 470);
+                var2 = 153.0;
+            }
+            else if (globalclass.randnum.getrandomnumber(1, 2) == 9) {
+                var1 = 141.0;
+                var2 = globalclass.randnum.getrandomfloat(-220, -183);
+            }
+            globalclass.randnum.getrandomnumber(1, 2);
+        }
+        else if (this.dropzoneflag == 1) {
+            var1 = 37.1;
+            var2 = 32.1;
+        }
+        else if (this.dropzoneflag == 2) {
+            var1 = 53.1;
+            var2 = 55.1;
+        }
+        else if (this.dropzoneflag == 3) {
+            var1 = 50.1;
+            var2 = 79.1;
+        }
+        else if (this.dropzoneflag == 4) {
+            var1 = 49.0;
+            var2 = 108.0;
+        }
+        else if (this.dropzoneflag == 5) {
+            var1 = 58.0;
+            var2 = 137.0;
+        }
+        else if (this.dropzoneflag == 6) {
+            var1 = 74.0;
+            var2 = 160.0;
+        }
+        else if (this.dropzoneflag == 7) {
+            var1 = 0 - 129.0;
+            var2 = 222.0;
+        }
+        else if (this.dropzoneflag == 8) {
+            var1 = 0 - 147.0;
+            var2 = 248.0;
+        }
+        else if (this.dropzoneflag == 9) {
+            var1 = 0 - 155.0;
+            var2 = 280.0;
+        }
+        else if (this.dropzoneflag == 10) {
+            var1 = 0 - 155.0;
+            var2 = 310.0;
+        }
+        else if (this.dropzoneflag == 11) {
+            var1 = 0 - 158.0;
+            var2 = 342.0;
+        }
+        else if (this.dropzoneflag == 12) {
+            var1 = 0 - 172.0;
+            var2 = 364.0;
+        }
+        else if (this.dropzoneflag == 13) {
+            var1 = 0 - 195.0;
+            var2 = 377.0;
+        }
+        else if (this.dropzoneflag == 14) {
+            var1 = 0 - 66.0;
+            var2 = 288.0;
+        }
+        return new basicpoint(var1, 100.0, var2);
+    }
+    
+    method ysubtract(param1, param2) {
+        return new basicpoint(param1.x, param1.y - param2, param1.z);
+    }
+}

@@ -1,0 +1,55 @@
+class ss_boxfit_activetext : ss_activetext {
+    
+    method ss_boxfit_activetext(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13) {
+        this.x2 = param6;
+        this.y2 = param7;
+        this.ss_activetext(param1, param2, param3, param4, param5, param8, param9, param10, param11, param12, param13);
+        return null;
+    }
+    
+    method initfull() {
+        this.font = sctilefont::create(this.fontname);
+        this.font2 = sctilefont::create(this.fontname2);
+        if (this.curfont == 0) {
+            this.text = sctextobject::createtextobject(this.x1, this.y1, this.x2, this.y2, this.z, this.font, this.string);
+        }
+        else {
+            this.text = sctextobject::createtextobject(this.x1, this.y1, this.x2, this.y2, this.z, this.font2, this.string);
+        }
+        sctextobject::enableboxfit(this.text, 1);
+        return null;
+    }
+    
+    method initshort() {
+        this.font = sctilefont::create(this.fontname);
+        this.font2 = sctilefont::create(this.fontname2);
+        if (this.curfont == 0) {
+            this.text = sctextobject::createtextobject(this.x1, this.y1, this.x2, this.y2, this.z, this.font, this.string);
+        }
+        else {
+            this.text = sctextobject::createtextobject(this.x1, this.y1, this.x2, this.y2, this.z, this.font2, this.string);
+        }
+        sctextobject::enableboxfit(this.text, 1);
+        return null;
+    }
+    
+    method setactive(param1) {
+        if (!(this.curfont == 1)) {
+            sctextobject::setfont(this.text, this.font2);
+            sctextobject::setboxposition(this.text, this.x1 - ((this.x2 - this.x1) * 0.1), this.y1 - ((this.x2 - this.x1) * 0.1), this.x2 + ((this.x2 - this.x1) * 0.1), this.y2 + ((this.x2 - this.x1) * 0.1), this.z);
+            sctextobject::enableboxfit(this.text, 1);
+            this.curfont = 1;
+        }
+        return null;
+    }
+    
+    method setinactive() {
+        if (!(this.curfont == 0)) {
+            sctextobject::setfont(this.text, this.font);
+            this.curfont = 0;
+            sctextobject::setboxposition(this.text, this.x1, this.y1, this.x2, this.y2, this.z);
+            sctextobject::enableboxfit(this.text, 1);
+        }
+        return null;
+    }
+}

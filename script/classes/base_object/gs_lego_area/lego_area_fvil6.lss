@@ -1,0 +1,44 @@
+class lego_area_fvil6 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_fvil6(param1) {
+        this.gs_lego_area("fvil", param1, 0, 0);
+        this.lego_area_initfull();
+        this.puzzle = new fvil6_puzzle(this);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        this.puzzle.input(param1);
+        return null;
+    }
+    
+    method exit() {
+        this.puzzle.exit();
+        this.puzzle = null;
+        return null;
+    }
+}
