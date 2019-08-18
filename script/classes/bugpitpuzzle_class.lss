@@ -61,7 +61,7 @@ class bugpitpuzzle_class {
         this.door_goal_a.setresponse(3, 3, 3);
         this.door_goal_b.setresponse(3, 3, 3);
         gcstaticsoundsptrarray::playtablesound(1042);
-        gcsaver::setcondition(33554432, 1);
+        bettersaver::setbooleanvalue(72, 1);
         return null;
     }
     
@@ -128,7 +128,7 @@ class bugpitpuzzle_class {
         else if (param1.eventid == 8) {
             var2 = param1.args[0];
             if (var2 == scslosifoundation::stringtoidentifier("trap")) {
-                this.parent.parent.cam.setaimode(11);
+                this.parent.level.cam.setaimode(11);
                 globalclass.player.actor.setinputstate("ninp");
                 globalclass.player.actor.idle();
                 scprocessmanager::pausecreatures(0);
@@ -172,10 +172,10 @@ class bugpitpuzzle_class {
         gcstaticsoundsptrarray::playtablesound(1105);
         this.door_trap.changeposition(0.0, 0 - 15.0, 0.0, 0.5);
         this.trapdoorshut = 1;
-        this.parent.parent.cam.setaimode(0);
-        this.parent.parent.cam.settargetpos(888.3, 9.4, 126.5);
-        this.parent.parent.cam.setpos(886.6, 7.0, 117.8);
-        this.parent.parent.cam.shakecamera(1.5, 0.15);
+        this.parent.level.cam.setaimode(0);
+        this.parent.level.cam.settargetpos(888.3, 9.4, 126.5);
+        this.parent.level.cam.setpos(886.6, 7.0, 117.8);
+        this.parent.level.cam.shakecamera(1.5, 0.15);
         globalclass.player.actor.setinputstate("none");
         globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
         return null;
