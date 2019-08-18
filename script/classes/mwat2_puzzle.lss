@@ -1,11 +1,7 @@
 class mwat2_puzzle {
     property parent;
-    property maskx;
-    property showpickup;
+    property mask;
     property deathincrementor;
-    property pathevent;
-    property cangetevent;
-    property cangeteventtimer;
     property door1;
     property door2;
     property distplaytexttimer;
@@ -13,84 +9,68 @@ class mwat2_puzzle {
     property howtotext;
     property rotatemask;
     property deltatimer;
-    property call_ev_safe_time_once;
     
     method mwat2_puzzle(param1) {
         this.parent = param1;
-        this.showpickup = 1;
         return null;
     }
     
     method initfull() {
-        var var1;
-        var var2;
-        var var3;
-        this.call_ev_safe_time_once = 1;
+        var mask_text;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(1);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
         globalclass.bgmusic.play();
-        this.cangetevent = 1;
         this.deltatimer = 0.0;
         this.rotatemask = 0;
         this.deathincrementor = 0;
-        this.distplaytexttimer = new lego_timer("dspt", 4.0, 0);
-        this.distplaytexttimer.initfull();
-        this.cangeteventtimer = new lego_timer("gtev", 0.8, 0);
-        this.cangeteventtimer.initfull();
-        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mask"));
-        if (var1) {
-            this.showpickup = 0;
-        }
-        if (this.showpickup) {
-            this.maskx = new lego_moveableobject("mask");
-            this.maskx.initfull();
-            this.maskx.show();
-            this.maskx.movebboxsides(2, 2, 2, -2, -2, -2);
-            this.maskx.hide();
-            var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 3, 0);
-            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
-            this.desctext.initfull();
-            var3 = (screeny - 100) + 20;
-            var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 3, 1);
-            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var2, screenx * 0.5, var3, 0, 1, 256, 0, 0);
-            this.howtotext.initfull();
-        }
         this.door1 = new lego_moveableobject("dor1");
         this.door1.initfull();
         this.door1.settweakable();
         this.door2 = new lego_moveableobject("dor2");
         this.door2.initfull();
         this.door2.settweakable();
-        globalclass.player.actor.setwaterlevel(-5000);
-        this.closedoor2();
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mask")) == 0) {
+            this.mask = new lego_moveableobject("mask");
+            this.mask.initfull();
+            this.mask.show();
+            this.distplaytexttimer = new lego_timer("dspt", 4.0, 0);
+            this.distplaytexttimer.initfull();
+            mask_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 3, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", mask_text, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            this.desctext.initfull();
+            mask_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 3, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", mask_text, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
+            this.howtotext.initfull();
+            this.closedoor2();
+        }
         return null;
     }
     
     method cleanupfull() {
-        if (!(this.maskx == null)) {
-            this.maskx.cleanupfull();
-            this.maskx = null;
+        if (this.mask != null) {
+            this.mask.cleanupfull();
+            this.mask = null;
         }
-        if (!(this.distplaytexttimer == null)) {
+        if (this.distplaytexttimer != null) {
             this.distplaytexttimer.cleanupfull();
             this.distplaytexttimer = null;
         }
-        if (!(this.cangeteventtimer == null)) {
-            this.cangeteventtimer.cleanupfull();
-            this.cangeteventtimer = null;
-        }
-        if (!(this.door1 == null)) {
+        if (this.door1 != null) {
             this.door1.cleanupfull();
             this.door1 = null;
         }
-        if (!(this.door2 == null)) {
+        if (this.door2 != null) {
             this.door2.cleanupfull();
             this.door2 = null;
         }
-        if (!(this.desctext == null)) {
+        if (this.desctext != null) {
             this.desctext.cleanupfull();
             this.desctext = null;
         }
-        if (!(this.howtotext == null)) {
+        if (this.howtotext != null) {
             this.howtotext.cleanupfull();
             this.howtotext = null;
         }
@@ -108,58 +88,44 @@ class mwat2_puzzle {
         else {
             this.rotatemask = this.rotatemask + 2;
         }
-        this.maskx.setorientation(this.rotatemask, this.rotatemask, 0);
-        return null;
-    }
-    
-    method initshort() {
-        if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
-            debug::print("**** CLOSING DOOR FROM INITSHORT");
-            this.closedoor1();
-            this.closedoor2();
+        if (this.mask != null) {
+            this.mask.setorientation(this.rotatemask, this.rotatemask, 0);
         }
-        else {
-            this.opendoor1();
-        }
-        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-        globalclass.player.unkill();
-        globalclass.player.actor.setunderwater(0);
         return null;
     }
     
     method onevent(param1) {
-        if (param1.eventid == 44) {
-            if (this.call_ev_safe_time_once) {
-                if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
-                    this.closedoor1();
-                    this.closedoor2();
-                }
-                this.call_ev_safe_time_once = 0;
-            }
-        }
-        else if (param1.eventid == 4) {
+        if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp03")) {
-                this.closedoor1();
+                if (this.mask != null) {
+                    this.closedoor1();
+                }
             }
-            param1.args[0];
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
-            this.initshort();
+            this.opendoor1();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setunderwater(0);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 8) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("gtev")) {
-                this.cangetevent = 1;
-            }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
-                this.desctext.hide();
-                this.desctext.cleanupfull();
-                this.desctext = null;
-                this.howtotext.hide();
-                this.howtotext.cleanupfull();
-                this.howtotext = null;
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
+                if (this.desctext != null) {
+                    this.desctext.hide();
+                    this.desctext.cleanupfull();
+                    this.desctext = null;
+                }
+                if (this.howtotext != null) {
+                    this.howtotext.hide();
+                    this.howtotext.cleanupfull();
+                    this.howtotext = null;
+                }
             }
         }
         else if (param1.eventid == 1) {
@@ -168,20 +134,21 @@ class mwat2_puzzle {
                     this.showtext();
                     this.opendoor2();
                 }
-                param1.args[1];
             }
-            param1.args[0];
         }
         else if (param1.eventid == 43) {
-            if (this.cangetevent) {
-                this.deathincrementor = this.deathincrementor + 1;
-                debug::print(("***************** YOU HAVE KILLED " + __tostring(this.deathincrementor)) + " NUMBER OF SHARKS");
-            }
+            this.deathincrementor = this.deathincrementor + 1;
+            debug::print(("***************** YOU HAVE KILLED " + __tostring(this.deathincrementor)) + " NUMBER OF SHARKS");
             if (this.deathincrementor < 6) {
                 debug::print("***************** NOT GIVING THE MASK");
+                if (this.mask != null) {
+                    this.mask.hide();
+                }
             }
             else {
-                this.givemask();
+                if (this.mask != null) {
+                    this.givemask();
+                }
             }
         }
         return null;
@@ -194,10 +161,10 @@ class mwat2_puzzle {
         this.howtotext.show();
         this.distplaytexttimer.reset(0);
         this.distplaytexttimer.start();
-        this.maskx.hide();
+        this.mask.hide();
         globalclass.player.addmask("fake", 1);
         globalclass.hud.show();
-        gcsaver::pickupmask(this.maskx.id);
+        gcsaver::pickupmask(this.mask.id);
         return null;
     }
     
@@ -226,24 +193,14 @@ class mwat2_puzzle {
     }
     
     method input(param1) {
-        if (param1.button == 90) {
-            if (param1.event == 2) {
-                this.cheat();
-            }
-        }
-        return null;
-    }
-    
-    method cheat() {
-        this.givemask();
         return null;
     }
     
     method givemask() {
         debug::print("*******************************[][][][][][] GIVING THE MASK");
-        this.maskx.show();
-        this.maskx.fadeout(0.0);
-        this.maskx.fadein(1.0);
+        this.mask.show();
+        this.mask.fadeout(0.0);
+        this.mask.fadein(1.0);
         return null;
     }
     
