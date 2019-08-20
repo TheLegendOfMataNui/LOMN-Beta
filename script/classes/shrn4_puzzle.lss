@@ -8,7 +8,6 @@ class shrn4_puzzle {
     
     method shrn4_puzzle(param1) {
         this.parent = param1;
-        this.showbossdoor = 1;
         return null;
     }
     
@@ -19,7 +18,14 @@ class shrn4_puzzle {
         gcareadirector::setnearestmax(10);
         this.bossdoor = new lego_moveableobject("etdr", this.parent.name);
         this.bossdoor.initfull();
-        this.bossdoor.setalpha(0.3);
+        if (bettersaver::getbooleanvalue(68) == 0) {
+            this.showbossdoor = 1;
+            this.bossdoor.show();
+            this.bossdoor.setalpha(0.3);
+        }
+        else {
+            this.bossdoor.hide();
+        }
         turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("nuju"), 0);
         gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
         gccharacter::setupmoveable(turaga, 1.5, 0.8, 1, 0, 0);
