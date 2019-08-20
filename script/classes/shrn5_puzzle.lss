@@ -9,7 +9,6 @@ class shrn5_puzzle {
     
     method shrn5_puzzle(param1) {
         this.parent = param1;
-        this.showbossdoor = 1;
         return null;
     }
     
@@ -25,11 +24,12 @@ class shrn5_puzzle {
         globalclass.bgmusic.play();
         this.bossdoor = new lego_moveableobject("dor1", "shrn");
         this.bossdoor.initfull();
-        if (this.showbossdoor) {
+        if (bettersaver::getbooleanvalue(69) == 0) {
+            this.showbossdoor = 1;
             this.bossdoor.show();
             this.bossdoor.setalpha(0.6);
         }
-        else if (bettersaver::getbooleanvalue(69)) {
+        else {
             this.bossdoor.hide();
         }
         door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 25);
