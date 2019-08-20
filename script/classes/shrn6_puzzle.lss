@@ -9,7 +9,6 @@ class shrn6_puzzle {
     
     method shrn6_puzzle(param1) {
         this.parent = param1;
-        this.showbossdoor = 1;
         return null;
     }
     
@@ -34,10 +33,11 @@ class shrn6_puzzle {
         if (globalclass.player.haselement()) {
             this.doorarray[1].hide();
         }
-        if (this.showbossdoor) {
+        if (bettersaver::getbooleanvalue(70) == 0) {
+            this.showbossdoor = 1;
             this.doorarray[2].setalpha(0.4);
         }
-        else if (bettersaver::getbooleanvalue(70)) {
+        else {
             this.doorarray[2].hide();
         }
         door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 60);
@@ -122,6 +122,8 @@ class shrn6_puzzle {
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("t000"));
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 1) {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("drs4")) {
