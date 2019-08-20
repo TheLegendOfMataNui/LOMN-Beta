@@ -9,7 +9,6 @@ class fvil6_puzzle {
     
     method fvil6_puzzle(param1) {
         this.parent = param1;
-        this.showcoindoor = 1;
         return null;
     }
     
@@ -43,11 +42,12 @@ class fvil6_puzzle {
         }
         this.coindoor = new lego_moveableobject("door");
         this.coindoor.initfull();
-        if (this.showcoindoor) {
+        if (bettersaver::getbooleanvalue(57) == 0) {
+            this.showcoindoor = 1;
             this.coindoor.show();
             this.coindoor.setalpha(0.8);
         }
-        else if (bettersaver::getbooleanvalue(57)) {
+        else {
             this.coindoor.hide();
         }
         door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 8);
