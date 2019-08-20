@@ -18,7 +18,6 @@ class vllg1_puzzle {
     
     method vllg1_puzzle(param1) {
         this.parent = param1;
-        this.showcoindoor = 1;
         return null;
     }
     
@@ -139,11 +138,12 @@ class vllg1_puzzle {
         }
         this.coindoor = new lego_moveableobject("dr00", "vllg");
         this.coindoor.initfull();
-        if (this.showcoindoor) {
+        if (bettersaver::getbooleanvalue(52) == 0) {
+            this.showcoindoor = 1;
             this.coindoor.show();
             this.coindoor.setalpha(0.5);
         }
-        else if (bettersaver::getbooleanvalue(52)) {
+        else {
             this.coindoor.hide();
         }
         door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 10);
