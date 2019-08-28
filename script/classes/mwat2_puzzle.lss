@@ -36,6 +36,7 @@ class mwat2_puzzle {
             this.mask = new lego_moveableobject("mask");
             this.mask.initfull();
             this.mask.show();
+            this.mask.hide();
             this.distplaytexttimer = new lego_timer("dspt", 4.0, 0);
             this.distplaytexttimer.initfull();
             mask_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 3, 0);
@@ -141,9 +142,9 @@ class mwat2_puzzle {
             debug::print(("***************** YOU HAVE KILLED " + __tostring(this.deathincrementor)) + " NUMBER OF SHARKS");
             if (this.deathincrementor < 6) {
                 debug::print("***************** NOT GIVING THE MASK");
-                if (this.mask != null) {
-                    this.mask.hide();
-                }
+                //if (this.mask != null) {
+                //    this.mask.hide();
+                //}
             }
             else {
                 if (this.mask != null) {
