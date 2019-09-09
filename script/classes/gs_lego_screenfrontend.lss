@@ -245,6 +245,12 @@ class gs_lego_screenfrontend {
     }
     
     method initfull() {
+        var onua;
+        var gali;
+        var pohatu;
+        var kopaka;
+        var lewa;
+        var tahu;
         this.point = new ss_basesprite("Root/Data/Art/MenuArt/cursor0000", 50, 50, 0, 82, 82);
         this.point.initfull();
         this.point.add();
@@ -274,6 +280,70 @@ class gs_lego_screenfrontend {
         this.adjustcamera(0, 1, 1, 5.0);
         this.titleimage = new lego_moveableobject("ttle");
         this.titleimage.initfull();
+        onua = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("onua"), 0);
+        gali = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("gali"), 0);
+        pohatu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("poha"), 0);
+        kopaka = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kopa"), 0);
+        lewa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("lewa"), 0);
+        tahu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("tahu"), 0);
+        if ((globalclass.unlockdirector.unlocks.played_onua) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("onua"), 0);
+        }
+        else {
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("onua"), 0);
+            gccharacter::setinputstate(onua, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::setorientation(onua, 50);
+            gccharacter::switchanimation(onua, scslosifoundation::stringtoidentifier("o000"), -1);
+        }
+        if ((globalclass.unlockdirector.unlocks.played_gali) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("gali"), 0);
+        }
+        else {
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("gali"), 0);
+            gccharacter::setinputstate(gali, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::setorientation(gali, 25);
+            gccharacter::switchanimation(gali, scslosifoundation::stringtoidentifier("g000"), -1);
+        }
+        if ((globalclass.unlockdirector.unlocks.played_pohatu) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("poha"), 0);
+        }
+        else {
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("poha"), 0);
+            gccharacter::setinputstate(pohatu, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::setorientation(pohatu, 0);
+            gccharacter::switchanimation(pohatu, scslosifoundation::stringtoidentifier("p000"), -1);
+        }
+        if ((globalclass.unlockdirector.unlocks.played_kopaka) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("kopa"), 0);
+        }
+        else {
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("kopa"), 0);
+            gccharacter::setinputstate(kopaka, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::setorientation(kopaka, 0);
+            gccharacter::switchanimation(kopaka, scslosifoundation::stringtoidentifier("k000"), -1);
+        }
+        if ((globalclass.unlockdirector.unlocks.played_lewa) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("lewa"), 0);
+        }
+        else {
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("lewa"), 0);
+            gccharacter::setinputstate(lewa, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::setorientation(lewa, -25);
+            gccharacter::switchanimation(lewa, scslosifoundation::stringtoidentifier("l000"), -1);
+        }
+        if ((globalclass.unlockdirector.unlocks.played_tahu) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("tahu"), 0);
+        }
+        else {
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("tahu"), 0);
+            gccharacter::setinputstate(tahu, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::setorientation(tahu, -50);
+            gccharacter::switchanimation(tahu, scslosifoundation::stringtoidentifier("t000"), -1);
+        }
+        if ((globalclass.unlockdirector.unlocks.played_nobua) == 0) {
+        }
+        else {
+        }
         return null;
     }
     
