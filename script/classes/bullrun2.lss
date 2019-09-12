@@ -6,6 +6,7 @@ class bullrun2 {
     property whichplane;
     property rearup;
     property starttimer;
+    property ismounted;
     
     method bullrun2(param1) {
         this.parent = param1;
@@ -19,32 +20,39 @@ class bullrun2 {
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
         gclightdirector::setcavelighting(1);
-        this.bully = this.parent.level.getbull();
-        this.bully.changearea(scslosifoundation::stringtoidentifier(this.parent.name));
+        this.bully = new gs_lego_character("cbly", "bull", this.parent.name, 0, 0, 0, 0, "aiin");
+        this.bully.initfull();
+        this.bully.add();
         this.bully.gotostartpos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-        globalclass.player.actor.ride(scslosifoundation::stringtoidentifier(this.bully.contstring), scslosifoundation::stringtoidentifier(this.bully.area), 2063160497);
-        gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("bl09"));
+        this.bully.show();
+        this.bully.setclimb(5);
+        this.bully.disablecollisions();
         this.bullmovesound = new tablecopysound(620);
         this.bullsnortsound = new tablecopysound(622);
+        gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("bl09"));
+        this.bully.setsplitanimation(scslosifoundation::stringtoidentifier("bl00"));
         this.whichplane = 0;
         this.rearup = 1;
         this.starttimer = 1;
+        this.ismounted = 0;
         return null;
     }
     
     method cleanupfull() {
-        this.bullmovesound.stop();
-        this.bullsnortsound.stop();
-        this.bullmovesound = null;
-        this.bullsnortsound = null;
         this.bully.setbullrunmode(0.0);
-        if (!(this.bully == null)) {
+        if (this.bullmovesound != null) {
+            this.bullmovesound.stop();
+            this.bullmovesound = null;
+        }
+        if (this.bullsnortsound != null) {
+            this.bullsnortsound.stop();
+            this.bullsnortsound = null;
+        }
+        if (this.bully != null) {
             globalclass.player.actor.unride();
-            this.parent.level.destroybull();
-            this.bully.setbullrunmode(0.0);
+            this.bully.cleanupfull();
             this.bully = null;
         }
-        this.whichplane = null;
         return null;
     }
     
@@ -57,6 +65,10 @@ class bullrun2 {
         else {
             this.starttimer = this.starttimer + param1.deltatime;
         }
+        if (this.ismounted == 0) {
+            this.ismounted = 1;
+            globalclass.player.actor.ride(scslosifoundation::stringtoidentifier(this.bully.contstring), scslosifoundation::stringtoidentifier(this.bully.area), 2063160497);
+        }            
         return null;
     }
     
@@ -94,13 +106,18 @@ class bullrun2 {
         else if (param1.eventid == 11) {
             if (scslosifoundation::identifiertostring(param1.args[1]) == "bl09") {
                 this.bully.setsplitanimation(scslosifoundation::stringtoidentifier("bl02"));
-                this.bully.setbullrunmode(50.0);
+                this.bully.setbullrunmode(45.0);
                 this.bullmovesound.play(1);
             }
         }
         else if (param1.eventid == 3) {
             debug::print("****************I HIT TRIGGERBOX***********************" + scslosifoundation::identifiertostring(param1.args[0]));
-            gccollisionphysicsgroup::spinmask(1.2);
+            globalclass.player.kill();
+            this.parent.level.cam.setaimode(7);
+            gcstaticsoundsptrarray::playtablesound(1048);
+            globalclass.player.actor.setinputstate("none");
+            this.bully.hide();
+            this.bullmovesound.stop();
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
@@ -115,10 +132,10 @@ class bullrun2 {
             else if (this.whichplane == 2) {
                 this.bully.gotostartpos(scslosifoundation::stringtoidentifier("str2"), scslosifoundation::stringtoidentifier("lok2"));
             }
+            this.bully.show();
             this.bully.setsplitanimation(scslosifoundation::stringtoidentifier("bl00"));
             this.bully.setbullrunmode(0.0);
             globalclass.player.unkill();
-            this.bullmovesound.stop();
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb02"), 0);
@@ -134,6 +151,11 @@ class bullrun2 {
             globalclass.player.actor.setinputstate("ninp");
             this.parent.level.cam.setaimode(11);
         }
+        return null;
+    }
+
+    method exit() {
+        this.parent = null;
         return null;
     }
 }

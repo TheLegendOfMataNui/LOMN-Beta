@@ -32,7 +32,10 @@ class acmaskpuzzle {
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
         gclightdirector::setcavelighting(0);
-        this.bully = this.parent.level.createbull(this.parent.name);
+        this.bully = new gs_lego_character("cbly", "bull", this.parent.name, 0, 0, 0, 0, "aiin");
+        this.bully.initfull();
+        this.bully.add();
+        this.bully.show();
         this.setupbullai = 1;
         gccharacter::aisetbecomeshappy(this.bully.handle, 0);
         this.bully.setpos(79.0, 0.15, 161.0);
@@ -90,7 +93,7 @@ class acmaskpuzzle {
     
     method cleanupfull() {
         var var1;
-        if (!(this.wallchunks == null)) {
+        if (this.wallchunks != null) {
             var1 = 0;
             while ((this.wallchunks.__length - 1) >= var1) {
                 this.wallchunks[var1].cleanupfull();
@@ -99,21 +102,25 @@ class acmaskpuzzle {
             }
             this.wallchunks = null;
         }
-        if (!(this.mask == null)) {
+        if (this.mask != null) {
             this.mask.cleanupfull();
             this.mask = null;
         }
-        if (!(this.desctext == null)) {
+        if (this.desctext != null) {
             this.desctext.cleanupfull();
             this.desctext = null;
         }
-        if (!(this.howtotext == null)) {
+        if (this.howtotext != null) {
             this.howtotext.cleanupfull();
             this.howtotext = null;
         }
-        if (!(this.blockplane == null)) {
+        if (this.blockplane != null) {
             this.blockplane.cleanupfull();
             this.blockplane = null;
+        }
+        if (this.bully != null) {
+            this.bully.cleanupfull();
+            this.bully = null;
         }
         this.cinema1 = null;
         this.cinema2 = null;
@@ -147,10 +154,10 @@ class acmaskpuzzle {
     
     method input(param1) {
         if ((param1.event == 2) && (param1.button == 251)) {
-            if (!(this.cinema1 == null)) {
+            if (this.cinema1 != null) {
                 gccinemaengine::stop(this.cinema1);
             }
-            if (!(this.cinema2 == null)) {
+            if (this.cinema2 != null) {
                 gccinemaengine::stop(this.cinema2);
                 if (this.cinema2_shown == 1) {
                     globalclass.bgmusic.stop();
