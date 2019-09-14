@@ -1,46 +1,46 @@
 class lego_area_blcv : gs_lego_area {
-    property parent;
-    property mask_puzzle;
+    property puzzle;
     
     method lego_area_blcv(param1) {
-        this.parent = param1;
         this.gs_lego_area("blcv", param1, 0, 0);
-        this.mask_puzzle = new acmaskpuzzle(this);
+        this.puzzle = new acmaskpuzzle(this);
         this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
         this.lego_area_show();
-        this.mask_puzzle.initfull();
-        this.mask_puzzle.show();
+        this.puzzle.initfull();
         return null;
     }
     
     method process(param1) {
-        this.mask_puzzle.process(param1);
+        this.puzzle.process(param1);
         return null;
     }
     
     method onevent(param1) {
-        this.mask_puzzle.onevent(param1);
+        this.puzzle.onevent(param1);
         return null;
     }
     
     method input(param1) {
-        this.mask_puzzle.input(param1);
+        this.puzzle.input(param1);
         return null;
     }
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.mask_puzzle.cleanupfull();
+        this.puzzle.cleanupfull();
         return null;
     }
     
     method exit() {
-        this.mask_puzzle.exit();
-        this.parent = null;
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

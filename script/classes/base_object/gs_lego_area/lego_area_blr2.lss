@@ -10,7 +10,7 @@ class lego_area_blr2 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        this.puzzle.init();
+        this.puzzle.initfull();
         return null;
     }
     
@@ -31,11 +31,16 @@ class lego_area_blr2 : gs_lego_area {
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.puzzle.cleanup();
+        this.puzzle.cleanupfull();
         return null;
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

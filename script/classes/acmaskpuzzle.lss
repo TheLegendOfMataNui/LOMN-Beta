@@ -1,5 +1,5 @@
 class acmaskpuzzle {
-    property parea;
+    property parent;
     property bully;
     property setupbullai;
     property mask;
@@ -7,42 +7,37 @@ class acmaskpuzzle {
     property cinema2;
     property cinema1_shown;
     property cinema2_shown;
-    property showpickup;
-    property founditem;
     property wallchunks;
     property blockplane;
     
     method acmaskpuzzle(param1) {
-        this.parea = param1;
-        this.mask = null;
+        this.parent = param1;
         this.cinema1_shown = 0;
         this.cinema2_shown = 0;
-        this.showpickup = 1;
         return null;
     }
     
     method initfull() {
         var var1;
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICpohatutheme");
         globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
         gclightdirector::setcavelighting(0);
-        this.bully = this.parea.level.createbull(this.parea.name);
+        this.bully = new gs_lego_character("cbly", "bull", this.parent.name, 0, 0, 0, 0, "aiin");
+        this.bully.initfull();
+        this.bully.add();
+        this.bully.show();
         this.setupbullai = 1;
         gccharacter::aisetbecomeshappy(this.bully.handle, 0);
-        this.bully.setpos(109.0, 1.0, 169.0);
+        this.bully.setpos(79.0, 0.15, 161.0);
         gccharacter::addmask(this.bully.handle, scslosifoundation::stringtoidentifier("mklf"), "mask");
         gccharacter::addmask(this.bully.handle, scslosifoundation::stringtoidentifier("mkrt"), "mask");
         gccharacter::switchmask(this.bully.handle, scslosifoundation::stringtoidentifier("mklf"));
         gccharacter::switchsecondmask(this.bully.handle, scslosifoundation::stringtoidentifier("mkrt"));
         gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("p047"));
-        this.founditem = gcsaver::findmask(scslosifoundation::stringtoidentifier("mska"));
-        if (this.founditem) {
-            this.showpickup = 0;
-        }
-        if (this.showpickup) {
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mska")) == 0) {
             this.mask = new lego_pickup("mska", 10, 1, "item", 1, 1);
             this.mask.initfull();
             this.mask.show();
@@ -77,37 +72,31 @@ class acmaskpuzzle {
         return null;
     }
     
-    method show() {
-        return null;
-    }
-    
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        if ((this.wallchunks.__length - 1) >= var1) {
-            this.wallchunks[var1].cleanupfull();
-            this.wallchunks[var1] = null;
-            var1 = var1 + 1;
-        }
-        else {
-            this.wallchunks.__length - 1;
-            this.wallchunks = null;
-            if (!(this.mask == null)) {
-                this.mask.cleanupfull();
-                this.mask = null;
+        if (this.wallchunks != null) {
+            var1 = 0;
+            while ((this.wallchunks.__length - 1) >= var1) {
+                this.wallchunks[var1].cleanupfull();
+                this.wallchunks[var1] = null;
+                var1 = var1 + 1;
             }
-            this.founditem = null;
-            this.showpickup = null;
-            this.bully = null;
-            this.cinema1 = null;
-            this.cinema2 = null;
+            this.wallchunks = null;
+        }
+        if (this.mask != null) {
+            this.mask.cleanupfull();
+            this.mask = null;
+        }
+        if (this.blockplane != null) {
             this.blockplane.cleanupfull();
             this.blockplane = null;
-            if (!(this.bully == null)) {
-                this.parea.level.destroybull();
-                this.bully = null;
-            }
         }
+        if (this.bully != null) {
+            this.bully.cleanupfull();
+            this.bully = null;
+        }
+        this.cinema1 = null;
+        this.cinema2 = null;
         return null;
     }
     
@@ -127,6 +116,8 @@ class acmaskpuzzle {
                         globalclass.hud.hide();
                         gccinemaengine::play(this.cinema2);
                         this.cinema2_shown = 1;
+                        globalclass.player.maskcontrol.toggleactive();
+                        globalclass.hud.mask.hide();
                     }
                 }
             }
@@ -135,69 +126,69 @@ class acmaskpuzzle {
     }
     
     method input(param1) {
-        if (param1.event == 2) {
-            if (param1.button == 251) {
-                if (!(this.cinema1 == null)) {
-                    gccinemaengine::stop(this.cinema1);
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (this.cinema1 != null) {
+                gccinemaengine::stop(this.cinema1);
+            }
+            if (this.cinema2 != null) {
+                gccinemaengine::stop(this.cinema2);
+                if (this.cinema2_shown == 1) {
+                    globalclass.bgmusic.stop();
                 }
             }
-            if (param1.button == 251) {
-                if (!(this.cinema2 == null)) {
-                    gccinemaengine::stop(this.cinema2);
-                }
-            }
-            param1.button;
         }
         return null;
     }
     
     method onevent(param1) {
-        var var1;
         if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                this.parea.parent.cam.setaimode(7);
+                this.parent.level.cam.setaimode(7);
                 globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                globalclass.player.actor.setinputstate("none");
             }
         }
         else if (param1.eventid == 11) {
             if (scslosifoundation::identifiertostring(param1.args[1]) == "p047") {
-                this.mask.hide();
-                var1 = 1;
                 globalclass.hud.hide();
                 gccinemaengine::play(this.cinema1);
                 this.cinema1_shown = 1;
                 this.bully.aiidle();
-                this.bully.setpos(109.0, 1.0, 169.0);
+                this.bully.setpos(79.0, 0.15, 161.0);
                 this.bully.disableanim(scslosifoundation::stringtoidentifier("bl08"));
                 this.bully.disableanim(scslosifoundation::stringtoidentifier("bl09"));
                 this.bully.aipatrol();
+                if (globalclass.player.maskcontrol.isactive()) {
+                    globalclass.player.maskcontrol.toggleactive();
+                    globalclass.hud.mask.hide();
+                }
             }
-            scslosifoundation::identifiertostring(param1.args[1]);
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parea.enterstartid, this.parea.enterlookid);
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             globalclass.player.actor.setinputstate("ninp");
-            this.parea.level.cam.setaimode(11);
-            this.bully.setpos(109.0, 1.0, 169.0);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
+            this.parent.level.cam.setaimode(11);
+            this.bully.setpos(79.0, 0.15, 161.0);
         }
         else if (param1.eventid == 30) {
-            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
-            globalclass.bgmusic.play(1);
-            globalclass.hud.show();
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cin2")) {
-                this.bully.setpos(109.0, 1.0, 169.0);
+                this.bully.setpos(79.0, 0.15, 161.0);
+                globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICpohatutheme");
+                globalclass.bgmusic.play(1);
             }
         }
         return null;
     }
     
     method exit() {
-        this.parea = null;
+        this.parent = null;
         return null;
     }
 }
