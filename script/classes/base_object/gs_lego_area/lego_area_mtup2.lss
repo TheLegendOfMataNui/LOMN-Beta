@@ -3,10 +3,12 @@ class lego_area_mtup2 : gs_lego_area {
     
     method lego_area_mtup2(param1) {
         this.gs_lego_area("mtup", param1, 0, 0);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
+        this.lego_area_show();
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
         globalclass.bgmusic.play();
         gcmodeldirector::setnearestmax(7);
@@ -16,40 +18,37 @@ class lego_area_mtup2 : gs_lego_area {
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin1");
-            globalclass.hud.hide();
             gccinemaengine::play(this.cinema);
+            gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("strt"));
         }
         return null;
     }
     
     method cleanupfull() {
+        this.lego_area_hide();
         this.cinema = null;
         return null;
     }
     
     method input(param1) {
-        if (param1.event == 2) {
-            if (param1.button == 251) {
-                if (!(this.cinema == null)) {
-                    gccinemaengine::stop(this.cinema);
-                }
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (this.cinema != null) {
+                gccinemaengine::stop(this.cinema);
             }
-            param1.button;
         }
         return null;
     }
     
     method onevent(param1) {
         if (param1.eventid == 30) {
-            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
-            globalclass.bgmusic.play(1);
+            globalclass.bgmusic.stop();
             globalclass.player.maskcontrol.changemask(0);
         }
-        param1.eventid;
         return null;
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
         return null;
     }
 }
