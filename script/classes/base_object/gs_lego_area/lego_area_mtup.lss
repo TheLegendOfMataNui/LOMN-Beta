@@ -1,11 +1,7 @@
 class lego_area_mtup : gs_lego_area {
-    property parent;
     property puzzle;
     
     method lego_area_mtup(param1) {
-        var var1;
-        this.parent = param1;
-        var1 = 1;
         this.gs_lego_area("mtup", param1, 0, 0);
         this.puzzle = new mtup_class(this);
         this.lego_area_initfull();
@@ -15,7 +11,10 @@ class lego_area_mtup : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        this.puzzle.show();
+        gcareadirector::setnearestmax(50);
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(0);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPohatuAmbience");
         globalclass.bgmusic.play(1);
         return null;
@@ -43,7 +42,11 @@ class lego_area_mtup : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle.exit();
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
