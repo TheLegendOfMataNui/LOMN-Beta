@@ -13,8 +13,13 @@ class ptv1_puzzle {
         hivehandle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
         gchive::setmaxcreatures(hivehandle, 3);
         gchive::setcreaturetype(hivehandle, scslosifoundation::stringtoidentifier("lsrp"));
-        nobua = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::settohunga(nobua, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 0) {
+            nobua = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(nobua, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        }
+        else {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        }
         digging_wall = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("ptv1"));
         gcmoveableobj::inittargetmorph(digging_wall, "lev1", "ptv1");
         gcmoveableobj::setdig(digging_wall, 1);
