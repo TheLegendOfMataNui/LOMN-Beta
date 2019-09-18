@@ -1,8 +1,5 @@
 class ptv1_puzzle {
     property parent;
-    property vlgr;
-    property hive1handle;
-    property morphobj;
     
     method ptv1_puzzle(param1) {
         this.parent = param1;
@@ -10,26 +7,26 @@ class ptv1_puzzle {
     }
     
     method initfull() {
-        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(this.hive1handle, 3);
-        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("lsrp"));
+        var villager;
+        var hivehandle;
+        var digging_wall;
+        hivehandle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hivehandle, 3);
+        gchive::setcreaturetype(hivehandle, scslosifoundation::stringtoidentifier("lsrp"));
         if (gcsaver::isconditionset(4194304) == 0) {
-            this.vlgr = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(this.vlgr, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk0a"));
+            villager = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(villager, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk0a"));
         }
         else {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
         }
-        this.morphobj = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("ptv1"));
-        gcmoveableobj::inittargetmorph(this.morphobj, "lev1", "ptv1");
-        gcmoveableobj::setdig(this.morphobj, 1);
+        digging_wall = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("ptv1"));
+        gcmoveableobj::inittargetmorph(digging_wall, "lev1", "ptv1");
+        gcmoveableobj::setdig(digging_wall, 1);
         return null;
     }
     
     method cleanupfull() {
-        this.vlgr = null;
-        this.hive1handle = null;
-        this.morphobj = null;
         return null;
     }
     
