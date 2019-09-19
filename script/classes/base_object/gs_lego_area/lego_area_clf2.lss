@@ -1,11 +1,9 @@
 class lego_area_clf2 : gs_lego_area {
     property boulderpuzzle;
-    property parent;
     
     method lego_area_clf2(param1) {
         this.gs_lego_area("clf2", param1, 0, 0);
         this.boulderpuzzle = new cliffscale_class(this);
-        this.parent = param1;
         this.lego_area_initfull();
         return null;
     }
@@ -35,9 +33,10 @@ class lego_area_clf2 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.boulderpuzzle.exit();
-        this.boulderpuzzle = null;
-        this.parent = null;
+        if (this.boulderpuzzle != null) {
+            this.boulderpuzzle.exit();
+            this.boulderpuzzle = null;
+        }
         return null;
     }
 }

@@ -1,7 +1,6 @@
 class pizza_puzzlep : base_object {
     property parent;
     property mask;
-    property showmask;
     
     method pizza_puzzlep(param1) {
         this.parent = param1;
@@ -9,37 +8,24 @@ class pizza_puzzlep : base_object {
     }
     
     method initfull() {
-        var var1;
-        var var2;
-        var var3;
-        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mskv"));
-        if (var1) {
-            this.showmask = 0;
-            debug::print("* cnt1 has mask");
-        }
-        else {
-            this.showmask = 1;
-            debug::print("* mask show");
-        }
-        if (this.showmask) {
+        var digging_wall1;
+        var digging_wall2;
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mskv")) == 0) {
             this.mask = new lego_pickup("mskv", 8, 1, "item", 4, 1);
             this.mask.initfull();
             this.mask.show();
         }
-        var2 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("pzzl"));
-        gcmoveableobj::inittargetmorph(var2, "lev1", "pzzl");
-        gcmoveableobj::setdig(var2, 1);
-        var2 = null;
-        var3 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig5"), scslosifoundation::stringtoidentifier("pzzl"));
-        gcmoveableobj::inittargetmorph(var3, "lev1", "pzzl");
-        gcmoveableobj::setdig(var3, 1);
-        var3 = null;
+        digging_wall1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("pzzl"));
+        gcmoveableobj::inittargetmorph(digging_wall1, "lev1", "pzzl");
+        gcmoveableobj::setdig(digging_wall1, 1);
+        digging_wall2 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig5"), scslosifoundation::stringtoidentifier("pzzl"));
+        gcmoveableobj::inittargetmorph(digging_wall2, "lev1", "pzzl");
+        gcmoveableobj::setdig(digging_wall2, 1);
         return null;
     }
     
     method cleanupfull() {
-        if (!(this.mask == null)) {
-            this.showmask = this.mask.objshown;
+        if (this.mask != null) {
             this.mask.cleanupfull();
             this.mask = null;
         }

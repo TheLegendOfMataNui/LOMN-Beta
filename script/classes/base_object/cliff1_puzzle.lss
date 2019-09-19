@@ -1,18 +1,15 @@
 class cliff1_puzzle : base_object {
+    property parent;
     property button;
     property buttonpos;
     property ledge1;
     property ledge1pos;
     property ledge2;
     property ledge2pos;
-    property objectarray;
-    property parent;
     property savecam;
     property buttonpressed;
-    property slidesound;
     property cutscenetimer;
     property splineon;
-    property puzzledone;
     
     method cliff1_puzzle(param1) {
         this.parent = param1;
@@ -40,7 +37,6 @@ class cliff1_puzzle : base_object {
         var4 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dig0"), scslosifoundation::stringtoidentifier("clf1"));
         gcmoveableobj::inittargetmorph(var4, "lev1", "clf1");
         gcmoveableobj::setdig(var4, 1);
-        var4 = null;
         this.cutscenetimer = new lego_timer("tim0", 1.5, 0);
         this.splineon = 0;
         this.button.initfull();
@@ -59,8 +55,7 @@ class cliff1_puzzle : base_object {
             this.ledge2.gety(), 
             this.ledge2.getz() ];
         this.cutscenetimer.initfull();
-        this.puzzledone = gcsaver::isconditionset(8388608);
-        if (this.puzzledone) {
+        if (gcsaver::isconditionset(8388608)) {
             this.skipcinematic();
             this.buttonpressed = 1;
         }
@@ -68,28 +63,26 @@ class cliff1_puzzle : base_object {
     }
     
     method cleanupfull() {
-        var var1;
-        var var2;
-        var var3;
-        if (!(this.button == null)) {
+        if (this.button != null) {
             this.button.cleanupfull();
             this.button = null;
         }
-        if (!(this.ledge1 == null)) {
+        if (this.ledge1 != null) {
             this.ledge1.cleanupfull();
             this.ledge1 = null;
         }
-        if (!(this.ledge2 == null)) {
+        if (this.ledge2 != null) {
             this.ledge2.cleanupfull();
             this.ledge2 = null;
         }
-        var1 = null;
-        var2 = null;
-        var3 = null;
-        if (!(this.cutscenetimer == null)) {
+        if (this.cutscenetimer != null) {
             this.cutscenetimer.cleanupfull();
             this.cutscenetimer = null;
         }
+        this.buttonpos = null;
+        this.ledge1pos = null;
+        this.ledge2pos = null;
+        this.savecam = null;
         return null;
     }
     
@@ -100,8 +93,6 @@ class cliff1_puzzle : base_object {
     
     method onevent(param1) {
         var var1;
-        var var2;
-        var var3;
         if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
         }
@@ -119,7 +110,6 @@ class cliff1_puzzle : base_object {
                 gcstaticsoundsptrarray::playtablesound(1048);
                 this.parent.level.cam.setaimode(7);
                 globalclass.player.actor.setinputstate("none");
-                gccollisionphysicsgroup::spinmask(1.2);
             }
             else if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
                 if (this.buttonpressed == 0) {
@@ -130,21 +120,20 @@ class cliff1_puzzle : base_object {
             }
         }
         else if (param1.eventid == 12) {
-            var1 = param1.args[0];
-            if (var1 == this.button.id) {
-                var2 = this.parent.level.cam;
-                this.savecam = [ var2.x1, 
-                    var2.y1, 
-                    var2.z, 
-                    var2.tx, 
-                    var2.ty, 
-                    var2.tz ];
-                var2.scaletocutscene();
-                var2.makespline("Root/Data/Levels/lev1/clf1/clf1_CAM.slb");
-                var2.setspline(0, 4.0, 1, 0);
-                var2.settargetspline(3, 1, 0);
-                var2.settargetpos(-133, -61, -223);
-                var2.setaimode(3);
+            if (param1.args[0] == this.button.id) {
+                var1 = this.parent.level.cam;
+                this.savecam = [ var1.x1, 
+                    var1.y1, 
+                    var1.z, 
+                    var1.tx, 
+                    var1.ty, 
+                    var1.tz ];
+                var1.scaletocutscene();
+                var1.makespline("Root/Data/Levels/lev1/clf1/clf1_CAM.slb");
+                var1.setspline(0, 4.0, 1, 0);
+                var1.settargetspline(3, 1, 0);
+                var1.settargetpos(-133, -61, -223);
+                var1.setaimode(3);
                 this.splineon = 1;
                 this.ledge1.setresponse(0, 0, 3);
                 this.ledge2.setresponse(0, 0, 3);
@@ -158,13 +147,12 @@ class cliff1_puzzle : base_object {
             this.cutscenetimer.start();
         }
         else if (param1.eventid == 8) {
-            var3 = param1.args[0];
-            if (var3 == scslosifoundation::stringtoidentifier("tim0")) {
-                var2 = this.parent.level.cam;
-                var2.setaimode(11);
-                var2.setpos(this.savecam[0], this.savecam[1], this.savecam[2]);
-                var2.settargetpos(this.savecam[3], this.savecam[4], this.savecam[5]);
-                var2.resetviewport();
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tim0")) {
+                var1 = this.parent.level.cam;
+                var1.setaimode(11);
+                var1.setpos(this.savecam[0], this.savecam[1], this.savecam[2]);
+                var1.settargetpos(this.savecam[3], this.savecam[4], this.savecam[5]);
+                var1.resetviewport();
                 globalclass.hud.show();
                 globalclass.player.actor.setinputstate("ninp");
                 scprocessmanager::pausecreatures(0);

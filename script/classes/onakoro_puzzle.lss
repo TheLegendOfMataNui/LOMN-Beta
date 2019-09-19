@@ -23,22 +23,16 @@ class onakoro_puzzle {
         if (gcsaver::isconditionset(4194304) == 1) {
             var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
-            var1 = null;
             var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
             gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
-            var1 = null;
             var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
             gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
-            var1 = null;
             var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
             gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
-            var1 = null;
             var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
             gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
-            var1 = null;
             var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
             gccharacter::settohunga(var1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk0a"));
-            var1 = null;
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv0"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv1"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv2"), scslosifoundation::stringtoidentifier("vllg"));
@@ -70,7 +64,7 @@ class onakoro_puzzle {
             gchive::setmaxcreatures(var5, 3);
             gchive::setcreaturetype(var5, scslosifoundation::stringtoidentifier("bats"));
             gchive::setspawnrate(var5, 5);
-            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
             globalclass.bgmusic.play(1);
         }
         this.coindoor = new lego_moveableobject("dr00", "vllg");
@@ -91,12 +85,6 @@ class onakoro_puzzle {
     }
     
     method cleanupfull() {
-        var var1;
-        var var2;
-        var var3;
-        var var4;
-        var var5;
-        this.coindoortexttimer = null;
         if (!(this.coindoortext == null)) {
             this.coindoortext.remove();
             this.coindoortext.cleanupfull();
@@ -106,12 +94,6 @@ class onakoro_puzzle {
             this.coindoor.cleanupfull();
             this.coindoor = null;
         }
-        var1 = null;
-        var2 = null;
-        var3 = null;
-        var4 = null;
-        var5 = null;
-        this.deadhives = null;
         return null;
     }
     
@@ -151,16 +133,10 @@ class onakoro_puzzle {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("dr00")) {
                 if (this.showcoindoor == 1) {
                     if (globalclass.player.tokens >= 10) {
-                        if (globalclass.player.actor.ishookenabled) {
-                            this.coindoor.fadeout(1.5);
-                            gcstaticsoundsptrarray::playtablesound(1084);
-                            this.showcoindoor = 0;
-                            this.coindoortext.hide();
-                        }
-                        else {
-                            this.coindoortext.show();
-                            this.coindoortexttimer = 1.0;
-                        }
+                        this.coindoor.fadeout(1.5);
+                        gcstaticsoundsptrarray::playtablesound(1084);
+                        this.showcoindoor = 0;
+                        this.coindoortext.hide();
                     }
                     else {
                         this.coindoortext.show();
