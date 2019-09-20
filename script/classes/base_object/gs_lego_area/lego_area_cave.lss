@@ -9,35 +9,8 @@ class lego_area_cave : gs_lego_area {
     }
     
     method initfull() {
-        var var1;
         this.lego_area_show();
         this.puzzle.initfull();
-        gcareadirector::setfog(-16777216, 0 - 75.0, 0 - 200.0, 0.05);
-        gcareadirector::setnearestmax(10);
-        gcmodeldirector::setnearestmax(8);
-        gclightdirector::setcavelighting(1);
-        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg00"), scslosifoundation::stringtoidentifier("cave"));
-        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
-        gcmoveableobj::setdig(var1, 0);
-        var1 = null;
-        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg05"), scslosifoundation::stringtoidentifier("cave"));
-        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
-        gcmoveableobj::setdig(var1, 0);
-        var1 = null;
-        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg10"), scslosifoundation::stringtoidentifier("cave"));
-        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
-        gcmoveableobj::setdig(var1, 0);
-        var1 = null;
-        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg15"), scslosifoundation::stringtoidentifier("cave"));
-        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
-        gcmoveableobj::setdig(var1, 0);
-        var1 = null;
-        var1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg20"), scslosifoundation::stringtoidentifier("cave"));
-        gcmoveableobj::inittargetmorph(var1, "lev1", "cave");
-        gcmoveableobj::setdig(var1, 0);
-        var1 = null;
-        globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
-        globalclass.bgmusic.play(1);
         return null;
     }
     
@@ -54,8 +27,10 @@ class lego_area_cave : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.puzzle.exit();
-        this.puzzle = null;
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

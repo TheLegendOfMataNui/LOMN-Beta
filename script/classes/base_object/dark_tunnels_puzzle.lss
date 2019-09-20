@@ -8,15 +8,39 @@ class dark_tunnels_puzzle : base_object {
     }
     
     method initfull() {
-        var var1;
-        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("disc"));
-        if (var1 == 0) {
+        var digging_wall1;
+        var digging_wall2;
+        var digging_wall3;
+        var digging_wall4;
+        var digging_wall5;
+        gcareadirector::setfog(-16777216, 0 - 75.0, 0 - 200.0, 0.05);
+        gcareadirector::setnearestmax(10);
+        gcmodeldirector::setnearestmax(8);
+        gclightdirector::setcavelighting(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+        globalclass.bgmusic.play(1);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("disc")) == 0) {
             this.discpickup = new lego_pickup("disc", 0, 5, "item", 10, 1);
             this.discpickup.initfull();
             this.discpickup.show();
             this.discpickup.setcondition(32768);
             this.discpickup.setquest(1);
         }
+        digging_wall1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg00"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(digging_wall1, "lev1", "cave");
+        gcmoveableobj::setdig(digging_wall1, 0);
+        digging_wall2 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg05"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(digging_wall2, "lev1", "cave");
+        gcmoveableobj::setdig(digging_wall2, 0);
+        digging_wall3 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg10"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(digging_wall3, "lev1", "cave");
+        gcmoveableobj::setdig(digging_wall3, 0);
+        digging_wall4 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg15"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(digging_wall4, "lev1", "cave");
+        gcmoveableobj::setdig(digging_wall4, 0);
+        digging_wall5 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg20"), scslosifoundation::stringtoidentifier("cave"));
+        gcmoveableobj::inittargetmorph(digging_wall5, "lev1", "cave");
+        gcmoveableobj::setdig(digging_wall5, 0);
         return null;
     }
     
@@ -45,7 +69,7 @@ class dark_tunnels_puzzle : base_object {
     }
     
     method cleanupfull() {
-        if (!(this.discpickup == null)) {
+        if (this.discpickup != null) {
             this.discpickup.cleanupfull();
             this.discpickup = null;
         }

@@ -11,12 +11,6 @@ class lego_area_l1a8 : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        gcareadirector::setfog(-16777216, 0 - 1.0, 0 - 200.0, 0.05);
-        gclightdirector::setcavelighting(0);
-        gcareadirector::setnearestmax(30);
-        gcmodeldirector::setnearestmax(2);
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
-        globalclass.bgmusic.play(1);
         return null;
     }
     
@@ -26,14 +20,17 @@ class lego_area_l1a8 : gs_lego_area {
     }
     
     method cleanupfull() {
+        this.lego_area_hide();
         this.puzzle.cleanupfull();
         return null;
     }
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.puzzle.exit();
-        this.puzzle = null;
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
