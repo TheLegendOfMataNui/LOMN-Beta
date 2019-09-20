@@ -8,10 +8,7 @@ class wthk2_puzzle {
     }
     
     method initfull() {
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
-        globalclass.bgmusic.play();
         this.callsurfonce = 1;
-        gcareadirector::setnearestmax(8);
         return null;
     }
     
@@ -26,13 +23,14 @@ class wthk2_puzzle {
     
     method onevent(param1) {
         if (param1.eventid == 4) {
-            if (this.callsurfonce) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) && (this.callsurfonce)) {
                 this.startsurf();
                 this.callsurfonce = 0;
             }
         }
         else if (param1.eventid == 3) {
             if (((((param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb01"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb02"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb03"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb04"))) {
+                this.endsurf();
                 globalclass.player.kill();
                 this.parent.level.cam.setaimode(7);
                 gcstaticsoundsptrarray::playtablesound(1048);
@@ -45,7 +43,6 @@ class wthk2_puzzle {
         else if (param1.eventid == 27) {
             this.initshort();
         }
-        scslosifoundation::stringtoidentifier("tp02");
         return null;
     }
     
@@ -55,7 +52,7 @@ class wthk2_puzzle {
         globalclass.player.unkill();
         globalclass.player.actor.setinputstate("ninp");
         this.parent.level.cam.setaimode(11);
-        globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
+        //globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
         gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
         gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
         gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb02"), 0);
@@ -69,7 +66,7 @@ class wthk2_puzzle {
         globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g032"));
         globalclass.player.actor.setsurfingability(0.3, 0.8);
         globalclass.player.actor.setsurfminspeed(7.0);
-        globalclass.player.actor.setsurfmaxspeed(15.0);
+        globalclass.player.actor.setsurfmaxspeed(10.0);
         return null;
     }
     

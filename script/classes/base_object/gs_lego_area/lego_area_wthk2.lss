@@ -15,6 +15,8 @@ class lego_area_wthk2 : gs_lego_area {
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
         gclightdirector::setcavelighting(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
+        globalclass.bgmusic.play();
         return null;
     }
     
@@ -36,8 +38,10 @@ class lego_area_wthk2 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.puzzle.exit();
-        this.puzzle = null;
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
