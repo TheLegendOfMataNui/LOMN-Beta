@@ -43,8 +43,10 @@ class lego_area_shrn : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.crack_puzzle.exit();
-        this.crack_puzzle = null;
+        if (this.crack_puzzle != null) {
+            this.crack_puzzle.exit();
+            this.crack_puzzle = null;
+        }
         return null;
     }
 }

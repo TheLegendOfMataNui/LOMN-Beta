@@ -1,7 +1,6 @@
 class rescuetohunga_puzzlep : base_object {
     property parent;
     property scorpion;
-    property toggle;
     property showintro;
     property desctext;
     property howtotext;
@@ -14,19 +13,17 @@ class rescuetohunga_puzzlep : base_object {
     }
     
     method initfull() {
-        var var1;
-        var var2;
-        var var3;
-        var var4;
-        var var5;
-        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(var1, 1);
-        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("lsrp"));
-        gchive::setspawnrate(var1, 5);
-        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
-        gchive::setmaxcreatures(var2, 1);
-        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("lsrp"));
-        gchive::setspawnrate(var2, 5);
+        var hive1handle;
+        var hive2handle;
+        var boss_text;
+        hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hive1handle, 1);
+        gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(hive1handle, 5);
+        hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(hive2handle, 1);
+        gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(hive2handle, 5);
         gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("a005"));
         this.scorpion = new gs_lego_character("chia", "bsrp", "scrp", 0, 0 - 170.4, 0 - 71.6, 0 - 543.9, "aiin");
         this.spikedoortop = new lego_moveableobject("drtp", "shrn");
@@ -38,59 +35,58 @@ class rescuetohunga_puzzlep : base_object {
         this.scorpion.show();
         this.scorpion.aisetattacktype(5);
         this.scorpion.setscale(3.0);
-        this.toggle = 0;
-        var3 = gcsaver::isconditionset(1073741824);
-        if (var3) {
+        if (gcsaver::isconditionset(1073741824)) {
             this.showintro = 0;
         }
         else {
             this.showintro = 1;
-            var4 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 0);
-            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var4, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            boss_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", boss_text, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
             this.desctext.initfull();
-            var5 = (screeny - 100) + 20;
-            var4 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 1);
-            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var4, screenx * 0.5, var5, 0, 1, 256, 0, 0);
+            boss_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", boss_text, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
+        }
+        //replace bettersaver call with gcsaver later if a suitable flag can be used without screwing anything else up
+        if (bettersaver::getbooleanvalue(71)) {
+            this.spikedoortop.interpolate(this.spikedoortop.getx(), this.spikedoortop.gety() + 15, this.spikedoortop.getz(), 0.0);
+            this.spikedoorbottom.interpolate(this.spikedoorbottom.getx(), this.spikedoorbottom.gety() - 25, this.spikedoorbottom.getz(), 0.0);
+            if (this.scorpion != null) {
+                this.scorpion.cleanupfull();
+                this.scorpion = null;
+            }
         }
         return null;
     }
     
     method cleanupfull() {
-        var var1;
-        var var2;
-        if (!(this.desctext == null)) {
+        if (this.desctext != null) {
             this.desctext.cleanupfull();
             this.desctext = null;
         }
-        if (!(this.howtotext == null)) {
+        if (this.howtotext != null) {
             this.howtotext.cleanupfull();
             this.howtotext = null;
         }
-        if (!(this.scorpion == null)) {
+        if (this.scorpion != null) {
             this.scorpion.cleanupfull();
             this.scorpion = null;
         }
-        if (!(this.spikedoortop == null)) {
+        if (this.spikedoortop != null) {
             this.spikedoortop.cleanupfull();
             this.spikedoortop = null;
         }
-        if (!(this.spikedoorbottom == null)) {
+        if (this.spikedoorbottom != null) {
             this.spikedoorbottom.cleanupfull();
             this.spikedoorbottom = null;
         }
-        var1 = null;
-        var2 = null;
         return null;
     }
     
     method openexit(param1) {
-        if (param1 == null) {
-            param1 = 5.0;
-        }
-        this.spikedoortop.interpolate(this.spikedoortop.getx(), this.spikedoortop.gety() + 15, this.spikedoortop.getz(), param1);
-        this.spikedoorbottom.interpolate(this.spikedoorbottom.getx(), this.spikedoorbottom.gety() - 25, this.spikedoorbottom.getz(), param1);
-        gcsaver::setcondition(1073741824, 1);
+        this.spikedoortop.interpolate(this.spikedoortop.getx(), this.spikedoortop.gety() + 15, this.spikedoortop.getz(), 5.0);
+        this.spikedoorbottom.interpolate(this.spikedoorbottom.getx(), this.spikedoorbottom.gety() - 25, this.spikedoorbottom.getz(), 5.0);
+        bettersaver::setbooleanvalue(71, 1);
         return null;
     }
     
@@ -101,7 +97,7 @@ class rescuetohunga_puzzlep : base_object {
         this.parent.level.cam.settargetpos(0 - 170.4, 0 - 71.6, 0 - 543.9);
         this.parent.level.cam.setaimode(2);
         globalclass.hud.hide();
-        gcsaver::setcondition(536870912, 1);
+        gcsaver::setcondition(1073741824, 1);
         this.desctext.add();
         this.desctext.show();
         this.howtotext.add();
@@ -127,8 +123,10 @@ class rescuetohunga_puzzlep : base_object {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 43) {
-            if (!(this.scorpion == null)) {
+            if (this.scorpion != null) {
                 if (param1.args[0] == this.scorpion.id) {
+                    globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+                    globalclass.bgmusic.play(1);
                     this.scorpion.cleanupfull();
                     this.scorpion = null;
                     this.openexit();
@@ -146,26 +144,6 @@ class rescuetohunga_puzzlep : base_object {
     }
     
     method input(param1) {
-        if (param1.button == 67) {
-            if (param1.event == 2) {
-                this.cheat1();
-            }
-        }
-        if (param1.button == 86) {
-            if (param1.event == 2) {
-                this.cheat2();
-            }
-        }
-        return null;
-    }
-    
-    method cheat1() {
-        this.openexit(10);
-        return null;
-    }
-    
-    method cheat2() {
-        this.openexit(2);
         return null;
     }
     

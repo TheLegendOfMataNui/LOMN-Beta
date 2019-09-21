@@ -39,7 +39,7 @@ class crack_puzzle {
             var1 = var1 + 1;
         }
         this.doorisopen = 0;
-        if (gcsaver::isconditionset(33554432)) {
+        if (bettersaver::getbooleanvalue(72)) {
             this.mdoors[1].openclose(1.0, 3.0);
         }
         if (gcsaver::isconditionset(16777216)) {
@@ -115,13 +115,12 @@ class crack_puzzle {
         var7 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("when"), 0);
         gccharacter::setinputstate(var7, scslosifoundation::stringtoidentifier("none"));
         gccharacter::setupmoveable(var7, 1.5, 0.8, 1, 0, 0);
-        var8 = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
-            gccollisionphysicsgroup::setportal(var8, "root/data/art/portals/onua/village_ripple/o_prtl", 1);
+            gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/onua/village_ripple/o_prtl", 1);
         }
         else {
-            gccollisionphysicsgroup::turnoffnextarea(var8);
+            gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tps9"));
         }
         return null;
     }
@@ -129,45 +128,39 @@ class crack_puzzle {
     method cleanupfull() {
         var var1;
         var var2;
-        var var3;
-        var1 = null;
-        this.edoortexttimer = null;
-        if (!(this.edoortext == null)) {
+        if (this.edoortext != null) {
             this.edoortext.remove();
             this.edoortext.cleanupfull();
             this.edoortext = null;
         }
-        if (!(this.edoor == null)) {
+        if (this.edoor != null) {
             this.edoor.cleanupfull();
             this.edoor = null;
         }
-        if (!(this.crackparts == null)) {
-            var2 = this.crackparts.__length - 1;
-            var3 = 0;
-            while (var2 >= var3) {
-                this.crackparts[var2 - var3].cleanupfull();
-                this.crackparts[var2 - var3] = null;
-                var3 = var3 + 1;
+        if (this.crackparts != null) {
+            var1 = this.crackparts.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.crackparts[var1 - var2].cleanupfull();
+                this.crackparts[var1 - var2] = null;
+                var2 = var2 + 1;
             }
             this.crackparts = null;
         }
         this.crackdefaults = null;
-        if (!(this.cracktimer == null)) {
-            this.cracktimer = null;
-        }
-        if (!(this.crackplane == null)) {
+        if (this.crackplane != null) {
             this.crackplane.cleanupfull();
             this.crackplane = null;
         }
-        if (!(this.mdoors == null)) {
-            var2 = this.mdoors.__length - 1;
-            var3 = 0;
-            while (var2 >= var3) {
-                this.mdoors[var2 - var3].cleanupfull();
-                this.mdoors[var2 - var3] = null;
-                var3 = var3 + 1;
+        if (this.mdoors != null) {
+            var1 = this.mdoors.__length - 1;
+            var2 = 0;
+            while (var1 >= var2) {
+                this.mdoors[var1 - var2].cleanupfull();
+                this.mdoors[var1 - var2] = null;
+                var2 = var2 + 1;
             }
-            this.mdoors = [ ];
+            this.mdoors = null;
         }
         return null;
     }
@@ -269,17 +262,19 @@ class crack_puzzle {
     
     method onevent(param1) {
         var var1;
-        var var2;
-        var1 = 0;
-        while ((this.mdoors.__length - 1) >= var1) {
-            this.mdoors[var1].onevent(param1);
-            var1 = var1 + 1;
+        var portal_trigger;
+        if (this.mdoors != null) {
+            var1 = 0;
+            while ((this.mdoors.__length - 1) >= var1) {
+                this.mdoors[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
         }
         if (param1.eventid == 41) {
             if (this.portalactive == 0) {
-                var2 = scslosifoundation::stringtoidentifier("tps9");
-                gccollisionphysicsgroup::turnonnextarea(var2, scslosifoundation::stringtoidentifier("tura"));
-                gccollisionphysicsgroup::setportal(var2, "root/data/art/portals/onua/village_ripple/o_prtl", 1);
+                portal_trigger = scslosifoundation::stringtoidentifier("tps9");
+                gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
+                gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/onua/village_ripple/o_prtl", 1);
                 this.portalactive = 1;
             }
         }
