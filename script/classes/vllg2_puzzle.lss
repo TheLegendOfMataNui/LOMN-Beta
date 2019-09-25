@@ -3,29 +3,23 @@ class vllg2_puzzle {
     property oldplatform;
     property newplatform;
     property printwhichplatformimon;
-    property horns;
     property puzinc;
     property currentlycollidingwith;
     property tempplatform;
     property canblow;
-    property currentsound;
     property testplatforms;
     property testplatformsubound;
-    property cinema;
-    property cinema_shown;
-    property oldorientation;
     property callev_safe_time_once;
     property door1;
     property door2;
     property hasenoughtokens;
     property puzzlesolved;
-    property hive1handle;
-    property hive2handle;
     property deadhives;
     property testfordoor1proximity;
     property door1x;
     property door1z;
     property gatestone;
+    property hookbox;
     
     method vllg2_puzzle(param1) {
         this.parent = param1;
@@ -34,14 +28,12 @@ class vllg2_puzzle {
     
     method initfull() {
         var var1;
-        var var2;
-        var var3;
-        var var4;
-        var var5;
+        var tohunga;
+        var hive1handle;
+        var hive2handle;
         this.testfordoor1proximity = 0;
         this.puzzlesolved = 0;
         this.hasenoughtokens = 0;
-        this.oldorientation = 0;
         this.callev_safe_time_once = 1;
         this.door1 = new lego_moveableobject("drs0");
         this.door1.initfull();
@@ -65,12 +57,14 @@ class vllg2_puzzle {
         }
         this.testplatformsubound = this.testplatforms.__length - 1;
         this.puzinc = 1;
-        var2 = null;
         this.canblow = 0;
         this.tempplatform = this.testplatforms[0];
         this.tempplatform.collide = 0;
-        var3 = gcsaver::finditem(scslosifoundation::stringtoidentifier("gstn"));
-        if (var3 == 0) {
+        this.hookbox = new lego_moveableobject("hk01");
+        this.hookbox.initfull();
+        this.hookbox.setmytargetingflags(1);
+        this.hookbox.setresponse(1, 1, 1);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gstn")) == 0) {
             this.gatestone = new lego_pickup("gstn", 0, 5, "item", 7, 1);
             this.gatestone.initfull();
             this.gatestone.show();
@@ -78,46 +72,38 @@ class vllg2_puzzle {
             this.gatestone.setquest(3);
         }
         this.deadhives = 0;
-        var4 = gcsaver::isconditionset(1073741824);
-        if (var4) {
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(var5, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk7a"));
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-            gccharacter::settohunga(var5, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk7a"));
-            var5 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
-            gccharacter::settohunga(var5, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk7a"));
+        if (gcsaver::isconditionset(1073741824)) {
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk7a"));
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk7a"));
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk7a"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv0"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv1"), scslosifoundation::stringtoidentifier("vllg"));
             globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
             globalclass.bgmusic.play(1);
-            gctoa::deactivatedragger(globalclass.player.actor.toahandle);
         }
         else {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl01"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl02"), 0);
-            this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-            gchive::setmaxcreatures(this.hive1handle, 8);
-            gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("crb1"));
-            gchive::setspawnrate(this.hive1handle, 5);
-            this.hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
-            gchive::setmaxcreatures(this.hive2handle, 8);
-            gchive::setcreaturetype(this.hive2handle, scslosifoundation::stringtoidentifier("crb1"));
-            gchive::setspawnrate(this.hive2handle, 5);
+            hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+            gchive::setmaxcreatures(hive1handle, 8);
+            gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("crb1"));
+            gchive::setspawnrate(hive1handle, 5);
+            hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+            gchive::setmaxcreatures(hive2handle, 8);
+            gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("crb1"));
+            gchive::setspawnrate(hive2handle, 5);
             globalclass.bgmusic.changefilename("Root/Data/sounds/Musicgalitheme");
             globalclass.bgmusic.play();
         }
-        globalclass.player.setgrapplinghookdistance(50);
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        this.hive1handle = null;
-        this.hive2handle = null;
-        if (!(this.cinema == null)) {
-            this.cinema = null;
-        }
         this.oldplatform = null;
         this.newplatform = null;
         this.printwhichplatformimon = null;
@@ -125,17 +111,22 @@ class vllg2_puzzle {
         this.currentlycollidingwith = null;
         this.tempplatform = null;
         this.canblow = null;
-        this.currentsound = null;
-        var1 = 0;
-        while ((this.testplatforms.__length - 1) >= var1) {
-            this.testplatforms[var1].cleanupfull();
-            this.testplatforms[var1] = null;
-            var1 = var1 + 1;
+        if (this.testplatforms != null) {
+            var1 = 0;
+            while ((this.testplatforms.__length - 1) >= var1) {
+                this.testplatforms[var1].cleanupfull();
+                this.testplatforms[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.testplatforms = null;
         }
-        this.testplatforms = null;
-        if (!(this.gatestone == null)) {
+        if (this.gatestone != null) {
             this.gatestone.cleanupfull();
             this.gatestone = null;
+        }
+        if (this.hookbox != null) {
+            this.hookbox.cleanupfull();
+            this.hookbox = null;
         }
         return null;
     }
@@ -176,9 +167,7 @@ class vllg2_puzzle {
                 if (param1.args[1] == 0) {
                     this.door1.hide();
                 }
-                param1.args[1];
             }
-            param1.args[0];
         }
         else if (param1.eventid == 51) {
             if (param1.args[1] == 1) {
@@ -189,7 +178,6 @@ class vllg2_puzzle {
                     globalclass.bgmusic.play(1);
                 }
             }
-            param1.args[1];
         }
         else if (param1.eventid == 44) {
             if (this.callev_safe_time_once) {
@@ -211,9 +199,9 @@ class vllg2_puzzle {
         }
         else if (param1.eventid == 1) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (!(param1.args[1] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                if (param1.args[1] != scslosifoundation::stringtoidentifier("cnt1")) {
                     this.newplatform = param1.args[1];
-                    if (!(this.oldplatform == this.newplatform)) {
+                    if (this.oldplatform != this.newplatform) {
                         this.printwhichplatformimon = 1;
                     }
                     if (this.printwhichplatformimon) {
@@ -250,9 +238,7 @@ class vllg2_puzzle {
                         this.tempplatform.setcollide();
                     }
                 }
-                param1.args[0];
             }
-            param1.args[2];
         }
         else if (param1.eventid == 11) {
             if (scslosifoundation::identifiertostring(param1.args[1]) == "g054") {
@@ -264,7 +250,6 @@ class vllg2_puzzle {
                     this.puzzlesolved = 0;
                 }
             }
-            scslosifoundation::identifiertostring(param1.args[1]);
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
@@ -280,7 +265,6 @@ class vllg2_puzzle {
                 globalclass.player.actor.setinputstate("ninp");
                 globalclass.level.cam.setaimode(11);
             }
-            param1.args[0];
         }
         else if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
@@ -291,15 +275,12 @@ class vllg2_puzzle {
                     globalclass.player.canshootdragger(1);
                 }
             }
-            param1.args[0];
         }
         if (param1.eventid == 42) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
                 gctoa::deactivatedragger(globalclass.player.actor.toahandle);
             }
-            param1.args[0];
         }
-        param1.eventid;
         return null;
     }
     

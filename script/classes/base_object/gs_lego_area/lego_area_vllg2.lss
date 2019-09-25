@@ -13,7 +13,6 @@ class lego_area_vllg2 : gs_lego_area {
         this.puzzle.initfull();
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
         gclightdirector::setcavelighting(0);
-        gcmodeldirector::setnearestmax(20);
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
@@ -43,8 +42,11 @@ class lego_area_vllg2 : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle.exit();
-        this.puzzle = null;
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
