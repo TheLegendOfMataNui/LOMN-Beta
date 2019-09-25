@@ -245,13 +245,15 @@ class global_class : base_object {
         return null;
     }
     
-    method setnextlevel(param1, param2) {
-        gcsaver::resetdata();
-        if (param1 == null) {
+    method setnextlevel(level_id, reset_save) {
+        if (level_id == null) {
             this.newlevel = "lev1";
         }
         else {
-            this.newlevel = param1;
+            this.newlevel = level_id;
+        }
+        if (reset_save == 1) {
+            gcsaver::resetdata();
         }
         this.whatsnext = 1;
         return null;
@@ -535,19 +537,5 @@ class global_class : base_object {
             this.nextid = this.nextid + 1;
         }
         return scslosifoundation::stringtoidentifier(__tostring(this.nextid));
-    }
-    
-    method loadgame(param1, param2) {
-        if (param1 == null) {
-            this.newlevel = "lev1";
-        }
-        else {
-            this.newlevel = param1;
-        }
-        if (param2 == 1) {
-            
-        }
-        this.whatsnext = 1;
-        return null;
     }
 }
