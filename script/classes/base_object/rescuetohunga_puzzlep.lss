@@ -6,6 +6,7 @@ class rescuetohunga_puzzlep : base_object {
     property howtotext;
     property spikedoortop;
     property spikedoorbottom;
+    property cankillscorpion;
     
     method rescuetohunga_puzzlep(param1) {
         this.parent = param1;
@@ -25,6 +26,7 @@ class rescuetohunga_puzzlep : base_object {
         gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("lsrp"));
         gchive::setspawnrate(hive2handle, 5);
         gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("a005"));
+        this.cankillscorpion = 1;
         this.scorpion = new gs_lego_character("chia", "bsrp", "scrp", 0, 0 - 170.4, 0 - 71.6, 0 - 543.9, "aiin");
         this.spikedoortop = new lego_moveableobject("drtp", "shrn");
         this.spikedoortop.initfull();
@@ -60,6 +62,7 @@ class rescuetohunga_puzzlep : base_object {
     }
     
     method cleanupfull() {
+        this.cankillscorpion = null;
         if (this.desctext != null) {
             this.desctext.cleanupfull();
             this.desctext = null;
@@ -123,8 +126,9 @@ class rescuetohunga_puzzlep : base_object {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 43) {
-            if (this.scorpion != null) {
+            if ((this.scorpion != null) && (this.cankillscorpion == 1)) {
                 if (param1.args[0] == this.scorpion.id) {
+                    debug::print("only fire if cankillscorpion is true");
                     globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
                     globalclass.bgmusic.play(1);
                     this.scorpion.cleanupfull();
