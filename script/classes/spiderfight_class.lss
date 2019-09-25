@@ -7,6 +7,7 @@ class spiderfight_class {
     property desctext;
     property howtotext;
     property door;
+    property cankillspider;
     
     method spiderfight_class(param1) {
         this.parent = param1;
@@ -17,6 +18,7 @@ class spiderfight_class {
         var bosstext;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
         globalclass.bgmusic.play(1);
+        this.cankillspider = 1;
         this.door = new lego_moveableobject("door", this.parent.name);
         this.door.initfull();
         this.web1 = new lego_moveableobject("web1", this.parent.name, [ "weba" ]);
@@ -35,13 +37,6 @@ class spiderfight_class {
         }
         else {
             this.door.interpolate(this.door.getx(), this.door.gety() + 10.0, this.door.getz(), 0.0);
-            this.web1.hide();
-            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
-            globalclass.bgmusic.play(1);
-            if (this.spider != null) {
-                this.spider.cleanupfull();
-                this.spider = null;
-            }
         }
         if (gcsaver::isconditionset(536870912)) {
             this.showintro = 0;
@@ -55,10 +50,20 @@ class spiderfight_class {
             this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
         }
+        if (bettersaver::getbooleanvalue(70)) {
+            this.web1.hide();
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+            globalclass.bgmusic.play(1);
+            if (this.spider != null) {
+                this.spider.cleanupfull();
+                this.spider = null;
+            }
+        }
         return null;
     }
     
     method cleanupfull() {
+        this.cankillspider = null;
         if (this.spider != null) {
             this.spider.cleanupfull();
             this.spider = null;
@@ -111,13 +116,16 @@ class spiderfight_class {
             this.door.interpolate(this.door.getx(), this.door.gety() + 10.0, this.door.getz(), 4.0);
         }
         else if (param1.eventid == 43) {
-            if (param1.args[0] == this.spider.id) {
-                this.web1.fadeout(3.0);
-                this.web1.setresponse(4, 4, 4);
-                this.spider.cleanupfull();
-                this.spider = null;
-                globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
-                globalclass.bgmusic.play(1);
+            if ((this.spider != null) && (this.cankillspider == 1)) {
+                if (param1.args[0] == this.spider.id) {
+                    this.web1.fadeout(3.0);
+                    this.web1.setresponse(4, 4, 4);
+                    this.spider.cleanupfull();
+                    this.spider = null;
+                    globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+                    globalclass.bgmusic.play(1);
+                    bettersaver::setbooleanvalue(70, 1);
+                }
             }
         }
         else if (param1.eventid == 35) {
