@@ -1,11 +1,8 @@
 class puzzle_class {
     property parent;
-    property bkikbossdoor_up;
-    property gly3door_up;
     property hasenoughtokens;
     property callev_safe_time_once;
     property camefromglyph3area;
-    property checkforglyph3areaentranceonce;
     property canhitgly3triggerplane;
     property bkikbossdoor;
     property gly3door;
@@ -16,8 +13,6 @@ class puzzle_class {
     
     method puzzle_class(param1) {
         this.parent = param1;
-        this.bkikbossdoor_up = 1;
-        this.gly3door_up = 1;
         this.hasenoughtokens = 0;
         return null;
     }
@@ -34,7 +29,6 @@ class puzzle_class {
         this.bkikbossdoor = new lego_moveableobject("drs0", "fake");
         this.gly3door = new lego_moveableobject("drs4", "fake");
         this.bkikbossdoor.initfull();
-        this.bkikbossdoor.setalpha(0.7);
         this.gly3door.initfull();
         this.bkikbossdoor.setresponse(3, 3, 3);
         this.gly3door.setresponse(3, 3, 3);
@@ -43,12 +37,11 @@ class puzzle_class {
         this.bossdoorz = this.bkikbossdoor.getz();
         this.callev_safe_time_once = 1;
         this.camefromglyph3area = 0;
-        this.checkforglyph3areaentranceonce = 1;
         this.canhitgly3triggerplane = 0;
         this.testforbossdoorproximity = 0;
         var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("oewa"), 0);
         gccharacter::setinputstate(var1, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setupmoveable(var1, 1.5, 0.8, 1, 0, 0);
+        gccharacter::switchanimation(var1, scslosifoundation::stringtoidentifier("oe00"), -1);
         var2 = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
@@ -60,21 +53,18 @@ class puzzle_class {
         return null;
     }
     
-    method show() {
-        return null;
-    }
-    
-    method hide() {
-        this.bkikbossdoor.cleanupfull();
-        this.bkikbossdoor = null;
-        this.gly3door.cleanupfull();
-        this.gly3door = null;
-        this.bkikbossdoor_up = null;
-        this.gly3door_up = null;
+    method cleanupfull() {
+        if (this.bkikbossdoor != null) {
+            this.bkikbossdoor.cleanupfull();
+            this.bkikbossdoor = null;
+        }
+        if (this.gly3door != null) {
+            this.gly3door.cleanupfull();
+            this.gly3door = null;
+        }
         this.hasenoughtokens = null;
         this.callev_safe_time_once = null;
         this.camefromglyph3area = null;
-        this.checkforglyph3areaentranceonce = null;
         this.canhitgly3triggerplane = null;
         this.testforbossdoorproximity = null;
         this.bossdoorx = null;
@@ -85,9 +75,6 @@ class puzzle_class {
     method process(param1) {
         var var1;
         var var2;
-        if (this.checkforglyph3areaentranceonce) {
-            this.checkforglyph3areaentranceonce = 0;
-        }
         if (this.testforbossdoorproximity) {
             var1 = globalclass.player.actor.getposx();
             var2 = globalclass.player.actor.getposz();
@@ -111,8 +98,6 @@ class puzzle_class {
     
     method onevent(param1) {
         var var1;
-        var var2;
-        var var3;
         if (param1.eventid == 41) {
             if (this.portalactive == 0) {
                 var1 = scslosifoundation::stringtoidentifier("tps9");
@@ -122,7 +107,6 @@ class puzzle_class {
             }
         }
         else if (param1.eventid == 21) {
-            debug::print("***************_event.args[2] = " + scslosifoundation::identifiertostring(param1.args[2]));
             if (param1.args[2] == scslosifoundation::stringtoidentifier("lok1")) {
                 this.camefromglyph3area = 1;
                 this.canhitgly3triggerplane = 1;
@@ -149,20 +133,23 @@ class puzzle_class {
                     }
                 }
             }
+            if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1") && (this.camefromglyph3area == 0)) {
+                this.camefromglyph3area = 1;
+                this.canhitgly3triggerplane = 1;
+                this.gly3door.setpos(this.gly3door.getx(), 0 - 0.7459, this.gly3door.getz());
+                debug::print("***********CAME IN FROM GLYPH 3 AREA");
+            }
         }
         else if (param1.eventid == 35) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("drs0")) {
                 if (param1.args[1] == 0) {
                     this.bkikbossdoor.hide();
                 }
-                param1.args[1];
             }
-            param1.args[0];
         }
         else if (param1.eventid == 4) {
-            var2 = param1.args[0];
             debug::print("$$$$$$$$$$$$$$$$$$$$$ You hit triggerplane:" + scslosifoundation::identifiertostring(param1.args[0]));
-            if (var2 == scslosifoundation::stringtoidentifier("tp04")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp04")) {
                 if (this.canhitgly3triggerplane) {
                     this.canhitgly3triggerplane = 0;
                     this.shutgly3door();
@@ -170,8 +157,7 @@ class puzzle_class {
             }
         }
         else if (param1.eventid == 12) {
-            var3 = scslosifoundation::stringtoidentifier("drs4");
-            if (param1.args[0] == var3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("drs4")) {
                 this.parent.level.cam.setaimode(11);
                 globalclass.player.actor.setinputstate("ninp");
             }
@@ -179,6 +165,11 @@ class puzzle_class {
         return null;
     }
     
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+
     method openbkikdoor() {
         this.bkikbossdoor.fadeout(2.0);
         return null;
