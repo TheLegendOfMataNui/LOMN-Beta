@@ -7,22 +7,17 @@ class lego_area_tura3 : gs_lego_area {
     }
     
     method initfull() {
-        var var1;
-        var var2;
-        var var3;
         this.lego_area_show();
         this.lego_area_initfull();
         gcareadirector::setnearestmax(20);
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
         gclightdirector::setcavelighting(1);
-        var2 = scslosifoundation::stringtoidentifier("tps9");
-        var3 = gcsaver::portalactive();
-        if (var3 == 1) {
-            gccollisionphysicsgroup::setportal(var2, "root/data/art/portals/poha/shrine_ripple/p_shrn_ptl", 1);
+        if (gcsaver::portalactive() == 1) {
+            gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/poha/shrine_ripple/p_shrn_ptl", 1);
         }
         else {
-            gccollisionphysicsgroup::turnoffnextarea(var2);
+            gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tps9"));
         }
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
         globalclass.bgmusic.play(1);
@@ -43,11 +38,11 @@ class lego_area_tura3 : gs_lego_area {
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.lego_area_cleanupfull();
         return null;
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
         return null;
     }
 }
