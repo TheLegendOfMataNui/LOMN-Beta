@@ -13,7 +13,7 @@ class shrn5_puzzle {
     }
     
     method initfull() {
-        var turaga;
+        var matau;
         var portal_trigger;
         var door_text;
         gcmodeldirector::setnearestmax(5);
@@ -44,9 +44,9 @@ class shrn5_puzzle {
                 gccinemaengine::play(this.cinema);
             }
         }
-        turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"), 0);
-        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setupmoveable(turaga, 1.5, 0.8, 1, 0, 0);
+        matau = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"), 0);
+        gccharacter::setinputstate(matau, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(matau, scslosifoundation::stringtoidentifier("ma00"), -1);
         portal_trigger = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
@@ -136,7 +136,7 @@ class shrn5_puzzle {
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
             globalclass.player.unkill();
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("l000"));
             this.parent.level.cam.setaimode(11);

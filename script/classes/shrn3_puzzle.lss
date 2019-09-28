@@ -1,7 +1,6 @@
 class shrn3_puzzle {
     property parent;
     property camefromglyph3area;
-    property checkforglyph3areaentranceonce;
     property canhitgly3triggerplane;
     property bkikbossdoor;
     property gly3door;
@@ -17,7 +16,7 @@ class shrn3_puzzle {
     }
     
     method initfull() {
-        var turaga;
+        var onewa;
         var portal_trigger;
         var door_text;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
@@ -34,11 +33,10 @@ class shrn3_puzzle {
         this.gly3door.setresponse(3, 3, 3);
         this.gly3door.settweakable();
         this.camefromglyph3area = 0;
-        this.checkforglyph3areaentranceonce = 1;
         this.canhitgly3triggerplane = 0;
-        turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("oewa"), 0);
-        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setupmoveable(turaga, 1.5, 0.8, 1, 0, 0);
+        onewa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("oewa"), 0);
+        gccharacter::setinputstate(onewa, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(onewa, scslosifoundation::stringtoidentifier("oe00"), -1);
         portal_trigger = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
@@ -81,12 +79,6 @@ class shrn3_puzzle {
     }
     
     method process(param1) {
-        if (this.checkforglyph3areaentranceonce) {
-            this.checkforglyph3areaentranceonce = 0;
-        }
-        if (this.canhitgly3triggerplane) {
-            this.checkforglyph3areaentranceonce = 0;
-        }
         if (this.bossdoortexttimer > 0) {
             this.bossdoortexttimer = this.bossdoortexttimer - param1.deltatime;
         }
@@ -158,6 +150,10 @@ class shrn3_puzzle {
         return null;
     }
     
+    method exit() {
+        this.parent = null;
+        return null;
+    }
     method shutgly3door() {
         var var1;
         var var2;

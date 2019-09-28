@@ -12,7 +12,7 @@ class shrn4_puzzle {
     }
     
     method initfull() {
-        var turaga;
+        var nuju;
         var portal_trigger;
         var door_text;
         gcareadirector::setnearestmax(10);
@@ -26,9 +26,9 @@ class shrn4_puzzle {
         else {
             this.bossdoor.hide();
         }
-        turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("nuju"), 0);
-        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setupmoveable(turaga, 1.5, 0.8, 1, 0, 0);
+        nuju = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("nuju"), 0);
+        gccharacter::setinputstate(nuju, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(nuju, scslosifoundation::stringtoidentifier("nu00"), -1);
         portal_trigger = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {

@@ -14,7 +14,7 @@ class shrn6_puzzle {
     
     method initfull() {
         var var1;
-        var turaga;
+        var vakama;
         var portal_trigger;
         var door_text;
         gcareadirector::setnearestmax(15);
@@ -45,9 +45,9 @@ class shrn6_puzzle {
         this.bossdoortext.initfull();
         this.bossdoortext.add();
         this.bossdoortexttimer = 0.0;
-        turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vaka"), 0);
-        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setupmoveable(turaga, 1.5, 0.8, 1, 0, 0);
+        vakama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vaka"), 0);
+        gccharacter::setinputstate(vakama, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(vakama, scslosifoundation::stringtoidentifier("va00"), -1);
         portal_trigger = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
