@@ -23,17 +23,12 @@ class mtup_class {
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin1");
-            globalclass.hud.hide();
             gccinemaengine::play(this.cinema);
         }
         this.door = new lego_moveableobject("door");
         this.door.initfull();
         this.door.setresponse(3, 3, 3);
         this.door.settweakable();
-        return null;
-    }
-    
-    method show() {
         return null;
     }
     
@@ -44,7 +39,7 @@ class mtup_class {
     method input(param1) {
         if (param1.event == 2) {
             if (param1.button == 251) {
-                if (!(this.cinema == null)) {
+                if (this.cinema != null) {
                     gccinemaengine::stop(this.cinema);
                 }
             }
@@ -58,12 +53,10 @@ class mtup_class {
     method onevent(param1) {
         if (param1.eventid == 30) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cin1")) {
-                globalclass.hud.show();
                 globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPohatuAmbience");
                 globalclass.bgmusic.play(1);
                 globalclass.player.maskcontrol.changemask(1);
             }
-            param1.args[0];
         }
         else if (param1.eventid == 51) {
             if (param1.args[1] == 1) {
@@ -74,18 +67,21 @@ class mtup_class {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
-            globalclass.player.actor.gotostartpos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
             globalclass.player.actor.setinputstate("ninp");
             this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
         }
         return null;
     }
     
     method cleanupfull() {
         this.cinema = null;
-        this.door.cleanupfull();
-        this.door = null;
+        if (this.door != null) {
+            this.door.cleanupfull();
+            this.door = null;
+        }
         return null;
     }
     
