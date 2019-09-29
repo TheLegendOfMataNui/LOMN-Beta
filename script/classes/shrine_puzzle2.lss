@@ -15,8 +15,7 @@ class shrine_puzzle2 {
     
     method initfull() {
         var var1;
-        var var2;
-        var var3;
+        var nokama;
         this.testbossdoorproximity = 0;
         this.doorsclosed = [ 1, 
             1 ];
@@ -31,32 +30,34 @@ class shrine_puzzle2 {
             this.doors[var1].settweakable();
             var1 = var1 + 1;
         }
-        this.doors[1].setalpha(0.8);
+        this.doors[1].setalpha(0.5);
         this.bdoorx = this.doors[1].getx();
         this.bdoorz = this.doors[1].getz();
-        var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"), 0);
-        gccharacter::setinputstate(var2, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setupmoveable(var2, 1.5, 0.8, 1, 0, 0);
-        var3 = scslosifoundation::stringtoidentifier("tps9");
+        nokama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"), 0);
+        gccharacter::setinputstate(nokama, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(nokama, scslosifoundation::stringtoidentifier("no00"), -1);
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
-            gccollisionphysicsgroup::setportal(var3, "root/data/art/portals/gali/village_ripple/g_prtl", 1);
+            gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/gali/village_ripple/g_prtl", 1);
         }
         else {
-            gccollisionphysicsgroup::turnoffnextarea(var3);
+            gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tps9"));
         }
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        while ((this.doors.__length - 1) >= var1) {
-            this.doors[var1].cleanupfull();
-            this.doors[var1] = null;
-            var1 = var1 + 1;
+        if (this.doors != null) {
+            var1 = 0;
+            while ((this.doors.__length - 1) >= var1) {
+                this.doors[var1].cleanupfull();
+                this.doors[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.doors = null;
         }
-        this.doors = null;
+        this.doorsclosed = null;
         return null;
     }
     
@@ -112,6 +113,7 @@ class shrine_puzzle2 {
                             if (globalclass.player.haselement()) {
                                 debug::print("************************ YOU HAVE GALI'S ELEMENTAL POWER");
                                 this.testbossdoorproximity = 1;
+                                this.callev_safe_time_event_once = 0;
                             }
                         }
                     }
@@ -121,7 +123,6 @@ class shrine_puzzle2 {
                     this.movedoorsdown(var2);
                     var2 = var2 + 1;
                 }
-                this.callev_safe_time_event_once = 0;
             }
         }
         else if (param1.eventid == 46) {
