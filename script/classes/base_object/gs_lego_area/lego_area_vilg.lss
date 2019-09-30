@@ -14,15 +14,14 @@ class lego_area_vilg : gs_lego_area {
     }
     
     method initfull() {
-        var var1;
         var var2;
+        this.lego_area_show();
         gcareadirector::setnearestmax(50);
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
         gclightdirector::setcavelighting(0);
         this.deadhives = 0;
-        var1 = gcsaver::isconditionset(1073741824);
-        if (var1) {
+        if (gcsaver::isconditionset(1073741824)) {
             var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gccharacter::setkapura(var2);
             var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
@@ -46,7 +45,6 @@ class lego_area_vilg : gs_lego_area {
         }
         this.coindoor = new lego_moveableobject("door");
         this.coindoor.initfull();
-        this.coindoor.setalpha(0.5);
         this.coindoorx = this.coindoor.getx();
         this.coindoorz = this.coindoor.getz();
         this.testforcoindoorproximity = 0;
@@ -81,9 +79,7 @@ class lego_area_vilg : gs_lego_area {
                 if (param1.args[1] == 0) {
                     this.coindoor.hide();
                 }
-                param1.args[1];
             }
-            param1.args[0];
         }
         else if (param1.eventid == 44) {
             if (this.callev_safe_time_once) {
@@ -115,14 +111,16 @@ class lego_area_vilg : gs_lego_area {
                     globalclass.bgmusic.play(1);
                 }
             }
-            param1.args[1];
         }
         return null;
     }
     
     method cleanupfull() {
-        this.coindoor.cleanupfull();
-        this.coindoor = null;
+        this.lego_area_hide();
+        if (this.coindoor != null) {
+            this.coindoor.cleanupfull();
+            this.coindoor = null;
+        }
         this.coindoorx = null;
         this.coindoorz = null;
         this.testforcoindoorproximity = null;
@@ -133,6 +131,7 @@ class lego_area_vilg : gs_lego_area {
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
         return null;
     }
     
