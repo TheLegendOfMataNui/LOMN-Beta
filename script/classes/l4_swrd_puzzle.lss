@@ -2,7 +2,6 @@ class l4_swrd_puzzle {
     property parent;
     property platforms;
     property hookarray;
-    property hittrigerbox;
     
     method l4_swrd_puzzle(param1) {
         this.parent = param1;
@@ -12,6 +11,8 @@ class l4_swrd_puzzle {
     method initfull() {
         var var1;
         var var2;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicKopakaAmbience");
+        globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
         this.platforms = [ new platform("pl02"), 
             new platform("pl03") ];
@@ -25,7 +26,6 @@ class l4_swrd_puzzle {
         gchive::setmaxcreatures(var2, 2);
         gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("lsrp"));
         gchive::setspawnrate(var2, 4);
-        this.hittrigerbox = 0;
         globalclass.player.setgrapplinghookdistance(50);
         this.hookarray = [ new lego_moveableobject("hk01"), 
             new lego_moveableobject("hk02"), 
@@ -42,6 +42,7 @@ class l4_swrd_puzzle {
     }
     
     method show() {
+        // TODO: Set up final platform to move instead of just sitting there
         this.platforms[0].setuppath([ new basicpoint(424, 12, -1170), 
             new basicpoint(424, 12, -1170), 
             new basicpoint(406, 19, -1190), 
@@ -63,70 +64,57 @@ class l4_swrd_puzzle {
         return null;
     }
     
-    method initshort() {
-        globalclass.player.unkill();
-        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-        if (this.hittrigerbox) {
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-            this.parent.level.cam.setaimode(11);
-            this.hittrigerbox = 0;
-        }
-        return null;
-    }
-    
-    method hide() {
+    method cleanupfull() {
         var var1;
-        var var2;
-        var1 = null;
-        var2 = 0;
-        while ((this.platforms.__length - 1) >= var2) {
-            this.platforms[var2].cleanupfull();
-            this.platforms[var2] = null;
-            var2 = var2 + 1;
+        if (this.platforms != null) {
+            var1 = 0;
+            while ((this.platforms.__length - 1) >= var1) {
+                this.platforms[var1].cleanupfull();
+                this.platforms[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platforms = null;
         }
-        this.platforms = null;
-        var2 = 0;
-        while ((this.hookarray.__length - 1) >= var2) {
-            this.hookarray[var2].cleanupfull();
-            this.hookarray[var2] = null;
-            var2 = var2 + 1;
+        if (this.hookarray != null) {
+            var1 = 0;
+            while ((this.hookarray.__length - 1) >= var1) {
+                this.hookarray[var1].cleanupfull();
+                this.hookarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.hookarray = null;
         }
-        this.hookarray = null;
+        globalclass.player.setgrapplinghookdistance(120);
         return null;
     }
     
     method onevent(param1) {
         var var1;
+        if (this.platforms != null) {
+            var1 = 0;
+            while ((this.platforms.__length - 1) >= var1) {
+                this.platforms[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
         if (param1.eventid == 3) {
-            this.hittrigerbox = 1;
-            this.parent.level.cam.setaimode(7);
-            gccollisionphysicsgroup::spinmask(1.2);
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
         }
         else if (param1.eventid == 27) {
-            if (this.hittrigerbox) {
-                globalclass.player.kill();
-            }
-            else {
-                this.initshort();
-            }
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 46) {
-            if (this.hittrigerbox) {
-                this.initshort();
-            }
-            else {
-                gccollisionphysicsgroup::spinmask(1.2);
-            }
-        }
-        else if (param1.eventid == 7) {
-            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
-                gcstaticsoundsptrarray::playtablesound(149);
-            }
-        }
-        var1 = 0;
-        while ((this.platforms.__length - 1) >= var1) {
-            this.platforms[var1].onevent(param1);
-            var1 = var1 + 1;
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         return null;
     }
@@ -142,11 +130,6 @@ class l4_swrd_puzzle {
             this.platforms[var1].process(param1);
             var1 = var1 + 1;
         }
-        return null;
-    }
-    
-    method cheat() {
-        globalclass.player.addmask(11);
         return null;
     }
     
