@@ -14,7 +14,6 @@ class lep1_puzzle {
     }
     
     method initfull() {
-        var var1;
         var var2;
         this.setupgernai = 1;
         this.firstprocess = 1;
@@ -23,9 +22,7 @@ class lep1_puzzle {
         this.startpatroltimer.initfull();
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
         globalclass.bgmusic.play();
-        this.spider = null;
-        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("spdr"));
-        if (var1 == 0) {
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("spdr")) == 0) {
             debug::print("************************ SHOWING THE SPIDER");
             this.spider = new lego_pickup("spdr", 0, 5, "item", 5, 1);
             this.spider.initfull();
@@ -55,22 +52,24 @@ class lep1_puzzle {
     
     method cleanupfull() {
         var var1;
-        if (!(this.spider == null)) {
+        if (this.spider != null) {
             this.spider.cleanupfull();
             this.spider = null;
         }
-        if (!(this.startpatroltimer == null)) {
+        if (this.startpatroltimer != null) {
             this.startpatroltimer.cleanupfull();
             this.startpatroltimer = null;
         }
-        var1 = 0;
-        while ((this.hookarray.__length - 1) >= var1) {
-            this.hookarray[var1].cleanupfull();
-            this.hookarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.hookarray != null) {
+            var1 = 0;
+            while ((this.hookarray.__length - 1) >= var1) {
+                this.hookarray[var1].cleanupfull();
+                this.hookarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.hookarray = null;
         }
-        this.hookarray = null;
-        if (!(this.gern == null)) {
+        if (this.gern != null) {
             this.gern.cleanupfull();
             this.gern = null;
         }
@@ -108,7 +107,6 @@ class lep1_puzzle {
                 debug::print("3");
                 this.gern.aienablepatrolonspline();
             }
-            param1.args[0];
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);

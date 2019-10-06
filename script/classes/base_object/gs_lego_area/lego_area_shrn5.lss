@@ -4,10 +4,12 @@ class lego_area_shrn5 : gs_lego_area {
     method lego_area_shrn5(param1) {
         this.gs_lego_area("shrn", param1, 0, 0);
         this.puzzle = new shrn_puzzle5(this);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
+        this.lego_area_show();
         this.puzzle.initfull();
         gcmodeldirector::setnearestmax(5);
         gcareadirector::setnearestmax(7);
@@ -17,13 +19,17 @@ class lego_area_shrn5 : gs_lego_area {
     }
     
     method cleanupfull() {
+        this.lego_area_hide();
         this.puzzle.cleanupfull();
         return null;
     }
     
     method exit() {
-        this.puzzle.exit();
-        this.puzzle = null;
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
     

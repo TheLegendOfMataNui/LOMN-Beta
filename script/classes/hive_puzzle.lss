@@ -2,13 +2,11 @@ class hive_puzzle {
     property parent;
     property cinema_shown;
     property cinema;
-    property showmask;
     property mask;
     
     method hive_puzzle(param1) {
         this.parent = param1;
         this.cinema_shown = 0;
-        this.showmask = 1;
         return null;
     }
     
@@ -19,7 +17,7 @@ class hive_puzzle {
             gccinemaengine::load(this.cinema, "cin2");
             gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("shrn"));
         }
-        if (this.showmask) {
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mask")) == 0) {
             this.mask = new lego_pickup("mask", 4, 1, "item", 1, 1);
             this.mask.initfull();
             this.mask.show();
@@ -29,8 +27,7 @@ class hive_puzzle {
     
     method cleanupfull() {
         this.cinema = null;
-        if (!(this.mask == null)) {
-            this.showmask = this.mask.objshown;
+        if (this.mask != null) {
             this.mask.cleanupfull();
             this.mask = null;
         }
@@ -57,26 +54,29 @@ class hive_puzzle {
                 this.playcinema();
             }
         }
+        else if (param1.eventid == 30) {
+            globalclass.bgmusic.stop();
+        }
         return null;
     }
     
     method input(param1) {
-        if (param1.event == 2) {
-            if (param1.button == 251) {
-                if (!(this.cinema == null)) {
-                    gccinemaengine::stop(this.cinema);
-                }
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (this.cinema != null) {
+                gccinemaengine::stop(this.cinema);
             }
-            param1.button;
         }
         return null;
     }
     
     method playcinema() {
         if (this.cinema_shown == 0) {
-            globalclass.hud.hide();
             gccinemaengine::play(this.cinema);
             this.cinema_shown = 1;
+			if (globalclass.player.maskcontrol.isactive()) {
+				globalclass.player.maskcontrol.toggleactive();
+				globalclass.hud.mask.hide();
+			}
         }
         return null;
     }
