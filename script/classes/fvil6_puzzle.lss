@@ -11,10 +11,8 @@ class fvil6_puzzle {
     }
     
     method initfull() {
-        var var1;
         var var2;
-        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("levr"));
-        if (var1 == 0) {
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("levr")) == 0) {
             this.leverpickup = new lego_pickup("levr", 0, 5, "item", 5, 1);
             this.leverpickup.initfull();
             this.leverpickup.setquest(2);
@@ -39,27 +37,30 @@ class fvil6_puzzle {
         }
         this.elmdoor = new lego_moveableobject("door");
         this.elmdoor.initfull();
-        this.elmdoor.setalpha(0.8);
         this.elmdoorshone = 1;
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        if (!(this.leverpickup == null)) {
+        if (this.leverpickup != null) {
             this.leverpickup.cleanupfull();
             this.leverpickup = null;
         }
-        var1 = 0;
-        while ((this.hookarray.__length - 1) >= var1) {
-            this.hookarray[var1].cleanupfull();
-            this.hookarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.hookarray != null) {
+            var1 = 0;
+            while ((this.hookarray.__length - 1) >= var1) {
+                this.hookarray[var1].cleanupfull();
+                this.hookarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.hookarray = null;
         }
-        this.hookarray = null;
         globalclass.player.setgrapplinghookdistance(45);
-        this.elmdoor.cleanupfull();
-        this.elmdoor = null;
+        if (this.elmdoor != null) {
+            this.elmdoor.cleanupfull();
+            this.elmdoor = null;
+        }
         return null;
     }
     
