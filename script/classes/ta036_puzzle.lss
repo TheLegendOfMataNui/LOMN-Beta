@@ -3,7 +3,6 @@ class ta036_puzzle {
     property mthermals;
     property mask;
     property gotmask;
-    property showmask;
     
     method ta036_puzzle(param1) {
         this.parent = param1;
@@ -37,13 +36,7 @@ class ta036_puzzle {
             new thermal("tm33"), 
             new thermal("tm34"), 
             new thermal("tm35") ];
-        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mk6a"))) {
-            this.showmask = 0;
-        }
-        else {
-            this.showmask = 1;
-        }
-        if (this.showmask == 1) {
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mk6a")) == 0) {
             this.mask = new lego_pickup("mk6a", 1011, 1, "item", 1, 1);
             this.mask.initfull();
             this.mask.show();
@@ -57,20 +50,19 @@ class ta036_puzzle {
     
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        while ((this.mthermals.__length - 1) >= var1) {
-            this.mthermals[var1].cleanupfull();
-            var1 = var1 + 1;
-        }
-        this.mthermals = [ ];
-        if (!(this.mask == null)) {
-            if (this.mask.objshown == 0) {
-                this.showmask = 0;
+        if (this.mthermals != null) {
+            var1 = 0;
+            while ((this.mthermals.__length - 1) >= var1) {
+                this.mthermals[var1].cleanupfull();
+                this.mthermals[var1] = null;
+                var1 = var1 + 1;
             }
+            this.mthermals = null;
+        }
+        if (this.mask != null) {
             this.mask.cleanupfull();
             this.mask = null;
         }
-        this.mthermals.__length - 1;
         return null;
     }
     
@@ -86,10 +78,12 @@ class ta036_puzzle {
     
     method onevent(param1) {
         var var1;
-        var1 = 0;
-        while ((this.mthermals.__length - 1) >= var1) {
-            this.mthermals[var1].onevent(param1);
-            var1 = var1 + 1;
+        if (this.mthermals != null) {
+            var1 = 0;
+            while ((this.mthermals.__length - 1) >= var1) {
+                this.mthermals[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
         }
         if (param1.eventid == 39) {
             this.gotmask = 1;
