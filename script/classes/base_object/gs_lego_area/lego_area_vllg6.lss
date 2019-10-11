@@ -4,20 +4,17 @@ class lego_area_vllg6 : gs_lego_area {
     method lego_area_vllg6(param1) {
         this.gs_lego_area("vllg", param1, 0, 0);
         this.lego_area_initfull();
-        this.startingarea = [ 180, 
-            -356, 
-            0 - 51.4, 
-            689 ];
         return null;
     }
     
     method initfull() {
+        this.lego_area_show();
         var var1;
         gcmodeldirector::setnearestmax(5);
         gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
         globalclass.bgmusic.play(1);
-        if (!(gcsaver::finditem(scslosifoundation::stringtoidentifier("swrd")) == 1)) {
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("swrd")) == 0) {
             this.swrd = new lego_pickup("swrd", 0, 3, "item", 9, 1);
             this.swrd.initfull();
             this.swrd.show();
@@ -49,7 +46,8 @@ class lego_area_vllg6 : gs_lego_area {
     }
     
     method cleanupfull() {
-        if (!(this.swrd == null)) {
+        this.lego_area_hide();
+        if (this.swrd != null) {
             this.swrd.cleanupfull();
             this.swrd = null;
         }
@@ -68,6 +66,7 @@ class lego_area_vllg6 : gs_lego_area {
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
         return null;
     }
 }
