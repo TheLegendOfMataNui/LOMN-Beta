@@ -12,7 +12,7 @@ class shrn6_puzzle {
     
     method initfull() {
         var var1;
-        var var2;
+        var vakama;
         var var3;
         gcareadirector::setnearestmax(15);
         this.doorarray = [ new lego_moveableobject("drs2"), 
@@ -30,9 +30,9 @@ class shrn6_puzzle {
         }
         this.doorarray[2].fadein();
         this.bossdoorshone = 1;
-        var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vaka"), 0);
-        gccharacter::setinputstate(var2, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setupmoveable(var2, 1.5, 0.8, 1, 0, 0);
+        vakama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vaka"), 0);
+        gccharacter::setinputstate(vakama, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(vakama, scslosifoundation::stringtoidentifier("va00"), -1);
         var3 = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
@@ -57,13 +57,15 @@ class shrn6_puzzle {
     
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        while ((this.doorarray.__length - 1) >= var1) {
-            this.doorarray[var1].cleanupfull();
-            this.doorarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.doorarray != null) {
+            var1 = 0;
+            while ((this.doorarray.__length - 1) >= var1) {
+                this.doorarray[var1].cleanupfull();
+                this.doorarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.doorarray = null;
         }
-        this.doorarray = null;
         this.cinema = null;
         return null;
     }
@@ -98,9 +100,6 @@ class shrn6_puzzle {
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
-        }
-        else if (param1.eventid == 27) {
-            
         }
         else if (param1.eventid == 1) {
             if ((param1.args[1] == scslosifoundation::stringtoidentifier("drs4")) && (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1"))) {
