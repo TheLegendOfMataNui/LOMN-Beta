@@ -84,6 +84,12 @@ class puzzle_tahu7 {
         else if (param1.eventid == 27) {
             this.resetb();
         }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {
+                globalclass.setnextlevel("lev0", 1);
+                bettersaver::setbooleanvalue(100, 1);
+            }
+        }
         else if (param1.eventid == 1) {
             if (this.buttonpressed == 0) {
                 if ((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[1] == this.button.id)) {
