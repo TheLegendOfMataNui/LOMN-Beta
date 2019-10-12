@@ -14,9 +14,6 @@ class lego_area_gali : gs_lego_area {
             this.puzzle = new puzzle_gali7();
             this.puzzle.initfull(this.name);
         }
-        globalclass.hud.cdtimer.initfull();
-        globalclass.hud.cdtimer.settime(120.0);
-        globalclass.hud.cdtimer.start();
         return null;
     }
     
@@ -43,6 +40,9 @@ class lego_area_gali : gs_lego_area {
             if (!(globalclass.player.actorid == "gali")) {
                 globalclass.player.changetoa("gali");
                 globalclass.player.maskcontrol.changemask(1);
+                globalclass.hud.cdtimer.initfull();
+                globalclass.hud.cdtimer.settime(120.0);
+                globalclass.hud.cdtimer.start();
                 gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
                 globalclass.player.setupgrapplinghook();
                 globalclass.player.setgrapplinghookdistance(85);

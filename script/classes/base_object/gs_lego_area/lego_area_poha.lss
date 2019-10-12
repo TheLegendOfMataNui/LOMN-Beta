@@ -8,9 +8,6 @@ class lego_area_poha : gs_lego_area {
     
     method initfull() {
         gcmodeldirector::setnearestmax(10);
-        globalclass.hud.cdtimer.initfull();
-        globalclass.hud.cdtimer.settime(120.0);
-        globalclass.hud.cdtimer.start();
         this.puzzle = new puzzle_poha7();
         this.puzzle.initfull(this.name);
         return null;
@@ -39,6 +36,9 @@ class lego_area_poha : gs_lego_area {
             if (!(globalclass.player.actorid == "poha")) {
                 globalclass.player.changetoa("poha");
                 globalclass.player.maskcontrol.changemask(2);
+                globalclass.hud.cdtimer.initfull();
+                globalclass.hud.cdtimer.settime(120.0);
+                globalclass.hud.cdtimer.start();
                 gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
             }
         }
