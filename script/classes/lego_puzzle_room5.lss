@@ -5,7 +5,6 @@ class lego_puzzle_room5 {
     property hittriggerplaneonce;
     property callev_safe_time_once;
     property glyph;
-    property showpickup;
     property hiveinc;
     
     method lego_puzzle_room5(param1) {
@@ -18,8 +17,6 @@ class lego_puzzle_room5 {
         var var2;
         var var3;
         var var4;
-        var var5;
-        this.showpickup = 1;
         this.hiveinc = 0;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEWATHEME");
         globalclass.bgmusic.play();
@@ -47,11 +44,7 @@ class lego_puzzle_room5 {
         gchive::setmaxcreatures(var4, 2);
         gchive::setcreaturetype(var4, scslosifoundation::stringtoidentifier("lsrp"));
         gchive::setspawnrate(var4, 4);
-        var5 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"));
-        if (var5) {
-            this.showpickup = 0;
-        }
-        if (this.showpickup) {
+        if (gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp")) == 0) {
             this.glyph = new lego_pickup("glyp", 16, 2, "item", 3, 1);
             this.glyph.initfull();
             this.glyph.show();
@@ -61,6 +54,7 @@ class lego_puzzle_room5 {
     
     method initshort() {
         this.callev_safe_time_once = 1;
+        this.hittriggerplaneonce = 1;
         globalclass.level.cam.setaimode(11);
         globalclass.player.unkill();
         globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
@@ -68,22 +62,18 @@ class lego_puzzle_room5 {
     }
     
     method cleanupfull() {
-        var var1;
-        var var2;
-        var var3;
-        var var4;
-        if (!(this.glyph == null)) {
+        if (this.glyph != null) {
             this.glyph.cleanupfull();
             this.glyph = null;
         }
-        var1 = null;
-        var2 = null;
-        var3 = null;
-        var4 = null;
-        this.door1.cleanupfull();
-        this.door1 = null;
-        this.door2.cleanupfull();
-        this.door2 = null;
+        if (this.door1 != null) {
+            this.door1.cleanupfull();
+            this.door1 = null;
+        }
+        if (this.door2 != null) {
+            this.door2.cleanupfull();
+            this.door2 = null;
+        }
         return null;
     }
     
@@ -125,7 +115,6 @@ class lego_puzzle_room5 {
                     this.hittriggerplaneonce = 0;
                 }
             }
-            param1.args[0];
         }
         else if (param1.eventid == 46) {
             globalclass.level.cam.setaimode(7);
