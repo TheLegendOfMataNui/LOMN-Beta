@@ -9,6 +9,7 @@ class shrn2_puzzle {
     property needstobeunderwater;
     property doorsclosed;
     property doors;
+    property portalactive;
     
     method shrn2_puzzle(param1) {
         this.parent = param1;
@@ -24,6 +25,8 @@ class shrn2_puzzle {
     
     method initfull() {
         var var1;
+        var nokama;
+        var portal_trigger;
         this.doors = [ new lego_moveableobject("dor1"), 
             new lego_moveableobject("dor3"), 
             new lego_moveableobject("dor4") ];
@@ -65,6 +68,17 @@ class shrn2_puzzle {
             this.movedoorsdown(var1);
             var1 = var1 + 1;
         }
+        nokama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"), 0);
+        gccharacter::setinputstate(nokama, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(nokama, scslosifoundation::stringtoidentifier("no00"), -1);
+        portal_trigger = scslosifoundation::stringtoidentifier("tps9");
+        this.portalactive = gcsaver::portalactive();
+        if (this.portalactive == 1) {
+            gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/gali/village_ripple/g_prtl", 1);
+        }
+        else {
+            gccollisionphysicsgroup::turnoffnextarea(portal_trigger);
+        }
         return null;
     }
     
@@ -87,6 +101,7 @@ class shrn2_puzzle {
     }
     
     method onevent(param1) {
+        var portal_trigger;
         if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
         }
@@ -103,6 +118,14 @@ class shrn2_puzzle {
                 if (param1.args[1] == scslosifoundation::stringtoidentifier("whpl")) {
                     gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier("hydr"), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
                 }
+            }
+        }
+        else if (param1.eventid == 41) {
+            if (this.portalactive == 0) {
+                portal_trigger = scslosifoundation::stringtoidentifier("tps9");
+                gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
+                gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/gali/village_ripple/g_prtl", 1);
+                this.portalactive = 1;
             }
         }
         return null;
