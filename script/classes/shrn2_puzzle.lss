@@ -1,11 +1,8 @@
 class shrn2_puzzle {
     property parent;
-    property watterfall1_on;
-    property watterfall2_on;
-    property watterfall3_on;
-    property watterfall1;
-    property watterfall2;
-    property watterfall3;
+    property waterfall1;
+    property waterfall2;
+    property waterfall3;
     property needstobeunderwater;
     property doorsclosed;
     property doors;
@@ -13,13 +10,7 @@ class shrn2_puzzle {
     
     method shrn2_puzzle(param1) {
         this.parent = param1;
-        this.watterfall1_on = 0;
-        this.watterfall2_on = 0;
-        this.watterfall3_on = 0;
         this.needstobeunderwater = 1;
-        this.doorsclosed = [ 1, 
-            1, 
-            1 ];
         return null;
     }
     
@@ -27,6 +18,9 @@ class shrn2_puzzle {
         var var1;
         var nokama;
         var portal_trigger;
+        this.doorsclosed = [ 1, 
+            1, 
+            1 ];
         this.doors = [ new lego_moveableobject("dor1"), 
             new lego_moveableobject("dor3"), 
             new lego_moveableobject("dor4") ];
@@ -35,30 +29,12 @@ class shrn2_puzzle {
             this.doors[var1].initfull();
             var1 = var1 + 1;
         }
-        this.watterfall1 = new lego_moveableobject("swf1");
-        this.watterfall1.initfull();
-        this.watterfall2 = new lego_moveableobject("swf2");
-        this.watterfall2.initfull();
-        this.watterfall3 = new lego_moveableobject("swf3");
-        this.watterfall3.initfull();
-        if (this.watterfall1_on) {
-            this.watterfall1.show();
-        }
-        else {
-            this.watterfall1.hide();
-        }
-        if (this.watterfall2_on) {
-            this.watterfall2.show();
-        }
-        else {
-            this.watterfall2.hide();
-        }
-        if (this.watterfall3_on) {
-            this.watterfall3.show();
-        }
-        else {
-            this.watterfall3.hide();
-        }
+        this.waterfall1 = new lego_moveableobject("swf1");
+        this.waterfall1.initfull();
+        this.waterfall2 = new lego_moveableobject("swf2");
+        this.waterfall2.initfull();
+        this.waterfall3 = new lego_moveableobject("swf3");
+        this.waterfall3.initfull();
         if (this.needstobeunderwater) {
             globalclass.player.actor.setunderwater(1);
             this.needstobeunderwater = 1;
@@ -79,24 +55,42 @@ class shrn2_puzzle {
         else {
             gccollisionphysicsgroup::turnoffnextarea(portal_trigger);
         }
+        if (bettersaver::getbooleanvalue(75)) {
+            this.waterfall1.hide();
+        }
+        if (bettersaver::getbooleanvalue(76)) {
+            this.waterfall2.hide();
+        }
+        if (bettersaver::getbooleanvalue(77)) {
+            this.waterfall3.hide();
+        }
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        while ((this.doors.__length - 1) >= var1) {
-            this.doors[var1].cleanupfull();
-            this.doors[var1] = null;
-            var1 = var1 + 1;
+        if (this.doors != null) {
+            var1 = 0;
+            while ((this.doors.__length - 1) >= var1) {
+                this.doors[var1].cleanupfull();
+                this.doors[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.doors = null;
         }
-        this.doors = null;
-        this.watterfall1.cleanupfull();
-        this.watterfall1 = null;
-        this.watterfall2.cleanupfull();
-        this.watterfall2 = null;
-        this.watterfall3.cleanupfull();
-        this.watterfall3 = null;
+        if (this.waterfall1 != null) {
+            this.waterfall1.cleanupfull();
+            this.waterfall1 = null;
+        }
+        if (this.waterfall2 != null) {
+            this.waterfall2.cleanupfull();
+            this.waterfall2 = null;
+        }
+        if (this.waterfall3 != null) {
+            this.waterfall3.cleanupfull();
+            this.waterfall3 = null;
+        }
+        this.doorsclosed = null;
         return null;
     }
     
@@ -126,6 +120,9 @@ class shrn2_puzzle {
                 gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
                 gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/gali/village_ripple/g_prtl", 1);
                 this.portalactive = 1;
+            }
+            if (bettersaver::getbooleanvalue(75)) {
+                this.waterfall1.hide();
             }
         }
         return null;
