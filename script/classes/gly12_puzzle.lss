@@ -1,29 +1,16 @@
 class gly12_puzzle {
     property parent;
-    property glyph;
     property hookshots;
     property piras;
-    property showpickup;
     property door;
     
     method gly12_puzzle(param1) {
         this.parent = param1;
-        this.showpickup = 1;
         return null;
     }
     
     method initfull() {
-        var var1;
         var var2;
-        gcareadirector::setnearestmax(50);
-        var1 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"));
-        if (var1) {
-            this.showpickup = 0;
-        }
-        if (this.showpickup) {
-            this.glyph = new lego_pickup("glyp", 5, 2, "item", 6, 1);
-            this.glyph.initfull();
-        }
         this.piras = [ new gs_lego_character("pir0", "pira", "gly1", 0, 250.3, 9.2, 0 - 51.9, "aiin"), 
             new gs_lego_character("pir1", "pira", "gly1", 0, 246.3, 0 - 8.7, 0 - 50.9, "aiin"), 
             new gs_lego_character("pir2", "pira", "gly1", 0, 244.3, 0 - 20.8, 0 - 67.9, "aiin"), 
@@ -54,7 +41,6 @@ class gly12_puzzle {
             this.hookshots[var2].show();
             var2 = var2 + 1;
         }
-        globalclass.player.actor.setcontext(0);
         return null;
     }
     
@@ -66,45 +52,35 @@ class gly12_puzzle {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
         }
-        else if (param1.eventid == 1) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (param1.args[1] == scslosifoundation::stringtoidentifier("glyp")) {
-                    this.glyph.pickup();
-                }
-                param1.args[1];
-            }
-            param1.args[0];
-        }
         else if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {
                 screenlist.screens[2].screen.areas[12].puzzle.needstobeunderwater(1);
                 screenlist.screens[2].screen.areas[12].puzzle.switchit(0);
             }
-            param1.args[0];
         }
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        if (!(this.glyph == null)) {
-            this.glyph.cleanupfull();
-            this.glyph = null;
+        if (this.piras != null) {
+            var1 = 0;
+            while ((this.piras.__length - 1) >= var1) {
+                this.piras[var1].cleanupfull();
+                this.piras[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.piras = null;
         }
-        var1 = 0;
-        while ((this.piras.__length - 1) >= var1) {
-            this.piras[var1].cleanupfull();
-            this.piras[var1] = null;
-            var1 = var1 + 1;
+        if (this.hookshots != null) {
+            var1 = 0;
+            while ((this.hookshots.__length - 1) >= var1) {
+                this.hookshots[var1].cleanupfull();
+                this.hookshots[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.hookshots = null;
         }
-        this.piras = null;
-        var1 = 0;
-        while ((this.hookshots.__length - 1) >= var1) {
-            this.hookshots[var1].cleanupfull();
-            this.hookshots[var1] = null;
-            var1 = var1 + 1;
-        }
-        this.hookshots = null;
         return null;
     }
     
