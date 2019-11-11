@@ -1,0 +1,115 @@
+class gly12_puzzle {
+    property parent;
+    property glyph;
+    property hookshots;
+    property piras;
+    property showpickup;
+    property door;
+    
+    method gly12_puzzle(param1) {
+        this.parent = param1;
+        this.showpickup = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        gcareadirector::setnearestmax(50);
+        var1 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"));
+        if (var1) {
+            this.showpickup = 0;
+        }
+        if (this.showpickup) {
+            this.glyph = new lego_pickup("glyp", 5, 2, "item", 6, 1);
+            this.glyph.initfull();
+        }
+        this.piras = [ new gs_lego_character("pir0", "pira", "gly1", 0, 250.3, 9.2, 0 - 51.9, "aiin"), 
+            new gs_lego_character("pir1", "pira", "gly1", 0, 246.3, 0 - 8.7, 0 - 50.9, "aiin"), 
+            new gs_lego_character("pir2", "pira", "gly1", 0, 244.3, 0 - 20.8, 0 - 67.9, "aiin"), 
+            new gs_lego_character("pir3", "pira", "gly1", 0, 232.3, 0 - 18.8, 0 - 53.9, "aiin"), 
+            new gs_lego_character("pir4", "pira", "gly1", 0, 0 - 2.5, 0 - 21.7, 106.9, "aiin"), 
+            new gs_lego_character("pir5", "pira", "gly1", 0, 266.0, 0 - 0.6, 157.1, "aiin"), 
+            new gs_lego_character("pir6", "pira", "gly1", 0, 155.2, 0 - 7.0, 81.2, "aiin"), 
+            new gs_lego_character("pir7", "pira", "gly1", 0, 0 - 99.1, 139.2, 0 - 47.2, "aiin"), 
+            new gs_lego_character("pir8", "pira", "gly1", 0, 0 - 112.8, 132.5, 21.8, "aiin"), 
+            new gs_lego_character("pir9", "pira", "gly1", 0, 0 - 190.0, 140.1, 25.9, "aiin"), 
+            new gs_lego_character("pirx", "pira", "gly1", 0, 0 - 232.8, 129.9, 13.6, "aiin") ];
+        var2 = 0;
+        while ((this.piras.__length - 1) >= var2) {
+            this.piras[var2].initfull();
+            this.piras[var2].add();
+            this.piras[var2].settweakable();
+            this.piras[var2].show();
+            var2 = var2 + 1;
+        }
+        this.hookshots = [ new lego_moveableobject("trg1"), 
+            new lego_moveableobject("trg2"), 
+            new lego_moveableobject("trg3"), 
+            new lego_moveableobject("trg4") ];
+        var2 = 0;
+        while ((this.hookshots.__length - 1) >= var2) {
+            this.hookshots[var2].initfull();
+            this.hookshots[var2].setmytargetingflags(1);
+            this.hookshots[var2].show();
+            var2 = var2 + 1;
+        }
+        globalclass.player.actor.setcontext(0);
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("glyp")) {
+                    this.glyph.pickup();
+                }
+                param1.args[1];
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {
+                screenlist.screens[2].screen.areas[12].puzzle.needstobeunderwater(1);
+                screenlist.screens[2].screen.areas[12].puzzle.switchit(0);
+            }
+            param1.args[0];
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (!(this.glyph == null)) {
+            this.glyph.cleanupfull();
+            this.glyph = null;
+        }
+        var1 = 0;
+        while ((this.piras.__length - 1) >= var1) {
+            this.piras[var1].cleanupfull();
+            this.piras[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.piras = null;
+        var1 = 0;
+        while ((this.hookshots.__length - 1) >= var1) {
+            this.hookshots[var1].cleanupfull();
+            this.hookshots[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hookshots = null;
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}
