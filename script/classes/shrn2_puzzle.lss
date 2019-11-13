@@ -14,6 +14,9 @@ class shrn2_puzzle {
     method shrn2_puzzle(param1) {
         this.parent = param1;
         this.needstobeunderwater = 1;
+        this.doorsclosed = [ 1, 
+            1, 
+            1 ];
         return null;
     }
     
@@ -22,9 +25,6 @@ class shrn2_puzzle {
         var nokama;
         var portal_trigger;
         var door_text;
-        this.doorsclosed = [ 1, 
-            1, 
-            1 ];
         this.doors = [ new lego_moveableobject("dor1"), 
             new lego_moveableobject("dor3"), 
             new lego_moveableobject("dor2"), 
@@ -44,11 +44,6 @@ class shrn2_puzzle {
             globalclass.player.actor.setunderwater(1);
             this.needstobeunderwater = 1;
         }
-        var1 = 0;
-        while (2 >= var1) {
-            this.movedoorsdown(var1);
-            var1 = var1 + 1;
-        }
         nokama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"), 0);
         gccharacter::setinputstate(nokama, scslosifoundation::stringtoidentifier("none"));
         gccharacter::switchanimation(nokama, scslosifoundation::stringtoidentifier("no00"), -1);
@@ -65,9 +60,14 @@ class shrn2_puzzle {
         }
         if (bettersaver::getbooleanvalue(76)) {
             this.waterfall2.hide();
+            this.doors[0].hide();
         }
         if (bettersaver::getbooleanvalue(77)) {
             this.waterfall3.hide();
+            this.doors[1].hide();
+        }
+        if (bettersaver::getbooleanvalue(78)) {
+            this.doors[2].hide();
         }
         if (bettersaver::getbooleanvalue(66) == 0) {
             this.showbossdoor = 1;
@@ -75,6 +75,11 @@ class shrn2_puzzle {
         }
         else {
             this.doors[3].hide();
+        }
+        var1 = 0;
+        while (2 >= var1) {
+            this.movedoorsdown(var1);
+            var1 = var1 + 1;
         }
         door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 8);
         this.bossdoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
@@ -107,7 +112,6 @@ class shrn2_puzzle {
             this.waterfall3.cleanupfull();
             this.waterfall3 = null;
         }
-        this.doorsclosed = null;
         if (this.bossdoortext != null) {
             this.bossdoortext.remove();
             this.bossdoortext.cleanupfull();
@@ -206,7 +210,7 @@ class shrn2_puzzle {
         else {
             this.needstobeunderwater = 0;
         }
-        debug::print("[][][]what the hell does this do anyway?");
+        debug::print("what the hell does this do anyway?");
         return null;
     }
     
@@ -234,6 +238,8 @@ class shrn2_puzzle {
                 var2 = this.doors[var1].getx();
                 var3 = this.doors[var1].getz();
                 this.doors[var1].interpolate(var2, 0 - 97.6, var3, 1.0);
+                this.waterfall2.hide();
+                bettersaver::setbooleanvalue(76, 1);
             }
             else {
                 debug::print(("*****DOOR " + __tostring(var1)) + " GOES UP");
