@@ -172,9 +172,11 @@ class shrn2_puzzle {
         else if (param1.eventid == 44) {
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str6")) && (bettersaver::getbooleanvalue(76) == 0)) {
                 bettersaver::setbooleanvalue(76, 1);
+                this.waterfall3.hide();
             }
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str4")) && (bettersaver::getbooleanvalue(77) == 0)) {
                 bettersaver::setbooleanvalue(77, 1);
+                this.waterfall2.hide();
             }
         }
         return null;
@@ -244,7 +246,6 @@ class shrn2_puzzle {
                 var2 = this.doors[var1].getx();
                 var3 = this.doors[var1].getz();
                 this.doors[var1].interpolate(var2, 0 - 97.6, var3, 1.0);
-                this.waterfall3.hide();
             }
             else {
                 debug::print(("*****DOOR " + __tostring(var1)) + " GOES UP");
@@ -265,7 +266,6 @@ class shrn2_puzzle {
                 var2 = this.doors[var1].getx();
                 var3 = this.doors[var1].getz();
                 this.doors[var1].interpolate(var2, 24.3, var3, 1.0);
-                this.waterfall2.hide();
             }
         }
         else if (var1 == 2) {
