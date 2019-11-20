@@ -36,15 +36,23 @@ class gizzer {
     }
     
     method cleanupfull() {
-        this.gyzer.cleanupfull();
-        this.swich.cleanupfull();
-        this.timer.cleanupfull();
-        this.startpos.cleanupfull();
-        this.gyzer = null;
-        this.swich = null;
-        this.timer = null;
+        if (this.gyzer != null) {
+            this.gyzer.cleanupfull();
+            this.gyzer = null;
+        }
+        if (this.swich != null) {
+            this.swich.cleanupfull();
+            this.swich = null;
+        }
+        if (this.timer != null) {
+            this.timer.cleanupfull();
+            this.timer = null;
+        }
+        if (this.startpos != null) {
+            this.startpos.cleanupfull();
+            this.startpos = null;
+        }
         this.state = null;
-        this.startpos = null;
         this.switchmoveing = null;
         return null;
     }
