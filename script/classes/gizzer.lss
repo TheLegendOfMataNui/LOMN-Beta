@@ -1,0 +1,114 @@
+class gizzer {
+    property gyzer;
+    property swich;
+    property timer;
+    property state;
+    property startpos;
+    property switchmoveing;
+    property resetting;
+    
+    method gizzer(param1, param2, param3, param4) {
+        this.swich = new lego_moveableobject(param1);
+        this.swich.initfull();
+        this.swich.setresponse(0, 0, 0);
+        this.gyzer = new lego_moveableobject(param2);
+        this.gyzer.initfull();
+        this.gyzer.setresponse(1, 0, 1);
+        this.gyzer.setpos(this.gyzer.getx(), 10, this.gyzer.getz());
+        this.timer = new lego_timer(param3, 5, 0);
+        this.timer.initfull();
+        this.startpos = new basicpoint(this.gyzer.getx(), 10, this.gyzer.getz());
+        this.switchmoveing = 0;
+        return null;
+    }
+    
+    method initfull() {
+        this.state = 0;
+        this.gyzer.settweakable();
+        this.swich.settweakable();
+        this.resetting = 0;
+        return null;
+    }
+    
+    method show() {
+        this.start();
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.gyzer.cleanupfull();
+        this.swich.cleanupfull();
+        this.timer.cleanupfull();
+        this.startpos.cleanupfull();
+        this.gyzer = null;
+        this.swich = null;
+        this.timer = null;
+        this.state = null;
+        this.startpos = null;
+        this.switchmoveing = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (param1.args[0] == this.swich.id) {
+                this.hitswitch();
+            }
+        }
+        else if (param1.eventid == 12) {
+            if (param1.args[0] == this.gyzer.id) {
+                this.start();
+            }
+        }
+        else if (param1.eventid == 8) {
+            if (param1.args[0] == this.timer.id) {
+                this.start();
+            }
+        }
+        else if (param1.eventid == 34) {
+            if (param1.args[0] == this.gyzer.id) {
+                if (this.resetting) {
+                    this.resetting = 0;
+                    this.start();
+                }
+                else {
+                    this.timer.reset(0);
+                    this.timer.start();
+                }
+            }
+            if (param1.args[0] == this.swich.id) {
+                this.switchmoveing = 0;
+            }
+        }
+        return null;
+    }
+    
+    method start() {
+        this.gyzer.setslidetimer(0, 19, 0, 1, 2, 1);
+        return null;
+    }
+    
+    method reset(param1) {
+        this.resetting = 1;
+        this.gyzer.stopslidetimer();
+        this.gyzer.setslidetimer(0, this.startpos.y - this.gyzer.gety(), 0, 1, 1, 0);
+        this.timer.stop();
+        this.timer.reset(0);
+        return null;
+    }
+    
+    method hitswitch() {
+        if (!this.switchmoveing) {
+            this.switchmoveing = 1;
+            this.swich.setslidetimer(0, 0 - 0.2, 0, 1, 2, 1);
+            this.reset();
+        }
+        return null;
+    }
+    
+    method exit() {
+        var var1;
+        var1 = null;
+        return null;
+    }
+}
