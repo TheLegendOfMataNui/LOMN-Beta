@@ -1,0 +1,432 @@
+class bech2_puzzle {
+    property parent;
+    property platformarray;
+    property newplatform;
+    property oldplatform;
+    property printwhichplatformimon;
+    property waterburstarray;
+    property timerarray;
+    property grapplingpivot;
+    property hoppingplatforms;
+    property kn00coords;
+    property kn01coords;
+    property kn02coords;
+    property kn03coords;
+    property kn04coords;
+    property kn05coords;
+    property kn06coords;
+    property kn07coords;
+    property platformarrayubound;
+    property waterburstarrayubound;
+    property maskoftranslation;
+    property grapplingareaplatforms;
+    property elevatorplatforms;
+    property showpickup;
+    
+    method bech2_puzzle(param1) {
+        this.parent = param1;
+        this.showpickup = 1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var var3;
+        var var4;
+        var var5;
+        var var6;
+        var var7;
+        var var8;
+        var var9;
+        var var10;
+        gcareadirector::setnearestmax(50);
+        this.elevatorplatforms = [ new lego_moveableobject("ep00"), 
+            new lego_moveableobject("ep01"), 
+            new lego_moveableobject("ep02"), 
+            new lego_moveableobject("ep03"), 
+            new lego_moveableobject("ep04"), 
+            new lego_moveableobject("ep05") ];
+        this.grapplingpivot = new lego_moveableobject("hk01");
+        this.grapplingareaplatforms = [ new lego_moveableobject("pr07"), 
+            new lego_moveableobject("pr08"), 
+            new lego_moveableobject("pr09") ];
+        this.hoppingplatforms = [ new lego_moveableobject("hp00"), 
+            new lego_moveableobject("hp01"), 
+            new lego_moveableobject("hp02"), 
+            new lego_moveableobject("hp03"), 
+            new lego_moveableobject("hp04"), 
+            new lego_moveableobject("hp05"), 
+            new lego_moveableobject("hp06"), 
+            new lego_moveableobject("hp07"), 
+            new lego_moveableobject("hp08"), 
+            new lego_moveableobject("hp09"), 
+            new lego_moveableobject("hp10"), 
+            new lego_moveableobject("hp11"), 
+            new lego_moveableobject("hp12"), 
+            new lego_moveableobject("hp13"), 
+            new lego_moveableobject("hp14"), 
+            new lego_moveableobject("hp15"), 
+            new lego_moveableobject("hp16"), 
+            new lego_moveableobject("hp17"), 
+            new lego_moveableobject("hp18"), 
+            new lego_moveableobject("hp19"), 
+            new lego_moveableobject("hp20"), 
+            new lego_moveableobject("hp21"), 
+            new lego_moveableobject("hp22") ];
+        this.waterburstarray = [ new lego_moveableobject("kn00"), 
+            new lego_moveableobject("kn01"), 
+            new lego_moveableobject("kn02"), 
+            new lego_moveableobject("kn03"), 
+            new lego_moveableobject("kn04"), 
+            new lego_moveableobject("kn05"), 
+            new lego_moveableobject("kn06"), 
+            new lego_moveableobject("kn07") ];
+        this.waterburstarrayubound = this.waterburstarray.__length - 1;
+        this.platformarray = [ new beachplatform("lg01") ];
+        this.platformarrayubound = this.platformarray.__length - 1;
+        var1 = globalclass.randnum.getrandomfloat(6.0, 7.5);
+        var2 = globalclass.randnum.getrandomfloat(6.0, 7.5);
+        var3 = globalclass.randnum.getrandomfloat(6.0, 7.5);
+        var4 = globalclass.randnum.getrandomfloat(6.0, 7.5);
+        var5 = globalclass.randnum.getrandomfloat(6.0, 7.5);
+        var6 = globalclass.randnum.getrandomfloat(6.0, 7.5);
+        var7 = globalclass.randnum.getrandomfloat(6.0, 7.5);
+        var8 = globalclass.randnum.getrandomfloat(6.0, 7.5);
+        this.timerarray = [ new lego_timer("wbt0", var1, 0), 
+            new lego_timer("wbt1", var2, 0), 
+            new lego_timer("wbt2", var3, 0), 
+            new lego_timer("wbt3", var4, 0), 
+            new lego_timer("wbt4", var5, 0), 
+            new lego_timer("wbt5", var6, 0), 
+            new lego_timer("wbt6", var7, 0), 
+            new lego_timer("wbt7", var8, 0) ];
+        var9 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mk9a"));
+        if (var9) {
+            this.showpickup = 0;
+        }
+        if (this.showpickup) {
+            this.maskoftranslation = new lego_pickup("mk9a", 9, 1, "item", 2, 1);
+            this.maskoftranslation.initfull();
+            this.maskoftranslation.show();
+        }
+        var10 = 0;
+        while ((this.elevatorplatforms.__length - 1) >= var10) {
+            this.elevatorplatforms[var10].initfull("pf04", "Root/data/levels/lev2/bech", -3, -1, -3, 3, 1, 3);
+            var10 = var10 + 1;
+        }
+        var10 = 0;
+        while ((this.elevatorplatforms.__length - 1) >= var10) {
+            this.elevatorplatforms[var10].settweakable();
+            this.elevatorplatforms[var10].setresponse(1, 0, 1);
+            var10 = var10 + 1;
+        }
+        this.grapplingpivot.initfull();
+        this.grapplingpivot.setmytargetingflags(1);
+        this.grapplingpivot.setresponse(1, 1, 1);
+        var10 = 0;
+        while ((this.hoppingplatforms.__length - 1) >= var10) {
+            this.hoppingplatforms[var10].initfull("pf04", "Root/data/levels/lev2/bech", -3, -1, -3, 3, 1, 3);
+            this.hoppingplatforms[var10].setresponse(1, 0, 1);
+            var10 = var10 + 1;
+        }
+        var10 = 0;
+        while ((this.waterburstarray.__length - 1) >= var10) {
+            this.waterburstarray[var10].initfull();
+            this.waterburstarray[var10].setresponse(2, 2, 2);
+            this.waterburstarray[var10].setmoveable(null, null, 0, 0, 0, 0);
+            this.waterburstarray[var10].setalpha(0.0);
+            var10 = var10 + 1;
+        }
+        var10 = 0;
+        while ((this.timerarray.__length - 1) >= var10) {
+            this.timerarray[var10].initfull();
+            var10 = var10 + 1;
+        }
+        var10 = 0;
+        while ((this.platformarray.__length - 1) >= var10) {
+            this.platformarray[var10].obj.initfull();
+            this.platformarray[var10].obj.setresponse(1, 0, 1);
+            var10 = var10 + 1;
+        }
+        var10 = 0;
+        while ((this.grapplingareaplatforms.__length - 1) >= var10) {
+            this.grapplingareaplatforms[var10].initfull();
+            this.grapplingareaplatforms[var10].setresponse(1, 0, 1);
+            this.grapplingareaplatforms[var10].settweakable();
+            var10 = var10 + 1;
+        }
+        this.kn00coords = new basicpoint(this.waterburstarray[0].getx(), this.waterburstarray[0].gety(), this.waterburstarray[0].getz());
+        this.kn01coords = new basicpoint(this.waterburstarray[1].getx(), this.waterburstarray[1].gety(), this.waterburstarray[1].getz());
+        this.kn02coords = new basicpoint(this.waterburstarray[2].getx(), this.waterburstarray[2].gety(), this.waterburstarray[2].getz());
+        this.kn03coords = new basicpoint(this.waterburstarray[3].getx(), this.waterburstarray[3].gety(), this.waterburstarray[3].getz());
+        this.kn04coords = new basicpoint(this.waterburstarray[4].getx(), this.waterburstarray[4].gety(), this.waterburstarray[4].getz());
+        this.kn05coords = new basicpoint(this.waterburstarray[5].getx(), this.waterburstarray[5].gety(), this.waterburstarray[5].getz());
+        this.kn06coords = new basicpoint(this.waterburstarray[6].getx(), this.waterburstarray[6].gety(), this.waterburstarray[6].getz());
+        this.kn07coords = new basicpoint(this.waterburstarray[7].getx(), this.waterburstarray[7].gety(), this.waterburstarray[7].getz());
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        globalclass.player.actor.setcontext(0);
+        this.hoppingplatforms[0].setposition(0 - 352.39, 649.69, 0 - 533.21);
+        this.hoppingplatforms[1].setposition(0 - 342.39, 653.69, 0 - 546.21);
+        this.hoppingplatforms[2].setposition(0 - 332.39, 657.69, 558.21);
+        this.hoppingplatforms[3].setposition(0 - 330.4, 658.69, 0 - 557.21);
+        this.hoppingplatforms[4].setposition(0 - 319.4, 662.69, 0 - 570.21);
+        this.hoppingplatforms[5].setposition(0 - 303.39, 666.69, 0 - 572.21);
+        this.hoppingplatforms[6].setposition(0 - 296.4, 671.69, 0 - 585.21);
+        this.hoppingplatforms[7].setposition(0 - 293.4, 674.69, 0 - 602.21);
+        this.hoppingplatforms[8].setposition(0 - 305.4, 677.69, 0 - 612.21);
+        this.hoppingplatforms[9].setposition(0 - 315.4, 679.69, 0 - 599.21);
+        this.hoppingplatforms[10].setposition(0 - 327.4, 681.69, 0 - 586.21);
+        this.hoppingplatforms[11].setposition(0 - 340.4, 683.69, 0 - 573.21);
+        this.hoppingplatforms[12].setposition(0 - 355.4, 685.69, 0 - 563.21);
+        this.hoppingplatforms[13].setposition(0 - 371.4, 687.69, 0 - 554.21);
+        this.hoppingplatforms[14].setposition(0 - 386.39, 690.69, 0 - 546.21);
+        this.hoppingplatforms[15].setposition(0 - 421.4, 697.69, 0 - 536.21);
+        this.hoppingplatforms[16].setposition(0 - 439.4, 701.69, 0 - 530.21);
+        this.hoppingplatforms[17].setposition(0 - 455.4, 706.69, 0 - 528.21);
+        this.hoppingplatforms[18].setposition(0 - 468.4, 710.69, 0 - 527.21);
+        this.hoppingplatforms[19].setposition(0 - 477.4, 712.69, 0 - 538.21);
+        this.hoppingplatforms[20].setposition(0 - 473.4, 712.69, 0 - 556.21);
+        this.hoppingplatforms[21].setposition(0 - 467.4, 712.69, 0 - 573.2);
+        this.hoppingplatforms[22].setposition(0 - 457.4, 712.69, 0 - 589.2);
+        this.grapplingareaplatforms[0].setposition(0 - 131.42, 394.63, 0 - 297.83);
+        this.grapplingareaplatforms[1].setposition(0 - 149.1, 395.98, 0 - 313.19);
+        this.grapplingareaplatforms[2].setposition(0 - 167.17, 399.17, 0 - 325.96);
+        this.elevatorplatforms[0].setposition(0 - 374.48, 643.39, 0 - 509.89);
+        this.elevatorplatforms[1].setposition(0 - 387.55, 641.09, 0 - 499.08);
+        this.elevatorplatforms[2].setposition(0 - 397.55, 599.09, 0 - 485.08);
+        this.elevatorplatforms[3].setposition(0 - 393.55, 600.09, 0 - 475.08);
+        this.elevatorplatforms[4].setposition(0 - 404.55, 600.09, 0 - 476.08);
+        this.elevatorplatforms[5].setposition(0 - 380.54, 623.09, 0 - 488.08);
+        var1 = 0;
+        while ((this.elevatorplatforms.__length - 1) >= var1) {
+            this.elevatorplatforms[var1].show();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.hoppingplatforms.__length - 1) >= var1) {
+            this.hoppingplatforms[var1].show();
+            var1 = var1 + 1;
+        }
+        this.platformarray[0].obj.setposition(0 - 451.4, 711.68, 0 - 601.62);
+        this.platformarray[0].obj.setorientation(0.0, 0 - 104.0, 0.0);
+        this.platformarray[0].setstartingycoord(this.platformarray[0].obj.gety());
+        this.platformarray[0].setfinalycoord(this.platformarray[0].obj.gety() - 1.0);
+        var1 = 0;
+        while ((this.timerarray.__length - 1) >= var1) {
+            this.timerarray[var1].reset(0);
+            this.timerarray[var1].start();
+            var1 = var1 + 1;
+        }
+        this.elevatorplatforms[1].setslidetimer(0, -23, 0, globalclass.randnum.getrandomfloat(3.0, 4.5), -1, 0.5);
+        this.elevatorplatforms[2].setslidetimer(0, 23, 0, globalclass.randnum.getrandomfloat(3.0, 4.5), -1, 0.5);
+        this.elevatorplatforms[3].setslidetimer(0, -80, 0, globalclass.randnum.getrandomfloat(5.0, 6.5), -1, 0.5);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].cleanupfull();
+            this.platformarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.platformarray = null;
+        this.newplatform = null;
+        this.oldplatform = null;
+        this.printwhichplatformimon = null;
+        var1 = 0;
+        while ((this.waterburstarray.__length - 1) >= var1) {
+            this.waterburstarray[var1].cleanupfull();
+            this.waterburstarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.waterburstarray = null;
+        var1 = 0;
+        while ((this.timerarray.__length - 1) >= var1) {
+            this.timerarray[var1].cleanupfull();
+            this.timerarray[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.timerarray = null;
+        this.grapplingpivot.cleanupfull();
+        this.grapplingpivot = null;
+        var1 = 0;
+        while ((this.hoppingplatforms.__length - 1) >= var1) {
+            this.hoppingplatforms[var1].cleanupfull();
+            this.hoppingplatforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hoppingplatforms = null;
+        this.kn00coords.cleanupfull();
+        this.kn00coords = null;
+        this.kn01coords.cleanupfull();
+        this.kn01coords = null;
+        this.kn02coords.cleanupfull();
+        this.kn02coords = null;
+        this.kn03coords.cleanupfull();
+        this.kn03coords = null;
+        this.kn04coords.cleanupfull();
+        this.kn04coords = null;
+        this.kn05coords.cleanupfull();
+        this.kn05coords = null;
+        this.kn06coords.cleanupfull();
+        this.kn06coords = null;
+        this.kn07coords.cleanupfull();
+        this.kn07coords = null;
+        this.platformarrayubound = null;
+        this.waterburstarrayubound = null;
+        if (!(this.maskoftranslation == null)) {
+            this.maskoftranslation.cleanupfull();
+            this.maskoftranslation = null;
+        }
+        var1 = 0;
+        while ((this.grapplingareaplatforms.__length - 1) >= var1) {
+            this.grapplingareaplatforms[var1].cleanupfull();
+            this.grapplingareaplatforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.grapplingareaplatforms = null;
+        var1 = 0;
+        while ((this.elevatorplatforms.__length - 1) >= var1) {
+            this.elevatorplatforms[var1].cleanupfull();
+            this.elevatorplatforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.elevatorplatforms = null;
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = 0;
+        while (this.platformarrayubound >= var1) {
+            this.platformarray[var1].obj.process();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while (this.platformarrayubound >= var1) {
+            if (this.platformarray[var1].obj.collide == 0) {
+                if (!(this.platformarray[var1].obj.gety() == this.platformarray[var1].startingycoord)) {
+                    if (this.platformarray[var1].name == "lg01") {
+                        this.platformarray[var1].setfirsttouch("true");
+                        this.platformarray[var1].obj.interpolate(this.platformarray[var1].obj.getx(), this.platformarray[var1].startingycoord, this.platformarray[var1].obj.getz(), 0.2);
+                    }
+                    this.platformarray[var1].name;
+                }
+            }
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while (this.waterburstarrayubound >= var1) {
+            if (this.waterburstarray[var1].gety() <= 710.0) {
+                this.waterburstarray[var1].setalpha(1.0);
+            }
+            if (this.waterburstarray[var1].gety() <= 514.73) {
+                this.waterburstarray[var1].setposition(60.0, 170.0, 855.0);
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 1) {
+            
+        }
+        else if (param1.eventid == 8) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("wbt0")) {
+                this.waterburstarray[0].setalpha(0.0);
+                this.waterburstarray[0].setposition(this.kn00coords);
+                this.waterburstarray[0].setmoveableflags(1, 0, 0, 0);
+                this.waterburstarray[0].setvelocity(25, -40, 25);
+                this.timerarray[0].reset(0);
+                this.timerarray[0].start();
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("wbt1")) {
+                this.waterburstarray[1].setalpha(0.0);
+                this.waterburstarray[1].setposition(this.kn01coords);
+                this.waterburstarray[1].setmoveableflags(1, 0, 0, 0);
+                this.waterburstarray[1].setvelocity(25, -40, 25);
+                this.timerarray[1].reset(0);
+                this.timerarray[1].start();
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("wbt2")) {
+                this.waterburstarray[2].setalpha(0.0);
+                this.waterburstarray[2].setposition(this.kn02coords);
+                this.waterburstarray[2].setmoveableflags(1, 0, 0, 0);
+                this.waterburstarray[2].setvelocity(25, -40, 25);
+                this.timerarray[2].reset(0);
+                this.timerarray[2].start();
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("wbt3")) {
+                this.waterburstarray[3].setalpha(0.0);
+                this.waterburstarray[3].setposition(this.kn03coords);
+                this.waterburstarray[3].setmoveableflags(1, 0, 0, 0);
+                this.waterburstarray[3].setvelocity(25, -40, 25);
+                this.timerarray[3].reset(0);
+                this.timerarray[3].start();
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("wbt4")) {
+                this.waterburstarray[4].setalpha(0.0);
+                this.waterburstarray[4].setposition(this.kn04coords);
+                this.waterburstarray[4].setmoveableflags(1, 0, 0, 0);
+                this.waterburstarray[4].setvelocity(25, -40, 25);
+                this.timerarray[4].reset(0);
+                this.timerarray[4].start();
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("wbt5")) {
+                this.waterburstarray[5].setalpha(0.0);
+                this.waterburstarray[5].setposition(this.kn05coords);
+                this.waterburstarray[5].setmoveableflags(1, 0, 0, 0);
+                this.waterburstarray[5].setvelocity(25, -40, 25);
+                this.timerarray[5].reset(0);
+                this.timerarray[5].start();
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("wbt6")) {
+                this.waterburstarray[6].setalpha(0.0);
+                this.waterburstarray[6].setposition(this.kn06coords);
+                this.waterburstarray[6].setmoveableflags(1, 0, 0, 0);
+                this.waterburstarray[6].setvelocity(25, -40, 25);
+                this.timerarray[6].reset(0);
+                this.timerarray[6].start();
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("wbt7")) {
+                this.waterburstarray[7].setalpha(0.0);
+                this.waterburstarray[7].setposition(this.kn07coords);
+                this.waterburstarray[7].setmoveableflags(1, 0, 0, 0);
+                this.waterburstarray[7].setvelocity(25, -40, 25);
+                this.timerarray[7].reset(0);
+                this.timerarray[7].start();
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            globalclass.player.unkill();
+        }
+        var1 = 0;
+        while ((this.platformarray.__length - 1) >= var1) {
+            this.platformarray[var1].onevent(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}

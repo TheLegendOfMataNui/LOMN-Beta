@@ -1,0 +1,116 @@
+class beachplatform {
+    property id;
+    property name;
+    property obj;
+    property objid;
+    property objname;
+    property area;
+    property locktheycoord;
+    property startingycoord;
+    property finalycoord;
+    property firsttouch;
+    property rotation;
+    property interpfinishedid;
+    
+    method beachplatform(param1, param2) {
+        this.obj = new lego_moveableobject(param1, param2);
+        this.objid = this.obj.id;
+        this.id = this.obj.id;
+        this.objname = scslosifoundation::identifiertostring(this.obj.id);
+        this.name = scslosifoundation::identifiertostring(this.obj.id);
+        if (param2 == null) {
+            this.area = "fake";
+        }
+        else {
+            this.area = param2;
+        }
+        this.firsttouch = 1;
+        this.rotation = 0;
+        this.interpfinishedid = null;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 1) {
+            if (scslosifoundation::identifiertostring(param1.args[1]) == "lg01") {
+                if (this.firsttouch) {
+                    debug::print("I should only get this one at a time");
+                    if (this.obj.gety() > this.finalycoord) {
+                        this.obj.interpolate(this.obj.getx(), this.finalycoord, this.obj.getz(), 0.16);
+                        this.firsttouch = 0;
+                        this.interpfinishedid = "firstInterp";
+                    }
+                }
+                this.obj.setcollide();
+            }
+            scslosifoundation::identifiertostring(param1.args[1]);
+        }
+        else if (param1.eventid == 12) {
+            if (scslosifoundation::identifiertostring(param1.args[0]) == "lg01") {
+                if ((this.obj.gety() < this.startingycoord) && (this.interpfinishedid == "firstInterp")) {
+                    debug::print("Caught the event...interping back");
+                    this.obj.interpolate(this.obj.getx(), this.startingycoord - 0.7, this.obj.getz(), 0.35);
+                    this.interpfinishedid = "secondInterp";
+                }
+            }
+            scslosifoundation::identifiertostring(param1.args[0]);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.id = null;
+        this.name = null;
+        this.obj.cleanupfull();
+        this.obj = null;
+        this.objid = null;
+        this.objname = null;
+        this.area = null;
+        this.locktheycoord = null;
+        this.startingycoord = null;
+        this.finalycoord = null;
+        this.firsttouch = null;
+        this.rotation = null;
+        this.interpfinishedid = null;
+        return null;
+    }
+    
+    method setuptipfactor() {
+        return null;
+    }
+    
+    method setstartingycoord(param1) {
+        this.startingycoord = param1;
+        return null;
+    }
+    
+    method setfinalycoord(param1) {
+        this.finalycoord = param1;
+        return null;
+    }
+    
+    method setfirsttouch(param1) {
+        if (param1 == "true") {
+            this.firsttouch = 1;
+        }
+        if (param1 == "false") {
+            this.firsttouch = 0;
+        }
+        return null;
+    }
+    
+    method exit() {
+        var var1;
+        var1 = null;
+        return null;
+    }
+}
