@@ -1,59 +1,35 @@
 class vlgs2_puzzle {
     property parent;
     property firstsplit;
-    property rotation;
     property hook;
-    property showpickup;
-    property trigplane1;
-    property trigplane2;
-    property hive1handle;
     
     method vlgs2_puzzle(param1) {
         this.parent = param1;
-        this.showpickup = 1;
         return null;
     }
     
     method initfull() {
-        var var1;
+        var hivehandle;
         this.firstsplit = 1;
-        this.rotation = 0;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
         globalclass.bgmusic.play();
-        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("hook"));
-        if (var1) {
-            this.showpickup = 0;
-        }
-        if (this.showpickup) {
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("hook")) == 0) {
             this.hook = new lego_pickup("hook", 0, 3, "item", 1, 1);
             this.hook.initfull();
             this.hook.show();
         }
-        this.trigplane1 = new lego_triggerobject("tp02", "vlgs");
-        this.trigplane1.initfull();
-        this.trigplane1.setresponse(4, 3);
-        this.trigplane2 = new lego_triggerobject("tp03", "vlgs");
-        this.trigplane2.initfull();
-        this.trigplane2.setresponse(4, 3);
-        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(this.hive1handle, 8);
-        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("crb1"));
-        gchive::setspawnrate(this.hive1handle, 5);
+        hivehandle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hivehandle, 8);
+        gchive::setcreaturetype(hivehandle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(hivehandle, 5);
         return null;
     }
     
     method cleanupfull() {
-        this.hive1handle = null;
-        this.firstsplit = null;
-        this.rotation = null;
-        if (!(this.hook == null)) {
+        if (this.hook != null) {
             this.hook.cleanupfull();
             this.hook = null;
         }
-        this.trigplane1.cleanupfull();
-        this.trigplane1 = null;
-        this.trigplane2.cleanupfull();
-        this.trigplane2 = null;
         return null;
     }
     
