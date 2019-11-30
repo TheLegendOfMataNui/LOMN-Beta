@@ -22,6 +22,7 @@ class bech2_puzzle {
     property grapplingareaplatforms;
     property elevatorplatforms;
     property showpickup;
+	property gatestone;
     
     method bech2_puzzle(param1) {
         this.parent = param1;
@@ -150,6 +151,13 @@ class bech2_puzzle {
             this.platformarray[var10].obj.initfull();
             this.platformarray[var10].obj.setresponse(1, 0, 1);
             var10 = var10 + 1;
+        }
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gstn")) == 0) {
+            this.gatestone = new lego_pickup("gstn", 0, 5, "item", 7, 1);
+            this.gatestone.initfull();
+            this.gatestone.show();
+            this.gatestone.setcondition(262144);
+            this.gatestone.setquest(3);
         }
         var10 = 0;
         while ((this.grapplingareaplatforms.__length - 1) >= var10) {
@@ -286,6 +294,10 @@ class bech2_puzzle {
         if (!(this.maskoftranslation == null)) {
             this.maskoftranslation.cleanupfull();
             this.maskoftranslation = null;
+        }
+        if (this.gatestone != null) {
+            this.gatestone.cleanupfull();
+            this.gatestone = null;
         }
         var1 = 0;
         while ((this.grapplingareaplatforms.__length - 1) >= var1) {
