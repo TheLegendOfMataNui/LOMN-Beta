@@ -1,12 +1,8 @@
 class vtnl2_puzzle {
     property parent;
-    property oldplatform;
-    property newplatform;
-    property printwhichplatformimon;
     property caveplatforms;
     property clonedplatforms;
     property randomnumber;
-    property hive1handle;
     property discpickup;
     property passedtrigplane;
     
@@ -17,11 +13,10 @@ class vtnl2_puzzle {
     
     method initfull() {
         var var1;
-        var var2;
+        var hive1handle;
         this.passedtrigplane = 0;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
         globalclass.bgmusic.play();
-        gcareadirector::setnearestmax(10);
         this.randomnumber = new slosi_random(0);
         this.caveplatforms = [ new lego_moveableobject("pf01"), 
             new lego_moveableobject("pf03"), 
@@ -72,12 +67,11 @@ class vtnl2_puzzle {
         this.caveplatforms[1].setslidetimer(0 - 20.0, 0.0, 30.0, this.randomnumber.getrandomfloat(5.0, 6.5), -1, 0.5);
         this.clonedplatforms[1].setslidetimer(20.0, 0.0, 0 - 25.0, this.randomnumber.getrandomfloat(4.0, 5.0), -1, 0.5);
         this.caveplatforms[4].setslidetimer(0 - 15.0, 0.0, 20.0, this.randomnumber.getrandomfloat(4.0, 5.0), -1, 0.5);
-        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(this.hive1handle, 8);
-        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("crb1"));
-        gchive::setspawnrate(this.hive1handle, 5);
-        var2 = gcsaver::finditem(scslosifoundation::stringtoidentifier("disc"));
-        if (var2 == 0) {
+        hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hive1handle, 8);
+        gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(hive1handle, 5);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("disc")) == 0) {
             this.discpickup = new lego_pickup("disc", 0, 5, "item", 8, 1);
             this.discpickup.initfull();
             this.discpickup.show();
@@ -87,32 +81,28 @@ class vtnl2_puzzle {
         return null;
     }
     
-    method show() {
-        return null;
-    }
-    
     method cleanupfull() {
         var var1;
-        this.hive1handle = null;
-        this.oldplatform = null;
-        this.newplatform = null;
-        this.printwhichplatformimon = null;
-        var1 = 0;
-        while ((this.caveplatforms.__length - 1) >= var1) {
-            this.caveplatforms[var1].cleanupfull();
-            this.caveplatforms[var1] = null;
-            var1 = var1 + 1;
+        if (this.caveplatforms != null) {
+            var1 = 0;
+            while ((this.caveplatforms.__length - 1) >= var1) {
+                this.caveplatforms[var1].cleanupfull();
+                this.caveplatforms[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.caveplatforms = null;
         }
-        this.caveplatforms = null;
-        var1 = 0;
-        while ((this.clonedplatforms.__length - 1) >= var1) {
-            this.clonedplatforms[var1].cleanupfull();
-            this.clonedplatforms[var1] = null;
-            var1 = var1 + 1;
+        if (this.clonedplatforms != null) {
+            var1 = 0;
+            while ((this.clonedplatforms.__length - 1) >= var1) {
+                this.clonedplatforms[var1].cleanupfull();
+                this.clonedplatforms[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.clonedplatforms = null;
         }
-        this.clonedplatforms = null;
         this.randomnumber = null;
-        if (!(this.discpickup == null)) {
+        if (this.discpickup != null) {
             this.discpickup.cleanupfull();
             this.discpickup = null;
         }
@@ -136,15 +126,14 @@ class vtnl2_puzzle {
         }
         else if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
                 this.parent.level.cam.setaimode(7);
-                gccollisionphysicsgroup::spinmask(1.2);
                 globalclass.player.actor.setinputstate("none");
             }
-            param1.args[0];
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
-            globalclass.player.actor.setinputstate("none");
         }
         else if (param1.eventid == 27) {
             if (this.passedtrigplane) {
