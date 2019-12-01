@@ -1,0 +1,122 @@
+class evac2_puzzle {
+    property parent;
+    property callsurfonce;
+    property gotonextarea;
+    property wirlpool;
+    property orientation;
+    property getcollideonce;
+    
+    method evac2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.getcollideonce = 1;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
+        globalclass.bgmusic.play();
+        globalclass.player.actor.setsecondarybclreport();
+        this.wirlpool = new lego_moveableobject("wtfl");
+        this.wirlpool.initfull();
+        this.wirlpool.settweakable();
+        this.callsurfonce = 1;
+        this.gotonextarea = 0;
+        this.orientation = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.wirlpool != null) {
+            this.wirlpool.cleanupfull();
+            this.wirlpool = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        this.rotatewirlpool();
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 42) {
+            if (this.callsurfonce) {
+                this.startsurf();
+                this.callsurfonce = 0;
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("wtfl")) {
+                    if (this.getcollideonce == 1) {
+                        debug::print("************** You collided with WTFL");
+                        gcstaticsoundsptrarray::playtablesound(1092);
+                        this.endsurf();
+                        this.gotonextarea = 1;
+                        gccollisionphysicsgroup::spinmask(1.2);
+                        this.getcollideonce = 0;
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            if (this.gotonextarea) {
+                this.endsurf();
+                this.loadnextarea();
+            }
+            else {
+                this.getcollideonce = 1;
+                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+                globalclass.player.unkill();
+                this.endsurf();
+                this.callsurfonce = 1;
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 90) {
+            if (param1.event == 2) {
+                this.startsurf();
+            }
+        }
+        return null;
+    }
+    
+    method rotatewirlpool() {
+        if (this.orientation > 359) {
+            this.orientation = 0;
+        }
+        else {
+            this.orientation = this.orientation + 1;
+        }
+        this.wirlpool.setorientation(0.0, this.orientation, 0.0);
+        return null;
+    }
+    
+    method startsurf() {
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g032"));
+        globalclass.player.actor.setsurfingability(0.3, 0.8);
+        return null;
+    }
+    
+    method endsurf() {
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g000"));
+        globalclass.player.actor.setsurfingability(0.0, 0.0);
+        return null;
+    }
+    
+    method loadnextarea() {
+        gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier("isld"), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}
