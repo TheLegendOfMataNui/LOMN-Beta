@@ -1,8 +1,6 @@
 class hk01_puzzle {
     property parent;
     property hookarray;
-    property hive1handle;
-    property hive2handle;
     
     method hk01_puzzle(param1) {
         this.parent = param1;
@@ -11,8 +9,10 @@ class hk01_puzzle {
     
     method initfull() {
         var var1;
-        var var2;
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
+        var kapura;
+        var hive1handle;
+        var hive2handle;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
         globalclass.bgmusic.play();
         this.hookarray = [ new lego_moveableobject("hk09"), 
             new lego_moveableobject("hk10"), 
@@ -28,38 +28,31 @@ class hk01_puzzle {
             var1 = var1 + 1;
         }
         globalclass.player.setgrapplinghookdistance(48);
-        this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(this.hive1handle, 8);
-        gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("crb1"));
-        gchive::setspawnrate(this.hive1handle, 5);
-        this.hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
-        gchive::setmaxcreatures(this.hive2handle, 8);
-        gchive::setcreaturetype(this.hive2handle, scslosifoundation::stringtoidentifier("crb1"));
-        gchive::setspawnrate(this.hive2handle, 5);
-        var2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::setkapura(var2);
+        hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hive1handle, 8);
+        gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(hive1handle, 5);
+        hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(hive2handle, 8);
+        gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(hive2handle, 5);
+        kapura = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setkapura(kapura);
         globalclass.player.actor.setclimbability(5);
-        return null;
-    }
-    
-    method initshort() {
-        globalclass.player.unkill();
-        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-        globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        this.hive1handle = null;
-        this.hive2handle = null;
-        var1 = 0;
-        while ((this.hookarray.__length - 1) >= var1) {
-            this.hookarray[var1].cleanupfull();
-            this.hookarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.hookarray != null) {
+            var1 = 0;
+            while ((this.hookarray.__length - 1) >= var1) {
+                this.hookarray[var1].cleanupfull();
+                this.hookarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.hookarray = null;
         }
-        this.hookarray = null;
         return null;
     }
     
@@ -73,7 +66,10 @@ class hk01_puzzle {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
-            this.initshort();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
         }
         return null;
     }
