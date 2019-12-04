@@ -1,0 +1,174 @@
+class gl3s_puzzle {
+    property parent;
+    property spirtarray;
+    
+    method gl3s_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        globalclass.player.actor.setunderwater(1);
+/*        this.spirtarray = [ new spirt("spr0"), 
+            new spirt("spr1"), 
+            new spirt("spr2"), 
+            new spirt("spr3"), 
+            new spirt("spr4"), 
+            new spirt("spr5"), 
+            new spirt("spr6") ];
+        this.spirtarray[0].initfull([ new basicpoint(-10, 0 - 2.8, 0 - 75.4), 
+            new basicpoint(-10, 0 - 1.8, 0 - 75.4), 
+            new basicpoint(-10, 0 - 2.8, 0 - 75.4), 
+            new basicpoint(-10, 3.8, 0 - 75.4), 
+            new basicpoint(-10, 0 - 2.8, 0 - 75.4) ], [ 0.5, 
+            0.5, 
+            0.5, 
+            0.5, 
+            0.5 ]);
+        this.spirtarray[1].initfull([ new basicpoint(-16, -16, -47), 
+            new basicpoint(-16, -15, -47), 
+            new basicpoint(-16, -16, -47), 
+            new basicpoint(-16, -11, -47), 
+            new basicpoint(-16, -16, -47) ], [ 0.5, 
+            0.5, 
+            0.5, 
+            0.5, 
+            0.5 ]);
+        this.spirtarray[2].initfull([ new basicpoint(7, 0 - 28.2, -8), 
+            new basicpoint(7, 0 - 27.2, -8), 
+            new basicpoint(7, 0 - 28.2, -8), 
+            new basicpoint(7, 0 - 23.2, -8), 
+            new basicpoint(7, 0 - 28.2, -8) ], [ 0.5, 
+            0.5, 
+            0.5, 
+            0.5, 
+            0.5 ]);
+        this.spirtarray[3].initfull([ new basicpoint(0 - 3.5, 0 - 55.4, 65), 
+            new basicpoint(0 - 3.5, 0 - 54.4, 65), 
+            new basicpoint(0 - 3.5, 0 - 55.4, 65), 
+            new basicpoint(0 - 3.5, 0 - 50.4, 65), 
+            new basicpoint(0 - 3.5, 0 - 55.4, 65) ], [ 0.5, 
+            0.5, 
+            0.5, 
+            0.5, 
+            0.5 ]);
+        this.spirtarray[4].initfull([ new basicpoint(27.6, -98, 162), 
+            new basicpoint(27.6, -97, 162), 
+            new basicpoint(27.6, -98, 162), 
+            new basicpoint(27.6, -93, 162), 
+            new basicpoint(27.6, -98, 162) ], [ 0.5, 
+            0.5, 
+            0.5, 
+            0.5, 
+            0.5 ]);
+        this.spirtarray[5].initfull([ new basicpoint(60, -121, 222), 
+            new basicpoint(60, -120, 222), 
+            new basicpoint(60, -121, 222), 
+            new basicpoint(60, -116, 222), 
+            new basicpoint(60, -121, 222) ], [ 0.5, 
+            0.5, 
+            0.5, 
+            0.5, 
+            0.5 ]);
+        this.spirtarray[6].initfull([ new basicpoint(41.6, -154, 326), 
+            new basicpoint(41.6, -153, 326), 
+            new basicpoint(41.6, -154, 326), 
+            new basicpoint(41.6, -149, 326), 
+            new basicpoint(41.6, -154, 326) ], [ 0.5, 
+            0.5, 
+            0.5, 
+            0.5, 
+            0.5 ]);
+        var1 = 0;
+        while ((this.spirtarray.__length - 1) >= var1) {
+            this.spirtarray[var1].show();
+            this.spirtarray[var1].settweakable();
+            this.spirtarray[var1].obj.obj.setscale(0.5);
+            var1 = var1 + 1;
+        } */
+        return null;
+    }
+    
+    method cleanupfull() {
+//        var var1;
+        globalclass.player.actor.setsurfingability(0.0, 0.8);
+/*        if (this.spirtarray != null) {
+            var1 = 0;
+            while ((this.spirtarray.__length - 1) >= var1) {
+                this.spirtarray[var1].cleanupfull();
+                this.spirtarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.spirtarray = null;
+        } */
+        return null;
+    }
+    
+    method process(param1) {
+/*        var var1;
+        var1 = 0;
+        while ((this.spirtarray.__length - 1) >= var1) {
+            this.spirtarray[var1].process(param1);
+            var1 = var1 + 1;
+        } */
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {
+                screenlist.screens[2].screen.areas[12].puzzle.needstobeunderwater(0);
+                screenlist.screens[2].screen.areas[12].puzzle.switchit(2);
+            }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                this.startsurf();
+            }
+        }
+        else if (param1.eventid == 3) {
+            this.parent.level.cam.setaimode(7);
+            globalclass.player.actor.setsurfingability(0.0, 1);
+            gcstaticsoundsptrarray::playtablesound(1048);
+            globalclass.player.kill();
+            globalclass.player.actor.setinputstate("none");
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.setpos(0 - 18.2, 11.0, 0 - 114.0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb02"), 0);
+            globalclass.player.actor.setinputstate("ninp");
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.unkill();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 80) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        return null;
+    }
+    
+    method startsurf() {
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g032"), -1);
+        globalclass.player.actor.setsurfingability(0.3, 0.8);
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

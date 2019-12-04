@@ -3,7 +3,7 @@ class lego_area_evac2 : gs_lego_area {
     
     method lego_area_evac2(param1) {
         this.gs_lego_area("evac", param1, 0, 0);
-        this.puzzle = new lego_puzzle_evac2(this);
+        this.puzzle = new evac2_puzzle(this);
         this.lego_area_initfull();
         return null;
     }
@@ -40,8 +40,11 @@ class lego_area_evac2 : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle.exit();
-        this.puzzle = null;
+        this.lego_area_cleanupfull();
+        if (!(this.puzzle == null)) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

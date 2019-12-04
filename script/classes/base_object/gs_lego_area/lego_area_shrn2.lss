@@ -11,6 +11,12 @@ class lego_area_shrn2 : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+        globalclass.bgmusic.play();
         return null;
     }
     
