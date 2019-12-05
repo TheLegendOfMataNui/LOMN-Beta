@@ -1,0 +1,38 @@
+class lego_area_gizr2 : gs_lego_area {
+    
+    method lego_area_gizr2(param1) {
+        this.gs_lego_area("gizr", param1, 0, 0);
+        this.puzzle = new gizr_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gcareadirector::setfog(-16777216, 0 - 70.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        globalclass.bgmusic.stop();
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        return null;
+    }
+}
