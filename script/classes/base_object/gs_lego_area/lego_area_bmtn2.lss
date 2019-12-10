@@ -1,0 +1,39 @@
+class lego_area_bmtn2 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_bmtn2(param1) {
+        this.gs_lego_area("bmtn", param1, 0, 0);
+        this.puzzle = new bmtn2_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setnearestmax(2);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        return null;
+    }
+}
