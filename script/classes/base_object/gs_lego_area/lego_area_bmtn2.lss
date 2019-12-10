@@ -1,9 +1,9 @@
-class lego_area_evac2 : gs_lego_area {
+class lego_area_bmtn2 : gs_lego_area {
     property puzzle;
     
-    method lego_area_evac2(param1) {
-        this.gs_lego_area("evac", param1, 0, 0);
-        this.puzzle = new evac2_puzzle(this);
+    method lego_area_bmtn2(param1) {
+        this.gs_lego_area("bmtn", param1, 0, 0);
+        this.puzzle = new bmtn2_puzzle(this);
         this.lego_area_initfull();
         return null;
     }
@@ -11,21 +11,9 @@ class lego_area_evac2 : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        gcmodeldirector::setnearestmax(7);
-        gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
-        gclightdirector::setcavelighting(1);
-        return null;
-    }
-    
-    method cleanupfull() {
-        this.lego_area_hide();
-        this.puzzle.cleanupfull();
-        return null;
-    }
-    
-    method process(param1) {
-        this.puzzle.process(param1);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setnearestmax(2);
         return null;
     }
     
@@ -34,8 +22,9 @@ class lego_area_evac2 : gs_lego_area {
         return null;
     }
     
-    method input(param1) {
-        this.puzzle.input(param1);
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
         return null;
     }
     
