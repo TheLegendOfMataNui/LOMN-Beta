@@ -1,4 +1,4 @@
-class startpuzzle {
+class strt4_puzzle {
     property parent;
     property button;
     property buttonup;
@@ -7,11 +7,10 @@ class startpuzzle {
     property dooropen;
     property tiggerboxid;
     property camposnum;
-    property startedfalling;
     property cinema;
     property killedbytrigerbox;
     
-    method startpuzzle(param1) {
+    method strt4_puzzle(param1) {
         this.parent = param1;
         this.buttonup = 1;
         this.dooropen = 0;
@@ -19,10 +18,14 @@ class startpuzzle {
     }
     
     method initfull() {
-        var var1;
-        var var2;
-        gcareadirector::setfog(-16777200, 0 - 1.0, 0 - 900.0, 0.15);
-        gcareadirector::setnearestmax(15);
+        var hive1handle;
+        var hive2handle;
+        var tohunga;
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(tohunga, rgba(255, 255, 255, 255), rgba(122, 254, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
+        gccharacter::setorientation(tohunga, -42);
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
         this.doortop = new lego_moveableobject("drt1");
         this.doortop.initfull();
         this.doorbottom = new lego_moveableobject("drb1");
@@ -32,53 +35,37 @@ class startpuzzle {
         this.setupstartingpositions();
         this.tiggerboxid = 0;
         this.camposnum = 0;
-        this.startedfalling = 0;
-        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(var1, 2);
-        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("lsrp"));
-        gchive::setspawnrate(var1, 4);
-        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
-        gchive::setmaxcreatures(var2, 2);
-        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("lsrp"));
-        gchive::setspawnrate(var2, 4);
+        hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hive1handle, 2);
+        gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(hive1handle, 4);
+        hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
+        gchive::setmaxcreatures(hive2handle, 2);
+        gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("lsrp"));
+        gchive::setspawnrate(hive2handle, 4);
         this.killedbytrigerbox = 0;
-        return null;
-    }
-    
-    method initshort() {
-        this.killedbytrigerbox = 0;
-        globalclass.player.unkill();
-        this.resetcharacterposition();
-        gccollisionphysicsgroup::toggletriggerboxentered(this.tiggerboxid, 0);
-        this.parent.level.cam.setaimode(11);
-        globalclass.player.actor.setinputstate("ninp");
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin1");
+            gccinemaengine::play(this.cinema);
+        }
         return null;
     }
     
     method cleanupfull() {
-        var var1;
-        var var2;
-        var1 = null;
-        var2 = null;
-        this.doortop.cleanupfull();
-        this.doortop = null;
-        this.doorbottom.cleanupfull();
-        this.doorbottom = null;
-        this.button.cleanupfull();
-        this.button = null;
+        if (this.doortop != null) {
+            this.doortop.cleanupfull();
+            this.doortop = null;
+        }
+        if (this.doorbottom != null) {
+            this.doorbottom.cleanupfull();
+            this.doorbottom = null;
+        }
+        if (this.button != null) {
+            this.button.cleanupfull();
+            this.button = null;
+        }
         this.cinema = null;
-        return null;
-    }
-    
-    method cleanupshort() {
-        return null;
-    }
-    
-    method show() {
-        return null;
-    }
-    
-    method hide() {
         return null;
     }
     
@@ -87,14 +74,9 @@ class startpuzzle {
     }
     
     method input(param1) {
-        if (param1.button == 85) {
-            if (param1.event == 2) {
-                this.startdropping();
-            }
-        }
-        if (param1.button == 49) {
-            if (param1.event == 2) {
-                this.startcam();
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (this.cinema != null) {
+                gccinemaengine::stop(this.cinema);
             }
         }
         return null;
@@ -102,44 +84,37 @@ class startpuzzle {
     
     method onevent(param1) {
         var var1;
-        var var2;
-        var var3;
         if (param1.eventid == 1) {
-            var1 = param1.args[0];
-            var2 = param1.args[1];
-            if (var1 == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (var2 == scslosifoundation::stringtoidentifier("sw00")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("sw00")) {
                     this.hitswitch();
                 }
-                var2;
             }
         }
         else if (param1.eventid == 3) {
-            var3 = param1.args[0];
-            if (((var3 == scslosifoundation::stringtoidentifier("tb00")) || (var3 == scslosifoundation::stringtoidentifier("tb01"))) || (var3 == scslosifoundation::stringtoidentifier("tb02"))) {
+            var1 = param1.args[0];
+            if (((var1 == scslosifoundation::stringtoidentifier("tb00")) || (var1 == scslosifoundation::stringtoidentifier("tb01"))) || (var1 == scslosifoundation::stringtoidentifier("tb02"))) {
                 this.killedbytrigerbox = 1;
+                globalclass.player.kill();
                 this.parent.level.cam.setaimode(7);
-                this.tiggerboxid = var3;
-                gccollisionphysicsgroup::spinmask(1.2);
+                gcstaticsoundsptrarray::playtablesound(1048);
+                globalclass.player.actor.setinputstate("none");
+                this.tiggerboxid = var1;
             }
         }
         else if (param1.eventid == 27) {
             if (this.killedbytrigerbox) {
-                globalclass.player.kill();
+                this.killedbytrigerbox = 0;
+                this.resetcharacterposition();
             }
-            else {
-                this.cleanupshort();
-                this.initshort();
-            }
+            globalclass.player.unkill();
+            gccollisionphysicsgroup::toggletriggerboxentered(this.tiggerboxid, 0);
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
+            globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 46) {
-            if (this.killedbytrigerbox) {
-                this.cleanupshort();
-                this.initshort();
-            }
-            else {
-                gccollisionphysicsgroup::spinmask(1.0);
-            }
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 14) {
             if (this.camposnum == 0) {
@@ -154,9 +129,11 @@ class startpuzzle {
                 this.parent.level.cam.setaimode(11);
             }
         }
-        else if (param1.eventid == 7) {
-            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
-                gcstaticsoundsptrarray::playtablesound(149);
+        else if (param1.eventid == 30) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cin1")) {
+                globalclass.bgmusic.changefilename("Root/Data/sounds/MusicKopakaAmbience");
+                globalclass.bgmusic.play(3);
+                globalclass.player.maskcontrol.changemask(3);
             }
         }
         return null;
@@ -175,10 +152,6 @@ class startpuzzle {
             globalclass.player.actor.setpos(176.1, 0 - 336.1, 1601.4);
             globalclass.player.actor.setorientation(0 - 174.3);
         }
-        return null;
-    }
-    
-    method cheat() {
         return null;
     }
     
