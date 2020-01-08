@@ -3,6 +3,7 @@ class gly22_puzzle {
     property gyzerarray;
     property lastgyzer;
     property door;
+	property printglyph;
     
     method gly22_puzzle(param1) {
         this.parent = param1;
@@ -33,6 +34,8 @@ class gly22_puzzle {
         this.lastgyzer.setpos(this.lastgyzer.getx(), 10, this.lastgyzer.getz());
         this.lastgyzer.setresponse(1, 0, 1);
         this.lastgyzer.setslidetimer(0, 16, 0, 2, -1, 1);
+        this.printglyph = new lego_pickup("Glyp", 17, 2, "item", 5, 0);
+        this.printglyph.initfull();
         return null;
     }
     
@@ -67,6 +70,10 @@ class gly22_puzzle {
         if (this.door != null) {
             this.door.cleanupfull();
             this.door = null;
+        }
+        if (this.printglyph != null) {
+            this.printglyph.cleanupfull();
+            this.printglyph = null;
         }
         return null;
     }

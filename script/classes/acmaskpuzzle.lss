@@ -12,6 +12,7 @@ class acmaskpuzzle {
     property showintro;
     property desctext;
     property howtotext;
+	property printglyph;
     
     method acmaskpuzzle(param1) {
         this.parent = param1;
@@ -88,6 +89,8 @@ class acmaskpuzzle {
             this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
         }
+        this.printglyph = new lego_pickup("glyp", 17, 2, "item", 4, 0);
+        this.printglyph.initfull();
         return null;
     }
     
@@ -124,6 +127,10 @@ class acmaskpuzzle {
         }
         this.cinema1 = null;
         this.cinema2 = null;
+        if (this.printglyph != null) {
+            this.printglyph.cleanupfull();
+            this.printglyph = null;
+        }
         return null;
     }
     
@@ -177,8 +184,7 @@ class acmaskpuzzle {
             }
         }
         else if (param1.eventid == 11) {
-            if (scslosifoundation::identifiertostring(param1.args[1]) == "p047") {
-                globalclass.hud.hide();
+			if ((scslosifoundation::identifiertostring(param1.args[1]) == "p047") && (gcsaver::findmask(scslosifoundation::stringtoidentifier("mska")))) {
                 gccinemaengine::play(this.cinema1);
                 this.cinema1_shown = 1;
                 this.bully.aiidle();
