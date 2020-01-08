@@ -1,5 +1,5 @@
 class mudmonster_puzzle {
-    property parea;
+    property parent;
     property mudmonster;
     property mudtimer;
     property mudpos;
@@ -14,7 +14,7 @@ class mudmonster_puzzle {
     property stone;
     
     method mudmonster_puzzle(param1) {
-        this.parea = param1;
+        this.parent = param1;
         return null;
     }
     
@@ -53,7 +53,7 @@ class mudmonster_puzzle {
     }
     
     method exit() {
-        this.parea = null;
+        this.parent = null;
         return null;
     }
     
@@ -129,13 +129,13 @@ class mudmonster_puzzle {
                 var3 = gcmudboss::getpositionz(this.mudmonster.mudman);
                 var4 = 30;
                 var5 = 10;
-                this.parea.level.cam.interpolate(var1 - var4, var2 + var5, var3, var1, var2 + var5, var3, 3);
+                this.parent.level.cam.interpolate(var1 - var4, var2 + var5, var3, var1, var2 + var5, var3, 3);
                 this.mudmonster.mudstate = 5;
             }
         }
         else if (this.mudmonster.mudstate == 7) {
             if (this.mudtimer > 2) {
-                this.parea.level.cam.setaimode(11);
+                this.parent.level.cam.setaimode(11);
                 this.mudtimer = 0;
                 this.mudmonster.mudstate = 11;
                 gcmudboss::setdoprocess(this.mudmonster.mudman, 1);
@@ -184,7 +184,7 @@ class mudmonster_puzzle {
             }
         }
         else if (param1.eventid == 14) {
-            this.parea.level.cam.setaimode(0);
+            this.parent.level.cam.setaimode(0);
             if (this.mudmonster.mudstate == 10) {
                 gcmudboss::setsplitanimation(this.mudmonster.mudman, 1831874611, -1);
             }
@@ -224,7 +224,7 @@ class mudmonster_puzzle {
                 var5 = gcmudboss::getcamposx(this.mudmonster.mudman);
                 var6 = gcmudboss::getcamposy(this.mudmonster.mudman);
                 var7 = gcmudboss::getcamposz(this.mudmonster.mudman);
-                this.parea.level.cam.interpolate(var5, var6 + 10, var7, var2, var3 + 10, var4, 3);
+                this.parent.level.cam.interpolate(var5, var6 + 10, var7, var2, var3 + 10, var4, 3);
             }
         }
         else if (param1.eventid == 46) {
@@ -247,7 +247,7 @@ class mudmonster_puzzle {
     method resetarea() {
         gccollisionphysicsgroup::spinmask(1.2);
         this.initshort();
-        globalclass.player.actor.gotopos(this.parea.enterstartid, this.parea.enterlookid);
+        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
         globalclass.player.unkill();
         globalclass.player.actor.idle();
         globalclass.player.actor.setinputstate("ninp");
@@ -259,11 +259,11 @@ class mudmonster_puzzle {
         var var1;
         gctransdirector::hide(scslosifoundation::stringtoidentifier("mwf0"), 0);
         gcmodeldirector::hide(1836409945, 0);
-        this.parea.endarea();
+        this.parent.endarea();
         var1 = gccollisionphysicsgroup::gettriggerplane(scslosifoundation::stringtoidentifier("tpm2"));
         gctriggerplane::setplaneresponses(var1, 4, 4);
-        this.parea.level.cam.setpos(991, 2, 212);
-        this.parea.level.cam.settargetpos(995, 1, 212);
+        this.parent.level.cam.setpos(991, 2, 212);
+        this.parent.level.cam.settargetpos(995, 1, 212);
         this.turaga.setpos(995, 0, 212);
         this.turaga.show();
         gccharacter::settransparency(this.turaga.handle, 0.0);
@@ -277,7 +277,7 @@ class mudmonster_puzzle {
     
     method startconversation() {
         var var1;
-        this.parea.level.cam.setaimode(11);
+        this.parent.level.cam.setaimode(11);
         var1 = gcconversationengine::getconversationengine();
         gcconversationengine::forceconversation(var1, 2003330414);
         return null;
