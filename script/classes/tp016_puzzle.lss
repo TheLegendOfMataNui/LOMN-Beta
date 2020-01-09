@@ -3,7 +3,7 @@ class tp016_puzzle {
     property smallplatform;
     property largeplatform;
     property door;
-    property glyph;
+    property printglyph;
     
     method tp016_puzzle(param1) {
         this.parent = param1;
@@ -11,8 +11,10 @@ class tp016_puzzle {
     }
     
     method initfull() {
-        this.glyph = new lego_pickup("glyp", 17, 2, "item", 4, 1);
-        this.glyph.initfull();
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pgl6")) == 0) {
+            this.printglyph = new lego_pickup("pgl6", 0, 7, "item", 4, 0);
+            this.printglyph.initfull();
+        }
         this.largeplatform = new lego_moveableobject("pl00");
         this.smallplatform = new lego_moveableobject("pl01");
         this.door = new lego_moveableobject("drs1");

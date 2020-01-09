@@ -220,16 +220,19 @@ class lego_pickup {
                 globalclass.hud.show();
                 gcsaver::pickupmask(this.obj.id);
             }
-            if (this.putype == 3) {
-                globalclass.player.setupgrapplinghook();
-                gcsaver::pickupitem(this.obj.id);
-                gcsaver::sethookfound();
-            }
             if (this.putype == 2) {
                 globalclass.player.addelement(this.scriptid);
                 globalclass.hud.show();
                 gcsaver::pickupglyph(this.obj.id);
                 gcsaver::setglyphfound();
+            }
+            if (this.putype == 3) {
+                globalclass.player.setupgrapplinghook();
+                gcsaver::pickupitem(this.obj.id);
+                gcsaver::sethookfound();
+            }
+            if (this.putype == 4) {
+                gcsaver::pickupitem(this.obj.id);
             }
             if (this.putype == 5) {
                 gcsaver::pickupitem(this.obj.id);
@@ -253,7 +256,15 @@ class lego_pickup {
                     gcsaver::setquest(6, this.quest);
                 }
             }
-            if (this.putype == 4) {
+            if (this.putype == 6) {
+                gcsaver::pickupitem(this.obj.id);
+                globalclass.player.addmaxlife(20);
+                gcsaver::sethealth(gcsaver::gethealth() + 20);
+                globalclass.player.addmaxenergy(20);
+                gcsaver::setenergy(gcsaver::getenergy() + 20);
+            }
+            if (this.putype == 7) {
+                //TODO: Code for the printing elements
                 gcsaver::pickupitem(this.obj.id);
             }
             this.objshown = 0;

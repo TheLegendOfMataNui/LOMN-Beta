@@ -3,6 +3,7 @@ class roll_puzzle {
     property callsurfonce;
     property callunsurfonce;
     property musichasstarted;
+	property printglyph;
     
     method roll_puzzle(param1) {
         this.parent = param1;
@@ -18,10 +19,18 @@ class roll_puzzle {
         this.callsurfonce = 1;
         this.callunsurfonce = 1;
         this.musichasstarted = 0;
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pgl1")) == 0) {
+            this.printglyph = new lego_pickup("pgl1", 0, 7, "item", 7, 0);
+            this.printglyph.initfull();
+        }
         return null;
     }
     
     method cleanupfull() {
+        if (this.printglyph != null) {
+            this.printglyph.cleanupfull();
+            this.printglyph = null;
+        }
         return null;
     }
     
