@@ -89,8 +89,10 @@ class acmaskpuzzle {
             this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
         }
-        this.printglyph = new lego_pickup("glyp", 17, 2, "item", 4, 0);
-        this.printglyph.initfull();
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pgl3")) == 0) {
+            this.printglyph = new lego_pickup("pgl3", 0, 7, "item", 4, 0);
+            this.printglyph.initfull();
+        }
         return null;
     }
     

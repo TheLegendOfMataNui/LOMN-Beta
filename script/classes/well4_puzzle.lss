@@ -137,8 +137,10 @@ class well4_puzzle {
             }
             var1 = var1 + 1;
         }
-        this.printglyph = new lego_pickup("gly0", 17, 2, "item", 4, 0);
-        this.printglyph.initfull();
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pgl4")) == 0) {
+            this.printglyph = new lego_pickup("pgl4", 0, 7, "item", 4, 0);
+            this.printglyph.initfull();
+        }
         return null;
     }
     

@@ -34,8 +34,10 @@ class gly22_puzzle {
         this.lastgyzer.setpos(this.lastgyzer.getx(), 10, this.lastgyzer.getz());
         this.lastgyzer.setresponse(1, 0, 1);
         this.lastgyzer.setslidetimer(0, 16, 0, 2, -1, 1);
-        this.printglyph = new lego_pickup("Glyp", 17, 2, "item", 5, 0);
-        this.printglyph.initfull();
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pgl2")) == 0) {
+            this.printglyph = new lego_pickup("pgl2", 0, 7, "item", 5, 0);
+            this.printglyph.initfull();
+        }
         return null;
     }
     
