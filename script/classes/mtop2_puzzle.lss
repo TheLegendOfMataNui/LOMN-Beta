@@ -1,7 +1,6 @@
 class mtop2_puzzle {
     property parent;
     property hookarray;
-    property maskx;
     property gearpickup;
     property platform;
     
@@ -29,12 +28,6 @@ class mtop2_puzzle {
             this.hookarray[var1].setresponse(1, 1, 1);
             var1 = var1 + 1;
         }
-        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mk9a")) == 0) {
-            this.maskx = new lego_pickup("mk9a", 9, 1, "item", 2, 1);
-            this.maskx.initfull();
-            this.maskx.show();
-            this.moveplatformin();
-        }
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gear")) == 0) {
             this.gearpickup = new lego_pickup("gear", 0, 5, "item", 6, 1);
             this.gearpickup.initfull();
@@ -58,10 +51,6 @@ class mtop2_puzzle {
         if (this.platform != null) {
             this.platform.cleanupfull();
             this.platform = null;
-        }
-        if (this.maskx != null) {
-            this.maskx.cleanupfull();
-            this.maskx = null;
         }
         if (this.gearpickup != null) {
             this.gearpickup.cleanupfull();
