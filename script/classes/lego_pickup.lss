@@ -6,7 +6,6 @@ class lego_pickup {
     property scriptid;
     property putype;
     property objshown;
-    property howtostring;
     property desctext;
     property deltatimer;
     property spinspeed;
@@ -15,43 +14,37 @@ class lego_pickup {
     property condition;
     property quest;
     
-    method lego_pickup(param1, param2, param3, param4, param5, param6) {
+    method lego_pickup(objid, scriptid, pickuptype, stringtablegroup, groupid, numberofstrings) {
+        var string;
         var var1;
-        var var2;
-        var var3;
-        var var4;
-        var var5;
-        this.obj = new lego_moveableobject(param1);
-        this.scriptid = param2;
-        if (param3 == null) {
+        this.obj = new lego_moveableobject(objid);
+        this.scriptid = scriptid;
+        if (pickuptype == null) {
             this.putype = 0;
         }
         else {
-            this.putype = param3;
+            this.putype = pickuptype;
         }
-        var1 = 1.2;
-        if (param4 == null) {
-            var2 = " X X X ";
+        if (stringtablegroup == null) {
+            string = " X X X ";
         }
         else {
-            var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier(param4), param5, 0);
+            string = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier(stringtablegroup), groupid, 0);
         }
-        this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var2, screenx * 0.5, screeny - 130, 0, var1, 256, 0, 0);
-        var3 = 1.0;
-        this.howtolines = param6;
+        this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", string, screenx * 0.5, screeny - 130, 0, 1.2, 256, 0, 0);
+        this.howtolines = numberofstrings;
         this.howtotextarray = [  ];
-        if (param6 > 0) {
-            var4 = 0;
-            while ((param6 - 1) >= var4) {
-                if (!(param4 == null)) {
-                    var2 = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier(param4), param5, var4 + 1);
+        if (numberofstrings > 0) {
+            var1 = 0;
+            while ((numberofstrings - 1) >= var1) {
+                if (stringtablegroup != null) {
+                    string = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier(stringtablegroup), groupid, var1 + 1);
                 }
                 else {
-                    var2 = "Text not localized yet...";
+                    string = "Text not localized yet...";
                 }
-                var5 = (screeny - 100) + (20 * var4);
-                this.howtotextarray.__append(new gs_legotext("Root/Data/Art/Fonts/BionicleFont", var2, screenx * 0.5, var5, 0, var3, 256, 0, 0));
-                var4 = var4 + 1;
+                this.howtotextarray.__append(new gs_legotext("Root/Data/Art/Fonts/BionicleFont", string, screenx * 0.5, (screeny - 100) + (20 * var1), 0, 1.0, 256, 0, 0));
+                var1 = var1 + 1;
             }
         }
         this.objshown = 1;
@@ -90,17 +83,27 @@ class lego_pickup {
             gclightdirector::killpickuplighting(this.obj.id);
             this.objshown = 0;
         }
-        this.obj.cleanupfull();
-        this.obj = null;
-        this.desctext.cleanupfull();
-        this.desctext = null;
-        this.deltatimer = null;
-        var1 = 0;
-        while ((this.howtotextarray.__length - 1) >= var1) {
-            this.howtotextarray[var1].cleanupfull();
-            var1 = var1 + 1;
+        if (this.obj != null) {
+            this.obj.cleanupfull();
+            this.obj = null;
         }
-        this.howtotextarray = null;
+        if (this.desctext != null) {
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        this.deltatimer = null;
+        if (this.howtotextarray != null) {
+            var1 = 0;
+            while ((this.howtotextarray.__length - 1) >= var1) {
+                this.howtotextarray[var1].cleanupfull();
+                this.howtotextarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.howtotextarray = null;
+        }
+        this.scriptid = null;
+        this.putype = null;
+        this.howtolines = null;
         return null;
     }
     
