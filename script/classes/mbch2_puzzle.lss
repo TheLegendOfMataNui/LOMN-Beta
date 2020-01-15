@@ -1,0 +1,371 @@
+class mbch2_puzzle {
+    property parent;
+    property bubbles;
+    property mc;
+    property boulder;
+    property door;
+    property randnum;
+    property droplandonce;
+    property callonce;
+    property tohungas;
+    property boxer;
+    property waterfall;
+    property waterfall2;
+    property ledge;
+    property incrementor;
+    property mwatarea;
+    property wirly;
+    property discpickup;
+    
+    method mbch2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var2;
+        var var3;
+        var var4;
+        this.incrementor = 0;
+        this.mwatarea = 0;
+        this.droplandonce = 1;
+        this.callonce = 1;
+        this.randnum = new slosi_random(0);
+        this.wirly = new lego_moveableobject("wrpl");
+        this.door = new lego_moveableobject("dor1");
+        this.boulder = new lego_moveableobject("bldr");
+        this.boxer = new gs_lego_character("boxa", "rptl", "mbch", 0, 427.2, 365.0, 81.0, "none");
+        this.waterfall = new lego_moveableobject("wfl1");
+        this.waterfall2 = new lego_moveableobject("wfl2");
+        this.ledge = new platform("ldge");
+        this.tohungas = [ new runningcharacter("toh0", "vlgr", "mbch", 59, 275.7, 352.9, 60.8, "none"), 
+            new runningcharacter("toh1", "vlgr", "mbch", 28, 281.6, 352.4, 74.1, "none"), 
+            new runningcharacter("toh2", "vlgr", "mbch", 127, 290.2, 352.6, 81.8, "none"), 
+            new runningcharacter("toh3", "vlgr", "mbch", 103, 299.1, 353.0, 97.3, "none") ];
+        this.mc = [ new lego_moveableobject("pf01"), 
+            new lego_moveableobject("pf02"), 
+            new lego_moveableobject("pf03") ];
+        this.wirly.initfull();
+        this.door.initfull();
+        this.door.show();
+        this.boulder.initfull();
+        this.boulder.setmoveable(10.5, 0.1, 0, 0, 0, 0);
+        this.boulder.setfalllimit(335.7);
+        this.boulder.show();
+        this.boxer.initfull();
+        this.boxer.add();
+        this.boxer.show();
+        this.waterfall.initfull();
+        this.waterfall.setresponse(4, 4, 4);
+        this.waterfall.show();
+        this.waterfall2.initfull();
+        this.waterfall2.setresponse(4, 4, 4);
+        this.waterfall2.hide();
+        var2 = 0;
+        while ((this.tohungas.__length - 1) >= var2) {
+            if (var2 == 0) {
+                this.tohungas[var2].init("Root/Data/Levels/lev2/mbch/Line01.txt");
+            }
+            else if (var2 == 1) {
+                this.tohungas[var2].init("Root/Data/Levels/lev2/mbch/Line02.txt");
+            }
+            else if (var2 == 2) {
+                this.tohungas[var2].init("Root/Data/Levels/lev2/mbch/Line03.txt");
+            }
+            else if (var2 == 3) {
+                this.tohungas[var2].init("Root/Data/Levels/lev2/mbch/Line04.txt");
+            }
+            this.tohungas[var2].add();
+            var3 = this.tohungas[var2];
+            var3.speed = 5.0;
+            this.tohungas[var2].show();
+            var2 = var2 + 1;
+        }
+        this.tohungas[0].setpos(275.7, 353.0, 60.8);
+        this.tohungas[1].setpos(281.6, 353.0, 74.1);
+        this.tohungas[2].setpos(290.2, 353.0, 81.8);
+        this.tohungas[3].setpos(299.1, 353.0, 97.3);
+        var2 = 0;
+        while ((this.mc.__length - 1) >= var2) {
+            this.mc[var2].initfull();
+            this.mc[var2].setmoveable(1.5, 0.1, 0, 0, 0, 0);
+            this.mc[var2].setresponse(0, 0, 3);
+            this.mc[var2].show();
+            var2 = var2 + 1;
+        }
+        this.ledge.initfull();
+        this.ledge.setupfall(1.0, "wtvr");
+        this.ledge.setuptouchshakerotate(1.5, 0.0, 1.5, 0.2);
+        this.ledge.show();
+        var4 = gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc2"));
+        if (var4 == 0) {
+            this.discpickup = new lego_pickup("dsc2", 0, 5, "item", 12, 1);
+            this.discpickup.initfull();
+            this.discpickup.show();
+            this.discpickup.setcondition(32768);
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.mc.__length - 1) >= var1) {
+            this.mc[var1].cleanupfull();
+            this.mc[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.mc = null;
+        this.boulder.cleanupfull();
+        this.boulder = null;
+        this.door.cleanupfull();
+        this.door = null;
+        this.randnum = null;
+        this.droplandonce = null;
+        this.callonce = null;
+        var1 = 0;
+        while ((this.tohungas.__length - 1) >= var1) {
+            this.tohungas[var1].cleanupfull();
+            this.tohungas[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.tohungas = null;
+        this.boxer.cleanupfull();
+        this.boxer = null;
+        this.waterfall.cleanupfull();
+        this.waterfall = null;
+        this.waterfall2.cleanupfull();
+        this.waterfall2 = null;
+        this.ledge.cleanupfull();
+        this.ledge = null;
+        this.incrementor = null;
+        this.mwatarea = null;
+        this.wirly.cleanupfull();
+        this.wirly = null;
+        if (!(this.discpickup == null)) {
+            this.discpickup.cleanupfull();
+            this.discpickup = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (this.tohungas == null) {
+            debug::print("*****TOHUNGAS ARE NOTHING");
+        }
+        else {
+            var1 = 0;
+            while ((this.tohungas.__length - 1) >= var1) {
+                this.tohungas[var1].process(param1);
+                var1 = var1 + 1;
+            }
+        }
+        if (this.ledge == null) {
+            debug::print("*****LEDGE IS NOTHING");
+        }
+        else {
+            this.ledge.process(param1);
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        if (param1.eventid == 1000) {
+            debug::print("EventID.args[0] = " + __tostring(param1.args[0]));
+            if (__toint(param1.args[0]) == 1) {
+                this.incrementor = this.incrementor + 1;
+                if (this.incrementor <= (this.tohungas.__length - 1)) {
+                    this.tohungas[this.incrementor].startrunning();
+                    debug::print(("TOHUNGA " + __tostring(this.incrementor)) + " SHOULD BE MOVING");
+                }
+            }
+            if (__toint(param1.args[0]) == 2) {
+                debug::print("OPENING DOOR");
+                this.opendoor();
+            }
+        }
+        else if (param1.eventid == 35) {
+            if (param1.args[0] == this.boulder.id) {
+                if (param1.args[1] == 0) {
+                    this.boulder.hide();
+                }
+            }
+            else if (param1.args[0] == this.waterfall.id) {
+                if (param1.args[1] == 0) {
+                    this.waterfall.hide();
+                    this.tohungas[0].startrunning();
+                    debug::print("TOHUNGA 0 SHOULD BE MOVING");
+                }
+            }
+        }
+        else if (param1.eventid == 31) {
+            if (param1.args[0] == this.boulder.id) {
+                this.waterfall.fadeout(2.5);
+                this.boulder.fadeout(2.0);
+                this.waterfall2.show();
+                this.waterfall2.fadeout(0.0);
+                this.waterfall2.fadein(1.0);
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == this.ledge.id) {
+                    var1 = this.ledge.obj.getx();
+                    var2 = globalclass.player.actor.getpos().y1;
+                    var3 = this.ledge.obj.getz();
+                    globalclass.player.actor.setpos(var1, var2, var3);
+                    this.mwatarea = 1;
+                }
+                else if (param1.args[1] == this.boulder.id) {
+                    if (globalclass.player.whichmaskonface() == 0) {
+                        if (this.callonce) {
+                            this.boulder.setmoveableflags(1, 1, 0, 1);
+                            this.boulder.setfriction(0.1);
+                            this.callonce = 0;
+                        }
+                    }
+                    else if (this.callonce == 0) {
+                        this.boulder.setfriction(0.0);
+                        this.boulder.setmoveableflags(0, 0, 0, 0);
+                        this.callonce = 1;
+                    }
+                }
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {
+                this.dropland();
+            }
+            param1.args[0];
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
+                gccollisionphysicsgroup::spinmask(1.2);
+                gcstaticsoundsptrarray::playtablesound(774);
+                gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier("mwat"), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+        }
+        this.ledge.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 80) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        if (param1.button == 49) {
+            if (param1.event == 2) {
+                this.animate(0);
+            }
+        }
+        if (param1.button == 50) {
+            if (param1.event == 2) {
+                this.animate(1);
+            }
+        }
+        if (param1.button == 51) {
+            if (param1.event == 2) {
+                this.animate(2);
+            }
+        }
+        if (param1.button == 52) {
+            if (param1.event == 2) {
+                this.animate(3);
+            }
+        }
+        if (param1.button == 53) {
+            if (param1.event == 2) {
+                this.animate(4);
+            }
+        }
+        if (param1.button == 54) {
+            if (param1.event == 2) {
+                this.animate(5);
+            }
+        }
+        if (param1.button == 55) {
+            if (param1.event == 2) {
+                this.animate(6);
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        this.boulder.setmoveableflags(1, 1, 0, 1);
+        this.boulder.setvelocity(0.05);
+        return null;
+    }
+    
+    method dropland() {
+        var var1;
+        var var2;
+        var var3;
+        if (this.droplandonce) {
+            var1 = 0;
+            while ((this.mc.__length - 1) >= var1) {
+                var2 = this.randnum.getrandomfloat(0 - 5.0, 5.0);
+                var3 = this.randnum.getrandomfloat(0 - 5.0, 5.0);
+                this.mc[var1].setmoveableflags(1, 1, 0, 1);
+                this.mc[var1].setvelocity(var2, 0.0, var3);
+                this.mc[var1].setrollangle(var2, 0.0, var3);
+                var1 = var1 + 1;
+            }
+            this.droplandonce = 0;
+        }
+        return null;
+    }
+    
+    method opendoor() {
+        this.door.interpolate(-1861, 215.1, 0 - 1224.3, 2.5);
+        return null;
+    }
+    
+    method animate(param1) {
+        if (param1 == 0) {
+            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp00"));
+        }
+        else if (param1 == 1) {
+            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp01"));
+        }
+        else if (param1 == 2) {
+            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp02"));
+        }
+        else if (param1 == 3) {
+            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp03"));
+        }
+        else if (param1 == 4) {
+            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp04"));
+        }
+        else if (param1 == 5) {
+            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp05"));
+        }
+        else if (param1 == 6) {
+            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp06"));
+        }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}
