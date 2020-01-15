@@ -15,7 +15,7 @@ class lego_area_mtup6 : gs_lego_area {
             gccinemaengine::play(this.cinema);
         }
         globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
-        globalclass.bgmusic.play(1);
+        globalclass.bgmusic.play();
         return null;
     }
     
@@ -37,6 +37,8 @@ class lego_area_mtup6 : gs_lego_area {
     method onevent(param1) {
         if (param1.eventid == 30) {
             globalclass.player.maskcontrol.changemask(4);
+            globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
+            globalclass.bgmusic.play();
         }
         if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
