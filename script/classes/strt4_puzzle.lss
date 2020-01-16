@@ -21,11 +21,16 @@ class strt4_puzzle {
         var hive1handle;
         var hive2handle;
         var tohunga;
-        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::settohunga(tohunga, rgba(255, 255, 255, 255), rgba(122, 254, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
-        gccharacter::setorientation(tohunga, -42);
-        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
+        if (gcsaver::isconditionset(4194304) == 0) {
+            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(tohunga, rgba(255, 255, 255, 255), rgba(122, 254, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
+            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
+            gccharacter::setorientation(tohunga, -42);
+        }
+        else {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        }
         this.doortop = new lego_moveableobject("drt1");
         this.doortop.initfull();
         this.doorbottom = new lego_moveableobject("drb1");
