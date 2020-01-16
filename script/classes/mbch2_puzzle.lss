@@ -25,7 +25,6 @@ class mbch2_puzzle {
     method initfull() {
         var var2;
         var var3;
-        var var4;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICGALITHEME");
         globalclass.bgmusic.play();		
         this.incrementor = 0;
@@ -99,12 +98,12 @@ class mbch2_puzzle {
         this.ledge.setupfall(1.0, "wtvr");
         this.ledge.setuptouchshakerotate(1.5, 0.0, 1.5, 0.2);
         this.ledge.show();
-        var4 = gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc2"));
-        if (var4 == 0) {
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc2")) == 0) {
             this.discpickup = new lego_pickup("dsc2", 0, 5, "item", 8, 1);
             this.discpickup.initfull();
             this.discpickup.show();
             this.discpickup.setcondition(32768);
+            this.discpickup.setquest(1);
         }
         return null;
     }
@@ -144,7 +143,7 @@ class mbch2_puzzle {
         this.mwatarea = null;
         this.wirly.cleanupfull();
         this.wirly = null;
-        if (!(this.discpickup == null)) {
+        if (this.discpickup != null) {
             this.discpickup.cleanupfull();
             this.discpickup = null;
         }
