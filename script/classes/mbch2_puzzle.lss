@@ -7,7 +7,6 @@ class mbch2_puzzle {
     property randnum;
     property droplandonce;
     property callonce;
-    property boxer;
     property waterfall;
     property waterfall2;
     property ledge;
@@ -34,7 +33,6 @@ class mbch2_puzzle {
         this.wirly = new lego_moveableobject("wrpl");
         this.door = new lego_moveableobject("dor1");
         this.boulder = new lego_moveableobject("bldr");
-        this.boxer = new gs_lego_character("boxa", "rptl", "mbch", 0, 427.2, 365.0, 81.0, "none");
         this.waterfall = new lego_moveableobject("wfl1");
         this.waterfall2 = new lego_moveableobject("wfl2");
         this.ledge = new platform("ldge");
@@ -48,9 +46,6 @@ class mbch2_puzzle {
         this.boulder.setmoveable(10.5, 0.1, 0, 0, 0, 0);
         this.boulder.setfalllimit(335.7);
         this.boulder.show();
-        this.boxer.initfull();
-        this.boxer.add();
-        this.boxer.show();
         this.waterfall.initfull();
         this.waterfall.setresponse(4, 4, 4);
         this.waterfall.show();
@@ -101,10 +96,6 @@ class mbch2_puzzle {
         this.randnum = null;
         this.droplandonce = null;
         this.callonce = null;
-        if (this.boxer != null) {
-            this.boxer.cleanupfull();
-            this.boxer = null;
-        }
         if (this.waterfall != null) {
             this.waterfall.cleanupfull();
             this.waterfall = null;
@@ -231,41 +222,6 @@ class mbch2_puzzle {
                 this.cheat();
             }
         }
-        if (param1.button == 49) {
-            if (param1.event == 2) {
-                this.animate(0);
-            }
-        }
-        if (param1.button == 50) {
-            if (param1.event == 2) {
-                this.animate(1);
-            }
-        }
-        if (param1.button == 51) {
-            if (param1.event == 2) {
-                this.animate(2);
-            }
-        }
-        if (param1.button == 52) {
-            if (param1.event == 2) {
-                this.animate(3);
-            }
-        }
-        if (param1.button == 53) {
-            if (param1.event == 2) {
-                this.animate(4);
-            }
-        }
-        if (param1.button == 54) {
-            if (param1.event == 2) {
-                this.animate(5);
-            }
-        }
-        if (param1.button == 55) {
-            if (param1.event == 2) {
-                this.animate(6);
-            }
-        }
         return null;
     }
     
@@ -296,31 +252,6 @@ class mbch2_puzzle {
     
     method opendoor() {
         this.door.interpolate(-1861, 215.1, 0 - 1224.3, 2.5);
-        return null;
-    }
-    
-    method animate(param1) {
-        if (param1 == 0) {
-            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp00"));
-        }
-        else if (param1 == 1) {
-            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp01"));
-        }
-        else if (param1 == 2) {
-            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp02"));
-        }
-        else if (param1 == 3) {
-            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp03"));
-        }
-        else if (param1 == 4) {
-            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp04"));
-        }
-        else if (param1 == 5) {
-            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp05"));
-        }
-        else if (param1 == 6) {
-            this.boxer.setsplitanimation(scslosifoundation::stringtoidentifier("rp06"));
-        }
         return null;
     }
     
