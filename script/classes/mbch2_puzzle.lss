@@ -7,7 +7,6 @@ class mbch2_puzzle {
     property randnum;
     property droplandonce;
     property callonce;
-    property tohungas;
     property boxer;
     property waterfall;
     property waterfall2;
@@ -39,10 +38,6 @@ class mbch2_puzzle {
         this.waterfall = new lego_moveableobject("wfl1");
         this.waterfall2 = new lego_moveableobject("wfl2");
         this.ledge = new platform("ldge");
-        this.tohungas = [ new runningcharacter("toh0", "vlgr", "mbch", 59, 275.7, 352.9, 60.8, "none"), 
-            new runningcharacter("toh1", "vlgr", "mbch", 28, 281.6, 352.4, 74.1, "none"), 
-            new runningcharacter("toh2", "vlgr", "mbch", 127, 290.2, 352.6, 81.8, "none"), 
-            new runningcharacter("toh3", "vlgr", "mbch", 103, 299.1, 353.0, 97.3, "none") ];
         this.mc = [ new lego_moveableobject("pf01"), 
             new lego_moveableobject("pf02"), 
             new lego_moveableobject("pf03") ];
@@ -62,30 +57,6 @@ class mbch2_puzzle {
         this.waterfall2.initfull();
         this.waterfall2.setresponse(4, 4, 4);
         this.waterfall2.hide();
-        var2 = 0;
-        while ((this.tohungas.__length - 1) >= var2) {
-            if (var2 == 0) {
-                this.tohungas[var2].init("Root/Data/Levels/lev2/mbch/Line01.txt");
-            }
-            else if (var2 == 1) {
-                this.tohungas[var2].init("Root/Data/Levels/lev2/mbch/Line02.txt");
-            }
-            else if (var2 == 2) {
-                this.tohungas[var2].init("Root/Data/Levels/lev2/mbch/Line03.txt");
-            }
-            else if (var2 == 3) {
-                this.tohungas[var2].init("Root/Data/Levels/lev2/mbch/Line04.txt");
-            }
-            this.tohungas[var2].add();
-            var3 = this.tohungas[var2];
-            var3.speed = 5.0;
-            this.tohungas[var2].show();
-            var2 = var2 + 1;
-        }
-        this.tohungas[0].setpos(275.7, 353.0, 60.8);
-        this.tohungas[1].setpos(281.6, 353.0, 74.1);
-        this.tohungas[2].setpos(290.2, 353.0, 81.8);
-        this.tohungas[3].setpos(299.1, 353.0, 97.3);
         var2 = 0;
         while ((this.mc.__length - 1) >= var2) {
             this.mc[var2].initfull();
@@ -110,39 +81,48 @@ class mbch2_puzzle {
     
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        while ((this.mc.__length - 1) >= var1) {
-            this.mc[var1].cleanupfull();
-            this.mc[var1] = null;
-            var1 = var1 + 1;
+        if (this.mc != null) {
+            var1 = 0;
+            while ((this.mc.__length - 1) >= var1) {
+                this.mc[var1].cleanupfull();
+                this.mc[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.mc = null;
         }
-        this.mc = null;
-        this.boulder.cleanupfull();
-        this.boulder = null;
-        this.door.cleanupfull();
-        this.door = null;
+        if (this.boulder != null) {
+            this.boulder.cleanupfull();
+            this.boulder = null;
+        }
+        if (this.door != null) {
+            this.door.cleanupfull();
+            this.door = null;
+        }
         this.randnum = null;
         this.droplandonce = null;
         this.callonce = null;
-        var1 = 0;
-        while ((this.tohungas.__length - 1) >= var1) {
-            this.tohungas[var1].cleanupfull();
-            this.tohungas[var1] = null;
-            var1 = var1 + 1;
+        if (this.boxer != null) {
+            this.boxer.cleanupfull();
+            this.boxer = null;
         }
-        this.tohungas = null;
-        this.boxer.cleanupfull();
-        this.boxer = null;
-        this.waterfall.cleanupfull();
-        this.waterfall = null;
-        this.waterfall2.cleanupfull();
-        this.waterfall2 = null;
-        this.ledge.cleanupfull();
-        this.ledge = null;
+        if (this.waterfall != null) {
+            this.waterfall.cleanupfull();
+            this.waterfall = null;
+        }
+        if (this.waterfall2 != null) {
+            this.waterfall2.cleanupfull();
+            this.waterfall2 = null;
+        }
+        if (this.ledge != null) {
+            this.ledge.cleanupfull();
+            this.ledge = null;
+        }
         this.incrementor = null;
         this.mwatarea = null;
-        this.wirly.cleanupfull();
-        this.wirly = null;
+        if (this.wirly != null) {
+            this.wirly.cleanupfull();
+            this.wirly = null;
+        }
         if (this.discpickup != null) {
             this.discpickup.cleanupfull();
             this.discpickup = null;
@@ -151,17 +131,6 @@ class mbch2_puzzle {
     }
     
     method process(param1) {
-        var var1;
-        if (this.tohungas == null) {
-            debug::print("*****TOHUNGAS ARE NOTHING");
-        }
-        else {
-            var1 = 0;
-            while ((this.tohungas.__length - 1) >= var1) {
-                this.tohungas[var1].process(param1);
-                var1 = var1 + 1;
-            }
-        }
         if (this.ledge == null) {
             debug::print("*****LEDGE IS NOTHING");
         }
@@ -175,21 +144,10 @@ class mbch2_puzzle {
         var var1;
         var var2;
         var var3;
-        if (param1.eventid == 1000) {
-            debug::print("EventID.args[0] = " + __tostring(param1.args[0]));
-            if (__toint(param1.args[0]) == 1) {
-                this.incrementor = this.incrementor + 1;
-                if (this.incrementor <= (this.tohungas.__length - 1)) {
-                    this.tohungas[this.incrementor].startrunning();
-                    debug::print(("TOHUNGA " + __tostring(this.incrementor)) + " SHOULD BE MOVING");
-                }
-            }
-            if (__toint(param1.args[0]) == 2) {
-                debug::print("OPENING DOOR");
-                this.opendoor();
-            }
+        if (this.ledge != null) {
+            this.ledge.onevent(param1);
         }
-        else if (param1.eventid == 35) {
+        if (param1.eventid == 35) {
             if (param1.args[0] == this.boulder.id) {
                 if (param1.args[1] == 0) {
                     this.boulder.hide();
@@ -198,8 +156,6 @@ class mbch2_puzzle {
             else if (param1.args[0] == this.waterfall.id) {
                 if (param1.args[1] == 0) {
                     this.waterfall.hide();
-                    this.tohungas[0].startrunning();
-                    debug::print("TOHUNGA 0 SHOULD BE MOVING");
                 }
             }
         }
@@ -237,20 +193,20 @@ class mbch2_puzzle {
                     }
                 }
             }
-            param1.args[0];
         }
         else if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {
                 this.dropland();
             }
-            param1.args[0];
         }
         else if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
                 globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
             }
             else if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
-                gccollisionphysicsgroup::spinmask(1.2);
                 gcstaticsoundsptrarray::playtablesound(774);
                 gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier("mwat"), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
             }
@@ -260,9 +216,12 @@ class mbch2_puzzle {
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
         }
-        this.ledge.onevent(param1);
         return null;
     }
     
