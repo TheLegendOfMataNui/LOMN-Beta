@@ -41,6 +41,7 @@ class gs_lego_screenfrontend {
     property playgame;
     property printmenu;
     property glossary;
+	property soundtest;
     property curspline;
     property cameramode;
     property rotateval;
@@ -122,6 +123,13 @@ class gs_lego_screenfrontend {
             0 ];
         this.optiontext.__append(var1);
         var1 = [ "Controls", 
+            50, 
+            50 + (40 * this.optiontext.__length), 
+            0, 
+            0, 
+            0 ];
+        this.optiontext.__append(var1);
+        var1 = [ "Sound Test", 
             50, 
             50 + (40 * this.optiontext.__length), 
             0, 
@@ -241,6 +249,7 @@ class gs_lego_screenfrontend {
         this.options_graphics = new graphicsoptions(this);
         this.printmenu = new gsprintmenu(this);
         this.glossary = new gsglossary(this);
+		this.soundtest = new soundtest(this);
         return null;
     }
     
@@ -464,6 +473,10 @@ class gs_lego_screenfrontend {
             this.titleimage.cleanupfull();
             this.titleimage = null;
         }
+        if (!(this.soundtest == null)) {
+            this.soundtest.cleanupfull();
+            this.soundtest = null;
+        }
         this.curscreen = 10;
         this.screentimer = 0;
         this.cameramode = null;
@@ -502,6 +515,9 @@ class gs_lego_screenfrontend {
         }
         else if (this.curscreen == 5) {
             this.printmenu.onevent(param1);
+        }
+        if (this.curscreen == 11) {
+            this.soundtest.onevent(param1);
         }
         else if (param1.eventid == 25) {
             this.mousebuttonreleased(param1.args[0]);
@@ -607,6 +623,9 @@ class gs_lego_screenfrontend {
         }
         else if (this.curscreen == 5) {
             this.printmenu.input(param1);
+        }
+        else if (this.curscreen == 11) {
+            this.soundtest.input(param1);
         }
         return null;
     }
@@ -724,7 +743,7 @@ class gs_lego_screenfrontend {
                     }
                 }
             }
-            else if (((param1 == 2) && !(this.curscreen == -1)) && !(this.curscreen == 10)) {
+            else if (((param1 == 2) && !(this.curscreen == -1)) && !(this.curscreen == 11)) {
                 gcstaticsoundsptrarray::playtablesound(1073);
                 this.back();
             }
@@ -768,6 +787,11 @@ class gs_lego_screenfrontend {
             globalclass.level.cam.setaimode(3);
         }
         else if (param1 == 6) {
+            globalclass.level.cam.setspline(18, 3.0, param2, param3);
+            globalclass.level.cam.settargetspline(21, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 7) {
             globalclass.level.cam.setspline(18, 3.0, param2, param3);
             globalclass.level.cam.settargetspline(21, param2, param3);
             globalclass.level.cam.setaimode(3);
@@ -882,6 +906,10 @@ class gs_lego_screenfrontend {
             else if (param1 == 6) {
                 this.gotodifferentscreen(this.controlstext, 3);
             }
+            else if (param1 == 7) {
+                this.soundtest.initfull();
+                this.gotodifferentscreen(null, 11);
+            }
         }
         else if (this.curscreen == 1) {
             
@@ -934,6 +962,9 @@ class gs_lego_screenfrontend {
             }
             else if (param1 == 6) {
                 this.adjustcamera(8, 1, 1, 2.0);
+            }
+            else if (param1 == 7) {
+                this.adjustcamera(2, 1, 1, 7.0);
             }
         }
         else if (this.curscreen == 1) {
