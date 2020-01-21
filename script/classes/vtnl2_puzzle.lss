@@ -2,7 +2,6 @@ class vtnl2_puzzle {
     property parent;
     property caveplatforms;
     property randomnumber;
-    property discpickup;
     property passedtrigplane;
     
     method vtnl2_puzzle(param1) {
@@ -52,13 +51,6 @@ class vtnl2_puzzle {
         gchive::setmaxcreatures(hive1handle, 8);
         gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("crb1"));
         gchive::setspawnrate(hive1handle, 5);
-        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("disc")) == 0) {
-            this.discpickup = new lego_pickup("disc", 0, 5, "item", 8, 1);
-            this.discpickup.initfull();
-            this.discpickup.show();
-            this.discpickup.setcondition(32768);
-            this.discpickup.setquest(1);
-        }
         return null;
     }
     
@@ -74,10 +66,6 @@ class vtnl2_puzzle {
             this.caveplatforms = null;
         }
         this.randomnumber = null;
-        if (this.discpickup != null) {
-            this.discpickup.cleanupfull();
-            this.discpickup = null;
-        }
         return null;
     }
     

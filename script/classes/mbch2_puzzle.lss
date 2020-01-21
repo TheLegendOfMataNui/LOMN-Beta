@@ -1,0 +1,272 @@
+class mbch2_puzzle {
+    property parent;
+    property mc;
+    property boulder;
+    property door;
+    property randnum;
+    property droplandonce;
+    property callonce;
+    property waterfall;
+    property waterfall2;
+    property ledge;
+    property wirly;
+    property discpickup;
+    
+    method mbch2_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var2;
+        var var3;
+        var tohunga;
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICGALITHEME");
+        globalclass.bgmusic.play();		
+        this.droplandonce = 1;
+        this.callonce = 1;
+        this.randnum = new slosi_random(0);
+        this.wirly = new lego_moveableobject("wrpl");
+        this.door = new lego_moveableobject("dor1");
+        this.boulder = new lego_moveableobject("bldr");
+        this.waterfall = new lego_moveableobject("wfl1");
+        this.waterfall2 = new lego_moveableobject("wfl2");
+        this.ledge = new platform("ldge");
+        this.mc = [ new lego_moveableobject("pf01"), 
+            new lego_moveableobject("pf02"), 
+            new lego_moveableobject("pf03") ];
+        this.wirly.initfull();
+        this.door.initfull();
+        this.door.show();
+        this.boulder.initfull();
+        this.boulder.setmoveable(10.5, 0.1, 0, 0, 0, 0);
+        this.boulder.setfalllimit(335.7);
+        this.boulder.show();
+        this.waterfall.initfull();
+        this.waterfall.setresponse(4, 4, 4);
+        this.waterfall.show();
+        this.waterfall2.initfull();
+        this.waterfall2.setresponse(4, 4, 4);
+        this.waterfall2.hide();
+        var2 = 0;
+        while ((this.mc.__length - 1) >= var2) {
+            this.mc[var2].initfull();
+            this.mc[var2].setmoveable(1.5, 0.1, 0, 0, 0, 0);
+            this.mc[var2].setresponse(0, 0, 3);
+            this.mc[var2].show();
+            var2 = var2 + 1;
+        }
+        this.ledge.initfull();
+        this.ledge.setupfall(1.0, "wtvr");
+        this.ledge.setuptouchshakerotate(1.5, 0.0, 1.5, 0.2);
+        this.ledge.show();
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc2")) == 0) {
+            this.discpickup = new lego_pickup("dsc2", 0, 5, "item", 8, 1);
+            this.discpickup.initfull();
+            this.discpickup.show();
+            this.discpickup.setcondition(32768);
+            this.discpickup.setquest(1);
+        }
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(tohunga, rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mkca"));
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+        gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+        gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+        gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
+        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (this.mc != null) {
+            var1 = 0;
+            while ((this.mc.__length - 1) >= var1) {
+                this.mc[var1].cleanupfull();
+                this.mc[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.mc = null;
+        }
+        if (this.boulder != null) {
+            this.boulder.cleanupfull();
+            this.boulder = null;
+        }
+        if (this.door != null) {
+            this.door.cleanupfull();
+            this.door = null;
+        }
+        this.randnum = null;
+        this.droplandonce = null;
+        this.callonce = null;
+        if (this.waterfall != null) {
+            this.waterfall.cleanupfull();
+            this.waterfall = null;
+        }
+        if (this.waterfall2 != null) {
+            this.waterfall2.cleanupfull();
+            this.waterfall2 = null;
+        }
+        if (this.ledge != null) {
+            this.ledge.cleanupfull();
+            this.ledge = null;
+        }
+        if (this.wirly != null) {
+            this.wirly.cleanupfull();
+            this.wirly = null;
+        }
+        if (this.discpickup != null) {
+            this.discpickup.cleanupfull();
+            this.discpickup = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.ledge == null) {
+            debug::print("*****LEDGE IS NOTHING");
+        }
+        else {
+            this.ledge.process(param1);
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        var var3;
+        if (this.ledge != null) {
+            this.ledge.onevent(param1);
+        }
+        if (param1.eventid == 35) {
+            if (param1.args[0] == this.boulder.id) {
+                if (param1.args[1] == 0) {
+                    this.boulder.hide();
+                }
+            }
+            else if (param1.args[0] == this.waterfall.id) {
+                if (param1.args[1] == 0) {
+                    this.waterfall.hide();
+                }
+            }
+        }
+        else if (param1.eventid == 31) {
+            if (param1.args[0] == this.boulder.id) {
+                this.waterfall.fadeout(2.5);
+                this.boulder.fadeout(2.0);
+                this.waterfall2.show();
+                this.waterfall2.fadeout(0.0);
+                this.waterfall2.fadein(1.0);
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == this.ledge.id) {
+                    var1 = this.ledge.obj.getx();
+                    var2 = globalclass.player.actor.getpos().y1;
+                    var3 = this.ledge.obj.getz();
+                    globalclass.player.actor.setpos(var1, var2, var3);
+                }
+                else if (param1.args[1] == this.boulder.id) {
+                    if (globalclass.player.whichmaskonface() == 0) {
+                        if (this.callonce) {
+                            this.boulder.setmoveableflags(1, 1, 0, 1);
+                            this.boulder.setfriction(0.1);
+                            this.callonce = 0;
+                        }
+                    }
+                    else if (this.callonce == 0) {
+                        this.boulder.setfriction(0.0);
+                        this.boulder.setmoveableflags(0, 0, 0, 0);
+                        this.callonce = 1;
+                    }
+                }
+            }
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {
+                this.dropland();
+            }
+        }
+        else if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                this.parent.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
+                gcstaticsoundsptrarray::playtablesound(774);
+                gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier("mwat"), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.setinputstate("ninp");
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (param1.button == 80) {
+            if (param1.event == 2) {
+                this.cheat();
+            }
+        }
+        return null;
+    }
+    
+    method cheat() {
+        this.boulder.setmoveableflags(1, 1, 0, 1);
+        this.boulder.setvelocity(0.05);
+        return null;
+    }
+    
+    method dropland() {
+        var var1;
+        var var2;
+        var var3;
+        if (this.droplandonce) {
+            var1 = 0;
+            while ((this.mc.__length - 1) >= var1) {
+                var2 = this.randnum.getrandomfloat(0 - 5.0, 5.0);
+                var3 = this.randnum.getrandomfloat(0 - 5.0, 5.0);
+                this.mc[var1].setmoveableflags(1, 1, 0, 1);
+                this.mc[var1].setvelocity(var2, 0.0, var3);
+                this.mc[var1].setrollangle(var2, 0.0, var3);
+                var1 = var1 + 1;
+            }
+            this.droplandonce = 0;
+        }
+        return null;
+    }
+    
+    method opendoor() {
+        this.door.interpolate(-1861, 215.1, 0 - 1224.3, 2.5);
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+}

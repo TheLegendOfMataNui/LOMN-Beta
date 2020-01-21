@@ -24,6 +24,7 @@ class vllg2_puzzle {
     property orientation;
     property cinema;
     property cinema_shown;
+	property gearpickup;
     
     method vllg2_puzzle(param1) {
         this.parent = param1;
@@ -46,6 +47,13 @@ class vllg2_puzzle {
         else {
             this.cinema_shown = 0;
         }
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gear")) == 0) {
+            this.gearpickup = new lego_pickup("gear", 0, 5, "item", 6, 1);
+            this.gearpickup.initfull();
+            this.gearpickup.show();
+            this.gearpickup.setcondition(131072);
+            this.gearpickup.setquest(2);
+        }		
         if (this.cinema_shown == 0) {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin3");
@@ -94,7 +102,7 @@ class vllg2_puzzle {
             gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
             gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
             tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk0a"));
+            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk0a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 60, 91, 255), rgba(72, 117, 174, 255), rgba(0, 0, 255, 255));
             gccharacter::setorientation(tohunga, -2);
             gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
@@ -262,6 +270,10 @@ class vllg2_puzzle {
             this.upgradefruit.cleanupfull();
             this.upgradefruit = null;
         }
+        if (this.gearpickup != null) {
+            this.gearpickup.cleanupfull();
+            this.gearpickup = null;
+        }		
         if (this.upgradefruit2 != null) {
             this.upgradefruit2.cleanupfull();
             this.upgradefruit2 = null;
