@@ -1,0 +1,40 @@
+class lego_area_kuta7 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_kuta7(param1) {
+        this.gs_lego_area("kuta", param1, 0, 0);
+        this.puzzle = new kuta7_puzzle(this);
+        this.lego_area_initfull();
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_area_show();
+        this.puzzle.initfull();
+        gcareadirector::setfog(-16777216, 0 - 1.0, 0 - 350.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
+        globalclass.bgmusic.play(1);
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
+        return null;
+    }
+}
