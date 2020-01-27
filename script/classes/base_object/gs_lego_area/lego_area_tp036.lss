@@ -1,46 +1,43 @@
-class lego_area_tp03 : gs_lego_area {
-    property parent;
+class lego_area_tp036 : gs_lego_area {
+    property puzzle;
     
-    method lego_area_tp03(param1) {
-        this.parent = param1;
+    method lego_area_tp036(param1) {
         this.gs_lego_area("tp03", param1, 0, 0);
         this.lego_area_initfull();
+        this.puzzle = new tp036_puzzle(this);
         return null;
     }
     
     method initfull() {
-        var var1;
-        var var2;
-        var var3;
-        var var4;
-        var var5;
-        var var6;
         this.lego_area_show();
-        this.lego_area_initfull();
-        gcmodeldirector::setnearestmax(15);
+        this.puzzle.show();
         return null;
     }
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.lego_area_cleanupfull();
+        this.puzzle.hide();
         return null;
     }
     
     method process(param1) {
+        this.puzzle.process(param1);
         return null;
     }
     
     method onevent(param1) {
+        this.puzzle.onevent(param1);
         return null;
     }
     
     method input(param1) {
+        this.puzzle.input(param1);
         return null;
     }
     
     method exit() {
-        this.parent = null;
+        this.puzzle.exit();
+        this.puzzle = null;
         return null;
     }
 }

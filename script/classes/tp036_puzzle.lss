@@ -1,0 +1,79 @@
+class tp036_puzzle {
+    property mmosquitoes;
+    property mparent;
+    property glyph;
+    property music;
+    
+    method tp036_puzzle(param1) {
+        this.mparent = param1;
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        this.glyph = new lego_pickup("glyp", 19, 2, "item", 6, 1);
+        this.glyph.initfull();
+        if (gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"))) {
+            this.glyph.hide();
+        }
+        else {
+            this.glyph.show();
+        }
+        this.mmosquitoes = [ new gs_lego_character("bill", "msqt", "fake", 0, 27.18, 22.7, 2.26, "aiin"), 
+            new gs_lego_character("mike", "msqt", "fake", 0, 27.18, 22.7, 2.26, "aiin"), 
+            new gs_lego_character("earl", "msqt", "fake", 0, 27.18, 22.7, 2.26, "aiin") ];
+        var1 = 0;
+        while ((this.mmosquitoes.__length - 1) >= var1) {
+            this.mmosquitoes[var1].initfull();
+            this.mmosquitoes[var1].add();
+            this.mmosquitoes[var1].show();
+            var1 = var1 + 1;
+        }
+        this.music = new legomp3player();
+        this.music.setupforplay("Root/Data/sounds/MUSICsurfandsnowboard");
+        this.music.play(1);
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        var1 = 0;
+        while ((this.mmosquitoes.__length - 1) >= var1) {
+            this.mmosquitoes[var1].hide();
+            this.mmosquitoes[var1].cleanupfull();
+            var1 = var1 + 1;
+        }
+        this.glyph = null;
+        this.music.stop();
+        this.music.cleanupfordestroy();
+        this.music = null;
+        return null;
+    }
+    
+    method exit() {
+        var var1;
+        var1 = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+            this.music.stop();
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.mparent.enterstartid, this.mparent.enterlookid);
+            globalclass.player.unkill();
+            this.music.play(1);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}
