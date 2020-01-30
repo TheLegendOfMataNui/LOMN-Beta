@@ -40,12 +40,12 @@ class ss_shoefitterbottombar {
         this.sidescrollbar.show();
         this.animslider.show();
         this.framenumber.show();
-        this.background.enabletransparency(1);
-        this.sidescrollbar.enabletransparency(1);
-        this.animslider.enabletransparency(1);
-        this.background.enablealphachannel(1);
-        this.sidescrollbar.enablealphachannel(1);
-        this.animslider.enablealphachannel(1);
+        //this.background.enabletransparency(1);
+        //this.sidescrollbar.enabletransparency(1);
+        //this.animslider.enabletransparency(1);
+        //this.background.enablealphachannel(1);
+        //this.sidescrollbar.enablealphachannel(1);
+        //this.animslider.enablealphachannel(1);
         this.flagarray = [  ];
         this.soundarray = [  ];
         this.animationlength = [ 0.0, 
@@ -374,7 +374,7 @@ class ss_shoefitterbottombar {
     }
     
     method animationrunning(param1, param2) {
-        if (!(this.animationlength[0] == 0)) {
+        if (this.animationlength[0] != 0) {
             this.moveslider(26 + ((param2.shoefittercharacter.gettime() / this.animationlength[0]) * 534));
         }
         return null;
@@ -414,8 +414,8 @@ class ss_shoefitterbottombar {
                 var2.hide();
                 var2.remove();
                 var2.cleanupfull();
-                var2.enabletransparency(1);
-                var2.enablealphachannel(1);
+                //var2.enabletransparency(1);
+                //var2.enablealphachannel(1);
                 var1 = var1 + 1;
             }
             var1 = var1 + 1;

@@ -19,8 +19,7 @@ class ss_shoefittercharacterwindow {
     }
     
     method initfull() {
-        var var1;
-        this.shoefittercharacter = new gs_lego_character("cnt" + __tostring(this.controller), this.currentcharacter, "bech", 0, 0, 0, 0, "ninp");
+        this.shoefittercharacter = new gs_lego_character("cnt" + __tostring(this.controller), this.currentcharacter, "name", 0, 0, 0, 0, "ninp");
         this.shoefittercamera = new gs_legocamera(0, 0, 30, 0, 0, 0);
         this.shoefittercamera.initfull();
         this.shoefittercamera.setaimode(0);
@@ -28,7 +27,6 @@ class ss_shoefittercharacterwindow {
         this.rotatepause = 0.0;
         this.rewindpause = 0.0;
         this.frameadvpause = 0.0;
-        var1 = 0;
         this.animationarray = [  ];
         this.playing = 0;
         return null;
@@ -40,19 +38,19 @@ class ss_shoefittercharacterwindow {
     }
     
     method cleanupfull() {
-        var var1;
-        this.shoefittercamera.cleanupfull();
-        this.shoefittercamera = null;
+        if (this.shoefittercamera != null) {
+            this.shoefittercamera.cleanupfull();
+            this.shoefittercamera = null;
+        }
         if (this.shoefittercharacter.onscreen) {
             this.shoefittercharacter.hide();
             this.shoefittercharacter.remove();
+            this.shoefittercharacter.cleanupfull();
+            this.shoefittercharacter = null;
         }
-        this.shoefittercharacter.cleanupfull();
-        this.shoefittercharacter = null;
         this.rotatepause = null;
         this.rewindpause = null;
         this.frameadvpause = null;
-        var1 = null;
         return null;
     }
     
@@ -125,7 +123,9 @@ class ss_shoefittercharacterwindow {
                 }
             }
         }
-        if (!(this.shoefittercharacter.currentanimation == 0)) {
+        if (this.shoefittercharacter.currentanimation != 0) {
+            debug::print("is this firing");
+            debug::print("Current animation = " + __tostring(this.shoefittercharacter.currentanimation));
             if (param1.button == 102) {
                 if (param1.event == 2) {
                     this.frameadv();
@@ -211,6 +211,7 @@ class ss_shoefittercharacterwindow {
             this.shoefittercharacter.hide();
             this.shoefittercharacter.remove();
             this.shoefittercharacter.cleanupfull();
+            this.shoefittercharacter = null;
         }
         this.currentcharacter = param1;
         if (this.currentcharacter == "zaug") {
@@ -225,10 +226,14 @@ class ss_shoefittercharacterwindow {
     }
     
     method addcharacter() {
+        gcmodeldirector::addtoa(this.currentcharacter);
         this.shoefittercharacter = new gs_lego_character("cnt" + __tostring(this.controller), this.currentcharacter, "cnt1", 0, 0, 0, 0, "ninp");
         this.shoefittercharacter.initfull();
         this.shoefittercharacter.add();
         this.shoefittercharacter.show();
+        this.shoefittercharacter.initmotionsystem();
+        this.shoefittercharacter.physicson(1);
+        this.shoefittercharacter.setupphysics(1.5, 0.8, 1, 0, 0);
         gccharacter::settweakable(this.shoefittercharacter.handle);
         this.setanimations();
         this.checkcamerapos();
@@ -297,6 +302,7 @@ class ss_shoefittercharacterwindow {
         while ((this.animationarray.__length - 1) >= var1) {
             var2 = this.animationarray[var1];
             if (var2[0] == this.shoefittercharacter.currentanimation) {
+                debug::print("Current animation = " + __tostring(this.shoefittercharacter.currentanimation));
                 var3 = this.createsaveableflags(param1);
                 var4 = this.createsaveablesounds(param2);
                 if (var2.__length > 1) {
@@ -451,13 +457,16 @@ class ss_shoefittercharacterwindow {
         var5 = 4;
         var3 = 0;
         while ((this.animationarray.__length - 1) >= var3) {
+            debug::print("check this first");
             var6 = this.animationarray[var3];
             var7 = var6[0];
             if (var6.__length > 1) {
+                debug::print("check this second");
                 var8 = var6[1];
                 var9 = this.sortflags(var8);
                 var10 = 0;
                 while ((var8.__length - 1) >= var10) {
+                    debug::print("check this third");
                     var11 = var8[var9[var10]];
                     var5 = var5 + 1;
                     var1.writeln(("C;Y" + __tostring(var5)) + ";X2;K\"trigger\"");
@@ -485,6 +494,7 @@ class ss_shoefittercharacterwindow {
                     var5 = var5 + 1;
                     var15 = 0;
                     while ((var11.arg_value_array.__length - 1) >= var15) {
+                        debug::print("check this fourth");
                         var1.writeln(((("C;Y" + __tostring(var5)) + ";X3;K\"") + var11.arg_name_array[var15]) + "\"");
                         if (__isstring(var11.arg_value_array[var15])) {
                             var1.writeln(("C;X4;K\"" + var11.arg_value_array[var15]) + "\"");
