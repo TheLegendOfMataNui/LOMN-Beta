@@ -1,0 +1,104 @@
+class wair7_piston {
+    property obj;
+    property x;
+    property y;
+    property z;
+    property moveout;
+    property dist;
+    property axis;
+    property time;
+    property moveoninit;
+    
+    method wair7_piston(param1, param2, param3, param4, param5) {
+        this.obj = new lego_moveableobject(param1, "pst2");
+        this.dist = param2;
+        this.axis = param3;
+        this.time = param4;
+        this.moveoninit = param5;
+        return null;
+    }
+    
+    method initfull() {
+        this.obj.initfull();
+        this.x = this.obj.getx();
+        this.y = this.obj.gety();
+        this.z = this.obj.getz();
+        if (this.moveoninit) {
+            if (this.axis == 1) {
+                this.obj.setposition(this.x + this.dist, this.y, this.z);
+            }
+            else if (this.axis == 2) {
+                this.obj.setposition(this.x, this.y + this.dist, this.z);
+            }
+            else if (this.axis == 3) {
+                this.obj.setposition(this.x, this.y, this.z + this.dist);
+            }
+        }
+        this.moveout = 1;
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        return null;
+    }
+    
+    method toggle() {
+        if (this.moveoninit) {
+            if (this.moveout) {
+                this.moveout = 0;
+                this.obj.interpolate(this.x, this.y, this.z, this.time);
+            }
+            else {
+                this.moveout = 1;
+                if (this.axis == 1) {
+                    this.obj.interpolate(this.x + this.dist, this.y, this.z, this.time);
+                }
+                else if (this.axis == 2) {
+                    this.obj.interpolate(this.x, this.y + this.dist, this.z, this.time);
+                }
+                else if (this.axis == 3) {
+                    this.obj.interpolate(this.x, this.y, this.z + this.dist, this.time);
+                }
+            }
+        }
+        else if (this.moveout) {
+            this.moveout = 0;
+            if (this.axis == 1) {
+                this.obj.interpolate(this.x + this.dist, this.y, this.z, this.time);
+            }
+            else if (this.axis == 2) {
+                this.obj.interpolate(this.x, this.y + this.dist, this.z, this.time);
+            }
+            else if (this.axis == 3) {
+                this.obj.interpolate(this.x, this.y, this.z + this.dist, this.time);
+            }
+        }
+        else {
+            this.moveout = 1;
+            this.obj.interpolate(this.x, this.y, this.z, this.time);
+        }
+        return null;
+    }
+    
+    method reset() {
+        this.moveout = 1;
+        this.obj.resetinterpolate();
+        if (this.moveoninit) {
+            if (this.axis == 1) {
+                this.obj.setposition(this.x + this.dist, this.y, this.z);
+            }
+            else if (this.axis == 2) {
+                this.obj.setposition(this.x, this.y + this.dist, this.z);
+            }
+            else if (this.axis == 3) {
+                this.obj.setposition(this.x, this.y, this.z + this.dist);
+            }
+        }
+        else {
+            this.obj.setposition(this.x, this.y, this.z);
+        }
+        return null;
+    }
+}

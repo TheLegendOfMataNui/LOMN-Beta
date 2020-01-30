@@ -1,0 +1,154 @@
+class puzzle_pst1 {
+    property vpistons;
+    property hpistons;
+    property apistons;
+    property platforms;
+    
+    method puzzle_pst1() {
+        return null;
+    }
+    
+    method initfull(param1) {
+        var var1;
+        this.vpistons = [ new akam7_piston("sp01", param1, 0 - 20.0, 2, 1.0, 0.5), 
+            new akam7_piston("sp02", param1, 0 - 38.0, 2, 1.5, 0.75), 
+            new akam7_piston("sp03", param1, 22.0, 2, 1.0, 0.5), 
+            new akam7_piston("sp04", param1, 0 - 20.0, 2, 1.0, 0.5), 
+            new akam7_piston("sp05", param1, 0 - 20.0, 2, 1.3, 0.7) ];
+        var1 = 0;
+        while ((this.vpistons.__length - 1) >= var1) {
+            this.vpistons[var1].initfull(1, 1);
+            var1 = var1 + 1;
+        }
+        this.hpistons = [ new akam7_piston("ps00", param1, 30.0, 3, 1.5, 0.75), 
+            new akam7_piston("ps01", param1, 30.0, 3, 1.5, 0.75) ];
+        var1 = 0;
+        while ((this.hpistons.__length - 1) >= var1) {
+            this.hpistons[var1].initfull(1, 1);
+            var1 = var1 + 1;
+        }
+        this.apistons = [ new akam7_piston("bp01", param1, 0 - 19.5, 1, 1.0, 1.0), 
+            new akam7_piston("bp02", param1, 0 - 19.5, 1, 1.25, 0.75), 
+            new akam7_piston("bp03", param1, 0 - 19.5, 1, 1.5, 0.75), 
+            new akam7_piston("bp04", param1, 0 - 19.5, 1, 1.25, 0.75) ];
+        var1 = 0;
+        while ((this.apistons.__length - 1) >= var1) {
+            this.apistons[var1].initfull(1, 1);
+            var1 = var1 + 1;
+        }
+        this.platforms = [ new akam7_piston("pf01", param1, 35.0, 1, 1.5, 0.75), 
+            new akam7_piston("pf02", param1, 35.0, 1, 1.0, 0.75), 
+            new akam7_piston("pf03", param1, 42.0, 1, 1.25, 0.6), 
+            new akam7_piston("pf04", param1, 0 - 42.0, 4, 1.5, 0.6) ];
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            if (var1 == 3) {
+                this.platforms[var1].initfull(0, 0);
+            }
+            else {
+                this.platforms[var1].initfull(0, 1);
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.vpistons.__length - 1) >= var1) {
+            this.vpistons[var1].cleanupfull();
+            this.vpistons[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.vpistons = null;
+        var1 = 0;
+        while ((this.hpistons.__length - 1) >= var1) {
+            this.hpistons[var1].cleanupfull();
+            this.hpistons[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.hpistons = null;
+        var1 = 0;
+        while ((this.apistons.__length - 1) >= var1) {
+            this.apistons[var1].cleanupfull();
+            this.apistons[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.apistons = null;
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].cleanupfull();
+            this.platforms[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.platforms = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
+                this.reseta();
+            }
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == this.platforms[3].obj.id) {
+                this.platforms[3].activate();
+            }
+        }
+        else if (param1.eventid == 27) {
+            this.resetb();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+    
+    method reseta() {
+        globalclass.level.cam.setaimode(7);
+        globalclass.player.kill();
+        gccollisionphysicsgroup::spinmask(1.2);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+        return null;
+    }
+    
+    method resetb() {
+        var var1;
+        globalclass.player.unkill();
+        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        var1 = 0;
+        while ((this.vpistons.__length - 1) >= var1) {
+            this.vpistons[var1].reset(1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.hpistons.__length - 1) >= var1) {
+            this.hpistons[var1].reset(1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.apistons.__length - 1) >= var1) {
+            this.apistons[var1].reset(1);
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            if (var1 == 3) {
+                this.platforms[var1].reset(0);
+            }
+            else {
+                this.platforms[var1].reset(1);
+            }
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method resetc() {
+        globalclass.player.kill();
+        gccollisionphysicsgroup::spinmask(1.2);
+        return null;
+    }
+}

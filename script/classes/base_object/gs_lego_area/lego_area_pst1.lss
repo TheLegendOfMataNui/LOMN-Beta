@@ -1,0 +1,39 @@
+class lego_area_pst1 : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_pst1(param1) {
+        this.gs_lego_area("pst1", param1, 0, 0);
+        return null;
+    }
+    
+    method initfull() {
+        gcmodeldirector::setnearestmax(5);
+        gcareadirector::setnearestmax(15);
+        this.puzzle = new puzzle_pst1();
+        this.puzzle.initfull(this.name);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.puzzle.cleanupfull();
+        this.puzzle = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+}

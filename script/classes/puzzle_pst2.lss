@@ -1,0 +1,282 @@
+class puzzle_pst2 {
+    property pistons;
+    property doors;
+    property max;
+    property count;
+    property curdoor;
+    
+    method puzzle_pst2() {
+        this.pistons = null;
+        this.doors = null;
+        return null;
+    }
+    
+    method initfull(param1) {
+        var var1;
+        this.pistons = [ new wair7_piston("bp01", -36, 2, 1.0, 1), 
+            new wair7_piston("bp02", -36, 2, 1.0, 1), 
+            new wair7_piston("bp03", -36, 2, 1.0, 1), 
+            new wair7_piston("bp04", -36, 2, 1.0, 1), 
+            new wair7_piston("bp05", -36, 2, 1.0, 1), 
+            new wair7_piston("bp06", -36, 2, 1.0, 1), 
+            new wair7_piston("bp07", -36, 2, 1.0, 1), 
+            new wair7_piston("bp08", -36, 2, 1.0, 1) ];
+        var1 = 0;
+        while ((this.pistons.__length - 1) >= var1) {
+            this.pistons[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.doors = [ new wair7_piston("ld01", -14, 1, 4.0, 0), 
+            new wair7_piston("rd01", 14, 1, 4.0, 0), 
+            new wair7_piston("ld02", -14, 1, 4.0, 0), 
+            new wair7_piston("rd02", 14, 1, 4.0, 0), 
+            new wair7_piston("ld03", -14, 1, 4.0, 0), 
+            new wair7_piston("rd03", 14, 1, 4.0, 0), 
+            new wair7_piston("ld04", -14, 1, 4.0, 0), 
+            new wair7_piston("rd04", 14, 1, 4.0, 0), 
+            new wair7_piston("ld05", -14, 1, 4.0, 0), 
+            new wair7_piston("rd05", 14, 1, 4.0, 0), 
+            new wair7_piston("ld06", -14, 1, 4.0, 0), 
+            new wair7_piston("rd06", 14, 1, 4.0, 0) ];
+        var1 = 0;
+        while ((this.doors.__length - 1) >= var1) {
+            this.doors[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.pistons[0].toggle();
+        this.pistons[3].toggle();
+        this.pistons[7].toggle();
+        this.max = 3;
+        this.count = 0;
+        this.curdoor = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        var1 = 0;
+        while ((this.pistons.__length - 1) >= var1) {
+            this.pistons[var1].cleanupfull();
+            this.pistons[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.pistons = null;
+        var1 = 0;
+        while ((this.doors.__length - 1) >= var1) {
+            this.doors[var1].cleanupfull();
+            this.doors[var1] = null;
+            var1 = var1 + 1;
+        }
+        this.doors = null;
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        var var2;
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                this.reseta();
+            }
+        }
+        else if (param1.eventid == 27) {
+            this.resetb();
+        }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                var1 = param1.args[1];
+                if ((var1 >= scslosifoundation::stringtoidentifier("bp01")) && (var1 <= scslosifoundation::stringtoidentifier("bp08"))) {
+                    this.resetc();
+                }
+            }
+        }
+        else if (param1.eventid == 19) {
+            var2 = 0;
+            while ((this.pistons.__length - 1) >= var2) {
+                if ((param1.args[0] == this.pistons[var2].obj.id) && (this.pistons[var2].moveout == 0)) {
+                    if (this.count == 0) {
+                        if (param1.args[0] == this.pistons[3].obj.id) {
+                            this.pistons[3].toggle();
+                            this.count = this.count + 1;
+                        }
+                        else {
+                            this.resetcurrent();
+                        }
+                    }
+                    else if (this.count == 1) {
+                        if (param1.args[0] == this.pistons[7].obj.id) {
+                            this.pistons[7].toggle();
+                            this.count = this.count + 1;
+                        }
+                        else {
+                            this.resetcurrent();
+                        }
+                    }
+                    else if (this.count == 2) {
+                        if (param1.args[0] == this.pistons[0].obj.id) {
+                            this.pistons[0].toggle();
+                            this.count = this.count + 1;
+                        }
+                        else {
+                            this.resetcurrent();
+                        }
+                    }
+                    else if (this.count == 3) {
+                        if (param1.args[0] == this.pistons[4].obj.id) {
+                            this.pistons[4].toggle();
+                            this.count = this.count + 1;
+                        }
+                        else {
+                            this.resetcurrent();
+                        }
+                    }
+                    else if (this.count == 4) {
+                        if (param1.args[0] == this.pistons[2].obj.id) {
+                            this.pistons[2].toggle();
+                            this.count = this.count + 1;
+                        }
+                        else {
+                            this.resetcurrent();
+                        }
+                    }
+                    else if (this.count == 5) {
+                        if (param1.args[0] == this.pistons[5].obj.id) {
+                            this.pistons[5].toggle();
+                            this.count = this.count + 1;
+                        }
+                        else {
+                            this.resetcurrent();
+                        }
+                    }
+                    else if (this.count == 6) {
+                        if (param1.args[0] == this.pistons[1].obj.id) {
+                            this.pistons[1].toggle();
+                            this.count = this.count + 1;
+                        }
+                        else {
+                            this.resetcurrent();
+                        }
+                    }
+                    else if (this.count == 7) {
+                        if (param1.args[0] == this.pistons[6].obj.id) {
+                            this.pistons[6].toggle();
+                            this.count = this.count + 1;
+                        }
+                        else {
+                            this.resetcurrent();
+                        }
+                    }
+                    if (this.max == this.count) {
+                        this.initnext();
+                    }
+                }
+                var2 = var2 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method reseta() {
+        globalclass.level.cam.setaimode(7);
+        globalclass.player.kill();
+        gccollisionphysicsgroup::spinmask(1.2);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        return null;
+    }
+    
+    method resetb() {
+        globalclass.player.unkill();
+        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        this.reset();
+        return null;
+    }
+    
+    method resetc() {
+        globalclass.player.kill();
+        gccollisionphysicsgroup::spinmask(1.2);
+        return null;
+    }
+    
+    method initnext() {
+        var var1;
+        var1 = 0;
+        while ((this.pistons.__length - 1) >= var1) {
+            this.pistons[var1].reset();
+            var1 = var1 + 1;
+        }
+        this.doors[this.curdoor].toggle();
+        this.doors[this.curdoor + 1].toggle();
+        this.curdoor = this.curdoor + 2;
+        this.max = this.max + 1;
+        this.pistons[0].toggle();
+        this.pistons[3].toggle();
+        this.pistons[7].toggle();
+        if (this.max > 3) {
+            this.pistons[4].toggle();
+        }
+        if (this.max > 4) {
+            this.pistons[2].toggle();
+        }
+        if (this.max > 5) {
+            this.pistons[5].toggle();
+        }
+        if (this.max > 6) {
+            this.pistons[1].toggle();
+        }
+        if (this.max > 7) {
+            this.pistons[6].toggle();
+        }
+        this.count = 0;
+        return null;
+    }
+    
+    method reset() {
+        var var1;
+        var1 = 0;
+        while ((this.pistons.__length - 1) >= var1) {
+            this.pistons[var1].reset();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.doors.__length - 1) >= var1) {
+            this.doors[var1].reset();
+            var1 = var1 + 1;
+        }
+        this.pistons[0].toggle();
+        this.pistons[3].toggle();
+        this.pistons[7].toggle();
+        this.max = 3;
+        this.count = 0;
+        this.curdoor = 0;
+        return null;
+    }
+    
+    method resetcurrent() {
+        var var1;
+        var1 = 0;
+        while ((this.pistons.__length - 1) >= var1) {
+            this.pistons[var1].reset();
+            var1 = var1 + 1;
+        }
+        this.pistons[0].toggle();
+        this.pistons[3].toggle();
+        this.pistons[7].toggle();
+        if (this.max > 3) {
+            this.pistons[4].toggle();
+        }
+        if (this.max > 4) {
+            this.pistons[2].toggle();
+        }
+        if (this.max > 5) {
+            this.pistons[5].toggle();
+        }
+        if (this.max > 6) {
+            this.pistons[1].toggle();
+        }
+        if (this.max > 7) {
+            this.pistons[6].toggle();
+        }
+        this.count = 0;
+        return null;
+    }
+}

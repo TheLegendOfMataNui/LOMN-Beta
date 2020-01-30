@@ -1,0 +1,70 @@
+class akam7_piston {
+    property obj;
+    property time;
+    property delay;
+    property dist;
+    property axis;
+    property x;
+    property y;
+    property z;
+    property active;
+    
+    method akam7_piston(param1, param2, param3, param4, param5, param6) {
+        this.obj = new lego_moveableobject(param1, param2);
+        this.dist = param3;
+        this.axis = param4;
+        this.time = param5;
+        this.delay = param6;
+        return null;
+    }
+    
+    method initfull(param1, param2) {
+        this.obj.initfull();
+        if (param1 == 1) {
+            this.obj.setcrushflags(1, 1, 1, 1, 1, 1);
+        }
+        this.x = gcmoveableobj::getx(this.obj.handle);
+        this.y = gcmoveableobj::gety(this.obj.handle);
+        this.z = gcmoveableobj::getz(this.obj.handle);
+        this.active = 0;
+        if (param2 == 1) {
+            this.activate();
+        }
+        return null;
+    }
+    
+    method activate() {
+        if (this.active == 0) {
+            this.active = 1;
+            if (this.axis == 1) {
+                gcmoveableobj::setslidetimer(this.obj.handle, this.dist, 0.0, 0.0, this.time, -1, this.delay);
+            }
+            if (this.axis == 2) {
+                gcmoveableobj::setslidetimer(this.obj.handle, 0.0, this.dist, 0.0, this.time, -1, this.delay);
+            }
+            if (this.axis == 3) {
+                gcmoveableobj::setslidetimer(this.obj.handle, 0.0, 0.0, this.dist, this.time, -1, this.delay);
+            }
+            if (this.axis == 4) {
+                gcmoveableobj::setslidetimer(this.obj.handle, this.dist, 20.0, 0.0, this.time, -1, this.delay);
+            }
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.obj.cleanupfull();
+        this.obj = null;
+        return null;
+    }
+    
+    method reset(param1) {
+        gcmoveableobj::cancelinterpolate(this.obj.handle);
+        gcmoveableobj::setposition(this.obj.handle, this.x, this.y, this.z);
+        this.active = 0;
+        if (param1 == 1) {
+            this.activate();
+        }
+        return null;
+    }
+}
