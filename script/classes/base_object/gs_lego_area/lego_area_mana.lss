@@ -1,0 +1,46 @@
+class lego_area_mana : gs_lego_area {
+    property puzzle;
+    
+    method lego_area_mana(param1) {
+        this.gs_lego_area("mana", param1, 0, 0);
+        return null;
+    }
+    
+    method initfull() {
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
+        globalclass.bgmusic.play();				
+        gcmodeldirector::setnearestmax(10);
+        this.puzzle = new puzzle_mana7();
+        this.puzzle.initfull(this.name);
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.puzzle.cleanupfull();
+        this.puzzle = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 44) {
+            if (!(globalclass.player.actorid == "akam")) {
+                globalclass.player.changetoa("akam");
+                gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+			}
+		}	
+        this.puzzle.onevent(param1);		
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        return null;
+    }
+}
