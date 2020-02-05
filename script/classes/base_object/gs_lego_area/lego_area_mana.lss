@@ -7,6 +7,9 @@ class lego_area_mana : gs_lego_area {
     }
     
     method initfull() {
+        globalclass.bgmusic.stop();
+        gchuddirector::playcinematic("Root/Data/cinematics/ToaKaitaFight.bik", 1);
+        gcmodeldirector::setnearestmax(5);	
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
         globalclass.bgmusic.play();				
         gcmodeldirector::setnearestmax(10);
