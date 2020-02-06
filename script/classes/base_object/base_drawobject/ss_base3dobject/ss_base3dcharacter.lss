@@ -3,38 +3,38 @@ class ss_base3dcharacter : ss_base3dobject {
     property gepetto;
     property currentanimation;
     
-    method ss_base3dcharacter(param1, param2, param3, param4, param5, param6, param7) {
-        this.charstring = param2;
-        this.contstring = param1;
-        if (param3 == null) {
+    method ss_base3dcharacter(assigned_id, char_id, orientation, x_pos, y_pos, z_pos, input_state) {
+        this.charstring = char_id;
+        this.contstring = assigned_id;
+        if (orientation == null) {
             this.angle = 0.0;
         }
         else {
-            this.angle = param3;
+            this.angle = orientation;
         }
-        if (param4 == null) {
+        if (x_pos == null) {
             this.x1 = 0.0;
         }
         else {
-            this.x1 = param4;
+            this.x1 = x_pos;
         }
-        if (param5 == null) {
+        if (y_pos == null) {
             this.y1 = 0.0;
         }
         else {
-            this.y1 = param5;
+            this.y1 = y_pos;
         }
-        if (param6 == null) {
+        if (z_pos == null) {
             this.z = 0.0;
         }
         else {
-            this.z = param6;
+            this.z = z_pos;
         }
-        if (param7 == null) {
+        if (input_state == null) {
             this.inputstate = "none";
         }
         else {
-            this.inputstate = param7;
+            this.inputstate = input_state;
         }
         this.currentanimation = 0;
         return null;
