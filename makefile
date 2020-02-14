@@ -59,6 +59,7 @@ native: $(NATIVE_OUTPUTS)
 	@echo Copying '$@'...
 	@if not exist $(subst /,\,$(dir $@))NUL mkdir $(subst /,\,$(dir $@))
 	@copy /B $(subst /,\,$<) $(strip $(subst /,\,$@)) > NUL
+	@if not exist .\build\scripting\slks\shoefitter\onua\NUL mkdir .\build\scripting\slks\shoefitter\onua
 
 # 
 # Script files are compiled from script/ with lssc
