@@ -140,14 +140,30 @@ class ss_basecamera : base_drawobject {
         return null;
     }
     
-    method setzoomfactor(param1) {
+    //method setzoomfactor(param1) {
+        //if (!(param1 == null)) {
+            //this.zoom = param1;
+        //}
+        //else {
+            //this.zoom = 75.0;
+        //}
+        //gclegocamera::setzoomfactor(this.handle, this.zoom);
+        //return null;
+    //}
+
+    method setcamzoomfactor(param1) {
         if (!(param1 == null)) {
             this.zoom = param1;
         }
         else {
             this.zoom = 75.0;
         }
-        gclegocamera::setzoomfactor(this.handle, this.zoom);
+        gclegocamera::setcamzoomfactor(this.handle, this.zoom);
+        return null;
+    }
+
+    method setheightoffset(heightoffset) {
+        gclegocamera::setheightoffset(this.handle, heightoffset);
         return null;
     }
     

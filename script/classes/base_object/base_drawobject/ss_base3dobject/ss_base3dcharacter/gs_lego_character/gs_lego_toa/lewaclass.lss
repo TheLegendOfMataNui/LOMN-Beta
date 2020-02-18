@@ -7,6 +7,7 @@ class lewaclass : gs_lego_toa {
     property runningjumplength;
     property swimingabilty;
     property bounce;
+    property inputhandle;
     
     method lewaclass(param1, param2, param3, param4, param5) {
         this.gs_lego_toa(param1, param2, param3, param4, param5);
@@ -21,6 +22,19 @@ class lewaclass : gs_lego_toa {
         return null;
     }
     
+    method initfull() {
+        this.lego_toa_initfull();
+        this.inputhandle = globalclass.addtoinputlist(this);
+
+
+        // Set camera positioning
+        globalclass.level.cam.setcamzoomfactor(8.0); // TODO: Set a number here
+        globalclass.level.cam.setheightoffset(4.0); // TODO: Also set a number here
+
+
+        return null;
+    }
+
     method setupgrapplinghook(param1, param2, param3) {
         this.setdraggerreaction(0);
         this.setmydraggerreactionanimation(scslosifoundation::stringtoidentifier("l017"));

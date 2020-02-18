@@ -7,6 +7,7 @@ class nobuaclass : gs_lego_toa {
     property runningjumplength;
     property swimingabilty;
     property bounce;
+    property inputhandle;
     
     method nobuaclass(param1, param2, param3, param4, param5) {
         this.gs_lego_toa(param1, param2, param3, param4, param5);
@@ -18,6 +19,19 @@ class nobuaclass : gs_lego_toa {
         this.runningjumplength = 8;
         this.swimingabilty = 0;
         this.bounce = 0;
+        return null;
+    }
+
+    method initfull() {
+        this.lego_toa_initfull();
+        this.inputhandle = globalclass.addtoinputlist(this);
+
+
+        // Set camera positioning
+        globalclass.level.cam.setcamzoomfactor(5.0); // TODO: Set a number here
+        globalclass.level.cam.setheightoffset(1.5); // TODO: Also set a number here
+
+
         return null;
     }
     
