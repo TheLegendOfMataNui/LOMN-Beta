@@ -319,6 +319,10 @@ class player {
         }
         else if (this.actorid == "nbua") {
             this.actor = new nobuaclass(param2, param3, param4, param5, param6);
+                while (this.energy > 0) {
+                    this.removemaxenergy(20);
+                    this.removeenergy(20);
+                }
         }
         else if (this.actorid == "viki") {
             this.actor = new tahuclass(param2, param3, param4, param5, param6);
@@ -328,6 +332,9 @@ class player {
                 this.addmaxenergy(20);
                 var1 = var1 + 1;
             }
+        }
+        else if (this.actorid == "when") {
+            this.actor = new whenuaclass(param2, param3, param4, param5, param6);
         }
         globalclass.hud.tokens.setcolor();
         globalclass.hud.ammo.setcolor();
@@ -384,7 +391,13 @@ class player {
                 }
             }
             else if (this.actor.id == scslosifoundation::stringtoidentifier("nbua")) {
-                
+                while (this.energy > 0) {
+                    this.removemaxenergy();
+                    this.removeenergy();
+                }                
+            }
+            else if (this.actor.id == scslosifoundation::stringtoidentifier("when")) {
+
             }
         }
         return null;
@@ -495,6 +508,9 @@ class player {
         }		
         else if (param1 == "viki") {
             this.addmask("fake", 666);
+        }
+        else if (param1 == "when") {
+            this.addmask("fake", 8);
         }
         globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
         return null;
