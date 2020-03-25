@@ -43,7 +43,6 @@ class ta106_puzzle {
     property bl36coords;
     property timerarray;
     property startsecondhalftimer;
-    property music;
     
     method ta106_puzzle(param1) {
         this.parent = param1;
@@ -92,9 +91,8 @@ class ta106_puzzle {
         gcareadirector::setnearestmax(50);
         this.setsurfmode(1);
         globalclass.player.actor.addpart("tahu/surf", "surf");
-        this.music = new legomp3player();
-        this.music.setupforplay("Root/Data/sounds/MUSICTAHUTHEME");
-        this.music.play(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICTAHUTHEME");
+        globalclass.bgmusic.play(1);
         this.lavafountainarray = [ new lego_moveableobject("fp01"), 
             new lego_moveableobject("fp02"), 
             new lego_moveableobject("fp03"), 
@@ -214,7 +212,6 @@ class ta106_puzzle {
         this.fallingballsubound = this.fallingballs.__length - 1;
         this.startsecondhalftimer = new lego_timer("sect", 1.75, 0);
         this.startsecondhalftimer.initfull();
-        this.setsurfmode(1);
         return null;
     }
     
@@ -231,22 +228,19 @@ class ta106_puzzle {
         return null;
     }
     
-    method hide() {
+    method cleanupfull() {
         var var1;
         this.setsurfmode(0);
         globalclass.settestforlavacollisions(1);
-        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t000"));
-        globalclass.player.actor.setforwardvelocity(0.0);
-        this.music.stop();
-        this.music.cleanupfordestroy();
-        this.music = null;
-        var1 = 0;
-        while ((this.lavafountainarray.__length - 1) >= var1) {
-            this.lavafountainarray[var1].cleanupfull();
-            this.lavafountainarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.lavafountainarray != null) {
+            var1 = 0;
+            while ((this.lavafountainarray.__length - 1) >= var1) {
+                this.lavafountainarray[var1].cleanupfull();
+                this.lavafountainarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.lavafountainarray = null;
         }
-        this.lavafountainarray = null;
         this.lavafountainarrayubound = null;
         var1 = 0;
         while ((this.fallingballs.__length - 1) >= var1) {
@@ -315,7 +309,7 @@ class ta106_puzzle {
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
-            this.music.stop();
+            globalclass.bgmusic.stop();
         }
         else if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
@@ -360,7 +354,7 @@ class ta106_puzzle {
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb03"), 0);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb04"), 0);
             this.setsurfmode(1);
-            this.music.play(1);
+            globalclass.bgmusic.play(1);
         }
         return null;
     }
