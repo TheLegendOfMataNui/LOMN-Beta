@@ -19,7 +19,6 @@ class takv_puzzle {
         globalclass.bgmusic.play();
         this.killedcharacters = 0;
         this.call_ev_safe_time_once = 1;
-        globalclass.player.actor.setunderwater(1);
         this.door1 = new lego_moveableobject("drs0");
         this.door1.initfull();
         this.door1.settweakable();
@@ -45,7 +44,6 @@ class takv_puzzle {
     method initshort() {
         globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
         globalclass.player.unkill();
-        globalclass.player.actor.setunderwater(1);
         this.opendoors();
         return null;
     }
@@ -80,7 +78,6 @@ class takv_puzzle {
                 if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
                     this.closedoor1();
                     this.closedoor2();
-                    globalclass.player.actor.setunderwater(0);
                 }
             }
         }
