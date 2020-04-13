@@ -32,7 +32,6 @@ class lego_area_mtup5 : gs_lego_area {
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
         gclightdirector::setcavelighting(0);
-        BetterSaver::Save();
         return null;
     }
     
@@ -54,6 +53,7 @@ class lego_area_mtup5 : gs_lego_area {
     }
     
     method onevent(param1) {
+        BetterSaver::Save();
         if (param1.eventid == 44) {
             if (this.call_ev_safe_time_once) {
                 if (this.enterstartid == scslosifoundation::stringtoidentifier("str1")) {

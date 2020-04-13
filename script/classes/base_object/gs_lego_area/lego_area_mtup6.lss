@@ -16,7 +16,6 @@ class lego_area_mtup6 : gs_lego_area {
             gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("fvil"));
         }
         globalclass.bgmusic.stop();
-        BetterSaver::Save();
         return null;
     }
     
@@ -37,6 +36,7 @@ class lego_area_mtup6 : gs_lego_area {
     }
     
     method onevent(param1) {
+        BetterSaver::Save();
         if (param1.eventid == 30) {
             globalclass.player.maskcontrol.changemask(4);
         }

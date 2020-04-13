@@ -13,7 +13,6 @@ class lego_area_mtup : gs_lego_area {
         this.puzzle.initfull();
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPohatuAmbience");
         globalclass.bgmusic.play(1);
-        BetterSaver::Save();
         return null;
     }
     
@@ -28,6 +27,7 @@ class lego_area_mtup : gs_lego_area {
     }
     
     method onevent(param1) {
+        BetterSaver::Save();
         this.puzzle.onevent(param1);
         return null;
     }

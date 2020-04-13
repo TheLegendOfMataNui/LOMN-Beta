@@ -21,7 +21,6 @@ class lego_area_onua : gs_lego_area {
         this.puzzle.initfull(this.name);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
         globalclass.bgmusic.play(1);
-        BetterSaver::Save();
         return null;
     }
     
@@ -43,6 +42,7 @@ class lego_area_onua : gs_lego_area {
     }
     
     method onevent(param1) {
+        BetterSaver::Save();
         if (param1.eventid == 44) {
             if (!(globalclass.player.actorid == "onua")) {
                 globalclass.player.changetoa("onua");
