@@ -9,14 +9,11 @@ class lego_area_mtup6 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
-            this.cinema = gccinemaengine::create();
-            gccinemaengine::load(this.cinema, "cin1");
-            gccinemaengine::play(this.cinema);
-        }
+        this.cinema = gccinemaengine::create();
+        gccinemaengine::load(this.cinema, "cin1");
+        gccinemaengine::play(this.cinema);
         globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
         globalclass.bgmusic.play();
-        BetterSaver::Save();
         return null;
     }
     
@@ -36,6 +33,7 @@ class lego_area_mtup6 : gs_lego_area {
     }
     
     method onevent(param1) {
+        BetterSaver::Save();
         if (param1.eventid == 30) {
             globalclass.player.maskcontrol.changemask(4);
             globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");

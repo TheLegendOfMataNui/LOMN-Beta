@@ -15,7 +15,6 @@ class lego_area_strt4 : gs_lego_area {
         globalclass.bgmusic.play(1);
         gcareadirector::setfog(-16777200, 0 - 1.0, 0 - 900.0, 0.15);
         gcareadirector::setnearestmax(15);
-        BetterSaver::Save();
         return null;
     }
     
@@ -36,6 +35,7 @@ class lego_area_strt4 : gs_lego_area {
     }
     
     method onevent(param1) {
+        BetterSaver::Save();
         this.puzzle.onevent(param1);
         return null;
     }
