@@ -9,9 +9,11 @@ class lego_area_mtup6 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        this.cinema = gccinemaengine::create();
-        gccinemaengine::load(this.cinema, "cin1");
-        gccinemaengine::play(this.cinema);
+        if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin1");
+            gccinemaengine::play(this.cinema);
+        }
         globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
         globalclass.bgmusic.play();
         return null;
