@@ -7,6 +7,7 @@ class mwat2_puzzle {
     property distplaytexttimer;
     property desctext;
     property howtotext;
+	property linebreaktext;
     property rotatemask;
     property deltatimer;
     
@@ -45,6 +46,9 @@ class mwat2_puzzle {
             mask_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 3, 1);
             this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", mask_text, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
+            mask_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 3, 2);
+            this.linebreaktext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", mask_text, screenx * 0.5, (screeny - 70) + 20, 0, 1, 256, 0, 0);
+            this.linebreaktext.initfull();
             this.closedoor2();
         }
         return null;
@@ -74,6 +78,10 @@ class mwat2_puzzle {
         if (this.howtotext != null) {
             this.howtotext.cleanupfull();
             this.howtotext = null;
+        }
+        if (this.linebreaktext != null) {
+            this.linebreaktext.cleanupfull();
+            this.linebreaktext = null;
         }
         return null;
     }
@@ -127,6 +135,11 @@ class mwat2_puzzle {
                     this.howtotext.cleanupfull();
                     this.howtotext = null;
                 }
+                if (this.linebreaktext != null) {
+                    this.linebreaktext.hide();
+                    this.linebreaktext.cleanupfull();
+                    this.linebreaktext = null;
+                }
             }
         }
         else if (param1.eventid == 1) {
@@ -160,6 +173,8 @@ class mwat2_puzzle {
         this.desctext.show();
         this.howtotext.add();
         this.howtotext.show();
+		this.linebreaktext.add();
+		this.linebreaktext.show();
         this.distplaytexttimer.reset(0);
         this.distplaytexttimer.start();
         this.mask.hide();
