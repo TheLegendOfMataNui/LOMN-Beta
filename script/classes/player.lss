@@ -40,7 +40,7 @@ class player {
         this.gotglyph = 0;
         this.glyphpowerdrain = 20;
         this.bshootdragger = 1;
-        this.equipmentarray = [0];
+        this.equipmentarray = 0;
         return null;
     }
     
@@ -595,6 +595,7 @@ class player {
         var1 = new scriptevent(46);
         var1.send();
         globalclass.hud.hide();
+        this.removeequipment();
         return null;
     }
     
@@ -605,6 +606,18 @@ class player {
         this.addenergy(this.maxenergy);
         this.actor.setunderwater(0);
         globalclass.hud.show();
+        if (this.equipmentarray == 1) {
+            this.equipmentarray = 0;
+            this.equipcombat();
+        }
+        else if (this.equipmentarray == 2) {
+            this.equipmentarray = 0;
+            this.equipsurf();
+        }
+        if (this.equipmentarray == 0) {
+            this.equipmentarray = 1;
+            this.unequip();
+        }
         return null;
     }
     
@@ -775,7 +788,7 @@ class player {
     method equipcombat() {
         var toa;
         toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
-        if ((this.equipmentarray[0] == 0) || (this.equipmentarray[0] == 2)) {
+        if ((this.equipmentarray == 0) || (this.equipmentarray == 2)) {
             if (this.actorid == "kopa") {
                 //Remove All
                 gccharacter::removepart(toa, 3);
@@ -786,7 +799,7 @@ class player {
                 //Apply equipment
                 gccharacter::addpart(toa, "cnt1/hsrd", 1);
                 gccharacter::addpart(toa, "cnt1/hsld", 2);
-                this.equipmentarray = [1];
+                this.equipmentarray = 1;
             }
             else if (this.actorid == "lewa") {
                 //Remove All
@@ -794,7 +807,7 @@ class player {
             
                 //Apply equipment
                 gccharacter::addpart(toa, "cnt1/haxe", 1);
-                this.equipmentarray = [1];
+                this.equipmentarray = 1;
             }
             else if (this.actorid == "tahu") {
                 //Remove All
@@ -802,7 +815,7 @@ class player {
             
                 //Apply equipment
                 gccharacter::addpart(toa, "cnt1/hsrd", 1);
-                this.equipmentarray = [1];
+                this.equipmentarray = 1;
             }
         }
         return null;
@@ -811,7 +824,7 @@ class player {
     method equipsurf() {
         var toa;
         toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
-        if ((this.equipmentarray[0] == 0) || (this.equipmentarray[0] == 1)) {
+        if ((this.equipmentarray == 0) || (this.equipmentarray == 1)) {
             if (this.actorid == "kopa") {    
                 //Remove All
                 gccharacter::removepart(toa, 2);
@@ -821,7 +834,7 @@ class player {
                 //Apply equipment
                 gccharacter::addpart(toa, "cnt1/hsrd", 6);
                 gccharacter::addpart(toa, "cnt1/fsld", 5);
-                this.equipmentarray = [2];
+                this.equipmentarray = 2;
             }
         }
         return null;
@@ -830,7 +843,7 @@ class player {
     method unequip() {
         var toa;
         toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
-        if ((this.equipmentarray[0] == 1) || (this.equipmentarray[0] == 2)) {
+        if ((this.equipmentarray == 1) || (this.equipmentarray == 2)) {
             if (this.actorid == "kopa") {      
                 //Remove All
                 gccharacter::removepart(toa, 1);
@@ -841,7 +854,7 @@ class player {
                 //Apply equipment
                 gccharacter::addpart(toa, "cnt1/bsrd", 3);
                 gccharacter::addpart(toa, "cnt1/bsld", 4);
-                this.equipmentarray = [0];
+                this.equipmentarray = 0;
             }
             else if (this.actorid == "lewa") {
                 //Remove All
@@ -849,7 +862,7 @@ class player {
             
                 //Apply equipment
                 gccharacter::addpart(toa, "cnt1/baxe", 2);
-                this.equipmentarray = [0];
+                this.equipmentarray = 0;
             }
             else if (this.actorid == "tahu") {
                 //Remove All
@@ -857,9 +870,22 @@ class player {
             
                 //Apply equipment
                 gccharacter::addpart(toa, "cnt1/bsrd", 2);
-                this.equipmentarray = [0];
+                this.equipmentarray = 0;
             }
         }
+        return null;
+    }
+
+   method removeequipment() {
+        var toa;
+        toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
+        //Remove All
+        gccharacter::removepart(toa, 1);
+        gccharacter::removepart(toa, 2);
+        gccharacter::removepart(toa, 3);
+        gccharacter::removepart(toa, 4);
+        gccharacter::removepart(toa, 5);
+        gccharacter::removepart(toa, 6);
         return null;
     }
 }
