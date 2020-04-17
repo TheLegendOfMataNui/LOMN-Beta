@@ -1,8 +1,10 @@
 class lego_area_mana : gs_lego_area {
     property puzzle;
+    property saved;
     
     method lego_area_mana(param1) {
         this.gs_lego_area("mana", param1, 0, 0);
+        this.saved = 0;
         return null;
     }
     
@@ -29,7 +31,10 @@ class lego_area_mana : gs_lego_area {
     }
     
     method onevent(param1) {
-        BetterSaver::Save();
+        if (this.saved == 0) {
+            BetterSaver::Save();
+            this.saved = 1;
+        }
         if (param1.eventid == 44) {
             if (!(globalclass.player.actorid == "akam")) {
                 globalclass.player.changetoa("akam");

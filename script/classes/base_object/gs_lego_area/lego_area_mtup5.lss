@@ -1,9 +1,11 @@
 class lego_area_mtup5 : gs_lego_area {
     property cinema;
     property call_ev_safe_time_once;
+    property saved;
     
     method lego_area_mtup5(param1) {
         this.gs_lego_area("mtup", param1, 0, 0);
+        this.saved = 0;
         return null;
     }
     
@@ -54,7 +56,10 @@ class lego_area_mtup5 : gs_lego_area {
     }
     
     method onevent(param1) {
-        BetterSaver::Save();
+        if (this.saved == 0) {
+            BetterSaver::Save();
+            this.saved = 1;
+        }
         if (param1.eventid == 44) {
             if (this.call_ev_safe_time_once) {
                 if (this.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
