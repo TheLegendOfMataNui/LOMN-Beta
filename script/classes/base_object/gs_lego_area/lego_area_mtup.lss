@@ -1,10 +1,12 @@
 class lego_area_mtup : gs_lego_area {
     property puzzle;
+    property saved;
     
     method lego_area_mtup(param1) {
         this.gs_lego_area("mtup", param1, 0, 0);
         this.puzzle = new mtup_class(this);
         this.lego_area_initfull();
+        this.saved = 0;
         return null;
     }
     
@@ -27,7 +29,10 @@ class lego_area_mtup : gs_lego_area {
     }
     
     method onevent(param1) {
-        BetterSaver::Save();
+        if (this.saved == 0) {
+            BetterSaver::Save();
+            this.saved = 1;
+        }
         this.puzzle.onevent(param1);
         return null;
     }
