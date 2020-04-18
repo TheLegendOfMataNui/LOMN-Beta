@@ -12,6 +12,7 @@ class mbch2_puzzle {
     property wirly;
     property discpickup;
     property boulderdropped;
+    property cinema;
     
     method mbch2_puzzle(param1) {
         this.parent = param1;
@@ -188,6 +189,9 @@ class mbch2_puzzle {
                             this.boulder.setmoveableflags(1, 1, 0, 1);
                             this.boulder.setfriction(0.1);
                             this.callonce = 0;
+                            this.cinema = gccinemaengine::create();
+                            gccinemaengine::load(this.cinema, "cin4");
+                            gccinemaengine::play(this.cinema);
                         }
                     }
                     else if (this.callonce == 0) {
