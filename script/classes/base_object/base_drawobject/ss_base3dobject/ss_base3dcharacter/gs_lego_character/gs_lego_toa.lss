@@ -3,31 +3,31 @@ class gs_lego_toa : gs_lego_character {
     property mapperhandle;
     property ishookenabled;
     
-    method gs_lego_toa(param1, param2, param3, param4, param5) {
-        this.charname = param1;
-        if (param2 == null) {
+    method gs_lego_toa(char_id, orientation, x_pos, y_pos, z_pos) {
+        this.charname = char_id;
+        if (orientation == null) {
             this.angle = 0.0;
         }
         else {
-            this.angle = param2;
+            this.angle = orientation;
         }
-        if (param3 == null) {
+        if (x_pos == null) {
             this.x1 = 0.0;
         }
         else {
-            this.x1 = param3;
+            this.x1 = x_pos;
         }
-        if (param4 == null) {
+        if (y_pos == null) {
             this.y1 = 0.0;
         }
         else {
-            this.y1 = param4;
+            this.y1 = y_pos;
         }
-        if (param5 == null) {
+        if (z_pos == null) {
             this.z = 0.0;
         }
         else {
-            this.z = param5;
+            this.z = z_pos;
         }
         this.onscreen = 0;
         this.area = "cnt1";
@@ -37,12 +37,10 @@ class gs_lego_toa : gs_lego_character {
     }
     
     method lego_toa_initfull() {
-        var var1;
         gcmodeldirector::addtoa(this.charname);
         this.toahandle = gcmodeldirector::gettoa();
         this.contid = scslosifoundation::stringtoidentifier("cnt1");
         this.handle = gcmodeldirector::getcharacter(this.contid, this.areaid);
-        var1 = 1;
         this.ishookenabled = 0;
         if (this.charname == "onua") {
             globalclass.unlockdirector.unlocks.played_onua = true;
