@@ -1,10 +1,12 @@
 class lego_area_mtup5 : gs_lego_area {
     property cinema;
-    property call_ev_safe_time_once;
+    property music_stopped;
     property saved;
+    property safecount;
     
     method lego_area_mtup5(param1) {
         this.gs_lego_area("mtup", param1, 0, 0);
+        this.lego_area_initfull();
         this.saved = 0;
         return null;
     }
@@ -12,13 +14,13 @@ class lego_area_mtup5 : gs_lego_area {
     method initfull() {
         var var1;
         var var2;
+        this.lego_area_show();
         globalclass.player.equipcombat();
         globalclass.bgmusic.stop();
-        this.call_ev_safe_time_once = 1;
+        this.music_stopped = 1;
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin1");
-            globalclass.hud.hide();
             gccinemaengine::play(this.cinema);
         }
         gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
@@ -35,19 +37,18 @@ class lego_area_mtup5 : gs_lego_area {
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
         gclightdirector::setcavelighting(0);
+        this.safecount = 0;
         return null;
     }
     
     method cleanupfull() {
-        var var1;
-        var var2;
+        this.lego_area_hide();
         this.cinema = null;
-        var1 = null;
-        var2 = null;
         return null;
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
         return null;
     }
     
@@ -56,46 +57,54 @@ class lego_area_mtup5 : gs_lego_area {
     }
     
     method onevent(param1) {
+        var kopaka;
         if (this.saved == 0) {
             BetterSaver::Save();
             this.saved = 1;
         }
         if (param1.eventid == 44) {
-            if (this.call_ev_safe_time_once) {
+            if (this.music_stopped) {
                 if (this.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
                     globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaAmbience");
                     globalclass.bgmusic.play();
                 }
-                this.call_ev_safe_time_once = 0;
+                this.music_stopped = 0;
+            }
+            else if (this.cinema != null) {
+                if (this.safecount < 3) {
+                    this.safecount = this.safecount + 1;
+                    if (this.safecount == 2) {
+                        kopaka = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kopa"), 0);    
+                        gccharacter::addpart(kopaka, "kopa/hsrd", 1);
+                        gccharacter::addpart(kopaka, "kopa/hsld", 2);
+                    }
+                }
             }
         }
         else if (param1.eventid == 30) {
             globalclass.player.maskcontrol.changemask(3);
             globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-            globalclass.hud.show();
             globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaAmbience");
             globalclass.bgmusic.play();
         }
         else if (param1.eventid == 46) {
-            globalclass.level.cam.setaimode(7);
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
-            globalclass.level.cam.setaimode(11);
-            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("l000"));
         }
         return null;
     }
     
     method input(param1) {
-        if (param1.event == 2) {
-            if (param1.button == 251) {
-                if (!(this.cinema == null)) {
-                    gccinemaengine::stop(this.cinema);
-                }
+        if ((param1.event == 2) && (param1.button == 251)) {
+            if (this.cinema != null) {
+                gccinemaengine::stop(this.cinema);
             }
-            param1.button;
         }
         return null;
     }
