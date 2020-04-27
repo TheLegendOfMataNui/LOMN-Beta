@@ -24,7 +24,12 @@ class vllg2_puzzle {
     property orientation;
     property cinema;
     property cinema_shown;
+    property desctext;
+    property howtotext;
+    property displaytexttimer;
+    property rotatestone;
 	property gearpickup;
+    property deltatimer;
     
     method vllg2_puzzle(param1) {
         this.parent = param1;
@@ -37,6 +42,9 @@ class vllg2_puzzle {
         var tohunga;
         var hive1handle;
         var hive2handle;
+		var gearpickup_text;
+        this.rotatestone = 0;
+        this.deltatimer = 0.0;
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(8);
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 50000.0, 0.01);
@@ -48,11 +56,17 @@ class vllg2_puzzle {
             this.cinema_shown = 0;
         }
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gear")) == 0) {
-            this.gearpickup = new lego_pickup("gear", 0, 5, "item", 6, 1);
+            this.gearpickup = new lego_moveableobject("gear");
             this.gearpickup.initfull();
             this.gearpickup.show();
-            this.gearpickup.setcondition(131072);
-            this.gearpickup.setquest(2);
+            this.displaytexttimer = new lego_timer("dspt", 4.0, 0);
+            this.displaytexttimer.initfull();
+            gearpickup_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 6, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", gearpickup_text, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            this.desctext.initfull();
+            gearpickup_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 6, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", gearpickup_text, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
+            this.howtotext.initfull();
         }		
         if (this.cinema_shown == 0) {
             this.cinema = gccinemaengine::create();
@@ -281,7 +295,19 @@ class vllg2_puzzle {
         if (this.gearpickup != null) {
             this.gearpickup.cleanupfull();
             this.gearpickup = null;
-        }		
+        }
+        if (this.desctext != null) {
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        if (this.howtotext != null) {
+            this.howtotext.cleanupfull();
+            this.howtotext = null;
+        }
+        if (this.displaytexttimer != null) {
+            this.displaytexttimer.cleanupfull();
+            this.displaytexttimer = null;
+        }
         if (this.upgradefruit2 != null) {
             this.upgradefruit2.cleanupfull();
             this.upgradefruit2 = null;
@@ -306,6 +332,19 @@ class vllg2_puzzle {
     method process(param1) {
         var var1;
         var var2;
+		this.deltatimer = this.deltatimer + param1.deltatime;
+        if (this.deltatimer > 0) {
+            
+        }
+        if (this.rotatestone >= 360) {
+            this.rotatestone = 0;
+        }
+        else {
+            this.rotatestone = this.rotatestone + 2;
+        }
+        if (this.gearpickup != null) {
+            this.gearpickup.setorientation(this.rotatestone, this.rotatestone, 0);
+        }
         this.rotatecrystal();
         var1 = 0;
         while (this.testplatformsubound >= var1) {
@@ -338,6 +377,35 @@ class vllg2_puzzle {
                 }
             }
         }
+        else if (param1.eventid == 1) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("gear")) {
+                    this.desctext.add();
+                    this.desctext.show();
+                    this.howtotext.add();
+                    this.howtotext.show();
+                    this.displaytexttimer.reset(0);
+                    this.displaytexttimer.start();
+                    this.gearpickup.hide();
+                    globalclass.hud.show();
+                    gcsaver::pickupitem(this.gearpickup.id);
+                    gcsaver::setquest(2, 2);
+                    gcsaver::setcondition(131072, 1);
+                }
+            }
+        }
+		else if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
+			if (this.desctext != null) {
+				this.desctext.hide();
+				this.desctext.cleanupfull();
+				this.desctext = null;
+			}
+			if (this.howtotext != null) {
+				this.howtotext.hide();
+				this.howtotext.cleanupfull();
+				this.howtotext = null;
+			}
+		}
         else if (param1.eventid == 35) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("drs0")) {
                 bettersaver::setbooleanvalue(53, 1);
