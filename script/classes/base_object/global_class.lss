@@ -24,6 +24,8 @@ class global_class : base_object {
     property gamefont2;
     property gamefont3;
     property gamefont4;
+    property gamefont5;
+    property gamefont6;
     property hittoggletimer;
     property whatsnext;
     property testforlavacollisions;
@@ -63,8 +65,10 @@ class global_class : base_object {
         this.language = 0;
         this.gamefont = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
         this.gamefont2 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
-        this.gamefont3 = sctilefont::create("Root/Data/Art/Fonts/tech_font_01");
-        this.gamefont4 = sctilefont::create("Root/Data/Art/Fonts/tech_font_01_hilight");
+        this.gamefont3 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
+        this.gamefont4 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
+        this.gamefont5 = sctilefont::create("Root/Data/Art/Fonts/tech_font_01");
+        this.gamefont6 = sctilefont::create("Root/Data/Art/Fonts/tech_font_01_hilight");
         sctilefont::setcolor(this.gamefont2, 255, 255, 0, 255);
         this.whatsnext = 0;
         this.testforlavacollisions = 1;
@@ -454,11 +458,17 @@ class global_class : base_object {
         else if (param1 == "Root/Data/Art/Fonts/BionicleFontHi") {
             return this.gamefont2;
         }
-        else if (param1 == "Root/Data/Art/Fonts/tech_font_01") {
+        else if (param1 == "3") {
             return this.gamefont3;
         }
-        else if (param1 == "Root/Data/Art/Fonts/tech_font_01_hilight") {
+        else if (param1 == "4") {
             return this.gamefont4;
+        }
+        else if (param1 == "Root/Data/Art/Fonts/tech_font_01") {
+            return this.gamefont5;
+        }
+        else if (param1 == "Root/Data/Art/Fonts/tech_font_01_hilight") {
+            return this.gamefont6;
         }
         return null;
     }
