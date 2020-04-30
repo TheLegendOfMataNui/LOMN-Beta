@@ -25,14 +25,19 @@ class ss_shoefittersidebar {
     property flagsset;
     property parent;
     
-    method ss_shoefittersidebar(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
+    method ss_shoefittersidebar(param1, param2, param3, param4, param6, param7, param8, param9) {
         this.background = param1;
         this.title = param2;
         this.menustart = param4;
         this.currentwindow = 0;
         this.flagtypearray = param6;
         this.bonearray = param9;
-        this.characterarray = param5;
+        this.characterarray = [ "Onua", 
+            "Bug", 
+            "Big Spider", 
+            "Mud Monster", 
+            "Bull Tiger", 
+            "Rock Monster" ];
         this.soundarray = [ "OOPSTHEME", 
             "KEELATHEME" ];
         this.flagarray = param7;
@@ -49,13 +54,14 @@ class ss_shoefittersidebar {
         this.title.initfull();
         this.flagtypearray.initfull();
         this.background.add();
+        this.background.show();
         this.title.add();
         this.flagtypearray.add();
         this.title.show();
-        this.title.enabletransparency(1);
-        this.flagtypearray.enabletransparency(1);
-        this.title.enablealphachannel(1);
-        this.flagtypearray.enablealphachannel(1);
+        //this.title.enabletransparency(1);
+        //this.flagtypearray.enabletransparency(1);
+        //this.title.enablealphachannel(1);
+        //this.flagtypearray.enablealphachannel(1);
         this.menu.initfull();
         this.resetmenupointerarray();
         this.setupmenu(this.characterarray, "CHARACTERS", 0);
@@ -148,7 +154,7 @@ class ss_shoefittersidebar {
             this.resetmenupointerarray();
         }
         else if (this.currentwindow == 1) {
-            if (!(this.menu.destination == 0)) {
+            if (this.menu.destination != 0) {
                 this.loadanimation(param1, param2, param3, param4);
             }
         }
@@ -159,7 +165,7 @@ class ss_shoefittersidebar {
             this.loadflag(param3, param4, param1);
         }
         else if (this.currentwindow == 4) {
-            if (!(this.definearray[0] == "No Flag")) {
+            if (this.definearray[0] != "No Flag") {
                 this.setpointerarray(4);
                 this.setupmenu(this.howtodefinearray, "HOW TO DEFINE", 7);
             }
@@ -396,7 +402,7 @@ class ss_shoefittersidebar {
         param3.showanimation();
         param2.showlabels();
         param3.hideflags();
-        param1.shoefittercharacter.switchanimation(this.menu.destination);
+        param1.shoefittercharacter.setsplitanimation(this.menu.destination, -1);
         param1.shoefittercharacter.pause();
         param4.clearallflags();
         this.flagsset = param4.loadsetflags(param1.animationarray, this.menu.destination, param1.shoefittercharacter.getduration());
@@ -432,6 +438,7 @@ class ss_shoefittersidebar {
         var var4;
         var var5;
         if (param1.shoefittercharacter.onscreen) {
+            debug::print("Char string = " + __tostring(param1.shoefittercharacter.charstring));
             this.stringidmap = scslosistringmapper::create(((("Root/Data/characters/" + param1.shoefittercharacter.charstring) + "/") + param1.shoefittercharacter.charstring) + "_names.slb");
             var1 = param1.animationarray;
             var2 = [  ];
@@ -439,10 +446,13 @@ class ss_shoefittersidebar {
             while ((var1.__length - 1) >= var3) {
                 var4 = var1[var3];
                 var5 = scslosistringmapper::getstring(this.stringidmap, var4[0]);
-                if (!(var5 == "")) {
+                if (var5 != "") {
                     var2.__append(var5);
                 }
                 var3 = var3 + 1;
+            }
+            foreach (var thing : var2) {
+                debug::print(thing);
             }
             return var2;
         }
@@ -482,7 +492,7 @@ class ss_shoefittersidebar {
             var3.__append(new ss_shoefittermenucontainer(new gs_legoactivetext("Root/Data/Art/Fonts/tech_font_01", "Root/Data/Art/Fonts/tech_font_01_hilight", scslosistringfuncs::toupper(var6), this.menustart.x1, this.menustart.y1 + (16 * var4), this.menustart.z, var1), var5));
             var4 = var4 + 1;
         }
-        if (!(param3 == null)) {
+        if (param3 != null) {
             this.menu.switchitems(var3, this.menupointerarray[param3], this.scrollmarkerarray[param3]);
         }
         return null;
