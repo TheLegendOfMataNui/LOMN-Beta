@@ -8,6 +8,14 @@ class l4_visn_puzzle {
     property door1b;
     property door2t;
     property door2b;
+    property switch1;
+    property switch1uppos;
+    property switch1downpos;
+    property switch2;
+    property switch2uppos;
+    property switch2downpos;
+    property hitswitch1;
+    property hitswitch2;
     
     method l4_visn_puzzle(param1) {
         this.parent = param1;
@@ -19,7 +27,7 @@ class l4_visn_puzzle {
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicKopakaAmbience");
         globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
-        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mskv")) == 1) {
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mskv")) == 0) {
             this.mask = new lego_pickup("mskv", 3, 1, "item", 1, 1);
             this.mask.initfull();
             this.mask.show();
@@ -37,7 +45,6 @@ class l4_visn_puzzle {
             new lego_moveableobject("bl01"), 
             new lego_moveableobject("bl02"), 
             new lego_moveableobject("bl03") ];
-        this.teleblock = new lego_moveableobject("tblk");
         this.door1t = new lego_moveableobject("drt1");
         this.door1b = new lego_moveableobject("drb1");
         this.door2t = new lego_moveableobject("drt2");
@@ -48,12 +55,30 @@ class l4_visn_puzzle {
             this.pushblocks[var1].setresponse(3, 0, 3);
             var1 = var1 + 1;
         }
+        this.teleblock = new lego_moveableobject("tblk");
         this.teleblock.initfull();
-        this.teleblock.setmoveable(1.0, 0.1, 1, 1, 1, 0);
+        this.teleblock.setmytargetingflags(4);
+        this.teleblock.setmoveable(1.0, 0.8, 1, 0, 1, 1);
+        this.teleblock.settweakable();
+        this.teleblock.setignoreallcollisions(0);
         this.door1t.initfull();
         this.door1b.initfull();
         this.door2t.initfull();
         this.door2b.initfull();
+        this.switch1 = new lego_moveableobject("sw04");
+        this.switch1.initfull();
+        this.switch1uppos = new basicpoint(this.switch1.getx(), this.switch1.gety(), this.switch1.getz());
+        this.switch1downpos = new basicpoint(this.switch1.getx(), this.switch1.gety() - 0.8, this.switch1.getz());
+        this.switch1.setresponse(0, 0, 0);
+        this.switch1.setignoreallcollisions(0);
+        this.switch2 = new lego_moveableobject("sw05");
+        this.switch2.initfull();
+        this.switch2uppos = new basicpoint(this.switch2.getx(), this.switch2.gety(), this.switch2.getz());
+        this.switch2downpos = new basicpoint(this.switch2.getx(), this.switch2.gety() - 0.8, this.switch2.getz());
+        this.switch2.setresponse(0, 0, 0);
+        this.switch2.setignoreallcollisions(0);
+        this.hitswitch1 = 0;
+        this.hitswitch2 = 0;
         return null;
     }
     
@@ -127,6 +152,30 @@ class l4_visn_puzzle {
             this.door2b.cleanupfull();
             this.door2b = null;
         }
+        if (this.switch1 != null) {
+            this.switch1.cleanupfull();
+            this.switch1 = null;
+        }
+        if (this.switch1uppos != null) {
+            this.switch1uppos.cleanupfull();
+            this.switch1uppos = null;
+        }
+        if (this.switch1downpos != null) {
+            this.switch1downpos.cleanupfull();
+            this.switch1downpos = null;
+        }
+        if (this.switch2 != null) {
+            this.switch2.cleanupfull();
+            this.switch2 = null;
+        }
+        if (this.switch2uppos != null) {
+            this.switch2uppos.cleanupfull();
+            this.switch2uppos = null;
+        }
+        if (this.switch2downpos != null) {
+            this.switch2downpos.cleanupfull();
+            this.switch2downpos = null;
+        }
         return null;
     }
     
@@ -140,6 +189,14 @@ class l4_visn_puzzle {
         while ((this.sbarray.__length - 1) >= var1) {
             this.sbarray[var1].process();
             var1 = var1 + 1;
+        }
+        this.switch1.process();
+        if (this.teleblock.gety() < -200) {
+            this.teleblock.setpos(319.2, 8.3, 0 - 887.6);
+        }
+        this.switch2.process();
+        if (this.teleblock.gety() < -200) {
+            this.teleblock.setpos(319.2, 8.3, 0 - 887.6);
         }
         return null;
     }
@@ -160,6 +217,58 @@ class l4_visn_puzzle {
         }
         else if (param1.eventid == 1) {
             
+        }
+        if (this.switch1 != null) {
+            this.switch1.onevent(param1);
+        }
+        if (param1.eventid == 1) {
+            if (param1.args[1] == scslosifoundation::stringtoidentifier("sw04")) {
+                if (param1.args[2]) {
+                    this.hitswitch1(0);
+                }
+                else {
+                    this.hitswitch1(1);
+                }
+            }
+        }
+        if (this.switch2 != null) {
+            this.switch2.onevent(param1);
+        }
+        if (param1.eventid == 1) {
+            if (param1.args[1] == scslosifoundation::stringtoidentifier("sw05")) {
+                if (param1.args[2]) {
+                    this.hitswitch2(0);
+                }
+                else {
+                    this.hitswitch2(1);
+                }
+            }
+        }
+        return null;
+    }
+
+    method hitswitch1(param1) {
+        if (!(this.hitswitch1 == param1)) {
+            this.hitswitch1 = param1;
+            if (param1) {
+                this.switch1.setpos(this.switch1downpos);
+                this.openmaskdoor(1);
+            }
+            else {
+                this.switch1.setpos(this.switch1uppos);
+                this.openmaskdoor(0);
+            }
+        }
+        return null;
+    }
+
+    method hitswitch2(param1) {
+        if (!(this.hitswitch2 == param1)) {
+            this.hitswitch2 = param1; 
+            if (param1) {
+                this.switch2.setpos(this.switch2downpos);
+                this.openenddoor();
+            }
         }
         return null;
     }
