@@ -15,6 +15,7 @@ class test_puzzle {
 		var var1;
         var KEVIN;
 		var tohunga;
+        var ussal;
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-16777216, 0 - 5.0, 0 - 600.0, 0.01);
@@ -32,6 +33,10 @@ class test_puzzle {
 		gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
         gccharacter::setsplitanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
 		gccharacter::setorientation(tohunga, -90);
+        ussal = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("krb2"));
+        gccharacter::addpart(ussal, "krb2/nbua", 1);
+        gccharacter::setinputstate(ussal, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(ussal, scslosifoundation::stringtoidentifier("kr00"), -1);
 		this.callsurfonce = 1;
         this.miruactive = 1;
         this.holedo = 1;
