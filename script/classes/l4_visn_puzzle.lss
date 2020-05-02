@@ -210,18 +210,18 @@ class l4_visn_puzzle {
                 var1 = var1 + 1;
             }
         }
+        if (this.switch1 != null) {
+            this.switch1.onevent(param1);
+        }
+        if (this.switch2 != null) {
+            this.switch2.onevent(param1);
+        }
         if (param1.eventid == 7) {
             if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
                 gcstaticsoundsptrarray::playtablesound(149);
             }
         }
         else if (param1.eventid == 1) {
-            
-        }
-        if (this.switch1 != null) {
-            this.switch1.onevent(param1);
-        }
-        if (param1.eventid == 1) {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("sw04")) {
                 if (param1.args[2]) {
                     this.hitswitch1(0);
@@ -230,11 +230,6 @@ class l4_visn_puzzle {
                     this.hitswitch1(1);
                 }
             }
-        }
-        if (this.switch2 != null) {
-            this.switch2.onevent(param1);
-        }
-        if (param1.eventid == 1) {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("sw05")) {
                 if (param1.args[2]) {
                     this.hitswitch2(0);
@@ -248,7 +243,7 @@ class l4_visn_puzzle {
     }
 
     method hitswitch1(param1) {
-        if (!(this.hitswitch1 == param1)) {
+        if (this.hitswitch1 != param1) {
             this.hitswitch1 = param1;
             if (param1) {
                 this.switch1.setpos(this.switch1downpos);
@@ -263,21 +258,13 @@ class l4_visn_puzzle {
     }
 
     method hitswitch2(param1) {
-        if (!(this.hitswitch2 == param1)) {
+        if (this.hitswitch2 != param1) {
             this.hitswitch2 = param1; 
             if (param1) {
                 this.switch2.setpos(this.switch2downpos);
                 this.openenddoor();
             }
         }
-        return null;
-    }
-    
-    method moveset(param1, param2) {
-        return null;
-    }
-    
-    method movetele(param1) {
         return null;
     }
     
