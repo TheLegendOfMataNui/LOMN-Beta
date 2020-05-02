@@ -8,7 +8,11 @@ class extras {
     property active;
     property extratext;
     property printmenu;
+    property glossarymenu;
+    property creditsscreen;
+    property print;
     property glossary;
+    property credits;
     property minidx;
     property maxidx;
     property showidx;
@@ -27,22 +31,32 @@ class extras {
     }
 
     method setupoutsidescreens() {
-        this.printmenu = new gsprintmenu(this);
+        this.print = new gsprintmenu(this);
         this.glossary = new gsglossary(this);
+        this.credits = new creditsscreen(this);
         return null;
     }
     
     method initfull() {
         var var1;
         var1 = 0;
+        this.minidx = 0;
+        this.showidx = 10;
+        this.curidx = 0;
+        this.activemenu = [  ];
+        this.backmenu = [  ];
+        this.menuactive = 0;
         this.curoption = -1;
         this.optarray = [  ];
-        this.printmenu = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 20), "", this.optarray.__length);
+        this.glossarymenu = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 20), "", this.optarray.__length);
+        this.glossarymenu.initfull();
+        this.optarray.__append(this.glossarymenu);
+        this.printmenu = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 40), "", this.optarray.__length);
         this.printmenu.initfull();
         this.optarray.__append(this.printmenu);
-        this.glossary = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 40), "", this.optarray.__length);
-        this.glossary.initfull();
-        this.optarray.__append(this.glossary);
+        this.creditsscreen = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 7), "", this.optarray.__length);
+        this.creditsscreen.initfull();
+        this.optarray.__append(this.creditsscreen);
         this.backoption = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 3), "", this.optarray.__length);
         this.backoption.initfull();
         this.optarray.__append(this.backoption);
@@ -78,7 +92,7 @@ class extras {
     
     method input(param1) {
         if (this.active) {
-            if (this.curoption == 2) {
+            if (this.curoption == 3) {
 				debug::print("[][][] back");
                 this.back();
             }
@@ -86,7 +100,10 @@ class extras {
                 this.glossary.input(param1);
             }
             else if (this.curscreen == 5) {
-                this.printmenu.input(param1);
+                this.print.input(param1);
+            }
+            else if (this.curscreen == 7) {
+                this.credits.input(param1);
             }
         }
         return null;
@@ -108,7 +125,23 @@ class extras {
             this.glossary.onevent(param1);
         }
         else if (this.curscreen == 5) {
-            this.printmenu.onevent(param1);
+            this.print.onevent(param1);
+        }
+        else if (this.curscreen == 7) {
+            this.credits.onevent(param1);
+        }
+
+        return null;
+    }
+
+    method process(param1) {
+        if (this.curscreen == 7) {
+            this.credits.process(param1);
+            debug::print("[][][] credits process");
+        }
+        else if (this.curscreen == 5) {
+            this.print.process(param1);
+            debug::print("[][][] print process");
         }
         return null;
     }
@@ -134,26 +167,47 @@ class extras {
         if (this.curoption == -1) {
             
         }
-        else if (this.curoption == 2) {
+        else if (this.curoption == 3) {
 			debug::print("[][][] back");
 			this.back();
         }
         else if (this.curoption == 0) {
             this.glossary.initfull();
             this.gotodifferentscreen(null, 4);
-            this.active = 0;
+            this.hideactivemenu();
+            this.process();
+            debug::print("[][][] glossary");
             gcstaticsoundsptrarray::playtablesound(1072);
         }
         else if (this.curoption == 1) {
-            this.printmenu.initfull();
+            this.print.initfull();
             this.gotodifferentscreen(null, 5);
-            this.active = 0;
+            this.hideactivemenu();
+            this.process();
+            debug::print("[][][] printmenu");
+            gcstaticsoundsptrarray::playtablesound(1072);
+        }
+        else if (this.curoption == 2) {
+            this.credits.initfull();
+            this.gotodifferentscreen(null, 7);
+            this.hideactivemenu();
+            this.process();
+            debug::print("[][][] credits");
             gcstaticsoundsptrarray::playtablesound(1072);
         }
         else {
             gcstaticsoundsptrarray::playtablesound(1072);
         }
         this.curoption;
+        return null;
+    }
+
+    method hideactivemenu() {
+        this.active = 0;
+        this.glossarymenu.cleanupfull();
+        this.printmenu.cleanupfull();
+        this.creditsscreen.cleanupfull();
+        this.backoption.cleanupfull();
         return null;
     }
 

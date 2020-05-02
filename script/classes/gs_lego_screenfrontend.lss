@@ -37,11 +37,8 @@ class gs_lego_screenfrontend {
     property menuactive;
     property ingame;
     property options_graphics;
-    property options_credits;
     property options_sound;
     property playgame;
-    property printmenu;
-    property glossary;
 	property extras;
     property curspline;
     property cameramode;
@@ -102,27 +99,6 @@ class gs_lego_screenfrontend {
             0 ];
         this.optiontext.__append(var1);
         var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 25), 
-            50, 
-            50 + (40 * this.optiontext.__length), 
-            0, 
-            0, 
-            0 ];
-        this.optiontext.__append(var1);
-        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 20), 
-            50, 
-            50 + (40 * this.optiontext.__length), 
-            0, 
-            0, 
-            0 ];
-        this.optiontext.__append(var1);
-        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 40), 
-            50, 
-            50 + (40 * this.optiontext.__length), 
-            0, 
-            0, 
-            0 ];
-        this.optiontext.__append(var1);
-        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 7), 
             50, 
             50 + (40 * this.optiontext.__length), 
             0, 
@@ -244,11 +220,8 @@ class gs_lego_screenfrontend {
     
     method setupoutsidescreens() {
         this.playgame = new gsplaygame(this);
-        this.options_credits = new creditsscreen(this);
         this.options_sound = new soundoptions(this);
         this.options_graphics = new graphicsoptions(this);
-        this.printmenu = new gsprintmenu(this);
-        this.glossary = new gsglossary(this);
 		this.extras = new extras(this);
         return null;
     }
@@ -469,21 +442,9 @@ class gs_lego_screenfrontend {
             this.options_sound.cleanupfull();
             this.options_sound = null;
         }
-        if (!(this.options_credits == null)) {
-            this.options_credits.cleanupfull();
-            this.options_credits = null;
-        }
         if (!(this.playgame == null)) {
             this.playgame.cleanupfull();
             this.playgame = null;
-        }
-        if (!(this.glossary == null)) {
-            this.glossary.cleanupfull();
-            this.glossary = null;
-        }
-        if (!(this.printmenu == null)) {
-            this.printmenu.cleanupfull();
-            this.printmenu = null;
         }
         if (this.titleimage != null) {
             this.titleimage.cleanupfull();
@@ -532,12 +493,6 @@ class gs_lego_screenfrontend {
         else if (this.curscreen == 9) {
             this.playgame.onevent(param1);
         }
-        else if (this.curscreen == 4) {
-            this.glossary.onevent(param1);
-        }
-        else if (this.curscreen == 5) {
-            this.printmenu.onevent(param1);
-        }
         if (this.curscreen == 11) {
             this.extras.onevent(param1);
         }
@@ -583,12 +538,6 @@ class gs_lego_screenfrontend {
         if (this.cameramode == 0) {
             this.addyaw();
         }
-        if (this.curscreen == 7) {
-            this.options_credits.process(param1);
-        }
-        else if (this.curscreen == 5) {
-            this.printmenu.process(param1);
-        }
         return null;
     }
     
@@ -631,20 +580,11 @@ class gs_lego_screenfrontend {
         if (this.curscreen == 8) {
             this.options_graphics.input(param1);
         }
-        else if (this.curscreen == 7) {
-            this.options_credits.input(param1);
-        }
         else if (this.curscreen == 1) {
             this.options_sound.input(param1);
         }
         else if (this.curscreen == 9) {
             this.playgame.input(param1);
-        }
-        else if (this.curscreen == 4) {
-            this.glossary.input(param1);
-        }
-        else if (this.curscreen == 5) {
-            this.printmenu.input(param1);
         }
         else if (this.curscreen == 11) {
             this.extras.input(param1);
@@ -924,16 +864,6 @@ class gs_lego_screenfrontend {
                 this.gotodifferentscreen(this.languagetext, 6);
             }
             else if (param1 == 3) {
-                
-            }
-            else if (param1 == 4) {
-                
-            }
-            else if (param1 == 5) {
-                this.options_credits.initfull();
-                this.gotodifferentscreen(null, 7);
-            }
-            else if (param1 == 6) {
                 this.gotodifferentscreen(this.controlstext, 3);
             }
         }
@@ -979,20 +909,12 @@ class gs_lego_screenfrontend {
                 this.adjustcamera(10, 1, 1, 2.0);
             }
             else if (param1 == 3) {
-                this.glossary.initfull();
-                this.gotodifferentscreen(null, 4);
-            }
-            else if (param1 == 4) {
-                this.printmenu.initfull();
-                this.gotodifferentscreen(null, 5);
-            }
-            else if (param1 == 5) {
-                this.adjustcamera(22, 1, 1, 2.0);
-            }
-            else if (param1 == 6) {
                 this.adjustcamera(8, 1, 1, 2.0);
             }
-            else if (param1 == 7) {
+            else if (param1 == 4) {
+                this.adjustcamera(8, 1, 1, 2.0);
+            }
+            else if (param1 == 5) {
                 this.adjustcamera(2, 1, 1, 7.0);
             }
         }
