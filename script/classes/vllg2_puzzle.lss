@@ -331,7 +331,6 @@ class vllg2_puzzle {
     
     method process(param1) {
         var var1;
-        var var2;
 		this.deltatimer = this.deltatimer + param1.deltatime;
         if (this.deltatimer > 0) {
             
@@ -374,23 +373,6 @@ class vllg2_puzzle {
                             globalclass.player.maskcontrol.toggleactive();
                             globalclass.hud.mask.hide();
                     }
-                }
-            }
-        }
-        else if (param1.eventid == 1) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (param1.args[1] == scslosifoundation::stringtoidentifier("gear")) {
-                    this.desctext.add();
-                    this.desctext.show();
-                    this.howtotext.add();
-                    this.howtotext.show();
-                    this.displaytexttimer.reset(0);
-                    this.displaytexttimer.start();
-                    this.gearpickup.hide();
-                    globalclass.hud.show();
-                    gcsaver::pickupitem(this.gearpickup.id);
-                    gcsaver::setquest(2, 2);
-                    gcsaver::setcondition(131072, 1);
                 }
             }
         }
@@ -479,6 +461,21 @@ class vllg2_puzzle {
                     }
                 }
             }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("gear")) {
+                    this.desctext.add();
+                    this.desctext.show();
+                    this.howtotext.add();
+                    this.howtotext.show();
+                    this.displaytexttimer.reset(0);
+                    this.displaytexttimer.start();
+                    this.gearpickup.hide();
+                    globalclass.hud.show();
+                    gcsaver::pickupitem(this.gearpickup.id);
+                    gcsaver::setquest(2, 2);
+                    gcsaver::setcondition(131072, 1);
+                }
+            }
         }
         else if (param1.eventid == 11) {
             if (scslosifoundation::identifiertostring(param1.args[1]) == "g054") {
@@ -521,6 +518,20 @@ class vllg2_puzzle {
                 }
                 else if (param1.args[1] == 0) {
                     globalclass.player.canshootdragger(1);
+                }
+            }
+        }
+        else if (param1.eventid == 8) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
+                if (this.desctext != null) {
+                    this.desctext.hide();
+                    this.desctext.cleanupfull();
+                    this.desctext = null;
+                }
+                if (this.howtotext != null) {
+                    this.howtotext.hide();
+                    this.howtotext.cleanupfull();
+                    this.howtotext = null;
                 }
             }
         }
