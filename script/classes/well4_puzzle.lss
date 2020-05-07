@@ -148,30 +148,38 @@ class well4_puzzle {
         return null;
     }
     
-    method hide() {
+    method cleanupfull() {
         var var1;
-        if (!(this.glyph == null)) {
+        if (this.glyph != null) {
             this.glyph.cleanupfull();
             this.glyph = null;
         }
         this.founditem = null;
         this.showpickup = null;
-        var1 = 0;
-        while ((this.platforms.__length - 1) >= var1) {
-            this.platforms[var1].cleanupfull();
-            this.platforms[var1] = null;
-            var1 = var1 + 1;
+        if (this.platforms != null) {
+            var1 = 0;
+            while ((this.platforms.__length - 1) >= var1) {
+                this.platforms[var1].cleanupfull();
+                this.platforms[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platforms = null;
         }
-        this.platforms = null;
         this.yvalue = null;
-        this.rotatetimer.cleanupfull();
-        this.rotatetimer = null;
+        if (this.rotatetimer != null) {
+            this.rotatetimer.cleanupfull();
+            this.rotatetimer = null;
+        }
         this.rotatecase = null;
         this.starttimeronce = null;
-        this.doortop.cleanupfull();
-        this.doortop = null;
-        this.doorbottom.cleanupfull();
-        this.doorbottom = null;
+        if (this.doortop != null) {
+            this.doortop.cleanupfull();
+            this.doortop = null;
+        }
+        if (this.doorbottom != null) {
+            this.doorbottom.cleanupfull();
+            this.doorbottom = null;
+        }
         this.original_platform_y_coord = null;
         this.doortop = null;
         this.doorbottom = null;
@@ -213,15 +221,17 @@ class well4_puzzle {
     method onevent(param1) {
         var var1;
         var var2;
-        var1 = 0;
-        while (8 >= var1) {
-            this.platforms[var1].onevent(param1);
-            var1 = var1 + 1;
-        }
-        var1 = 24;
-        while (28 >= var1) {
-            this.platforms[var1].onevent(param1);
-            var1 = var1 + 1;
+        if (this.platforms != null) {
+            var1 = 0;
+            while (8 >= var1) {
+                this.platforms[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+            var1 = 24;
+            while (28 >= var1) {
+                this.platforms[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
         }
         if (param1.eventid == 44) {
             if (this.starttimeronce) {
@@ -250,7 +260,6 @@ class well4_puzzle {
                 this.rotatetimer.reset(0);
                 this.rotatetimer.start();
             }
-            param1.args[0];
         }
         else if (param1.eventid == 1002) {
             if (param1.args[0] == 1) {
@@ -262,9 +271,9 @@ class well4_puzzle {
         }
         else if (param1.eventid == 1) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (!(param1.args[1] == scslosifoundation::stringtoidentifier("cnt1"))) {
+                if (param1.args[1] != scslosifoundation::stringtoidentifier("cnt1")) {
                     this.newplatform = param1.args[1];
-                    if (!(this.oldplatform == this.newplatform)) {
+                    if (this.oldplatform != this.newplatform) {
                         this.printwhichplatformimon = 1;
                     }
                     if (this.printwhichplatformimon) {
@@ -308,11 +317,6 @@ class well4_puzzle {
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
-        }
-        else if (param1.eventid == 7) {
-            if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
-                gcstaticsoundsptrarray::playtablesound(149);
-            }
         }
         else if (param1.eventid == 39) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("glya")) {
