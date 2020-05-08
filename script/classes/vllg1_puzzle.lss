@@ -15,6 +15,9 @@ class vllg1_puzzle {
     property upgradefruit3_shown;
     property wirlpool;
     property orientation;
+    property diskactive;
+    property pickactive;
+    property bugactive;
     
     method vllg1_puzzle(param1) {
         this.parent = param1;
@@ -24,6 +27,11 @@ class vllg1_puzzle {
     method initfull() {
         var var1;
         var door_text;
+        gcmodeldirector::hide(scslosifoundation::stringtoidentifier("twli"), 0);
+        this.diskactive = 0;
+        this.pickactive = 0;
+        this.bugactive = 0;
+        this.placeitem();            
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"))) {
             this.cinema_shown = 1;
         }
@@ -234,6 +242,9 @@ class vllg1_puzzle {
             this.wirlpool = null;
         }
         this.cinema = null;
+        this.diskactive = null;
+        this.pickactive = null;
+        this.bugactive = null;
         return null;
     }
     
@@ -273,13 +284,16 @@ class vllg1_puzzle {
         }
         else if (param1.eventid == 41) {
             if (bettersaver::getbooleanvalue(32)) {
-                this.give_fruit();
+                this.give_fruit(); 
+                this.placeitem();
             }
             if (bettersaver::getbooleanvalue(33)) {
                 this.give_fruit2();
+                this.placeitem();
             }
             if (bettersaver::getbooleanvalue(34)) {
                 this.give_fruit3();
+                this.placeitem();
             }
         }
         else if (param1.eventid == 4) {
@@ -345,6 +359,32 @@ class vllg1_puzzle {
         if (this.upgradefruit3_shown == 0) {
             this.upgradefruit3.obj.setpos(-393.5724, -57.77681, 859.7791);
             this.upgradefruit3_shown = 1;
+        }
+        return null;
+    }
+
+    method placeitem() {
+        if (bettersaver::getbooleanvalue(32)) {
+            if (this.pickactive == 0) {
+                var var1;
+                var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+                gccharacter::addpart(var1, "vl01/pick", 1);
+                this.pickactive = 1;        
+            }
+        }
+        if (bettersaver::getbooleanvalue(33)) {
+            if (this.diskactive == 0) {
+                var var1;
+                var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+                gccharacter::addpart(var1, "vl02/sash", 1);
+                this.diskactive = 1; 
+            }
+        }
+        if (bettersaver::getbooleanvalue(34)) {
+            if (this.bugactive == 0) {
+                gcmodeldirector::show(scslosifoundation::stringtoidentifier("twli"), 0);
+                this.bugactive = 1;        
+            }
         }
         return null;
     }
