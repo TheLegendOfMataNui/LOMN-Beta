@@ -22,6 +22,11 @@ class well4_puzzle {
     property doorbottomy;
     property doorbottomz;
 	property printglyph;
+    property staticplatforms;
+    property mtriggerstate;
+    property mmaskon;
+    property platformcount;
+    property staticplatformcount;
     
     method well4_puzzle(param1) {
         this.parent = param1;
@@ -29,11 +34,14 @@ class well4_puzzle {
         this.oldplatform = null;
         this.newplatform = null;
         this.showpickup = 1;
+        this.mtriggerstate = 0;
         return null;
     }
     
     method initfull() {
-        var var1;
+        var var1;  
+        var var2;
+        var var3;
         gcareadirector::setnearestmax(50);
         this.starttimeronce = 1;
         this.founditem = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glya"));
@@ -45,10 +53,15 @@ class well4_puzzle {
             this.glyph.initfull();
             this.glyph.show();
         }
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pg14")) == 0) {
+            this.printglyph = new lego_pickup("pgl4", 0, 7, "item", 4, 0);
+            this.printglyph.initfull();
+        }
         this.rotatetimer = new lego_timer("rott", 2.0, 0);
         this.rotatetimer.initfull();
         this.rotatecase = 0;
-        this.platforms = [ new lego_volatileplatform("pf36"), 
+        this.platforms = [   
+            new lego_volatileplatform("pf36"), 
             new lego_volatileplatform("pf21"), 
             new lego_volatileplatform("pf22"), 
             new lego_volatileplatform("pf16"), 
@@ -77,6 +90,23 @@ class well4_puzzle {
             new lego_moveableobject("pf57"), 
             new lego_moveableobject("pf58"), 
             new lego_moveableobject("pf60") ];
+            this.platformcount = this.platforms.__length - 1;
+
+            this.staticplatforms = [
+            new lego_moveableobject("pf20"),
+            new lego_moveableobject("pf23"),
+            new lego_moveableobject("pf24"),
+            new lego_moveableobject("pf25"),
+            new lego_moveableobject("pf26"),
+            new lego_moveableobject("pf32"),
+            new lego_moveableobject("pf39"),
+            new lego_moveableobject("pf45"),
+            new lego_moveableobject("pf47"),
+            new lego_moveableobject("pf49"),
+            new lego_moveableobject("pf51"),
+            new lego_moveableobject("pf53") ];
+            this.staticplatformcount = this.staticplatforms.__length - 1;
+
         this.doortop = new lego_moveableobject("drt1");
         this.doorbottom = new lego_moveableobject("drb1");
         this.doortop.initfull();
@@ -100,12 +130,6 @@ class well4_puzzle {
             this.platforms[var1].setresponse(1, 0, 1);
             var1 = var1 + 1;
         }
-        gcareadirector::setallobjectsalpha(0.0);
-        if (this.showpickup) {
-            this.glyph.obj.setalpha();
-        }
-        this.doortop.setalpha();
-        this.doorbottom.setalpha();
         if (this.showpickup == 0) {
             this.doortop.setpos(this.doortopx, 8.23, this.doortopz);
             this.doorbottom.setpos(this.doorbottomx, 0 - 24.947, this.doorbottomz);
@@ -137,10 +161,6 @@ class well4_puzzle {
             }
             var1 = var1 + 1;
         }
-        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pgl4")) == 0) {
-            this.printglyph = new lego_pickup("pgl4", 0, 7, "item", 4, 0);
-            this.printglyph.initfull();
-        }
         return null;
     }
     
@@ -150,6 +170,7 @@ class well4_puzzle {
     
     method cleanupfull() {
         var var1;
+        var var2;
         if (this.glyph != null) {
             this.glyph.cleanupfull();
             this.glyph = null;
@@ -193,6 +214,16 @@ class well4_puzzle {
             this.printglyph.cleanupfull();
             this.printglyph = null;
         }
+        if (this.staticplatforms != null) {
+            var2 = 0;
+            while ((this.staticplatforms.__length - 1) >= var2) {
+                this.staticplatforms[var2].cleanupfull();
+                this.staticplatforms[var2] = null;
+                var2 = var2 + 1;
+            }
+            this.staticplatforms = null;
+        }
+        this.mtriggerstate = null;
         return null;
     }
     
@@ -221,6 +252,9 @@ class well4_puzzle {
     method onevent(param1) {
         var var1;
         var var2;
+        if ((this.platforms != null)  ||  (this.staticplatforms != null)) {
+            this.fadestuff();
+        }  
         if (this.platforms != null) {
             var1 = 0;
             while (8 >= var1) {
@@ -262,11 +296,13 @@ class well4_puzzle {
             }
         }
         else if (param1.eventid == 1002) {
-            if (param1.args[0] == 1) {
-                gcareadirector::setallobjectsadfade(1);
+            if (this.mtriggerstate == 0) {
+                debug::print("Fading in PLATFORMS");
+                this.mtriggerstate = 1;   
             }
-            if (param1.args[0] == 0) {
-                gcareadirector::setallobjectsalpha(0.0);
+            else  if (this.mtriggerstate == 1) {
+                debug::print("Fading out PLATFORMS");
+                this.mtriggerstate = 0;             
             }
         }
         else if (param1.eventid == 1) {
@@ -299,21 +335,16 @@ class well4_puzzle {
                 this.parent.level.cam.setaimode(7);
                 globalclass.player.actor.setinputstate("none");
             }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
-                globalclass.player.kill();
-                this.parent.level.cam.setaimode(7);
-                globalclass.player.actor.setinputstate("none");
-            }
         }
         else if (param1.eventid == 27) {
             globalclass.player.unkill();
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             this.resetplatforms();
+            this.mtriggerstate == 0;
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
             globalclass.player.actor.setinputstate("ninp");
             this.parent.level.cam.setaimode(11);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
@@ -349,12 +380,38 @@ class well4_puzzle {
             this.platforms[var1].setpos(this.platforms[var1].getx(), this.original_platform_y_coord, this.platforms[var1].getz());
             var1 = var1 + 1;
         }
-        gcareadirector::setallobjectsalpha(0.0);
-        if (this.showpickup) {
-            this.glyph.obj.setalpha();
+        return null;
+    }
+
+    method fadestuff() {
+        var var1;
+        var var2;
+        if (this.mtriggerstate == 1) {
+            var1 = 0;
+            while (this.platformcount >= var1) {      
+                this.platforms[var1].fadein(0.25);
+                var1 = var1 + 1;
+            }
+            var2 = 0;
+            while (this.staticplatformcount >= var2) {      
+                this.staticplatforms[var2].initfull();
+                this.staticplatforms[var2].fadein(0.25);
+                var2 = var2 + 1;
+            }
         }
-        this.doortop.setalpha();
-        this.doorbottom.setalpha();
+        else {          
+            var1 = 0;
+            while (this.platformcount >= var1) {
+                this.platforms[var1].fadeout(0.25);
+                var1 = var1 + 1;
+            }
+            var2 = 0;
+            while (this.staticplatformcount >= var2) {      
+                this.staticplatforms[var2].initfull();
+                this.staticplatforms[var2].fadeout(0.25);
+                var2 = var2 + 1;
+            }
+        }
         return null;
     }
     
