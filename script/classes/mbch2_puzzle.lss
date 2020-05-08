@@ -13,6 +13,9 @@ class mbch2_puzzle {
     property discpickup;
     property boulderdropped;
     property cinema;
+    property showintro;
+    property desctext;
+    property howtotext;
     
     method mbch2_puzzle(param1) {
         this.parent = param1;
@@ -23,6 +26,7 @@ class mbch2_puzzle {
         var var2;
         var var3;
         var tohunga;
+		var bosstext;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGODrumAndBassPart1");
         globalclass.bgmusic.play();		
         this.droplandonce = 1;
@@ -88,6 +92,18 @@ class mbch2_puzzle {
         gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
         gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
         this.boulderdropped = 0;
+        if (gcsaver::isconditionset(536870912)) {
+            this.showintro = 0;
+        }
+        else {
+            this.showintro = 1;
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 0);
+            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", bosstext, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
+            this.desctext.initfull();
+            bosstext = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("boss"), 1, 1);
+            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
+            this.howtotext.initfull();
+        }
         return null;
     }
     
@@ -132,6 +148,14 @@ class mbch2_puzzle {
         if (this.discpickup != null) {
             this.discpickup.cleanupfull();
             this.discpickup = null;
+        }
+        if (!(this.desctext == null)) {
+            this.desctext.cleanupfull();
+            this.desctext = null;
+        }
+        if (!(this.howtotext == null)) {
+            this.howtotext.cleanupfull();
+            this.howtotext = null;
         }
         return null;
     }
@@ -206,6 +230,12 @@ class mbch2_puzzle {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp01")) {
                 this.dropland();
             }
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+                debug::print("****** HIT TP02 SHOWING TARAKAVA INTRO");
+                if (this.showintro) {
+                    this.playintro();
+                }
+            }
         }
         else if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
@@ -229,6 +259,13 @@ class mbch2_puzzle {
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
             this.parent.level.cam.setaimode(11);
             globalclass.player.actor.setinputstate("ninp");
+        }
+        else if (param1.eventid == 6) {
+            this.parent.level.cam.setaimode(11);
+            this.parent.level.cam.resetviewport();
+            globalclass.hud.show();
+            this.desctext.hide();
+            this.howtotext.hide();
         }
         return null;
     }
@@ -274,6 +311,21 @@ class mbch2_puzzle {
     
     method exit() {
         this.parent = null;
+        return null;
+    }
+    method playintro() {
+        this.parent.level.cam.scaletocutscene();
+        this.parent.level.cam.makespline("Root/Data/Levels/lev2/mbch/mbch_CAM.slb");
+        this.parent.level.cam.setspline(0, 10.0, 1, 0);
+        this.parent.level.cam.settargetpos(-15.0, 6.0, 20.0);
+        this.parent.level.cam.setaimode(2);
+        globalclass.hud.hide();
+        gcsaver::setcondition(536870912, 1);
+        this.desctext.add();
+        this.desctext.show();
+        this.howtotext.add();
+        this.howtotext.show();
+        this.showintro = 0;
         return null;
     }
 }
