@@ -5,6 +5,7 @@ class test_puzzle {
     property holedo;
     property musichasstarted;
 	property boulderarray;
+    property boulderubound;
     
     method test_puzzle(param1) {
         this.parent = param1;
@@ -41,12 +42,16 @@ class test_puzzle {
         this.miruactive = 1;
         this.holedo = 1;
         this.musichasstarted = 0;
-        this.boulderarray = [ new bldr_boulder("bld0", this, 0 - 55.1, 80.2, 0 - 101.1, 2.8, 1) ]; 
+        this.boulderarray = [ new boulderclass("blle", this.parent), 
+            new boulderclass("bllf", this.parent), 
+            new boulderclass("bllg", this.parent) ];
         var1 = 0;
         while ((this.boulderarray.__length - 1) >= var1) {
             this.boulderarray[var1].initfull();
+            this.boulderarray[var1].obj.setignoreallcollisions(0);
             var1 = var1 + 1;
         }
+        this.boulderubound = this.boulderarray.__length - 1;
         return null;
     }
 
@@ -63,10 +68,10 @@ class test_puzzle {
     method process(param1) {
         var var1;
         var1 = 0;
-        while ((this.boulderarray.__length - 1) >= var1) {
-            this.boulderarray[var1].process(param1);
-            var1 = var1 + 1;
-        }
+            while (this.boulderubound >= var1) {
+                this.boulderarray[var1].process(param1);
+                var1 = var1 + 1;
+            }
         return null;
     }
     
@@ -115,41 +120,15 @@ class test_puzzle {
         }
 
         var var1;
-        if (param1.eventid == 31) {
-            var1 = 0;
-            while ((this.boulderarray.__length - 1) >= var1) {
-                if (param1.args[0] == this.boulderarray[var1].id) {
-                    this.boulderarray[var1].resettostart();
-                }
-                var1 = var1 + 1;
-            }
-        }
-        else if (param1.eventid == 1) {
-            var1 = 0;
-            while ((this.boulderarray.__length - 1) >= var1) {
-                if (param1.args[0] == this.boulderarray[var1].id) {
-                    if (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) {
-                        globalclass.player.actor.react(0, 4, this.boulderarray[var1].id);
-                    }
-                }
-                var1 = var1 + 1;
-            }
-        }
         var1 = 0;
-        while ((this.boulderarray.__length - 1) >= var1) {
-            this.boulderarray[var1].onevent(param1);
-            var1 = var1 + 1;
-        }
+            while (this.boulderubound >= var1) {
+                this.boulderarray[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
         return null;
     }
     
     method input(param1) {
-        var var1;
-        var1 = 0;
-        while ((this.boulderarray.__length - 1) >= var1) {
-            this.boulderarray[var1].input(param1);
-            var1 = var1 + 1;
-        }
         return null;
     }
     
