@@ -365,8 +365,10 @@ class vllg1_puzzle {
                     this.upgradefruit2.obj.setpos(-326.5602, -57.77215, 741.3592);
                     this.upgradefruit_shown = 1;
                 }   
-                gccharacter::addpart(this.nuparu, "vl02/sash", 1);
-                this.diskactive = 1;
+                if (this.diskactive == 0) {
+                    gccharacter::addpart(this.taipu, "vl02/sash", 1);
+                    this.diskactive = 1;
+                }
             }
             if (bettersaver::getbooleanvalue(34)) {
                 //Midak Quest Complete               
