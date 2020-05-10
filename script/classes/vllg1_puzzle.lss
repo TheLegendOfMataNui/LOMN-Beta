@@ -23,14 +23,14 @@ class vllg1_puzzle {
     property midak;
     property tehuti;
     property azibo;
-    property unnamed1;
+    property onepu;
     property akamu;
     property keeper;
     property damek;
     property kaj;
     property aiyetoro;
     property dosne;
-    property unnamed2;
+    property chadea;
     property pickactive;
     property diskactive;
 
@@ -50,14 +50,14 @@ class vllg1_puzzle {
         this.midak = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
         this.tehuti = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
         this.azibo = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
-        this.unnamed1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
+        this.onepu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
         this.akamu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
         this.keeper = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0);
         this.damek = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0);
         this.kaj = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0);
         this.aiyetoro = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl13"), 0);
         this.dosne =  gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0);
-        this.unnamed2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
+        this.chadea = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
         this.pickactive = 0;
         this.diskactive = 0;
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"))) {
@@ -133,11 +133,11 @@ class vllg1_puzzle {
             //Set Tohunga: Azibo
             gccharacter::settohunga(this.azibo, rgba(123, 121, 123, 255), rgba(231, 77, 0, 255), scslosifoundation::stringtoidentifier("mkba"));
 
-            //Set Tohunga: Unnamed 1
-            gccharacter::settohunga(this.unnamed1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk0a"));
-            gccharacter::setorientation(this.unnamed1, 80);
-            gccharacter::setinputstate(this.unnamed1, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(this.unnamed1, scslosifoundation::stringtoidentifier("d000"), -1);
+            //Set Tohunga: Onepu
+            gccharacter::settohunga(this.onepu, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk0a"));
+            gccharacter::setorientation(this.onepu, 80);
+            gccharacter::setinputstate(this.onepu, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.onepu, scslosifoundation::stringtoidentifier("d000"), -1);
 
             //Set Tohunga: Akamu
             gccharacter::settohunga(this.akamu, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk9a"));
@@ -185,13 +185,13 @@ class vllg1_puzzle {
             gccharacter::setinputstate(this.dosne, scslosifoundation::stringtoidentifier("none"));
             gccharacter::switchanimation(this.dosne, scslosifoundation::stringtoidentifier("d000"), -1);
             
-            //Set Tohunga: Unnamed 2
-            gccharacter::settohunga(this.unnamed2, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk1a"));
-            gccharacter::addpart(this.unnamed2, "vl15/sash", 1);
-            gccharacter::addpart(this.unnamed2, "vl15/lstf", 2);
-            gccharacter::setorientation(this.unnamed2, -43);
-            gccharacter::setinputstate(this.unnamed2, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(this.unnamed2, scslosifoundation::stringtoidentifier("d000"), -1);                                             
+            //Set Tohunga: Chadea
+            gccharacter::settohunga(this.chadea, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk1a"));
+            gccharacter::addpart(this.chadea, "vl15/sash", 1);
+            gccharacter::addpart(this.chadea, "vl15/lstf", 2);
+            gccharacter::setorientation(this.chadea, -43);
+            gccharacter::setinputstate(this.chadea, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.chadea, scslosifoundation::stringtoidentifier("d000"), -1);                                             
             
             //Hiding hives & Turaga door
             gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
@@ -300,14 +300,14 @@ class vllg1_puzzle {
         this.midak = null;
         this.tehuti = null;
         this.azibo = null;
-        this.unnamed1 = null;
+        this.onepu = null;
         this.akamu = null;
         this.keeper = null;
         this.damek = null;
         this.kaj = null;
         this.aiyetoro = null;
         this.dosne = null;
-        this.unnamed2 = null;
+        this.chadea = null;
         this.pickactive = null;
         this.diskactive = null;
         return null;
@@ -391,7 +391,7 @@ class vllg1_puzzle {
                     gccharacter::removepart(this.kaj, 2);
                     gccharacter::removepart(this.aiyetoro, 2);
                     gccharacter::removepart(this.dosne, 2);
-                    gccharacter::removepart(this.unnamed2, 2);
+                    gccharacter::removepart(this.chadea, 2);
                     this.cinema_shown = 1;
                     if (globalclass.player.maskcontrol.isactive()) {
                             globalclass.player.maskcontrol.toggleactive();
