@@ -29,22 +29,19 @@ class bmtn2_puzzle {
         gccharacter::setorientation(this.amaya, 35);
         gccharacter::addpart(this.amaya, "vlgr/sash", 1);
         gccharacter::addpart(this.amaya, "vlgr/staf", 2);
-        this.gatestone.hide();
-        if (bettersaver::getbooleanvalue(37) == 1) {
-            x = this.door.getx();
-            y = this.door.gety() + 9.0;
-            z = this.door.getz();
-            this.door.interpolate(x, y, z, 0.0);
-            this.gatestone.show();
-        }
-
-        //Set Kapura (VL01)
-        gccharacter::setkapura(this.kapura);
-
         this.door = new lego_moveableobject("door");
         this.door.initfull();
         this.door.settweakable();
-
+        this.gatestone.hide();
+        if (bettersaver::getbooleanvalue(37) == 1) {
+            this.gatestone.show();
+            x = this.door.getx();
+            y = this.door.gety() + 9.0;
+            z = this.door.getz();
+            this.door.interpolate(x, y, z, 0.0);            
+        }
+        //Set Kapura (VL01)
+        gccharacter::setkapura(this.kapura);
         this.upgradefruit3_shown = gcsaver::finditem(scslosifoundation::stringtoidentifier("fru1"));
         if (this.upgradefruit3_shown == 0) {
             this.upgradefruit3 = new lego_pickup("fru1", 0, 6, "frut", 1, 1);
