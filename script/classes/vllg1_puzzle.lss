@@ -97,10 +97,12 @@ class vllg1_puzzle {
             gccharacter::setinputstate(this.nuparu, scslosifoundation::stringtoidentifier("none"));
             gccharacter::switchanimation(this.nuparu, scslosifoundation::stringtoidentifier("d003"), -1);
             if (bettersaver::getbooleanvalue(33) == 1) {
-                //Set to idle & add item
+                //Set to idle & add item              
                 gccharacter::switchanimation(this.nuparu, scslosifoundation::stringtoidentifier("d000"), -1);
-                gccharacter::addpart(this.nuparu, "vl02/sash", 1);
-                this.diskactive = 1;
+                if (this.diskactive == 0) {
+                    gccharacter::addpart(this.nuparu, "vl02/sash", 1);
+                    this.diskactive = 1;
+                }
             }
             
             //Set Tohunga: Mamru
