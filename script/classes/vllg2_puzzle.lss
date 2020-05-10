@@ -31,8 +31,26 @@ class vllg2_puzzle {
 	property gearpickup;
     property deltatimer;
     property hutgear;
-    property diskactive;
+    property shasa;
+    property nixie;
+    property maku;
+    property keeper;
+    property yia;
+    property kai;
+    property deori;
+    property kailani;
+    property nireta;
+    property kotu;
+    property hahli;
+    property vhisola;
+    property okoth;
+    property marka;
+    property pelagia;
+    property aeryt;
+    property xeleria;
+    property certera;
     property gearactive;
+    property diskactive;
     
     method vllg2_puzzle(param1) {
         this.parent = param1;
@@ -46,15 +64,32 @@ class vllg2_puzzle {
         var hive1handle;
         var hive2handle;
 		var gearpickup_text;
+        this.shasa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        this.nixie = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+        this.maku = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+        this.keeper = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+        this.yia = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
+        this.kai = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
+        this.deori = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
+        this.kailani = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
+        this.nireta = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
+        this.kotu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
+        this.hahli = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0);
+        this.vhisola = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0);
+        this.okoth = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0);
+        this.marka = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl13"), 0);
+        this.pelagia = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0);
+        this.aeryt = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
+        this.xeleria = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
+        this.certera = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0);
         this.hutgear = new lego_moveableobject("gea1");
         this.hutgear.initfull();
-        this.hutgear.hide();     
+        this.hutgear.hide();
+        this.diskactive = 0;
         this.gearactive = 0;
         if (bettersaver::getbooleanvalue(36)) {              
             this.gearactive = 2;
-        }
-        this.diskactive = 0;
-        this.placeitem();
+        }      
         this.rotatestone = 0;
         this.deltatimer = 0.0;
         gcmodeldirector::setnearestmax(7);
@@ -123,97 +158,131 @@ class vllg2_puzzle {
         this.tempplatform.collide = 0;
         this.deadhives = 0;
         if (gcsaver::isconditionset(1073741824)) {
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkba"));
-			gccharacter::setorientation(tohunga, 270);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk0a"));
+            //Set Tohunga: Shasa (VLGR)
+            gccharacter::settohunga(this.shasa, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkba"));
+			gccharacter::setorientation(this.shasa, 270);
+            gccharacter::setinputstate(this.shasa, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.shasa, scslosifoundation::stringtoidentifier("d003"), -1);
+            if (bettersaver::getbooleanvalue(35) == 1) {
+                //Set to idle & add item              
+                gccharacter::switchanimation(this.shasa, scslosifoundation::stringtoidentifier("d000"), -1);
+                if (this.diskactive == 0) {
+                    gccharacter::addpart(this.shasa, "vlgr/sash", 1);
+                    this.diskactive = 1;
+                }
+            }
+            
+            //Set Tohunga Nixie (VL01)
+            gccharacter::settohunga(this.nixie, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk0a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 60, 91, 255), rgba(72, 117, 174, 255), rgba(0, 0, 255, 255));
-            gccharacter::setorientation(tohunga, -2);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk7a"));
-            gccharacter::setorientation(tohunga, -70);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+            gccharacter::setorientation(this.nixie, -2);
+            gccharacter::setinputstate(this.nixie, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.nixie, scslosifoundation::stringtoidentifier("d003"), -1);
+            if (bettersaver::getbooleanvalue(36) == 1) {
+                //Set to idle & add item              
+                gccharacter::switchanimation(this.nixie, scslosifoundation::stringtoidentifier("d000"), -1);
+                if (this.gearactive == 2) {
+                    this.hutgear.show();
+                }
+            }
+           
+            //Set Tohunga: Maku (VL02)
+            gccharacter::settohunga(this.maku, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk7a"));
+            gccharacter::setorientation(this.maku, -70);
+            gccharacter::setinputstate(this.maku, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.maku, scslosifoundation::stringtoidentifier("d000"), -1);
+            
+            //Set Tohunga: Treekeeper (VL03)
+            gccharacter::settohunga(this.keeper, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0), rgba(0, 208, 33, 255), rgba(0, 208, 33, 255), rgba(102, 0, 102, 255));
-            gccharacter::setorientation(tohunga, 10);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
+            gccharacter::setorientation(this.keeper, 10);
+            gccharacter::setinputstate(this.keeper, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.keeper, scslosifoundation::stringtoidentifier("d000"), -1);
+            
+            //Set Tohunga: Yia (VL04)
+            gccharacter::settohunga(this.yia, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0), rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), rgba(39, 38, 39, 255));
-            gccharacter::setorientation(tohunga, 158);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-            gccharacter::addpart(tohunga, "vl04/sash", 1);
-            gccharacter::addpart(tohunga, "vl04/staf", 2);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk2a"));
+            gccharacter::setorientation(this.yia, 158);
+            gccharacter::setinputstate(this.yia, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.yia, scslosifoundation::stringtoidentifier("d000"), -1);
+            gccharacter::addpart(this.yia, "vl04/sash", 1);
+            gccharacter::addpart(this.yia, "vl04/staf", 2);
+            
+            //Set Tohunga: Kai (VL05)
+            gccharacter::settohunga(this.kai, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk2a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0), rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), rgba(0, 0, 255, 255));
-            gccharacter::setorientation(tohunga, 149);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-            gccharacter::addpart(tohunga, "vl05/sash", 1);
-            gccharacter::addpart(tohunga, "vl05/staf", 2);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkca"));
+            gccharacter::setorientation(this.kai, 149);
+            gccharacter::setinputstate(this.kai, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.kai, scslosifoundation::stringtoidentifier("d000"), -1);
+            gccharacter::addpart(this.kai, "vl05/sash", 1);
+            gccharacter::addpart(this.kai, "vl05/staf", 2);
+            
+            //Set Tohunga: Deori (VL06)
+            gccharacter::settohunga(this.deori, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkca"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0), rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255));
-            gccharacter::setorientation(tohunga, 44);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-            gccharacter::addpart(tohunga, "vl06/sash", 1);
-            gccharacter::addpart(tohunga, "vl06/staf", 2);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
-            gccharacter::settohunga(tohunga, rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk8a"));
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk2a"));
+            gccharacter::setorientation(this.deori, 44);
+            gccharacter::setinputstate(this.deori, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.deori, scslosifoundation::stringtoidentifier("d000"), -1);
+            gccharacter::addpart(this.deori, "vl06/sash", 1);
+            gccharacter::addpart(this.deori, "vl06/staf", 2);
+            
+            //Set Tohunga: Kailani (VL07)
+            gccharacter::settohunga(this.kailani, rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk8a"));
+            
+            //Set Tohunga: Nireta (VL08)
+            gccharacter::settohunga(this.nireta, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk2a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0), rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), rgba(0, 0, 255, 255));
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk9a"));
-            gccharacter::setorientation(tohunga, 174);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("hak4"), -1);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk1a"));
-            gccharacter::setorientation(tohunga, 60);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("hak4"), -1);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkaa"));
+            
+            //Set Tohunga: Kotu (VL09)
+            gccharacter::settohunga(this.kotu, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk9a"));
+            gccharacter::setorientation(this.kotu, 174);
+            gccharacter::setinputstate(this.kotu, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.kotu, scslosifoundation::stringtoidentifier("hak4"), -1);
+            
+            //Set Tohunga: Hahli (VL10)
+            gccharacter::settohunga(this.hahli, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk1a"));
+            gccharacter::setorientation(this.hahli, 60);
+            gccharacter::setinputstate(this.hahli, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.hahli, scslosifoundation::stringtoidentifier("hak4"), -1);
+            
+            //Set Tohunga: Vhisola (VL11)
+            gccharacter::settohunga(this.vhisola, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkaa"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0), rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), rgba(115, 117, 115, 255));
-            gccharacter::setorientation(tohunga, 6);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("hak4"), -1);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+            gccharacter::setorientation(this.vhisola, 6);
+            gccharacter::setinputstate(this.vhisola, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.vhisola, scslosifoundation::stringtoidentifier("hak4"), -1);
+            
+            //Set Tohunga: Okoth (VL12)
+            gccharacter::settohunga(this.okoth, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl13"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), scslosifoundation::stringtoidentifier("mk6a"));
-            gccharacter::setorientation(tohunga, 22);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk3a"));
+            
+            //Set Tohunga: Marka (VL13)
+            gccharacter::settohunga(this.marka, rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), scslosifoundation::stringtoidentifier("mk6a"));
+            gccharacter::setorientation(this.marka, 22);
+            gccharacter::setinputstate(this.marka, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.marka, scslosifoundation::stringtoidentifier("d000"), -1);
+            
+            //Set Tohunga: Pelagia (VL14)
+            gccharacter::settohunga(this.pelagia, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk3a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl14"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255));
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk1a"));
+            
+            //Set Tohunga: Aeryt (Vl15)
+            gccharacter::settohunga(this.aeryt, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
+            
+            //Set Tohunga: Xeleria (VL16)
+            gccharacter::settohunga(this.xeleria, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk1a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255));
-            gccharacter::setorientation(tohunga, 174);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-            gccharacter::addpart(tohunga, "vl16/sash", 1);
-            gccharacter::addpart(tohunga, "vl16/staf", 2);
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk9a"));
+            gccharacter::setorientation(this.xeleria, 174);
+            gccharacter::setinputstate(this.xeleria, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.xeleria, scslosifoundation::stringtoidentifier("d000"), -1);
+            gccharacter::addpart(this.xeleria, "vl16/sash", 1);
+            gccharacter::addpart(this.xeleria, "vl16/staf", 2);
+            
+            //Set Tohunga: Certera (VL17)
+            gccharacter::settohunga(this.certera, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk9a"));
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0), rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), rgba(0, 0, 255, 255));
+
+            //Hiding hives & Turaga door
             gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv0"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv1"), scslosifoundation::stringtoidentifier("vllg"));
@@ -221,6 +290,7 @@ class vllg2_puzzle {
             globalclass.bgmusic.play(1);
         }
         else {
+            //Hiding Characters
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl01"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl02"), 0);
@@ -239,14 +309,6 @@ class vllg2_puzzle {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl15"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl16"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl17"), 0);
-            hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-            gchive::setmaxcreatures(hive1handle, 8);
-            gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("crb1"));
-            gchive::setspawnrate(hive1handle, 5);
-            hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
-            gchive::setmaxcreatures(hive2handle, 8);
-            gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("crb1"));
-            gchive::setspawnrate(hive2handle, 5);
             globalclass.bgmusic.changefilename("Root/Data/sounds/Musicgalitheme");
             globalclass.bgmusic.play();
         }
@@ -259,20 +321,6 @@ class vllg2_puzzle {
         if (this.upgradefruit2_shown == 0) {
             this.upgradefruit2 = new lego_pickup("fru0", 0, 6, "frut", 1, 1);
             this.upgradefruit2.initfull();
-        }
-        if (bettersaver::getbooleanvalue(35) == 1) {
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkca"));
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-        }
-        if (bettersaver::getbooleanvalue(36) == 1) {
-            tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-            gccharacter::settohunga(tohunga, rgba(0, 150, 121, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mk0a"));
-            gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 0, 40, 255), rgba(150, 174, 255, 255), rgba(0, 0, 255, 255));
-            gccharacter::setorientation(tohunga, -2);
-            gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
         }
         if (bettersaver::getbooleanvalue(59) == 1) {
             gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 0);
@@ -339,6 +387,24 @@ class vllg2_puzzle {
             this.wirlpool = null;
         }
         this.cinema = null;
+        this.shasa = null;
+        this.nixie = null;
+        this.maku = null;
+        this.keeper = null;
+        this.yia = null;
+        this.kai = null;
+        this.deori = null;
+        this.kailani = null;
+        this.nireta = null;
+        this.kotu = null;
+        this.hahli = null;
+        this.vhisola = null;
+        this.okoth = null;
+        this.marka = null;
+        this.pelagia = null;
+        this.aeryt = null;
+        this.xeleria = null;
+        this.certera = null;
         this.hutgear = null;
         this.gearactive = null;
         this.diskactive = null;
@@ -384,6 +450,10 @@ class vllg2_puzzle {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin3")) && (this.cinema_shown == 0)) {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
                     gccinemaengine::play(this.cinema);
+                    //Remove Tohunga hand items
+                    if (this.gearactive == 1) {
+                        gccharacter::removepart(this.nixie, 1);
+                    }
                     this.cinema_shown = 1;
                     if (globalclass.player.maskcontrol.isactive()) {
                             globalclass.player.maskcontrol.toggleactive();
@@ -521,12 +591,26 @@ class vllg2_puzzle {
         }
         else if (param1.eventid == 41) {
             if (bettersaver::getbooleanvalue(35)) {
-                this.give_fruit();
-                this.placeitem();
+                //Shasa Quest Complete    
+                if (this.upgradefruit_shown == 0) {
+                    this.upgradefruit.obj.setpos(68.00262, 2, 58.24104);
+                    this.upgradefruit_shown = 1;
+                }
+                if (this.diskactive == 0) {
+                    gccharacter::addpart(this.shasa, "vlgr/sash", 1);
+                    this.diskactive = 1; 
+                }
             }
             if (bettersaver::getbooleanvalue(36)) {
-                this.give_fruit2();
-                this.placeitem();
+                //Nixie Quest Complete    
+                if (this.upgradefruit2_shown == 0) {
+                    this.upgradefruit2.obj.setpos(461.1303, 0.496229, 473.2127);
+                    this.upgradefruit2_shown = 1;
+                }
+                if (this.gearactive == 0) {               
+                    gccharacter::addpart(this.nixie, "vl01/gear", 1);
+                    this.gearactive = 1;        
+                }
             }
         }
         else if (param1.eventid == 3) {
@@ -704,48 +788,7 @@ class vllg2_puzzle {
         this.door2.interpolate(var1, var2 + 9.5, var3, 2.5);
         return null;
     }
-    
-    method give_fruit() {
-        if (this.upgradefruit_shown == 0) {
-            this.upgradefruit.obj.setpos(68.00262, 2, 58.24104);
-            this.upgradefruit_shown = 1;
-        }
-        return null;
-    }
-    
-    method give_fruit2() {
-        if (this.upgradefruit2_shown == 0) {
-            this.upgradefruit2.obj.setpos(461.1303, 0.496229, 473.2127);
-            this.upgradefruit2_shown = 1;
-        }
-        return null;
-    }
 
-    method placeitem() {
-        if (bettersaver::getbooleanvalue(35)) {
-            if (this.diskactive == 0) {
-                var var1;
-                var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-                gccharacter::addpart(var1, "vlgr/sash", 1);
-                this.diskactive = 1; 
-            }
-        }
-        if (bettersaver::getbooleanvalue(36)) {
-            if (this.gearactive == 0) {
-                var var1;
-                var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-                gccharacter::addpart(var1, "vl01/gear", 1);
-                this.gearactive = 1;        
-            }
-        }
-        if (bettersaver::getbooleanvalue(36)) {
-            if (this.gearactive == 2) {                
-                this.hutgear.show();     
-            }
-        }
-        return null;
-    }
-    
     method rotatecrystal() {
         if (this.orientation > 359) {
             this.orientation = 0;
