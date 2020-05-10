@@ -30,6 +30,9 @@ class vllg2_puzzle {
     property rotatestone;
 	property gearpickup;
     property deltatimer;
+    property hutgear;
+    property diskactive;
+    property gearactive;
     
     method vllg2_puzzle(param1) {
         this.parent = param1;
@@ -43,6 +46,15 @@ class vllg2_puzzle {
         var hive1handle;
         var hive2handle;
 		var gearpickup_text;
+        this.hutgear = new lego_moveableobject("gea1");
+        this.hutgear.initfull();
+        this.hutgear.hide();     
+        this.gearactive = 0;
+        if (bettersaver::getbooleanvalue(36)) {              
+            this.gearactive = 2;
+        }
+        this.diskactive = 0;
+        this.placeitem();
         this.rotatestone = 0;
         this.deltatimer = 0.0;
         gcmodeldirector::setnearestmax(7);
@@ -327,6 +339,9 @@ class vllg2_puzzle {
             this.wirlpool = null;
         }
         this.cinema = null;
+        this.hutgear = null;
+        this.gearactive = null;
+        this.diskactive = null;
         return null;
     }
     
@@ -507,9 +522,11 @@ class vllg2_puzzle {
         else if (param1.eventid == 41) {
             if (bettersaver::getbooleanvalue(35)) {
                 this.give_fruit();
+                this.placeitem();
             }
             if (bettersaver::getbooleanvalue(36)) {
                 this.give_fruit2();
+                this.placeitem();
             }
         }
         else if (param1.eventid == 3) {
@@ -690,7 +707,7 @@ class vllg2_puzzle {
     
     method give_fruit() {
         if (this.upgradefruit_shown == 0) {
-            this.upgradefruit.obj.setpos(70.00262, -0.956037, 70.24104);
+            this.upgradefruit.obj.setpos(68.00262, 2, 58.24104);
             this.upgradefruit_shown = 1;
         }
         return null;
@@ -700,6 +717,31 @@ class vllg2_puzzle {
         if (this.upgradefruit2_shown == 0) {
             this.upgradefruit2.obj.setpos(461.1303, 0.496229, 473.2127);
             this.upgradefruit2_shown = 1;
+        }
+        return null;
+    }
+
+    method placeitem() {
+        if (bettersaver::getbooleanvalue(35)) {
+            if (this.diskactive == 0) {
+                var var1;
+                var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+                gccharacter::addpart(var1, "vlgr/sash", 1);
+                this.diskactive = 1; 
+            }
+        }
+        if (bettersaver::getbooleanvalue(36)) {
+            if (this.gearactive == 0) {
+                var var1;
+                var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+                gccharacter::addpart(var1, "vl01/gear", 1);
+                this.gearactive = 1;        
+            }
+        }
+        if (bettersaver::getbooleanvalue(36)) {
+            if (this.gearactive == 2) {                
+                this.hutgear.show();     
+            }
         }
         return null;
     }

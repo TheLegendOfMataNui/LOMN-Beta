@@ -3,6 +3,8 @@ class bmtn2_puzzle {
     property door;
     property upgradefruit3;
     property upgradefruit3_shown;
+    property gatestone;
+    property stoneactive;
     
     method bmtn2_puzzle(param1) {
         this.parent = param1;
@@ -14,6 +16,11 @@ class bmtn2_puzzle {
         var y;
         var z;
         var tohunga;
+        this.gatestone = new lego_moveableobject("gstn");
+        this.gatestone.initfull();
+        this.gatestone.hide();
+        this.stoneactive = 0;
+        this.placeitem();  
         tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
         gccharacter::settohunga(tohunga, rgba(0, 0, 255, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mkaa"));
         gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
@@ -51,6 +58,8 @@ class bmtn2_puzzle {
             this.door.cleanupfull();
             this.door = null;
         }
+        this.stoneactive = null;
+        this.gatestone = null;
         return null;
     }
     
@@ -59,6 +68,7 @@ class bmtn2_puzzle {
             if (bettersaver::getbooleanvalue(37)) {
                 this.give_fruit3();
                 this.movedoorup();
+                this.placeitem();
             }
         }
         else if (param1.eventid == 3) {
@@ -106,5 +116,14 @@ class bmtn2_puzzle {
             this.upgradefruit3_shown = 1;
         }
         return null;
+    }
+
+    method placeitem() {
+        if (bettersaver::getbooleanvalue(37)) {
+            if (this.stoneactive == 0) {
+                this.gatestone.show();
+                this.stoneactive = 1;        
+            }
+        }
     }
 }
