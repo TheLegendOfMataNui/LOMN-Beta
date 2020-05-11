@@ -61,8 +61,6 @@ class vllg2_puzzle {
         var var1;
         var door_text;
         var tohunga;
-        var hive1handle;
-        var hive2handle;
 		var gearpickup_text;
         this.shasa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
         this.nixie = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
@@ -286,6 +284,8 @@ class vllg2_puzzle {
             gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv0"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv1"), scslosifoundation::stringtoidentifier("vllg"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("fhv0"), scslosifoundation::stringtoidentifier("vllg"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("fhv1"), scslosifoundation::stringtoidentifier("vllg"));
             globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
             globalclass.bgmusic.play(1);
         }
@@ -483,7 +483,7 @@ class vllg2_puzzle {
         else if (param1.eventid == 51) {
             if (param1.args[1] == 1) {
                 this.deadhives = this.deadhives + 1;
-                if (this.deadhives >= 2) {
+                if (this.deadhives >= 4) {
                     gcsaver::setcondition(1073741824, 1);
                     gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
                     globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
