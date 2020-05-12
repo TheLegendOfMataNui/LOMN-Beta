@@ -13,7 +13,7 @@ class lego_area_tura2 : gs_lego_area {
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
         gclightdirector::setcavelighting(1);
         if (gcsaver::portalactive() == 1) {
-            gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/gali/shrine_ripple/g_shrn_ptl", 1);
+            gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/gali/shrine_ripple/g_shrn_ptl", 1);            
         }
         else {
             gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tps9"));
@@ -34,7 +34,6 @@ class lego_area_tura2 : gs_lego_area {
     method onevent(param1) {
         if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
-                screenlist.screens[2].screen.areas[9].puzzle.needstobeunderwater(0);
             }
         }
         return null;
