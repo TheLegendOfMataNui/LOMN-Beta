@@ -199,9 +199,6 @@ class shrn2_puzzle {
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) && (bettersaver::getbooleanvalue(78) == 0)) {
                 bettersaver::setbooleanvalue(78, 1);
             }
-            if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str9")) {
-                gcstaticsoundsptrarray::playtablesound(1094);
-            }
             else if (this.inwater == 1) {
                 if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) || (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str7")) || (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str9"))) {
                     globalclass.player.actor.setunderwater(0);            
@@ -213,6 +210,11 @@ class shrn2_puzzle {
                 }            
             }
             this.inwater = 0;
+        }
+        if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
+                gcstaticsoundsptrarray::playtablesound(1094);
+            }
         }
         return null;
     }
