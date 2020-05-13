@@ -79,14 +79,14 @@ class shrn2_puzzle {
         }
         if (bettersaver::getbooleanvalue(76)) {
             this.waterfall3.hide();
-            this.doors[0].hide();
+            this.switchit(0);
         }
         if (bettersaver::getbooleanvalue(77)) {
             this.waterfall2.hide();
-            this.doors[1].hide();
+            this.switchit(1);
         }
         if (bettersaver::getbooleanvalue(78)) {
-            this.doors[2].hide();
+            this.switchit(2);
         }
         if (bettersaver::getbooleanvalue(66) == 0) {
             this.showbossdoor = 1;
@@ -178,35 +178,40 @@ class shrn2_puzzle {
                 this.portalactive = 1;
             }
             if (bettersaver::getbooleanvalue(75)) {
+                //TALKED TO NOKAMA
                 this.waterfall1.hide();
             }
         }
         else if (param1.eventid == 35) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("dor4")) {
-                bettersaver::setbooleanvalue(66, 1);
+                //EXIT: TO BOSS               
                 this.doors[3].hide();
+                bettersaver::setbooleanvalue(66, 1);
             }
         }
         else if (param1.eventid == 44) {
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str6")) && (bettersaver::getbooleanvalue(76) == 0)) {
-                bettersaver::setbooleanvalue(76, 1);
+                //ENTERED FROM: GLY1                
                 this.waterfall3.hide();
+                bettersaver::setbooleanvalue(76, 1);
             }
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str4")) && (bettersaver::getbooleanvalue(77) == 0)) {
-                bettersaver::setbooleanvalue(77, 1);
+                //ENTERED FROM: GLY2
                 this.waterfall2.hide();
+                bettersaver::setbooleanvalue(77, 1);
             }
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) && (bettersaver::getbooleanvalue(78) == 0)) {
+                //ENTERED FROM: GL3S
                 bettersaver::setbooleanvalue(78, 1);
             }
             else if (this.inwater == 1) {
                 if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) || (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str7")) || (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str9"))) {
-                    globalclass.player.actor.setunderwater(0);            
-                    debug::print ("SHOULD NOT SPAWN IN WATER");
+                    //SHOULD NOT SPAWN IN WATER
+                    globalclass.player.actor.setunderwater(0);                               
                 }
                 else {
+                    //SHOULD SPAWN IN WATER
                     globalclass.player.actor.setunderwater(1);
-                    debug::print ("SHOULD SPAWN IN WATER");
                 }            
             }
             this.inwater = 0;
@@ -228,35 +233,19 @@ class shrn2_puzzle {
         }
         return null;
     }
-
-    method input(param1) {
-        if (param1.button == 90) {
-            if (param1.event == 2) {
-                this.cheat(0);
-            }
-        }
-        if (param1.button == 88) {
-            if (param1.event == 2) {
-                this.cheat(1);
-            }
-        }
-        if (param1.button == 67) {
-            if (param1.event == 2) {
-                this.cheat(2);
-            }
-        }
-        return null;
-    }
     
     method switchit(param1) {
         if (param1 == 0) {
             this.doorsclosed[param1] = 0;
+            debug::print("OPENING GLY1 DOOR, PARAM1 = "  + __tostring(param1));
         }
         else if (param1 == 1) {
             this.doorsclosed[param1] = 0;
+            debug::print("OPENING GLY2 DOOR, PARAM1 = "  + __tostring(param1));
         }
         else if (param1 == 2) {
             this.doorsclosed[param1] = 0;
+            debug::print("OPENING GL3S DOOR, PARAM1 = "  + __tostring(param1));
         }
         return null;
     }
@@ -306,42 +295,6 @@ class shrn2_puzzle {
                 var2 = this.doors[var1].getx();
                 var3 = this.doors[var1].getz();
                 this.doors[var1].interpolate(var2, 0.0, var3, 1.0);
-            }
-        }
-        return null;
-    }
-    
-    method cheat(param1) {
-        var var1;
-        var1 = param1;
-        if (var1 == 0) {
-            if (this.doorsclosed[0]) {
-                this.doorsclosed[0] = 0;
-                this.movedoorsdown(var1);
-            }
-            else {
-                this.doorsclosed[0] = 1;
-                this.movedoorsdown(var1);
-            }
-        }
-        else if (var1 == 1) {
-            if (this.doorsclosed[1]) {
-                this.doorsclosed[1] = 0;
-                this.movedoorsdown(var1);
-            }
-            else {
-                this.doorsclosed[1] = 1;
-                this.movedoorsdown(var1);
-            }
-        }
-        else if (var1 == 2) {
-            if (this.doorsclosed[2]) {
-                this.doorsclosed[2] = 0;
-                this.movedoorsdown(var1);
-            }
-            else {
-                this.doorsclosed[2] = 1;
-                this.movedoorsdown(var1);
             }
         }
         return null;
