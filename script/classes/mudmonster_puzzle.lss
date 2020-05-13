@@ -131,6 +131,7 @@ class mudmonster_puzzle {
                 var5 = 10;
                 this.parent.level.cam.interpolate(var1 - var4, var2 + var5, var3, var1, var2 + var5, var3, 3);
                 this.mudmonster.mudstate = 5;
+                debug::print("PAN CAMERA");
             }
         }
         else if (this.mudmonster.mudstate == 7) {
@@ -140,6 +141,7 @@ class mudmonster_puzzle {
                 this.mudmonster.mudstate = 11;
                 gcmudboss::setdoprocess(this.mudmonster.mudman, 1);
                 this.cleanupstrings();
+                debug::print("SET CAM NORMAL");
             }
         }
         else if (this.mudmonster.mudstate == 10) {
@@ -167,6 +169,8 @@ class mudmonster_puzzle {
             if (param1.args[0] == 1836409945) {
                 if (param1.args[2] == scslosifoundation::stringtoidentifier("Fprj")) {
                     this.mudmonster.releasemudball(this.mudhits);
+                    debug::print("THROW MUD");
+                    gcstaticsoundsptrarray::playtablesound(481);
                     this.thrown = 1;
                 }
             }
@@ -176,17 +180,19 @@ class mudmonster_puzzle {
                 if (this.mudmonster.mudstate == 5) {
                     this.mudtimer = 0;
                     this.mudmonster.mudstate = 7;
-                    debug::print("setting mudstate to ready");
+                    debug::print("MUD READY");
                 }
             }
             else if ((param1.args[1] == 1831874611) && (this.mudmonster.mudstate == 10)) {
                 gcmudboss::morph(this.mudmonster.mudman, 5, 3.5);
+                debug::print("MUD DIE MORPH");
             }
         }
         else if (param1.eventid == 14) {
             this.parent.level.cam.setaimode(0);
             if (this.mudmonster.mudstate == 10) {
                 gcmudboss::setsplitanimation(this.mudmonster.mudman, 1831874611, -1);
+                debug::print("MUD DIE ANIM");
             }
             else {
                 this.attacking = 0;
@@ -194,6 +200,8 @@ class mudmonster_puzzle {
                 gcmodeldirector::show(1836409945, 1836409945);
                 this.mudtimer = 0;
                 this.showstrings();
+                gcstaticsoundsptrarray::playtablesound(480);
+                debug::print("MUD ABSOLUTELY ERECT");
             }
         }
         else if (param1.eventid == 13) {
@@ -203,6 +211,8 @@ class mudmonster_puzzle {
                 var1 = null;
                 this.mudtimer = 0;
                 gcmudboss::setdoprocess(this.mudmonster.mudman, 0);
+                gcstaticsoundsptrarray::playtablesound(484);
+                debug::print("MUD INTRO TAUNT");
             }
             else if (this.mudmonster.mudstate == 10) {
                 this.endarea();
@@ -225,6 +235,8 @@ class mudmonster_puzzle {
                 var6 = gcmudboss::getcamposy(this.mudmonster.mudman);
                 var7 = gcmudboss::getcamposz(this.mudmonster.mudman);
                 this.parent.level.cam.interpolate(var5, var6 + 10, var7, var2, var3 + 10, var4, 3);
+                gcstaticsoundsptrarray::playtablesound(482);
+                debug::print("MUD DIE");
             }
         }
         else if (param1.eventid == 46) {
@@ -239,7 +251,7 @@ class mudmonster_puzzle {
             this.finishconversation();
         }
         else if (param1.eventid == 39) {
-            
+            debug::print("DO?");
         }
         return null;
     }
