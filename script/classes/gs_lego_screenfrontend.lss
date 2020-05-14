@@ -4,6 +4,7 @@ class gs_lego_screenfrontend {
     property destination;
     property argarray;
     property point;
+	property click;
     property startx;
     property starty;
     property xchange;
@@ -36,11 +37,9 @@ class gs_lego_screenfrontend {
     property menuactive;
     property ingame;
     property options_graphics;
-    property options_credits;
     property options_sound;
     property playgame;
-    property printmenu;
-    property glossary;
+	property extras;
     property curspline;
     property cameramode;
     property rotateval;
@@ -67,10 +66,16 @@ class gs_lego_screenfrontend {
                 33, 
                 639, 
                 399 ], 
-            [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 41), 
+            [ "Extras",  
                 400, 
                 400, 
                 34, 
+                639, 
+                439 ],
+            [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 41), 
+                400, 
+                440, 
+                35, 
                 639, 
                 439 ] ];
         return null;
@@ -94,27 +99,6 @@ class gs_lego_screenfrontend {
             0 ];
         this.optiontext.__append(var1);
         var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 25), 
-            50, 
-            50 + (40 * this.optiontext.__length), 
-            0, 
-            0, 
-            0 ];
-        this.optiontext.__append(var1);
-        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 20), 
-            50, 
-            50 + (40 * this.optiontext.__length), 
-            0, 
-            0, 
-            0 ];
-        this.optiontext.__append(var1);
-        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 40), 
-            50, 
-            50 + (40 * this.optiontext.__length), 
-            0, 
-            0, 
-            0 ];
-        this.optiontext.__append(var1);
-        var1 = [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 7), 
             50, 
             50 + (40 * this.optiontext.__length), 
             0, 
@@ -236,11 +220,9 @@ class gs_lego_screenfrontend {
     
     method setupoutsidescreens() {
         this.playgame = new gsplaygame(this);
-        this.options_credits = new creditsscreen(this);
         this.options_sound = new soundoptions(this);
         this.options_graphics = new graphicsoptions(this);
-        this.printmenu = new gsprintmenu(this);
-        this.glossary = new gsglossary(this);
+		this.extras = new extras(this);
         return null;
     }
     
@@ -255,12 +237,18 @@ class gs_lego_screenfrontend {
             gchuddirector::playcinematic("Root/Data/cinematics/ewokCelebration.bik", 1);
             bettersaver::setbooleanvalue(100, 0);
         }
-        this.point = new ss_basesprite("Root/Data/Art/MenuArt/cursor0000", 50, 50, 0, 82, 82);
+        this.point = new ss_basesprite("Root/Data/Art/MenuArt/cursor0001", 50, 50, 0, 82, 82);
         this.point.initfull();
         this.point.add();
         this.point.show();
         this.point.hide();
         this.point.enablealphachannel(1);
+		this.click = new ss_basesprite("Root/Data/Art/MenuArt/cursor0000", 50, 50, 0, 82, 82);
+        this.click.initfull();
+        this.click.add();
+        this.click.show();
+        this.click.hide();
+        this.click.enablealphachannel(1);
         this.minidx = 0;
         this.showidx = 10;
         this.curidx = 0;
@@ -295,7 +283,7 @@ class gs_lego_screenfrontend {
         }
         else {
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("onua"), 0);
-		    gccharacter::addpart(onua, "onua/mk0a", scslosifoundation::stringtoidentifier("fake"));		
+		    gccharacter::addpart(onua, "onua/mk0a", 1);		
             gccharacter::setinputstate(onua, scslosifoundation::stringtoidentifier("none"));
             gccharacter::setorientation(onua, 50);
             gccharacter::switchanimation(onua, scslosifoundation::stringtoidentifier("o000"), -1);
@@ -305,7 +293,7 @@ class gs_lego_screenfrontend {
         }
         else {
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("gali"), 0);
-		    gccharacter::addpart(gali, "gali/mk1a", scslosifoundation::stringtoidentifier("fake"));		
+		    gccharacter::addpart(gali, "gali/mk1a", 2);		
             gccharacter::setinputstate(gali, scslosifoundation::stringtoidentifier("none"));
             gccharacter::setorientation(gali, 25);
             gccharacter::switchanimation(gali, scslosifoundation::stringtoidentifier("g000"), -1);
@@ -315,7 +303,7 @@ class gs_lego_screenfrontend {
         }
         else {
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("poha"), 0);
-		    gccharacter::addpart(pohatu, "poha/mk2a", scslosifoundation::stringtoidentifier("fake"));		
+		    gccharacter::addpart(pohatu, "poha/mk2a", 3);		
             gccharacter::setinputstate(pohatu, scslosifoundation::stringtoidentifier("none"));
             gccharacter::setorientation(pohatu, 0);
             gccharacter::switchanimation(pohatu, scslosifoundation::stringtoidentifier("p000"), -1);
@@ -325,7 +313,9 @@ class gs_lego_screenfrontend {
         }
         else {
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("kopa"), 0);
-		    gccharacter::addpart(kopaka, "kopa/mk3a", scslosifoundation::stringtoidentifier("fake"));		
+		    gccharacter::addpart(kopaka, "kopa/mk3a", 4);		
+            gccharacter::addpart(kopaka, "kopa/hsrd", 7);		
+            gccharacter::addpart(kopaka, "kopa/hsld", 8);		
             gccharacter::setinputstate(kopaka, scslosifoundation::stringtoidentifier("none"));
             gccharacter::setorientation(kopaka, 0);
             gccharacter::switchanimation(kopaka, scslosifoundation::stringtoidentifier("k000"), -1);
@@ -335,7 +325,8 @@ class gs_lego_screenfrontend {
         }
         else {
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("lewa"), 0);
-		    gccharacter::addpart(lewa, "lewa/mk4a", scslosifoundation::stringtoidentifier("fake"));		
+		    gccharacter::addpart(lewa, "lewa/mk4a", 5);		
+            gccharacter::addpart(lewa, "lewa/haxe", 9);	
             gccharacter::setinputstate(lewa, scslosifoundation::stringtoidentifier("none"));
             gccharacter::setorientation(lewa, -25);
             gccharacter::switchanimation(lewa, scslosifoundation::stringtoidentifier("l000"), -1);
@@ -345,7 +336,8 @@ class gs_lego_screenfrontend {
         }
         else {
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("tahu"), 0);
-		    gccharacter::addpart(tahu, "tahu/mk6a", scslosifoundation::stringtoidentifier("fake"));		
+		    gccharacter::addpart(tahu, "tahu/mk6a", 6);
+            gccharacter::addpart(tahu, "tahu/hsrd", 10);
             gccharacter::setinputstate(tahu, scslosifoundation::stringtoidentifier("none"));
             gccharacter::setorientation(tahu, -50);
             gccharacter::switchanimation(tahu, scslosifoundation::stringtoidentifier("t000"), -1);
@@ -374,6 +366,12 @@ class gs_lego_screenfrontend {
             this.point.remove();
             this.point.cleanupfull();
             this.point = null;
+        }
+        if (!(this.click == null)) {
+            this.click.hide();
+            this.click.remove();
+            this.click.cleanupfull();
+            this.click = null;
         }
         if (!(this.activemenu == null)) {
             var1 = this.activemenu.__length - 1;
@@ -444,25 +442,17 @@ class gs_lego_screenfrontend {
             this.options_sound.cleanupfull();
             this.options_sound = null;
         }
-        if (!(this.options_credits == null)) {
-            this.options_credits.cleanupfull();
-            this.options_credits = null;
-        }
         if (!(this.playgame == null)) {
             this.playgame.cleanupfull();
             this.playgame = null;
         }
-        if (!(this.glossary == null)) {
-            this.glossary.cleanupfull();
-            this.glossary = null;
-        }
-        if (!(this.printmenu == null)) {
-            this.printmenu.cleanupfull();
-            this.printmenu = null;
-        }
         if (this.titleimage != null) {
             this.titleimage.cleanupfull();
             this.titleimage = null;
+        }
+        if (!(this.extras == null)) {
+            this.extras.cleanupfull();
+            this.extras = null;
         }
         this.curscreen = 10;
         this.screentimer = 0;
@@ -479,11 +469,17 @@ class gs_lego_screenfrontend {
         if (param1.eventid == 26) {
             this.mousex = param1.args[0];
             this.mousey = param1.args[1];
+			this.point.show();
+			this.click.hide();
             this.setmenupointer();
+        }
+        else if (param1.eventid == 24) {
+            this.mousebuttonreleased(param1.args[0]);
+			this.point.hide();
+			this.click.show();
         }
         else if (param1.eventid == 6) {
             this.resetcamera();
-            this.point.show();
         }
         if (this.curscreen == 8) {
             this.options_graphics.onevent(param1);
@@ -497,16 +493,13 @@ class gs_lego_screenfrontend {
         else if (this.curscreen == 9) {
             this.playgame.onevent(param1);
         }
-        else if (this.curscreen == 4) {
-            this.glossary.onevent(param1);
-        }
-        else if (this.curscreen == 5) {
-            this.printmenu.onevent(param1);
-        }
-        else if (param1.eventid == 25) {
-            this.mousebuttonreleased(param1.args[0]);
+        if (this.curscreen == 11) {
+            this.extras.onevent(param1);
         }
         else if (param1.eventid == 26) {
+            this.checkhighlites();
+        }
+        else if (param1.eventid == 25) {
             this.checkhighlites();
         }
         this.curscreen;
@@ -544,12 +537,6 @@ class gs_lego_screenfrontend {
         }
         if (this.cameramode == 0) {
             this.addyaw();
-        }
-        if (this.curscreen == 7) {
-            this.options_credits.process(param1);
-        }
-        else if (this.curscreen == 5) {
-            this.printmenu.process(param1);
         }
         return null;
     }
@@ -593,20 +580,14 @@ class gs_lego_screenfrontend {
         if (this.curscreen == 8) {
             this.options_graphics.input(param1);
         }
-        else if (this.curscreen == 7) {
-            this.options_credits.input(param1);
-        }
         else if (this.curscreen == 1) {
             this.options_sound.input(param1);
         }
         else if (this.curscreen == 9) {
             this.playgame.input(param1);
         }
-        else if (this.curscreen == 4) {
-            this.glossary.input(param1);
-        }
-        else if (this.curscreen == 5) {
-            this.printmenu.input(param1);
+        else if (this.curscreen == 11) {
+            this.extras.input(param1);
         }
         return null;
     }
@@ -668,6 +649,10 @@ class gs_lego_screenfrontend {
                         gcstaticsoundsptrarray::playtablesound(1073);
                         this.back();
                     }
+                    else if (this.curidx == 3) {
+                        gcstaticsoundsptrarray::playtablesound(1073);
+                        this.back();
+                    }
                 }
                 else if (this.curscreen == 6) {
                     if (this.curidx == 0) {
@@ -724,7 +709,7 @@ class gs_lego_screenfrontend {
                     }
                 }
             }
-            else if (((param1 == 2) && !(this.curscreen == -1)) && !(this.curscreen == 10)) {
+            else if (((param1 == 2) && !(this.curscreen == -1)) && !(this.curscreen == 11)) {
                 gcstaticsoundsptrarray::playtablesound(1073);
                 this.back();
             }
@@ -770,6 +755,11 @@ class gs_lego_screenfrontend {
         else if (param1 == 6) {
             globalclass.level.cam.setspline(18, 3.0, param2, param3);
             globalclass.level.cam.settargetspline(21, param2, param3);
+            globalclass.level.cam.setaimode(3);
+        }
+        else if (param1 == 7) {
+            globalclass.level.cam.setspline(30, 3.0, param2, param3);
+            globalclass.level.cam.settargetspline(33, param2, param3);
             globalclass.level.cam.setaimode(3);
         }
         else if (param1 == 8) {
@@ -854,6 +844,10 @@ class gs_lego_screenfrontend {
                 this.gotodifferentscreen(this.optiontext, 0);
             }
             else if (param1 == 2) {
+                this.extras.initfull();
+                this.gotodifferentscreen(null, 11);
+            }
+            else if (param1 == 3) {
                 globalclass.setexitflag();
             }
         }
@@ -870,16 +864,6 @@ class gs_lego_screenfrontend {
                 this.gotodifferentscreen(this.languagetext, 6);
             }
             else if (param1 == 3) {
-                
-            }
-            else if (param1 == 4) {
-                
-            }
-            else if (param1 == 5) {
-                this.options_credits.initfull();
-                this.gotodifferentscreen(null, 7);
-            }
-            else if (param1 == 6) {
                 this.gotodifferentscreen(this.controlstext, 3);
             }
         }
@@ -908,6 +892,9 @@ class gs_lego_screenfrontend {
                 this.adjustcamera(2, 1, 1, 7.0);
             }
             else if (param1 == 2) {
+                this.adjustcamera(7, 1, 1, 4.0);
+            }
+            else if (param1 == 3) {
                 this.adjustcamera(20, 1, 1, 4.0);
             }
         }
@@ -922,18 +909,13 @@ class gs_lego_screenfrontend {
                 this.adjustcamera(10, 1, 1, 2.0);
             }
             else if (param1 == 3) {
-                this.glossary.initfull();
-                this.gotodifferentscreen(null, 4);
+                this.adjustcamera(8, 1, 1, 2.0);
             }
             else if (param1 == 4) {
-                this.printmenu.initfull();
-                this.gotodifferentscreen(null, 5);
+                this.adjustcamera(8, 1, 1, 2.0);
             }
             else if (param1 == 5) {
-                this.adjustcamera(22, 1, 1, 2.0);
-            }
-            else if (param1 == 6) {
-                this.adjustcamera(8, 1, 1, 2.0);
+                this.adjustcamera(2, 1, 1, 7.0);
             }
         }
         else if (this.curscreen == 1) {
@@ -951,6 +933,10 @@ class gs_lego_screenfrontend {
             this.gotodifferentscreen(this.mainmenutext, -1);
         }
         else if (this.curscreen == 9) {
+            this.titleimage.fadein(1.0);
+            this.gotodifferentscreen(this.mainmenutext, -1);
+        }
+        else if (this.curscreen == 11) {
             this.titleimage.fadein(1.0);
             this.gotodifferentscreen(this.mainmenutext, -1);
         }
@@ -1005,6 +991,9 @@ class gs_lego_screenfrontend {
         }
         else if (this.curscreen == 9) {
             this.adjustcamera(16, 0, 1, 5.0);
+        }
+        else if (this.curscreen == 11) {
+            this.adjustcamera(7, 0, 1, 5.0);
         }
         return null;
     }
@@ -1147,6 +1136,7 @@ class gs_lego_screenfrontend {
     
     method setmenupointer() {
         this.point.setpos(this.mousex - 16, this.mousey - 16, this.mousex + 16, this.mousey + 16);
+		this.click.setpos(this.mousex - 16, this.mousey - 16, this.mousex + 16, this.mousey + 16);
         return null;
     }
 }

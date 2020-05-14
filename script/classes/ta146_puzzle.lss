@@ -11,6 +11,7 @@ class ta146_puzzle {
     method initfull() {
         var var1;
         var var2;
+        globalclass.player.equipcombat();
         globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
         globalclass.bgmusic.play(1);
         var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc6"));
@@ -23,7 +24,7 @@ class ta146_puzzle {
         }
         var2 = gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp"));
         if (var2 == 0) {
-            this.glyph = new lego_pickup("glyp", 16, 2, "item", 3, 1);
+            this.glyph = new lego_pickup("glyp", 16, 2, "item", 3, 2);
             this.glyph.initfull();
             this.glyph.show();
         }

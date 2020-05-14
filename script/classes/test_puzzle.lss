@@ -15,6 +15,7 @@ class test_puzzle {
 		var var1;
         var KEVIN;
 		var tohunga;
+        var ussal;
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-16777216, 0 - 5.0, 0 - 600.0, 0.01);
@@ -26,12 +27,16 @@ class test_puzzle {
         tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
         gccharacter::settohunga(tohunga, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), scslosifoundation::stringtoidentifier("mkmn"));
 		gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0), rgba(96, 116, 161, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
-		gccharacter::addpart(tohunga, "vlgr/it0a", 1);
-		gccharacter::addpart(tohunga, "vlgr/mk5a", 2);
+		gccharacter::addpart(tohunga, "vlgr/sash", 1);
+		gccharacter::addpart(tohunga, "vlgr/vahi", 2);
 		gccharacter::addpart(tohunga, "vlgr/spfs", 3);		
 		gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
         gccharacter::setsplitanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
 		gccharacter::setorientation(tohunga, -90);
+        ussal = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("krb2"));
+        gccharacter::addpart(ussal, "krb2/nbua", 1);
+        gccharacter::setinputstate(ussal, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(ussal, scslosifoundation::stringtoidentifier("kr00"), -1);
 		this.callsurfonce = 1;
         this.miruactive = 1;
         this.holedo = 1;

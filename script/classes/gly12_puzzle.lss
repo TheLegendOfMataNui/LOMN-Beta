@@ -54,12 +54,6 @@ class gly12_puzzle {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
         }
-        else if (param1.eventid == 4) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {
-                screenlist.screens[2].screen.areas[12].puzzle.needstobeunderwater(1);
-                screenlist.screens[2].screen.areas[12].puzzle.switchit(0);
-            }
-        }
         else if (param1.eventid == 44) {
             if (this.call_ev_safe_time_once) {
                 if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
@@ -68,6 +62,11 @@ class gly12_puzzle {
                 }
                 this.call_ev_safe_time_once = 0;
             }
+        }
+        else if (param1.eventid == 4) {	
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {	
+                screenlist.screens[2].screen.areas[9].puzzle.switchit(0);	
+            }	
         }
         return null;
     }

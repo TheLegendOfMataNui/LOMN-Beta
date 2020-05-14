@@ -3,17 +3,16 @@ class shrn2_puzzle {
     property waterfall1;
     property waterfall2;
     property waterfall3;
-    property needstobeunderwater;
     property doorsclosed;
     property doors;
     property portalactive;
     property bossdoortext;
     property bossdoortexttimer;
     property showbossdoor;
+    property inwater;
     
     method shrn2_puzzle(param1) {
         this.parent = param1;
-        this.needstobeunderwater = 1;
         this.doorsclosed = [ 1, 
             1, 
             1 ];
@@ -25,6 +24,8 @@ class shrn2_puzzle {
         var nokama;
         var portal_trigger;
         var door_text;
+		var tohunga;
+        this.inwater = 1;
         this.doors = [ new lego_moveableobject("dor1"), 
             new lego_moveableobject("dor3"), 
             new lego_moveableobject("dor2"), 
@@ -40,17 +41,36 @@ class shrn2_puzzle {
         this.waterfall2.initfull();
         this.waterfall3 = new lego_moveableobject("swf3");
         this.waterfall3.initfull();
-        if (this.needstobeunderwater) {
-            globalclass.player.actor.setunderwater(1);
-            this.needstobeunderwater = 1;
-        }
         nokama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"), 0);
         gccharacter::setinputstate(nokama, scslosifoundation::stringtoidentifier("none"));
         gccharacter::switchanimation(nokama, scslosifoundation::stringtoidentifier("no00"), -1);
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(tohunga, rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mkca"));
+		gccharacter::setorientation(tohunga, 0);
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+        gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+		gccharacter::setorientation(tohunga, 270);
+        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+        gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
+		gccharacter::setorientation(tohunga, 0);
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+        gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
+		gccharacter::setorientation(tohunga, 90);
+        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
+        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
         portal_trigger = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
             gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/gali/village_ripple/g_prtl", 1);
+            gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
         }
         else {
             gccollisionphysicsgroup::turnoffnextarea(portal_trigger);
@@ -60,14 +80,14 @@ class shrn2_puzzle {
         }
         if (bettersaver::getbooleanvalue(76)) {
             this.waterfall3.hide();
-            this.doors[0].hide();
+            this.switchit(0);
         }
         if (bettersaver::getbooleanvalue(77)) {
             this.waterfall2.hide();
-            this.doors[1].hide();
+            this.switchit(1);
         }
         if (bettersaver::getbooleanvalue(78)) {
-            this.doors[2].hide();
+            this.switchit(2);
         }
         if (bettersaver::getbooleanvalue(66) == 0) {
             this.showbossdoor = 1;
@@ -117,6 +137,7 @@ class shrn2_puzzle {
             this.bossdoortext.cleanupfull();
             this.bossdoortext = null;
         }
+        this.inwater = null;
         return null;
     }
     
@@ -128,10 +149,6 @@ class shrn2_puzzle {
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
-            if (this.needstobeunderwater) {
-                globalclass.player.actor.setunderwater(1);
-                this.needstobeunderwater = 1;
-            }
         }
         else if (param1.eventid == 1) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
@@ -155,33 +172,54 @@ class shrn2_puzzle {
             }
         }
         else if (param1.eventid == 41) {
-            if (this.portalactive == 0) {
+            if ((this.portalactive == 0) && (bettersaver::getbooleanvalue(75))) {
                 portal_trigger = scslosifoundation::stringtoidentifier("tps9");
                 gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
                 gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/gali/village_ripple/g_prtl", 1);
                 this.portalactive = 1;
             }
             if (bettersaver::getbooleanvalue(75)) {
+                //TALKED TO NOKAMA
                 this.waterfall1.hide();
             }
         }
         else if (param1.eventid == 35) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("dor4")) {
-                bettersaver::setbooleanvalue(66, 1);
+                //EXIT: TO BOSS               
                 this.doors[3].hide();
+                bettersaver::setbooleanvalue(66, 1);
             }
         }
         else if (param1.eventid == 44) {
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str6")) && (bettersaver::getbooleanvalue(76) == 0)) {
-                bettersaver::setbooleanvalue(76, 1);
+                //ENTERED FROM: GLY1                
                 this.waterfall3.hide();
+                bettersaver::setbooleanvalue(76, 1);
             }
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str4")) && (bettersaver::getbooleanvalue(77) == 0)) {
-                bettersaver::setbooleanvalue(77, 1);
+                //ENTERED FROM: GLY2
                 this.waterfall2.hide();
+                bettersaver::setbooleanvalue(77, 1);
             }
             if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) && (bettersaver::getbooleanvalue(78) == 0)) {
+                //ENTERED FROM: GL3S
                 bettersaver::setbooleanvalue(78, 1);
+            }
+            else if (this.inwater == 1) {
+                if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) || (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str7")) || (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str9"))) {
+                    //SHOULD NOT SPAWN IN WATER
+                    globalclass.player.actor.setunderwater(0);                               
+                }
+                else {
+                    //SHOULD SPAWN IN WATER
+                    globalclass.player.actor.setunderwater(1);
+                }            
+            }
+            this.inwater = 0;
+        }
+        if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
+                gcstaticsoundsptrarray::playtablesound(1094);
             }
         }
         return null;
@@ -196,46 +234,19 @@ class shrn2_puzzle {
         }
         return null;
     }
-
-    method input(param1) {
-        if (param1.button == 90) {
-            if (param1.event == 2) {
-                this.cheat(0);
-            }
-        }
-        if (param1.button == 88) {
-            if (param1.event == 2) {
-                this.cheat(1);
-            }
-        }
-        if (param1.button == 67) {
-            if (param1.event == 2) {
-                this.cheat(2);
-            }
-        }
-        return null;
-    }
-    
-    method needstobeunderwater(param1) {
-        if (param1) {
-            this.needstobeunderwater = 1;
-        }
-        else {
-            this.needstobeunderwater = 0;
-        }
-        debug::print("what the hell does this do anyway?");
-        return null;
-    }
     
     method switchit(param1) {
         if (param1 == 0) {
             this.doorsclosed[param1] = 0;
+            debug::print("OPENING GLY1 DOOR, PARAM1 = "  + __tostring(param1));
         }
         else if (param1 == 1) {
             this.doorsclosed[param1] = 0;
+            debug::print("OPENING GLY2 DOOR, PARAM1 = "  + __tostring(param1));
         }
         else if (param1 == 2) {
             this.doorsclosed[param1] = 0;
+            debug::print("OPENING GL3S DOOR, PARAM1 = "  + __tostring(param1));
         }
         return null;
     }
@@ -285,42 +296,6 @@ class shrn2_puzzle {
                 var2 = this.doors[var1].getx();
                 var3 = this.doors[var1].getz();
                 this.doors[var1].interpolate(var2, 0.0, var3, 1.0);
-            }
-        }
-        return null;
-    }
-    
-    method cheat(param1) {
-        var var1;
-        var1 = param1;
-        if (var1 == 0) {
-            if (this.doorsclosed[0]) {
-                this.doorsclosed[0] = 0;
-                this.movedoorsdown(var1);
-            }
-            else {
-                this.doorsclosed[0] = 1;
-                this.movedoorsdown(var1);
-            }
-        }
-        else if (var1 == 1) {
-            if (this.doorsclosed[1]) {
-                this.doorsclosed[1] = 0;
-                this.movedoorsdown(var1);
-            }
-            else {
-                this.doorsclosed[1] = 1;
-                this.movedoorsdown(var1);
-            }
-        }
-        else if (var1 == 2) {
-            if (this.doorsclosed[2]) {
-                this.doorsclosed[2] = 0;
-                this.movedoorsdown(var1);
-            }
-            else {
-                this.doorsclosed[2] = 1;
-                this.movedoorsdown(var1);
             }
         }
         return null;

@@ -1,9 +1,7 @@
 class lego_area_well4 : gs_lego_area {
     property puzzle;
-    property parent;
     
     method lego_area_well4(param1) {
-        this.parent = param1;
         this.gs_lego_area("well", param1, 0, 0);
         this.puzzle = new well4_puzzle(this);
         this.lego_area_initfull();
@@ -21,7 +19,7 @@ class lego_area_well4 : gs_lego_area {
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.puzzle.hide();
+        this.puzzle.cleanupfull();
         return null;
     }
     
@@ -41,11 +39,11 @@ class lego_area_well4 : gs_lego_area {
     }
     
     method exit() {
-        if (!(this.puzzle == null)) {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }
-        this.parent = null;
         return null;
     }
 }

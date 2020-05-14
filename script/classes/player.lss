@@ -17,6 +17,7 @@ class player {
     property bshootdragger;
     property enterstartid;
     property enterlookid;
+    property equipmentarray;
     
     method player() {
         return null;
@@ -39,6 +40,7 @@ class player {
         this.gotglyph = 0;
         this.glyphpowerdrain = 20;
         this.bshootdragger = 1;
+        this.equipmentarray = 0;
         return null;
     }
     
@@ -65,7 +67,7 @@ class player {
         this.energy = null;
         this.maxenergy = null;
         this.tokens = null;
-        if (!(this.actor == null)) {
+        if (this.actor != null) {
             this.actor.cleanupfull();
             this.actor = null;
         }
@@ -73,7 +75,7 @@ class player {
         this.draintimer = null;
         this.grapplinghooksetup = null;
         this.spritedamageamount = null;
-        if (!(this.maskcontrol == null)) {
+        if (this.maskcontrol != null) {
             this.maskcontrol.cleanupfull();
             this.maskcontrol = null;
         }
@@ -163,11 +165,12 @@ class player {
         var var1;
         var var2;
         var var3;
-        if (!(this.actor == null)) {
+        if (this.actor != null) {
             this.actor.onevent(param1);
             if (param1.eventid == 40) {
-                if (!(param1.args[1] == null)) {
+                if (param1.args[1] != null) {
                     debug::print("ouch! by " + __tostring(param1.args[1]));
+                    gcstaticsoundsptrarray::playtablesound(1098);
                 }
                 else {
                     debug::print("ARGS 1 = NOTHING");
@@ -252,19 +255,19 @@ class player {
         return null;
     }
     
-    method setactor(param1, param2, param3, param4, param5, param6, param7) {
+    method setactor(cnt1, char_id, orientation, x_pos, y_pos, z_pos, unused) {
         var var1;
-        this.actorid = param2;
+        this.actorid = char_id;
         if (this.actorid == "onua") {
-            this.actor = new onuaclass(param2, param3, param4, param5, param6);
+            this.actor = new onuaclass(char_id, orientation, x_pos, y_pos, z_pos);
         }
         else if (this.actorid == "gali") {
-            this.actor = new galiclass(param2, param3, param4, param5, param6);
+            this.actor = new galiclass(char_id, orientation, x_pos, y_pos, z_pos);
             this.addmaxlife(20);
             this.addmaxenergy(20);
         }
         else if (this.actorid == "poha") {
-            this.actor = new pohatuclass(param2, param3, param4, param5, param6);
+            this.actor = new pohatuclass(char_id, orientation, x_pos, y_pos, z_pos);
             var1 = 0;
             while (1 >= var1) {
                 this.addmaxlife(20);
@@ -273,7 +276,7 @@ class player {
             }
         }
         else if (this.actorid == "kopa") {
-            this.actor = new kopakaclass(param2, param3, param4, param5, param6);
+            this.actor = new kopakaclass(char_id, orientation, x_pos, y_pos, z_pos);
             var1 = 0;
             while (2 >= var1) {
                 this.addmaxlife(20);
@@ -282,7 +285,7 @@ class player {
             }
         }
         else if (this.actorid == "lewa") {
-            this.actor = new lewaclass(param2, param3, param4, param5, param6);
+            this.actor = new lewaclass(char_id, orientation, x_pos, y_pos, z_pos);
             var1 = 0;
             while (3 >= var1) {
                 this.addmaxlife(20);
@@ -291,7 +294,7 @@ class player {
             }
         }
         else if (this.actorid == "tahu") {
-            this.actor = new tahuclass(param2, param3, param4, param5, param6);
+            this.actor = new tahuclass(char_id, orientation, x_pos, y_pos, z_pos);
             var1 = 0;
             while (4 >= var1) {
                 this.addmaxlife(20);
@@ -300,22 +303,41 @@ class player {
             }
         }
         else if (this.actorid == "akam") {
-            this.actor = new onuaclass(param2, param3, param4, param5, param6);
+            this.actor = new onuaclass(char_id, orientation, x_pos, y_pos, z_pos);
+            var1 = 0;
+            while (5 >= var1) {
+                this.addmaxlife(20);
+                this.addmaxenergy(20);
+                var1 = var1 + 1;
+			}
         }
         else if (this.actorid == "wair") {
-            this.actor = new onuaclass(param2, param3, param4, param5, param6);
+            this.actor = new onuaclass(char_id, orientation, x_pos, y_pos, z_pos);
+            var1 = 0;
+            while (6 >= var1) {
+                this.addmaxlife(20);
+                this.addmaxenergy(20);
+                var1 = var1 + 1;
+			}
         }
         else if (this.actorid == "nbua") {
-            this.actor = new nobuaclass(param2, param3, param4, param5, param6);
+            this.actor = new nobuaclass(char_id, orientation, x_pos, y_pos, z_pos);
+                while (this.energy > 0) {
+                    this.removemaxenergy(20);
+                    this.removeenergy(20);
+                }
         }
         else if (this.actorid == "viki") {
-            this.actor = new tahuclass(param2, param3, param4, param5, param6);
+            this.actor = new tahuclass(char_id, orientation, x_pos, y_pos, z_pos);
             var1 = 0;
-            while (4 >= var1) {
-                this.addmaxlife(40);
-                this.addmaxenergy(40);
+            while (7 >= var1) {
+                this.addmaxlife(20);
+                this.addmaxenergy(20);
                 var1 = var1 + 1;
             }
+        }
+        else if (this.actorid == "when") {
+            this.actor = new whenuaclass(char_id, orientation, x_pos, y_pos, z_pos);
         }
         globalclass.hud.tokens.setcolor();
         globalclass.hud.ammo.setcolor();
@@ -324,7 +346,7 @@ class player {
     
     method actorinitfull() {
         var var1;
-        if (!(this.actor == null)) {
+        if (this.actor != null) {
             this.actor.initfull();
             this.actor.setcodelife(this.life);
             this.actor.show();
@@ -372,7 +394,13 @@ class player {
                 }
             }
             else if (this.actor.id == scslosifoundation::stringtoidentifier("nbua")) {
-                
+                while (this.energy > 0) {
+                    this.removemaxenergy();
+                    this.removeenergy();
+                }                
+            }
+            else if (this.actor.id == scslosifoundation::stringtoidentifier("when")) {
+
             }
         }
         return null;
@@ -405,26 +433,26 @@ class player {
         return null;
     }
     
-    method changetoa(param1) {
+    method changetoa(char_id) {
         globalclass.hud.cleanupfull();
         globalclass.hud.initfull();
         this.removeactor();
-        this.setactor("cnt1", param1, 0.0, 0.0, 0.0, 0.0, "ninp");
+        this.setactor("cnt1", char_id, 0.0, 0.0, 0.0, 0.0, "ninp");
         this.actorinitfull();
         this.maskcontrol.initfull();
-        if (param1 == "onua") {
+        if (char_id == "onua") {
             this.addmask("fake", 0);
             this.addmask("fake", 7);
             this.addmask("fake", 8);
         }
-        else if (param1 == "gali") {
+        else if (char_id == "gali") {
             this.addmask("fake", 0);
             this.addmask("fake", 1);
             this.addmask("fake", 7);
             this.addmask("fake", 8);
             this.addmask("fake", 9);
         }
-        else if (param1 == "poha") {
+        else if (char_id == "poha") {
             this.addmask("fake", 0);
             this.addmask("fake", 1);
             this.addmask("fake", 2);
@@ -433,7 +461,7 @@ class player {
             this.addmask("fake", 9);
             this.addmask("fake", 10);
         }
-        else if (param1 == "kopa") {
+        else if (char_id == "kopa") {
             this.addmask("fake", 0);
             this.addmask("fake", 1);
             this.addmask("fake", 2);
@@ -444,7 +472,7 @@ class player {
             this.addmask("fake", 10);
             this.addmask("fake", 11);
         }
-        else if (param1 == "lewa") {
+        else if (char_id == "lewa") {
             this.addmask("fake", 0);
             this.addmask("fake", 1);
             this.addmask("fake", 2);
@@ -457,7 +485,7 @@ class player {
             this.addmask("fake", 11);
             this.addmask("fake", 12);
         }
-        else if (param1 == "tahu") {
+        else if (char_id == "tahu") {
             this.addmask("fake", 0);
             this.addmask("fake", 1);
             this.addmask("fake", 2);
@@ -472,11 +500,20 @@ class player {
             this.addmask("fake", 11);
             this.addmask("fake", 12);
         }
-        else if (param1 == "nbua") {
+        else if (char_id == "nbua") {
             this.addmask("fake", 1011);
         }
-        else if (param1 == "viki") {
+        else if (char_id == "akam") {
+            this.addmask("fake", 13);
+        }
+        else if (char_id == "wair") {
+            this.addmask("fake", 14);
+        }		
+        else if (char_id == "viki") {
             this.addmask("fake", 666);
+        }
+        else if (char_id == "when") {
+            this.addmask("fake", 8);
         }
         globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
         return null;
@@ -559,6 +596,7 @@ class player {
         var1 = new scriptevent(46);
         var1.send();
         globalclass.hud.hide();
+        this.removeequipment();
         return null;
     }
     
@@ -569,6 +607,18 @@ class player {
         this.addenergy(this.maxenergy);
         this.actor.setunderwater(0);
         globalclass.hud.show();
+        if (this.equipmentarray == 1) {
+            this.equipmentarray = 0;
+            this.equipcombat();
+        }
+        else if (this.equipmentarray == 2) {
+            this.equipmentarray = 0;
+            this.equipsurf();
+        }
+        if (this.equipmentarray == 0) {
+            this.equipmentarray = 1;
+            this.unequip();
+        }
         return null;
     }
     
@@ -578,8 +628,8 @@ class player {
             this.life = this.maxlife;
         }
         globalclass.hud.thingy.setlife(this.life);
-        if (!(this.actor == null)) {
-            if (!(this.actor.toahandle == null)) {
+        if (this.actor != null) {
+            if (this.actor.toahandle != null) {
                 this.actor.setcodelife(this.life);
             }
         }
@@ -599,8 +649,8 @@ class player {
         else {
             globalclass.hud.thingy.setlife(this.life);
         }
-        if (!(this.actor == null)) {
-            if (!(this.actor.toahandle == null)) {
+        if (this.actor != null) {
+            if (this.actor.toahandle != null) {
                 this.actor.setcodelife(this.life);
             }
         }
@@ -733,6 +783,112 @@ class player {
             param1 = 1;
         }
         this.bshootdragger = param1;
+        return null;
+    }
+
+    method equipcombat() {
+        var toa;
+        toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
+        if ((this.equipmentarray == 0) || (this.equipmentarray == 2)) {
+            if (this.actorid == "kopa") {
+                //Remove All
+                gccharacter::removepart(toa, 3);
+                gccharacter::removepart(toa, 4);
+                gccharacter::removepart(toa, 5);
+                gccharacter::removepart(toa, 6);
+            
+                //Apply equipment
+                gccharacter::addpart(toa, "cnt1/hsrd", 1);
+                gccharacter::addpart(toa, "cnt1/hsld", 2);
+                this.equipmentarray = 1;
+            }
+            else if (this.actorid == "lewa") {
+                //Remove All
+                gccharacter::removepart(toa, 2);
+            
+                //Apply equipment
+                gccharacter::addpart(toa, "cnt1/haxe", 1);
+                this.equipmentarray = 1;
+            }
+            else if (this.actorid == "tahu") {
+                //Remove All
+                gccharacter::removepart(toa, 2);
+            
+                //Apply equipment
+                gccharacter::addpart(toa, "cnt1/hsrd", 1);
+                GcLight::SwordLight();
+                debug::print("Light 'em up boys");
+                this.equipmentarray = 1;
+            }
+        }
+        return null;
+    }
+
+    method equipsurf() {
+        var toa;
+        toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
+        if ((this.equipmentarray == 0) || (this.equipmentarray == 1)) {
+            if (this.actorid == "kopa") {    
+                //Remove All
+                gccharacter::removepart(toa, 2);
+                gccharacter::removepart(toa, 3);
+                gccharacter::removepart(toa, 4);
+            
+                //Apply equipment
+                gccharacter::addpart(toa, "cnt1/hsrd", 6);
+                gccharacter::addpart(toa, "cnt1/fsld", 5);
+                this.equipmentarray = 2;
+            }
+        }
+        return null;
+    }
+
+    method unequip() {
+        var toa;
+        toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
+        if ((this.equipmentarray == 1) || (this.equipmentarray == 2)) {
+            if (this.actorid == "kopa") {      
+                //Remove All
+                gccharacter::removepart(toa, 1);
+                gccharacter::removepart(toa, 2);
+                gccharacter::removepart(toa, 5);
+                gccharacter::removepart(toa, 6);
+            
+                //Apply equipment
+                gccharacter::addpart(toa, "cnt1/bsrd", 3);
+                gccharacter::addpart(toa, "cnt1/bsld", 4);
+                this.equipmentarray = 0;
+            }
+            else if (this.actorid == "lewa") {
+                //Remove All
+                gccharacter::removepart(toa, 1);
+            
+                //Apply equipment
+                gccharacter::addpart(toa, "cnt1/baxe", 2);
+                this.equipmentarray = 0;
+            }
+            else if (this.actorid == "tahu") {
+                //Remove All
+                gccharacter::removepart(toa, 1);
+            
+                //Apply equipment
+                gccharacter::addpart(toa, "cnt1/bsrd", 2);
+                this.equipmentarray = 0;
+            }
+        }
+        return null;
+    }
+
+   method removeequipment() {
+        var toa;
+        toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
+        //Remove All
+        gccharacter::removepart(toa, 1);
+        gccharacter::removepart(toa, 2);
+        gccharacter::removepart(toa, 3);
+        gccharacter::removepart(toa, 4);
+        gccharacter::removepart(toa, 5);
+        gccharacter::removepart(toa, 6);
         return null;
     }
 }

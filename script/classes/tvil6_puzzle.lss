@@ -16,6 +16,7 @@ class tvil6_puzzle {
     
     method initfull() {
         var bridge_operator;
+        globalclass.player.equipcombat();
         gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPart2LegoUNDERGROUND");
         globalclass.bgmusic.play(1);
@@ -129,6 +130,7 @@ class tvil6_puzzle {
     method give_fruit() {
         if (this.upgradefruit_shown == 0) {
             this.upgradefruit.obj.setpos(-122.2455, -7.307096, 408.8899);
+            gcstaticsoundsptrarray::playtablesound(1032);
             this.upgradefruit_shown = 1;
         }
         return null;

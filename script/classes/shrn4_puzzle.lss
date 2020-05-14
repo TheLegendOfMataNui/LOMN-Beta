@@ -15,6 +15,7 @@ class shrn4_puzzle {
         var nuju;
         var portal_trigger;
         var door_text;
+        globalclass.player.unequip();
         gcareadirector::setnearestmax(10);
         this.bossdoor = new lego_moveableobject("etdr", this.parent.name);
         this.bossdoor.initfull();
@@ -88,6 +89,11 @@ class shrn4_puzzle {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("etdr")) {
                 bettersaver::setbooleanvalue(68, 1);
                 this.bossdoor.hide();
+            }
+        }
+        if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
+                gcstaticsoundsptrarray::playtablesound(1094);
             }
         }
         return null;

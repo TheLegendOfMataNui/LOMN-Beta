@@ -17,6 +17,7 @@ class shrn6_puzzle {
         var vakama;
         var portal_trigger;
         var door_text;
+        globalclass.player.unequip();
         gcareadirector::setnearestmax(15);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
         globalclass.bgmusic.play(1);
@@ -149,6 +150,11 @@ class shrn6_puzzle {
         }
         else if (param1.eventid == 21) {
             
+        }
+        if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
+                gcstaticsoundsptrarray::playtablesound(1094);
+            }
         }
         return null;
     }

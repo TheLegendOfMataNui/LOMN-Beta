@@ -11,6 +11,7 @@ class global_class : base_object {
     property player;
     property pause;
     property tweak;
+    property inventoryscreen;
     property helpscreen;
     property cheats;
     property render;
@@ -24,6 +25,8 @@ class global_class : base_object {
     property gamefont2;
     property gamefont3;
     property gamefont4;
+    property gamefont5;
+    property gamefont6;
     property hittoggletimer;
     property whatsnext;
     property testforlavacollisions;
@@ -54,6 +57,7 @@ class global_class : base_object {
         this.tweak = new gs_lego_tweakers();
         this.cheats = new cheatlist();
         this.pause = new pausescreen();
+        this.inventoryscreen = new lego_inventoryscreen();
         this.helpscreen = new lego_helpscreen();
         this.render = new renderobjects();
         this.level = null;
@@ -65,6 +69,8 @@ class global_class : base_object {
         this.gamefont2 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
         this.gamefont3 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
         this.gamefont4 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
+        this.gamefont5 = sctilefont::create("Root/Data/Art/Fonts/tech_font_01");
+        this.gamefont6 = sctilefont::create("Root/Data/Art/Fonts/tech_font_01_hilight");
         sctilefont::setcolor(this.gamefont2, 255, 255, 0, 255);
         this.whatsnext = 0;
         this.testforlavacollisions = 1;
@@ -84,6 +90,9 @@ class global_class : base_object {
         this.processlist.__append(this.tweak);
         this.pause.initfull();
         this.inputlist.__append(this.pause);
+        this.inventoryscreen.initfull();
+        this.inputlist.__append(this.inventoryscreen);
+        this.processlist.__append(this.inventoryscreen);
         this.helpscreen.initfull();
         this.inputlist.__append(this.helpscreen);
         this.processlist.__append(this.helpscreen);
@@ -132,6 +141,10 @@ class global_class : base_object {
         if (!(this.pause == null)) {
             this.pause.cleanupfull();
             this.pause = null;
+        }
+        if (!(this.inventoryscreen == null)) {
+            this.inventoryscreen.cleanupfull();
+            this.inventoryscreen = null;
         }
         if (!(this.helpscreen == null)) {
             this.helpscreen.cleanupfull();
@@ -459,6 +472,12 @@ class global_class : base_object {
         }
         else if (param1 == "4") {
             return this.gamefont4;
+        }
+        else if (param1 == "Root/Data/Art/Fonts/tech_font_01") {
+            return this.gamefont5;
+        }
+        else if (param1 == "Root/Data/Art/Fonts/tech_font_01_hilight") {
+            return this.gamefont6;
         }
         return null;
     }

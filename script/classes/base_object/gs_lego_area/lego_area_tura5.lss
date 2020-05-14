@@ -7,9 +7,11 @@ class lego_area_tura5 : gs_lego_area {
     }
     
     method initfull() {
+        globalclass.player.unequip();
         this.lego_area_show();
         if (gcsaver::portalactive() == 1) {
             gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/lewa/shrine_ripple/l_shrn_ptl", 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("mata"), 0);  
         }
         else {
             gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tps9"));
@@ -28,6 +30,11 @@ class lego_area_tura5 : gs_lego_area {
     }
     
     method onevent(param1) {
+        if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
+                gcstaticsoundsptrarray::playtablesound(1094);
+            }
+        }
         return null;
     }
     

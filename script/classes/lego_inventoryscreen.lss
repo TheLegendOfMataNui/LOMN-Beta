@@ -1,0 +1,98 @@
+class lego_inventoryscreen {
+    property inventoryscreen;
+    property shown;
+    property text;
+    property inputenabled;
+    property skip;
+    
+    method lego_inventoryscreen() {
+        return null;
+    }
+    
+    method initfull() {
+        this.inventoryscreen = null;
+        this.shown = 0;
+        this.text = null;
+        this.inputenabled = 1;
+        this.skip = 0;
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (!(this.inventoryscreen == null)) {
+            this.inventoryscreen.cleanupfull();
+            this.inventoryscreen = null;
+        }
+        if (!(this.text == null)) {
+            this.text.cleanupfull();
+            this.text = null;
+        }
+        return null;
+    }
+    
+    method show() {
+        if (this.shown == 0) {
+            globalclass.hud.hide();
+            this.text = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "", screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
+            this.text.initfull();
+            this.text.add();
+            this.text.show();
+            this.shown = 1;
+            this.skip = 10;
+            globalclass.pause.toggleinput(0);
+        }
+        return null;
+    }
+    
+    method hide() {
+        if (this.shown == 1) {
+            this.text.hide();
+            this.text.remove();
+            this.text.cleanupfull();
+            this.initfull();
+            globalclass.hud.show();
+            if (globalclass.pause.ispaused == 1) {
+                globalclass.pause.show();
+            }
+            globalclass.pause.toggleinput(1);
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if ((this.shown == 1) && (globalclass.hud.hidden == 0)) {
+            globalclass.hud.hide();
+        }
+        if (this.skip > 0) {
+            this.skip = this.skip - 1;
+        }
+        if (this.shown == 1) {
+            gcstatusscreen::showinventory();
+        }
+        else {
+            gcstatusscreen::hideinventory();
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        if (((this.shown == 1) && (this.inputenabled == 1)) && (this.skip == 0)) {
+            if (param1.event == 2) {
+                this.hide();
+            }
+        }
+        return null;
+    }
+    
+    method enableinput(param1) {
+        this.inputenabled = param1;
+        return null;
+    }
+    
+    method setstring(param1) {
+        if (this.shown == 1) {
+            this.text.setstring(param1);
+        }
+        return null;
+    }
+}

@@ -9,23 +9,21 @@ class lego_level_8 : gs_lego_level {
         this.areas.__append(area);
         area = new lego_area_lep3(this);
         this.areas.__append(area);
-        area = new lev8_gly1(this);
+        area = new lev8_lstn(this);
         this.areas.__append(area);
         area = new lego_area_gvlg(this);
         this.areas.__append(area);
-        area = new lego_area_le10(this);
+        area = new lego_area_ruin(this);
         this.areas.__append(area);
         area = new lego_area_ptv0(this);
         this.areas.__append(area);
-        area = new lev8_ta04(this);
+        area = new lev8_trap(this);
         this.areas.__append(area);
         area = new lego_area_ta06(this);
         this.areas.__append(area);
-        area = new lev8_tp02(this);
+        area = new lev8_labr(this);
         this.areas.__append(area);
-        area = new lego_area_tp03(this);
-        this.areas.__append(area);
-        area = new lego_area_l1a2(this);
+        area = new lego_area_clmb(this);
         this.areas.__append(area);
         area = new lego_area_tmbl(this);
         this.areas.__append(area);
@@ -54,6 +52,28 @@ class lego_level_8 : gs_lego_level {
         }
         globalclass.saverloaded = 0;
         globalclass.unlockdirector.save();
+        return null;
+    }
+
+    method onevent(param1) {
+        this.lego_level_onevent(param1);
+        if (param1.eventid == 54) {
+            if (param1.args[0] == 1){
+                if (this.inwater == 0) {
+                    globalclass.player.canshootdragger(0);
+                    gcstaticsoundsptrarray::playtablesound(1092);
+                    debug::print("IS swimming");
+                    this.inwater = 1;
+                }
+            }
+            else if (param1.args[0] == 0) {
+                if (this.inwater == 1) {
+                    globalclass.player.canshootdragger(1);
+                    debug::print("NOT swimming");
+                    this.inwater = 0;
+                }
+            }
+        }
         return null;
     }
     

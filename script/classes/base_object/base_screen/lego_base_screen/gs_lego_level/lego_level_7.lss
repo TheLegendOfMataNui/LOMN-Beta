@@ -1,8 +1,17 @@
 class lego_level_7 : gs_lego_level {
+    property inwater;
     
     method lego_level_7() {
         var area;
-        this.gs_lego_level("lev7", "onua", "onua");
+        this.gs_lego_level("lev7", "akam", "mana");
+        area = new lego_area_mana(this);
+        this.areas.__append(area);	
+        area = new lego_area_pst1(this);
+        this.areas.__append(area);	
+        area = new lego_area_kuta7(this);
+        this.areas.__append(area);		
+        area = new lego_area_pst2(this);
+        this.areas.__append(area);										
         area = new lego_area_onua(this);
         this.areas.__append(area);
         area = new lego_area_gali(this);
@@ -15,19 +24,14 @@ class lego_level_7 : gs_lego_level {
         this.areas.__append(area);
         area = new lego_area_tahu(this);
         this.areas.__append(area);
-        area = new lego_area_kuta7(this);
-        this.areas.__append(area);		
-        area = new lego_area_pst2(this);
-        this.areas.__append(area);				
-        area = new lego_area_pst1(this);
-        this.areas.__append(area);						
         return null;
     }
     
     method initfull() {
         this.lego_level_initfull();
-        globalclass.player.addmask("fake", 0);
+        globalclass.player.addmask("fake", 13);
         globalclass.saverloaded = 0;
+        this.inwater = 1;
         return null;
     }
     
@@ -38,6 +42,44 @@ class lego_level_7 : gs_lego_level {
     
     method onevent(param1) {
         this.lego_level_onevent(param1);
+        if ((param1.eventid == 54) && (globalclass.player.actorid != "gali")) {
+            if (param1.args[0] == 1) {
+                if (this.inwater == 0) {
+                    globalclass.player.canshootdragger(0);
+                    gcstaticsoundsptrarray::playtablesound(1092);
+                    debug::print("IS swimming");
+                    this.inwater = 1;
+                }
+            }
+            else if (param1.args[0] == 0) {
+                if (this.inwater == 1) {
+                    globalclass.player.canshootdragger(1);
+                    debug::print("NOT swimming");
+                    this.inwater = 0;
+                }
+            }
+        }
+        else if ((param1.eventid == 54) && (globalclass.player.actorid == "gali")) {
+            if (param1.args[0] == 1) {
+                if (this.inwater == 0) {
+                    globalclass.player.canshootdragger(0);
+                    debug::print("IS swimming");
+                    this.inwater = 1;
+                }
+            }
+            else if (param1.args[0] == 0) {
+                if (this.inwater == 1) {
+                    globalclass.player.canshootdragger(1);
+                    debug::print("NOT swimming");
+                    this.inwater = 0;
+                }
+            }
+        }
+        else if ((param1.eventid == 15) && (globalclass.player.actorid == "gali")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
+                gcstaticsoundsptrarray::playtablesound(1092);
+            }
+        }
         return null;
     }
     

@@ -70,6 +70,14 @@ class mask {
             globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask", 0, 23, 1, 0, 0, 0, 0, 0));
             this.powerdrainrate = 0;
         }
+        else if (this.maskname == 13) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask7", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 2;	
+		}
+        else if (this.maskname == 14) {
+            globalclass.hud.mask.addmask(new gs_lego_animatesprite("Root/data/art/hud/mask rotate/mask5", 0, 23, 1, 0, 0, 0, 0, 0));
+            this.powerdrainrate = 2;
+		}
         return null;
     }
     
@@ -278,6 +286,39 @@ class mask {
 				globalclass.player.actor.deactivateshield();
             }
         }
+        else if (this.maskname == 13) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF VALOR");
+                globalclass.player.actor.activatestrength();
+                globalclass.player.actor.setanimationscalar(1.75);
+				globalclass.player.actor.activateshield();
+                var1 = new scriptevent(1011, [ 1 ]);
+                var1.send();				
+            }
+            else {
+                globalclass.player.actor.deactivatestrength();
+				globalclass.player.actor.setanimationscalar(1);
+				globalclass.player.actor.deactivateshield();
+                var1 = new scriptevent(1011, [ 0 ]);
+                var1.send();				
+            }
+        }		
+        else if (this.maskname == 14) {
+            if (param1) {
+                debug::print("YOU HAVE ACTIVATED THE MASK OF WISDOM");
+				gccharacter::setwatertimerlength(globalclass.player.actor.handle, 0);
+                var1 = new scriptevent(1002, [ 1 ]);
+                var1.send();
+				globalclass.player.actor.activatelevitation(1);
+            }
+            else {
+                gccharacter::setwatertimerlength(globalclass.player.actor.handle, 10);
+                globalclass.player.actor.replenishair();
+                var1 = new scriptevent(1002, [ 0 ]);
+                var1.send();
+                globalclass.player.actor.activatelevitation(0);
+            }
+        }				
         return null;
     }
     

@@ -1,7 +1,9 @@
 class lego_area_bech : gs_lego_area {
     property puzzle;
+    property saved;
     
     method lego_area_bech(param1) {
+        this.saved = 0;
         this.gs_lego_area("bech", param1, 0, 0);
         this.puzzle = new beach_puzzle(this);
         this.lego_area_initfull();
@@ -10,11 +12,15 @@ class lego_area_bech : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        this.puzzle.initfull();
+        this.puzzle.initfull();        
         return null;
     }
     
     method onevent(param1) {
+        if (this.saved == 0) {
+            BetterSaver::Save();
+            this.saved = 1;
+        }
         this.puzzle.onevent(param1);
         return null;
     }
@@ -27,7 +33,7 @@ class lego_area_bech : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        if (!(this.puzzle == null)) {
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }

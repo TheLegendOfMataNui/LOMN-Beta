@@ -236,9 +236,16 @@ class gs_lego_level : lego_base_screen {
     }
     
     method areasetactive(param1, param2, param3) {
-        this.temp_areaid = param1;
-        this.temp_startid = param2;
-        this.temp_lookid = param3;
+        if (globalclass.saverloaded) {
+            this.temp_areaid = gcsaver::getarea();
+            this.temp_startid = gcsaver::getstart();
+            this.temp_lookid = gcsaver::getlook();
+        }
+        else{ 
+            this.temp_areaid = param1;
+            this.temp_startid = param2;
+            this.temp_lookid = param3;
+        }
         this.areasetactive_pause_counter = 4;
         return null;
     }

@@ -5,12 +5,12 @@ class gs_lego_character : ss_base3dcharacter {
     property id;
     property charspline;
     
-    method gs_lego_character(param1, param2, param3, param4, param5, param6, param7, param8) {
-        this.ss_base3dcharacter(param1, param2, param4, param5, param6, param7, param8);
-        this.area = param3;
+    method gs_lego_character(assigned_id, char_id, area_id, orientation, x_pos, y_pos, z_pos, input_state) {
+        this.ss_base3dcharacter(assigned_id, char_id, orientation, x_pos, y_pos, z_pos, input_state);
+        this.area = area_id;
         this.areaid = scslosifoundation::stringtoidentifier(this.area);
-        this.myname = param1;
-        this.id = scslosifoundation::stringtoidentifier(param1);
+        this.myname = assigned_id;
+        this.id = scslosifoundation::stringtoidentifier(assigned_id);
         return null;
     }
     
@@ -112,7 +112,7 @@ class gs_lego_character : ss_base3dcharacter {
     
     method aisetspline(param1, param2) {
         this.charspline = scslosislkcubicspline::create(param1);
-        if (!(this.charspline == null)) {
+        if (this.charspline != null) {
             gccharacter::aisetsplinepaths(this.handle, this.charspline, param2);
         }
         return null;

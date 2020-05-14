@@ -10,13 +10,15 @@ class lego_area_tp036 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        this.puzzle.show();
+        this.puzzle.initfull();
+        gcmodeldirector::setnearestmax(5);
+        gcareadirector::setnearestmax(15);
         return null;
     }
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.puzzle.hide();
+        this.puzzle.cleanupfull();
         return null;
     }
     
@@ -36,8 +38,7 @@ class lego_area_tp036 : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle.exit();
-        this.puzzle = null;
+        this.lego_area_cleanupfull();
         return null;
     }
 }
