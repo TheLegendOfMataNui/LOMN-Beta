@@ -30,7 +30,6 @@ class vllg2_puzzle {
     property rotatestone;
 	property gearpickup;
     property deltatimer;
-    property hutgear;
     property shasa;
     property nixie;
     property maku;
@@ -50,7 +49,8 @@ class vllg2_puzzle {
     property xeleria;
     property certera;
     property gearactive;
-    property diskactive;
+    property diskactive;    
+    property hutgear;
     
     method vllg2_puzzle(param1) {
         this.parent = param1;
@@ -80,14 +80,14 @@ class vllg2_puzzle {
         this.aeryt = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl15"), 0);
         this.xeleria = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
         this.certera = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0);
-        this.hutgear = new lego_moveableobject("gea1");
-        this.hutgear.initfull();
-        this.hutgear.hide();
         this.diskactive = 0;
         this.gearactive = 0;
         if (bettersaver::getbooleanvalue(36)) {              
             this.gearactive = 2;
-        }      
+        }
+        this.hutgear = new lego_moveableobject("gea1");
+        this.hutgear.initfull();
+        this.hutgear.hide();
         this.rotatestone = 0;
         this.deltatimer = 0.0;
         gcmodeldirector::setnearestmax(7);
