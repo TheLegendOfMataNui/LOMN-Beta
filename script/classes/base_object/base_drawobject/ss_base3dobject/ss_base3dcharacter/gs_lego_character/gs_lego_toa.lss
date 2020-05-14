@@ -2,6 +2,8 @@ class gs_lego_toa : gs_lego_character {
     property toahandle;
     property mapperhandle;
     property ishookenabled;
+    property open_eye_sprite_filename; // No extension, like so: `Root/data/art/hud/greeneyeson`
+    property closed_eye_sprite_filename;
     
     method gs_lego_toa(param1, param2, param3, param4, param5) {
         this.charname = param1;
@@ -33,6 +35,10 @@ class gs_lego_toa : gs_lego_character {
         this.area = "cnt1";
         this.areaid = scslosifoundation::stringtoidentifier("cnt1");
         this.mapperhandle = gcgame::getkeymapper();
+
+        // Set default HUD sprites (to be overridden in individual toa classes)
+        this.open_eye_sprite_filename = "Root/data/art/hud/greeneyeson";
+        this.closed_eye_sprite_filename = "Root/data/art/hud/greeneyesoff";
         return null;
     }
     
@@ -66,6 +72,10 @@ class gs_lego_toa : gs_lego_character {
             debug::print("Playing as '" + this.charname + "'!");
         }
         globalclass.unlockdirector.save();
+
+        // Set the HUD head to the correct sprite
+        globalclass.hud.thingy.switch_eyes(this.open_eye_sprite_filename, this.closed_eye_sprite_filename);
+
         return null;
     }
     

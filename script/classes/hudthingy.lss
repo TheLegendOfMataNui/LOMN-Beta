@@ -483,4 +483,30 @@ class hudthingy {
         }
         return null;
     }
+
+    method switch_eyes(open_sprite_filename, closed_sprite_filename) {
+        // Destroy the old closed eye sprite
+        this.glowyeyes[0].hide();
+        this.glowyeyes[0].remove();
+        this.glowyeyes[0].cleanupfull();
+
+        // Destroy the old open eye sprite
+        this.glowyeyes[0].hide();
+        this.glowyeyes[0].remove();
+        this.glowyeyes[0].cleanupfull();
+
+        // Create and initialize the new closed eye sprite
+        this.glowyeyes[0] = new ss_basesprite(closed_sprite_filename, 9, 21, 0, 73, 85);
+        this.glowyeyes[0].initfull();
+        this.glowyeyes[0].enablealphachannel(true);
+        this.glowyeyes[0].add();
+        this.glowyeyes[0].hide(); // NOTE: The game usually keeps the closed-eye sprite hidden
+
+        // Create and initialize the new open eye sprite
+        this.glowyeyes[1] = new ss_basesprite(open_sprite_filename, 9, 21, 0, 73, 85);
+        this.glowyeyes[1].initfull();
+        this.glowyeyes[1].enablealphachannel(true);
+        this.glowyeyes[1].add();
+        this.glowyeyes[1].show();
+    }
 }
