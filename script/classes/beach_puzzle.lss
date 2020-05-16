@@ -13,10 +13,10 @@ class beach_puzzle {
     method initfull() {
         var crab1;
         var crab2;
-        gcareadirector::setnearestmax(3);
-        gcmodeldirector::setnearestmax(3);
+        gcareadirector::setnearestmax(20);
+        gcmodeldirector::setnearestmax(20);
         gclightdirector::setcavelighting(0);
-        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 50000.0, 0.01);
         globalclass.bgmusic.stop();
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1"))) {
             this.cinema_shown = 1;
@@ -28,9 +28,6 @@ class beach_puzzle {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin1");
         }
-        this.glasswall = new lego_triggerobject("tpw0", this.parent.name);
-        this.glasswall.initfull();
-        this.glasswall.setresponse(3, 3);
         this.safecount = 3;
         crab1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crb1"));
         crab2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cr01"));
