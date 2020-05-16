@@ -1,16 +1,14 @@
-class lego_volatileplatform {
-    property id;
-    property name;
+class lego_volatileplatform : lego_moveableobject {
     property obj;
     property objid;
     property objname;
-    property area;
     property dropsoundonce;
     property platformfallingsound;
     property platformrumblesound;
     property touched;
     
-    method lego_volatileplatform(param1, param2) {
+    method lego_volatileplatform(param1, param2, param3) {
+        this.lego_moveableobject(param1, param2, param3);
         this.obj = new lego_physicsobject(param1, param2);
         this.objid = this.obj.id;
         this.id = this.obj.id;
@@ -23,11 +21,18 @@ class lego_volatileplatform {
         return null;
     }
     
-    method initfull(param1, param2, param3, param4, param5, param6, param7, param8) {
+    method initfull(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
         this.obj.initfull(null, 1, 1, 0, 0, null, param1, param2, null, param3, param4, param5, param6, param7, param8);
         this.obj.setresponse(1, 0, 1);
         this.obj.setasshakeobj();
         this.setupsounds();
+        var var1;
+        if (!(param1 == null)) {
+            this.madeonthefly = 1;
+            var1 = gcmoveableobj::create("dumy", "dummy", "dummy", 0);            
+            this.handle = gcmoveableobj::create(this.name, param2, param1, param9);
+        }
+        this.moveable_initfull();
         return null;
     }
     
@@ -141,6 +146,26 @@ class lego_volatileplatform {
                     }
                 }
             }
+        }
+        return null;
+    }
+
+    method fadein(param1) {
+        if ((param1 == 0) || (param1 == null)) {
+            this.setalpha(1.0);
+        }
+        else {
+            gcmoveableobj::fadein(this.handle, param1);
+        }
+        return null;
+    }
+    
+    method fadeout(param1) {
+        if ((param1 == 0) || (param1 == null)) {
+            this.setalpha(0.0);
+        }
+        else {
+            gcmoveableobj::fadeout(this.handle, param1);
         }
         return null;
     }
