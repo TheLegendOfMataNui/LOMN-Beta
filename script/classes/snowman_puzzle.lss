@@ -16,6 +16,7 @@ class snowman_puzzle {
         var var1;
         var var2;
         var var3;
+        globalclass.player.removeequipment();
         globalclass.player.equipsurf();
         gcareadirector::setnearestmax(20);
         globalclass.player.actor.setsurfingability(0.8, 1.0);
@@ -59,6 +60,7 @@ class snowman_puzzle {
     
     method resetplayer() {
         var var1;
+        globalclass.player.removeequipment();
         globalclass.player.equipsurf();
         globalclass.player.unkill();
         globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str1"), scslosifoundation::stringtoidentifier("lok1"));
@@ -95,6 +97,7 @@ class snowman_puzzle {
             else if (param1.args[0] == (var1 + 1)) {
                 globalclass.player.actor.setsurfingability(0, 1.0);
                 globalclass.player.actor.idle();
+                globalclass.player.removeequipment();
                 globalclass.player.equipcombat();
                 gciceboss::start(this.icey);
             }
