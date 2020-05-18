@@ -1,38 +1,38 @@
 class gs_legotext : ss_basetext {
     property newfont;
     
-    method gs_legotext(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10) {
-        if (param10 == null) {
+    method gs_legotext(font_name, string, x1_pos, y1_pos, z_pos, scale, horizontal_alignment, vertical_alignment, padding, is_new_font) {
+        if (is_new_font == null) {
             this.newfont = 0;
         }
         else {
-            this.newfont = param10;
+            this.newfont = is_new_font;
         }
-        this.fontname = param1;
-        this.string = param2;
-        if (!(param9 == null)) {
-            this.padadjustment = param9;
+        this.fontname = font_name;
+        this.string = string;
+        if (padding != null) {
+            this.padadjustment = padding;
         }
         else {
             this.padadjustment = 0;
         }
-        this.x1 = param3;
-        this.y1 = param4 + this.padadjustment;
-        this.z = param5;
-        if (!(param6 == null)) {
-            this.scale = param6;
+        this.x1 = x1_pos;
+        this.y1 = y1_pos + this.padadjustment;
+        this.z = z_pos;
+        if (scale != null) {
+            this.scale = scale;
         }
         else {
             this.scale = 1;
         }
-        if (!(param7 == null)) {
-            this.horizontal = param7;
+        if (horizontal_alignment != null) {
+            this.horizontal = horizontal_alignment;
         }
         else {
             this.horizontal = 0;
         }
-        if (!(param8 == null)) {
-            this.verticle = param8;
+        if (vertical_alignment != null) {
+            this.verticle = vertical_alignment;
         }
         else {
             this.verticle = 4;
@@ -98,8 +98,8 @@ class gs_legotext : ss_basetext {
         return null;
     }
     
-    method scalefont(param1) {
-        this.scale = param1;
+    method scalefont(scale) {
+        this.scale = scale;
         sctextobject::setscale(this.text, this.scale, this.scale);
         return null;
     }
