@@ -1,0 +1,74 @@
+class enemy {
+    property instarray;
+
+    method enemy() {
+	    return null;
+    }
+
+    method initfull() {
+        this.instarray = [  ];
+        return null;
+    }
+
+    method cleanupfull() {
+        if (this.instarray != null) {
+            this.instarray = null;
+        }
+        return null;
+    }
+
+    method process(param1) {
+        return null;
+    }
+
+    method input(param1) {
+        if (param1.event == 2) { 
+            if (param1.button == 247) {
+                this.outofbounds();
+            }
+        }
+        return null;
+    }
+
+    method onevent(param1) {
+        //Character Spawn Check
+        //EventID 100 = Character spawned. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
+        if (param1.eventid == 100) { 
+            this.instarray.__append(gcmodeldirector::getcharacter(param1.args[2]));
+            debug::print("Spawned " + (scslosifoundation::identifiertostring(param1.args[2])));
+        }
+        else if (param1.eventid == 44) {
+            this.outofbounds();
+        }
+
+        else if (param1.eventid == 103) { 
+
+        }
+
+        else if (param1.eventid == 20) {
+            this.instarray = [  ];
+            debug::print("CLEARED ENEMY ARRAY");
+        }
+        return null;
+    }
+
+    method outofbounds() {
+        var instance;
+        instance = 0;
+        //Kill anything below Y -500 
+        //NOTE: Hives need to be hooked to an event, enemy recycling currently breaks this
+        if (!(this.instarray == null)) {
+            while ((this.instarray.__length - 1) >= instance) {
+                if (gccharacter::getpositiony(this.instarray[instance]) != null) {
+                    if (gccharacter::getpositiony(this.instarray[instance]) < 0) {                        
+                        gccharacter::aidie(this.instarray[instance]);
+                        this.instarray.__removeat(instance);
+                        debug::print("Rahi is out of bounds! Removing...");
+                    }
+                    instance = instance + 1;
+                }
+            }
+        }
+        return null;
+    }
+}
