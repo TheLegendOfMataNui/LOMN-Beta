@@ -1,5 +1,6 @@
 class enemy {
     property instarray;
+    property infectedmask;
 
     method enemy() {
 	    return null;
@@ -24,50 +25,56 @@ class enemy {
     method input(param1) {
         if (param1.event == 2) { 
             if (param1.button == 247) {
-                this.outofbounds();
+
             }
         }
         return null;
     }
 
     method onevent(param1) {
+        var instance;
         //Character Spawn Check
-        //EventID 100 = Character spawned. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
-        if (param1.eventid == 100) { 
+        //EventID 100 = GcModelDirector::AddCharacter. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
+        //EventID 103 = GcHive::InitCreature (NOTE: CURRENTLY DOESN'T PASS INSTANCEID CORRECTLY!)
+        if ((param1.eventid == 100) || (param1.eventid == 103)) { 
             this.instarray.__append(gcmodeldirector::getcharacter(param1.args[2]));
             debug::print("Spawned " + (scslosifoundation::identifiertostring(param1.args[2])));
         }
+
+        //Character Cured Check
+        //EventID 101 = GcCharacter::Kill. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
+        //GcCharacter::Kill as called by LOMNHook currently redirects to GcCharacter::AiSetBenign
+        else if (param1.eventid == 101) { 
+             debug::print("EVENT 101");
+        }
+
+        //Character Hazard Check
+        //EventID 44 = Currently unknown. Runs per frame and is used in a variety of ways throughout vanilla script
+        //GcCharacter::AiDie calls the original native code for GcCharacter::Kill, effectively letting us use both
+        //Currently only kills anything below Y -500
+        //NOTE: HIVE ENEMY RECYCLING CURRENTLY BREAKS THIS! EXPECT CRASHES!
         else if (param1.eventid == 44) {
-            this.outofbounds();
+            instance = 0;
+            if (!(this.instarray == null)) {
+                while ((this.instarray.__length - 1) >= instance) {
+                    if (gccharacter::getpositiony(this.instarray[instance]) != null) {
+                        if (gccharacter::getpositiony(this.instarray[instance]) < -500) {                        
+                            gccharacter::aidie(this.instarray[instance]);
+                            this.instarray.__removeat(instance);
+                            debug::print("Rahi is out of bounds! Removing...");
+                        }
+                        instance = instance + 1;
+                    }
+                }
+            }
         }
 
-        else if (param1.eventid == 103) { 
-
-        }
-
+        //Character Array Reset
+        //EventID 20 = Clear Area Event
+        //Clears the array on exiting the area
         else if (param1.eventid == 20) {
             this.instarray = [  ];
             debug::print("CLEARED ENEMY ARRAY");
-        }
-        return null;
-    }
-
-    method outofbounds() {
-        var instance;
-        instance = 0;
-        //Kill anything below Y -500 
-        //NOTE: Hives need to be hooked to an event, enemy recycling currently breaks this
-        if (!(this.instarray == null)) {
-            while ((this.instarray.__length - 1) >= instance) {
-                if (gccharacter::getpositiony(this.instarray[instance]) != null) {
-                    if (gccharacter::getpositiony(this.instarray[instance]) < 0) {                        
-                        gccharacter::aidie(this.instarray[instance]);
-                        this.instarray.__removeat(instance);
-                        debug::print("Rahi is out of bounds! Removing...");
-                    }
-                    instance = instance + 1;
-                }
-            }
         }
         return null;
     }
