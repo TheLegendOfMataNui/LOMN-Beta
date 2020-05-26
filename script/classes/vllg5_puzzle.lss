@@ -212,6 +212,7 @@ class vllg5_puzzle {
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0), rgba(2, 127, 30, 255), rgba(187, 231, 133, 255), rgba(2, 127, 30, 255));
             
             //Hiding hives & Turaga door
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("fhv0"), scslosifoundation::stringtoidentifier("vllg"));            
             globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
             globalclass.bgmusic.play(1);
@@ -378,6 +379,7 @@ class vllg5_puzzle {
                 this.deadhives = this.deadhives + 1;
                 if (this.deadhives >= 1) {
                     gcsaver::setcondition(4194304, 1);
+                    gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
                     globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
                     globalclass.bgmusic.play(1);
                 }
