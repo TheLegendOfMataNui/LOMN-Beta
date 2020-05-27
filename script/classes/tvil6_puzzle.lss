@@ -8,6 +8,8 @@ class tvil6_puzzle {
     property platform4;
     property platform5;
     property bridgeState;
+    property kalama;
+    property lever;
     
     method tvil6_puzzle(param1) {
         this.parent = param1;
@@ -16,25 +18,29 @@ class tvil6_puzzle {
     
     method initfull() {
         var bridge_operator;
+        this.kalama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        this.lever = new lego_moveableobject("levr");
+        this.lever.initfull();       
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setnearestmax(10);
         globalclass.player.equipcombat();
         gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPart2LegoUNDERGROUND");
         globalclass.bgmusic.play(1);
-        bridge_operator = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::settohunga(bridge_operator, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
-        gccharacter::setinputstate(bridge_operator, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(bridge_operator, scslosifoundation::stringtoidentifier("d003"), -1);
-        gccharacter::setorientation(bridge_operator, -18);
+
+        //Set Tohunga: Kalama        
+        gccharacter::settohunga(this.kalama, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
+        gccharacter::setinputstate(this.kalama, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(this.kalama, scslosifoundation::stringtoidentifier("d003"), -1);
+        gccharacter::setorientation(this.kalama, -46);
+        if (bettersaver::getbooleanvalue(47) == 1) {            
+            gccharacter::switchanimation(this.kalama, scslosifoundation::stringtoidentifier("d000"), -1);
+        }
+        this.lever.hide();
         this.upgradefruit_shown = gcsaver::finditem(scslosifoundation::stringtoidentifier("frut"));
         if (this.upgradefruit_shown == 0) {
             this.upgradefruit = new lego_pickup("frut", 0, 6, "frut", 1, 1);
             this.upgradefruit.initfull();
-        }
-        if (bettersaver::getbooleanvalue(47) == 1) {
-            bridge_operator = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-            gccharacter::settohunga(bridge_operator, rgba(39, 38, 39, 255), rgba(39, 38, 39, 255), scslosifoundation::stringtoidentifier("mkba"));
-            gccharacter::setinputstate(bridge_operator, scslosifoundation::stringtoidentifier("none"));
-            gccharacter::switchanimation(bridge_operator, scslosifoundation::stringtoidentifier("d000"), -1);
         }
         this.platform1 = new lego_moveableobject("prt1");
         this.platform1.initfull();
@@ -53,12 +59,13 @@ class tvil6_puzzle {
         this.platform5.settweakable();
         this.bridgeState = 0;
         if (bettersaver::getbooleanvalue(64) == 1) {
-            this.platform1.interpolate(-114.491, -71.3708, 385.759, 0.0);
-            this.platform2.interpolate(-125.478, -71.3708, 360.264, 0.0);
-            this.platform3.interpolate(-134.103, -71.3708, 335.037, 0.0);
-            this.platform4.interpolate(-123.733, -71.3708, 309.701, 0.0);
-            this.platform5.interpolate(-111.871, -71.3708, 284.253, 0.0);
+            this.platform1.interpolate(-114.491, -71.3708, 390.263, 0.0);
+            this.platform2.interpolate(-125.478, -71.3708, 361.763, 0.0);
+            this.platform3.interpolate(-134.103, -71.3708, 333.000, 0.0);
+            this.platform4.interpolate(-123.733, -71.3708, 302.963, 0.0);
+            this.platform5.interpolate(-111.871, -71.3708, 274.763, 0.0);
             this.bridgeState = 1;
+            this.lever.show();
         }
         return null;
     }
@@ -88,6 +95,8 @@ class tvil6_puzzle {
             this.platform5.cleanupfull();
             this.platform5 = null;
         }
+        this.kalama = null;
+        this.lever = null;
         return null;
     }
     
@@ -116,36 +125,28 @@ class tvil6_puzzle {
         }
         else if (param1.eventid == 41) {
             if (bettersaver::getbooleanvalue(47)) {
-                this.give_fruit();
-                this.raise_bridge();
+                //Kalama Quest Complete
+                if (this.upgradefruit_shown == 0) {
+                    this.upgradefruit.obj.setpos(-116.2455, -7.307096, 438.8899);
+                    gcstaticsoundsptrarray::playtablesound(1032);
+                    this.upgradefruit_shown = 1;
+                }
+                if (this.bridgeState == 0) {
+                    this.platform1.interpolate(-114.491, -71.3708, 390.263, 6.0);
+                    this.platform2.interpolate(-125.478, -71.3708, 361.763, 7.0);
+                    this.platform3.interpolate(-134.103, -71.3708, 333.000, 8.0);
+                    this.platform4.interpolate(-123.733, -71.3708, 302.963, 9.0);
+                    this.platform5.interpolate(-111.871, -71.3708, 274.763, 10.0);
+                    bettersaver::setbooleanvalue(64, 1);
+                    this.bridgeState = 1;
+                    this.lever.show();
+                }
             }
         }
         return null;
     }
     
     method input(param1) {
-        return null;
-    }
-    
-    method give_fruit() {
-        if (this.upgradefruit_shown == 0) {
-            this.upgradefruit.obj.setpos(-122.2455, -7.307096, 408.8899);
-            gcstaticsoundsptrarray::playtablesound(1032);
-            this.upgradefruit_shown = 1;
-        }
-        return null;
-    }
-    
-    method raise_bridge() {
-        if (this.bridgeState == 0) {
-            this.platform1.interpolate(-114.491, -71.3708, 385.759, 6.0);
-            this.platform2.interpolate(-125.478, -71.3708, 360.264, 7.0);
-            this.platform3.interpolate(-134.103, -71.3708, 335.037, 8.0);
-            this.platform4.interpolate(-123.733, -71.3708, 309.701, 9.0);
-            this.platform5.interpolate(-111.871, -71.3708, 284.253, 10.0);
-            bettersaver::setbooleanvalue(64, 1);
-            this.bridgeState = 1;
-        }
         return null;
     }
 }
