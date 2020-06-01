@@ -62,19 +62,19 @@ class hud_class {
     method cleanupfull() {
         var var1;
         var var2;
-        if (!(this.cdtimer == null)) {
+        if (this.cdtimer != null) {
             this.cdtimer.cleanupfull();
             this.cdtimer = null;
         }
-        if (!(this.screenfader == null)) {
+        if (this.screenfader != null) {
             this.screenfader.cleanupfull();
             this.screenfader = null;
         }
-        if (!(this.debuginfo == null)) {
+        if (this.debuginfo != null) {
             this.debuginfo.cleanupfull();
             this.debuginfo = null;
         }
-        if (!(this.itemsarray == null)) {
+        if (this.itemsarray != null) {
             var1 = this.itemsarray.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -111,8 +111,8 @@ class hud_class {
     method show() {
         var var1;
         if ((this.added == 1) && (this.hidden == 1)) {
-            if (!(globalclass.level == null)) {
-                if (!(globalclass.level.cam.getaimode() == 9)) {
+            if (globalclass.level != null) {
+                if (globalclass.level.cam.getaimode() != 9) {
                     this.hidden = 0;
                     var1 = 0;
                     while ((this.itemsarray.__length - 1) >= var1) {
@@ -170,7 +170,7 @@ class hud_class {
     method process(param1) {
         var var1;
         if (!(param1.deltatime == 0) && (this.added == 1)) {
-            if (!(this.cdtimer.active == null)) {
+            if (this.cdtimer.active != null) {
                 this.cdtimer.process(param1);
             }
             if (this.showdebuginfo == 1) {

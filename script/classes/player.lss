@@ -18,6 +18,10 @@ class player {
     property enterstartid;
     property enterlookid;
     property equipmentarray;
+    property air;
+    property maxair;
+    property splooshplayed;
+    property maskon;
     
     method player() {
         return null;
@@ -28,6 +32,8 @@ class player {
         this.maxlife = 60;
         this.energy = 60;
         this.maxenergy = 60;
+        this.air = 60;
+        this.maxair = 60;
         this.tokens = 0;
         this.actor = null;
         this.actorid = null;
@@ -41,12 +47,15 @@ class player {
         this.glyphpowerdrain = 20;
         this.bshootdragger = 1;
         this.equipmentarray = 0;
+        this.splooshplayed = 0;
+        this.maskon = 1;
         return null;
     }
     
     method initshort() {
         this.life = this.maxlife;
         this.energy = this.maxenergy;
+        this.air = this.maxair;
         this.tokens = 0;
         this.draintimer = 0.0;
         this.grapplinghooksetup = 0;
@@ -55,8 +64,10 @@ class player {
     }
     
     method cleanupshort() {
-        this.actor.cleanupfull();
-        this.actor = null;
+        if (this.actor != null) {
+            this.actor.cleanupfull();
+            this.actor = null;
+        }
         this.maskcontrol.cleanupshort();
         return null;
     }
@@ -66,6 +77,8 @@ class player {
         this.maxlife = null;
         this.energy = null;
         this.maxenergy = null;
+        this.air = null;
+        this.maxair = null;
         this.tokens = null;
         if (this.actor != null) {
             this.actor.cleanupfull();
@@ -158,6 +171,9 @@ class player {
         if (this.maskcontrol.isactive()) {
             this.drainpower(param1);
         }
+        if (this.maskon == 0) {
+            this.drainair(param1);
+        }
         return null;
     }
     
@@ -180,6 +196,31 @@ class player {
                 }
                 else {
                     this.removelife(__toint(param1.args[0]) * 10);
+                }
+            }
+            else if (param1.eventid == 54) {
+                if (param1.args[0] == 1) {
+                    if ((this.splooshplayed == 0) && (this.actorid != "gali")) {
+                        gcstaticsoundsptrarray::playtablesound(1092);
+                        this.splooshplayed = 1;
+                        debug::print("SPLOOSH!");
+                    }
+                    if ((this.whichmaskonface() == 1) && (this.maskcontrol.isactive())) {
+                        debug::print("this should be firing");
+                        this.maskon = 1;
+                        this.addair(this.maxair);                    
+                        debug::print("Air restored!");
+                    }
+                    else {
+                        this.maskon = 0;
+                    }
+                }
+                else if (param1.args[0] == 0) {
+                    this.maskon = 1;
+                    this.addair(this.maxair);
+                    if (this.splooshplayed) {
+                        this.splooshplayed = 0;
+                    }
                 }
             }
             else if (param1.eventid == 2) {
@@ -218,7 +259,12 @@ class player {
                     
                 }
                 else {
-                    this.actor.replenishair();
+                    gcnolightdirector::hide(var1, var3);
+                    gccollisionphysicsgroup::togglepickuponoff(var1, 0);
+                    this.addair(this.maxair);
+
+                    //old method for restoring air
+                    //this.actor.replenishair();
                 }
                 if (scslosistringfuncs::find(var2, "am")) {
                     
@@ -540,6 +586,27 @@ class player {
         return null;
     }
     
+    method drainair(param1) {
+        debug::print("test");
+        this.draintimer = this.draintimer + param1.deltatime;
+        debug::print("test 1");
+        if (this.draintimer >= 1.0) {
+            debug::print("test 2");
+            this.draintimer = 0.0;
+            //needs an additional check to make sure it does not fire once the mask is on because aparently the onevent isn't enough
+            if (this.air >= 0) {
+                debug::print("test 3");
+                this.removeair(5);
+                debug::print("test 4");
+            }
+            if (this.air == 0) {
+                debug::print("test 5");
+                this.actor.react(0.25);
+                debug::print("test 6");
+            }
+        }
+        return null;
+    }
     method addmask(param1, param2) {
         if (((this.maskcontrol.masks.__length - 1) < 0) || (this.maskcontrol.resetflag == 1)) {
             this.maskcontrol.addallmasks();
@@ -605,6 +672,7 @@ class player {
         gcstaticsoundsptrarray::playtablesound(1100);
         this.addlife(this.maxlife);
         this.addenergy(this.maxenergy);
+        this.addair(this.maxair);
         this.actor.setunderwater(0);
         globalclass.hud.show();
         if (this.equipmentarray == 1) {
@@ -754,12 +822,34 @@ class player {
     }
     
     method addair(param1) {
-        globalclass.hud.watermeter.addair(param1);
+        this.air = this.air + param1;
+        if (this.air > this.maxair) {
+            this.air = this.maxair;
+        }
+        globalclass.hud.thingy.setair(this.air);
         return null;
     }
     
-    method removeair() {
-        globalclass.hud.watermeter.start();
+    method removeair(param1) {
+        this.air = this.air - param1;
+        if (this.air < 0) {
+            this.air = 0;
+        }
+        globalclass.hud.thingy.setair(this.air);
+        return null;
+    }
+        
+    method addmaxair(param1) {
+        this.maxair = this.maxair + param1;
+        globalclass.hud.thingy.setmaxair(this.maxair);
+        this.addair(this.maxair);
+        return null;
+    }
+    
+    method removemaxair(param1) {
+        this.maxair = this.maxair - param1;
+        globalclass.hud.thingy.setmaxair(this.maxair);
+        this.addair(this.maxair);
         return null;
     }
     

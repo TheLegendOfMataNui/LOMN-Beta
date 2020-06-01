@@ -77,7 +77,7 @@ class lego_level_2 : gs_lego_level {
     method onevent(param1) {
         this.lego_level_onevent(param1);
         if (param1.eventid == 54) {
-            if ((param1.args[0] == 1) && (this.isswimming)){
+            if ((param1.args[0] == 1) && (this.isswimming)) {
                 globalclass.player.canshootdragger(0);
                 this.isswimming = 0;
                 debug::print("IS swimming");
@@ -91,33 +91,6 @@ class lego_level_2 : gs_lego_level {
         else if (param1.eventid == 15) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
                 gcstaticsoundsptrarray::playtablesound(1092);
-            }
-        }
-        else if (param1.eventid == 47) {
-            if (param1.args[0] == 5) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("5", 0.8);
-                gcstaticsoundsptrarray::playtablesound(1090);
-            }
-            else if (param1.args[0] == 4) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("4", 0.8);
-            }
-            else if (param1.args[0] == 3) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("3", 0.8);
-            }
-            else if (param1.args[0] == 2) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("2", 0.8);
-                gcstaticsoundsptrarray::playtablesound(1090);
-            }
-            else if (param1.args[0] == 1) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("1", 0.8);
-            }
-            else if (param1.args[0] == 0) {
-                globalclass.player.kill();
             }
         }
         return null;
