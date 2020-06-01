@@ -205,10 +205,10 @@ class player {
                         this.splooshplayed = 1;
                         debug::print("SPLOOSH!");
                     }
-                    if ((this.whichmaskonface() == 1) && (this.maskcontrol.isactive())) {
+                    else if ((this.whichmaskonface() == 1) && (this.maskcontrol.isactive()) == 1) {
                         debug::print("this should be firing");
                         this.maskon = 1;
-                        this.addair(this.maxair);                    
+                        this.addair(this.maxair);
                         debug::print("Air restored!");
                     }
                     else {
@@ -593,8 +593,7 @@ class player {
         if (this.draintimer >= 1.0) {
             debug::print("test 2");
             this.draintimer = 0.0;
-            //needs an additional check to make sure it does not fire once the mask is on because aparently the onevent isn't enough
-            if (this.air >= 0) {
+            if ((this.air >= 0) && (this.whichmaskonface() == 1) && (this.maskcontrol.isactive() == 0)) {
                 debug::print("test 3");
                 this.removeair(5);
                 debug::print("test 4");
