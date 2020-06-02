@@ -1,5 +1,4 @@
 class lego_level_2 : gs_lego_level {
-    property isswimming;
     
     method lego_level_2() {
         var area;
@@ -70,29 +69,11 @@ class lego_level_2 : gs_lego_level {
         }
         globalclass.saverloaded = 0;
         globalclass.unlockdirector.save();
-        this.isswimming = 0;
         return null;
     }
     
     method onevent(param1) {
         this.lego_level_onevent(param1);
-        if (param1.eventid == 54) {
-            if ((param1.args[0] == 1) && (this.isswimming)) {
-                globalclass.player.canshootdragger(0);
-                this.isswimming = 0;
-                debug::print("IS swimming");
-            }
-            else if ((param1.args[0] == 0) && (this.isswimming == 0)) {
-                globalclass.player.canshootdragger(1);
-                this.isswimming = 1;
-                debug::print("NOT swimming");
-            }
-        }
-        else if (param1.eventid == 15) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
-                gcstaticsoundsptrarray::playtablesound(1092);
-            }
-        }
         return null;
     }
     

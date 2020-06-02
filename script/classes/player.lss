@@ -21,7 +21,11 @@ class player {
     property air;
     property maxair;
     property splooshplayed;
+    property isswimming;
+    property submerged;
     property maskon;
+    property drowning;
+    property drowningonland;
     
     method player() {
         return null;
@@ -48,7 +52,11 @@ class player {
         this.bshootdragger = 1;
         this.equipmentarray = 0;
         this.splooshplayed = 0;
-        this.maskon = 1;
+        this.isswimming = 0;
+        this.submerged = 0;
+        this.maskon = 0;
+        this.drowning = 0;
+        this.drowningonland = 0;
         return null;
     }
     
@@ -171,7 +179,7 @@ class player {
         if (this.maskcontrol.isactive()) {
             this.drainpower(param1);
         }
-        if (this.maskon == 0) {
+        if (((this.submerged == 1) && (this.drowning == 1)) || (this.drowningonland == 1)) {
             this.drainair(param1);
         }
         return null;
@@ -200,27 +208,45 @@ class player {
             }
             else if (param1.eventid == 54) {
                 if (param1.args[0] == 1) {
-                    if ((this.splooshplayed == 0) && (this.actorid != "gali")) {
+                    this.submerged = 1;
+                    this.drowning == 1;
+                    this.drowningonland = 0;
+                    globalclass.player.canshootdragger(0);
+                    if ((this.splooshplayed == 0) && (this.actorid != "gali")) {                     
                         gcstaticsoundsptrarray::playtablesound(1092);
                         this.splooshplayed = 1;
                         debug::print("SPLOOSH!");
                     }
-                    else if ((this.whichmaskonface() == 1) && (this.maskcontrol.isactive()) == 1) {
-                        debug::print("this should be firing");
-                        this.maskon = 1;
-                        this.addair(this.maxair);
-                        debug::print("Air restored!");
-                    }
-                    else {
-                        this.maskon = 0;
-                    }
                 }
                 else if (param1.args[0] == 0) {
-                    this.maskon = 1;
+                    this.submerged = 0;
+                    this.drowning = 0;
                     this.addair(this.maxair);
+                    globalclass.player.canshootdragger(1);
                     if (this.splooshplayed) {
-                        this.splooshplayed = 0;
+                        this.splooshplayed = 0;                       
                     }
+                }
+            }
+            else if (param1.eventid == 44) {
+                if ((this.maskon == 0) && (this.submerged == 1)) {
+                    this.drowning = 1;
+                }                
+                else if (((this.maskon == 1) && (this.submerged == 1))&& (this.drowningonland != 1)) {
+                    this.drowning = 0;
+                    this.addair(this.maxair);
+                }               
+                else if ((this.maskon == 1) && (this.submerged == 0)) {
+                    this.drowningonland = 1;
+                }                
+                else if ((this.maskon == 0) && (this.submerged == 0)) {
+                    this.drowningonland = 0;
+                    this.addair(this.maxair);
+                }
+            }            
+            else if (param1.eventid == 15) {
+                if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
+                    gcstaticsoundsptrarray::playtablesound(1092);
                 }
             }
             else if (param1.eventid == 2) {
@@ -587,21 +613,14 @@ class player {
     }
     
     method drainair(param1) {
-        debug::print("test");
         this.draintimer = this.draintimer + param1.deltatime;
-        debug::print("test 1");
         if (this.draintimer >= 1.0) {
-            debug::print("test 2");
             this.draintimer = 0.0;
-            if ((this.air >= 0) && (this.whichmaskonface() == 1) && (this.maskcontrol.isactive() == 0)) {
-                debug::print("test 3");
+            if (this.air >= 0) {
                 this.removeair(5);
-                debug::print("test 4");
             }
             if (this.air == 0) {
-                debug::print("test 5");
                 this.actor.react(0.25);
-                debug::print("test 6");
             }
         }
         return null;
