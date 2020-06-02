@@ -139,12 +139,14 @@ class mask {
         }
         else if (this.maskname == 1) {
             if (param1) {
-                gccharacter::setwatertimerlength(globalclass.player.actor.handle, 0);
+                //gccharacter::setwatertimerlength(globalclass.player.actor.handle, 0);
+                globalclass.player.maskon = 1;
                 debug::print("YOU HAVE ACTIVATED THE MASK OF WATER");
             }
             else {
-                gccharacter::setwatertimerlength(globalclass.player.actor.handle, 10);
-                globalclass.player.actor.replenishair();
+                //gccharacter::setwatertimerlength(globalclass.player.actor.handle, 10);
+                //globalclass.player.actor.replenishair();
+                globalclass.player.maskon = 0;
             }
         }
         else if (this.maskname == 10) {

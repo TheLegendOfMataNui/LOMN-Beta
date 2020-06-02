@@ -1,5 +1,4 @@
 class lego_level_2 : gs_lego_level {
-    property isswimming;
     
     method lego_level_2() {
         var area;
@@ -70,56 +69,11 @@ class lego_level_2 : gs_lego_level {
         }
         globalclass.saverloaded = 0;
         globalclass.unlockdirector.save();
-        this.isswimming = 0;
         return null;
     }
     
     method onevent(param1) {
         this.lego_level_onevent(param1);
-        if (param1.eventid == 54) {
-            if ((param1.args[0] == 1) && (this.isswimming)){
-                globalclass.player.canshootdragger(0);
-                this.isswimming = 0;
-                debug::print("IS swimming");
-            }
-            else if ((param1.args[0] == 0) && (this.isswimming == 0)) {
-                globalclass.player.canshootdragger(1);
-                this.isswimming = 1;
-                debug::print("NOT swimming");
-            }
-        }
-        else if (param1.eventid == 15) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
-                gcstaticsoundsptrarray::playtablesound(1092);
-            }
-        }
-        else if (param1.eventid == 47) {
-            if (param1.args[0] == 5) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("5", 0.8);
-                gcstaticsoundsptrarray::playtablesound(1090);
-            }
-            else if (param1.args[0] == 4) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("4", 0.8);
-            }
-            else if (param1.args[0] == 3) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("3", 0.8);
-            }
-            else if (param1.args[0] == 2) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("2", 0.8);
-                gcstaticsoundsptrarray::playtablesound(1090);
-            }
-            else if (param1.args[0] == 1) {
-                globalclass.debugstring.scalefont(3.0);
-                globalclass.scriptmessage("1", 0.8);
-            }
-            else if (param1.args[0] == 0) {
-                globalclass.player.kill();
-            }
-        }
         return null;
     }
     
