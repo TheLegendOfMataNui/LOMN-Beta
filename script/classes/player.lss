@@ -21,11 +21,11 @@ class player {
     property air;
     property maxair;
     property splooshplayed;
-    property isswimming;
     property submerged;
     property maskon;
     property drowning;
     property drowningonland;
+    property underwater;
     
     method player() {
         return null;
@@ -52,11 +52,11 @@ class player {
         this.bshootdragger = 1;
         this.equipmentarray = 0;
         this.splooshplayed = 0;
-        this.isswimming = 0;
         this.submerged = 0;
         this.maskon = 0;
         this.drowning = 0;
         this.drowningonland = 0;
+        this.underwater = 0;
         return null;
     }
     
@@ -207,24 +207,30 @@ class player {
                 }
             }
             else if (param1.eventid == 54) {
-                if (param1.args[0] == 1) {
+                if (param1.args[0] == 1) {                   
                     this.submerged = 1;
-                    this.drowning == 1;
+                    this.drowning = 1;
                     this.drowningonland = 0;
-                    globalclass.player.canshootdragger(0);
+                    this.canshootdragger(0);
                     if ((this.splooshplayed == 0) && (this.actorid != "gali")) {                     
                         gcstaticsoundsptrarray::playtablesound(1092);
                         this.splooshplayed = 1;
                         debug::print("SPLOOSH!");
+                        this.underwater = 1;
+                        this.isswimming();
+                        //globalclass.hud.thingy.slide(1);
                     }
                 }
-                else if (param1.args[0] == 0) {
+                else if (param1.args[0] == 0) {                    
                     this.submerged = 0;
                     this.drowning = 0;
                     this.addair(this.maxair);
-                    globalclass.player.canshootdragger(1);
+                    this.canshootdragger(1);
                     if (this.splooshplayed) {
-                        this.splooshplayed = 0;                       
+                        this.splooshplayed = 0;    
+                        this.underwater = 0;
+                        this.isswimming();
+                        //globalclass.hud.thingy.slide(0);
                     }
                 }
             }
@@ -249,7 +255,6 @@ class player {
                 toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
                 if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
                     gcstaticsoundsptrarray::playtablesound(1092);
-                    gccharacter::setanimationrate(toa, 1);
                 }
             }
             else if (param1.eventid == 2) {
@@ -326,14 +331,6 @@ class player {
                 toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
                 if (this.maskcontrol.isactive()) {
                     this.maskcontrol.toggleactive();
-                }
-                else if (this.actorid == "gali") {  
-                    if (this.submerged == 1) {
-                        gccharacter::setanimationrate(toa, 2);
-                    }
-                    else {
-                        gccharacter::setanimationrate(toa, 1);
-                    }
                 }
             }
         }
@@ -439,6 +436,7 @@ class player {
             this.actor.initmotionsystem();
             this.actor.disableallraycollisions();
             this.actor.setupphysics(1.5, 0.8, 1, 0, 0);
+            this.isswimming();
             if (this.actor.id == scslosifoundation::stringtoidentifier("onua")) {
                 
             }
@@ -632,6 +630,9 @@ class player {
             if (this.air >= 0) {
                 this.removeair(5);
             }
+            if ((this.air >= 1) && (this.air <= 25)){
+                gcstaticsoundsptrarray::playtablesound(1090);
+            }
             if (this.air == 0) {
                 this.actor.react(5, 2);
             }
@@ -704,8 +705,9 @@ class player {
         this.addlife(this.maxlife);
         this.addenergy(this.maxenergy);
         this.addair(this.maxair);
-        this.actor.setunderwater(0);
         globalclass.hud.show();
+        this.underwater = 0;
+        this.isswimming();
         if (this.equipmentarray == 1) {
             this.equipmentarray = 0;
             this.equipcombat();
@@ -738,6 +740,9 @@ class player {
     method removelife(param1) {
         if (param1 == null) {
             param1 = 0;
+        }
+        if (this.life == 30) {
+            gcstaticsoundsptrarray::playtablesound(1030);
         }
         this.life = this.life - param1;
         if (this.life <= 0) {
@@ -1010,6 +1015,20 @@ class player {
         gccharacter::removepart(toa, 4);
         gccharacter::removepart(toa, 5);
         gccharacter::removepart(toa, 6);
+        return null;
+    }
+
+    method isswimming() {
+        if (this.underwater == 1) {
+            this.actor.setunderwater(1);
+            this.underwater = null;
+            debug::print(__tostring(this.actorid) + (" is swimming!"));
+        }
+        else if (this.underwater == 0) {
+            this.actor.setunderwater(0);
+            this.underwater = null;
+            debug::print(__tostring(this.actorid) + (" is not swimming!"));
+        }
         return null;
     }
 }

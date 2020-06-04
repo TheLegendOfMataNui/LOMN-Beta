@@ -40,49 +40,6 @@ class lego_level_7 : gs_lego_level {
         return null;
     }
     
-    method onevent(param1) {
-        this.lego_level_onevent(param1);
-        if ((param1.eventid == 54) && (globalclass.player.actorid != "gali")) {
-            if (param1.args[0] == 1) {
-                if (this.inwater == 0) {
-                    globalclass.player.canshootdragger(0);
-                    gcstaticsoundsptrarray::playtablesound(1092);
-                    debug::print("IS swimming");
-                    this.inwater = 1;
-                }
-            }
-            else if (param1.args[0] == 0) {
-                if (this.inwater == 1) {
-                    globalclass.player.canshootdragger(1);
-                    debug::print("NOT swimming");
-                    this.inwater = 0;
-                }
-            }
-        }
-        else if ((param1.eventid == 54) && (globalclass.player.actorid == "gali")) {
-            if (param1.args[0] == 1) {
-                if (this.inwater == 0) {
-                    globalclass.player.canshootdragger(0);
-                    debug::print("IS swimming");
-                    this.inwater = 1;
-                }
-            }
-            else if (param1.args[0] == 0) {
-                if (this.inwater == 1) {
-                    globalclass.player.canshootdragger(1);
-                    debug::print("NOT swimming");
-                    this.inwater = 0;
-                }
-            }
-        }
-        else if ((param1.eventid == 15) && (globalclass.player.actorid == "gali")) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
-                gcstaticsoundsptrarray::playtablesound(1092);
-            }
-        }
-        return null;
-    }
-    
     method settestforlavacollisions(param1) {
         var var1;
         var1 = param1;
