@@ -466,18 +466,20 @@ class vllg2_puzzle {
                 }
             }
         }
-		else if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
-			if (this.desctext != null) {
-				this.desctext.hide();
-				this.desctext.cleanupfull();
-				this.desctext = null;
-			}
-			if (this.howtotext != null) {
-				this.howtotext.hide();
-				this.howtotext.cleanupfull();
-				this.howtotext = null;
-			}
-		}
+        else if (param1.eventid == 8) {
+		    if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
+			    if (this.desctext != null) {
+				    this.desctext.hide();
+				    this.desctext.cleanupfull();
+				    this.desctext = null;
+			    }
+			    if (this.howtotext != null) {
+				    this.howtotext.hide();
+				    this.howtotext.cleanupfull();
+				    this.howtotext = null;
+			    }
+		    }
+        }
         else if (param1.eventid == 35) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("drs0")) {
                 bettersaver::setbooleanvalue(53, 1);
