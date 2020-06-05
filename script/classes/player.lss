@@ -23,9 +23,9 @@ class player {
     property splooshplayed;
     property submerged;
     property maskon;
-    property drowning;
     property drowningonland;
     property underwater;
+    property airshown;
     
     method player() {
         return null;
@@ -54,9 +54,9 @@ class player {
         this.splooshplayed = 0;
         this.submerged = 0;
         this.maskon = 0;
-        this.drowning = 0;
         this.drowningonland = 0;
         this.underwater = 0;
+        this.airshown = 0;
         return null;
     }
     
@@ -179,7 +179,7 @@ class player {
         if (this.maskcontrol.isactive()) {
             this.drainpower(param1);
         }
-        if (((this.submerged == 1) && (this.drowning == 1)) || (this.drowningonland == 1)) {
+        if ((this.submerged == 1) || (this.drowningonland == 1)) {
             this.drainair(param1);
         }
         return null;
@@ -209,50 +209,54 @@ class player {
             else if (param1.eventid == 54) {
                 if (param1.args[0] == 1) {                   
                     this.submerged = 1;
-                    this.drowning = 1;
-                    this.drowningonland = 0;
                     this.canshootdragger(0);
+                    if (this.maskon == 0) {
+                        this.showair(1);
+                        this.airshown = 1;
+                    }
                     if ((this.splooshplayed == 0) && (this.actorid != "gali")) {                     
                         gcstaticsoundsptrarray::playtablesound(1092);
                         this.splooshplayed = 1;
                         debug::print("SPLOOSH!");
                         this.underwater = 1;
                         this.isswimming();
-                        globalclass.hud.thingy.slide(0);
                     }
                 }
                 else if (param1.args[0] == 0) {                    
                     this.submerged = 0;
-                    this.drowning = 0;
                     this.addair(this.maxair);
                     this.canshootdragger(1);
+                    if (this.maskon == 0) {
+                        this.showair(0);
+                        this.airshown = 0;
+                    }
                     if (this.splooshplayed) {
                         this.splooshplayed = 0;    
                         this.underwater = 0;
-                        this.isswimming();
-                        globalclass.hud.thingy.slide(1);
+                        this.isswimming();                       
                     }
                 }
             }
-            else if (param1.eventid == 44) {
-                if ((this.maskon == 0) && (this.submerged == 1)) {
-                    this.drowning = 1;
-                }                
-                else if (((this.maskon == 1) && (this.submerged == 1))&& (this.drowningonland != 1)) {
-                    this.drowning = 0;
+            else if (param1.eventid == 44) {              
+                if ((this.maskon == 1) && (this.submerged == 1)) {
                     this.addair(this.maxair);
+                    //debug::print("Yes");
                 }               
                 else if ((this.maskon == 1) && (this.submerged == 0)) {
                     this.drowningonland = 1;
+                    this.showair(1);
+                    this.airshown = 1;
+                    //debug::print("Nono zone");
                 }                
                 else if ((this.maskon == 0) && (this.submerged == 0)) {
                     this.drowningonland = 0;
                     this.addair(this.maxair);
+                    this.showair(0);
+                    this.airshown = 0;
+                    //debug::print("Done the do");
                 }
             }
             else if (param1.eventid == 15) {
-                var toa;
-                toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
                 if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
                     gcstaticsoundsptrarray::playtablesound(1092);
                 }
@@ -1028,6 +1032,18 @@ class player {
             this.actor.setunderwater(0);
             this.underwater = null;
             debug::print(__tostring(this.actorid) + (" is not swimming!"));
+        }
+        return null;
+    }
+
+    method showair(param1) {
+        if ((param1 == 1) && (this.airshown == 0)) {
+            globalclass.hud.thingy.slideair(1);
+            this.airshown = 1;
+        }
+        else if ((param1 == 0) && (this.airshown == 1)) {
+            globalclass.hud.thingy.slideair(0);
+            this.airshown = 0;
         }
         return null;
     }
