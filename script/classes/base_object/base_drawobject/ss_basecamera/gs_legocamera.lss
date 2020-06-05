@@ -307,14 +307,14 @@ class gs_legocamera : ss_basecamera {
         return null;
     }
     
-    method settargetspline(param1, param2, param3) {
-        if (param1 == null) {
-            param1 = 0;
+    method settargetspline(target_spline_index, param2, param3) {
+        if (target_spline_index == null) {
+            target_spline_index = 0;
         }
         if (param3 == null) {
             param3 = 1;
         }
-        this.targetsplineindex = param1;
+        this.targetsplineindex = target_spline_index;
         gclegocamera::settargetspline(this.handle, this.cameraspline, this.camsplineindex, this.targetsplineindex, this.splineduration, param2, param3);
         return null;
     }
