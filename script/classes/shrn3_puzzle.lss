@@ -8,6 +8,7 @@ class shrn3_puzzle {
     property bossdoortext;
     property bossdoortexttimer;
     property showbossdoor;
+    property crashbandicootwarped;
     
     method shrn3_puzzle(param1) {
         this.parent = param1;
@@ -19,6 +20,7 @@ class shrn3_puzzle {
         var onewa;
         var portal_trigger;
         var door_text;
+        this.crashbandicootwarped = 0;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
         globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
@@ -75,6 +77,8 @@ class shrn3_puzzle {
             this.bossdoortext.cleanupfull();
             this.bossdoortext = null;
         }
+        gcstaticsoundsptrarray::stoptablesound(1094);
+        this.crashbandicootwarped = null;
         return null;
     }
     
@@ -147,9 +151,11 @@ class shrn3_puzzle {
                 }
             }
         }
-        if (param1.eventid == 4) {
+        if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
                 gcstaticsoundsptrarray::playtablesound(1094);
+                this.crashbandicootwarped = 1;
+                debug::print("WOAH!");
             }
         }
         return null;

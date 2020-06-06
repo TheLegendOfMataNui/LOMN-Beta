@@ -10,6 +10,7 @@ class shrn2_puzzle {
     property bossdoortexttimer;
     property showbossdoor;
     property inwater;
+    property crashbandicootwarped;
     
     method shrn2_puzzle(param1) {
         this.parent = param1;
@@ -26,6 +27,7 @@ class shrn2_puzzle {
         var door_text;
 		var tohunga;
         this.inwater = 1;
+        this.crashbandicootwarped = 0;
         this.doors = [ new lego_moveableobject("dor1"), 
             new lego_moveableobject("dor3"), 
             new lego_moveableobject("dor2"), 
@@ -138,6 +140,8 @@ class shrn2_puzzle {
             this.bossdoortext = null;
         }
         this.inwater = null;
+        gcstaticsoundsptrarray::stoptablesound(1094);
+        this.crashbandicootwarped = null;
         return null;
     }
     
@@ -221,9 +225,11 @@ class shrn2_puzzle {
             }
             this.inwater = 0;
         }
-        if (param1.eventid == 4) {
+        if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
                 gcstaticsoundsptrarray::playtablesound(1094);
+                this.crashbandicootwarped = 1;
+                debug::print("WOAH!");
             }
         }
         return null;

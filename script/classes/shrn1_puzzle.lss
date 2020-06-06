@@ -11,6 +11,7 @@ class shrn1_puzzle {
     property crackstate;
     property showedoor;
     property portalactive;
+    property crashbandicootwarped;
     
     method shrn1_puzzle(param1) {
         this.parent = param1;
@@ -28,6 +29,7 @@ class shrn1_puzzle {
         var var6;
         var whenua;
         var portal_trigger;
+        this.crashbandicootwarped = 0;
         gcareadirector::setfog(-16777216, 0 - 65.0, 0 - 600.0, 0.05);
         gclightdirector::setcavelighting(1);
         gcareadirector::setnearestmax(15);
@@ -166,6 +168,8 @@ class shrn1_puzzle {
             }
             this.mdoors = null;
         }
+        gcstaticsoundsptrarray::stoptablesound(1094);
+        this.crashbandicootwarped = null;
         return null;
     }
     
@@ -335,9 +339,11 @@ class shrn1_puzzle {
                 }
             }
         }
-        if (param1.eventid == 4) {
+        if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
                 gcstaticsoundsptrarray::playtablesound(1094);
+                this.crashbandicootwarped = 1;
+                debug::print("WOAH!");
             }
         }
         return null;

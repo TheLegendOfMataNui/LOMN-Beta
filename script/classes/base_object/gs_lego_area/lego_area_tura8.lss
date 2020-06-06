@@ -1,15 +1,14 @@
-class lego_area_tura1 : gs_lego_area {
+class lego_area_tura8 : gs_lego_area {
     property crashbandicootwarped;
     property warpsound;
     
-    method lego_area_tura1(param1) {
+    method lego_area_tura8(param1) {
         this.gs_lego_area("tura", param1, 0, 0);
         this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
-        this.playlegend();
         this.crashbandicootwarped = 0;
         this.warpsound = new tablecopysound(1094);
         this.lego_area_show();
@@ -57,39 +56,6 @@ class lego_area_tura1 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        return null;
-    }
-    
-    method playlegend() {
-        var var1;
-        if (bettersaver::getbooleanvalue(50) == 0) {
-            if (gcareadirector::getlanguage() == 0) {
-                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVEn.bik", 1);
-            }
-            if (gcareadirector::getlanguage() == 1) {
-                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVFr.bik", 1);
-            }
-            if (gcareadirector::getlanguage() == 2) {
-                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVGer.bik", 1);
-            }
-            if (gcareadirector::getlanguage() == 3) {
-                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVDa.bik", 1);
-            }
-            if (gcareadirector::getlanguage() == 4) {
-                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVDu.bik", 1);
-            }
-            if (gcareadirector::getlanguage() == 5) {
-                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVIt.bik", 1);
-            }
-            if (gcareadirector::getlanguage() == 6) {
-                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVSpa.bik", 1);
-            }
-            if (gcareadirector::getlanguage() == 7) {
-                gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVSwe.bik", 1);
-            }
-            var1 = gcconversationengine::getconversationengine();
-            gcconversationengine::forceconversation(var1, 2003330414);
-        }
         return null;
     }
 }

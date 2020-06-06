@@ -5,6 +5,7 @@ class shrn4_puzzle {
     property bossdoortext;
     property bossdoortexttimer;
     property showbossdoor;
+    property crashbandicootwarped;
     
     method shrn4_puzzle(param1) {
         this.parent = param1;
@@ -15,6 +16,7 @@ class shrn4_puzzle {
         var nuju;
         var portal_trigger;
         var door_text;
+        this.crashbandicootwarped = 0;
         globalclass.player.unequip();
         gcareadirector::setnearestmax(10);
         this.bossdoor = new lego_moveableobject("etdr", this.parent.name);
@@ -56,6 +58,8 @@ class shrn4_puzzle {
             this.bossdoortext.cleanupfull();
             this.bossdoortext = null;
         }
+        gcstaticsoundsptrarray::stoptablesound(1094);
+        this.crashbandicootwarped = null;
         return null;
     }
     
@@ -91,9 +95,11 @@ class shrn4_puzzle {
                 this.bossdoor.hide();
             }
         }
-        if (param1.eventid == 4) {
+        if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
                 gcstaticsoundsptrarray::playtablesound(1094);
+                this.crashbandicootwarped = 1;
+                debug::print("WOAH!");
             }
         }
         return null;

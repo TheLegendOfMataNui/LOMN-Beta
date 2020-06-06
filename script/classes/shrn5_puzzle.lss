@@ -6,6 +6,7 @@ class shrn5_puzzle {
     property bossdoortext;
     property bossdoortexttimer;
     property showbossdoor;
+    property crashbandicootwarped;
     
     method shrn5_puzzle(param1) {
         this.parent = param1;
@@ -16,6 +17,7 @@ class shrn5_puzzle {
         var matau;
         var portal_trigger;
         var door_text;
+        this.crashbandicootwarped = 0;
         globalclass.player.unequip();
         gcmodeldirector::setnearestmax(5);
         gcareadirector::setnearestmax(7);
@@ -70,6 +72,8 @@ class shrn5_puzzle {
             this.bossdoor = null;
         }
         this.cinema = null;
+        gcstaticsoundsptrarray::stoptablesound(1094);
+        this.crashbandicootwarped = null;
         return null;
     }
     
@@ -143,9 +147,11 @@ class shrn5_puzzle {
             this.parent.level.cam.setaimode(11);
             globalclass.player.actor.setinputstate("ninp");
         }
-        if (param1.eventid == 4) {
+        if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
                 gcstaticsoundsptrarray::playtablesound(1094);
+                this.crashbandicootwarped = 1;
+                debug::print("WOAH!");
             }
         }
         return null;
