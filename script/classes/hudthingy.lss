@@ -311,27 +311,24 @@ class hudthingy {
     }
     
     method process(param1) {
-        if (this.onscreen == 1) {
-            if (this.movement < 0) {
-                this.changepos(-10);
-                if (this.airbar[0].x1 <= -86) {
-                    this.movement = 0;
-                }
-            }              
-            if (this.movement == -2) {
-                this.changepos(-50);
-                if (this.airbar[0].x1 == -86) {
-                    this.movement = 0;
-                }
-            }            
-            if (this.movement > 0) {
-                this.changepos(10);
-                if (this.airbar[0].x1 >= 66) {
-                    this.movement = 0;
-                    this.onscreen = 0;
-                }
-            }            
-        }
+        if ((this.movement < 0) && (this.airbar[0].x1 >= -86)) {
+            this.changepos(-10);
+            if (this.airbar[0].x1 <= -86) {
+                this.movement = 0;
+            }
+        }              
+        if ((this.movement == -2) && (this.airbar[0].x1 >= -86)) {
+            this.changepos(-50);
+            if (this.airbar[0].x1 <= -86) {
+                this.movement = 0;
+            }
+        }            
+        if ((this.movement > 0) && (this.airbar[0].x1 <= 66)) {
+            this.changepos(10);
+            if (this.airbar[0].x1 >= 66) {
+                this.movement = 0;
+            }
+        }            
         return null;
     }
     
@@ -342,19 +339,24 @@ class hudthingy {
     method slideair(param1) {
         if (param1 == 0) {
             debug::print("[][AirBar][] Slide Off");
-            this.movement = -1;
-            this.onscreen = 1;            
+            if (this.onscreen == 1) {
+                this.movement = -1;
+                this.onscreen = 0;
+            }
         }        
         else if (param1 == 1) {
             debug::print("[][AirBar][] Slide On");
-            if (this.onscreen == 1) {
+            if (this.onscreen == 0) {
                 this.movement = 1;
+                this.onscreen = 1;
             }      
         }
         else if (param1 == 2) {
             debug::print("[][AirBar][] Slide Off REAL FAST");
-            this.movement = -2;
-            this.onscreen = 1;            
+            if (this.onscreen == 1) {
+                this.movement = -2;
+                this.onscreen = 0;
+            }
         }
         return null;
     }
