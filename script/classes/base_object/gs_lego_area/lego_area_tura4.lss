@@ -11,8 +11,8 @@ class lego_area_tura4 : gs_lego_area {
     method initfull() {
         this.crashbandicootwarped = 0;
         this.warpsound = new tablecopysound(1094);
-        this.lego_area_show();
-        globalclass.player.unequip();
+        this.lego_area_show();               
+        globalclass.player.processequipment(2);
         if (gcsaver::portalactive() == 1) {
             gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/kopa/shrine_ripple/k_shrn_ptl", 1);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("nuju"), 0);  

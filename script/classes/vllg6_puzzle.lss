@@ -76,7 +76,7 @@ class vllg6_puzzle {
         }
         this.deadhives = 0;
         if (gcsaver::isconditionset(1073741824)) {
-            globalclass.player.unequip();         
+            globalclass.player.processequipment(2);       
             //Set Kapura (VLGR)
             gccharacter::setkapura(this.kapura);
             
@@ -205,7 +205,7 @@ class vllg6_puzzle {
         }
         else {
             //Hiding Characters
-            globalclass.player.equipcombat();
+            globalclass.player.processequipment(1);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl01"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl02"), 0);

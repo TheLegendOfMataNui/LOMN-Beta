@@ -86,7 +86,7 @@ class vllg5_puzzle {
         }
         this.deadhives = 0;
         if (gcsaver::isconditionset(4194304) == 1) {
-            globalclass.player.unequip();        
+            globalclass.player.processequipment(2);     
             //Set Tohunga: Makani (VLGR)
             gccharacter::settohunga(this.makani, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mkba"));
             gccharacter::setorientation(this.makani, 169);
@@ -237,7 +237,7 @@ class vllg5_puzzle {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl14"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl15"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl16"), 0);
-            globalclass.player.equipcombat();
+            globalclass.player.processequipment(1);
             globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaTheme");
             globalclass.bgmusic.play();
         }

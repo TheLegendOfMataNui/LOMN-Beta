@@ -7,7 +7,7 @@ class brd2_puzzle {
     }
     
     method initfull() {
-        globalclass.player.equipsurf();
+        globalclass.player.processequipment(3);
         gcareadirector::setnearestmax(5);
         globalclass.player.actor.setclimb(5);
         globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0);
@@ -59,6 +59,11 @@ class brd2_puzzle {
         else if (param1.eventid == 7) {
             if (param1.args[2] == scslosifoundation::stringtoidentifier("Ecut")) {
                 gcstaticsoundsptrarray::playtablesound(149);
+            }
+        }
+        else if (param1.eventid == 4) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {
+                globalclass.player.actor.setsurfingability(0.0, 0.0);
             }
         }
         return null;

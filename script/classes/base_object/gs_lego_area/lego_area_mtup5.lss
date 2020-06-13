@@ -15,7 +15,7 @@ class lego_area_mtup5 : gs_lego_area {
         var var1;
         var var2;
         this.lego_area_show();
-        globalclass.player.equipcombat();
+        globalclass.player.processequipment(1);
         globalclass.bgmusic.stop();
         this.music_stopped = 1;
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
@@ -91,10 +91,10 @@ class lego_area_mtup5 : gs_lego_area {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
             globalclass.player.unkill();
             globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
+            globalclass.level.cam.setaimode(11);
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("l000"));
         }
         return null;
