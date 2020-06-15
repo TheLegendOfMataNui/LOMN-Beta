@@ -155,12 +155,22 @@ class shrn6_puzzle {
         else if (param1.eventid == 21) {
             
         }
-        if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
+        else if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
                 gcstaticsoundsptrarray::playtablesound(1094);
                 this.crashbandicootwarped = 1;
                 debug::print("WOAH!");
             }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.unkill();
+            this.initshort();
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.player.actor.setinputstate("ninp");
+            globalclass.level.cam.setaimode(11);
         }
         return null;
     }
