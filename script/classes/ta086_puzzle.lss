@@ -78,18 +78,15 @@ class ta086_puzzle {
         else if (param1.eventid == 42) {
             
         }
-        else if (param1.eventid == 46) {
-            if (this.tiggerboxid == scslosifoundation::stringtoidentifier("tb00")) {
-                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            }
-            else if (this.tiggerboxid == scslosifoundation::stringtoidentifier("tb01")) {
-                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
             this.cleanupshort();
             this.initshort();
         }
-        else if (param1.eventid == 27) {
-            globalclass.player.kill();
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 3) {
             var1 = param1.args[0];
