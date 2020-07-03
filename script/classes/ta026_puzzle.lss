@@ -8,16 +8,15 @@ class ta026_puzzle {
     property secretdoorshow;
     property secreetdoorgone;
     property boardpickup;
-    property urnsound;
     property cinema;
     property cinemadone;
     property safetimercounter;
-    property lowpoint;
+    property coldlava;
+    property ded;
     
     method ta026_puzzle(param1) {
         this.parent = param1;
         this.secreetdoorgone = 0;
-        this.lowpoint = 10000;
         return null;
     }
     
@@ -27,6 +26,8 @@ class ta026_puzzle {
         gcareadirector::setnearestmaxdist(1000);
         gcareadirector::setnearestmax(50);
         this.secretdoorshow = 0;
+        this.ded = 0;
+        globalclass.player.actor.setsecondarybclreport();
         this.platformarray = [ new bounceyplatform("pl00"), 
             new bounceyplatform("pl02"), 
             new bounceyplatform("pl05"), 
@@ -70,18 +71,19 @@ class ta026_puzzle {
             this.hotobjarray[var1].setresponse(4, 4, 4);
             var1 = var1 + 1;
         }
-        this.hotobjarray[1].setcrushflags(1, 1, 1, 1, 1, 1);
-        this.coldobjarray = [ new lego_moveableobject("lav6"), 
-            new lego_moveableobject("add2"), 
+        this.coldobjarray = [ new lego_moveableobject("add2"), 
             new lego_moveableobject("bldr"), 
             new lego_moveableobject("adon") ];
         var1 = 0;
         while ((this.coldobjarray.__length - 1) >= var1) {
             this.coldobjarray[var1].initfull();
-            this.coldobjarray[var1].setresponse(4, 4, 4);
+            this.coldobjarray[var1].setresponse(0, 0, 3);
             var1 = var1 + 1;
         }
-        this.coldobjarray[1].setresponse(0, 0, 3);
+        this.coldlava = new lego_moveableobject("lav6");
+        this.coldlava.initfull();
+        this.coldlava.setresponse(4, 4, 4);
+        this.coldlava.hide();
         if (gcsaver::isconditionset(8388608)) {
             this.secreetdoorgone = 1;
         }
@@ -204,11 +206,12 @@ class ta026_puzzle {
     }
     
     method process(param1) {
-        if (this.cinemadone) {
+        if (this.ded == 0) {
             if (globalclass.player.actor.getpos().y1 < 220.1) {
                 globalclass.level.burnsound.play();
                 globalclass.level.cam.setaimode(7);
                 globalclass.player.kill();
+                this.ded = 1;
             }
         }
         return null;
@@ -257,6 +260,7 @@ class ta026_puzzle {
         }
         else if (param1.eventid == 27) {
             this.initshort();
+            this.ded = 0;
         }
         else if (param1.eventid == 30) {
             globalclass.hud.show();
@@ -342,6 +346,7 @@ class ta026_puzzle {
                 this.coldobjarray[var1].show();
                 var1 = var1 + 1;
             }
+            this.coldlava.show();
         }
         return null;
     }
