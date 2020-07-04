@@ -27,7 +27,6 @@ class ta026_puzzle {
         gcareadirector::setnearestmax(50);
         this.secretdoorshow = 0;
         this.ded = 0;
-        globalclass.player.actor.setsecondarybclreport();
         this.platformarray = [ new bounceyplatform("pl00"), 
             new bounceyplatform("pl02"), 
             new bounceyplatform("pl05"), 
@@ -122,7 +121,7 @@ class ta026_puzzle {
             this.boardpickup.setcondition(131072);
             this.boardpickup.setquest(3);
         }
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
         globalclass.bgmusic.play(1);
         if (this.state == 1) {
             if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin5")) == 0) {
@@ -345,8 +344,8 @@ class ta026_puzzle {
             while ((this.coldobjarray.__length - 1) >= var1) {
                 this.coldobjarray[var1].show();
                 var1 = var1 + 1;
+                this.coldlava.show();
             }
-            this.coldlava.show();
         }
         return null;
     }
