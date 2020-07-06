@@ -134,7 +134,7 @@ class ta026_puzzle {
                 this.cinemadone = 0;
                 gccinemaengine::play(this.cinema);
                 globalclass.bgmusic.stop();
-                debug::print("play cinema cin5 for ta02");
+                debug::print("play cinema cin5 for ta02");               
             }
         }
         return null;
@@ -266,11 +266,14 @@ class ta026_puzzle {
             globalclass.player.actor.setpos(0 - 261.3, 222.3, 470.6);
             globalclass.player.actor.setorientation(31.9);
             this.cinemadone = 1;
+            this.ded = 0;
             globalclass.bgmusic.play(1);
             globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("????"));
         }
         else if (param1.eventid == 44) {
-            
+            if (this.cinemadone == 0) {
+                this.ded = 1;
+            }
         }
         return null;
     }
