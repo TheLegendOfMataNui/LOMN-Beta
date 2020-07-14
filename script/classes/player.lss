@@ -30,6 +30,7 @@ class player {
     property equippedcombat;
     property equippedpeace;
     property equippedsurf;
+    property equippedjoke;
     
     method player() {
         return null;
@@ -65,6 +66,7 @@ class player {
         this.equippedcombat = 0;
         this.equippedpeace = 0;
         this.equippedsurf = 0;
+        this.equippedjoke = 0;
         return null;
     }
     
@@ -357,6 +359,9 @@ class player {
                 }
                 if (this.equiptype == 3) {
                     this.processequipment(3);
+                }
+                if (this.equiptype == 4) {
+                    this.processequipment(4);
                 }
             }
         }
@@ -743,6 +748,9 @@ class player {
         if (this.equiptype == 3) {
             this.processequipment(3);
         }
+        if (this.equiptype == 4) {
+            this.processequipment(4);
+        }
         this.actor.setanimationscalar(1);
         return null;
     }
@@ -1000,11 +1008,21 @@ class player {
             this.equiptype = 3;
             this.equippedsurf = 1;
             debug::print("Equipped Kopaka For Surfing");
+        }            
+        if ((param1 == 4) && (this.equippedjoke == 0)) {
+            if (this.actorid == "poha") {
+                //Apply Joke Equipment
+                gccharacter::addpart(toa, "cnt1/ptto", 6);
+                this.equiptype = 4;
+                this.equippedpeace = 1;
+                debug::print("Equipped Pohatu For Jokes");
+            }
         }        
         debug::print("Equipment type = " + __tostring(this.equiptype));
         debug::print("Equipcombat = " + __tostring(this.equippedcombat));
         debug::print("Equippeace = " + __tostring(this.equippedpeace));
         debug::print("Equipsurf = " + __tostring(this.equippedsurf));
+        debug::print("Equipsurf = " + __tostring(this.equippedjoke));
         return null;
     }
 
@@ -1014,11 +1032,13 @@ class player {
         this.equippedcombat = 0;
         this.equippedpeace = 0;
         this.equippedsurf = 0;
+        this.equippedjoke = 0;
         gccharacter::removepart(toa, 1);
         gccharacter::removepart(toa, 2);
         gccharacter::removepart(toa, 3);
         gccharacter::removepart(toa, 4);
         gccharacter::removepart(toa, 5);
+        gccharacter::removepart(toa, 6);
         debug::print("Removed all equipment!");
         return null;
     }
