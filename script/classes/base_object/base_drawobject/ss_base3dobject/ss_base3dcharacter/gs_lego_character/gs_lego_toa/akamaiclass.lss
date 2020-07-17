@@ -1,0 +1,50 @@
+class akamaiclass : gs_lego_toa {
+    property walkspeed;
+    property runspeed;
+    property standingjumpheight;
+    property standingjumplength;
+    property runningjumpheight;
+    property runningjumplength;
+    property swimingabilty;
+    property bounce;
+    property dig;
+    property mapperstate;
+    property inputhandle;
+    
+    method akamaiclass(param1, param2, param3, param4, param5) {
+        this.gs_lego_toa(param1, param2, param3, param4, param5);
+        this.walkspeed = 4;
+        this.runspeed = 15;
+        this.standingjumpheight = 6;
+        this.standingjumplength = 6;
+        this.runningjumpheight = 4;
+        this.runningjumplength = 8;
+        this.swimingabilty = 0;
+        this.bounce = 0;
+        gckeymapper::setusecontext(this.mapperhandle, 0);
+        this.inputhandle = null;
+        this.open_eye_sprite_filename = "Root/data/art/hud/redeyeson";
+        this.closed_eye_sprite_filename = "Root/data/art/hud/redeyesoff";
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_toa_initfull();
+        this.inputhandle = globalclass.addtoinputlist(this);
+
+
+        // Set camera positioning
+        globalclass.level.cam.setcamzoomfactor(9.0); // TODO: Set a number here
+        globalclass.level.cam.setheightoffset(5.0); // TODO: Also set a number here
+
+
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_toa_cleanupfull();
+        globalclass.removefrominputlist(this.inputhandle);
+        this.inputhandle = null;
+        return null;
+    }
+}
