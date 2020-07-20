@@ -233,6 +233,8 @@ class gs_lego_screenfrontend {
         var kopaka;
         var lewa;
         var tahu;
+		var akamai;
+		var wairuha;
         if (bettersaver::getbooleanvalue(100)) {
             gchuddirector::playcinematic("Root/Data/cinematics/ewokCelebration.bik", 1);
             bettersaver::setbooleanvalue(100, 0);
@@ -278,6 +280,8 @@ class gs_lego_screenfrontend {
         kopaka = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kopa"), 0);
         lewa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("lewa"), 0);
         tahu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("tahu"), 0);
+		akamai = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("akam"), 0);
+		wairuha = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("wair"), 0);
         if ((globalclass.unlockdirector.unlocks.played_onua) == 0) {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("onua"), 0);
         }
@@ -342,6 +346,26 @@ class gs_lego_screenfrontend {
             gccharacter::setorientation(tahu, -50);
             gccharacter::switchanimation(tahu, scslosifoundation::stringtoidentifier("t000"), -1);
         }
+        if ((globalclass.unlockdirector.unlocks.played_akamai) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("akam"), 0);
+        }
+        else {
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("akam"), 0);
+			gccharacter::addpart(akamai, "akam/mk8a", 11);
+            gccharacter::setinputstate(akamai, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::setorientation(akamai, 0);
+            gccharacter::switchanimation(akamai, scslosifoundation::stringtoidentifier("ak00"), -1);
+        }		
+        if ((globalclass.unlockdirector.unlocks.played_wairuha) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("wair"), 0);
+        }
+        else {
+            gcmodeldirector::show(scslosifoundation::stringtoidentifier("wair"), 0);
+			gccharacter::addpart(wairuha, "wair/mk9a", 12);
+            gccharacter::setinputstate(wairuha, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::setorientation(wairuha, -50);
+            gccharacter::switchanimation(wairuha, scslosifoundation::stringtoidentifier("wa00"), -1);
+        }		
         if ((globalclass.unlockdirector.unlocks.played_nobua) == 0) {
         }
         else {
