@@ -16,6 +16,7 @@ class test_puzzle {
         var KEVIN;
 		var tohunga;
         var ussal;
+        var nobua;
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-16777216, 0 - 5.0, 0 - 600.0, 0.01);
@@ -37,6 +38,12 @@ class test_puzzle {
         gccharacter::addpart(ussal, "krb2/nbua", 1);
         gccharacter::setinputstate(ussal, scslosifoundation::stringtoidentifier("none"));
         gccharacter::switchanimation(ussal, scslosifoundation::stringtoidentifier("kr00"), -1);
+        nobua = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+        gccharacter::settohunga(nobua, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
+        gccharacter::setinputstate(nobua, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(nobua, scslosifoundation::stringtoidentifier("hak1"), -1);
+        gccharacter::setorientation(nobua, 0);
+        gccharacter::setshadowtype(nobua, 0);
 		this.callsurfonce = 1;
         this.miruactive = 1;
         this.holedo = 1;
