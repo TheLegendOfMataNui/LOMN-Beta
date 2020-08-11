@@ -6,9 +6,9 @@ class legomp3player {
         return null;
     }
     
-    method setupforplay(param1) {
+    method setupforplay(audio_filepath) {
         if (this.handle != null) {
-            gcmp3player::setupforplay(this.handle, param1);
+            gcmp3player::setupforplay(this.handle, audio_filepath);
         }
         return null;
     }
@@ -20,12 +20,15 @@ class legomp3player {
         return null;
     }
     
-    method play(param1) {
-        if (param1 == null) {
-            param1 = 1;
+    method play(int) {
+        //int arg should be 0 or 1.  
+        //1 = loop track
+        //0 = play once
+        if (int == null) {
+            int = 1;
         }
         if (this.handle != null) {
-            gcmp3player::play(this.handle, param1);
+            gcmp3player::play(this.handle, int);
         }
         return null;
     }
@@ -65,9 +68,9 @@ class legomp3player {
         return null;
     }
     
-    method changefilename(param1) {
+    method changefilename(audio_filepath) {
         if (this.handle != null) {
-            gcmp3player::changefilename(this.handle, param1);
+            gcmp3player::changefilename(this.handle, audio_filepath);
         }
         return null;
     }
