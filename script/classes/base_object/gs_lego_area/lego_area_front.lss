@@ -28,8 +28,10 @@ class lego_area_front : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        this.frontendmenu.exit();
-        this.frontendmenu = null;
+        if (this.frontendmenu != null) {
+            this.frontendmenu.exit();
+            this.frontendmenu = null;
+        }
         return null;
     }
     
