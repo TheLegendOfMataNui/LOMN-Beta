@@ -1,10 +1,23 @@
 class puzzle_mana7 {
+    property parent;
+    property fmvplayed;
     
-    method puzzle_mana7() {
+    method puzzle_mana7(param1) {
+        this.parent = param1;
+        this.fmvplayed = 0;
         return null;
     }
     
-    method initfull(param1) {
+    method initfull() {
+        globalclass.bgmusic.stop();
+        if (this.fmvplayed == 0) {
+            gchuddirector::playcinematic("Root/Data/cinematics/ToaKiniMeeting.bik", 1);
+            this.fmvplayed = 1;
+        }
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
+        globalclass.bgmusic.play(1);				
+        gcmodeldirector::setnearestmax(5);
+        gcareadirector::setnearestmax(10);
         return null;
     }
     
@@ -12,19 +25,26 @@ class puzzle_mana7 {
         return null;
     }
     
+    method process(param1) {
+        return null;
+    }
+
     method onevent(param1) {
+        if (param1.eventid == 44) {
+            if (globalclass.player.actorid != "akam") {
+                globalclass.player.changetoa("akam");
+                gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+			}
+		}	
         return null;
     }
     
-    method reseta() {
+    method input(param1) {
         return null;
     }
     
-    method resetb() {
-        return null;
-    }
-    
-    method resetpuzzle() {
-        return null;
+    method exit() {
+       this.parent = null;
+       return null;
     }
 }

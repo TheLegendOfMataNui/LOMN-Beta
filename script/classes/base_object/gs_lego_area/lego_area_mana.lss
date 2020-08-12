@@ -4,29 +4,26 @@ class lego_area_mana : gs_lego_area {
     
     method lego_area_mana(param1) {
         this.gs_lego_area("mana", param1, 0, 0);
+        this.puzzle = new puzzle_mana7(this);
+        this.lego_area_initfull();
         this.saved = 0;
         return null;
     }
     
     method initfull() {
-        globalclass.bgmusic.stop();
-        gchuddirector::playcinematic("Root/Data/cinematics/ToaKiniMeeting.bik", 1);
-        gcmodeldirector::setnearestmax(5);	
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
-        globalclass.bgmusic.play();				
-        gcmodeldirector::setnearestmax(10);
-        this.puzzle = new puzzle_mana7();
-        this.puzzle.initfull(this.name);
+        this.lego_area_show();
+        this.puzzle.initfull();
         return null;
     }
     
     method cleanupfull() {
+        this.lego_area_hide();
         this.puzzle.cleanupfull();
-        this.puzzle = null;
         return null;
     }
     
     method process(param1) {
+        this.puzzle.process(param1);
         return null;
     }
     
@@ -35,21 +32,21 @@ class lego_area_mana : gs_lego_area {
             BetterSaver::Save();
             this.saved = 1;
         }
-        if (param1.eventid == 44) {
-            if (!(globalclass.player.actorid == "akam")) {
-                globalclass.player.changetoa("akam");
-                gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-			}
-		}	
         this.puzzle.onevent(param1);		
         return null;
     }
     
     method input(param1) {
+        this.puzzle.input(param1);
         return null;
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
