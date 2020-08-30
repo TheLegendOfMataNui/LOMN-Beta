@@ -9,25 +9,25 @@ class akam7_piston {
     property z;
     property active;
     
-    method akam7_piston(param1, param2, param3, param4, param5, param6) {
-        this.obj = new lego_moveableobject(param1, param2);
-        this.dist = param3;
-        this.axis = param4;
-        this.time = param5;
-        this.delay = param6;
+    method akam7_piston(obj_id, area_id, distance, axis, time, delay) {
+        this.obj = new lego_moveableobject(obj_id, area_id);
+        this.dist = distance;
+        this.axis = axis;
+        this.time = time;
+        this.delay = delay;
         return null;
     }
     
-    method initfull(param1, param2) {
+    method initfull(int1, int2) {
         this.obj.initfull();
-        if (param1 == 1) {
+        if (int1 == 1) {
             this.obj.setcrushflags(1, 1, 1, 1, 1, 1);
         }
         this.x = gcmoveableobj::getx(this.obj.handle);
         this.y = gcmoveableobj::gety(this.obj.handle);
         this.z = gcmoveableobj::getz(this.obj.handle);
         this.active = 0;
-        if (param2 == 1) {
+        if (int2 == 1) {
             this.activate();
         }
         return null;
@@ -53,16 +53,18 @@ class akam7_piston {
     }
     
     method cleanupfull() {
-        this.obj.cleanupfull();
-        this.obj = null;
+        if (this.obj != null) {
+            this.obj.cleanupfull();
+            this.obj = null;
+        }
         return null;
     }
     
-    method reset(param1) {
+    method reset(int) {
         gcmoveableobj::cancelinterpolate(this.obj.handle);
         gcmoveableobj::setposition(this.obj.handle, this.x, this.y, this.z);
         this.active = 0;
-        if (param1 == 1) {
+        if (int == 1) {
             this.activate();
         }
         return null;

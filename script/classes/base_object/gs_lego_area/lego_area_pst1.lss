@@ -3,24 +3,25 @@ class lego_area_pst1 : gs_lego_area {
     
     method lego_area_pst1(param1) {
         this.gs_lego_area("pst1", param1, 0, 0);
+        this.puzzle = new puzzle_pst1(this);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
-        gcmodeldirector::setnearestmax(5);
-        gcareadirector::setnearestmax(15);
-        this.puzzle = new puzzle_pst1();
-        this.puzzle.initfull(this.name);
+        this.lego_area_show();
+        this.puzzle.initfull();
         return null;
     }
     
     method cleanupfull() {
+        this.lego_area_hide();
         this.puzzle.cleanupfull();
-        this.puzzle = null;
         return null;
     }
     
     method process(param1) {
+        this.puzzle.process(param1);
         return null;
     }
     
@@ -30,10 +31,16 @@ class lego_area_pst1 : gs_lego_area {
     }
     
     method input(param1) {
+        this.puzzle.input(param1);
         return null;
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
