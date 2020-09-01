@@ -7,13 +7,10 @@ class onuaclass : gs_lego_toa {
     property runningjumplength;
     property swimingabilty;
     property bounce;
-    property dig;
-    property mapperstate;
     property inputhandle;
     
-    method onuaclass(param1, param2, param3, param4, param5) {
-        this.gs_lego_toa(param1, param2, param3, param4, param5);
-        this.dig = 1;
+    method onuaclass(char_id, orientation, x_pos, y_pos, z_pos) {
+        this.gs_lego_toa(char_id, orientation, x_pos, y_pos, z_pos);
         this.walkspeed = 4;
         this.runspeed = 15;
         this.standingjumpheight = 6;
@@ -22,8 +19,6 @@ class onuaclass : gs_lego_toa {
         this.runningjumplength = 8;
         this.swimingabilty = 0;
         this.bounce = 0;
-        this.mapperstate = 2;
-        gckeymapper::setusecontext(this.mapperhandle, 0);
         this.inputhandle = null;
         this.open_eye_sprite_filename = "Root/data/art/hud/greeneyeson";
         this.closed_eye_sprite_filename = "Root/data/art/hud/greeneyesoff";
@@ -34,12 +29,9 @@ class onuaclass : gs_lego_toa {
         this.lego_toa_initfull();
         this.inputhandle = globalclass.addtoinputlist(this);
 
-
         // Set camera positioning
-        globalclass.level.cam.setcamzoomfactor(7.0); // TODO: Set a number here
-        globalclass.level.cam.setheightoffset(3.0); // TODO: Also set a number here
-
-
+        globalclass.level.cam.setcamzoomfactor(7.0);
+        globalclass.level.cam.setheightoffset(3.0);
         return null;
     }
     
@@ -47,26 +39,6 @@ class onuaclass : gs_lego_toa {
         this.lego_toa_cleanupfull();
         globalclass.removefrominputlist(this.inputhandle);
         this.inputhandle = null;
-        return null;
-    }
-    
-    method setcontext(param1) {
-        this.dig = param1;
-        if (this.dig == 0) {
-            this.mapperstate = 0;
-            gckeymapper::setusecontext(this.mapperhandle, 4);
-            debug::print("************* SETCONTEXT MAPPERSTATE = 0");
-        }
-        else if (this.dig == 1) {
-            this.mapperstate = 1;
-            gckeymapper::setusecontext(this.mapperhandle, 0);
-            debug::print("************* SETCONTEXT MAPPERSTATE = 1");
-        }
-        else {
-            this.mapperstate = 2;
-            gckeymapper::setusecontext(this.mapperhandle, 0);
-            debug::print("************* SETCONTEXT MAPPERSTATE = 2");
-        }
         return null;
     }
     
@@ -80,7 +52,7 @@ class onuaclass : gs_lego_toa {
         this.settargeteermaxrange(200);
         this.settargeteerselectionmode(1);
         this.settargeteerconeangle(param1);
-        debug::print("GrapplingHook has been setUp.");
+        debug::print("Onua GrapplingHook has been setUp.");
         this.ishookenabled = 1;
         return null;
     }

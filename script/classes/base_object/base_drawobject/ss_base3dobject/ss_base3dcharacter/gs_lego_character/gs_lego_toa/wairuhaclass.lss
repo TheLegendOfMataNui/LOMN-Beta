@@ -11,8 +11,8 @@ class wairuhaclass : gs_lego_toa {
     property mapperstate;
     property inputhandle;
     
-    method wairuhaclass(param1, param2, param3, param4, param5) {
-        this.gs_lego_toa(param1, param2, param3, param4, param5);
+    method wairuhaclass(char_id, orientation, x_pos, y_pos, z_pos) {
+        this.gs_lego_toa(char_id, orientation, x_pos, y_pos, z_pos);
         this.walkspeed = 4;
         this.runspeed = 15;
         this.standingjumpheight = 6;
@@ -21,7 +21,6 @@ class wairuhaclass : gs_lego_toa {
         this.runningjumplength = 8;
         this.swimingabilty = 0;
         this.bounce = 0;
-        gckeymapper::setusecontext(this.mapperhandle, 0);
         this.inputhandle = null;
         this.open_eye_sprite_filename = "Root/data/art/hud/yelloweyeson";
         this.closed_eye_sprite_filename = "Root/data/art/hud/yelloweyesoff";
@@ -32,12 +31,9 @@ class wairuhaclass : gs_lego_toa {
         this.lego_toa_initfull();
         this.inputhandle = globalclass.addtoinputlist(this);
 
-
         // Set camera positioning
-        globalclass.level.cam.setcamzoomfactor(9.0); // TODO: Set a number here
-        globalclass.level.cam.setheightoffset(5.0); // TODO: Also set a number here
-
-
+        globalclass.level.cam.setcamzoomfactor(9.0);
+        globalclass.level.cam.setheightoffset(5.0);
         return null;
     }
     

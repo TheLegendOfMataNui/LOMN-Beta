@@ -7,12 +7,10 @@ class galiclass : gs_lego_toa {
     property runningjumplength;
     property swimingabilty;
     property bounce;
-    property mapperstate;
     property inputhandle;
     
-    method galiclass(param1, param2, param3, param4, param5) {
-        this.gs_lego_toa(param1, param2, param3, param4, param5);
-        this.mapperhandle = gcgame::getkeymapper();
+    method galiclass(char_id, orientation, x_pos, y_pos, z_pos) {
+        this.gs_lego_toa(char_id, orientation, x_pos, y_pos, z_pos);
         this.walkspeed = 4;
         this.runspeed = 15;
         this.standingjumpheight = 6;
@@ -21,8 +19,6 @@ class galiclass : gs_lego_toa {
         this.runningjumplength = 8;
         this.swimingabilty = 0;
         this.bounce = 0;
-        this.mapperstate = 1;
-        gckeymapper::setusecontext(this.mapperhandle, 0);
         this.inputhandle = null;
         this.open_eye_sprite_filename = "Root/data/art/hud/yelloweyeson";
         this.closed_eye_sprite_filename = "Root/data/art/hud/yelloweyesoff";
@@ -33,12 +29,9 @@ class galiclass : gs_lego_toa {
         this.lego_toa_initfull();
         this.inputhandle = globalclass.addtoinputlist(this);
 
-
         // Set camera positioning
-        globalclass.level.cam.setcamzoomfactor(8.0); // TODO: Set a number here
-        globalclass.level.cam.setheightoffset(4.0); // TODO: Also set a number here
-
-
+        globalclass.level.cam.setcamzoomfactor(8.0);
+        globalclass.level.cam.setheightoffset(4.0);
         return null;
     }
     
@@ -46,22 +39,6 @@ class galiclass : gs_lego_toa {
         this.lego_toa_cleanupfull();
         globalclass.removefrominputlist(this.inputhandle);
         this.inputhandle = null;
-        return null;
-    }
-    
-    method setcontext(param1) {
-        var var1;
-        var1 = param1;
-        if (var1 == 0) {
-            this.mapperstate = 0;
-            gckeymapper::setusecontext(this.mapperhandle, 0);
-            debug::print("************* SETCONTEXT MAPPERSTATE = 0");
-        }
-        else if (var1 == 1) {
-            this.mapperstate = 1;
-            gckeymapper::setusecontext(this.mapperhandle, 0);
-            debug::print("************* SETCONTEXT MAPPERSTATE = 1");
-        }
         return null;
     }
     
@@ -75,7 +52,7 @@ class galiclass : gs_lego_toa {
         this.settargeteermaxrange(45);
         this.settargeteerselectionmode(1);
         this.settargeteerconeangle(param1);
-        debug::print("GrapplingHook has been setUp.");
+        debug::print("Gali GrapplingHook has been setUp.");
         this.ishookenabled = 1;
         return null;
     }

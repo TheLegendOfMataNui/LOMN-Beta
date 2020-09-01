@@ -9,8 +9,8 @@ class pohatuclass : gs_lego_toa {
     property bounce;
     property inputhandle;
     
-    method pohatuclass(param1, param2, param3, param4, param5) {
-        this.gs_lego_toa(param1, param2, param3, param4, param5);
+    method pohatuclass(char_id, orientation, x_pos, y_pos, z_pos) {
+        this.gs_lego_toa(char_id, orientation, x_pos, y_pos, z_pos);
         this.walkspeed = 4;
         this.runspeed = 15;
         this.standingjumpheight = 6;
@@ -19,6 +19,7 @@ class pohatuclass : gs_lego_toa {
         this.runningjumplength = 8;
         this.swimingabilty = 0;
         this.bounce = 0;
+        this.inputhandle = null;
         this.open_eye_sprite_filename = "Root/data/art/hud/redorangeeyeson";
         this.closed_eye_sprite_filename = "Root/data/art/hud/redorangeeyesoff";
         return null;
@@ -30,13 +31,18 @@ class pohatuclass : gs_lego_toa {
         //globalclass.player.processequipment(4);
 
         // Set camera positioning
-        globalclass.level.cam.setcamzoomfactor(8.0); // TODO: Set a number here
-        globalclass.level.cam.setheightoffset(4.0); // TODO: Also set a number here
-
-
+        globalclass.level.cam.setcamzoomfactor(8.0);
+        globalclass.level.cam.setheightoffset(4.0);
         return null;
     }
     
+    method cleanupfull() {
+        this.lego_toa_cleanupfull();
+        globalclass.removefrominputlist(this.inputhandle);
+        this.inputhandle = null;
+        return null;
+    }
+
     method setupgrapplinghook(param1, param2, param3) {
         this.setdraggerreaction(0);
         this.setmydraggerreactionanimation(scslosifoundation::stringtoidentifier("p017"));
@@ -47,7 +53,7 @@ class pohatuclass : gs_lego_toa {
         this.settargeteermaxrange(50);
         this.settargeteerselectionmode(1);
         this.settargeteerconeangle(param1);
-        debug::print("GrapplingHook has been setUp.");
+        debug::print("Pohatu GrapplingHook has been setUp.");
         this.ishookenabled = 1;
         return null;
     }
