@@ -1,26 +1,47 @@
 
 // This class stores all the information that is saved for a user that should exist outside of individual save files.
 class unlocks {
+    // Version 1
     property played_onua;
     property played_gali;
     property played_pohatu;
     property played_kopaka;
     property played_lewa;
     property played_tahu;
+    property played_nobua;
+
+    // Version 2
+    property version;
     property played_akamai;
     property played_wairuha;
-    property played_nobua;
 
     // Initializes all the properties when there is no unlocks file to be loaded.
     method unlocks() {
-        this.played_onua = false;
-        this.played_gali = false;
-        this.played_pohatu = false;
-        this.played_kopaka = false;
-        this.played_lewa = false;
-        this.played_tahu = false;
-        this.played_akamai = false;
-        this.played_wairuha = false;
-        this.played_nobua = false;
+        this.version = 0; // Version '0' means nothing has been set, so the defaults will be set in the `update` method
+    }
+
+    // Checks whether this unlocks file is up to date, and if not, updates it to the latest version.
+    method upgrade() {
+
+        // Check whether the version number was loaded improperly (it will be for v1 unlock files), or whether the unlocks hasn't been initialized yet (version '0')
+        if (!__isint(this.version) || this.version < 1) {
+            this.version = 1; // Fill in what the version number of the original format should have been (1)
+            this.played_onua = false;
+            this.played_gali = false;
+            this.played_pohatu = false;
+            this.played_kopaka = false;
+            this.played_lewa = false;
+            this.played_tahu = false;
+            this.played_nobua = false;
+        }
+
+        // If the unlocks is older than version 2, set the default values of the version 2 properties
+        if (this.version < 2) {
+            this.version = 2;
+            this.played_akamai = false;
+            this.played_wairuha = false;
+        }
+
+        // TODO: If the unlocks is older than version 3, set the default values of the version 3 properties, etc...
     }
 }

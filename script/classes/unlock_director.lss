@@ -9,11 +9,23 @@ class unlock_director {
         if (this.file.fileexist()) {
             debug::print("Loading unlocks from file...");
             this.unlocks = this.file.loadosiobject();
+
+            // Debug: Print the version that was loaded
+            if (__isint(this.unlocks.version)) {
+                debug::print("[Unlocks]: Loaded unlocks version " + __tostring(this.unlocks.version));
+            }
+            else {
+                debug::print("[Unlocks]: Loaded legacy unlocks (v1)");
+            }
         }
         else {
             debug::print("No unlocks file, loading defaults...");
             this.unlocks = new unlocks();
         }
+
+        // Make sure the unlocks are up to date
+        this.unlocks.upgrade();
+
         debug::print("Played Onua: " + __tostring(this.unlocks.played_onua));
         debug::print("Played Gali: " + __tostring(this.unlocks.played_gali));
         debug::print("Played Pohatu: " + __tostring(this.unlocks.played_pohatu));
