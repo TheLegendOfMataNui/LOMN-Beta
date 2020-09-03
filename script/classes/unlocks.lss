@@ -24,20 +24,18 @@ class unlocks {
     method upgrade() {
 
         // LSS lacks short-circuiting OR operators
-        var isV1 = false;
+        var resetV1 = false;
         if (__isint(this.version)) {
-            debug::print("Version is int value: " + __tostring(this.version));
             if (this.version < 1) {
-                isV1 = true;
+                resetV1 = true;
             }
         }
         else {
-            debug::print("Version is not int value");
-            isV1 = true;
+            resetV1 = true;
         }
 
         // Check whether the version number was loaded improperly (it will be for v1 unlock files), or whether the unlocks hasn't been initialized yet (version '0')
-        if (!isV1) {
+        if (resetV1) {
             this.version = 1; // Fill in what the version number of the original format should have been (1)
             this.played_onua = false;
             this.played_gali = false;
