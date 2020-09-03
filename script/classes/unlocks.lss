@@ -25,10 +25,12 @@ class unlocks {
 
         // LSS lacks short-circuiting OR operators
         var isV1 = false;
-        if (!__isint(this.version)) {
-            isV1 = true;
+        if (__isint(this.version)) {
+            if (this.version < 1) {
+                isV1 = true;
+            }
         }
-        else if (this.version < 1) {
+        else {
             isV1 = true;
         }
 
