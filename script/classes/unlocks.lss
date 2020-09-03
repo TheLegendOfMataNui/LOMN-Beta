@@ -26,11 +26,13 @@ class unlocks {
         // LSS lacks short-circuiting OR operators
         var isV1 = false;
         if (__isint(this.version)) {
+            debug::print("Version is int value: " + __tostring(this.version));
             if (this.version < 1) {
                 isV1 = true;
             }
         }
         else {
+            debug::print("Version is not int value");
             isV1 = true;
         }
 
