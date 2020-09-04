@@ -1,12 +1,15 @@
-class puzzle_man17 {
+class man17_puzzle {
+    property parent;
     
-    method puzzle_man17() {
+    method man17_puzzle(param1) {
+        this.parent = param1;
         return null;
     }
     
-    method initfull(param1) {
+    method initfull() {
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGODrumAndBassPart2");
         globalclass.bgmusic.play();		
+        gcmodeldirector::setnearestmax(10);						
         return null;
     }
     
@@ -14,19 +17,20 @@ class puzzle_man17 {
         return null;
     }
     
+    method process(param1) {
+        return null;
+    }
+
     method onevent(param1) {
         return null;
     }
     
-    method reseta() {
+    method input(param1) {
         return null;
     }
     
-    method resetb() {
-        return null;
-    }
-    
-    method resetpuzzle() {
-        return null;
+    method exit() {
+       this.parent = null;
+       return null;
     }
 }
