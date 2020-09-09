@@ -9,12 +9,12 @@ class wair7_piston {
     property time;
     property moveoninit;
     
-    method wair7_piston(param1, param2, param3, param4, param5) {
-        this.obj = new lego_moveableobject(param1, "pst2");
-        this.dist = param2;
-        this.axis = param3;
-        this.time = param4;
-        this.moveoninit = param5;
+    method wair7_piston(obj_id, distance, axis, float, bool) {
+        this.obj = new lego_moveableobject(obj_id, "pst2");
+        this.dist = distance;
+        this.axis = axis;  //1 = x, 2 = y, 3 = z
+        this.time = float;
+        this.moveoninit = bool;
         return null;
     }
     
@@ -39,8 +39,10 @@ class wair7_piston {
     }
     
     method cleanupfull() {
-        this.obj.cleanupfull();
-        this.obj = null;
+        if (this.obj != null) {
+            this.obj.cleanupfull();
+            this.obj = null;
+        }
         return null;
     }
     

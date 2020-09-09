@@ -1,18 +1,22 @@
 class puzzle_pst2 {
+    property parent;
     property pistons;
     property doors;
     property max;
     property count;
     property curdoor;
     
-    method puzzle_pst2() {
+    method puzzle_pst2(param1) {
+        this.parent = param1;
         this.pistons = null;
         this.doors = null;
         return null;
     }
     
-    method initfull(param1) {
+    method initfull() {
         var var1;
+        gcmodeldirector::setnearestmax(50);
+        gcareadirector::setnearestmax(50);		
         globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
         globalclass.bgmusic.play();			
         this.pistons = [ new wair7_piston("bp01", -36, 2, 1.0, 1), 
@@ -60,41 +64,52 @@ class puzzle_pst2 {
     
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        while ((this.pistons.__length - 1) >= var1) {
-            this.pistons[var1].cleanupfull();
-            this.pistons[var1] = null;
-            var1 = var1 + 1;
+        if (this.pistons != null) {
+            var1 = 0;
+            while ((this.pistons.__length - 1) >= var1) {
+                this.pistons[var1].cleanupfull();
+                this.pistons[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.pistons = null;
         }
-        this.pistons = null;
-        var1 = 0;
-        while ((this.doors.__length - 1) >= var1) {
-            this.doors[var1].cleanupfull();
-            this.doors[var1] = null;
-            var1 = var1 + 1;
+        if (this.doors != null) {
+            var1 = 0;
+            while ((this.doors.__length - 1) >= var1) {
+                this.doors[var1].cleanupfull();
+                this.doors[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.doors = null;
         }
-        this.doors = null;
         return null;
     }
     
+    method process(param1) {
+        return null;
+    }
+
     method onevent(param1) {
         var var1;
         var var2;
         if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                this.reseta();
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                globalclass.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
             }
         }
         else if (param1.eventid == 27) {
-            this.resetb();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            this.reset();
         }
-        else if (param1.eventid == 1) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
-                var1 = param1.args[1];
-                if ((var1 >= scslosifoundation::stringtoidentifier("bp01")) && (var1 <= scslosifoundation::stringtoidentifier("bp08"))) {
-                    this.resetc();
-                }
-            }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 19) {
             var2 = 0;
@@ -182,27 +197,6 @@ class puzzle_pst2 {
         return null;
     }
     
-    method reseta() {
-        globalclass.level.cam.setaimode(7);
-        globalclass.player.kill();
-        gccollisionphysicsgroup::spinmask(1.2);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        return null;
-    }
-    
-    method resetb() {
-        globalclass.player.unkill();
-        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-        this.reset();
-        return null;
-    }
-    
-    method resetc() {
-        globalclass.player.kill();
-        gccollisionphysicsgroup::spinmask(1.2);
-        return null;
-    }
-    
     method initnext() {
         var var1;
         var1 = 0;
@@ -284,5 +278,14 @@ class puzzle_pst2 {
         }
         this.count = 0;
         return null;
+    }
+
+    method input(param1) {
+        return null;
+    }
+
+    method exit() {
+       this.parent = null;
+       return null;
     }
 }
