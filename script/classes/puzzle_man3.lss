@@ -7,9 +7,8 @@ class puzzle_man3 {
         return null;
     }
     
-    method initfull(param1) {
+    method initfull() {
         var var1;
-        var var2;
         var akamai;
         var mana1;
         var mana2;
@@ -20,19 +19,18 @@ class puzzle_man3 {
         var mana7;
         globalclass.bgmusic.changefilename("Root/Data/sounds/Musiclowandcreepyambience");
         globalclass.bgmusic.play();				
-        this.bridge = [
-            new lego_volatileplatform("prt1"),
-            new lego_volatileplatform("prt2"),
-            new lego_volatileplatform("prt3"),
-            new lego_volatileplatform("prt4"),
-            new lego_volatileplatform("prt5") ];
-        var2 = 0;
-        while ((this.bridge.__length - 1) >= var2) {
-            this.bridge[var2].initfull();
-            this.bridge[var2].settimetofall(1.2);
-            this.bridge[var2].setshakebobbleintensity(1.2);
-            this.bridge[var2].show();
-            var2 = var2 + 1;
+        this.bridge = [ new lego_volatileplatform("prt1", this.parent.name),
+            new lego_volatileplatform("prt2", this.parent.name),
+            new lego_volatileplatform("prt3", this.parent.name),
+            new lego_volatileplatform("prt4", this.parent.name),
+            new lego_volatileplatform("prt5", this.parent.name) ];
+        var1 = 0;
+        while ((this.bridge.__length - 1) >= var1) {
+            this.bridge[var1].initfull();
+            this.bridge[var1].settimetofall(1.2);
+            this.bridge[var1].setshakebobbleintensity(1.2);
+            this.bridge[var1].show();
+            var1 = var1 + 1;
         }
         akamai = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("akam"), 0);
         gccharacter::setinputstate(akamai, scslosifoundation::stringtoidentifier("none"));
@@ -100,6 +98,13 @@ class puzzle_man3 {
     
     method onevent(param1) {
         var var1;
+        if (this.bridge != null) {
+            var1 = 0;
+            while ((this.bridge.__length - 1) >= var1) {
+                this.bridge[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
         if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cine")) {
                 globalclass.bgmusic.stop();
@@ -128,13 +133,6 @@ class puzzle_man3 {
             var1 = 0;
             while ((this.bridge.__length - 1) >= var1) {
                 this.bridge[var1].reset();
-                var1 = var1 + 1;
-            }
-        }
-        if (!(this.bridge == null)) {
-            var1 = 0;
-            while ((this.bridge.__length - 1) >= var1) {
-                this.bridge[var1].onevent(param1);
                 var1 = var1 + 1;
             }
         }
