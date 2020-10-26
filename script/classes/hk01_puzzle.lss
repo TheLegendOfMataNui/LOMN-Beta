@@ -4,7 +4,6 @@ class hk01_puzzle {
     property glyph;
     property ledgearray;
     property targetarray;
-    property watchtimer;
     property halfway;
     
     method hk01_puzzle(param1) {
@@ -29,8 +28,6 @@ class hk01_puzzle {
             new lego_moveableobject("hot6", this.parent.name),
             new lego_moveableobject("hot7", this.parent.name),
             new lego_moveableobject("hot8", this.parent.name) ];
-        this.watchtimer = new lego_timer("wtim", 1, 0);
-        this.watchtimer.initfull();
         if (gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyl")) == 0) {
             this.glyph = new lego_pickup("glyl", 4, 2, "item", 6, 1);
             this.glyph.initfull();
@@ -50,11 +47,6 @@ class hk01_puzzle {
         while ((this.targetarray.__length - 1) >= var1) {
             this.targetarray[var1].initfull();
             this.targetarray[var1].setresponse(1, 1, 1);
-            var1 = var1 + 1;
-        }
-        var1 = 0;
-        while ((this.targetarray.__length - 1) >= var1) {
-            this.targetarray[var1].show();
             this.targetarray[var1].setmytargetingflags(1);
             var1 = var1 + 1;
         }
@@ -63,24 +55,15 @@ class hk01_puzzle {
     
     method cleanupfull() {
         var var1;
-        if (!(this.exitdoor == null)) {
+        if (this.exitdoor != null) {
             this.exitdoor.cleanupfull();
             this.exitdoor = null;
         }
-        if (!(this.watchtimer == null)) {
-            this.watchtimer.cleanupfull();
-            this.watchtimer = null;
+        if (this.glyph != null) {
+            this.glyph.cleanupfull();
+            this.glyph = null;
         }
-        if (!(this.targetarray == null)) {
-            var1 = 0;
-            while ((this.targetarray.__length - 1) >= var1) {
-                this.targetarray[var1].cleanupfull();
-                this.targetarray[var1] = null;
-                var1 = var1 + 1;
-            }
-            this.targetarray = null;
-        }
-        if (!(this.ledgearray == null)) {
+        if (this.ledgearray != null) {
             var1 = 0;
             while ((this.ledgearray.__length - 1) >= var1) {
                 this.ledgearray[var1].cleanupfull();
@@ -89,10 +72,16 @@ class hk01_puzzle {
             }
             this.ledgearray = null;
         }
-        if (!(this.glyph == null)) {
-            this.glyph.cleanupfull();
-            this.glyph = null;
+        if (this.targetarray != null) {
+            var1 = 0;
+            while ((this.targetarray.__length - 1) >= var1) {
+                this.targetarray[var1].cleanupfull();
+                this.targetarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.targetarray = null;
         }
+        this.halfway = null;
         return null;
     }
     
@@ -112,7 +101,7 @@ class hk01_puzzle {
     method onevent(param1) {
         var var1;
         var var2;
-        if (!(this.ledgearray == null)) {
+        if (this.ledgearray != null) {
             var1 = 0;
             while ((this.ledgearray.__length - 1) >= var1) {
                 this.ledgearray[var1].onevent(param1);
@@ -127,8 +116,6 @@ class hk01_puzzle {
             gcstaticsoundsptrarray::playtablesound(1048);
             globalclass.player.kill();
             globalclass.player.actor.setinputstate("none");
-            this.watchtimer.reset();
-            this.watchtimer.start();
         }
         else if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
