@@ -12,18 +12,18 @@ class lego_moveableobject : base_object {
     property collidetimer;
     property madeonthefly;
     
-    method lego_moveableobject(param1, param2, param3) {
+    method lego_moveableobject(obj_id, area_id, param3) {
         var var1;
-        this.name = param1;
+        this.name = obj_id;
         this.id = scslosifoundation::stringtoidentifier(this.name);
-        this.area = param2;
+        this.area = area_id;
         this.madeonthefly = 0;
         if (this.area == null) {
             this.area = "fake";
         }
         this.areaid = scslosifoundation::stringtoidentifier(this.area);
         this.anims = param3;
-        if (!(this.anims == null)) {
+        if (this.anims != null) {
             var1 = 0;
             while ((this.anims.__length - 1) >= var1) {
                 this.anims[var1] = scslosifoundation::stringtoidentifier(this.anims[var1]);
@@ -38,7 +38,7 @@ class lego_moveableobject : base_object {
         if (param9 == null) {
             param9 = 2;
         }
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.madeonthefly = 1;
             var1 = gcmoveableobj::create("dumy", "dummy", "dummy", 0);
             if (param3 == null) {
@@ -211,8 +211,8 @@ class lego_moveableobject : base_object {
         return new basicpoint(this.getx(), this.gety(), this.getz());
     }
     
-    method interpolate(param1, param2, param3, param4) {
-        gcmoveableobj::interpolate(this.handle, param1, param2, param3, param4);
+    method interpolate(x_coord, y_coord, z_coord, time_float) {
+        gcmoveableobj::interpolate(this.handle, x_coord, y_coord, z_coord, time_float);
         return null;
     }
     
@@ -322,7 +322,7 @@ class lego_moveableobject : base_object {
     
     method process(param1) {
         var var1;
-        if (!(this.collide == null)) {
+        if (this.collide != null) {
             if (this.collide > 0) {
                 this.collide = this.collide - 1;
                 if (this.collide == 1) {
@@ -403,7 +403,7 @@ class lego_moveableobject : base_object {
     
     method setbounceeventrepoert(param1) {
         var var1;
-        if (!(param1 == null)) {
+        if (param1 != null) {
             var1 = param1;
         }
         else {
