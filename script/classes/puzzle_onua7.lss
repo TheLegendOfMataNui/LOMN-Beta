@@ -1,27 +1,40 @@
 class puzzle_onua7 {
+    property parent;
     property targetarray;
     
-    method puzzle_onua7() {
+    method puzzle_onua7(param1) {
+        this.parent = param1;
         return null;
     }
     
-    method initfull(param1) {
+    method initfull() {
         var var1;
-        this.targetarray = [ new lego_moveableobject("hk01", param1), 
-            new lego_moveableobject("hk02", param1), 
-            new lego_moveableobject("hk03", param1), 
-            new lego_moveableobject("hk04", param1), 
-            new lego_moveableobject("hk05", param1), 
-            new lego_moveableobject("hk06", param1), 
-            new lego_moveableobject("hk07", param1), 
-            new lego_moveableobject("hk08", param1), 
-            new lego_moveableobject("hk09", param1), 
-            new lego_moveableobject("hk10", param1), 
-            new lego_moveableobject("hk11", param1), 
-            new lego_moveableobject("hk12", param1), 
-            new lego_moveableobject("hk13", param1), 
-            new lego_moveableobject("hk14", param1), 
-            new lego_moveableobject("hk15", param1) ];
+        gcmodeldirector::setnearestmax(5);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
+        globalclass.bgmusic.play(1);
+        if (globalclass.player.actorid != "onua") {
+            globalclass.player.changetoa("onua");
+            globalclass.player.setupgrapplinghook();
+            globalclass.player.setgrapplinghookdistance(45);
+        }
+        globalclass.hud.cdtimer.initfull();
+        globalclass.hud.cdtimer.settime(120.0);
+        globalclass.hud.cdtimer.start();
+        this.targetarray = [ new lego_moveableobject("hk01", this.parent.name), 
+            new lego_moveableobject("hk02", this.parent.name), 
+            new lego_moveableobject("hk03", this.parent.name), 
+            new lego_moveableobject("hk04", this.parent.name), 
+            new lego_moveableobject("hk05", this.parent.name), 
+            new lego_moveableobject("hk06", this.parent.name), 
+            new lego_moveableobject("hk07", this.parent.name), 
+            new lego_moveableobject("hk08", this.parent.name), 
+            new lego_moveableobject("hk09", this.parent.name), 
+            new lego_moveableobject("hk10", this.parent.name), 
+            new lego_moveableobject("hk11", this.parent.name), 
+            new lego_moveableobject("hk12", this.parent.name), 
+            new lego_moveableobject("hk13", this.parent.name), 
+            new lego_moveableobject("hk14", this.parent.name), 
+            new lego_moveableobject("hk15", this.parent.name) ];
         var1 = 0;
         while ((this.targetarray.__length - 1) >= var1) {
             this.targetarray[var1].initfull();
@@ -34,41 +47,60 @@ class puzzle_onua7 {
     
     method cleanupfull() {
         var var1;
-        var1 = 0;
-        while ((this.targetarray.__length - 1) >= var1) {
-            this.targetarray[var1].cleanupfull();
-            this.targetarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.targetarray != null) {
+            var1 = 0;
+            while ((this.targetarray.__length - 1) >= var1) {
+                this.targetarray[var1].cleanupfull();
+                this.targetarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.targetarray = null;
         }
-        this.targetarray = null;
+        globalclass.hud.cdtimer.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        var1 = globalclass.hud.cdtimer.finished();
+        if (var1) {
+            gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.hud.cdtimer.reset();
+        }
         return null;
     }
     
     method onevent(param1) {
         if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                this.reseta();
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                globalclass.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+                gctoa::deactivatedragger(globalclass.player.actor.toahandle);
             }
         }
         else if (param1.eventid == 27) {
-            this.resetb();
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.hud.cdtimer.reset();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         return null;
     }
-    
-    method reseta() {
-        globalclass.level.cam.setaimode(7);
-        globalclass.player.kill();
-        gccollisionphysicsgroup::spinmask(1.2);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        gctoa::deactivatedragger(globalclass.player.actor.toahandle);
+        
+    method input(param1) {
         return null;
     }
     
-    method resetb() {
-        globalclass.player.unkill();
-        gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-        globalclass.hud.cdtimer.reset();
-        return null;
+    method exit() {
+       this.parent = null;
+       return null;
     }
 }
