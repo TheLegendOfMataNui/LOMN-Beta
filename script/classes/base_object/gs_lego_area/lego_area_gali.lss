@@ -3,61 +3,44 @@ class lego_area_gali : gs_lego_area {
     
     method lego_area_gali(param1) {
         this.gs_lego_area("gali", param1, 0, 0);
+        this.puzzle = new gali7_puzzle(this);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
-        gcmodeldirector::setnearestmax(10);
-        if (globalclass.player.actorid == "gali") {
-            globalclass.player.setupgrapplinghook(25, 30, 30);
-            globalclass.player.setgrapplinghookdistance(85);
-            this.puzzle = new puzzle_gali7();
-            this.puzzle.initfull(this.name);
-        }
+        this.lego_area_show();
+        this.puzzle.initfull();
         return null;
     }
     
     method cleanupfull() {
-        globalclass.hud.cdtimer.cleanupfull();
+        this.lego_area_hide();
         this.puzzle.cleanupfull();
-        this.puzzle = null;
         return null;
     }
     
     method process(param1) {
-        var var1;
-        var1 = globalclass.hud.cdtimer.finished();
-        if (var1) {
-            gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-            globalclass.hud.cdtimer.reset();
-            gctoa::deactivatedragger(globalclass.player.actor.toahandle);
-        }
+        this.puzzle.process(param1);
         return null;
     }
     
     method onevent(param1) {
-        if (param1.eventid == 44) {
-            if (!(globalclass.player.actorid == "gali")) {
-                globalclass.player.changetoa("gali");
-                globalclass.player.maskcontrol.changemask(1);
-                globalclass.hud.cdtimer.initfull();
-                globalclass.hud.cdtimer.settime(120.0);
-                globalclass.hud.cdtimer.start();
-                gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-                globalclass.player.setupgrapplinghook();
-                globalclass.player.setgrapplinghookdistance(85);
-                this.puzzle = new puzzle_gali7();
-                this.puzzle.initfull(this.name);
-            }
-        }
+        this.puzzle.onevent(param1);
         return null;
     }
     
     method input(param1) {
+        this.puzzle.input(param1);
         return null;
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
