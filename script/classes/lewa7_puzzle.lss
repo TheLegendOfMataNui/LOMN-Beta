@@ -1,0 +1,46 @@
+class lewa7_puzzle {
+    property parent;
+    
+    method lewa7_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        gcmodeldirector::setnearestmax(10);
+        if (globalclass.player.actorid != "lewa") {
+            globalclass.player.changetoa("lewa");
+            globalclass.player.maskcontrol.changemask(4);
+        }
+        globalclass.hud.cdtimer.initfull();
+        globalclass.hud.cdtimer.settime(120.0);
+        globalclass.hud.cdtimer.start();
+        return null;
+    }
+    
+    method cleanupfull() {
+        globalclass.hud.cdtimer.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        if (globalclass.hud.cdtimer.finished()) {
+            gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.hud.cdtimer.reset();
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+       this.parent = null;
+       return null;
+    }
+}
