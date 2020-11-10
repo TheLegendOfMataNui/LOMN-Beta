@@ -7,10 +7,10 @@ class pohatu7_target {
     property platforms;
     property ignore;
     
-    method pohatu7_target(param1, param2, param3) {
-        this.platforms = param3;
-        this.timer = new lego_timer(param1, 2.0, 0);
-        this.obj = new lego_moveableobject(param1, param2);
+    method pohatu7_target(obj_id, area_id, platform_array_number) {
+        this.platforms = platform_array_number;
+        this.timer = new lego_timer(obj_id, 2.0, 0);
+        this.obj = new lego_moveableobject(obj_id, area_id);
         return null;
     }
     
@@ -25,10 +25,14 @@ class pohatu7_target {
     }
     
     method cleanupfull() {
-        this.timer.cleanupfull();
-        this.timer = null;
-        this.obj.cleanupfull();
-        this.obj = null;
+        if (this.timer != null) {
+            this.timer.cleanupfull();
+            this.timer = null;
+        }
+        if (this.obj != null) {
+            this.obj.cleanupfull();
+            this.obj = null;
+        }
         return null;
     }
     

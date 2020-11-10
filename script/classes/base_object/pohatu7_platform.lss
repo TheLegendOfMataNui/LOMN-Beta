@@ -8,16 +8,16 @@ class pohatu7_platform : base_object {
     property z;
     property moveup;
     
-    method pohatu7_platform(param1, param2, param3, param4, param5) {
+    method pohatu7_platform(obj_id, area_id, unknown, distance, time) {
         this.base_object();
-        this.id = scslosifoundation::stringtoidentifier(param1);
-        this.obj = gcareadirector::getmoveableobj(this.id, scslosifoundation::stringtoidentifier(param2));
+        this.id = scslosifoundation::stringtoidentifier(obj_id);
+        this.obj = gcareadirector::getmoveableobj(this.id, scslosifoundation::stringtoidentifier(area_id));
         gcmoveableobj::setcharacterresponses(this.obj, 0, 0, 3);
         this.x = gcmoveableobj::getx(this.obj);
         this.y = gcmoveableobj::gety(this.obj);
         this.z = gcmoveableobj::getz(this.obj);
-        this.dist = param4;
-        this.time = param5;
+        this.dist = distance;
+        this.time = time;
         return null;
     }
     

@@ -1,0 +1,125 @@
+class poha7_puzzle {
+    property parent;
+    property platforms;
+    property targets;
+    
+    method poha7_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcareadirector::setnearestmax(90);
+        gcmodeldirector::setnearestmax(90);
+        gcareadirector::setnearestmaxdist(1000);
+        if (globalclass.player.actorid != "poha") {
+            globalclass.player.changetoa("poha");
+            globalclass.player.maskcontrol.changemask(2);
+        }
+        globalclass.hud.cdtimer.initfull();
+        globalclass.hud.cdtimer.settime(120.0);
+        globalclass.hud.cdtimer.start();
+        this.platforms = [ new pohatu7_platform("pf01", "phtu", [  ], 4.5, 1.0), 
+            new pohatu7_platform("pf02", "phtu", [  ], 11.0, 1.0), 
+            new pohatu7_platform("pf03", "phtu", [  ], 18.5, 1.0), 
+            new pohatu7_platform("pf04", "phtu", [  ], 26.0, 1.0), 
+            new pohatu7_platform("pf05", "phtu", [  ], 33.5, 1.0), 
+            new pohatu7_platform("pf06", "phtu", [  ], 40.0, 1.0), 
+            new pohatu7_platform("pf07", "phtu", [  ], 46.5, 1.0), 
+            new pohatu7_platform("pf08", "phtu", [  ], 51.0, 1.0), 
+            new pohatu7_platform("pf09", "phtu", [  ], 55.5, 1.0) ];
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].initfull();
+            var1 = var1 + 1;
+        }
+        this.targets = [ new pohatu7_target("tg01", "phtu", [ this.platforms[1], 
+                this.platforms[2] ]), 
+            new pohatu7_target("tg02", "phtu", [ this.platforms[5], 
+                this.platforms[7] ]), 
+            new pohatu7_target("tg03", "phtu", [ this.platforms[1], 
+                this.platforms[8] ]), 
+            new pohatu7_target("tg04", "phtu", [ this.platforms[0], 
+                this.platforms[3] ]), 
+            new pohatu7_target("tg05", "phtu", [ this.platforms[4], 
+                this.platforms[7] ]), 
+            new pohatu7_target("tg06", "phtu", [ this.platforms[3], 
+                this.platforms[6] ]) ];
+        var1 = 0;
+        while ((this.targets.__length - 1) >= var1) {
+            this.targets[var1].initfull();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (this.platforms != null) {
+            var1 = 0;
+            while ((this.platforms.__length - 1) >= var1) {
+                this.platforms[var1].cleanupfull();
+                this.platforms[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platforms = null;
+        }
+        if (this.targets != null) {
+            var1 = 0;
+            while ((this.targets.__length - 1) >= var1) {
+                this.targets[var1].cleanupfull();
+                this.targets[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.targets = null;
+        }
+        globalclass.hud.cdtimer.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        if (globalclass.hud.cdtimer.finished()) {
+            gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.hud.cdtimer.reset();
+            this.resetpuzzle();
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (this.targets != null) { 
+            var1 = 0;
+            while ((this.targets.__length - 1) >= var1) {
+                this.targets[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method resetpuzzle() {
+        var var1;
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].reset();
+            var1 = var1 + 1;
+        }
+        var1 = 0;
+        while ((this.targets.__length - 1) >= var1) {
+            this.targets[var1].reset();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+       this.parent = null;
+       return null;
+    }
+}
