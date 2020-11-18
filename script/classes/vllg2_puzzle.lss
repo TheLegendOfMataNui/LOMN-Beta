@@ -24,12 +24,6 @@ class vllg2_puzzle {
     property orientation;
     property cinema;
     property cinema_shown;
-    property desctext;
-    property howtotext;
-    property displaytexttimer;
-    property rotatestone;
-	property gearpickup;
-    property deltatimer;
     property shasa;
     property nixie;
     property maku;
@@ -61,7 +55,6 @@ class vllg2_puzzle {
         var var1;
         var door_text;
         var tohunga;
-		var gearpickup_text;
         this.shasa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
         this.nixie = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
         this.maku = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
@@ -88,8 +81,6 @@ class vllg2_puzzle {
         this.hutgear = new lego_moveableobject("gea1");
         this.hutgear.initfull();
         this.hutgear.hide();
-        this.rotatestone = 0;
-        this.deltatimer = 0.0;
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(8);
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 50000.0, 0.01);
@@ -99,20 +90,7 @@ class vllg2_puzzle {
         }
         else {
             this.cinema_shown = 0;
-        }
-        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gear")) == 0) {
-            this.gearpickup = new lego_moveableobject("gear");
-            this.gearpickup.initfull();
-            this.gearpickup.show();
-            this.displaytexttimer = new lego_timer("dspt", 4.0, 0);
-            this.displaytexttimer.initfull();
-            gearpickup_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 6, 0);
-            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", gearpickup_text, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
-            this.desctext.initfull();
-            gearpickup_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 6, 1);
-            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", gearpickup_text, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
-            this.howtotext.initfull();
-        }		
+        }	
         if (this.cinema_shown == 0) {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin3");
@@ -357,22 +335,6 @@ class vllg2_puzzle {
             this.upgradefruit.cleanupfull();
             this.upgradefruit = null;
         }
-        if (this.gearpickup != null) {
-            this.gearpickup.cleanupfull();
-            this.gearpickup = null;
-        }
-        if (this.desctext != null) {
-            this.desctext.cleanupfull();
-            this.desctext = null;
-        }
-        if (this.howtotext != null) {
-            this.howtotext.cleanupfull();
-            this.howtotext = null;
-        }
-        if (this.displaytexttimer != null) {
-            this.displaytexttimer.cleanupfull();
-            this.displaytexttimer = null;
-        }
         if (this.upgradefruit2 != null) {
             this.upgradefruit2.cleanupfull();
             this.upgradefruit2 = null;
@@ -417,20 +379,6 @@ class vllg2_puzzle {
     
     method process(param1) {
         var var1;
-		this.deltatimer = this.deltatimer + param1.deltatime;
-        if (this.deltatimer > 0) {
-            
-        }
-        if (this.rotatestone >= 360) {
-            this.rotatestone = 0;
-        }
-        else {
-            this.rotatestone = this.rotatestone + 2;
-        }
-        if (this.gearpickup != null) {
-            this.gearpickup.setorientation(this.rotatestone, this.rotatestone, 0);
-        }
-        this.rotatecrystal();
         var1 = 0;
         while (this.testplatformsubound >= var1) {
             this.testplatforms[var1].process();
@@ -557,21 +505,7 @@ class vllg2_puzzle {
                     }
                 }
             }
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (param1.args[1] == scslosifoundation::stringtoidentifier("gear")) {
-                    this.desctext.add();
-                    this.desctext.show();
-                    this.howtotext.add();
-                    this.howtotext.show();
-                    this.displaytexttimer.reset(0);
-                    this.displaytexttimer.start();
-                    this.gearpickup.hide();
-                    globalclass.hud.show();
-                    gcsaver::pickupitem(this.gearpickup.id);
-                    gcsaver::setquest(2, 2);
-                    gcsaver::setcondition(131072, 1);
-                }
-            }
+
         }
         else if (param1.eventid == 11) {
             if (scslosifoundation::identifiertostring(param1.args[1]) == "g054") {

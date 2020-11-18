@@ -3,6 +3,10 @@ class isld2_puzzle {
     property glasswallarray;
     property entered_underwater;
     property call_ev_safe_time_once;
+    property gearpickup;
+    property displaytexttimer;
+    property desctext;
+    property howtotext;
     
     method isld2_puzzle(param1) {
         this.parent = param1;
@@ -11,6 +15,7 @@ class isld2_puzzle {
     
     method initfull() {
         var var1;
+        var gearpickup_text;
         this.glasswallarray = [ new lego_triggerobject("tp02", this.parent.name),
             new lego_triggerobject("tp03", this.parent.name),
             new lego_triggerobject("tp04", this.parent.name),
@@ -24,6 +29,13 @@ class isld2_puzzle {
         }
         this.call_ev_safe_time_once = 1;
         this.entered_underwater = 1;
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gear")) == 0) {
+            this.gearpickup = new lego_pickup("gear", 0, 5, "item", 6, 1);
+            this.gearpickup.initfull();
+            this.gearpickup.show();
+            this.gearpickup.setcondition(131072);
+            this.gearpickup.setquest(2);
+        }
         return null;
     }
     
@@ -74,6 +86,10 @@ class isld2_puzzle {
                 var1 = var1 + 1;
             }
             this.glasswallarray = null;
+        }
+        if (this.gearpickup != null) {
+            this.gearpickup.cleanupfull();
+            this.gearpickup = null;
         }
         return null;
     }
