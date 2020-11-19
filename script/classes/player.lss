@@ -371,6 +371,10 @@ class player {
     method setactor(cnt1, char_id, orientation, x_pos, y_pos, z_pos, unused) {
         var var1;
         this.actorid = char_id;
+        this.life = 60;
+        this.maxlife = 60;
+        this.energy = 60;
+        this.maxenergy = 60;
         if (this.actorid == "onua") {
             this.actor = new onuaclass(char_id, orientation, x_pos, y_pos, z_pos);
         }
@@ -468,54 +472,6 @@ class player {
             this.actor.disableallraycollisions();
             this.actor.setupphysics(1.5, 0.8, 1, 0, 0);
             this.isswimming();
-            if (this.actor.id == scslosifoundation::stringtoidentifier("onua")) {
-                
-            }
-            else if (this.actor.id == scslosifoundation::stringtoidentifier("gali")) {
-                this.addmaxenergy();
-                this.addmaxlife();
-            }
-            else if (this.actor.id == scslosifoundation::stringtoidentifier("poha")) {
-                var1 = 0;
-                while (1 >= var1) {
-                    this.addmaxenergy();
-                    this.addmaxlife();
-                    var1 = var1 + 1;
-                }
-            }
-            else if (this.actor.id == scslosifoundation::stringtoidentifier("kopa")) {
-                var1 = 0;
-                while (2 >= var1) {
-                    this.addmaxenergy();
-                    this.addmaxlife();
-                    var1 = var1 + 1;
-                }
-            }
-            else if (this.actor.id == scslosifoundation::stringtoidentifier("lewa")) {
-                var1 = 0;
-                while (3 >= var1) {
-                    this.addmaxenergy();
-                    this.addmaxlife();
-                    var1 = var1 + 1;
-                }
-            }
-            else if (this.actor.id == scslosifoundation::stringtoidentifier("tahu")) {
-                var1 = 0;
-                while (4 >= var1) {
-                    this.addmaxenergy();
-                    this.addmaxlife();
-                    var1 = var1 + 1;
-                }
-            }
-            else if (this.actor.id == scslosifoundation::stringtoidentifier("nbua")) {
-                while (this.energy > 0) {
-                    this.removemaxenergy();
-                    this.removeenergy();
-                }                
-            }
-            else if (this.actor.id == scslosifoundation::stringtoidentifier("when")) {
-
-            }
         }
         return null;
     }
