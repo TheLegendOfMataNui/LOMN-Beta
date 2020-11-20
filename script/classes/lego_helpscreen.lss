@@ -1,7 +1,6 @@
 class lego_helpscreen {
     property helpscreen;
     property shown;
-    property text;
     property inputenabled;
     property skip;
     
@@ -12,7 +11,6 @@ class lego_helpscreen {
     method initfull() {
         this.helpscreen = null;
         this.shown = 0;
-        this.text = null;
         this.inputenabled = 1;
         this.skip = 0;
         return null;
@@ -22,10 +20,6 @@ class lego_helpscreen {
         if (!(this.helpscreen == null)) {
             this.helpscreen.cleanupfull();
             this.helpscreen = null;
-        }
-        if (!(this.text == null)) {
-            this.text.cleanupfull();
-            this.text = null;
         }
         return null;
     }
@@ -44,13 +38,9 @@ class lego_helpscreen {
             else if (var1 == 2) {
                 this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_GER", 0, 0, 3, screenx, screeny);
             }
-            this.text = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "", screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
             this.helpscreen.initfull();
             this.helpscreen.add();
             this.helpscreen.show();
-            this.text.initfull();
-            this.text.add();
-            this.text.show();
             this.shown = 1;
             debug::print("[][b][] helpScreen on");
             this.skip = 10;
@@ -64,9 +54,6 @@ class lego_helpscreen {
             this.helpscreen.hide();
             this.helpscreen.remove();
             this.helpscreen.cleanupfull();
-            this.text.hide();
-            this.text.remove();
-            this.text.cleanupfull();
             this.initfull();
             globalclass.hud.show();
             if (globalclass.pause.ispaused == 1) {
@@ -99,13 +86,6 @@ class lego_helpscreen {
     
     method enableinput(param1) {
         this.inputenabled = param1;
-        return null;
-    }
-    
-    method setstring(param1) {
-        if (this.shown == 1) {
-            this.text.setstring(param1);
-        }
         return null;
     }
 }
