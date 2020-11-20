@@ -6,7 +6,8 @@ class shrn2_puzzle {
     property doorsclosed;
     property doors;
     property portalactive;
-    property bossdoortext;
+    property bossdoortext1;
+    property bossdoortext2;
     property bossdoortexttimer;
     property showbossdoor;
     property inwater;
@@ -103,11 +104,16 @@ class shrn2_puzzle {
             this.movedoorsdown(var1);
             var1 = var1 + 1;
         }
-        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 60);
-        this.bossdoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
-        this.bossdoortext.initfull();
-        this.bossdoortext.add();
+
+        //Set Door Text
+        this.bossdoortext1 = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 0) +  gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 1), screenx * 0.5, screeny * 0.70, 0, 1.5, 256, 4, 0);
+        this.bossdoortext2 = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", "60 " + gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 4), screenx * 0.5, screeny * 0.75, 0, 1.5, 256, 4, 0);
+        this.bossdoortext1.initfull();
+        this.bossdoortext2.initfull();
+        this.bossdoortext1.add();
+        this.bossdoortext2.add();
         this.bossdoortexttimer = 0.0;
+
         return null;
     }
     
@@ -134,10 +140,15 @@ class shrn2_puzzle {
             this.waterfall3.cleanupfull();
             this.waterfall3 = null;
         }
-        if (this.bossdoortext != null) {
-            this.bossdoortext.remove();
-            this.bossdoortext.cleanupfull();
-            this.bossdoortext = null;
+        if (this.bossdoortext1 != null) {
+            this.bossdoortext1.remove();
+            this.bossdoortext1.cleanupfull();
+            this.bossdoortext1 = null;
+        }
+        if (this.bossdoortext2 != null) {
+            this.bossdoortext2.remove();
+            this.bossdoortext2.cleanupfull();
+            this.bossdoortext2 = null;
         }
         this.inwater = null;
         gcstaticsoundsptrarray::stoptablesound(1094);
@@ -168,10 +179,12 @@ class shrn2_puzzle {
                         this.doors[3].fadeout(1.5);
                         gcstaticsoundsptrarray::playtablesound(1084);
                         this.showbossdoor = 0;
-                        this.bossdoortext.hide();
+                        this.bossdoortext1.hide();
+                        this.bossdoortext2.hide();
                     }
                     else {
-                        this.bossdoortext.show();
+                        this.bossdoortext1.show();
+                        this.bossdoortext2.show();
                         this.bossdoortexttimer = 1.0;
                     }
                 }
@@ -239,8 +252,9 @@ class shrn2_puzzle {
         if (this.bossdoortexttimer > 0) {
             this.bossdoortexttimer = this.bossdoortexttimer - param1.deltatime;
         }
-        else if (this.bossdoortext.onscreen == 1) {
-            this.bossdoortext.hide();
+        else if (this.bossdoortext1.onscreen == 1) {
+            this.bossdoortext1.hide();
+            this.bossdoortext2.hide();
         }
         return null;
     }

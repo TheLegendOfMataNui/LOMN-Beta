@@ -3,7 +3,8 @@ class fvil6_puzzle {
     property leverpickup;
     property hookarray;
     property coindoor;
-    property coindoortext;
+    property coindoortext1;
+    property coindoortext2;
     property coindoortexttimer;
     property showcoindoor;
     
@@ -50,11 +51,16 @@ class fvil6_puzzle {
         else {
             this.coindoor.hide();
         }
-        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 8);
-        this.coindoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
-        this.coindoortext.initfull();
-        this.coindoortext.add();
+
+        //Set Door Text
+        this.coindoortext1 = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 0) +  gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 3), screenx * 0.5, screeny * 0.70, 0, 1.5, 256, 4, 0);
+        this.coindoortext2 = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", "8 " + gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 4), screenx * 0.5, screeny * 0.75, 0, 1.5, 256, 4, 0);
+        this.coindoortext1.initfull();
+        this.coindoortext2.initfull();
+        this.coindoortext1.add();
+        this.coindoortext2.add();
         this.coindoortexttimer = 0.0;
+
         return null;
     }
     
@@ -74,10 +80,15 @@ class fvil6_puzzle {
             this.hookarray = null;
         }
         globalclass.player.setgrapplinghookdistance(45);
-        if (this.coindoortext != null) {
-            this.coindoortext.remove();
-            this.coindoortext.cleanupfull();
-            this.coindoortext = null;
+        if (this.coindoortext1 != null) {
+            this.coindoortext1.remove();
+            this.coindoortext1.cleanupfull();
+            this.coindoortext1 = null;
+        }
+        if (this.coindoortext2 != null) {
+            this.coindoortext2.remove();
+            this.coindoortext2.cleanupfull();
+            this.coindoortext2 = null;
         }
         if (this.coindoor != null) {
             this.coindoor.cleanupfull();
@@ -90,8 +101,9 @@ class fvil6_puzzle {
         if (this.coindoortexttimer > 0) {
             this.coindoortexttimer = this.coindoortexttimer - param1.deltatime;
         }
-        else if (this.coindoortext.onscreen == 1) {
-            this.coindoortext.hide();
+        else if (this.coindoortext1.onscreen == 1) {
+            this.coindoortext1.hide();
+            this.coindoortext2.hide();
         }
         return null;
     }
@@ -104,10 +116,12 @@ class fvil6_puzzle {
                         this.coindoor.fadeout(1.5);
                         gcstaticsoundsptrarray::playtablesound(1084);
                         this.showcoindoor = 0;
-                        this.coindoortext.hide();
+                        this.coindoortext1.hide();
+                        this.coindoortext2.hide();
                     }
                     else {
-                        this.coindoortext.show();
+                        this.coindoortext1.show();
+                        this.coindoortext2.show();
                         this.coindoortexttimer = 1.0;
                     }
                 }

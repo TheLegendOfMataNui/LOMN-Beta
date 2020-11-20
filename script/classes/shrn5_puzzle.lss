@@ -3,7 +3,8 @@ class shrn5_puzzle {
     property cinema;
     property bossdoor;
     property portalactive;
-    property bossdoortext;
+    property bossdoortext1;
+    property bossdoortext2;
     property bossdoortexttimer;
     property showbossdoor;
     property crashbandicootwarped;
@@ -35,11 +36,16 @@ class shrn5_puzzle {
         else {
             this.bossdoor.hide();
         }
-        door_text = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 25);
-        this.bossdoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", door_text, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
-        this.bossdoortext.initfull();
-        this.bossdoortext.add();
+
+        //Set Door Text
+        this.bossdoortext1 = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 0) +  gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 1), screenx * 0.5, screeny * 0.70, 0, 1.5, 256, 4, 0);
+        this.bossdoortext2 = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", "25 " + gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 4), screenx * 0.5, screeny * 0.75, 0, 1.5, 256, 4, 0);
+        this.bossdoortext1.initfull();
+        this.bossdoortext2.initfull();
+        this.bossdoortext1.add();
+        this.bossdoortext2.add();
         this.bossdoortexttimer = 0.0;
+
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2"))) {
             if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
                 this.cinema = gccinemaengine::create();
@@ -62,10 +68,15 @@ class shrn5_puzzle {
     }
     
     method cleanupfull() {
-        if (this.bossdoortext != null) {
-            this.bossdoortext.remove();
-            this.bossdoortext.cleanupfull();
-            this.bossdoortext = null;
+        if (this.bossdoortext1 != null) {
+            this.bossdoortext1.remove();
+            this.bossdoortext1.cleanupfull();
+            this.bossdoortext1 = null;
+        }
+        if (this.bossdoortext2 != null) {
+            this.bossdoortext2.remove();
+            this.bossdoortext2.cleanupfull();
+            this.bossdoortext2 = null;
         }
         if (this.bossdoor != null) {
             this.bossdoor.cleanupfull();
@@ -86,8 +97,9 @@ class shrn5_puzzle {
         if (this.bossdoortexttimer > 0) {
             this.bossdoortexttimer = this.bossdoortexttimer - param1.deltatime;
         }
-        else if (this.bossdoortext.onscreen == 1) {
-            this.bossdoortext.hide();
+        else if (this.bossdoortext1.onscreen == 1) {
+            this.bossdoortext1.hide();
+            this.bossdoortext1.hide();
         }
         return null;
     }
@@ -115,10 +127,12 @@ class shrn5_puzzle {
                         this.bossdoor.fadeout(1.5);
                         gcstaticsoundsptrarray::playtablesound(1084);
                         this.showbossdoor = 0;
-                        this.bossdoortext.hide();
+                        this.bossdoortext1.hide();
+                        this.bossdoortext2.hide();
                     }
                     else {
-                        this.bossdoortext.show();
+                        this.bossdoortext1.show();
+                        this.bossdoortext2.show();
                         this.bossdoortexttimer = 1.0;
                     }
                 }

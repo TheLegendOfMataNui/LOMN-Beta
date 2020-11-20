@@ -4,19 +4,19 @@ class shrn1_puzzle {
     property crackdefaults;
     property cracktimer;
     property crackplane;
-    property edoor;
-    property edoortext;
-    property edoortexttimer;
+    property bossdoor;
+    property bossdoortext;
+    property bossdoortexttimer;
     property mdoors;
     property crackstate;
-    property showedoor;
+    property showbossdoor;
     property portalactive;
     property crashbandicootwarped;
     
     method shrn1_puzzle(param1) {
         this.parent = param1;
         this.crackstate = 0;
-        this.showedoor = 1;
+        this.showbossdoor = 1;
         return null;
     }
     
@@ -100,23 +100,25 @@ class shrn1_puzzle {
                 var1 = var1 + 1;
             }
         }
-        this.edoor = new lego_moveableobject("mmdr", this.parent.name);
-        this.edoor.initfull();
-        if (this.showedoor) {
-            this.edoor.show();
-            this.edoor.setalpha(0.5);
+        this.bossdoor = new lego_moveableobject("mmdr", this.parent.name);
+        this.bossdoor.initfull();
+        if (this.showbossdoor) {
+            this.bossdoor.show();
+            this.bossdoor.setalpha(0.5);
         }
         else if (bettersaver::getbooleanvalue(65)) {
-            this.edoor.hide();
+            this.bossdoor.hide();
         }
         if (this.crackstate == 0) {
-            this.edoor.disablecollisions();
+            this.bossdoor.disablecollisions();
         }
-        var6 = gcareadirector::getscriptfluffstringuint(scslosifoundation::stringtoidentifier("door"), 1, 0, 60);
-        this.edoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", var6, screenx * 0.5, screeny * 0.83, 0, 1.5, 256, 4, 0);
-        this.edoortext.initfull();
-        this.edoortext.add();
-        this.edoortexttimer = 0.0;
+
+        //Set Door Text
+        this.bossdoortext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 0) + "60 " + gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("door"), 1, 4), screenx * 0.5, screeny * 0.70, 0, 1.5, 256, 4, 0);
+        this.bossdoortext.initfull();
+        this.bossdoortext.add();
+        this.bossdoortexttimer = 0.0;
+
         whenua = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("when"), 0);
         gccharacter::setinputstate(whenua, scslosifoundation::stringtoidentifier("none"));
         gccharacter::switchanimation(whenua, scslosifoundation::stringtoidentifier("wh02"), -1);
@@ -134,14 +136,14 @@ class shrn1_puzzle {
     method cleanupfull() {
         var var1;
         var var2;
-        if (this.edoortext != null) {
-            this.edoortext.remove();
-            this.edoortext.cleanupfull();
-            this.edoortext = null;
+        if (this.bossdoortext != null) {
+            this.bossdoortext.remove();
+            this.bossdoortext.cleanupfull();
+            this.bossdoortext = null;
         }
-        if (this.edoor != null) {
-            this.edoor.cleanupfull();
-            this.edoor = null;
+        if (this.bossdoor != null) {
+            this.bossdoor.cleanupfull();
+            this.bossdoor = null;
         }
         if (this.crackparts != null) {
             var1 = this.crackparts.__length - 1;
@@ -246,11 +248,11 @@ class shrn1_puzzle {
         else if (this.crackstate == 5) {
             
         }
-        if (this.edoortexttimer > 0) {
-            this.edoortexttimer = this.edoortexttimer - param1.deltatime;
+        if (this.bossdoortexttimer > 0) {
+            this.bossdoortexttimer = this.bossdoortexttimer - param1.deltatime;
         }
-        else if (this.edoortext.onscreen == 1) {
-            this.edoortext.hide();
+        else if (this.bossdoortext.onscreen == 1) {
+            this.bossdoortext.hide();
         }
         var1 = this.mdoors[0].object.getx();
         var2 = this.mdoors[0].object.getz();
@@ -305,7 +307,7 @@ class shrn1_puzzle {
                 }
             }
             if (param1.args[0] == scslosifoundation::stringtoidentifier("mmdr")) {
-                this.edoor.hide();
+                this.bossdoor.hide();
                 bettersaver::setbooleanvalue(65, 1);
             }
         }
@@ -325,16 +327,16 @@ class shrn1_puzzle {
         }
         else if (param1.eventid == 1) {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("mmdr")) {
-                if (this.showedoor == 1) {
+                if (this.showbossdoor == 1) {
                     if (globalclass.player.tokens >= 60) {
-                        this.edoor.fadeout(1.5);
+                        this.bossdoor.fadeout(1.5);
                         gcstaticsoundsptrarray::playtablesound(1084);
-                        this.showedoor = 0;
-                        this.edoortext.hide();
+                        this.showbossdoor = 0;
+                        this.bossdoortext.hide();
                     }
                     else {
-                        this.edoortext.show();
-                        this.edoortexttimer = 1.0;
+                        this.bossdoortext.show();
+                        this.bossdoortexttimer = 1.0;
                     }
                 }
             }
@@ -351,7 +353,7 @@ class shrn1_puzzle {
     
     method earthquake() {
         this.crackstate = 1;
-        this.edoor.enablecollisions();
+        this.bossdoor.enablecollisions();
         return null;
     }
     
