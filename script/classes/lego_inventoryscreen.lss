@@ -1,60 +1,57 @@
 class lego_inventoryscreen {
+    property inventoryscreen;
     property shown;
-    property skip;
     
     method lego_inventoryscreen() {
         return null;
     }
     
     method initfull() {
-        this.shown = 0;
-        this.skip = 0;
         return null;
     }
     
     method cleanupfull() {
+        this.inventoryscreen = null;
+        this.shown = null;
         return null;
     }
     
     method show() {
-        if (this.shown == 0) {
-            globalclass.hud.hide();
-            gcstatusscreen::showinventory();
-            this.shown = 1;
-            this.skip = 10;
-            globalclass.pause.toggleinput(0);
-            debug::print("SHOWING INVENTORY");
-        }
+        var width;
+        width = gcgame::getresolutionwidth();
+        globalclass.hud.hide();
+        this.inventoryscreen = new ss_basesprite("Root/Data/Art/MenuArt/background", 0, 0, 0, 852, 480);              
+        this.inventoryscreen.initfull();
+        this.inventoryscreen.add();
+        this.inventoryscreen.show();   
+        if (width == 640.000000) {
+            this.inventoryscreen.changepos(-105, 0);
+        }     
+        this.shown = 1;
+        globalclass.pause.toggleinput(0);
         return null;
     }
     
     method hide() {
-        if (this.shown == 1) {
-            gcstatusscreen::hideinventory();
-            this.initfull();
-            globalclass.hud.show();
-            if (globalclass.pause.ispaused == 1) {
-                globalclass.pause.show();
-            }
-            globalclass.pause.toggleinput(1);       
-            debug::print("HIDING INVENTORY");
+        globalclass.hud.show();
+        this.inventoryscreen.hide();
+        this.inventoryscreen.remove();
+        this.inventoryscreen.cleanupfull();
+        if (globalclass.pause.ispaused == 1) {
+            globalclass.pause.show();
         }
+        this.shown = 0;
+        globalclass.pause.toggleinput(1);
         return null;
     }
     
     method process(param1) {
-        if ((this.shown == 1) && (globalclass.hud.hidden == 0)) {
-            globalclass.hud.hide();
-        }
-        if (this.skip > 0) {
-            this.skip = this.skip - 1;
-        }
         return null;
     }
     
     method input(param1) {
-        if ((this.shown == 1) && (this.skip == 0)) {
-            if (param1.event == 2) {
+        if (this.shown == 1) {
+            if ((param1.event == 2) && (param1.button == 251)) {
                 this.hide();
             }
         }

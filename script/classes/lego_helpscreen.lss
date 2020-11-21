@@ -1,99 +1,82 @@
 class lego_helpscreen {
     property helpscreen;
     property shown;
-    property skip;
     
     method lego_helpscreen() {
         return null;
     }
     
     method initfull() {
-        this.helpscreen = null;
-        this.shown = 0;
-        this.skip = 0;
         return null;
     }
     
     method cleanupfull() {
-        if (!(this.helpscreen == null)) {
-            this.helpscreen.cleanupfull();
-            this.helpscreen = null;
-        }
+        this.helpscreen = null;
+        this.shown = null;
         return null;
     }
     
     method show() {
-        var var1;
         var width;
+        var lang;
         width = gcgame::getresolutionwidth();
-        if (this.shown == 0) {
-            globalclass.hud.hide();
-            var1 = gcareadirector::getlanguage();
-            if (var1 == 0) {
-                this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_US", 0, 0, 0, 852, 480);              
-            }
-            else if (var1 == 1) {
-                this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_FR", 0, 0, 0, 852, 480);
-            }
-            else if (var1 == 2) {
-                this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_GER", 0, 0, 0, 852, 480);
-            }
-            else if (var1 == 3) {
-                this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_DAN", 0, 0, 0, 852, 480);
-            }
-            else if (var1 == 4) {
-                this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_NL", 0, 0, 0, 852, 480);
-            }
-            else if (var1 == 5) {
-                this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_ITA", 0, 0, 0, 852, 480);
-            }
-            else if (var1 == 6) {
-                this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_SPA", 0, 0, 0, 852, 480);
-            }
-            else if (var1 == 7) {
-                this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_SWE", 0, 0, 0, 852, 480);
-            }
-            this.helpscreen.initfull();
-            this.helpscreen.add();
-            this.helpscreen.show();         
-            if (width == 640.000000) {
-                this.helpscreen.changepos(-105, 0);
-            }
-            this.shown = 1;
-            this.skip = 10;
-            globalclass.pause.toggleinput(0);
+        lang = gcareadirector::getlanguage();
+        globalclass.hud.hide();
+        if (lang == 0) {
+            this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_US", 0, 0, 0, 852, 480);              
         }
+        else if (lang == 1) {
+            this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_FR", 0, 0, 0, 852, 480);
+        }
+        else if (lang == 2) {
+            this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_GER", 0, 0, 0, 852, 480);
+        }
+        else if (lang == 3) {
+            this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_DAN", 0, 0, 0, 852, 480);
+        }
+        else if (lang == 4) {
+            this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_NL", 0, 0, 0, 852, 480);
+        }
+        else if (lang == 5) {
+            this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_ITA", 0, 0, 0, 852, 480);
+        }
+        else if (lang == 6) {
+            this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_SPA", 0, 0, 0, 852, 480);
+        }
+        else if (lang == 7) {
+            this.helpscreen = new ss_basesprite("Root/Data/Art/MenuArt/Help_Screen_SWE", 0, 0, 0, 852, 480);
+        }          
+        this.helpscreen.initfull();
+        this.helpscreen.add();
+        this.helpscreen.show();   
+        if (width == 640.000000) {
+            this.helpscreen.changepos(-105, 0);
+        }     
+        this.shown = 1;
+        globalclass.pause.toggleinput(0);
         return null;
     }
     
     method hide() {
-        if (this.shown == 1) {
-            this.helpscreen.hide();
-            this.helpscreen.remove();
-            this.helpscreen.cleanupfull();
-            this.initfull();
-            globalclass.hud.show();
-            if (globalclass.pause.ispaused == 1) {
-                globalclass.pause.show();
-            }
-            globalclass.pause.toggleinput(1);
+        globalclass.hud.show();
+        this.helpscreen.hide();
+        this.helpscreen.remove();
+        this.helpscreen.cleanupfull();
+        if (globalclass.pause.ispaused == 1) {
+            globalclass.pause.show();
         }
+        this.shown = 0;
+        globalclass.pause.toggleinput(1);
         return null;
     }
     
     method process(param1) {
-        if ((this.shown == 1) && (globalclass.hud.hidden == 0)) {
-            globalclass.hud.hide();
-        }
-        if (this.skip > 0) {
-            this.skip = this.skip - 1;
-        }
         return null;
     }
     
     method input(param1) {
-        if ((this.shown == 1) && (this.skip == 0)) {
-            if (param1.event == 2) {
+        if (this.shown == 1) {
+            if ((param1.event == 2) && (param1.button == 251)) {
                 this.hide();
             }
         }
