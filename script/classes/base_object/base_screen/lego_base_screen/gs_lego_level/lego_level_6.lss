@@ -108,6 +108,16 @@ class lego_level_6 : gs_lego_level {
         return null;
     }
     
+    method cleanupfull() {
+        this.lego_level_cleanupfull();
+        if (this.burnsound != null) {
+            this.burnsound.cleanupfull();
+            this.burnsound = null;
+        }
+        this.burnsoundplayed = null;
+        return null;
+    }
+
     method onevent(param1) {
         var var1;
         this.lego_level_onevent(param1);
