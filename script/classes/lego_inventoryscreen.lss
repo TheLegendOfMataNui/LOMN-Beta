@@ -1,6 +1,7 @@
 class lego_inventoryscreen {
     property inventoryscreen;
     property shown;
+    property invarray;
     
     method lego_inventoryscreen() {
         return null;
@@ -13,20 +14,76 @@ class lego_inventoryscreen {
     method cleanupfull() {
         this.inventoryscreen = null;
         this.shown = null;
+        this.invarray = null;
         return null;
     }
     
     method show() {
-        var width;
+        var width;        
         width = gcgame::getresolutionwidth();
         globalclass.hud.hide();
-        this.inventoryscreen = new ss_basesprite("Root/Data/Art/MenuArt/background", 0, 0, 0, 852, 480);              
-        this.inventoryscreen.initfull();
-        this.inventoryscreen.add();
-        this.inventoryscreen.show();   
-        if (width == 640.000000) {
-            this.inventoryscreen.changepos(-105, 0);
-        }     
+        this.invarray = 0;
+        this.inventoryscreen = [ 
+            new ss_basesprite("Root/Data/Art/MenuArt/status_background", 0, 0, 0, 852, 480),
+
+            new ss_basesprite("Root/Data/Art/stONUA", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stGALI", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stPOHATU", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stKOPAKA", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stLEWA", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stTAHU", 0, 0, 0, 852, 480),
+
+            new ss_basesprite("Root/Data/Art/OnuaQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/GaliQOcolordisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/PohatuQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/KppakaQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/LewaQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/TahuQOdisk", 0, 0, 0, 852, 480),
+
+            new ss_basesprite("Root/Data/Art/OnuaQOpick", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/GaliQOgear", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/PohatuQOpick", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/KppakaQO2", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/LewaQO2", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/TahuQO2", 0, 0, 0, 852, 480),
+
+            new ss_basesprite("Root/Data/Art/OnuaQObug", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/GaliQO3", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/PohatuQO3", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/KppakaQOcrystal", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/LewaQOspider", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/TahuQObug", 0, 0, 0, 852, 480),
+
+            new ss_basesprite("Root/Data/Art/StoneOnua", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/StoneGali", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/StonePohatu", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/StoneKopaka", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/StoneLewa", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/StoneTahu", 0, 0, 0, 852, 480),
+
+            new ss_basesprite("Root/Data/Art/stRuru", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stHuna", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stRau", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stKomau", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stMatatu", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stMahiki", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stPakari", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stKaukau", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stKakama", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stAkaku", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stMiru", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stHau", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stVahi", 0, 0, 0, 852, 480) ];
+        
+        while ((this.inventoryscreen.__length - 1) >= this.invarray) {
+            this.inventoryscreen[this.invarray].initfull();
+            this.inventoryscreen[this.invarray].add();
+            this.inventoryscreen[this.invarray].show();
+            if (width == 640.000000) {
+                this.inventoryscreen[this.invarray].changepos(-105, 0);
+            }    
+            this.invarray = this.invarray + 1;
+        } 
         this.shown = 1;
         globalclass.pause.toggleinput(0);
         return null;
@@ -34,9 +91,14 @@ class lego_inventoryscreen {
     
     method hide() {
         globalclass.hud.show();
-        this.inventoryscreen.hide();
-        this.inventoryscreen.remove();
-        this.inventoryscreen.cleanupfull();
+        this.invarray = 0;
+
+        while ((this.inventoryscreen.__length - 1) >= this.invarray) {
+            this.inventoryscreen[this.invarray].hide();
+            this.inventoryscreen[this.invarray].remove();
+            this.inventoryscreen[this.invarray].cleanupfull();
+            this.invarray = this.invarray + 1;
+        }
         if (globalclass.pause.ispaused == 1) {
             globalclass.pause.show();
         }
