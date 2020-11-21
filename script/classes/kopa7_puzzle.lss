@@ -1,0 +1,170 @@
+class kopa7_puzzle {
+    property parent;
+    property platforms;
+    property ring;
+    property targets;
+    property button;
+    property buttonpressed;
+    
+    method kopa7_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        gcmodeldirector::setnearestmax(90);
+        gcmodeldirector::setnearestmax(90);
+        gcareadirector::setnearestmaxdist(5000);
+        if (globalclass.player.actorid != "kopa") {
+            globalclass.player.changetoa("kopa");
+            globalclass.player.maskcontrol.changemask(3);
+        }
+        globalclass.hud.cdtimer.initfull();
+        globalclass.hud.cdtimer.settime(120.0);
+        globalclass.hud.cdtimer.start();
+        this.platforms = [ new kopaka7_platform("pt01", "kpka", [  ], 60.0, 2.0), 
+            new kopaka7_platform("pt02", "kpka", [  ], 60.0, 2.0), 
+            new kopaka7_platform("pt03", "kpka", [  ], 60.0, 2.0), 
+            new kopaka7_platform("pt04", "kpka", [  ], 60.0, 2.0), 
+            new kopaka7_platform("pt05", "kpka", [  ], 60.0, 2.0), 
+            new kopaka7_platform("pt06", "kpka", [  ], 60.0, 2.0) ];
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].initfull();
+            this.platforms[var1].toggle(1);
+            var1 = var1 + 1;
+        }
+        this.button = new lego_moveableobject("tg04", "kpka", [  ]);
+        this.button.initfull();
+        this.button.setresponse(0, 0, 3);
+        this.buttonpressed = 0;
+        this.ring = new kopaka7_platform("pf01", "kpka", [  ], 0 - 60.0, 0.1);
+        this.ring.initfull();
+        this.ring.toggle(1);
+        this.targets = [ new kopaka7_target("tg00", "kpka", this.ring, this.button), 
+            new kopaka7_target("tg01", "kpka", this.ring, this.button), 
+            new kopaka7_target("tg02", "kpka", this.ring, this.button) ];
+        var1 = 0;
+        while ((this.targets.__length - 1) >= var1) {
+            this.targets[var1].initfull();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        var var1;
+        if (this.platforms != null) {
+            var1 = 0;
+            while ((this.platforms.__length - 1) >= var1) {
+                this.platforms[var1].cleanupfull();
+                this.platforms[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.platforms = null;
+        }
+        if (this.targets != null) {
+            var1 = 0;
+            while ((this.targets.__length - 1) >= var1) {
+                this.targets[var1].cleanupfull();
+                this.targets[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.targets = null;
+        }
+        if (this.button != null) {
+            this.button.cleanupfull();
+            this.button = null;
+        }
+        if (this.ring != null) {
+            this.ring.cleanupfull();
+            this.ring = null;
+        }
+        this.buttonpressed = null;
+        globalclass.hud.cdtimer.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        if (globalclass.hud.cdtimer.finished()) {
+            gccollisionphysicsgroup::settoaposition(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.hud.cdtimer.reset();
+            this.resetpuzzle();
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        var var1;
+        if (param1.eventid == 3) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+                globalclass.player.kill();
+                gcstaticsoundsptrarray::playtablesound(1048);
+                globalclass.level.cam.setaimode(7);
+                globalclass.player.actor.setinputstate("none");
+            }
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            globalclass.level.cam.setaimode(11);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            globalclass.hud.cdtimer.reset();
+            this.resetpuzzle();
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 1) {
+            if (this.buttonpressed == 0) {
+                if ((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[1] == this.button.id)) {
+                    this.buttonpressed = 1;
+                    this.button.changeposition(0, 0 - 0.6, 0, 1.0);
+                    var1 = 0;
+                    while ((this.platforms.__length - 1) >= var1) {
+                        this.platforms[var1].toggle(0);
+                        var1 = var1 + 1;
+                    }
+                }
+            }
+        }
+        if (this.targets != null) {
+            var1 = 0;
+            while ((this.targets.__length - 1) >= var1) {
+                this.targets[var1].onevent(param1);
+                var1 = var1 + 1;
+            }
+        }
+        return null;
+    }
+    
+    method resetpuzzle() {
+        var var1;
+        var1 = 0;
+        while ((this.platforms.__length - 1) >= var1) {
+            this.platforms[var1].reset();
+            this.platforms[var1].toggle(1);
+            var1 = var1 + 1;
+        }
+        this.ring.reset();
+        this.ring.toggle(1);
+        var1 = 0;
+        while ((this.targets.__length - 1) >= var1) {
+            this.targets[var1].reset();
+            var1 = var1 + 1;
+        }
+        this.buttonpressed = 0;
+        return null;
+    }
+
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+       this.parent = null;
+       return null;
+    }
+}
