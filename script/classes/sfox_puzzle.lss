@@ -50,6 +50,7 @@ class sfox_puzzle {
         this.buzzyboi.add();
         this.buzzyboi.show();
         this.buzzyboicontrol = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crma"));
+        //this.buzzyboi.ride(scslosifoundation::stringtoidentifier("cnt1"), "sfox", 2063160497);
 
         gccharacter::aidisabledefault(this.buzzyboicontrol);
         gccharacter::deactivateattackcollisions(this.buzzyboicontrol);
@@ -91,13 +92,15 @@ class sfox_puzzle {
         var xtarget = gclegocamera::getforwardx(gcviewport::getcamera(gcgame::getmainview()));
         var ytarget = gclegocamera::getforwardy(gcviewport::getcamera(gcgame::getmainview()));       
         var ztarget = gclegocamera::getforwardz(gcviewport::getcamera(gcgame::getmainview()));  
+
+        gccharacter::setvelocity(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")), (90 * xtarget), (90 * ytarget), (90 * ztarget));
         
+        //Comment out the below code if you want to test proper riding:
         var lewax = gccharacter::getpositionx(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
         var leway = gccharacter::getpositiony(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
         var lewaz = gccharacter::getpositionz(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
         var lewadir = gccharacter::getorientation(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
-
-        gccharacter::setvelocity(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")), (90 * xtarget), (90 * ytarget), (90 * ztarget));
+       
 
         if ((gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crma"))) != null) {
             gccharacter::setposition(this.buzzyboicontrol, (lewax), (leway +6), lewaz);
