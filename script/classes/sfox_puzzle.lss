@@ -7,8 +7,53 @@ class sfox_puzzle {
     }
     
     method initfull() {
-        var rama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("dfly"));
-        gccharacter::aisetbenign(rama, 1);
+        var ramacount = 0;
+        var rama = [ 
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("dfly")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df01")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df02")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df03")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df04")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df05")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df06")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df07")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df08")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df09")),      
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df10")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df11")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df12")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df13")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df14")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df15")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df16")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df17")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df18")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df19")),          
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df20")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df21")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df22")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df23")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df24")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df25")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df26")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df27")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df28")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df29")),      
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df30")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df31")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df32")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df33")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df34")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df35")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df36")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df37")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df38")),
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df39")) ];
+        while ((rama.__length - 1) >= ramacount) {
+            gccharacter::aisetbenign(rama[ramacount], 1);
+            ramacount = ramacount + 1;
+            debug::print("Rama Are Passive!");
+        }       
         return null;
     }
 
@@ -38,7 +83,7 @@ class sfox_puzzle {
         var xtarget = gclegocamera::getforwardx(gcviewport::getcamera(gcgame::getmainview()));
         var ytarget = gclegocamera::getforwardy(gcviewport::getcamera(gcgame::getmainview()));       
         var ztarget = gclegocamera::getforwardz(gcviewport::getcamera(gcgame::getmainview()));
-        gccharacter::setvelocity(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")), (50 * xtarget), (50 * ytarget), (50 * ztarget));
+        gccharacter::setvelocity(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")), (90 * xtarget), (90 * ytarget), (90 * ztarget));
         return null;
     }
 }
