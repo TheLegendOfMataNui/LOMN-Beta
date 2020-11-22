@@ -1,5 +1,7 @@
 class sfox_puzzle {
     property parent;
+    property buzzyboi;
+    property buzzyboicontrol;
     
     method sfox_puzzle(param1) {
         this.parent = param1;
@@ -7,9 +9,17 @@ class sfox_puzzle {
     }
     
     method initfull() {
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICTechnoSnowboardPart2");
+        globalclass.bgmusic.play(1);
+
+        // Set camera positioning
+        globalclass.level.cam.setcamzoomfactor(9.0);
+        globalclass.level.cam.setheightoffset(2.0);       
+        globalclass.player.maskcontrol.usemasks(0);
+
         var ramacount = 0;
         var rama = [ 
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("dfly")),
+           gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("dfly")),
             gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df01")),
             gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df02")),
             gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df03")),
@@ -28,36 +38,34 @@ class sfox_puzzle {
             gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df16")),
             gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df17")),
             gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df18")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df19")),          
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df20")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df21")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df22")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df23")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df24")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df25")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df26")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df27")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df28")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df29")),      
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df30")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df31")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df32")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df33")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df34")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df35")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df36")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df37")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df38")),
-            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df39")) ];
+            gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("df19")) ];
+
         while ((rama.__length - 1) >= ramacount) {
             gccharacter::aisetbenign(rama[ramacount], 1);
             ramacount = ramacount + 1;
-            debug::print("Rama Are Passive!");
-        }       
+        }
+
+        this.buzzyboi = new gs_lego_character("crma", "rama", this.parent.name, 0, 0, 0, 0, "aiin");
+        this.buzzyboi.initfull();
+        this.buzzyboi.add();
+        this.buzzyboi.show();
+        this.buzzyboicontrol = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crma"));
+
+        gccharacter::aidisabledefault(this.buzzyboicontrol);
+        gccharacter::deactivateattackcollisions(this.buzzyboicontrol);
+        gccharacter::disableallraycollisions(this.buzzyboicontrol);
+        gccharacter::setignoreallcollisions(this.buzzyboicontrol, 1);
         return null;
     }
 
     method cleanupfull() {
+        if (this.buzzyboi != null) {
+            this.buzzyboi.cleanupfull();
+            this.buzzyboi = null;
+        }
+        if (this.buzzyboicontrol != null) {
+            this.buzzyboicontrol = null;
+        }
         return null;
     }
     
@@ -71,7 +79,7 @@ class sfox_puzzle {
     }
     
     method onevent(param1) {
-        this.fly();
+        this.windfly();
         return null;
     }
     
@@ -79,11 +87,24 @@ class sfox_puzzle {
         return null;
     }
 
-    method fly() {
+    method windfly() {     
         var xtarget = gclegocamera::getforwardx(gcviewport::getcamera(gcgame::getmainview()));
         var ytarget = gclegocamera::getforwardy(gcviewport::getcamera(gcgame::getmainview()));       
-        var ztarget = gclegocamera::getforwardz(gcviewport::getcamera(gcgame::getmainview()));
+        var ztarget = gclegocamera::getforwardz(gcviewport::getcamera(gcgame::getmainview()));  
+        
+        var lewax = gccharacter::getpositionx(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
+        var leway = gccharacter::getpositiony(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
+        var lewaz = gccharacter::getpositionz(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
+        var lewadir = gccharacter::getorientation(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
+
         gccharacter::setvelocity(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")), (90 * xtarget), (90 * ytarget), (90 * ztarget));
+
+        if ((gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crma"))) != null) {
+            gccharacter::setposition(this.buzzyboicontrol, (lewax), (leway +6), lewaz);
+            gccharacter::setorientation(this.buzzyboicontrol, lewadir);
+        }
+
+        globalclass.player.maskcontrol.changemask(10);
         return null;
     }
 }
