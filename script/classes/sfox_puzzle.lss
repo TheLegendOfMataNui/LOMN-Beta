@@ -1,0 +1,44 @@
+class sfox_puzzle {
+    property parent;
+    
+    method sfox_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        var rama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("dfly"));
+        gccharacter::aisetbenign(rama, 1);
+        return null;
+    }
+
+    method cleanupfull() {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.fly();
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+
+    method fly() {
+        var xtarget = gclegocamera::getforwardx(gcviewport::getcamera(gcgame::getmainview()));
+        var ytarget = gclegocamera::getforwardy(gcviewport::getcamera(gcgame::getmainview()));       
+        var ztarget = gclegocamera::getforwardz(gcviewport::getcamera(gcgame::getmainview()));
+        gccharacter::setvelocity(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")), (50 * xtarget), (50 * ytarget), (50 * ztarget));
+        return null;
+    }
+}
