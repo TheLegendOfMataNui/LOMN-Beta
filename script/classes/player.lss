@@ -167,7 +167,7 @@ class player {
             }
             else if (param1.button == 231) {
                 if (this.grapplinghooksetup) {
-                    if (this.bshootdragger == 1) {
+                    if (this.bshootdragger) {
                         this.actor.shootdragger();
                     }
                     else {
@@ -348,6 +348,13 @@ class player {
                 }
             }
             else if (param1.eventid == 21) {
+                var areaid = (scslosifoundation::identifiertostring(gcareadirector::getcurrentarea()));
+                if ((areaid == "vllg") || (areaid == "tura") || (areaid == "shrn") || (areaid == "mosh")) {
+                    this.canshootdragger(0);
+                }
+                else {
+                    this.canshootdragger(1);
+                }
                 if (this.equiptype == 1) {
                 this.processequipment(1);
                 }
