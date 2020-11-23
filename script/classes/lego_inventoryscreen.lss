@@ -1,72 +1,44 @@
 class lego_inventoryscreen {
     property inventoryscreen;
+    property inventorybackground;
+    property defaultitems;
+    property noblemasks;
+    property greatmasks;
+    property questitems;
     property shown;
-    property invarray;
-    
+    property width;
+  
     method lego_inventoryscreen() {
         return null;
     }
     
-    method initfull() {
-        return null;
-    }
-    
-    method cleanupfull() {
-        this.inventoryscreen = null;
-        this.shown = null;
-        this.invarray = null;
-        return null;
-    }
-    
-    method show() {
-        var width;        
-        width = gcgame::getresolutionwidth();
-        globalclass.hud.hide();
-        this.invarray = 0;
-        this.inventoryscreen = [ 
-            new ss_basesprite("Root/Data/Art/MenuArt/status_background", 0, 0, 0, 852, 480),
-
+    method initfull() {     
+        this.width = gcgame::getresolutionwidth();
+        this.inventorybackground = [ new ss_basesprite("Root/Data/Art/MenuArt/status_background", -80, 0, 0, 720, 480) ];
+        
+        this.defaultitems = [
             new ss_basesprite("Root/Data/Art/stONUA", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/stGALI", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/stPOHATU", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/stKOPAKA", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/stLEWA", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/stTAHU", 0, 0, 0, 852, 480),
-
-            new ss_basesprite("Root/Data/Art/OnuaQOdisk", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/GaliQOcolordisk", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/PohatuQOdisk", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/KppakaQOdisk", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/LewaQOdisk", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/TahuQOdisk", 0, 0, 0, 852, 480),
-
-            new ss_basesprite("Root/Data/Art/OnuaQOpick", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/GaliQOgear", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/PohatuQOpick", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/KppakaQO2", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/LewaQO2", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/TahuQO2", 0, 0, 0, 852, 480),
-
-            new ss_basesprite("Root/Data/Art/OnuaQObug", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/GaliQO3", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/PohatuQO3", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/KppakaQOcrystal", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/LewaQOspider", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/TahuQObug", 0, 0, 0, 852, 480),
-
             new ss_basesprite("Root/Data/Art/StoneOnua", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stGALI", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/StoneGali", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stPOHATU", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/StonePohatu", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stKOPAKA", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/StoneKopaka", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/StoneLewa", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/StoneTahu", 0, 0, 0, 852, 480),
-
+            new ss_basesprite("Root/Data/Art/stLEWA", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/StoneLewa", 0, 0, 0, 852, 480),        
+            new ss_basesprite("Root/Data/Art/stTAHU", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/StoneTahu", 0, 0, 0, 852, 480) ];
+        
+        this.noblemasks = [
             new ss_basesprite("Root/Data/Art/stRuru", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/stHuna", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/stRau", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/stKomau", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/stMatatu", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/stMahiki", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/stMahiki", 0, 0, 0, 852, 480) ];
+
+        this.greatmasks = [
             new ss_basesprite("Root/Data/Art/stPakari", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/stKaukau", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/stKakama", 0, 0, 0, 852, 480),
@@ -74,35 +46,73 @@ class lego_inventoryscreen {
             new ss_basesprite("Root/Data/Art/stMiru", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/stHau", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/stVahi", 0, 0, 0, 852, 480) ];
-        
-        while ((this.inventoryscreen.__length - 1) >= this.invarray) {
-            this.inventoryscreen[this.invarray].initfull();
-            this.inventoryscreen[this.invarray].add();
-            this.inventoryscreen[this.invarray].show();
-            if (width == 640.000000) {
-                this.inventoryscreen[this.invarray].changepos(-105, 0);
-            }    
-            this.invarray = this.invarray + 1;
-        } 
+
+        this.questitems = [
+            new ss_basesprite("Root/Data/Art/OnuaQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/OnuaQOpick", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/OnuaQObug", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/GaliQOcolordisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/GaliQOgear", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/GaliQO3", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/PohatuQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/PohatuQOpick", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/PohatuQO3", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/KppakaQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/KppakaQO2", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/KppakaQOcrystal", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/LewaQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/LewaQO2", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/LewaQOspider", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/TahuQOdisk", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/TahuQO2", 0, 0, 0, 852, 480),
+            new ss_basesprite("Root/Data/Art/TahuQObug", 0, 0, 0, 852, 480) ];         
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.inventoryscreen = null;
+        this.defaultitems = null;
+        this.noblemasks = null;
+        this.greatmasks = null;
+        this.questitems = null;
+        this.shown = null;
+        this.width = null;
+        return null;
+    }
+    
+    method show() {
+        var inventoryscreen = 0;
+        this.inventoryscreen = [ ];
+        this.processdefaultitems();
+        this.processquests();
+        this.processmasks();
+        while ((this.inventoryscreen.__length - 1) >= inventoryscreen) {               
+            this.inventoryscreen[inventoryscreen].initfull();
+            this.inventoryscreen[inventoryscreen].add();
+            this.inventoryscreen[inventoryscreen].show();
+            if (this.width == 640.000000) {        
+                this.inventoryscreen[inventoryscreen].setpos(-113, 0, 753, 480);                       
+            }
+            inventoryscreen = inventoryscreen + 1; 
+        }           
         this.shown = 1;
+        globalclass.hud.hide();
         globalclass.pause.toggleinput(0);
         return null;
     }
     
     method hide() {
-        globalclass.hud.show();
-        this.invarray = 0;
-
-        while ((this.inventoryscreen.__length - 1) >= this.invarray) {
-            this.inventoryscreen[this.invarray].hide();
-            this.inventoryscreen[this.invarray].remove();
-            this.inventoryscreen[this.invarray].cleanupfull();
-            this.invarray = this.invarray + 1;
+        var inventoryscreen = 0;
+        while ((this.inventoryscreen.__length - 1) >= inventoryscreen) {
+            this.inventoryscreen[inventoryscreen].cleanupfull();
+            this.inventoryscreen[inventoryscreen] = null;
+            inventoryscreen = inventoryscreen + 1;
         }
         if (globalclass.pause.ispaused == 1) {
             globalclass.pause.show();
         }
         this.shown = 0;
+        globalclass.hud.show();
         globalclass.pause.toggleinput(1);
         return null;
     }
@@ -116,6 +126,266 @@ class lego_inventoryscreen {
             if ((param1.event == 2) && (param1.button == 251)) {
                 this.hide();
             }
+        }
+        return null;
+    }
+
+    method processdefaultitems() {
+        var defaultitems = 0;
+        var noblemasks = 0;
+        var greatmasks = 0;
+        this.inventoryscreen.__append(this.inventorybackground[0]);
+        if (gcareadirector::getcurrentlevel() == scslosifoundation::stringtoidentifier("lev1")) {
+            //Default Items
+             while (0 >= defaultitems) {
+                this.inventoryscreen.__append(this.defaultitems[defaultitems]);
+                defaultitems = defaultitems + 1;
+            }
+            //Great Masks
+             while (0 >= greatmasks) {
+                this.inventoryscreen.__append(this.greatmasks[greatmasks]); 
+                greatmasks = greatmasks + 1;
+            }
+        }
+        else if (gcareadirector::getcurrentlevel() == scslosifoundation::stringtoidentifier("lev2")) {
+            //Default Items
+             while (2 >= defaultitems) {
+                this.inventoryscreen.__append(this.defaultitems[defaultitems]); 
+                defaultitems = defaultitems + 1;
+            }
+            //Noble Masks
+             while (1 >= noblemasks) {
+                this.inventoryscreen.__append(this.noblemasks[noblemasks]);  
+                noblemasks = noblemasks + 1;
+            }   
+            //Great Masks
+             while (0 >= greatmasks) {
+                this.inventoryscreen.__append(this.greatmasks[greatmasks]);  
+                greatmasks = greatmasks + 1;
+            }      
+        }        
+        else if (gcareadirector::getcurrentlevel() == scslosifoundation::stringtoidentifier("lev3")) {
+            //Default Items
+             while (4 >= defaultitems) {
+                this.inventoryscreen.__append(this.defaultitems[defaultitems]);  
+                defaultitems = defaultitems + 1;
+            }
+            //Noble Masks
+             while (2 >= noblemasks) {
+                this.inventoryscreen.__append(this.noblemasks[noblemasks]); 
+                noblemasks = noblemasks + 1;
+            }   
+            //Great Masks
+             while (1 >= greatmasks) {
+                this.inventoryscreen.__append(this.greatmasks[greatmasks]);  
+                greatmasks = greatmasks + 1;
+            }            
+        }        
+        else if (gcareadirector::getcurrentlevel() == scslosifoundation::stringtoidentifier("lev4")) {
+            //Default Items
+             while (6 >= defaultitems) {
+                this.inventoryscreen.__append(this.defaultitems[defaultitems]); 
+                defaultitems = defaultitems + 1;
+            }
+            //Noble Masks
+             while (3 >= noblemasks) {
+                this.inventoryscreen.__append(this.noblemasks[noblemasks]); 
+                noblemasks = noblemasks + 1;
+            }   
+            //Great Masks
+             while (2 >= greatmasks) {
+                this.inventoryscreen.__append(this.greatmasks[greatmasks]); 
+                greatmasks = greatmasks + 1;
+            }            
+        }        
+        else if (gcareadirector::getcurrentlevel() == scslosifoundation::stringtoidentifier("lev5")) {
+            //Default Items
+             while (8 >= defaultitems) {
+                this.inventoryscreen.__append(this.defaultitems[defaultitems]); 
+                defaultitems = defaultitems + 1;
+            } 
+            //Noble Masks
+             while (4 >= noblemasks) {
+                this.inventoryscreen.__append(this.noblemasks[noblemasks]); 
+                noblemasks = noblemasks + 1;
+            }   
+            //Great Masks
+             while (3 >= greatmasks) {
+                this.inventoryscreen.__append(this.greatmasks[greatmasks]);  
+                greatmasks = greatmasks + 1;
+            }            
+        }        
+        else if (gcareadirector::getcurrentlevel() == scslosifoundation::stringtoidentifier("lev6")) {
+            //Default Items
+             while (10 >= defaultitems) {
+                this.inventoryscreen.__append(this.defaultitems[defaultitems]); 
+                defaultitems = defaultitems + 1;
+            }
+            //Noble Masks
+             while (5 >= noblemasks) {
+                this.inventoryscreen.__append(this.noblemasks[noblemasks]);  
+                noblemasks = noblemasks + 1;
+            }   
+            //Great Masks
+             while (4 >= greatmasks) {
+                this.inventoryscreen.__append(this.greatmasks[greatmasks]); 
+                greatmasks = greatmasks + 1;
+            }            
+        }        
+        else if (gcareadirector::getcurrentlevel() == scslosifoundation::stringtoidentifier("lev7")) {
+            //Default Items
+             while (11 >= defaultitems) {
+                this.inventoryscreen.__append(this.defaultitems[defaultitems]); 
+                defaultitems = defaultitems + 1;
+            }
+            //Noble Masks
+             while (5 >= noblemasks) {
+                this.inventoryscreen.__append(this.noblemasks[noblemasks]);  
+                noblemasks = noblemasks + 1;
+            }   
+            //Great Masks
+             while (6 >= greatmasks) {
+                this.inventoryscreen.__append(this.greatmasks[greatmasks]); 
+                greatmasks = greatmasks + 1;
+            }                
+        }               
+        return null;
+    }
+
+    method processquests() {
+        //Onua
+        if (GcSaver::QuestComplete(1, 1)) {
+           this.inventoryscreen.__append(this.questitems[0]); 
+        }
+        if (GcSaver::QuestComplete(1, 2)) {
+           this.inventoryscreen.__append(this.questitems[1]); 
+        }
+        if (GcSaver::QuestComplete(1, 3)) {
+           this.inventoryscreen.__append(this.questitems[2]); 
+        }        
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("ston")) == 1) {
+           this.inventoryscreen.__append(this.defaultitems[1]); 
+        }        
+
+        //Gali
+        if (GcSaver::QuestComplete(2, 1)) {
+           this.inventoryscreen.__append(this.questitems[0]); 
+        }
+        if (GcSaver::QuestComplete(2, 2)) {
+           this.inventoryscreen.__append(this.questitems[1]); 
+        }
+        if (GcSaver::QuestComplete(2, 3)) {
+           this.inventoryscreen.__append(this.questitems[2]); 
+        }        
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("ston")) == 1) {
+           this.inventoryscreen.__append(this.defaultitems[3]); 
+        }
+
+        //Pohatu
+        if (GcSaver::QuestComplete(3, 1)) {
+           this.inventoryscreen.__append(this.questitems[0]); 
+        }
+        if (GcSaver::QuestComplete(3, 2)) {
+           this.inventoryscreen.__append(this.questitems[1]); 
+        }
+        if (GcSaver::QuestComplete(3, 3)) {
+           this.inventoryscreen.__append(this.questitems[2]); 
+        }        
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("ston")) == 1) {
+           this.inventoryscreen.__append(this.defaultitems[5]); 
+        }
+        
+        //Kopaka
+        if (GcSaver::QuestComplete(4, 1)) {
+           this.inventoryscreen.__append(this.questitems[0]); 
+        }
+        if (GcSaver::QuestComplete(4, 2)) {
+           this.inventoryscreen.__append(this.questitems[1]); 
+        }
+        if (GcSaver::QuestComplete(4, 3)) {
+           this.inventoryscreen.__append(this.questitems[2]); 
+        }        
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("ston")) == 1) {
+           this.inventoryscreen.__append(this.defaultitems[7]); 
+        }
+
+        //Lewa
+        if (GcSaver::QuestComplete(5, 1)) {
+           this.inventoryscreen.__append(this.questitems[0]); 
+        }
+        if (GcSaver::QuestComplete(5, 2)) {
+           this.inventoryscreen.__append(this.questitems[1]); 
+        }
+        if (GcSaver::QuestComplete(5, 3)) {
+           this.inventoryscreen.__append(this.questitems[2]); 
+        }        
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("ston")) == 1) {
+           this.inventoryscreen.__append(this.defaultitems[9]); 
+        }
+
+        //Tahu
+        if (GcSaver::QuestComplete(6, 1)) {
+           this.inventoryscreen.__append(this.questitems[0]); 
+        }
+        if (GcSaver::QuestComplete(6, 2)) {
+           this.inventoryscreen.__append(this.questitems[1]); 
+        }
+        if (GcSaver::QuestComplete(6, 3)) {
+           this.inventoryscreen.__append(this.questitems[2]); 
+        }        
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("ston")) == 1) {
+           this.inventoryscreen.__append(this.defaultitems[11]); 
+        }
+        return null;
+    }    
+
+    method processmasks() {
+        //Onua
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mskv"), scslosifoundation::stringtoidentifier("pzzl"))) {
+           this.inventoryscreen.__append(this.noblemasks[0]); 
+        }
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mskc"), scslosifoundation::stringtoidentifier("spcv"))) {
+            this.inventoryscreen.__append(this.noblemasks[1]); 
+        }
+
+        //Gali
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mk9a"), scslosifoundation::stringtoidentifier("bech"))) {
+            this.inventoryscreen.__append(this.noblemasks[2]); 
+        }
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mask"), scslosifoundation::stringtoidentifier("mwat"))) {
+            this.inventoryscreen.__append(this.greatmasks[1]); 
+        }
+
+        //Pohatu
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mska"), scslosifoundation::stringtoidentifier("blcv"))) {
+            this.inventoryscreen.__append(this.noblemasks[3]); 
+        }
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("msks"), scslosifoundation::stringtoidentifier("ptos"))) {
+            this.inventoryscreen.__append(this.greatmasks[2]); 
+        }
+
+        //Kopaka
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mtel"), scslosifoundation::stringtoidentifier("tele"))) {
+            this.inventoryscreen.__append(this.noblemasks[4]); 
+        }
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mskv"), scslosifoundation::stringtoidentifier("visn"))) {
+            this.inventoryscreen.__append(this.greatmasks[3]); 
+        }
+
+        //Lewa
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mski"), scslosifoundation::stringtoidentifier("cave"))) {
+            this.inventoryscreen.__append(this.noblemasks[5]); 
+        }
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mask"), scslosifoundation::stringtoidentifier("hive"))) {
+            this.inventoryscreen.__append(this.greatmasks[4]); 
+        }
+
+        //Tahu
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mk6a"), scslosifoundation::stringtoidentifier("ta03"))) {
+            this.inventoryscreen.__append(this.greatmasks[5]); 
+        }
+        if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mk5a"), scslosifoundation::stringtoidentifier("ta12"))) {
+            this.inventoryscreen.__append(this.greatmasks[6]); 
         }
         return null;
     }
