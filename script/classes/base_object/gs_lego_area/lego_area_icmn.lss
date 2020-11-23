@@ -1,14 +1,16 @@
-class lego_area_boss6 : gs_lego_area {
+class lego_area_icmn : gs_lego_area {
     property puzzle;
     
-    method lego_area_boss6(param1) {
-        this.gs_lego_area("boss", param1, 0, 0);
-        this.puzzle = new boss6_puzzle(this);
+    method lego_area_icmn(param1) {
+        this.gs_lego_area("icmn", param1, 0, 0);
+        this.puzzle = new icmn_puzzle(this);
         this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
+        globalclass.bgmusic.changefilename("Root/Data/Sounds/MUSICKopakaTheme");
+        globalclass.bgmusic.play(1);
         this.lego_area_show();
         this.puzzle.initfull();
         return null;
@@ -17,6 +19,11 @@ class lego_area_boss6 : gs_lego_area {
     method cleanupfull() {
         this.lego_area_hide();
         this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
         return null;
     }
     
