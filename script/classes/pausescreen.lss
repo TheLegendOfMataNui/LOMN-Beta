@@ -100,8 +100,35 @@ class pausescreen {
         }
         this.menustrings = null;      
         this.menubox.hide();
-        this.menubox = null;
         this.ispaused = 0;
+        return null;
+    }
+    
+    method hide() {
+        var var1;
+        if (this.ispaused == 1) {
+            var1 = 0;
+            while ((this.menustrings.__length - 1) >= var1) {
+                this.menustrings[var1].hide();
+                this.hidden = 1;
+                var1 = var1 + 1;
+            }
+            this.menubox.hide();
+        }
+        return null;
+    }
+    
+    method show() {
+        var var1;
+        if (this.ispaused == 1) {
+            var1 = 0;
+            while ((this.menustrings.__length - 1) >= var1) {
+                this.hidden = 0;
+                this.menustrings[var1].show();
+                var1 = var1 + 1;
+            }           
+        }
+        this.menubox.show();
         return null;
     }
     
