@@ -224,6 +224,11 @@ class vllg4_puzzle {
             //Set Tohunga: Volma (VL18)
             gccharacter::settohunga(this.volma, rgba(255, 255, 255, 255), rgba(122, 254, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
 
+            //Set Rahi: Blue Bat
+			gcmodeldirector::show(scslosifoundation::stringtoidentifier("bbat"), 0);
+            gccharacter::setgroundoffset(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("bbat")), 2);
+            gccharacter::aidisabledefault(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("bbat")));
+
             //Hiding hives & Turaga door
             gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
             gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv0"), scslosifoundation::stringtoidentifier("vllg"));
@@ -255,6 +260,7 @@ class vllg4_puzzle {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl16"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl17"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl18"), 0);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("bbat"), 0);
             globalclass.bgmusic.changefilename("Root/Data/Sounds/MUSICKopakaTheme");
             globalclass.bgmusic.play(1);
         }
