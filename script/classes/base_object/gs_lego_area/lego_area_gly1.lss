@@ -29,10 +29,20 @@ class lego_area_gly1 : gs_lego_area {
             this.hammerpickup.setcondition(131072);
             this.hammerpickup.setquest(2);
         }
+        else {
+            this.hammerpickup = new lego_moveableobject("hamm");
+            this.hammerpickup.initfull();
+            this.hammerpickup.hide();
+        }
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("hook")) == 0) {
             this.clawpickup = new lego_pickup("hook", 0, 3, "item", 9, 1);
             this.clawpickup.initfull();
             this.clawpickup.show();
+        }
+        else {
+            this.clawpickup = new lego_moveableobject("hook");
+            this.clawpickup.initfull();
+            this.clawpickup.hide();
         }
         return null;
     }

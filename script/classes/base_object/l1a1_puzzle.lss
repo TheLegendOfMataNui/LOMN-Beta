@@ -19,12 +19,22 @@ class l1a1_puzzle : base_object {
             this.clawpickup.initfull();
             this.clawpickup.show();
         }
+        else {
+            this.clawpickup = new lego_moveableobject("claw");
+            this.clawpickup.initfull();
+            this.clawpickup.hide();
+        }
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pic1")) == 0) {
             this.pickpickup = new lego_pickup("pic1", 0, 5, "item", 9, 1);
             this.pickpickup.initfull();
             this.pickpickup.show();
             this.pickpickup.setcondition(8192);
             this.pickpickup.setquest(2);
+        }
+        else {
+            this.pickpickup = new lego_moveableobject("pic1");
+            this.pickpickup.initfull();
+            this.pickpickup.hide();
         }
         return null;
     }

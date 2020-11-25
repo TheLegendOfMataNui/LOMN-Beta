@@ -1,6 +1,5 @@
 class le04_puzzle {
     property parent;
-    property spiderpickup;
     property hookarray;
 	property printglyph;
     
@@ -30,15 +29,16 @@ class le04_puzzle {
             this.printglyph = new lego_pickup("pgl5", 0, 7, "item", 4, 0);
             this.printglyph.initfull();
         }
+        else {
+            this.printglyph = new lego_moveableobject("pgl5");
+            this.printglyph.initfull();
+            this.printglyph.hide();
+        }
         return null;
     }
     
     method cleanupfull() {
         var var1;
-        if (!(this.spiderpickup == null)) {
-            this.spiderpickup.cleanupfull();
-            this.spiderpickup = null;
-        }
         var1 = 0;
         while ((this.hookarray.__length - 1) >= var1) {
             this.hookarray[var1].cleanupfull();

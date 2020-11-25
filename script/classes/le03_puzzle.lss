@@ -17,6 +17,11 @@ class le03_puzzle {
             this.hook = new lego_pickup("axe1", 0, 3, "item", 9, 1);
             this.hook.initfull();
         }
+        else {
+            this.hook = new lego_moveableobject("axe1");
+            this.hook.initfull();
+            this.hook.hide();
+        }
         hivehandle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
         gchive::setmaxcreatures(hivehandle, 2);
         gchive::setcreaturetype(hivehandle, scslosifoundation::stringtoidentifier("bats"));

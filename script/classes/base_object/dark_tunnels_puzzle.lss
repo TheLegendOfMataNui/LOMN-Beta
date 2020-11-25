@@ -26,6 +26,11 @@ class dark_tunnels_puzzle : base_object {
             this.discpickup.setcondition(32768);
             this.discpickup.setquest(1);
         }
+        else {
+            this.discpickup = new lego_moveableobject("disc");
+            this.discpickup.initfull();
+            this.discpickup.hide();
+        }
         digging_wall1 = gcareadirector::getmoveableobj(scslosifoundation::stringtoidentifier("dg00"), scslosifoundation::stringtoidentifier("cave"));
         gcmoveableobj::inittargetmorph(digging_wall1, "lev1", "cave");
         gcmoveableobj::setdig(digging_wall1, 0);

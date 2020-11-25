@@ -26,6 +26,11 @@ class lego_area_xrod : gs_lego_area {
             this.discpickup.setcondition(32768);
             this.discpickup.setquest(1);
         }
+        else {
+            this.discpickup = new lego_moveableobject("dsc3");
+            this.discpickup.initfull();
+            this.discpickup.hide();
+        }
         this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
         gchive::setmaxcreatures(this.hive1handle, 8);
         gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("bats"));
