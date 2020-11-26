@@ -1,9 +1,9 @@
 class lego_area_mdmn : gs_lego_area {
-    property mudpuzzle;
+    property puzzle;
     
     method lego_area_mdmn(param1) {
         this.gs_lego_area("mdmn", param1, 0, 0);
-        this.mudpuzzle = new mdmn_puzzle(this);
+        this.puzzle = new mdmn_puzzle(this);
         this.lego_area_initfull();
         return null;
     }
@@ -14,7 +14,7 @@ class lego_area_mdmn : gs_lego_area {
         gcareadirector::setfog(-14145496, 0 - 20.0, 0 - 175.0, 0.05);
         gcareadirector::setnearestmax(15);
         gcmodeldirector::setnearestmax(5);
-        this.mudpuzzle.initfull();
+        this.puzzle.initfull();
         return null;
     }
     
@@ -24,17 +24,17 @@ class lego_area_mdmn : gs_lego_area {
     }
     
     method process(param1) {
-        this.mudpuzzle.process(param1);
+        this.puzzle.process(param1);
         return null;
     }
     
     method input(param1) {
-        this.mudpuzzle.input(param1);
+        this.puzzle.input(param1);
         return null;
     }
     
     method onevent(param1) {
-        this.mudpuzzle.onevent(param1);
+        this.puzzle.onevent(param1);
         return null;
     }
     
@@ -45,7 +45,7 @@ class lego_area_mdmn : gs_lego_area {
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.mudpuzzle.cleanupfull();
+        this.puzzle.cleanupfull();
         return null;
     }
     
