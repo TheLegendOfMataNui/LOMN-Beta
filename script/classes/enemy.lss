@@ -1,6 +1,5 @@
 class enemy {
     property instarray;
-    property infectedmask;
 
     method enemy() {
 	    return null;
@@ -23,11 +22,6 @@ class enemy {
     }
 
     method input(param1) {
-        if (param1.event == 2) { 
-            if (param1.button == 247) {
-
-            }
-        }
         return null;
     }
 
@@ -44,7 +38,6 @@ class enemy {
         //EventID 101 = GcCharacter::Kill. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
         //GcCharacter::Kill as called by LOMNHook currently redirects to GcCharacter::AiSetBenign
         else if (param1.eventid == 101) { 
-        //gcmodeldirector::hide(gcmodeldirector::getcharacter(param1.args[2]), 0);  
             debug::print("EVENT 101");            
         }
 
