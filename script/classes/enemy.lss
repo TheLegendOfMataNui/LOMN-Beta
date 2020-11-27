@@ -26,41 +26,26 @@ class enemy {
     }
 
     method onevent(param1) {
-        var instance;
-        //Character Spawned Check
-        //EventID 100 = GcModelDirector::AddCharacter. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])       
-        if (param1.eventid == 100) { 
-            this.instarray.__append(gcmodeldirector::getcharacter(param1.args[2]));
-            debug::print("Spawned " + (scslosifoundation::identifiertostring(param1.args[2])));
-        }
-
-        //Character Cured Check
-        //EventID 101 = GcCharacter::Kill. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
-        //GcCharacter::Kill as called by LOMNHook currently redirects to GcCharacter::AiSetBenign
-        else if (param1.eventid == 101) { 
-            debug::print("EVENT 101");            
-        }
-
-        //Character Killed Check
-        //EventID 102 = GcCharacter::AIDie. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
-        //GcCharacter::AiDie calls the original native code for GcCharacter::Kill, effectively letting us use both
-        else if (param1.eventid == 102) {
-            debug::print("EVENT 102");
+        var instance = 0;
+        //Character Array Reset
+        //EventID 20 = Clear Area Event
+        //Clears the array on exiting the area
+        if (param1.eventid == 20) {
+            this.instarray = [  ];
+            debug::print("CLEARED ENEMY ARRAY");
         }
 
         //Character Hazard Check
         //EventID 44 = Collision Physics Process Event
         //Currently only kills anything below Y -100
         else if (param1.eventid == 44) {
-            instance = 0;
-            if (!(this.instarray == null)) {
+            if (this.instarray != null) {
                 while ((this.instarray.__length - 1) >= instance) {
                     if (gccharacter::getpositiony(this.instarray[instance]) != null) {
                         if (gccharacter::getpositiony(this.instarray[instance]) < -100) {                        
-                            gccharacter::aidie(this.instarray[instance]);
-                            gccharacter::setposition(this.instarray[instance], 0, -999, 0);
-                            this.instarray.__removeat(instance);  
-                            debug::print("Rahi is out of bounds! Removing...");
+                            gccharacter::aipatrol(this.instarray[instance]);
+                            gccharacter::setfalllimit(this.instarray[instance], -100);
+                            debug::print("RAHI IS OUT OF BOUNDS, RESETTING AI...");
                         }
                         instance = instance + 1;
                     }
@@ -68,12 +53,23 @@ class enemy {
             }
         }
 
-        //Character Array Reset
-        //EventID 20 = Clear Area Event
-        //Clears the array on exiting the area
-        else if (param1.eventid == 20) {
-            this.instarray = [  ];
-            debug::print("CLEARED ENEMY ARRAY");
+        //Character Spawned Check
+        //EventID 100 = GcModelDirector::AddCharacter. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])       
+        else if (param1.eventid == 100) {             
+            this.instarray.__append(gcmodeldirector::getcharacter(param1.args[2]));
+            debug::print("Spawned " + (scslosifoundation::identifiertostring(param1.args[2])));
+        }
+
+        //Character Cured Check
+        //EventID 101 = GcCharacter::Kill. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
+        //GcCharacter::Kill as called by LOMNHook currently redirects to GcCharacter::AiSetBenign
+        else if (param1.eventid == 101) {   
+            if (this.instarray != null) {
+                while ((this.instarray.__length - 1) >= instance) {                    
+                    gccharacter::aiidle(this.instarray[instance]);
+                    instance = instance + 1;
+                }
+            } 
         }
         return null;
     }
