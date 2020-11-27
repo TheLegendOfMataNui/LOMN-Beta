@@ -44,34 +44,29 @@ class enemy {
         //EventID 101 = GcCharacter::Kill. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
         //GcCharacter::Kill as called by LOMNHook currently redirects to GcCharacter::AiSetBenign
         else if (param1.eventid == 101) { 
-             debug::print("EVENT 101");
+        //gcmodeldirector::hide(gcmodeldirector::getcharacter(param1.args[2]), 0);  
+            debug::print("EVENT 101");            
         }
 
         //Character Killed Check
         //EventID 102 = GcCharacter::AIDie. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
         //GcCharacter::AiDie calls the original native code for GcCharacter::Kill, effectively letting us use both
-        else if (param1.eventid == 102) { 
-             debug::print("EVENT 102");
-        }
-
-        //Hive Recycling Check
-        //EventID 103 = GcHive::InitCreature (NOTE: CURRENTLY DOESN'T PASS INSTANCEID CORRECTLY!)
-        else if (param1.eventid == 103) { 
-             debug::print("EVENT 103");
+        else if (param1.eventid == 102) {
+            debug::print("EVENT 102");
         }
 
         //Character Hazard Check
-        //EventID 44 = Currently unknown. Runs per frame and is used in a variety of ways throughout vanilla script      
-        //Currently only kills anything below Y -500
-        //NOTE: HIVE ENEMY RECYCLING CURRENTLY BREAKS THIS! EXPECT CRASHES!
+        //EventID 44 = Collision Physics Process Event
+        //Currently only kills anything below Y -100
         else if (param1.eventid == 44) {
             instance = 0;
             if (!(this.instarray == null)) {
                 while ((this.instarray.__length - 1) >= instance) {
                     if (gccharacter::getpositiony(this.instarray[instance]) != null) {
-                        if (gccharacter::getpositiony(this.instarray[instance]) < -500) {                        
+                        if (gccharacter::getpositiony(this.instarray[instance]) < -100) {                        
                             gccharacter::aidie(this.instarray[instance]);
-                            this.instarray.__removeat(instance);
+                            gccharacter::setposition(this.instarray[instance], 0, -999, 0);
+                            this.instarray.__removeat(instance);  
                             debug::print("Rahi is out of bounds! Removing...");
                         }
                         instance = instance + 1;

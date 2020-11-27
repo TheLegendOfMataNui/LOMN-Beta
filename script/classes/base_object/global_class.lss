@@ -9,7 +9,7 @@ class global_class : base_object {
     property nextid;
     property hud;
     property player;
-    //property enemy;
+    property enemy;
     property pause;
     property tweak;
     property inventoryscreen;
@@ -55,7 +55,7 @@ class global_class : base_object {
         this.nextid = null;
         this.hud = new hud_class();
         this.player = new player();
-        //this.enemy = new enemy();
+        this.enemy = new enemy();
         this.tweak = new gs_lego_tweakers();
         this.cheats = new cheatlist();
         this.pause = new pausescreen();
@@ -103,10 +103,10 @@ class global_class : base_object {
         this.cheats.initfull();
         this.inputlist.__append(this.cheats);
         this.processlist.__append(this.cheats);
-        //this.enemy.initfull();
-        //this.eventlist.__append(this.enemy);
-        //this.inputlist.__append(this.enemy);
-        //this.processlist.__append(this.enemy);
+        this.enemy.initfull();
+        this.eventlist.__append(this.enemy);
+        this.inputlist.__append(this.enemy);
+        this.processlist.__append(this.enemy);
         this.debugtimer.initfull();
         this.debugstring.initfull();
         var1 = 0;
@@ -140,10 +140,10 @@ class global_class : base_object {
             this.player.cleanupfull();
             this.player = null;
         }
-        //if (!(this.enemy == null)) {
-        //    this.enemy.cleanupfull();
-        //    this.enemy = null;
-        //}
+        if (!(this.enemy == null)) {
+            this.enemy.cleanupfull();
+            this.enemy = null;
+        }
         if (!(this.tweak == null)) {
             this.tweak.cleanupfull();
             this.tweak = null;
@@ -221,7 +221,7 @@ class global_class : base_object {
     method initshort() {
         this.hud.initfull();
         this.player.initfull();
-        //this.enemy.initfull();
+        this.enemy.initfull();
         this.shortinit = 0;
         return null;
     }
@@ -233,7 +233,7 @@ class global_class : base_object {
             this.level = null;
         }
         this.player.cleanupfull();
-        //this.enemy.cleanupfull();
+        this.enemy.cleanupfull();
         this.hud.cleanupfull();
         this.hittoggletimer = 0;
         this.whatsnext = 0;
