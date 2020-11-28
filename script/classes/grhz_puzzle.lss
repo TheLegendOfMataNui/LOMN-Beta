@@ -1,6 +1,5 @@
 class grhz_puzzle {
     property parent;
-    property showmask;
     property mask;
     property drownsound;
     property drownsoundplayed;
@@ -13,15 +12,9 @@ class grhz_puzzle {
     method initfull() {
         var var1;
         globalclass.bgmusic.stop();
-        this.showmask = 1;
-        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("msks"));
-        if (var1) {
-            this.showmask = 0;
-        }
-        if (this.showmask) {
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("msks")) == 0) {
             this.mask = new lego_pickup("msks", 2, 1, "item", 2, 1);
             this.mask.initfull();
-            this.mask.show();
         }
         this.drownsound = new tablecopysound(1048);
         this.drownsoundplayed = 0;
@@ -29,7 +22,7 @@ class grhz_puzzle {
     }
     
     method cleanupfull() {
-        if (!(this.mask == null)) {
+        if (this.mask != null) {
             this.mask.cleanupfull();
             this.mask = null;
         }
