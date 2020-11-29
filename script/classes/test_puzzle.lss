@@ -12,20 +12,33 @@ class test_puzzle {
     }
     
     method initfull() {
-		var var1;
-        var KEVIN;
-		var tohunga;
-        var ussal;
-        var nobua;
+		var boulder = 0;
+        var kevin = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kevn"));
+		var tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        var ussal = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("krb2"));
+        var nobua = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-16777216, 0 - 5.0, 0 - 600.0, 0.01);
         gclightdirector::setcavelighting(0);
-        KEVIN = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("kevn"));
-        gccharacter::setscale(KEVIN, 15.0);
-		gccharacter::setanimationscalar(KEVIN, 2.00);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
-        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        this.callsurfonce = 1;
+        this.miruactive = 1;
+        this.holedo = 1;
+        this.musichasstarted = 0;
+
+        //Boulder Stuff
+        this.boulderarray = [ new bldr_boulder("bld0", this, 0 - 55.1, 80.2, 0 - 101.1, 2.8, 1) ]; 
+        while ((this.boulderarray.__length - 1) >= boulder) {
+            this.boulderarray[boulder].initfull();
+            boulder = boulder + 1;
+        }
+        
+        //Kevin Stuff
+        gccharacter::setscale(kevin, 15.0);
+		gccharacter::setanimationscalar(kevin, 2.00);
+        
+        //Liam Staff Tohunga Stuff
         gccharacter::settohunga(tohunga, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), scslosifoundation::stringtoidentifier("mkmn"));
 		gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0), rgba(96, 116, 161, 0), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
 		gccharacter::addpart(tohunga, "vlgr/sash", 1);
@@ -34,26 +47,18 @@ class test_puzzle {
 		gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
         gccharacter::setsplitanimation(tohunga, scslosifoundation::stringtoidentifier("d003"), -1);
 		gccharacter::setorientation(tohunga, -90);
-        ussal = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("krb2"));
+
+        //Ussal Stuff
         gccharacter::addpart(ussal, "krb2/nbua", 1);
         gccharacter::setinputstate(ussal, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(ussal, scslosifoundation::stringtoidentifier("kr00"), -1);
-        nobua = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+        gccharacter::switchanimation(ussal, scslosifoundation::stringtoidentifier("kr00"), -1);    
+        
+        //Nobua Stuff
         gccharacter::settohunga(nobua, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
         gccharacter::setinputstate(nobua, scslosifoundation::stringtoidentifier("none"));
         gccharacter::switchanimation(nobua, scslosifoundation::stringtoidentifier("hak1"), -1);
         gccharacter::setorientation(nobua, 0);
         gccharacter::setshadowtype(nobua, 0);
-		this.callsurfonce = 1;
-        this.miruactive = 1;
-        this.holedo = 1;
-        this.musichasstarted = 0;
-        this.boulderarray = [ new bldr_boulder("bld0", this, 0 - 55.1, 80.2, 0 - 101.1, 2.8, 1) ]; 
-        var1 = 0;
-        while ((this.boulderarray.__length - 1) >= var1) {
-            this.boulderarray[var1].initfull();
-            var1 = var1 + 1;
-        }
         return null;
     }
 
@@ -68,11 +73,10 @@ class test_puzzle {
     }
     
     method process(param1) {
-        var var1;
-        var1 = 0;
-        while ((this.boulderarray.__length - 1) >= var1) {
-            this.boulderarray[var1].process(param1);
-            var1 = var1 + 1;
+        var boulder = 0;
+        while ((this.boulderarray.__length - 1) >= boulder) {
+            this.boulderarray[boulder].process(param1);
+            boulder = boulder + 1;
         }
         return null;
     }
@@ -121,41 +125,37 @@ class test_puzzle {
             }
         }
 
-        var var1;
+        var boulder = 0;
         if (param1.eventid == 31) {
-            var1 = 0;
-            while ((this.boulderarray.__length - 1) >= var1) {
-                if (param1.args[0] == this.boulderarray[var1].id) {
-                    this.boulderarray[var1].resettostart();
+            while ((this.boulderarray.__length - 1) >= boulder) {
+                if (param1.args[0] == this.boulderarray[boulder].id) {
+                    this.boulderarray[boulder].resettostart();
                 }
-                var1 = var1 + 1;
+                boulder = boulder + 1;
             }
         }
         else if (param1.eventid == 1) {
-            var1 = 0;
-            while ((this.boulderarray.__length - 1) >= var1) {
-                if (param1.args[0] == this.boulderarray[var1].id) {
+            while ((this.boulderarray.__length - 1) >= boulder) {
+                if (param1.args[0] == this.boulderarray[boulder].id) {
                     if (param1.args[1] == scslosifoundation::stringtoidentifier("cnt1")) {
-                        globalclass.player.actor.react(0, 4, this.boulderarray[var1].id);
+                        globalclass.player.actor.react(0, 4, this.boulderarray[boulder].id);
                     }
                 }
-                var1 = var1 + 1;
+                boulder = boulder + 1;
             }
         }
-        var1 = 0;
-        while ((this.boulderarray.__length - 1) >= var1) {
-            this.boulderarray[var1].onevent(param1);
-            var1 = var1 + 1;
+        while ((this.boulderarray.__length - 1) >= boulder) {
+            this.boulderarray[boulder].onevent(param1);
+            boulder = boulder + 1;
         }
         return null;
     }
     
     method input(param1) {
-        var var1;
-        var1 = 0;
-        while ((this.boulderarray.__length - 1) >= var1) {
-            this.boulderarray[var1].input(param1);
-            var1 = var1 + 1;
+        var boulder = 0;
+        while ((this.boulderarray.__length - 1) >= boulder) {
+            this.boulderarray[boulder].input(param1);
+            boulder = boulder + 1;
         }
         return null;
     }
@@ -179,12 +179,11 @@ class test_puzzle {
     }
 
 	method holedo() {
-        var var1;
+        var player = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"));
         globalclass.player.actor.setsurfingability(0.3, 0.8);
         globalclass.player.actor.setsurfminspeed(10.0);
         globalclass.player.actor.setsurfmaxspeed(50.0);
-        var1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"));
-        gccharacter::setscale(var1, 0.00001);
+        gccharacter::setscale(player, 0.00001);
     return null;
     }
 
