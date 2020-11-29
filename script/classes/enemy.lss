@@ -42,8 +42,9 @@ class enemy {
                 while ((this.instarray.__length - 1) >= instance) {
                     if (gccharacter::getpositiony(this.instarray[instance]) != null) {
                         if (gccharacter::getpositiony(this.instarray[instance]) < -99) {                        
-                            gccharacter::aipatrol(this.instarray[instance]);                           
-                            debug::print("Rahi is out of bounds! Resetting AI...");
+                            gccharacter::aidie(this.instarray[instance]);
+                            this.instarray.__removeat(instance);
+                            debug::print("Rahi is out of bounds! Removing...");
                         }
                         instance = instance + 1;
                     }
@@ -55,7 +56,6 @@ class enemy {
         //EventID 100 = GcModelDirector::AddCharacter. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])       
         else if (param1.eventid == 100) {             
             this.instarray.__append(gcmodeldirector::getcharacter(param1.args[2]));
-            gccharacter::setfalllimit(gcmodeldirector::getcharacter(param1.args[2]), -100);
             debug::print("Spawned " + (scslosifoundation::identifiertostring(param1.args[2])));
         }
 
