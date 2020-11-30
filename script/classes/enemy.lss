@@ -1,5 +1,6 @@
 class enemy {
     property instarray;
+    property killheight;
 
     method enemy() {
 	    return null;
@@ -13,6 +14,9 @@ class enemy {
     method cleanupfull() {
         if (this.instarray != null) {
             this.instarray = null;
+        }        
+        if (this.killheight != null) {
+            this.killheight = null;
         }
         return null;
     }
@@ -38,10 +42,10 @@ class enemy {
         //Character Hazard Check
         //EventID 44 = Collision Physics Process Event
         else if (param1.eventid == 44) {
-            if (this.instarray != null) {
+            if ((this.instarray != null) && (this.killheight != null)) {
                 while ((this.instarray.__length - 1) >= instance) {
                     if (gccharacter::getpositiony(this.instarray[instance]) != null) {
-                        if (gccharacter::getpositiony(this.instarray[instance]) < -99) {                        
+                        if (gccharacter::getpositiony(this.instarray[instance]) < this.killheight) {                        
                             gccharacter::aidie(this.instarray[instance]);
                             this.instarray.__removeat(instance);
                             debug::print("Rahi is out of bounds! Removing...");
@@ -64,7 +68,7 @@ class enemy {
         //GcCharacter::Kill as called by LOMNHook currently redirects to GcCharacter::AiSetBenign
         else if (param1.eventid == 101) {                   
             gccharacter::aiidle(gcmodeldirector::getcharacter(param1.args[2]));
-            debug::print((scslosifoundation::identifiertostring(param1.args[2])) + " is now idle");
+            debug::print((scslosifoundation::identifiertostring(param1.args[2])) + " is now idle!");
         }
         return null;
     }
