@@ -8,6 +8,7 @@ class l1a7_puzzlep : base_object {
     property lastid;
     property deadhives;
     property savedrahi;
+    property taskcomplete;
     
     method l1a7_puzzlep(param1) {
         this.parent = param1;
@@ -86,6 +87,7 @@ class l1a7_puzzlep : base_object {
         }
         this.deadhives = 0;
         this.savedrahi = 0;
+        this.taskcomplete = 0;
         return null;
     }
     
@@ -93,8 +95,9 @@ class l1a7_puzzlep : base_object {
         var var1;
         var var2;
         if (param1.eventid == 44) {
-            if ((this.deadhives == 2) && (this.savedrahi == 2)) {
+            if ((this.deadhives == 2) && (this.savedrahi == 2) && (this.taskcomplete == 0)) {
                 this.opendoor();
+                this.taskcomplete = 1;
             }
         }
         else if (param1.eventid == 51) {
