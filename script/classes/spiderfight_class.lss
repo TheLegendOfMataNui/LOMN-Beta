@@ -7,7 +7,6 @@ class spiderfight_class {
     property desctext;
     property howtotext;
     property door;
-    property cankillspider;
     
     method spiderfight_class(param1) {
         this.parent = param1;
@@ -22,7 +21,6 @@ class spiderfight_class {
         gcareadirector::setfog(-16777216, 0 - 30.0, 0 - 80.0, 0.05);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGODrumAndBassPart1");
         globalclass.bgmusic.play(1);
-        this.cankillspider = 1;
         this.door = new lego_moveableobject("door", this.parent.name);
         this.door.initfull();
         this.web1 = new lego_moveableobject("web1", this.parent.name, [ "weba" ]);
@@ -59,15 +57,13 @@ class spiderfight_class {
             globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
             globalclass.bgmusic.play(1);
             if (this.spider != null) {
-                this.spider.cleanupfull();
-                this.spider = null;
+                this.spider.aisetbenign(1);
             }
         }
         return null;
     }
     
     method cleanupfull() {
-        this.cankillspider = null;
         if (this.spider != null) {
             this.spider.cleanupfull();
             this.spider = null;
@@ -119,18 +115,12 @@ class spiderfight_class {
         else if (param1.eventid == 39) {
             this.door.interpolate(this.door.getx(), this.door.gety() + 10.0, this.door.getz(), 4.0);
         }
-        else if (param1.eventid == 43) {
-            if ((this.spider != null) && (this.cankillspider == 1)) {
-                if (param1.args[0] == this.spider.id) {
-                    this.web1.fadeout(3.0);
-                    this.web1.setresponse(4, 4, 4);
-                    this.spider.cleanupfull();
-                    this.spider = null;
-                    globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
-                    globalclass.bgmusic.play(1);
-                    bettersaver::setbooleanvalue(74, 1);
-                }
-            }
+        else if (param1.eventid == 101) {
+            this.web1.fadeout(3.0);
+            this.web1.setresponse(4, 4, 4);
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+            globalclass.bgmusic.play(1);
+            bettersaver::setbooleanvalue(74, 1);
         }
         else if (param1.eventid == 35) {
             if ((param1.args[0] == this.web1.id)) {

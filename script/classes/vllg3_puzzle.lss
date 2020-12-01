@@ -3,6 +3,7 @@ class vllg3_puzzle {
     property cinema;
     property cinema_shown;
     property deadhives;
+    property savedrahi;
     property coindoor;
     property coindoortext;
     property coindoortexttimer;
@@ -90,6 +91,7 @@ class vllg3_puzzle {
             gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("tura"));
         }
         this.deadhives = 0;
+        this.savedrahi = 0;
         if (gcsaver::isconditionset(4194304) == 1) {
             //Set Tohunga: Golyo (VLGR)
             gccharacter::settohunga(this.golyo, rgba(163, 81, 0, 255), rgba(222, 198, 128, 255), scslosifoundation::stringtoidentifier("mk4a"));
@@ -348,6 +350,20 @@ class vllg3_puzzle {
     }
     
     method onevent(param1) {
+        if (param1.eventid == 51) {
+            this.deadhives = this.deadhives + 1;
+        }
+        else if (param1.eventid == 101) {
+            this.savedrahi = this.savedrahi + 1;
+        }        
+        else if (param1.eventid == 44) {
+            if ((this.deadhives == 4) && this.savedrahi == 4) {
+                gcsaver::setcondition(4194304, 1);
+                gcareadirector::hide(scslosifoundation::stringtoidentifier("drs2"), scslosifoundation::stringtoidentifier("vllg"));
+                globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+                globalclass.bgmusic.play(1);
+            }
+        }
         if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
         }
@@ -357,17 +373,6 @@ class vllg3_puzzle {
             globalclass.player.unkill();
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
             globalclass.player.actor.setinputstate("ninp");
-        }
-        else if (param1.eventid == 51) {
-            if (param1.args[1] == 1) {
-                this.deadhives = this.deadhives + 1;
-                if (this.deadhives == 4) {
-                    gcsaver::setcondition(4194304, 1);
-                    gcareadirector::hide(scslosifoundation::stringtoidentifier("drs2"), scslosifoundation::stringtoidentifier("vllg"));
-                    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
-                    globalclass.bgmusic.play(1);
-                }
-            }
         }
         else if (param1.eventid == 35) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("door")) {

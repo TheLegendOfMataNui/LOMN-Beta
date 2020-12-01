@@ -5,7 +5,8 @@ class lego_puzzle_room5 {
     property hittriggerplaneonce;
     property callev_safe_time_once;
     property glyph;
-    property hiveinc;
+    property deadhives;
+    property savedrahi;
     
     method lego_puzzle_room5(param1) {
         this.parent = param1;
@@ -17,7 +18,8 @@ class lego_puzzle_room5 {
         var var2;
         var var3;
         var var4;
-        this.hiveinc = 0;
+        this.deadhives = 0;
+        this.savedrahi = 0;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEWATHEME");
         globalclass.bgmusic.play();
         this.door1 = new lego_moveableobject("dr01");
@@ -49,6 +51,7 @@ class lego_puzzle_room5 {
             this.glyph.initfull();
             this.glyph.show();
         }
+        this.closedoor2();
         return null;
     }
     
@@ -82,36 +85,35 @@ class lego_puzzle_room5 {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 44) {
+        if (param1.eventid == 51) {
+            if (param1.args[1] == 0) {
+                this.deadhives = this.deadhives + 1;
+            }
+        }        
+        else if (param1.eventid == 101) {
+            if (param1.args[1] == 0) {
+                this.savedrahi = this.savedrahi + 1;
+            }
+        }
+        else if (param1.eventid == 44) {
             if (this.callev_safe_time_once) {
                 if (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
                     
                 }
                 else {
                     this.opendoor1();
-                    this.opendoor2();
                 }
                 globalclass.player.actor.setorientation(180);
                 this.callev_safe_time_once = 0;
-            }
-        }
-        else if (param1.eventid == 51) {
-            if (param1.args[1] == 1) {
-                this.hiveinc = this.hiveinc + 1;
-                if (this.hiveinc >= 4) {
-                    debug::print("****************************** CONGRATS YOU SOLVED THE PUZZLE ***********************8");
+                if ((this.deadhives == 4) && (this.savedrahi == 4)) {
                     this.opendoor2();
                 }
-            }
-            else if (param1.args[1] == 0) {
-                debug::print("********* YEAH YOU HAVE KILLED A HIVE!!");
             }
         }
         else if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
-                if (this.hittriggerplaneonce) {
+                if (this.hittriggerplaneonce) {                   
                     this.closedoor1();
-                    this.closedoor2();
                     this.hittriggerplaneonce = 0;
                 }
             }

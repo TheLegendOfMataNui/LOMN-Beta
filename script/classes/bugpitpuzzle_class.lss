@@ -1,7 +1,7 @@
 class bugpitpuzzle_class {
     property parent;
     property trapdoortimer;
-    property deadhives;
+    property deadthings;
     property door_trap;
     property door_goal_a;
     property door_goal_b;
@@ -43,7 +43,7 @@ class bugpitpuzzle_class {
         gchive::setmaxcreatures(this.hive4handle, 0);
         gchive::setcreaturetype(this.hive4handle, scslosifoundation::stringtoidentifier("bugz"));
         gchive::setspawnrate(this.hive4handle, 30);
-        this.deadhives = 0;
+        this.deadthings = 0;
         this.door_trap = new lego_moveableobject("dor3", this.parent.name);
         this.door_goal_a = new lego_moveableobject("dor7", this.parent.name);
         this.door_goal_b = new lego_moveableobject("dor8", this.parent.name);
@@ -91,7 +91,7 @@ class bugpitpuzzle_class {
         this.hive2handle = null;
         this.hive3handle = null;
         this.hive4handle = null;
-        this.deadhives = null;
+        this.deadthings = null;
         return null;
     }
     
@@ -153,9 +153,12 @@ class bugpitpuzzle_class {
             globalclass.player.actor.setinputstate("ninp");
         }
         else if (param1.eventid == 51) {
-            if (param1.args[1] == 1) {
-                this.killedahive();
-            }
+            this.deadthings = this.deadthings + 1;
+            this.killedahive();
+        }
+        else if (param1.eventid == 101) {
+            this.deadthings = this.deadthings + 1;
+            this.killedahive();
         }
         return null;
     }
@@ -183,14 +186,13 @@ class bugpitpuzzle_class {
     
     method killedahive() {
         var var1;
-        this.deadhives = this.deadhives + 1;
-        if (this.deadhives == 4) {
+        if (this.deadthings == 8) {
             var1 = 5.5;
             globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
             globalclass.bgmusic.play(1);
         }
         else {
-            var1 = this.deadhives * 0.5;
+            var1 = this.deadthings * 0.25;
         }
         this.door_goal_a.changeposition(0 - var1, 0.0, var1, 0.0);
         this.door_goal_b.changeposition(var1, 0.0, 0 - var1, 0.0);
