@@ -265,7 +265,7 @@ class player {
                     this.airshown = 0;
                     //debug::print("Done the do");
                 }
-            }
+            }          
             else if (param1.eventid == 15) {
                 if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
                     gcstaticsoundsptrarray::playtablesound(1092);
@@ -347,6 +347,9 @@ class player {
                     this.maskcontrol.toggleactive();
                 }
             }
+            else if (param1.eventid == 20) {
+                this.processequipment(1);
+            }  
             else if (param1.eventid == 21) {
                 var areaid = (scslosifoundation::identifiertostring(gcareadirector::getcurrentarea()));
                 if ((areaid == "vllg") || (areaid == "tura") || (areaid == "shrn") || (areaid == "mosh")) {
@@ -356,7 +359,7 @@ class player {
                     this.canshootdragger(1);
                 }
                 if (this.equiptype == 1) {
-                this.processequipment(1);
+                    this.processequipment(1);
                 }
                 if (this.equiptype == 2) {
                     this.processequipment(2);
