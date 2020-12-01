@@ -1,0 +1,97 @@
+class nest1_puzzle {
+    property parent;
+    property bigbug;
+	property printglyph;
+    property exitdoorleft;
+    property exitdoorright;
+    
+    method nest1_puzzle(param1) {
+        this.parent = param1;
+        return null;
+    }
+    
+    method initfull() {
+        this.exitdoorleft = new lego_moveableobject("dor8", this.parent.name);
+        this.exitdoorleft.initfull();
+        this.exitdoorright = new lego_moveableobject("dor7", this.parent.name);
+        this.exitdoorright.initfull();
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGODrumAndBassPart2");
+        globalclass.bgmusic.play();		
+        gcmodeldirector::setnearestmax(10);						
+        this.bigbug = new gs_lego_character("bugz", "bugz", "fake", 0, -950.9, 0.2, 18, "aiin");
+        this.bigbug.initfull();
+        this.bigbug.add(0);
+        this.bigbug.show();
+        this.bigbug.setscale(10.0);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("pgl1")) == 0) {
+            this.printglyph = new lego_pickup("pgl1", 0, 7, "item", 7, 0);
+            this.printglyph.initfull();
+        }
+        else {
+            this.printglyph = new lego_moveableobject("pgl1");
+            this.printglyph.initfull();
+            this.printglyph.hide();
+            this.exitdoorleft.interpolate(this.exitdoorleft.getx() + 10, this.exitdoorleft.gety(), this.exitdoorleft.getz() - 10, 0);
+            this.exitdoorright.interpolate(this.exitdoorright.getx() - 10, this.exitdoorright.gety(), this.exitdoorright.getz() + 10, 0);
+            debug::print("****** DOOR OPENING, GET OUT");
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        if (this.printglyph != null) {
+            this.printglyph.cleanupfull();
+            this.printglyph = null;
+        }
+        if (this.bigbug != null) {
+            this.bigbug.cleanupfull();
+            this.bigbug = null;
+        }
+        if (this.exitdoorleft != null) {
+            this.exitdoorleft.cleanupfull();
+            this.exitdoorleft = null;
+        }
+        if (this.exitdoorright != null) {
+            this.exitdoorright.cleanupfull();
+            this.exitdoorright = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        return null;
+    }
+
+    method onevent(param1) {
+        if (param1.eventid == 39) {
+            this.exitdoorleft.interpolate(this.exitdoorleft.getx() + 10, this.exitdoorleft.gety(), this.exitdoorleft.getz() - 10, 7);
+            this.exitdoorright.interpolate(this.exitdoorright.getx() - 10, this.exitdoorright.gety(), this.exitdoorright.getz() + 10, 7);
+        }
+        else if (param1.eventid == 3) {
+            this.parent.level.cam.setaimode(7);
+            gcstaticsoundsptrarray::playtablesound(1048);
+            globalclass.player.kill();
+            globalclass.player.actor.setinputstate("none");
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            this.parent.level.cam.setaimode(11);
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+       this.parent = null;
+       return null;
+    }
+}
