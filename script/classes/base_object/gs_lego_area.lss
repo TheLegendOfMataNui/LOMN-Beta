@@ -1,16 +1,16 @@
 class gs_lego_area : base_object {
-    property name;
-    property id;
+    property name; // As a string
+    property id; // As an identifier
     property onscreen;
     property darkarea;
     property startingarea;
     property enterstartid;
     property enterlookid;
-    property level;
+    property level; // This is the gs_lego_level instance
     
-    method gs_lego_area(param1, param2, param3, param4) {
+    method gs_lego_area(param1, level, param3, param4) {
         this.name = param1;
-        this.level = param2;
+        this.level = level;
         this.id = scslosifoundation::stringtoidentifier(param1);
         if (param3 == null) {
             this.onscreen = 0;
@@ -27,6 +27,7 @@ class gs_lego_area : base_object {
     
     method initfull() {
         this.lego_area_initfull();
+        debug::print("AREA INITFULL FOR AREA " + this.name);
         return null;
     }
     
@@ -40,6 +41,8 @@ class gs_lego_area : base_object {
     }
     
     method lego_area_show() {
+        lomnonline::opensession("localhost", 1337, this.level.name + "_" + this.name, "test player");
+
         return null;
     }
     
@@ -49,6 +52,8 @@ class gs_lego_area : base_object {
     }
     
     method lego_area_hide() {
+        lomnonline::closesession();
+
         if (globalclass.player.maskcontrol.isactive()) {
             globalclass.player.maskcontrol.toggleactive();
             globalclass.hud.mask.hide();
@@ -67,6 +72,17 @@ class gs_lego_area : base_object {
     
     method releaseemmiter(param1, param2) {
         return gcareadirector::releaseemitter(param1, param2);
+    }
+
+    method processonline(param1) {
+        this.lego_area_processonline(param1);
+    }
+
+    method lego_area_processonline(param1) {
+        var position = globalclass.player.actor.getpos(); // ss_point
+        lomnonline::sendupdate(position.x1, position.y1, position.z, 0.0, globalclass.player.actor.getorientation(), 0.0);
+
+        return null;
     }
     
     method cleanupfull() {
