@@ -2,6 +2,9 @@ class mtup3_class {
     property parent;
     property cinema;
     property door;
+    property deadhives;
+    property savedrahi;
+    property taskcomplete;
     
     method mtup3_class(param1) {
         this.parent = param1;
@@ -36,6 +39,9 @@ class mtup3_class {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("ls01"), 0);
             this.door.interpolate(this.door.getx(), 4.0244, this.door.getz(), 0);
         }
+        this.deadhives = 0;
+        this.savedrahi = 0;
+        this.taskcomplete = 0;
         return null;
     }
     
@@ -53,17 +59,24 @@ class mtup3_class {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 30) {
+        if (param1.eventid == 44) {
+            if ((this.deadhives == 1) && (this.savedrahi == 3) && (this.taskcomplete == 0)) {
+                bettersaver::setbooleanvalue(51, 1);
+                this.door.interpolate(this.door.getx(), 4.0244, this.door.getz(), 5);
+                this.taskcomplete = 1;
+            }
+        }
+        else if (param1.eventid == 51) {
+            this.deadhives = this.deadhives + 1;
+        }
+        else if (param1.eventid == 101) {
+            this.savedrahi = this.savedrahi + 1;
+        }  
+        else if (param1.eventid == 30) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cin1")) {
                 globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPohatuAmbience");
                 globalclass.bgmusic.play(1);
                 globalclass.player.maskcontrol.changemask(1);
-            }
-        }
-        else if (param1.eventid == 51) {
-            if (param1.args[1] == 1) {
-                bettersaver::setbooleanvalue(51, 1);
-                this.door.interpolate(this.door.getx(), 4.0244, this.door.getz(), 5);
             }
         }
         else if (param1.eventid == 46) {
