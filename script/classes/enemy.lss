@@ -39,6 +39,20 @@ class enemy {
             debug::print("Cleared Enemy Array!");
         }
 
+        //Knockback Processing
+        //EventID 40 = Player Damage Event
+        //MAY CAUSE ISSUES DUE TO OTHER FUNCTIONS ALSO TRIPPING THIS EVENT
+        else if (param1.eventid == 40) {
+            if (param1.args[1] != null) {
+                var toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"));
+                var char = gcmodeldirector::getcharacter(param1.args[1]);
+
+                //TO DO
+
+                debug::print(scslosifoundation::identifiertostring(param1.args[1]) + " damaged player!");
+            }
+        }
+
         //Character Hazard Check
         //EventID 44 = Collision Physics Process Event
         else if (param1.eventid == 44) {
