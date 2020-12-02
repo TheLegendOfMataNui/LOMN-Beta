@@ -1,6 +1,12 @@
 class enemy {
     property instarray;
     property killheight;
+    property particletimer;
+    property timeractive;
+    property charx;
+    property chary;
+    property charz;
+    property infmask;
 
     method enemy() {
 	    return null;
@@ -8,20 +14,36 @@ class enemy {
 
     method initfull() {
         this.instarray = [  ];
+        this.particletimer = 0.0;
+        this.timeractive = 0;
         return null;
     }
 
     method cleanupfull() {
         if (this.instarray != null) {
             this.instarray = null;
+        }               
+        if (this.infmask != null) {
+            this.infmask = null;
         }        
-        if (this.killheight != null) {
-            this.killheight = null;
-        }
         return null;
     }
 
     method process(param1) {
+        //Timer for Infected Mask & Particle Fountain
+        if (this.timeractive == 1) {
+            this.chary = this.chary + 0.05;
+            this.particletimer = this.particletimer + param1.deltatime;
+            gcareadirector::createemitter(24, this.charx, this.chary, this.charz);
+            this.infmask.setpos(this.charx, (this.chary + 1.5), this.charz);
+            if (this.particletimer >= 1) {
+                this.infmask.hide();
+                this.infmask.remove();
+                this.infmask.cleanupfull();
+                this.particletimer = 0.0;
+                this.timeractive = 0;
+            }
+        }
         return null;
     }
 
@@ -81,7 +103,16 @@ class enemy {
         //Character Cured Check
         //EventID 101 = GcCharacter::Kill. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])
         //GcCharacter::Kill as called by LOMNHook currently redirects to GcCharacter::AiSetBenign
-        else if (param1.eventid == 101) {                   
+        else if (param1.eventid == 101) {    
+            this.charx = gccharacter::getpositionx(gcmodeldirector::getcharacter(param1.args[2]));
+            this.chary = gccharacter::getpositiony(gcmodeldirector::getcharacter(param1.args[2]));
+            this.charz = gccharacter::getpositionz(gcmodeldirector::getcharacter(param1.args[2]));
+            this.timeractive = 1;
+            this.infmask = new ss_bigsprite("Root/Data/Art/INF_TAHU0000", this.charx, this.chary, this.charz, 2, 2);
+            this.infmask.initfull();
+            this.infmask.add();
+            this.infmask.show();
+            this.infmask.setcamstate(1);
             gccharacter::aiidle(gcmodeldirector::getcharacter(param1.args[2]));
             debug::print((scslosifoundation::identifiertostring(param1.args[2])) + " is now idle!");
         }
