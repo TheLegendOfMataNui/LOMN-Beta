@@ -12,6 +12,10 @@ class lego_area_tura5 : gs_lego_area {
         this.crashbandicootwarped = 0;
         this.warpsound = new tablecopysound(1094);
         this.lego_area_show();
+        var turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"));   
+        gccharacter::setorientation(turaga, 0);
+        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(turaga, scslosifoundation::stringtoidentifier("ma00"), -1);
         globalclass.player.processequipment(2);
         if (gcsaver::portalactive() == 1) {
             gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/lewa/shrine_ripple/l_shrn_ptl", 0);

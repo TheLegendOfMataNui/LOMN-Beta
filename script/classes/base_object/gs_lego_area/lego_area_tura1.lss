@@ -13,6 +13,10 @@ class lego_area_tura1 : gs_lego_area {
         this.crashbandicootwarped = 0;
         this.warpsound = new tablecopysound(1094);
         this.lego_area_show();
+        var turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("when"));   
+        gccharacter::setorientation(turaga, 0);
+        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(turaga, scslosifoundation::stringtoidentifier("wh00"), -1);
         gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
         gclightdirector::setcavelighting(1);
         gcareadirector::setnearestmax(3);
