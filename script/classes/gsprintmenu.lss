@@ -5,6 +5,13 @@ class gsprintmenu {
     property background1;
     property backopt1;
     property imagelist;
+    property onuapics;
+    property galipics;
+    property pohapics;
+    property kopapics;
+    property lewapics;
+    property tahupics;
+    property endgame;
     property subon;
     property background2;
     property backopt2;
@@ -32,74 +39,94 @@ class gsprintmenu {
         this.backopt1.initfull();
         this.imagelist = [ 
             new printmenupic("Root/data/art/PrintMenu/fgs1", 38, 48, 102, 112, "Root/data/art/PrintMenu/HL01", 22, 37, 118, 133, 1), 
-            new printmenupic("Root/data/art/PrintMenu/fis1", 139, 49, 203, 113, "Root/data/art/PrintMenu/HL02", 122, 37, 218, 133, 1), 
-            new printmenupic("Root/data/art/PrintMenu/ops1", 238, 48, 302, 112, "Root/data/art/PrintMenu/HL03", 221, 37, 317, 133, 1), 
-            new printmenupic("Root/data/art/PrintMenu/oas1", 338, 48, 402, 112, "Root/data/art/PrintMenu/HL04", 322, 37, 418, 133, 1), 
-            new printmenupic("Root/data/art/PrintMenu/ocs1", 438, 48, 502, 112, "Root/data/art/PrintMenu/HL05", 422, 37, 518, 133, 1), 
-            new printmenupic("Root/data/art/PrintMenu/oms1", 538, 48, 602, 112, "Root/data/art/PrintMenu/HL06", 522, 37, 618, 133, 1), 
-            new printmenupic("Root/data/art/PrintMenu/gps1", 38, 128, 102, 192, "Root/data/art/PrintMenu/HL07", 22, 117, 118, 213, 1), 
-            new printmenupic("Root/data/art/PrintMenu/gas1", 139, 129, 203, 193, "Root/data/art/PrintMenu/HL08", 122, 117, 218, 213, 1), 
-            new printmenupic("Root/data/art/PrintMenu/gcs1", 237, 129, 301, 193, "Root/data/art/PrintMenu/HL09", 221, 117, 317, 213, 1), 
-            new printmenupic("Root/data/art/PrintMenu/gms1", 338, 128, 402, 192, "Root/data/art/PrintMenu/HL10", 322, 117, 418, 213, 1), 
-            new printmenupic("Root/data/art/PrintMenu/pps1", 439, 128, 503, 192, "Root/data/art/PrintMenu/HL11", 422, 117, 518, 213, 1), 
-            new printmenupic("Root/data/art/PrintMenu/pas1", 538, 128, 602, 192, "Root/data/art/PrintMenu/HL12", 522, 117, 618, 213, 1), 
-            new printmenupic("Root/data/art/PrintMenu/pcs1", 39, 208, 103, 272, "Root/data/art/PrintMenu/HL13", 22, 197, 118, 293, 1), 
-            new printmenupic("Root/data/art/PrintMenu/pms1", 139, 208, 203, 272, "Root/data/art/PrintMenu/HL14", 122, 197, 218, 293, 1), 
-            new printmenupic("Root/data/art/PrintMenu/kps1", 238, 208, 302, 272, "Root/data/art/PrintMenu/HL15", 221, 197, 317, 293, 1), 
-            new printmenupic("Root/data/art/PrintMenu/kas1", 338, 208, 402, 272, "Root/data/art/PrintMenu/HL16", 322, 197, 418, 293, 1), 
-            new printmenupic("Root/data/art/PrintMenu/kcs1", 438, 209, 502, 273, "Root/data/art/PrintMenu/HL17", 422, 197, 518, 293, 1), 
-            new printmenupic("Root/data/art/PrintMenu/kms1", 539, 209, 603, 273, "Root/data/art/PrintMenu/HL18", 522, 197, 618, 293, 1), 
-            new printmenupic("Root/data/art/PrintMenu/lps1", 38, 289, 102, 353, "Root/data/art/PrintMenu/HL19", 22, 277, 118, 373, 1), 
-            new printmenupic("Root/data/art/PrintMenu/las1", 139, 289, 203, 353, "Root/data/art/PrintMenu/HL20", 123, 277, 219, 373, 1), 
-            new printmenupic("Root/data/art/PrintMenu/lcs1", 237, 289, 301, 353, "Root/data/art/PrintMenu/HL21", 221, 277, 317, 373, 1), 
-            new printmenupic("Root/data/art/PrintMenu/lms1", 339, 289, 403, 353, "Root/data/art/PrintMenu/HL22", 322, 277, 418, 373, 1), 
-            new printmenupic("Root/data/art/PrintMenu/tps1", 439, 289, 503, 353, "Root/data/art/PrintMenu/HL23", 422, 277, 518, 373, 1), 
-            new printmenupic("Root/data/art/PrintMenu/tas1", 539, 289, 603, 353, "Root/data/art/PrintMenu/HL24", 522, 277, 618, 373, 1), 
-            new printmenupic("Root/data/art/PrintMenu/tcs1", 39, 369, 103, 433, "Root/data/art/PrintMenu/HL25", 22, 358, 118, 454, 1), 
-            new printmenupic("Root/data/art/PrintMenu/tms1", 139, 369, 203, 433, "Root/data/art/PrintMenu/HL26", 122, 358, 218, 454, 1), 
-            new printmenupic("Root/data/art/PrintMenu/INSTRUCT05", 238, 369, 302, 433, "Root/data/art/PrintMenu/HL27", 221, 358, 317, 454, 1), 
-            new printmenupic("Root/data/art/PrintMenu/INSTRUCT06", 339, 369, 403, 433, "Root/data/art/PrintMenu/HL28", 322, 358, 418, 454, 1) ];
+            new printmenupic("Root/data/art/PrintMenu/fis1", 139, 49, 203, 113, "Root/data/art/PrintMenu/HL02", 122, 37, 218, 133, 1) ];
         var1 = 0;
         while ((this.imagelist.__length - 1) >= var1) {
             this.imagelist[var1].initfull();
             var1 = var1 + 1;
         }
-	    if ((globalclass.unlockdirector.unlocks.printonua) == 0) {
-            this.imagelist[2].hide();
-            this.imagelist[3].hide();
-            this.imagelist[4].hide();
-            this.imagelist[5].hide();
+	    if ((globalclass.unlockdirector.unlocks.printonua) == 1) {
+            this.onuapics = [
+                new printmenupic("Root/data/art/PrintMenu/ops1", 238, 48, 302, 112, "Root/data/art/PrintMenu/HL03", 221, 37, 317, 133, 1), 
+                new printmenupic("Root/data/art/PrintMenu/oas1", 338, 48, 402, 112, "Root/data/art/PrintMenu/HL04", 322, 37, 418, 133, 1), 
+                new printmenupic("Root/data/art/PrintMenu/ocs1", 438, 48, 502, 112, "Root/data/art/PrintMenu/HL05", 422, 37, 518, 133, 1), 
+                new printmenupic("Root/data/art/PrintMenu/oms1", 538, 48, 602, 112, "Root/data/art/PrintMenu/HL06", 522, 37, 618, 133, 1) ];
+            var1 = 0;
+            while ((this.onuapics.__length - 1) >= var1) {
+                this.onuapics[var1].initfull();
+                var1 = var1 + 1;
+            }
 	    }
-	    if ((globalclass.unlockdirector.unlocks.printgali) == 0) {
-	    	this.imagelist[6].hide();
-		    this.imagelist[7].hide();
-	    	this.imagelist[8].hide();
-		    this.imagelist[9].hide();
+	    if ((globalclass.unlockdirector.unlocks.printgali) == 1) {
+            this.galipics = [
+                new printmenupic("Root/data/art/PrintMenu/gps1", 38, 128, 102, 192, "Root/data/art/PrintMenu/HL07", 22, 117, 118, 213, 1), 
+                new printmenupic("Root/data/art/PrintMenu/gas1", 139, 129, 203, 193, "Root/data/art/PrintMenu/HL08", 122, 117, 218, 213, 1), 
+                new printmenupic("Root/data/art/PrintMenu/gcs1", 237, 129, 301, 193, "Root/data/art/PrintMenu/HL09", 221, 117, 317, 213, 1), 
+                new printmenupic("Root/data/art/PrintMenu/gms1", 338, 128, 402, 192, "Root/data/art/PrintMenu/HL10", 322, 117, 418, 213, 1) ];
+            var1 = 0;
+            while ((this.galipics.__length - 1) >= var1) {
+                this.galipics[var1].initfull();
+                var1 = var1 + 1;
+            }
 	    }
-	    if ((globalclass.unlockdirector.unlocks.printpoha) == 0) {
-		    this.imagelist[10].hide();
-		    this.imagelist[11].hide();
-		    this.imagelist[12].hide();
-		    this.imagelist[13].hide();
+	    if ((globalclass.unlockdirector.unlocks.printpoha) == 1) {
+            this.pohapics = [
+                new printmenupic("Root/data/art/PrintMenu/pps1", 439, 128, 503, 192, "Root/data/art/PrintMenu/HL11", 422, 117, 518, 213, 1), 
+                new printmenupic("Root/data/art/PrintMenu/pas1", 538, 128, 602, 192, "Root/data/art/PrintMenu/HL12", 522, 117, 618, 213, 1), 
+                new printmenupic("Root/data/art/PrintMenu/pcs1", 39, 208, 103, 272, "Root/data/art/PrintMenu/HL13", 22, 197, 118, 293, 1), 
+                new printmenupic("Root/data/art/PrintMenu/pms1", 139, 208, 203, 272, "Root/data/art/PrintMenu/HL14", 122, 197, 218, 293, 1) ];
+            var1 = 0;
+            while ((this.pohapics.__length - 1) >= var1) {
+                this.pohapics[var1].initfull();
+                var1 = var1 + 1;
+            }
 	    }
-	    if ((globalclass.unlockdirector.unlocks.printkopa) == 0) {
-		    this.imagelist[14].hide();
-		    this.imagelist[15].hide();
-		    this.imagelist[16].hide();
-		    this.imagelist[17].hide();
+	    if ((globalclass.unlockdirector.unlocks.printkopa) == 1) {
+            this.kopapics = [
+                new printmenupic("Root/data/art/PrintMenu/kps1", 238, 208, 302, 272, "Root/data/art/PrintMenu/HL15", 221, 197, 317, 293, 1), 
+                new printmenupic("Root/data/art/PrintMenu/kas1", 338, 208, 402, 272, "Root/data/art/PrintMenu/HL16", 322, 197, 418, 293, 1), 
+                new printmenupic("Root/data/art/PrintMenu/kcs1", 438, 209, 502, 273, "Root/data/art/PrintMenu/HL17", 422, 197, 518, 293, 1), 
+                new printmenupic("Root/data/art/PrintMenu/kms1", 539, 209, 603, 273, "Root/data/art/PrintMenu/HL18", 522, 197, 618, 293, 1) ];
+            var1 = 0;
+            while ((this.kopapics.__length - 1) >= var1) {
+                this.kopapics[var1].initfull();
+                var1 = var1 + 1;
+            }
 	    }
-	    if ((globalclass.unlockdirector.unlocks.printlewa) == 0) {
-		    this.imagelist[18].hide();
-		    this.imagelist[19].hide();
-		    this.imagelist[20].hide();
-	    	this.imagelist[21].hide();
+	    if ((globalclass.unlockdirector.unlocks.printlewa) == 1) {
+            this.lewapics = [
+                new printmenupic("Root/data/art/PrintMenu/lps1", 38, 289, 102, 353, "Root/data/art/PrintMenu/HL19", 22, 277, 118, 373, 1), 
+                new printmenupic("Root/data/art/PrintMenu/las1", 139, 289, 203, 353, "Root/data/art/PrintMenu/HL20", 123, 277, 219, 373, 1), 
+                new printmenupic("Root/data/art/PrintMenu/lcs1", 237, 289, 301, 353, "Root/data/art/PrintMenu/HL21", 221, 277, 317, 373, 1), 
+                new printmenupic("Root/data/art/PrintMenu/lms1", 339, 289, 403, 353, "Root/data/art/PrintMenu/HL22", 322, 277, 418, 373, 1) ];
+            var1 = 0;
+            while ((this.lewapics.__length - 1) >= var1) {
+                this.lewapics[var1].initfull();
+                var1 = var1 + 1;
+            }
 	    }
-	    if ((globalclass.unlockdirector.unlocks.printtahu) == 0) {
-		    this.imagelist[22].hide();
-		    this.imagelist[23].hide();
-		    this.imagelist[24].hide();
-		    this.imagelist[25].hide();
+	    if ((globalclass.unlockdirector.unlocks.printtahu) == 1) {
+            this.tahupics = [
+                new printmenupic("Root/data/art/PrintMenu/tps1", 439, 289, 503, 353, "Root/data/art/PrintMenu/HL23", 422, 277, 518, 373, 1), 
+                new printmenupic("Root/data/art/PrintMenu/tas1", 539, 289, 603, 353, "Root/data/art/PrintMenu/HL24", 522, 277, 618, 373, 1), 
+                new printmenupic("Root/data/art/PrintMenu/tcs1", 39, 369, 103, 433, "Root/data/art/PrintMenu/HL25", 22, 358, 118, 454, 1), 
+                new printmenupic("Root/data/art/PrintMenu/tms1", 139, 369, 203, 433, "Root/data/art/PrintMenu/HL26", 122, 358, 218, 454, 1) ];
+            var1 = 0;
+            while ((this.tahupics.__length - 1) >= var1) {
+                this.tahupics[var1].initfull();
+                var1 = var1 + 1;
+            }
 	    }
+        if ((globalclass.unlockdirector.unlocks.beatkuta) == 1) {
+            this.endgame = [
+                new printmenupic("Root/data/art/PrintMenu/INSTRUCT05", 238, 369, 302, 433, "Root/data/art/PrintMenu/HL27", 221, 358, 317, 454, 1), 
+                new printmenupic("Root/data/art/PrintMenu/INSTRUCT06", 339, 369, 403, 433, "Root/data/art/PrintMenu/HL28", 322, 358, 418, 454, 1) ];
+            var1 = 0;
+            while ((this.endgame.__length - 1) >= var1) {
+                this.endgame[var1].initfull();
+                var1 = var1 + 1;
+            }
+        }
         this.printer = scprinter::create();
         this.printlock = 0;
         this.printtext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "Printing...", __toint(320 * screenratio), __toint(460 * screenratio), 0, 1.0 * screenratio, 256, 4, 0, 1);
@@ -140,6 +167,69 @@ class gsprintmenu {
                 var1 = var1 + 1;
             }
             this.imagelist = null;
+        }
+        if (!(this.onuapics == null)) {
+            var1 = 0;
+            while ((this.onuapics.__length - 1) >= var1) {
+                this.onuapics[var1].cleanupfull();
+                this.onuapics[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.onuapics = null;
+        }
+        if (!(this.galipics == null)) {
+            var1 = 0;
+            while ((this.galipics.__length - 1) >= var1) {
+                this.galipics[var1].cleanupfull();
+                this.galipics[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.galipics = null;
+        }
+        if (!(this.pohapics == null)) {
+            var1 = 0;
+            while ((this.pohapics.__length - 1) >= var1) {
+                this.pohapics[var1].cleanupfull();
+                this.pohapics[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.pohapics = null;
+        }
+        if (!(this.kopapics == null)) {
+            var1 = 0;
+            while ((this.kopapics.__length - 1) >= var1) {
+                this.kopapics[var1].cleanupfull();
+                this.kopapics[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.kopapics = null;
+        }
+        if (!(this.lewapics == null)) {
+            var1 = 0;
+            while ((this.lewapics.__length - 1) >= var1) {
+                this.lewapics[var1].cleanupfull();
+                this.lewapics[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.lewapics = null;
+        }
+        if (!(this.tahupics == null)) {
+            var1 = 0;
+            while ((this.tahupics.__length - 1) >= var1) {
+                this.tahupics[var1].cleanupfull();
+                this.tahupics[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.tahupics = null;
+        }
+        if (!(this.endgame == null)) {
+            var1 = 0;
+            while ((this.endgame.__length - 1) >= var1) {
+                this.endgame[var1].cleanupfull();
+                this.endgame[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.endgame = null;
         }
         if (!(this.background2 == null)) {
             this.background2.hide();
