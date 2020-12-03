@@ -1,40 +1,41 @@
 class ss_bigsprite : ss_basesprite {
     property camstate;
     
-    method ss_bigsprite(param1, param2, param3, param4, param5, param6, param7) {
-        this.filename = param1;
-        if (!(param2 == null)) {
-            this.x1 = param2;
+    method ss_bigsprite(file_path, x_pos, y_pos, z_pos, width, height, cam_state) {
+        this.filename = file_path;
+        if (x_pos != null) {
+            this.x1 = x_pos;
         }
         else {
             this.x1 = 0;
         }
-        if (!(param3 == null)) {
-            this.y1 = param3;
+        if (y_pos != null) {
+            this.y1 = y_pos;
         }
         else {
             this.y1 = 0;
         }
-        if (!(param4 == null)) {
-            this.z = param4;
+        if (z_pos != null) {
+            this.z = z_pos;
         }
         else {
             this.z = 0;
         }
-        if (!(param5 == null)) {
-            this.w = param5;
+        if (width != null) {
+            this.w = width;
         }
         else {
             this.w = 0;
         }
-        if (!(param6 == null)) {
-            this.h = param6;
+        if (height != null) {
+            this.h = height;
         }
         else {
             this.h = 0;
         }
-        if (!(param7 == null)) {
-            this.camstate = param7;
+        //boolean is sprite a billboard, default is true
+        if (cam_state != null) {
+            this.camstate = cam_state;
         }
         else {
             this.camstate = 1;
@@ -57,6 +58,9 @@ class ss_bigsprite : ss_basesprite {
     }
     
     method cleanupfull() {
+        if (this.handle != null) {
+            gceffectsdirector::remove(this.handle);
+        }
         this.handle = null;
         this.sprite = null;
         return null;
@@ -79,24 +83,29 @@ class ss_bigsprite : ss_basesprite {
     }
     
     method hide() {
-        gceffectsdirector::hide(this.handle);
-        this.onscreen = 0;
+        if (this.handle != null) {
+            gceffectsdirector::hide(this.handle);
+            this.onscreen = 0;
+        }
         return null;
     }
     
     method remove() {
-        gceffectsdirector::remove(this.handle);
+        if (this.handle != null) {
+            gceffectsdirector::remove(this.handle);
+            this.handle = null;
+        }
         return null;
     }
     
     method setpos(param1, param2, param3) {
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.x1 = param1;
         }
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.y1 = param2;
         }
-        if (!(param3 == null)) {
+        if (param3 != null) {
             this.z = param3;
         }
         gcbigsprite::setposition(this.sprite, this.w, this.h, this.x1, this.y1, this.z);
@@ -104,13 +113,13 @@ class ss_bigsprite : ss_basesprite {
     }
     
     method changepos(param1, param2, param3) {
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.x1 = this.x1 + param1;
         }
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.y1 = this.y1 + param2;
         }
-        if (!(param3 == null)) {
+        if (param3 != null) {
             this.z = this.z + param3;
         }
         gcbigsprite::setposition(this.sprite, this.w, this.h, this.x1, this.y1, this.z);
@@ -118,10 +127,10 @@ class ss_bigsprite : ss_basesprite {
     }
     
     method setwh(param1, param2) {
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.h = param2;
         }
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.w = param1;
         }
         gcbigsprite::setposition(this.sprite, this.w, this.h, this.x1, this.y1, this.z);
@@ -129,18 +138,18 @@ class ss_bigsprite : ss_basesprite {
     }
     
     method changewh(param1, param2) {
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.w = param1 + this.w;
         }
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.h = param2 + this.h;
         }
         gcbigsprite::setposition(this.sprite, this.w, this.h, this.x1, this.y1, this.z);
         return null;
     }
     
-    method setcamstate(param1) {
-        this.camstate = param1;
+    method setcamstate(bool) {
+        this.camstate = bool;
         gcbigsprite::facecamera(this.sprite, this.camstate);
         return null;
     }

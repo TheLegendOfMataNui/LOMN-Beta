@@ -3,46 +3,44 @@ class ss_basesprite : base_drawobject {
     property sprite;
     property handle;
     
-    method ss_basesprite(param1, param2, param3, param4, param5, param6, param7) {
-        var var1;
-        this.filename = param1;
-        if (!(param2 == null)) {
-            this.x1 = param2;
+    method ss_basesprite(file_path, left_side_pos, top_side_pos, z_coord, right_side_pos, bottom_side_pos, alpha) {
+        this.filename = file_path;
+        if (left_side_pos != null) {
+            this.x1 = left_side_pos;
         }
         else {
             this.x1 = 0;
         }
-        if (!(param3 == null)) {
-            this.y1 = param3;
+        if (top_side_pos != null) {
+            this.y1 = top_side_pos;
         }
         else {
             this.y1 = 0;
         }
-        if (!(param5 == null)) {
-            this.x2 = param5;
-        }
-        else {
-            this.x2 = 0;
-        }
-        if (!(param6 == null)) {
-            this.y2 = param6;
-        }
-        else {
-            this.y2 = 0;
-        }
-        if (!(param4 == null)) {
-            this.z = param4;
+        if (z_coord != null) {
+            this.z = z_coord;
         }
         else {
             this.z = 0;
         }
-        if (!(param7 == null)) {
-            this.transval = param7;
+        if (right_side_pos != null) {
+            this.x2 = right_side_pos;
+        }
+        else {
+            this.x2 = 0;
+        }
+        if (bottom_side_pos != null) {
+            this.y2 = bottom_side_pos;
+        }
+        else {
+            this.y2 = 0;
+        }
+        if (alpha != null) {
+            this.transval = alpha;
         }
         else {
             this.transval = 255;
         }
-        var1 = 0;
         return null;
     }
     
@@ -58,7 +56,7 @@ class ss_basesprite : base_drawobject {
     }
     
     method cleanupfull() {
-        if (!(this.handle == null)) {
+        if (this.handle != null) {
             gchuddirector::remove(this.handle);
         }
         this.sprite = null;
@@ -77,7 +75,7 @@ class ss_basesprite : base_drawobject {
     }
     
     method remove() {
-        if (!(this.handle == null)) {
+        if (this.handle != null) {
             gchuddirector::remove(this.handle);
             this.handle = null;
         }
@@ -91,7 +89,7 @@ class ss_basesprite : base_drawobject {
     }
     
     method hide() {
-        if (!(this.handle == null)) {
+        if (this.handle != null) {
             gchuddirector::hide(this.handle);
             this.onscreen = 0;
         }
@@ -99,16 +97,16 @@ class ss_basesprite : base_drawobject {
     }
     
     method setpos(param1, param2, param3, param4) {
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.x1 = param1;
         }
-        if (!(param3 == null)) {
+        if (param3 != null) {
             this.x2 = param3;
         }
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.y1 = param2;
         }
-        if (!(param4 == null)) {
+        if (param4 != null) {
             this.y2 = param4;
         }
         gcbigsprite::sethudposition(this.sprite, this.x1, this.y1, this.x2, this.y2);
@@ -117,11 +115,11 @@ class ss_basesprite : base_drawobject {
     }
     
     method changepos(param1, param2) {
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.x1 = this.x1 + param1;
             this.x2 = this.x2 + param1;
         }
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.y1 = this.y1 + param2;
             this.y2 = this.y2 + param2;
         }
@@ -130,7 +128,7 @@ class ss_basesprite : base_drawobject {
     }
     
     method setzvalue(param1) {
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.z = param1;
         }
         gcbigsprite::setzdepth(this.sprite, this.z);
@@ -139,7 +137,7 @@ class ss_basesprite : base_drawobject {
     
     method enabletransparency(param1) {
         var var1;
-        if (!(param1 == null)) {
+        if (param1 != null) {
             var1 = param1;
         }
         else {
@@ -155,20 +153,21 @@ class ss_basesprite : base_drawobject {
         return null;
     }
     
-    method enablealphachannel(param1) {
+    method enablealphachannel(bool) {
+        //default is true
         var var1;
-        if (!(param1 == null)) {
-            var1 = param1;
+        if (bool != null) {
+            var1 = bool;
         }
         else {
             var1 = 1;
         }
-        gcbigsprite::enablealphachannel(this.sprite, param1);
+        gcbigsprite::enablealphachannel(this.sprite, bool);
         return null;
     }
     
-    method setcolor(param1, param2, param3, param4) {
-        gcbigsprite::setcolor(this.sprite, param1, param2, param3, param4);
+    method setcolor(red, green, blue, alpha) {
+        gcbigsprite::setcolor(this.sprite, red, green, blue, alpha);
         return null;
     }
 }
