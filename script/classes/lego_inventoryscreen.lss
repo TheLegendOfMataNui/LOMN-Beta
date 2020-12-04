@@ -5,6 +5,7 @@ class lego_inventoryscreen {
     property noblemasks;
     property greatmasks;
     property questitems;
+    property tokens;
     property shown;
     property width;
   
@@ -65,7 +66,11 @@ class lego_inventoryscreen {
             new ss_basesprite("Root/Data/Art/LewaQOspider", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/TahuQOdisk", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/TahuQO2", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/TahuQObug", 0, 0, 0, 852, 480) ];         
+            new ss_basesprite("Root/Data/Art/TahuQObug", 0, 0, 0, 852, 480) ];      
+            
+            var var1 = screenx - 184;
+            this.tokens = new gs_lego_animatesprite("Root/data/art/pickups/onuatoken/onua_token", 0, 29, 1, var1, 20, 0, var1 + 64, 84);
+            this.tokens.initfull();
         return null;
     }
     
@@ -75,6 +80,7 @@ class lego_inventoryscreen {
         this.noblemasks = null;
         this.greatmasks = null;
         this.questitems = null;
+        this.tokens = null;
         this.shown = null;
         this.width = null;
         return null;
@@ -86,6 +92,9 @@ class lego_inventoryscreen {
         this.processdefaultitems();
         this.processquests();
         this.processmasks();
+        this.tokens.add();
+        this.tokens.show();
+        this.tokens.startanimate();
         while ((this.inventoryscreen.__length - 1) >= inventoryscreen) {               
             this.inventoryscreen[inventoryscreen].initfull();
             this.inventoryscreen[inventoryscreen].add();
@@ -111,6 +120,7 @@ class lego_inventoryscreen {
         if (globalclass.pause.ispaused == 1) {
             globalclass.pause.show();
         }
+        this.tokens.hide();
         this.shown = 0;
         globalclass.hud.show();
         globalclass.pause.toggleinput(1);
@@ -130,11 +140,18 @@ class lego_inventoryscreen {
         return null;
     }
 
+    method onevent(param1) {
+        if (param1.eventid == 50) {
+            this.ammo.setammo(param1.args[0]);
+        }
+        return null;
+    }
+
     method processdefaultitems() {
         var defaultitems = 0;
         var noblemasks = 0;
         var greatmasks = 0;
-        this.inventoryscreen.__append(this.inventorybackground[0]);
+        //this.inventoryscreen.__append(this.inventorybackground[0]);
         if (gcareadirector::getcurrentlevel() == scslosifoundation::stringtoidentifier("lev1")) {
             //Default Items
              while (0 >= defaultitems) {
