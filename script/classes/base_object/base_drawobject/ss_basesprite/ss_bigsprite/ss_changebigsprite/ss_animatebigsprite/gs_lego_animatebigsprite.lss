@@ -1,0 +1,195 @@
+class gs_lego_animatebigsprite : ss_animatebigsprite {
+    property loopcount;
+    property maxloops;
+    property loopbackwards;
+    
+    method gs_lego_animatebigsprite(filepath, first_frame, last_frame, frames_animating, x_pos, y_pos, z_pos, width, height) {
+        this.ss_animatebigsprite(filepath, first_frame, last_frame, frames_animating, x_pos, y_pos, z_pos, width, height);
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var sprite;
+        this.spritearray = [  ];
+        var1 = this.first;
+        while (this.last >= var1) {
+            if (var1 < 10) {
+                var2 = (this.filename + "000") + __tostring(var1);
+            }
+            if ((var1 >= 10) && (var1 < 100)) {
+                var2 = (this.filename + "00") + __tostring(var1);
+            }
+            if ((var1 >= 100) && (var1 < 1000)) {
+                var2 = (this.filename + "0") + __tostring(var1);
+            }
+            if ((var1 >= 1000) && (var1 < 10000)) {
+                var2 = this.filename + __tostring(var1);
+            }
+            sprite = new ss_bigsprite(var2, this.x1, this.y1, this.z, this.w, this.h);
+            sprite.initfull();
+            this.spritearray.__append(sprite);
+            var1 = var1 + 1;
+        }
+        this.currentsprite = 0;
+        this.framecount = 0;
+        this.animatingonflag = 0;
+        this.maxloops = 0;
+        this.loopcount = 0;
+        this.loopbackwards = 0;
+        return null;
+    }
+    
+    method enablealphachannel(param1) {
+        var var1;
+        var1 = 0;
+        while ((this.spritearray.__length - 1) >= var1) {
+            this.spritearray[var1].enablealphachannel(param1);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method setcolor(red, green, blue, alpha) {
+        var var1;
+        var1 = 0;
+        while ((this.spritearray.__length - 1) >= var1) {
+            this.spritearray[var1].setcolor(red, green, blue, alpha);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method setpos(param1, param2, param3) {
+        var var1;
+        if (param1 != null) {
+            this.x1 = param1;
+        }
+        if (param2 != null) {
+            this.y1 = param2;
+        }
+        if (param3 != null) {
+            this.z = param3;
+        }
+        var1 = 0;
+        while ((this.spritearray.__length - 1) >= var1) {
+            this.spritearray[var1].setpos(this.x1, this.y1, this.z);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method changepos(param1, param2, param3) {
+        var var1;
+        if (param1 != null) {
+            this.x1 = this.x1 + param1;
+        }
+        if (param2 != null) {
+            this.y1 = this.y1 + param2;
+        }
+        if (param3 != null) {
+            this.z = this.z + param3;
+        }
+        var1 = 0;
+        while ((this.spritearray.__length - 1) >= var1) {
+            this.spritearray[var1].changepos(param1, param2, param3);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method startanimate() {
+        this.spritearray[this.currentsprite].hide();
+        this.currentsprite = 0;
+        this.animatingonflag = 1;
+        this.spritearray[this.currentsprite].show();
+        return null;
+    }
+    
+    method stopanimate() {
+        this.spritearray[this.currentsprite].hide();
+        this.animatingonflag = 0;
+        return null;
+    }
+    
+    method animloop(param1, param2) {
+        this.spritearray[this.currentsprite].hide();
+        if (param2 == 1) {
+            this.currentsprite = 0;
+            this.loopbackwards = 0;
+        }
+        else {
+            this.currentsprite = this.spritearray.__length - 1;
+            this.loopbackwards = 1;
+        }
+        this.animatingonflag = 1;
+        this.maxloops = param1;
+        this.framecount = 0;
+        this.loopcount = 0;
+        this.spritearray[this.currentsprite].show();
+        return null;
+    }
+    
+    method gotoframe(param1, param2) {
+        if ((param1 > (this.spritearray.__length - 1)) || (param1 < 0)) {
+            debug::print("!!! invalid frame - " + __tostring(param1));
+        }
+        else {
+            this.spritearray[this.currentsprite].hide();
+            this.currentsprite = param1;
+            if (param2 == 1) {
+                this.animatingonflag = 0;
+            }
+            this.spritearray[this.currentsprite].show();
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        var var1;
+        if (this.animatingonflag == 1) {
+            this.framecount = this.framecount + 1;
+            if (this.framecount == this.framesanimating) {
+                this.spritearray[this.currentsprite].hide();
+                if (this.loopbackwards == 1) {
+                    if (this.currentsprite == 0) {
+                        this.loopcount = this.loopcount + 1;
+                        if (this.loopcount == this.maxloops) {
+                            this.animatingonflag = 0;
+                            this.loopcount = 0;
+                            var1 = new scriptevent(1004, [ this.handle, 
+                                !this.loopbackwards ]);
+                            var1.send();
+                        }
+                        else {
+                            this.currentsprite = this.spritearray.__length - 1;
+                        }
+                    }
+                    else {
+                        this.currentsprite = this.currentsprite - 1;
+                    }
+                }
+                else if (this.currentsprite == (this.spritearray.__length - 1)) {
+                    this.loopcount = this.loopcount + 1;
+                    if (this.loopcount == this.maxloops) {
+                        this.animatingonflag = 0;
+                        this.loopcount = 0;
+                        var1 = new scriptevent(1004, [ this.handle, 
+                            !this.loopbackwards ]);
+                        var1.send();
+                    }
+                    else {
+                        this.currentsprite = 0;
+                    }
+                }
+                else {
+                    this.currentsprite = this.currentsprite + 1;
+                }
+                this.spritearray[this.currentsprite].show();
+                this.framecount = 0;
+            }
+        }
+        return null;
+    }
+}

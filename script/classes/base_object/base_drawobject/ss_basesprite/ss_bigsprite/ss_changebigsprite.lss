@@ -1,0 +1,160 @@
+class ss_changebigsprite : ss_bigsprite {
+    property first;
+    property last;
+    property spritearray;
+    property currentsprite;
+    
+    method ss_changebigsprite(filepath, first_frame, last_frame, x_pos, y_pos, z_pos, width, height) {
+        this.filename = filepath;
+        this.first = first_frame;
+        this.last = last_frame;
+        if (x_pos != null) {
+            this.x1 = x_pos;
+        }
+        else {
+            this.x1 = 0;
+        }
+        if (y_pos != null) {
+            this.y1 = y_pos;
+        }
+        else {
+            this.y1 = 0;
+        }
+        if (z_pos != null) {
+            this.z = z_pos;
+        }
+        else {
+            this.z = 0;
+        }
+        if (width != null) {
+            this.w = width;
+        }
+        else {
+            this.w = 0;
+        }
+        if (height != null) {
+            this.h = height;
+        }
+        else {
+            this.h = 0;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var sprite;
+        this.spritearray = [  ];
+        this.currentsprite = 0;
+        var1 = this.first;
+        while (this.last >= var1) {
+            if (var1 < 10) {
+                var2 = ((this.filename + "000") + __tostring(var1)) + ".tga";
+            }
+            if ((var1 >= 10) && (var1 < 100)) {
+                var2 = ((this.filename + "00") + __tostring(var1)) + ".tga";
+            }
+            if ((var1 >= 100) && (var1 < 1000)) {
+                var2 = ((this.filename + "0") + __tostring(var1)) + ".tga";
+            }
+            if ((var1 >= 1000) && (var1 < 10000)) {
+                var2 = (this.filename + __tostring(var1)) + ".tga";
+            }
+            sprite = new ss_bigsprite(var2, this.x1, this.y1, this.z, this.w, this.h);
+            sprite.initfull();
+            this.spritearray.__append(sprite);
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method initshort() {
+        var var1;
+        var1 = 0;
+        while ((this.spritearray.__length - 1) >= var1) {
+            this.spritearray[var1].show();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.spritearray = null;
+        this.currentsprite = null;
+        return null;
+    }
+    
+    method cleanupshort() {
+        var var1;
+        var1 = 0;
+        while ((this.spritearray.__length - 1) >= var1) {
+            this.spritearray[var1].hide();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method add() {
+        var var1;
+        var1 = 0;
+        while ((this.spritearray.__length - 1) >= var1) {
+            this.spritearray[var1].add();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method show(param1) {
+        if (param1 == null) {
+            this.spritearray[this.currentsprite].show();
+        }
+        else {
+            this.spritearray[this.currentsprite].hide();
+            this.currentsprite = param1;
+            this.spritearray[this.currentsprite].show();
+        }
+        return null;
+    }
+    
+    method hide(param1) {
+        if (param1 == null) {
+            this.spritearray[this.currentsprite].hide();
+        }
+        else {
+            this.spritearray[this.currentsprite].hide();
+            this.currentsprite = param1;
+            this.spritearray[this.currentsprite].hide();
+        }
+        return null;
+    }
+    
+    method remove() {
+        var var1;
+        var1 = 0;
+        while ((this.spritearray.__length - 1) >= var1) {
+            this.spritearray[var1].remove();
+            var1 = var1 + 1;
+        }
+        return null;
+    }
+    
+    method showcurrent() {
+        this.spritearray[this.currentsprite].show();
+        return null;
+    }
+    
+    method hidecurrent() {
+        this.spritearray[this.currentsprite].hide();
+        return null;
+    }
+    
+    method getcurrent() {
+        return this.currentsprite;
+    }
+    
+    method setcurrent(param1) {
+        this.currentsprite = param1;
+        return null;
+    }
+}

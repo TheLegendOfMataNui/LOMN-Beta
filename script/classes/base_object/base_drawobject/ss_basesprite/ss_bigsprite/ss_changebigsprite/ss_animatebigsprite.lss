@@ -1,0 +1,133 @@
+class ss_animatebigsprite : ss_changebigsprite {
+    property framesanimating;
+    property animatingonflag;
+    property framecount;
+    
+    method ss_animatebigsprite(filepath, first_frame, last_frame, frames_animating, x_pos, y_pos, z_pos, width, height) {
+        this.filename = filepath;
+        this.first = first_frame;
+        this.last = last_frame;
+        this.framesanimating = frames_animating;
+        if (x_pos != null) {
+            this.x1 = x_pos;
+        }
+        else {
+            this.x1 = 0;
+        }
+        if (y_pos != null) {
+            this.y1 = y_pos;
+        }
+        else {
+            this.y1 = 0;
+        }
+        if (z_pos != null) {
+            this.z = z_pos;
+        }
+        else {
+            this.z = 0;
+        }
+        if (width != null) {
+            this.w = width;
+        }
+        else {
+            this.w = 0;
+        }
+        if (height != null) {
+            this.h = height;
+        }
+        else {
+            this.h = 0;
+        }
+        return null;
+    }
+    
+    method initfull() {
+        var var1;
+        var var2;
+        var sprite;
+        this.spritearray = [  ];
+        var1 = this.first;
+        while (this.last >= var1) {
+            if (var1 < 10) {
+                var2 = ((this.filename + "000") + __tostring(var1)) + ".tga";
+            }
+            if ((var1 >= 10) && (var1 < 100)) {
+                var2 = ((this.filename + "00") + __tostring(var1)) + ".tga";
+            }
+            if ((var1 >= 100) && (var1 < 1000)) {
+                var2 = ((this.filename + "0") + __tostring(var1)) + ".tga";
+            }
+            if ((var1 >= 1000) && (var1 < 10000)) {
+                var2 = (this.filename + __tostring(var1)) + ".tga";
+            }
+            sprite = new ss_bigsprite(var2, this.x1, this.y1, this.z, this.w, this.h);
+            sprite.initfull();
+            this.spritearray.__append(sprite);
+            var1 = var1 + 1;
+        }
+        this.currentsprite = 0;
+        this.framecount = 0;
+        this.animatingonflag = 0;
+        return null;
+    }
+    
+    method show() {
+        this.spritearray[this.currentsprite].show();
+        return null;
+    }
+    
+    method hide() {
+        this.spritearray[this.currentsprite].hide();
+        return null;
+    }
+    
+    method startanimate() {
+        this.spritearray[this.currentsprite].hide();
+        this.currentsprite = 0;
+        this.animatingonflag = 1;
+        return null;
+    }
+    
+    method pauseanimate(param1) {
+        if (param1 == null) {
+            this.animatingonflag = 0;
+        }
+        else {
+            this.spritearray[this.currentsprite].hide();
+            this.currentsprite = param1;
+            this.spritearray[this.currentsprite].show();
+            this.animatingonflag = 0;
+        }
+        return null;
+    }
+    
+    method stopanimate() {
+        this.spritearray[this.currentsprite].hide();
+        this.animatingonflag = 0;
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.animatingonflag == 1) {
+            if (param1.callcount == 1) {
+                this.framecount = this.framecount + 1;
+                if (this.framecount == this.framesanimating) {
+                    this.spritearray[this.currentsprite].hide();
+                    if (this.currentsprite == (this.spritearray.__length - 1)) {
+                        this.currentsprite = 0;
+                    }
+                    else {
+                        this.currentsprite = this.currentsprite + 1;
+                    }
+                    this.spritearray[this.currentsprite].show();
+                    this.framecount = 0;
+                }
+            }
+        }
+        return null;
+    }
+    
+    method input(param1) {
+        return null;
+    }
+}
