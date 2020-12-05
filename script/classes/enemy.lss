@@ -42,7 +42,8 @@ class enemy {
             this.particletimer = this.particletimer + param1.deltatime;
             gcareadirector::createemitter(24, this.charx, this.chary, this.charz);
             this.infmask.setpos(this.charx, (this.chary + 1.5), this.charz);
-            if (this.particletimer >= 1) {
+            this.infmask.process();
+            if (this.particletimer >= 1.5) {
                 this.infmask.hide();
                 this.infmask.remove();
                 this.infmask.cleanupfull();
@@ -50,6 +51,7 @@ class enemy {
                 this.timeractive = 0;
             }
         }
+
         return null;
     }
 
@@ -156,11 +158,12 @@ class enemy {
             this.chary = gccharacter::getpositiony(gcmodeldirector::getcharacter(param1.args[2]));
             this.charz = gccharacter::getpositionz(gcmodeldirector::getcharacter(param1.args[2]));
             this.timeractive = 1;
-            this.infmask = new ss_bigsprite("Root/Data/Art/INF_TAHU0000", this.charx, this.chary, this.charz, 2, 2);
+            this.infmask = new gs_lego_animatebigsprite("Root/Data/Art/INF_TAHU", 0, 71, 1, -280, -60, 1330, 2, 2);
             this.infmask.initfull();
             this.infmask.add();
             this.infmask.show();
-            this.infmask.setcamstate(1);
+            this.infmask.animloop(1, 1);
+            this.infmask.startanimate();
             gccharacter::aiidle(gcmodeldirector::getcharacter(param1.args[2]));
             debug::print((scslosifoundation::identifiertostring(param1.args[2])) + " is now idle!");
         }
