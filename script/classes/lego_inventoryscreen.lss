@@ -5,8 +5,19 @@ class lego_inventoryscreen {
     property noblemasks;
     property greatmasks;
     property questitems;
+    property tokens;
+    property tokencount;
+    property tokensprite;
+    property tokentext;    
+    property tokenframes;
+    property ammo;
+    property ammocount;
+    property ammosprite;
+    property ammotext;
     property shown;
     property width;
+    property xpos;
+    property ypos;
   
     method lego_inventoryscreen() {
         return null;
@@ -14,6 +25,8 @@ class lego_inventoryscreen {
     
     method initfull() {     
         this.width = gcgame::getresolutionwidth();
+        this.xpos = screenx - 730;
+        this.ypos = screeny - 100;
         this.inventorybackground = [ new ss_basesprite("Root/Data/Art/MenuArt/status_background", 0, 0, 0, 853, 480) ];
         
         this.defaultitems = [
@@ -65,7 +78,7 @@ class lego_inventoryscreen {
             new ss_basesprite("Root/Data/Art/LewaQOspider", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/TahuQOdisk", 0, 0, 0, 852, 480),
             new ss_basesprite("Root/Data/Art/TahuQO2", 0, 0, 0, 852, 480),
-            new ss_basesprite("Root/Data/Art/TahuQObug", 0, 0, 0, 852, 480) ];         
+            new ss_basesprite("Root/Data/Art/TahuQObug", 0, 0, 0, 852, 480) ];      
         return null;
     }
     
@@ -75,12 +88,18 @@ class lego_inventoryscreen {
         this.noblemasks = null;
         this.greatmasks = null;
         this.questitems = null;
-        this.shown = null;
+        this.tokens = null;
+        this.tokentext = null;   
+        this.tokensprite = null;
+        this.ammo = null;
+        this.ammotext = null;
+        this.ammosprite = null;
         this.width = null;
         return null;
     }
     
     method show() {
+        //Show Inventory Elements
         var inventoryscreen = 0;
         this.inventoryscreen = [ ];
         this.processdefaultitems();
@@ -91,10 +110,34 @@ class lego_inventoryscreen {
             this.inventoryscreen[inventoryscreen].add();
             this.inventoryscreen[inventoryscreen].show();
             if (this.width == 640.000000) {        
-                this.inventoryscreen[inventoryscreen].setpos(-113, 0, 753, 480);                       
+                this.inventoryscreen[inventoryscreen].setpos(-113, 0, 753, 480);        
+                this.xpos = screenx - 630;
             }
             inventoryscreen = inventoryscreen + 1; 
-        }           
+        }              
+        this.setsprite();
+        //Show Tokens
+        this.tokencount = __tostring(globalclass.hud.tokens.tcount);
+        this.tokens = new gs_lego_animatesprite(this.tokensprite, 0, this.tokenframes, 1, this.xpos, this.ypos, 0, this.xpos + 32, this.ypos + 32);
+        this.tokentext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", " -  " + this.tokencount, (this.xpos + 32) + 5, (this.ypos + 16), 0, 1.2, 0, 4, 0);
+        this.tokens.initfull();
+        this.tokens.add();
+        this.tokens.show();
+        this.tokens.startanimate();
+        this.tokentext.initfull();
+        this.tokentext.add();
+        this.tokentext.show();          
+        //Show Ammo
+        this.ammocount = __tostring(globalclass.hud.ammo.count);
+        this.ammo = new gs_lego_animatesprite(this.ammosprite, 0, 23, 1, this.xpos, (this.ypos + 26), 0, this.xpos + 32, this.ypos + 58);
+        this.ammotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", " -  " + this.ammocount, (this.xpos + 32) + 5, (this.ypos + 42), 0, 1.2, 0, 4, 0);
+        this.ammo.initfull();
+        this.ammo.add();
+        this.ammo.show();
+        this.ammo.startanimate();
+        this.ammotext.initfull();
+        this.ammotext.add();
+        this.ammotext.show();    
         this.shown = 1;
         globalclass.hud.hide();
         globalclass.pause.toggleinput(0);
@@ -102,12 +145,27 @@ class lego_inventoryscreen {
     }
     
     method hide() {
+        //Hide Inventory Elements
         var inventoryscreen = 0;
         while ((this.inventoryscreen.__length - 1) >= inventoryscreen) {
             this.inventoryscreen[inventoryscreen].cleanupfull();
             this.inventoryscreen[inventoryscreen] = null;
             inventoryscreen = inventoryscreen + 1;
         }
+        //Hide Tokens
+        this.tokens.hide();
+        this.tokens.remove();
+        this.tokens.cleanupfull();
+        this.tokentext.hide();
+        this.tokentext.remove();
+        this.tokentext.cleanupfull();    
+        //Hide Ammo
+        this.ammo.hide();
+        this.ammo.remove();
+        this.ammo.cleanupfull();
+        this.ammotext.hide();
+        this.ammotext.remove();
+        this.ammotext.cleanupfull();
         if (globalclass.pause.ispaused == 1) {
             globalclass.pause.show();
         }
@@ -118,6 +176,10 @@ class lego_inventoryscreen {
     }
     
     method process(param1) {
+        if (this.shown == 1) {
+            this.tokens.process();
+            this.ammo.process();
+        }
         return null;
     }
     
@@ -127,6 +189,10 @@ class lego_inventoryscreen {
                 this.hide();
             }
         }
+        return null;
+    }
+
+    method onevent(param1) {
         return null;
     }
 
@@ -155,7 +221,7 @@ class lego_inventoryscreen {
             }
             //Noble Masks
              while (1 >= noblemasks) {
-                this.inventoryscreen.__append(this.noblemasks[noblemasks]);  
+                this.inventoryscreen.__append(this.noblemasks[noblemasks]);
                 noblemasks = noblemasks + 1;
             }   
             //Great Masks
@@ -386,6 +452,59 @@ class lego_inventoryscreen {
         }
         if (gcsaver::findmaska(scslosifoundation::stringtoidentifier("mk5a"), scslosifoundation::stringtoidentifier("ta12"))) {
             this.inventoryscreen.__append(this.greatmasks[6]); 
+        }
+        return null;
+    }
+
+    method setsprite() {
+        var noblemasks = 0;
+        if (globalclass.player.actorid == "nbua") {
+            this.tokensprite = "Root/data/art/pickups/token/token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpybllonua";
+            this.tokenframes = 11;
+        }
+        else {
+            this.tokenframes = 29;
+        }
+        if (globalclass.player.actorid == "onua") {
+            this.tokensprite = "Root/data/art/pickups/onuatoken/onua_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpybllonua";
+        }
+        else if (globalclass.player.actorid == "gali") {
+            this.tokensprite = "Root/data/art/pickups/galitoken/gali_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpybllgali";
+        }
+        else if (globalclass.player.actorid == "poha") {
+            this.tokensprite = "Root/data/art/pickups/pohatoken/poha_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpybllpohatu";
+        }
+        else if (globalclass.player.actorid == "kopa") {
+            this.tokensprite = "Root/data/art/pickups/kopatoken/kopa_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpybllkopaka";
+        }
+        else if (globalclass.player.actorid == "lewa") {
+            this.tokensprite = "Root/data/art/pickups/lewatoken/lewa_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpyblllewa";
+        }
+        else if (globalclass.player.actorid == "tahu") {
+            this.tokensprite = "Root/data/art/pickups/tahutoken/tahu_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpyblltahu";
+        }
+        else if (globalclass.player.actorid == "akam") {
+            this.tokensprite = "Root/data/art/pickups/pohatoken/poha_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/atom";
+        }		
+        else if (globalclass.player.actorid == "wair") {
+            this.tokensprite = "Root/data/art/pickups/onuatoken/onua_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/atom";
+        }		
+        else if (globalclass.player.actorid == "viki") {
+            this.tokensprite = "Root/data/art/pickups/onuatoken/onua_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpybllonua";
+        }
+        else if (globalclass.player.actorid == "when") {
+            this.tokensprite = "Root/data/art/pickups/onuatoken/onua_token";
+            this.ammosprite = "Root/data/art/hud/elemrotate/hpybllonua";
         }
         return null;
     }
