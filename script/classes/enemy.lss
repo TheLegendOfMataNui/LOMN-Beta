@@ -38,11 +38,13 @@ class enemy {
     method process(param1) {
         //Timer for Infected Mask & Particle Fountain
         if (this.timeractive == 1) {
-            this.chary = this.chary + 0.05;
-            this.particletimer = this.particletimer + param1.deltatime;
-            gcareadirector::createemitter(24, this.charx, this.chary, this.charz);
-            this.infmask.setpos(this.charx, (this.chary + 1.5), this.charz);
-            this.infmask.process();
+            if (globalclass.pause.ispaused == 0) {
+                this.chary = this.chary + 0.05;
+                this.infmask.setpos(this.charx, (this.chary + 1.5), this.charz);
+                this.infmask.process();
+                this.particletimer = this.particletimer + param1.deltatime;
+                gcareadirector::createemitter(24, this.charx, this.chary, this.charz);
+            }
             if (this.particletimer >= 1.5) {
                 this.infmask.hide();
                 this.infmask.remove();
