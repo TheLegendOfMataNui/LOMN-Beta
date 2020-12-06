@@ -3,8 +3,8 @@ class gs_lego_animatesprite : ss_animatesprite {
     property maxloops;
     property loopbackwards;
     
-    method gs_lego_animatesprite(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
-        this.ss_animatesprite(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+    method gs_lego_animatesprite(filepath, first_frame, last_frame, frames_animating, left_side_pos, top_side_pos, z_coord, right_side_pos, bottom_side_pos) {
+        this.ss_animatesprite(filepath, first_frame, last_frame, frames_animating, left_side_pos, top_side_pos, z_coord, right_side_pos, bottom_side_pos);
         return null;
     }
     
@@ -63,16 +63,16 @@ class gs_lego_animatesprite : ss_animatesprite {
     
     method setpos(param1, param2, param3, param4) {
         var var1;
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.x1 = param1;
         }
-        if (!(param3 == null)) {
+        if (param3 != null) {
             this.x2 = param3;
         }
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.y1 = param2;
         }
-        if (!(param4 == null)) {
+        if (param4 != null) {
             this.y2 = param4;
         }
         var1 = 0;
@@ -85,11 +85,11 @@ class gs_lego_animatesprite : ss_animatesprite {
     
     method changepos(param1, param2) {
         var var1;
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.x1 = this.x1 + param1;
             this.x2 = this.x2 + param1;
         }
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.y1 = this.y1 + param2;
             this.y2 = this.y2 + param2;
         }

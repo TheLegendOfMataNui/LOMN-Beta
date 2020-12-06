@@ -3,40 +3,40 @@ class ss_animatesprite : ss_changesprite {
     property animatingonflag;
     property framecount;
     
-    method ss_animatesprite(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
-        this.filename = param1;
-        this.first = param2;
-        this.last = param3;
-        this.framesanimating = param4;
-        if (!(param5 == null)) {
-            this.x1 = param5;
+    method ss_animatesprite(filepath, first_frame, last_frame, frames_animating, left_side_pos, top_side_pos, z_coord, right_side_pos, bottom_side_pos) {
+        this.filename = filepath;
+        this.first = first_frame;
+        this.last = last_frame;
+        this.framesanimating = frames_animating;
+        if (left_side_pos != null) {
+            this.x1 = left_side_pos;
         }
         else {
             this.x1 = 0;
         }
-        if (!(param6 == null)) {
-            this.y1 = param6;
+        if (top_side_pos != null) {
+            this.y1 = top_side_pos;
         }
         else {
             this.y1 = 0;
         }
-        if (!(param8 == null)) {
-            this.x2 = param8;
+        if (z_coord != null) {
+            this.z = z_coord;
+        }
+        else {
+            this.z = 0;
+        }
+        if (right_side_pos != null) {
+            this.x2 = right_side_pos;
         }
         else {
             this.x2 = 0;
         }
-        if (!(param9 == null)) {
-            this.y2 = param9;
+        if (bottom_side_pos != null) {
+            this.y2 = bottom_side_pos;
         }
         else {
             this.y2 = 0;
-        }
-        if (!(param7 == null)) {
-            this.z = param7;
-        }
-        else {
-            this.z = 0;
         }
         return null;
     }
@@ -44,7 +44,7 @@ class ss_animatesprite : ss_changesprite {
     method initfull() {
         var var1;
         var var2;
-        var var3;
+        var sprite;
         this.spritearray = [  ];
         var1 = this.first;
         while (this.last >= var1) {
@@ -60,9 +60,9 @@ class ss_animatesprite : ss_changesprite {
             if ((var1 >= 1000) && (var1 < 10000)) {
                 var2 = (this.filename + __tostring(var1)) + ".tga";
             }
-            var3 = new ss_basesprite(var2, this.x1, this.y1, this.z, this.x2, this.y2);
-            var3.initfull();
-            this.spritearray.__append(var3);
+            sprite = new ss_basesprite(var2, this.x1, this.y1, this.z, this.x2, this.y2);
+            sprite.initfull();
+            this.spritearray.__append(sprite);
             var1 = var1 + 1;
         }
         this.currentsprite = 0;
