@@ -146,13 +146,22 @@ class lego_pickup {
                         gcstaticsoundsptrarray::playtablesound(1075);
                     }
                     if (this.putype == 2) {
-                        
+                        gcstaticsoundsptrarray::playtablesound(1075);                        
                     }
                     if (this.putype == 3) {
-                        
+                        gcstaticsoundsptrarray::playtablesound(1075);
                     }
                     if (this.putype == 4) {
-                        
+                        gcstaticsoundsptrarray::playtablesound(1075);
+                    }
+                    if (this.putype == 5) {
+                        gcstaticsoundsptrarray::playtablesound(1075);
+                    }
+                    if (this.putype == 6) {
+                        gcstaticsoundsptrarray::playtablesound(1075);
+                    }
+                    if (this.putype == 7) {
+                        gcstaticsoundsptrarray::playtablesound(1075);
                     }
                     this.pickup();
                 }
@@ -186,7 +195,6 @@ class lego_pickup {
     method pickup() {
         var var1;
         if (this.objshown == 1) {
-            gcstaticsoundsptrarray::playtablesound(1075);
             this.obj.disablecollisions();
             globalclass.player.actor.pickup(this.obj.id);
             this.desctext.add();
@@ -267,8 +275,26 @@ class lego_pickup {
                 gcsaver::setenergy(gcsaver::getenergy() + 20);
             }
             if (this.putype == 7) {
-                //TODO: Code for the printing elements
                 gcsaver::pickupitem(this.obj.id);
+                if (globalclass.level.name == "lev1") {
+                    globalclass.unlockdirector.unlocks.printonua = true;
+                }
+                else if (globalclass.level.name == "lev2") {
+                    globalclass.unlockdirector.unlocks.printgali = true;
+                }
+                else if (globalclass.level.name == "lev3") {
+                    globalclass.unlockdirector.unlocks.printpoha = true;
+                }
+                else if (globalclass.level.name == "lev4") {
+                    globalclass.unlockdirector.unlocks.printkopa = true;
+                }
+                else if (globalclass.level.name == "lev5") {
+                    globalclass.unlockdirector.unlocks.printlewa = true;
+                }
+                else if (globalclass.level.name == "lev6") {
+                    globalclass.unlockdirector.unlocks.printtahu = true;
+                }
+                globalclass.unlockdirector.save();
             }
             this.objshown = 0;
             gclightdirector::killpickuplighting(this.obj.id);
