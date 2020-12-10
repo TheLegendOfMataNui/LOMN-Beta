@@ -4,13 +4,14 @@ class gsprintmenu {
     property active;
     property background1;
     property backopt1;
-    property imagelist;
+    property defaultpics;
     property onuapics;
     property galipics;
     property pohapics;
     property kopapics;
     property lewapics;
     property tahupics;
+    property imagelist;
     property endgame;
     property subon;
     property background2;
@@ -37,12 +38,13 @@ class gsprintmenu {
         this.background1.show();
         this.backopt1 = new printmenuhighlight("Root/data/art/PrintMenu/HL_ARROW01", 531, 353, 627, 481);
         this.backopt1.initfull();
-        this.imagelist = [ 
+        this.imagelist = [   ];
+        this.defaultpics = [ 
             new printmenupic("Root/data/art/PrintMenu/fgs1", 38, 48, 102, 112, "Root/data/art/PrintMenu/HL01", 22, 37, 118, 133, 1), 
             new printmenupic("Root/data/art/PrintMenu/fis1", 139, 49, 203, 113, "Root/data/art/PrintMenu/HL02", 122, 37, 218, 133, 1) ];
         var1 = 0;
-        while ((this.imagelist.__length - 1) >= var1) {
-            this.imagelist[var1].initfull();
+        while ((this.defaultpics.__length - 1) >= var1) {
+            this.imagelist.__append(this.defaultpics[var1]);
             var1 = var1 + 1;
         }
 	    if ((globalclass.unlockdirector.unlocks.printonua) == 1) {
@@ -53,7 +55,7 @@ class gsprintmenu {
                 new printmenupic("Root/data/art/PrintMenu/oms1", 538, 48, 602, 112, "Root/data/art/PrintMenu/HL06", 522, 37, 618, 133, 1) ];
             var1 = 0;
             while ((this.onuapics.__length - 1) >= var1) {
-                this.onuapics[var1].initfull();
+                this.imagelist.__append(this.onuapics[var1]);
                 var1 = var1 + 1;
             }
 	    }
@@ -65,7 +67,7 @@ class gsprintmenu {
                 new printmenupic("Root/data/art/PrintMenu/gms1", 338, 128, 402, 192, "Root/data/art/PrintMenu/HL10", 322, 117, 418, 213, 1) ];
             var1 = 0;
             while ((this.galipics.__length - 1) >= var1) {
-                this.galipics[var1].initfull();
+                this.imagelist.__append(this.galipics[var1]);
                 var1 = var1 + 1;
             }
 	    }
@@ -77,7 +79,7 @@ class gsprintmenu {
                 new printmenupic("Root/data/art/PrintMenu/pms1", 139, 208, 203, 272, "Root/data/art/PrintMenu/HL14", 122, 197, 218, 293, 1) ];
             var1 = 0;
             while ((this.pohapics.__length - 1) >= var1) {
-                this.pohapics[var1].initfull();
+                this.imagelist.__append(this.pohapics[var1]);
                 var1 = var1 + 1;
             }
 	    }
@@ -89,7 +91,7 @@ class gsprintmenu {
                 new printmenupic("Root/data/art/PrintMenu/kms1", 539, 209, 603, 273, "Root/data/art/PrintMenu/HL18", 522, 197, 618, 293, 1) ];
             var1 = 0;
             while ((this.kopapics.__length - 1) >= var1) {
-                this.kopapics[var1].initfull();
+                this.imagelist.__append(this.kopapics[var1]);
                 var1 = var1 + 1;
             }
 	    }
@@ -101,7 +103,7 @@ class gsprintmenu {
                 new printmenupic("Root/data/art/PrintMenu/lms1", 339, 289, 403, 353, "Root/data/art/PrintMenu/HL22", 322, 277, 418, 373, 1) ];
             var1 = 0;
             while ((this.lewapics.__length - 1) >= var1) {
-                this.lewapics[var1].initfull();
+                this.imagelist.__append(this.lewapics[var1]);
                 var1 = var1 + 1;
             }
 	    }
@@ -113,7 +115,7 @@ class gsprintmenu {
                 new printmenupic("Root/data/art/PrintMenu/tms1", 139, 369, 203, 433, "Root/data/art/PrintMenu/HL26", 122, 358, 218, 454, 1) ];
             var1 = 0;
             while ((this.tahupics.__length - 1) >= var1) {
-                this.tahupics[var1].initfull();
+                this.imagelist.__append(this.tahupics[var1]);
                 var1 = var1 + 1;
             }
 	    }
@@ -123,9 +125,14 @@ class gsprintmenu {
                 new printmenupic("Root/data/art/PrintMenu/INSTRUCT06", 339, 369, 403, 433, "Root/data/art/PrintMenu/HL28", 322, 358, 418, 454, 1) ];
             var1 = 0;
             while ((this.endgame.__length - 1) >= var1) {
-                this.endgame[var1].initfull();
+                this.imagelist.__append(this.endgame[var1]);
                 var1 = var1 + 1;
             }
+        }
+        var1 = 0;
+        while ((this.imagelist.__length - 1) >= var1) {
+            this.imagelist[var1].initfull();
+            var1 = var1 + 1;
         }
         this.printer = scprinter::create();
         this.printlock = 0;
@@ -167,6 +174,15 @@ class gsprintmenu {
                 var1 = var1 + 1;
             }
             this.imagelist = null;
+        }        
+        if (!(this.defaultpics == null)) {
+            var1 = 0;
+            while ((this.defaultpics.__length - 1) >= var1) {
+                this.defaultpics[var1].cleanupfull();
+                this.defaultpics[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.defaultpics = null;
         }
         if (!(this.onuapics == null)) {
             var1 = 0;
