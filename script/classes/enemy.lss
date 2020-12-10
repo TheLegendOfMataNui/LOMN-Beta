@@ -15,6 +15,7 @@ class enemy {
     }
 
     method initfull() {
+        this.infmask = [  ];
         this.landarray = [  ];
         this.waterarray = [  ];
         this.particletimer = 0.0;
@@ -36,6 +37,7 @@ class enemy {
     }
 
     method process(param1) {
+<<<<<<< Updated upstream
         //Timer for Infected Mask & Particle Fountain
         if (this.timeractive == 1) {
             if (globalclass.pause.ispaused == 0) {
@@ -52,6 +54,12 @@ class enemy {
                 this.particletimer = 0.0;
                 this.timeractive = 0;
             }
+=======
+        var instance = 0;
+        while ((this.infmask.__length - 1) >= instance) {
+            this.infmask[instance].process(param1);
+            instance = instance + 1;
+>>>>>>> Stashed changes
         }
 
         return null;
@@ -67,6 +75,7 @@ class enemy {
         //EventID 20 = Clear Area Event
         //Clears the array on exiting the area
         if (param1.eventid == 20) {
+            this.infmask = [  ];
             this.landarray = [  ];
             this.waterarray = [  ];
             this.killheight = null;
@@ -159,6 +168,7 @@ class enemy {
             this.charx = gccharacter::getpositionx(gcmodeldirector::getcharacter(param1.args[2]));
             this.chary = gccharacter::getpositiony(gcmodeldirector::getcharacter(param1.args[2]));
             this.charz = gccharacter::getpositionz(gcmodeldirector::getcharacter(param1.args[2]));
+<<<<<<< Updated upstream
             this.timeractive = 1;
             this.infmask = new gs_lego_animatebigsprite("Root/Data/Art/INF_TAHU", 0, 71, 1, -280, -60, 1330, 2, 2);
             this.infmask.initfull();
@@ -166,6 +176,9 @@ class enemy {
             this.infmask.show();
             this.infmask.animloop(1, 1);
             this.infmask.startanimate();
+=======
+            this.infmask.__append(new infmask(this.charx, this.chary, this.charz));
+>>>>>>> Stashed changes
             gccharacter::aiidle(gcmodeldirector::getcharacter(param1.args[2]));
             debug::print((scslosifoundation::identifiertostring(param1.args[2])) + " is now idle!");
         }

@@ -1,0 +1,44 @@
+class infmask : enemy {
+    property x;
+    property y;
+    property z;
+    property mask;
+    property timer;
+    property active;
+
+    method infmask(param1, param2, param3) {
+        this.x = param1;
+        this.y = param2;
+        this.z = param3;
+        this.mask = new gs_lego_animatebigsprite("Root/Data/Art/INF_TAHU", 0, 71, 1, param1, param2, param3, 2, 2);
+        this.mask.initfull();
+        this.mask.add();
+        this.mask.show();
+        this.mask.animloop(1, 1);
+        this.mask.startanimate();
+        this.timer = 0.0;
+        this.active = 1;
+	    return null;
+    }
+
+    method process(param1) {
+        //Timer for Infected Mask & Particle Fountain
+        if (this.active == 1) {
+            if (globalclass.pause.ispaused == 0) {
+                this.y = this.y + 0.05;
+                this.timer = this.timer + param1.deltatime;
+                this.mask.process();
+                this.mask.setpos(this.x, (this.y + 1), this.z);
+                gcareadirector::createemitter(24, this.x, this.y, this.z);
+            }
+            if (this.timer >= 1.2) {
+                this.mask.hide();
+                this.mask.remove();
+                this.mask.cleanupfull();
+                this.timer = 0.0;
+                this.active = 0;
+            }
+        }
+        return null;
+    }
+}
