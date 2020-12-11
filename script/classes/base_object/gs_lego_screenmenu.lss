@@ -12,15 +12,8 @@ class gs_lego_screenmenu : base_object {
     property lineposition;
     
     method gs_lego_screenmenu(param1) {
-        var width = gcgame::getresolutionwidth();
         this.items = param1;
         this.bgart = new ss_basesprite("Root/Data/Art/MenuArt/LUKE", 0, 0, 0, 852, 480);
-        this.bgart.initfull();
-        this.bgart.add();
-        this.bgart.show();
-        if (width == 640.000000) {
-            this.bgart.setpos(-113, 0, 753, 480);
-        }     
         return null;
     }
     
@@ -31,6 +24,13 @@ class gs_lego_screenmenu : base_object {
         var var4;
         var var5;
         var var6;
+        var width = gcgame::getresolutionwidth();
+        this.bgart.initfull();
+        this.bgart.add();
+        this.bgart.show();
+        if (width == 640.000000) {
+            this.bgart.setpos(-113, 0, 753, 480);
+        }     
         this.startx = screenx * 0.56;
         this.starty = screeny * 0.41;
         var1 = this.startx;
