@@ -3,8 +3,6 @@ class enemy {
     property waterarray;
     property killheight;
     property waterlevel;
-    property particletimer;
-    property timeractive;
     property charx;
     property chary;
     property charz;
@@ -18,8 +16,6 @@ class enemy {
         this.infmask = [  ];
         this.landarray = [  ];
         this.waterarray = [  ];
-        this.particletimer = 0.0;
-        this.timeractive = 0;
         return null;
     }
 
@@ -41,9 +37,9 @@ class enemy {
         var instance = 0;
         while ((this.infmask.__length - 1) >= instance) {
             this.infmask[instance].process(param1);
+            debug::print(instance);
             instance = instance + 1;
         }
-
         return null;
     }
 
@@ -53,16 +49,16 @@ class enemy {
 
     method onevent(param1) {
         var instance = 0;
-        //Character Array Reset
+        //Enemy Array Reset
         //EventID 20 = Clear Area Event
-        //Clears the array on exiting the area
+        //Clears the arrays on exiting the area
         if (param1.eventid == 20) {
             this.infmask = [  ];
             this.landarray = [  ];
             this.waterarray = [  ];
             this.killheight = null;
             this.waterlevel = null;
-            debug::print("Cleared Enemy Array!");
+            debug::print("Cleared Enemy Arrays!");
         }
 
         //Knockback Processing
