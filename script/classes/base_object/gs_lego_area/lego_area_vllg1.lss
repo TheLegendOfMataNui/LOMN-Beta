@@ -11,11 +11,11 @@ class lego_area_vllg1 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
+        this.puzzle.initfull();
         gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
         gclightdirector::setcavelighting(1);
         gcareadirector::setnearestmax(8);
         gcmodeldirector::setnearestmax(5);
-        this.puzzle.initfull();
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 0) {
             gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
             gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
@@ -39,17 +39,7 @@ class lego_area_vllg1 : gs_lego_area {
     
     method onevent(param1) {
         this.puzzle.onevent(param1);
-        if (param1.eventid == 46) {
-            gccollisionphysicsgroup::spinmask(1.2);
-        }
-        else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.setinputstate("ninp");
-            this.level.cam.setaimode(11);
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
-        }
-        else if ((param1.eventid == 44) && (this.cinema != null)) {
+        if ((param1.eventid == 44) && (this.cinema != null)) {
             param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gccharacter::settohunga(param1, rgba(102, 0, 102, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk6a"));
             param1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
@@ -65,9 +55,6 @@ class lego_area_vllg1 : gs_lego_area {
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl02"), 0);
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl03"), 0);
             gcmodeldirector::show(scslosifoundation::stringtoidentifier("vl04"), 0);
-        }
-        else if (param1.eventid == 30) {
-            globalclass.bgmusic.stop();
         }
         return null;
     }

@@ -334,7 +334,17 @@ class vllg1_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 51) {
+        if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
+        }
+        else if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setinputstate("ninp");
+            this.level.cam.setaimode(11);
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+        }
+        else if (param1.eventid == 51) {
             this.deadhives = this.deadhives + 1;
         }
         else if (param1.eventid == 101) {
