@@ -514,10 +514,11 @@ class bech2_puzzle {
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.setunderwater(0);
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
             globalclass.player.actor.setinputstate("ninp");
             this.parent.level.cam.setaimode(11);
-            globalclass.player.unkill();
         }
         return null;
     }
