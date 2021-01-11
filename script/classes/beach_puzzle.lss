@@ -82,7 +82,7 @@ class beach_puzzle {
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
         }
         else if (param1.eventid == 44) {
-            if (!(this.cinema == null) && (this.safecount < 3)) {
+            if ((this.cinema != null) && (this.safecount < 3)) {
                 this.safecount = this.safecount + 1;
                 if (this.safecount == 2) {
                     tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
@@ -95,7 +95,7 @@ class beach_puzzle {
     
     method input(param1) {
         if ((param1.event == 2) && (param1.button == 251)) {
-            if (!(this.cinema == null)) {
+            if (this.cinema != null) {
                 gccinemaengine::stop(this.cinema);
             }
         }
