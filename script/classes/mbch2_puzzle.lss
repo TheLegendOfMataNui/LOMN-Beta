@@ -117,7 +117,9 @@ class mbch2_puzzle {
             this.howtotext.initfull();
         }
         if (bettersaver::getbooleanvalue(74)) {
-            if (this.lizard != null) {
+			globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICGALIambience");
+			globalclass.bgmusic.play(1);
+			if (this.lizard != null) {
                 this.lizard.aisetbenign(1);
             }
         }
@@ -248,6 +250,8 @@ class mbch2_puzzle {
             }
         }
         else if (param1.eventid == 101) {
+			globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICGALIambience");
+			globalclass.bgmusic.play(1);
             bettersaver::setbooleanvalue(74, 1);
         }        
         else if (param1.eventid == 4) {
