@@ -13,6 +13,8 @@ class lego_pickup {
     property howtolines;
     property condition;
     property quest;
+    property water_pickup;
+    property texttimer;
     
     method lego_pickup(objid, scriptid, pickuptype, stringtablegroup, groupid, numberofstrings) {
         var string;
@@ -48,6 +50,7 @@ class lego_pickup {
             }
         }
         this.objshown = 1;
+        this.water_pickup = 0;
         return null;
     }
     
@@ -71,6 +74,7 @@ class lego_pickup {
             gclightdirector::setpickuplighting(this.obj.id);
             this.condition = 0;
             this.quest = 0;
+            this.texttimer = 0.0;
         }
         return null;
     }
@@ -188,6 +192,17 @@ class lego_pickup {
                 this.rotation = this.rotation + 2;
             }
             this.obj.setorientation(this.rotation, this.rotation, 0);
+
+            // if pickup is underwater, simulate the length of the collection animation with a timer while hiding the object
+            if (this.water_pickup == 1) {
+                this.texttimer = this.texttimer + param1.deltatime;
+                gclightdirector::killpickuplighting(this.obj.id);
+                this.obj.hide();
+                if (this.texttimer >= 4) {
+                    this.gotit();
+                    this.water_pickup = 0;
+                }
+            }
         }
         return null;
     }
@@ -196,7 +211,16 @@ class lego_pickup {
         var var1;
         if (this.objshown == 1) {
             this.obj.disablecollisions();
-            globalclass.player.actor.pickup(this.obj.id);
+
+            // is the pickup underwater or not?
+            if (globalclass.player.submerged == 0) {
+                // not underwater, proceed normally
+                globalclass.player.actor.pickup(this.obj.id);
+            }
+            else {
+                // underwater
+                this.water_pickup = 1;
+            }
             this.desctext.add();
             this.desctext.show();
             var1 = 0;
