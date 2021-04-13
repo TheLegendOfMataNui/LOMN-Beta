@@ -15,8 +15,6 @@ class shrn1_puzzle {
     
     method shrn1_puzzle(param1) {
         this.parent = param1;
-        this.crackstate = 0;
-        this.showbossdoor = 1;
         return null;
     }
     
@@ -69,6 +67,7 @@ class shrn1_puzzle {
             this.crackplane = null;
         }
         else {
+            this.crackstate = 0;
             this.crackdefaults = [  ];
             this.cracktimer = 0.0;
             this.crackplane = new lego_triggerobject("tps7", this.parent.name);
@@ -102,15 +101,13 @@ class shrn1_puzzle {
         }
         this.bossdoor = new lego_moveableobject("mmdr", this.parent.name);
         this.bossdoor.initfull();
-        if (this.showbossdoor) {
+        if (bettersaver::getbooleanvalue(65) == 0) {
+            this.showbossdoor = 1;
             this.bossdoor.show();
             this.bossdoor.setalpha(0.5);
         }
-        else if (bettersaver::getbooleanvalue(65)) {
+        else {
             this.bossdoor.hide();
-        }
-        if (this.crackstate == 0) {
-            this.bossdoor.disablecollisions();
         }
 
         //Set Door Text
