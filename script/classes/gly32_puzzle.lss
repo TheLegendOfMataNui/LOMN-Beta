@@ -17,11 +17,6 @@ class gly32_puzzle {
     property rotating;
     property rotatetime;
     property rotatespeed;
-    property desctext;
-    property howtotext;
-    property distplaytexttimer;
-    property deltatimer1;
-    property rotation;
     
     method gly32_puzzle(param1) {
         this.parent = param1;
@@ -35,10 +30,7 @@ class gly32_puzzle {
     
     method initfull() {
         var KEVIN;
-        var glyph_text;
         var var1;
-        this.rotation = 0;
-        this.deltatimer1 = 0.0;
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gclightdirector::setcavelighting(1);
@@ -46,17 +38,9 @@ class gly32_puzzle {
         globalclass.bgmusic.play();
         globalclass.player.actor.setwaterlevel(1000);
         if (gcsaver::findglyph(scslosifoundation::stringtoidentifier("glyp")) == 0) {
-            this.glyph = new lego_moveableobject("glyp");
+            this.glyph = new lego_pickup("glyp", 7, 2, "item", 4, 1);
             this.glyph.initfull();
             this.glyph.show();
-            this.distplaytexttimer = new lego_timer("dspt", 4.0, 0);
-            this.distplaytexttimer.initfull();
-            glyph_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 4, 0);
-            this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", glyph_text, screenx * 0.5, screeny - 130, 0, 1, 256, 0, 0);
-            this.desctext.initfull();
-            glyph_text = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier("item"), 4, 1);
-            this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", glyph_text, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
-            this.howtotext.initfull();
         }
         this.numberofdownswitchs = 0;
         this.switch1 = new lego_moveableobject("swc1");
@@ -110,22 +94,6 @@ class gly32_puzzle {
             }
             this.doorarray = null;
         }
-        if (this.desctext != null) {
-            this.desctext.hide();
-            this.desctext.remove();
-            this.desctext.cleanupfull();
-            this.desctext = null;
-        }
-        if (this.howtotext != null) {
-            this.howtotext.hide();
-            this.howtotext.remove();
-            this.howtotext.cleanupfull();
-            this.howtotext = null;
-        }
-        if (this.distplaytexttimer != null) {
-            this.distplaytexttimer.cleanupfull();
-            this.distplaytexttimer = null;
-        }
         if (this.switch1 != null) {
             this.switch1.cleanupfull();
             this.switch1 = null;
@@ -153,35 +121,6 @@ class gly32_puzzle {
         return null;
     }
     
-    method showtext() {
-        this.desctext.add();
-        this.desctext.show();
-        this.howtotext.add();
-        this.howtotext.show();
-        this.distplaytexttimer.reset(0);
-        this.distplaytexttimer.start();
-        this.glyph.hide();
-        globalclass.player.addelement(7);
-        globalclass.hud.show();
-        gcsaver::pickupglyph(this.glyph.id);
-        bettersaver::setbooleanvalue(79, 1);
-        return null;
-    }
-    
-    method removetext() {
-        if (!(this.desctext == null)) {
-            this.desctext.hide();
-            this.desctext.cleanupfull();
-            this.desctext = null;
-        }
-        if (!(this.howtotext == null)) {
-            this.howtotext.hide();
-            this.howtotext.cleanupfull();
-            this.howtotext = null;
-        }
-        return null;
-    }
-    
     method process(param1) {
         if (this.rotating) {
             this.rotatetime = this.rotatetime + param1.deltatime;
@@ -191,19 +130,6 @@ class gly32_puzzle {
                     this.opendoors();
                 }
             }
-        }
-        this.deltatimer1 = this.deltatimer1 + param1.deltatime;
-        if (this.deltatimer1 > 0) {
-            
-        }
-        if (this.rotation >= 360) {
-            this.rotation = 0;
-        }
-        else {
-            this.rotation = this.rotation + 2;
-        }
-        if (this.glyph != null) {
-            this.glyph.setorientation(this.rotation, this.rotation, 0);
         }
         if ((globalclass.player.whichmaskonface() == 8) && (globalclass.player.ismaskpoweron() == 1)) {
             gcareadirector::setfog(-16777216, 0 - 1.0, 0 - 350.0, 0.05);
@@ -217,12 +143,7 @@ class gly32_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 8) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
-                this.removetext();
-            }
-        }
-        else if (param1.eventid == 46) {
+        if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
@@ -232,7 +153,6 @@ class gly32_puzzle {
         }
         else if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                this.removetext();
                 gcbagroup::setswitchareas(scslosifoundation::stringtoidentifier("gl3s"), scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
             }
         }
@@ -280,11 +200,6 @@ class gly32_puzzle {
                     this.numberofdownswitchs = this.numberofdownswitchs + 1;
                     this.switch5_up = 0;
                     this.test();
-                }
-            }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (param1.args[1] == scslosifoundation::stringtoidentifier("glyp")) {
-                    this.showtext();
                 }
             }
         }
