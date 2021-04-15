@@ -9,32 +9,32 @@ class ss_basetext : base_drawobject {
     property scale;
     property padadjustment;
     
-    method ss_basetext(param1, param2, param3, param4, param5, param6, param7, param8, param9) {
-        this.fontname = param1;
-        this.string = param2;
-        if (!(param9 == null)) {
-            this.padadjustment = param9;
+    method ss_basetext(font_name, string, x_pos, y_pos, z_pos, scale, horizontal_alignment, vertical_alignment, padding) {
+        this.fontname = font_name;
+        this.string = string;
+        if (padding != null) {
+            this.padadjustment = padding;
         }
         else {
             this.padadjustment = 0;
         }
-        this.x1 = param3;
-        this.y1 = param4 + this.padadjustment;
-        this.z = param5;
-        if (!(param6 == null)) {
-            this.scale = param6;
+        this.x1 = x_pos;
+        this.y1 = y_pos + this.padadjustment;
+        this.z = z_pos;
+        if (scale != null) {
+            this.scale = scale;
         }
         else {
             this.scale = 1;
         }
-        if (!(param7 == null)) {
-            this.horizontal = param7;
+        if (horizontal_alignment != null) {
+            this.horizontal = horizontal_alignment;
         }
         else {
             this.horizontal = 0;
         }
-        if (!(param8 == null)) {
-            this.verticle = param8;
+        if (vertical_alignment != null) {
+            this.verticle = vertical_alignment;
         }
         else {
             this.verticle = 4;
@@ -116,13 +116,13 @@ class ss_basetext : base_drawobject {
     }
     
     method changepos(param1, param2, param3) {
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.x1 = param1 + this.x1;
         }
-        if (!(param2 == null)) {
+        if (param2 != null) {
             this.y1 = param2 + this.y1;
         }
-        if (!(param3 == null)) {
+        if (param3 != null) {
             this.z = param3 + this.z;
         }
         sctextobject::setposition(this.text, this.x1, this.y1, this.z);

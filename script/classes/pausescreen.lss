@@ -24,7 +24,7 @@ class pausescreen {
     method cleanupfull() {
         var var1;
         var var2;
-        if (!(this.menustrings == null)) {
+        if (this.menustrings != null) {
             var1 = this.menustrings.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -39,7 +39,7 @@ class pausescreen {
     }
     
     method toggleinput(param1) {
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.inputenabled = param1;
         }
         else if (this.inputenabled == 1) {
@@ -135,7 +135,7 @@ class pausescreen {
     
     method input(param1) {
         if (this.inputenabled) {
-            if (!(globalclass.level.name == "lev0")) {
+            if (globalclass.level.name != "lev0") {
                 if (param1.button == 251) {
                     if (param1.event == 2) {
                         this.pause();
