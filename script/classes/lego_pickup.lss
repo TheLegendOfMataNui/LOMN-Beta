@@ -10,12 +10,10 @@ class lego_pickup {
     property deltatimer;
     property spinspeed;
     property howtotextarray;
-    property howtolines;
     property condition;
     property quest;
     property water_pickup;
     property texttimer;
-    property run_once;
     
     method lego_pickup(objid, scriptid, pickuptype, stringtablegroup, groupid, numberofstrings) {
         var string;
@@ -35,7 +33,6 @@ class lego_pickup {
             string = gcareadirector::getscriptstring(scslosifoundation::stringtoidentifier(stringtablegroup), groupid, 0);
         }
         this.desctext = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", string, screenx * 0.5, screeny - 130, 0, 1.2, 256, 0, 0);
-        this.howtolines = numberofstrings;
         this.howtotextarray = [  ];
         if (numberofstrings > 0) {
             var1 = 0;
@@ -52,7 +49,6 @@ class lego_pickup {
         }
         this.objshown = 1;
         this.water_pickup = 0;
-        this.run_once = 0;
         return null;
     }
     
@@ -94,6 +90,7 @@ class lego_pickup {
             this.obj = null;
         }
         if (this.desctext != null) {
+            this.desctext.hide();
             this.desctext.cleanupfull();
             this.desctext = null;
         }
@@ -101,6 +98,7 @@ class lego_pickup {
         if (this.howtotextarray != null) {
             var1 = 0;
             while ((this.howtotextarray.__length - 1) >= var1) {
+                this.howtotextarray[var1].hide();
                 this.howtotextarray[var1].cleanupfull();
                 this.howtotextarray[var1] = null;
                 var1 = var1 + 1;
@@ -109,7 +107,7 @@ class lego_pickup {
         }
         this.scriptid = null;
         this.putype = null;
-        this.howtolines = null;
+        this.texttimer = null;
         return null;
     }
     
@@ -145,6 +143,7 @@ class lego_pickup {
     }
     
     method onevent(param1) {
+        var var1;
         if (this.objshown == 1) {
             if (param1.eventid == 1) {
                 if ((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (param1.args[1] == this.obj.id)) {
@@ -170,11 +169,20 @@ class lego_pickup {
                         gcstaticsoundsptrarray::playtablesound(1075);
                     }
                     this.pickup();
+                    this.gotit();
                 }
             }
             else if (param1.eventid == 39) {
                 if (param1.args[0] == this.obj.id) {
-                    this.gotit();
+                    this.objshown = 0;
+                    gclightdirector::killpickuplighting(this.obj.id);
+                    this.obj.hide();
+                    this.desctext.hide();
+                    var1 = 0;
+                    while ((this.howtotextarray.__length - 1) >= var1) {
+                        this.howtotextarray[var1].hide();
+                        var1 = var1 + 1;
+                    }
                 }
             }
         }
@@ -198,9 +206,11 @@ class lego_pickup {
         }
 
         // if pickup is underwater, simulate the length of the collection animation with a timer
-        if (this.water_pickup == 1) {
+        if ((this.water_pickup == 1) && (this.texttimer != null)) {
             this.texttimer = this.texttimer + param1.deltatime;
-            if (this.texttimer >= 4) {
+            gclightdirector::killpickuplighting(this.obj.id);
+            this.obj.hide();
+            if (this.texttimer >= 5) {
                 this.desctext.hide();
                 var1 = 0;
                 while ((this.howtotextarray.__length - 1) >= var1) {
@@ -210,12 +220,6 @@ class lego_pickup {
                 this.water_pickup = 0;
             }
         }
-
-        // runs this to immediately award the underwater item while the text timer runs down
-        if (this.run_once == 1) {
-            this.gotit();
-            this.run_once = 0;
-        }    
         return null;
     }
     
@@ -232,7 +236,6 @@ class lego_pickup {
             else {
                 // underwater
                 this.water_pickup = 1;
-                this.run_once = 1;
             }
             this.desctext.add();
             this.desctext.show();
@@ -261,7 +264,6 @@ class lego_pickup {
     }
     
     method gotit() {
-        var var1;
         if (this.objshown == 1) {
             if (this.putype == 1) {
                 globalclass.player.addmask("fake", this.scriptid);
@@ -333,19 +335,6 @@ class lego_pickup {
                 }
                 globalclass.unlockdirector.save();
             }
-            this.objshown = 0;
-            gclightdirector::killpickuplighting(this.obj.id);
-
-            // dont run this while underwater 
-            if (globalclass.player.submerged == 0) {
-                this.desctext.hide();
-                var1 = 0;
-                while ((this.howtotextarray.__length - 1) >= var1) {
-                    this.howtotextarray[var1].hide();
-                    var1 = var1 + 1;
-                }
-            }
-            this.obj.hide();
         }
         return null;
     }
