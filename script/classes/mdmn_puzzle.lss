@@ -12,6 +12,7 @@ class mdmn_puzzle {
     property turaga;
     property mudmandead;
     property stone;
+    property waterfall;
     
     method mdmn_puzzle(param1) {
         this.parent = param1;
@@ -19,7 +20,6 @@ class mdmn_puzzle {
     }
     
     method initfull() {
-        var var1;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
         this.mudmonster = new mudmonster(this);
         this.mudmonster.init();
@@ -30,14 +30,20 @@ class mdmn_puzzle {
         this.turaga.settweakable();
         this.mudmandead = 0;
         gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tpm1"));
-        var1 = gccollisionphysicsgroup::gettriggerplane(scslosifoundation::stringtoidentifier("tpm1"));
-        gctriggerplane::setplaneresponses(var1, 3, 3);
-        var1 = gccollisionphysicsgroup::gettriggerplane(scslosifoundation::stringtoidentifier("tpm2"));
-        gctriggerplane::setplaneresponses(var1, 3, 3);
         this.stone = new lego_pickup("ston", 0, 4, "item", 11, 0);
         this.stone.initfull();
         this.stone.obj.setpos(0, 0, 0);
         this.initshort();
+        this.waterfall = new lego_moveableobject("mwf0", "mdmn");
+        this.waterfall.initfull();
+        if (bettersaver::getbooleanvalue(79) == 0) {
+            this.waterfall.show();
+            this.waterfall.setalpha(0.7);
+        }
+        else {
+            this.waterfall.hide();
+            this.mudmonster.mudstate = 10;
+        }
         return null;
     }
     
@@ -59,7 +65,7 @@ class mdmn_puzzle {
     
     method cleanupfull() {
         debug::print("Cleaning up mud puzzle");
-        if (!(this.mudmonster == null)) {
+        if (this.mudmonster != null) {
             this.mudmonster.cleanupfull();
             this.mudmonster = null;
         }
@@ -68,14 +74,17 @@ class mdmn_puzzle {
         this.mudhits = null;
         this.attacking = null;
         this.reacting = null;
-        if (!(this.stone == null)) {
+        if (this.stone != null) {
             this.stone.cleanupfull();
             this.stone = null;
         }
-        if (!(this.turaga == null)) {
-            this.turaga.remove();
+        if (this.turaga != null) {
             this.turaga.cleanupfull();
             this.turaga = null;
+        }
+        if (this.waterfall != null) {
+            this.waterfall.cleanupfull();
+            this.waterfall = null;
         }
         return null;
     }
@@ -162,7 +171,7 @@ class mdmn_puzzle {
         var var5;
         var var6;
         var var7;
-        if (!(this.mudmonster == null)) {
+        if (this.mudmonster != null) {
             this.mudmonster.onevent(param1);
         }
         if (param1.eventid == 7) {
@@ -225,7 +234,7 @@ class mdmn_puzzle {
             }
         }
         else if (param1.eventid == 43) {
-            if (!(this.mudmonster == null)) {
+            if (this.mudmonster != null) {
                 this.mudmonster.mudstate = 10;
                 this.mudtimer = 0;
                 var2 = gcmudboss::getpositionx(this.mudmonster.mudman);
@@ -245,6 +254,9 @@ class mdmn_puzzle {
         else if (param1.eventid == 35) {
             if ((param1.args[0] == 2003330414) && (param1.args[1] == 1)) {
                 this.startconversation();
+            }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("mwf0")) {
+                this.waterfall.hide();
             }
         }
         else if (param1.eventid == 41) {
@@ -268,12 +280,8 @@ class mdmn_puzzle {
     }
     
     method endarea() {
-        var var1;
-        gctransdirector::hide(scslosifoundation::stringtoidentifier("mwf0"), 0);
         gcmodeldirector::hide(1836409945, 0);
         this.parent.endarea();
-        var1 = gccollisionphysicsgroup::gettriggerplane(scslosifoundation::stringtoidentifier("tpm2"));
-        gctriggerplane::setplaneresponses(var1, 4, 4);
         this.parent.level.cam.setpos(991, 2, 212);
         this.parent.level.cam.settargetpos(995, 1, 212);
         this.turaga.setpos(995, 0, 212);
@@ -281,9 +289,12 @@ class mdmn_puzzle {
         gccharacter::settransparency(this.turaga.handle, 0.0);
         this.turaga.fadein(1.5);
         this.turaga.disableai();
-        globalclass.player.usemasks(1);
         this.mudtimer = 0;
         this.mudmonster.mudstate = 10;
+        gccollisionphysicsgroup::turnonnextarea(scslosifoundation::stringtoidentifier("tpm1"), scslosifoundation::stringtoidentifier("shrn"));
+        this.waterfall.fadeout(1.5);
+        gcstaticsoundsptrarray::playtablesound(1084);
+        bettersaver::setbooleanvalue(79, 1);
         return null;
     }
     
