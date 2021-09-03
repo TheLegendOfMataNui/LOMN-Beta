@@ -10,7 +10,7 @@ class lego_area_ptos : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        this.puzzle.init();
+        this.puzzle.initfull();
         return null;
     }
     
@@ -36,7 +36,11 @@ class lego_area_ptos : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle.exit();
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
