@@ -1,6 +1,7 @@
 class lego_area_tura1 : gs_lego_area {
     property crashbandicootwarped;
     property warpsound;
+    property old_man;
     
     method lego_area_tura1(param1) {
         this.gs_lego_area("tura", param1, 0, 0);
@@ -13,10 +14,16 @@ class lego_area_tura1 : gs_lego_area {
         this.crashbandicootwarped = 0;
         this.warpsound = new tablecopysound(1094);
         this.lego_area_show();
-        var turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("when"));   
-        gccharacter::setorientation(turaga, 0);
-        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(turaga, scslosifoundation::stringtoidentifier("wh00"), -1);
+        //var turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("when"));   
+        //gccharacter::setorientation(turaga, 0);
+        //gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
+        //gccharacter::switchanimation(turaga, scslosifoundation::stringtoidentifier("wh00"), -1);
+        this.old_man = new gs_lego_character("when", "when", "fake", 0, 16.4179, -9.37957, -14.5622, "aiin");
+        this.old_man.initfull();
+        this.old_man.add(0);
+        this.old_man.show();
+        this.old_man.aisetspline("Root/Data/Levels/lev1/tura/tura_spline.slb", 0);
+        this.old_man.aienablepatrolonspline();
         gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
         gclightdirector::setcavelighting(1);
         gcareadirector::setnearestmax(3);
