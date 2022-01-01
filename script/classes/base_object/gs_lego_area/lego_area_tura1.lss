@@ -10,7 +10,7 @@ class lego_area_tura1 : gs_lego_area {
     }
     
     method initfull() {
-        this.playlegend();
+        //this.playlegend();
         this.crashbandicootwarped = 0;
         this.warpsound = new tablecopysound(1094);
         this.lego_area_show();
@@ -23,7 +23,10 @@ class lego_area_tura1 : gs_lego_area {
         this.old_man.add(0);
         this.old_man.show();
         this.old_man.aisetspline("Root/Data/Levels/lev1/tura/tura_spline.slb", 0);
-        this.old_man.aienablepatrolonspline();
+        //this.old_man.aienablepatrolonspline();
+        //this.old_man.aipatrol();
+        this.old_man.aidisablepatrolonspline();
+        this.old_man.aiidle();
         gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
         gclightdirector::setcavelighting(1);
         gcareadirector::setnearestmax(3);
@@ -66,6 +69,10 @@ class lego_area_tura1 : gs_lego_area {
         this.lego_area_hide();       
         this.warpsound.stopreset(0);
         this.crashbandicootwarped = null;
+        if (this.old_man != null) {
+            this.old_man.cleanupfull();
+            this.old_man = null;
+        }
         return null;
     }
     
