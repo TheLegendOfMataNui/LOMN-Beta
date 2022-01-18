@@ -4,7 +4,8 @@ class test_puzzle {
     property miruactive;
     property holedo;
     property musichasstarted;
-	property boulderarray;
+    property boulderarray;
+    property old_man;
     
     method test_puzzle(param1) {
         this.parent = param1;
@@ -59,11 +60,30 @@ class test_puzzle {
         gccharacter::switchanimation(nobua, scslosifoundation::stringtoidentifier("hak1"), -1);
         gccharacter::setorientation(nobua, 0);
         gccharacter::setshadowtype(nobua, 0);
+
+        //villager test
+        this.old_man = new gs_lego_character("vl02", "vl02", "fake", 0, 16.4179, -9.37957, -14.5622, "aiin");
+        this.old_man.initfull();
+        this.old_man.add(0);
+        this.old_man.show();
+        this.old_man.aisetspline("Root/Data/Levels/lev1/test/test_spline.slb", 0);
+        //this.old_man.aienablepatrolonspline();
+        //this.old_man.aipatrol();
+
+        //comment following lines and uncomment previous two to enable spline
+
+        this.old_man.aidisablepatrolonspline();
+        this.old_man.aiidle();
+
         return null;
     }
 
 
     method cleanupfull() {
+        if (this.old_man != null) {
+            this.old_man.cleanupfull();
+            this.old_man = null;
+        }
         return null;
     }
     
