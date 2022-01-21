@@ -1,7 +1,5 @@
 class ta106_puzzle {
     property parent;
-    property lavafountainarray;
-    property lavafountainarrayubound;
     property fallingballs;
     property fallingballsubound;
     property bl00coords;
@@ -56,22 +54,6 @@ class ta106_puzzle {
         globalclass.player.actor.addpart("tahu/surf", "surf");
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICTAHUTHEME");
         globalclass.bgmusic.play(1);
-        this.lavafountainarray = [ new lego_moveableobject("fp01"), 
-            new lego_moveableobject("fp02"), 
-            new lego_moveableobject("fp03"), 
-            new lego_moveableobject("fp04"), 
-            new lego_moveableobject("fp05"), 
-            new lego_moveableobject("fp06"), 
-            new lego_moveableobject("fp07"), 
-            new lego_moveableobject("fp08"), 
-            new lego_moveableobject("fp09"), 
-            new lego_moveableobject("fp10"), 
-            new lego_moveableobject("fp11"), 
-            new lego_moveableobject("fp12"), 
-            new lego_moveableobject("fp13"), 
-            new lego_moveableobject("fp14"), 
-            new lego_moveableobject("fp15"), 
-            new lego_moveableobject("fp16") ];
         this.fallingballs = [  ];
         this.timerarray = [ ]; // Create empty array
         var i = 0; // Stores which iteration of the loop we are in
@@ -91,13 +73,6 @@ class ta106_puzzle {
             this.timerarray[var1].initfull();
             var1 = var1 + 1;
         }
-        var1 = 0;
-        while ((this.lavafountainarray.__length - 1) >= var1) {
-            this.lavafountainarray[var1].initfull();
-            this.lavafountainarray[var1].setresponse(1, 1, 1);
-            var1 = var1 + 1;
-        }
-        this.lavafountainarrayubound = this.lavafountainarray.__length - 1;
         var1 = 0;
         while ((this.fallingballs.__length - 1) >= var1) {
             this.fallingballs[var1].initfull();
@@ -134,16 +109,6 @@ class ta106_puzzle {
         var var1;
         this.setsurfmode(0);
         globalclass.settestforlavacollisions(1);
-        if (this.lavafountainarray != null) {
-            var1 = 0;
-            while ((this.lavafountainarray.__length - 1) >= var1) {
-                this.lavafountainarray[var1].cleanupfull();
-                this.lavafountainarray[var1] = null;
-                var1 = var1 + 1;
-            }
-            this.lavafountainarray = null;
-        }
-        this.lavafountainarrayubound = null;
         if (this.fallingballs != null) {
             var1 = 0;
             while ((this.fallingballs.__length - 1) >= var1) {
@@ -182,15 +147,6 @@ class ta106_puzzle {
     method onevent(param1) {
         var var1;
         if (param1.eventid == 1) {
-            var1 = 0;
-            while (this.lavafountainarrayubound >= var1) {
-                if (param1.args[1] == this.lavafountainarray[var1].id) {
-                    debug::print("You hit a pillar........" + __tostring(this.lavafountainarray[var1].name));
-                    globalclass.player.actor.react(0, 3, this.lavafountainarray[var1].id);
-                    globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("t038"));
-                }
-                var1 = var1 + 1;
-            }
             var1 = 0;
             while (this.fallingballsubound >= var1) {
                 if (param1.args[1] == this.fallingballs[var1].id) {
