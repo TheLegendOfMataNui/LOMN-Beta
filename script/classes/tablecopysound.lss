@@ -2,59 +2,59 @@ class tablecopysound {
     property handle;
     property index;
     
-    method tablecopysound(param1) {
-        this.index = param1;
-        this.handle = gcstaticsoundsptrarray::gettablesoundcopy(param1);
+    method tablecopysound(soundtable_id) {
+        this.index = soundtable_id;
+        this.handle = gcstaticsoundsptrarray::gettablesoundcopy(soundtable_id);
         if (this.handle == null) {
-            debug::print(("ERROR --- can not create << " + __tostring(param1)) + " >> sound returned nothing");
+            debug::print(("ERROR --- can not create << " + __tostring(soundtable_id)) + " >> sound returned nothing");
         }
         return null;
     }
     
-    method synctocharacter(param1) {
+    method synctocharacter(char_id) {
         if (this.handle != null) {
-            gc3dsound::synctocharacter(this.handle, param1);
+            gc3dsound::synctocharacter(this.handle, char_id);
         }
         return null;
     }
     
-    method synctoobject(param1) {
+    method synctoobject(obj_id) {
         if (this.handle != null) {
-            gc3dsound::synctoobject(this.handle, param1);
+            gc3dsound::synctoobject(this.handle, obj_id);
         }
         return null;
     }
     
-    method synctoprojectile(param1) {
+    method synctoprojectile(projectile_id) {
         if (this.handle != null) {
-            gc3dsound::synctoprojectile(this.handle, param1);
+            gc3dsound::synctoprojectile(this.handle, projectile_id);
         }
         return null;
     }
     
-    method play(param1) {
+    method play(bool) {
         if (this.handle != null) {
-            if (param1 == null) {
-                param1 = 0;
+            if (bool == null) {
+                bool = 0;
             }
             if (this.handle == null) {
                 debug::print(("ERROR --- CAN'T Play sound << " + __tostring(this.index)) + " >> handle is nothing");
             }
             else {
-                gc3dsound::play(this.handle, param1);
+                gc3dsound::play(this.handle, bool);
             }
         }
         return null;
     }
     
-    method stop(param1) {
+    method stop(unused) {
         if (this.handle != null) {
             gc3dsound::stop(this.handle);
         }
         return null;
     }
     
-    method stopreset(param1) {
+    method stopreset(unused) {
         if (this.handle != null) {
             gc3dsound::stopreset(this.handle);
         }
