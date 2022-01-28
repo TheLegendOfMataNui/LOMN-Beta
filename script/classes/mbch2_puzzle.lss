@@ -18,10 +18,14 @@ class mbch2_puzzle {
     property desctext;
     property howtotext;
     property unasa;
-    property unasa_color;
+    property unasa_colors;
     property amtapi;
+    property amtapi_colors;
     property apefi;
+    property apefi_colors;
     property yala;
+    property yala_colors;
+    property switchai;
         
     method mbch2_puzzle(param1) {
         this.parent = param1;
@@ -29,14 +33,24 @@ class mbch2_puzzle {
     }
     
     method initfull() {
-        var var2;
-        var var3;
-        var tohunga;
+        var var1;
 		var bosstext;
+
+        //Set up area rendering stuff
+        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setnearestmax(15);
+        gcmodeldirector::setnearestmax(7);
+        gcmodeldirector::setnearestmaxdist(1000.0);
+        gcareadirector::setnearestmaxdist(1000.0);
+
+        //Typical music loading
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGODrumAndBassPart1");
         globalclass.bgmusic.play();		
+
         this.droplandonce = 1;
         this.callonce = 1;
+        this.boulderdropped = 0;
         this.randnum = new slosi_random(0);
         this.wirly = new lego_moveableobject("wrpl");
         this.door = new lego_moveableobject("dor1");
@@ -60,18 +74,20 @@ class mbch2_puzzle {
         this.waterfall2.initfull();
         this.waterfall2.setresponse(4, 4, 4);
         this.waterfall2.hide();
-        var2 = 0;
-        while ((this.mc.__length - 1) >= var2) {
-            this.mc[var2].initfull();
-            this.mc[var2].setmoveable(1.5, 0.1, 0, 0, 0, 0);
-            this.mc[var2].setresponse(0, 0, 3);
-            this.mc[var2].show();
-            var2 = var2 + 1;
+        var1 = 0;
+        while ((this.mc.__length - 1) >= var1) {
+            this.mc[var1].initfull();
+            this.mc[var1].setmoveable(1.5, 0.1, 0, 0, 0, 0);
+            this.mc[var1].setresponse(0, 0, 3);
+            this.mc[var1].show();
+            var1 = var1 + 1;
         }
         this.ledge.initfull();
         this.ledge.setupfall(1.0, "wtvr");
         this.ledge.setuptouchshakerotate(1.5, 0.0, 1.5, 0.2);
         this.ledge.show();
+
+        //Lost throwing disc pickup code            
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc2")) == 0) {
             this.discpickup = new lego_pickup("dsc2", 0, 5, "item", 8, 1);
             this.discpickup.initfull();
@@ -84,11 +100,7 @@ class mbch2_puzzle {
             this.discpickup.initfull();
             this.discpickup.hide();
         }
-        //tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-        //gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
-        //gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
-        //gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-        //gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+
         //tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
         //gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
         //gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
@@ -98,13 +110,16 @@ class mbch2_puzzle {
         //gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
         //gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
         //gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-        this.boulderdropped = 0;
+
+        //Set up Tarakava mini-boss
         this.lizard = new gs_lego_character("rptl", "rptl", "fake", 0, -570, 360, 78, "aiin");
         this.lizard.initfull();
         this.lizard.add(0);
         this.lizard.show();
         this.lizard.aisetattacktype(5);
         this.lizard.setscale(2.0);
+
+        //Check if Tarakava intro has been played
         if (bettersaver::getbooleanvalue(80)) {
             this.showintro = 0;
         }
@@ -117,6 +132,8 @@ class mbch2_puzzle {
             this.howtotext = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", bosstext, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 0, 0);
             this.howtotext.initfull();
         }
+
+        //Check if Tarakava has been defeated or not
         if (bettersaver::getbooleanvalue(74)) {
 			globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICGALIambience");
 			globalclass.bgmusic.play(1);
@@ -124,24 +141,32 @@ class mbch2_puzzle {
                 this.lizard.aisetbenign(1);
             }
         }
+
+        //Set up Unasa (vlgr)
         this.unasa = new gs_lego_character("vlgr", "vlgr", "fake", 0, 273.6912, 350.7369, 60.25493, "aiin");
         this.unasa.initfull();
         this.unasa.add(0);
         this.unasa.show();
         this.unasa.aisetspline("Root/Data/Levels/lev2/mbch/mbch_spline.slb", 0);
 
-        // This code is supposed to turn off spline usage and then make the villager idle correctly but it crashes
-        this.unasa.aidisablepatrolonspline();
-        this.unasa.aiidle();
+        // Set Tohunga: Unasa
+        this.unasa_colors = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(this.unasa_colors, rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mkca"));
+        
+        //Set up Amtapi (vl01)
+        this.amtapi = new gs_lego_character("vl01", "vl01", "fake", 0, 283.1583, 350.7395, 74.81258, "aiin");
+        this.amtapi.initfull();
+        this.amtapi.add(0);
+        this.amtapi.show();
+        this.amtapi.aisetspline("Root/Data/Levels/lev2/mbch/mbch_spline_1.slb", 0);
 
-        // Uncomment this when enabling the spline usage, aipatrol crashes with vlgr currently, whereas they don't use the splines anyway just here for reasons I don't know
-        //this.unasa.aienablepatrolonspline();
-        //this.unasa.aipatrol();
+        // Set Tohunga: Amtapi
+        this.amtapi_colors = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+        gccharacter::settohunga(this.amtapi_colors, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
 
-
-        //tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        //gccharacter::settohunga(tohunga, rgba(72, 117, 174, 255), rgba(72, 117, 174, 255), scslosifoundation::stringtoidentifier("mkca"));
-        //gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+        //Set AI switch flag 
+        this.switchai = 1;
         return null;
     }
     
@@ -191,23 +216,45 @@ class mbch2_puzzle {
             this.lizard.cleanupfull();
             this.lizard = null;
         }
-        if (!(this.desctext == null)) {
+        if (this.desctext != null) {
             this.desctext.cleanupfull();
             this.desctext = null;
         }
-        if (!(this.howtotext == null)) {
+        if (this.howtotext != null) {
             this.howtotext.cleanupfull();
             this.howtotext = null;
         }
+        if (this.unasa != null) {
+            this.unasa.cleanupfull();
+            this.unasa = null;
+        }
+        if (this.amtapi != null) {
+            this.amtapi.cleanupfull();
+            this.amtapi = null;
+        }
+        this.unasa_colors = null;
+        this.amtapi_colors = null;
         return null;
     }
     
     method process(param1) {
+        this.unasa.process(param1);
+        this.amtapi.process(param1);
         if (this.ledge == null) {
             debug::print("*****LEDGE IS NOTHING");
         }
         else {
             this.ledge.process(param1);
+        }
+        if (this.switchai) {
+            this.switchai = 0;
+            //Disabling AI and splines for Tohunga
+            this.unasa.disableai();
+            this.unasa.aidisablepatrolonspline();
+            this.unasa.aiidle();
+            this.amtapi.disableai();
+            this.amtapi.aiidle();
+            debug::print("^^^^^^^^^^^^^^^^^^^^^^TOHUNGA SHOULD STAY STILL FOR NOW...AI WAS CHANGED");
         }
         return null;
     }
@@ -228,6 +275,7 @@ class mbch2_puzzle {
             else if (param1.args[0] == this.waterfall.id) {
                 if (param1.args[1] == 0) {
                     this.waterfall.hide();
+                    this.getamoveon();
                 }
             }
         }
@@ -318,6 +366,13 @@ class mbch2_puzzle {
     }
     
     method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+        }
         if (param1.button == 80) {
             if (param1.event == 2) {
                 this.cheat();
@@ -360,6 +415,7 @@ class mbch2_puzzle {
         this.parent = null;
         return null;
     }
+
     method playintro() {
         this.parent.level.cam.scaletocutscene();
         this.parent.level.cam.makespline("Root/Data/Levels/lev2/mbch/mbch_CAM.slb");
@@ -375,5 +431,17 @@ class mbch2_puzzle {
         this.showintro = 0;
         bettersaver::setbooleanvalue(80, 1);
         return null;
+    }
+
+    method getamoveon() {
+        debug::print("is this actually firing like it's supposed to?");
+        //Reenable Tohunga AI on splines
+        this.unasa.setsplitanimation(scslosifoundation::stringtoidentifier("d001"));
+        this.unasa.aienablepatrolonspline();
+        this.unasa.aipatrol();
+        this.amtapi.setsplitanimation(scslosifoundation::stringtoidentifier("d001"));
+        this.amtapi.aienablepatrolonspline();
+        this.amtapi.aipatrol();
+        debug::print("should be doing the dew");        
     }
 }
