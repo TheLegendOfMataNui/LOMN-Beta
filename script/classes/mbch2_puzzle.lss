@@ -101,16 +101,6 @@ class mbch2_puzzle {
             this.discpickup.hide();
         }
 
-        //tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
-        //gccharacter::settohunga(tohunga, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
-        //gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-        //gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-        //tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
-        //gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
-        //gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
-        //gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-        //gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-
         //Set up Tarakava mini-boss
         this.lizard = new gs_lego_character("rptl", "rptl", "fake", 0, -570, 360, 78, "aiin");
         this.lizard.initfull();
@@ -158,12 +148,35 @@ class mbch2_puzzle {
         this.amtapi.initfull();
         this.amtapi.add(0);
         this.amtapi.show();
-        this.amtapi.aisetspline("Root/Data/Levels/lev2/mbch/mbch_spline_1.slb", 0);
+        this.amtapi.aisetspline("Root/Data/Levels/lev2/mbch/mbch_spline.slb", 0);
 
         // Set Tohunga: Amtapi
         this.amtapi_colors = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
         gccharacter::settohunga(this.amtapi_colors, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
         gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 60, 91, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
+
+        //Set up Apefi (vl02)
+        this.apefi = new gs_lego_character("vl02", "vl02", "fake", 0, 291.3081, 350.7387, 80.64327, "aiin");
+        this.apefi.initfull();
+        this.apefi.add(0);
+        this.apefi.show();
+        this.apefi.aisetspline("Root/Data/Levels/lev2/mbch/mbch_spline.slb", 0);
+
+        // Set Tohunga: Apefi
+        this.apefi_colors = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+        gccharacter::settohunga(this.apefi_colors, rgba(0, 60, 91, 255), rgba(0, 0, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
+
+        //Set up Yala (vl03)
+        this.yala = new gs_lego_character("vl03", "vl03", "fake", 0, 300.704, 350.7374, 97.1296, "aiin");
+        this.yala.initfull();
+        this.yala.add(0);
+        this.yala.show();
+        this.yala.aisetspline("Root/Data/Levels/lev2/mbch/mbch_spline.slb", 0);
+
+        // Set Tohunga: Yala
+        this.yala_colors = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+        gccharacter::settohunga(this.yala_colors, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
+        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0), rgba(72, 117, 174, 255), rgba(0, 60, 91, 255), rgba(0, 0, 255, 255));
 
         //Set AI switch flag 
         this.switchai = 1;
@@ -232,14 +245,26 @@ class mbch2_puzzle {
             this.amtapi.cleanupfull();
             this.amtapi = null;
         }
+        if (this.apefi != null) {
+            this.apefi.cleanupfull();
+            this.apefi = null;
+        }
+        if (this.yala != null) {
+            this.yala.cleanupfull();
+            this.yala = null;
+        }
         this.unasa_colors = null;
         this.amtapi_colors = null;
+        this.apefi_colors = null;
+        this.yala_colors = null;
         return null;
     }
     
     method process(param1) {
         this.unasa.process(param1);
         this.amtapi.process(param1);
+        this.apefi.process(param1);
+        this.yala.process(param1);
         if (this.ledge == null) {
             debug::print("*****LEDGE IS NOTHING");
         }
@@ -249,11 +274,22 @@ class mbch2_puzzle {
         if (this.switchai) {
             this.switchai = 0;
             //Disabling AI and splines for Tohunga
+            //Unasa (vlgr)
             this.unasa.disableai();
             this.unasa.aidisablepatrolonspline();
             this.unasa.aiidle();
+            //Amtapi (vl01)
             this.amtapi.disableai();
+            this.amtapi.aidisablepatrolonspline();
             this.amtapi.aiidle();
+            //Apefi (vl02)
+            this.apefi.disableai();
+            this.apefi.aidisablepatrolonspline();
+            this.apefi.aiidle();
+            //Yala (vl03)
+            this.yala.disableai();
+            this.yala.aidisablepatrolonspline();
+            this.yala.aiidle();
             debug::print("^^^^^^^^^^^^^^^^^^^^^^TOHUNGA SHOULD STAY STILL FOR NOW...AI WAS CHANGED");
         }
         return null;
@@ -436,12 +472,22 @@ class mbch2_puzzle {
     method getamoveon() {
         debug::print("is this actually firing like it's supposed to?");
         //Reenable Tohunga AI on splines
+        //Unasa (vlgr)
         this.unasa.setsplitanimation(scslosifoundation::stringtoidentifier("d001"));
         this.unasa.aienablepatrolonspline();
         this.unasa.aipatrol();
+        //Amtapi (vl01)
         this.amtapi.setsplitanimation(scslosifoundation::stringtoidentifier("d001"));
         this.amtapi.aienablepatrolonspline();
         this.amtapi.aipatrol();
+        //Apefi (vl02)
+        this.apefi.setsplitanimation(scslosifoundation::stringtoidentifier("d001"));
+        this.apefi.aienablepatrolonspline();
+        this.apefi.aipatrol();
+        //Yala (vl03)
+        this.yala.setsplitanimation(scslosifoundation::stringtoidentifier("d001"));
+        this.yala.aienablepatrolonspline();
+        this.yala.aipatrol();
         debug::print("should be doing the dew");        
     }
 }
