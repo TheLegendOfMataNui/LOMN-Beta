@@ -3,7 +3,6 @@ class lego_area_bech : gs_lego_area {
     property saved;
     
     method lego_area_bech(param1) {
-        this.parent = param1;
         this.gs_lego_area("bech", param1, 0, 0);
         this.lego_area_initfull();
         this.saved = 0;
@@ -32,13 +31,10 @@ class lego_area_bech : gs_lego_area {
             BetterSaver::Save();
             this.saved = 1;
         }
-        if (param1.eventid == 46) {
-            gccollisionphysicsgroup::spinmask(1.2);
-        }
-        else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.level.enterstartid, this.level.enterlookid);
+        if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
             globalclass.player.unkill();
-            globalclass.player.actor.setinputstate("ninp");
+            //globalclass.player.actor.setinputstate("ninp");
             this.level.cam.setaimode(11);
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
         }

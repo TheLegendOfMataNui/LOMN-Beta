@@ -16,6 +16,7 @@ class player {
     property bshootdragger;
     property enterstartid;
     property enterlookid;
+    property toadied;
     
     method player() {
         return null;
@@ -38,6 +39,7 @@ class player {
         this.gotglyph = 0;
         this.glyphpowerdrain = 20;
         this.bshootdragger = 1;
+        this.toadied = 0;
         return null;
     }
     
@@ -164,7 +166,7 @@ class player {
         var var3;
         if (!(this.actor == null)) {
             this.actor.onevent(param1);
-            if (param1.eventid == 40) {
+            if ((param1.eventid == 40)   && (this.toadied == 0)) {
                 if (!(param1.args[1] == null)) {
                     debug::print("ouch! by " + __tostring(param1.args[1]));
                 }
@@ -246,6 +248,7 @@ class player {
                 if (this.maskcontrol.isactive()) {
                     this.maskcontrol.toggleactive();
                 }
+                gccollisionphysicsgroup::spinmask(1.2);
             }
         }
         return null;
@@ -532,11 +535,14 @@ class player {
     
     method kill() {
         var var1;
-        this.actor.toamustdie();
-        gcstaticsoundsptrarray::playtablesound(1099);
-        var1 = new scriptevent(46);
-        var1.send();
-        globalclass.hud.hide();
+        if (this.toadied == 0) {
+            this.toadied = 1;
+            this.actor.toamustdie();
+            gcstaticsoundsptrarray::playtablesound(1099);
+            var1 = new scriptevent(46);
+            var1.send();
+            globalclass.hud.hide();
+        }
         return null;
     }
     
@@ -546,8 +552,8 @@ class player {
         this.addlife(this.maxlife);
         this.addenergy(this.maxenergy);
         this.actor.setunderwater(0);
-        globalclass.hud.show();
         this.actor.setanimationscalar(1);
+        this.toadied = 0;
         return null;
     }
     

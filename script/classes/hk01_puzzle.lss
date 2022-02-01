@@ -61,11 +61,7 @@ class hk01_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 46) {
-            debug::print("************* GETTING THE PLAYER IS DEAD EVENT ----- SPIN MASK HAPPENING");
-            gccollisionphysicsgroup::spinmask(1.2);
-        }
-        else if (param1.eventid == 27) {
+        if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
             this.parent.level.cam.setaimode(11);
