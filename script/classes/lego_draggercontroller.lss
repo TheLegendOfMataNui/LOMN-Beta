@@ -9,6 +9,7 @@ property charz;
 property chardir;
 property sprite;
 property hook;
+property active;
 
     method lego_draggercontroller(param1, param2, param3) {
         this.draggersprite();
@@ -16,7 +17,7 @@ property hook;
         return null;
     }
 
-    method initfull() {            
+    method initfull() {       
         return null;
     }
 
@@ -29,20 +30,33 @@ property hook;
     }    
     
     method process(param1) {
-        this.dragger.process();
+        if (this.active == 1) {
+            this.dragger.process();
+        }
         return null;
     }
 
     method input(param1) {
         if ((param1.event == 2) && (param1.button == 231)) {
-            this.getcoords();
-            this.dragger.initfull();
-            this.dragger.add();
-            this.dragger.show();
-            this.dragger.animloop(0, 1);
-            this.dragger.startanimate();
-            this.dragger.setpos(this.charx, (this.chary + 2), this.charz);
-            debug::print("Spawning Object!");
+            if (this.active == 1) {
+                this.active = 0;
+                this.dragger.hide();
+                this.dragger.remove();
+                this.dragger.cleanupfull();                
+                debug::print("Active = " + (__tostring(this.active)) + ". Removing Dragger!");
+            }
+            if (this.active != 1) {
+                this.active = 1;
+                this.getcoords();
+                this.dragger.initfull();
+                this.dragger.add();
+                this.dragger.show();
+                this.dragger.animloop(0, 1);
+                this.dragger.startanimate();
+                this.dragger.setpos(this.charx, (this.chary + 2), this.charz);                
+                debug::print("Active = " + (__tostring(this.active)) + ". Spawning Dragger!");
+            }
+
         }
     }
 
