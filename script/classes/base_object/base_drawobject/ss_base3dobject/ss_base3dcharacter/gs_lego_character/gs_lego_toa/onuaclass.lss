@@ -8,6 +8,7 @@ class onuaclass : gs_lego_toa {
     property swimingabilty;
     property bounce;
     property inputhandle;
+    property dragger;
     
     method onuaclass(char_id, orientation, x_pos, y_pos, z_pos) {
         this.gs_lego_toa(char_id, orientation, x_pos, y_pos, z_pos);
@@ -33,6 +34,20 @@ class onuaclass : gs_lego_toa {
         // Set camera positioning
         globalclass.level.cam.setcamzoomfactor(7.0);
         globalclass.level.cam.setheightoffset(3.0);
+
+        //Init dragger
+        this.dragger = new lego_draggercontroller();        
+        this.dragger.initfull();
+        return null;
+    }
+
+    method process(param1) {
+        this.dragger.process(param1);
+        return null;
+    }    
+    
+    method input(param1) {
+        this.dragger.input(param1);
         return null;
     }
     

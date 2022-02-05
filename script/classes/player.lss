@@ -182,6 +182,9 @@ class player {
         if (this.whichmaskonface() == 11) {
             this.maskcontrol.input(param1);
         }
+        if (this.actor != null) {
+            this.actor.input(param1);
+        }            
         return null;
     }
     
@@ -192,6 +195,9 @@ class player {
         if ((this.submerged == 1) || (this.drowningonland == 1)) {
             this.drainair(param1);
         }
+        if (this.actor != null) {
+            this.actor.process(param1);
+        }        
         return null;
     }
     
