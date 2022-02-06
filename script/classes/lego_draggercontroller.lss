@@ -6,14 +6,14 @@ property ztarget;
 property charx;
 property chary;
 property charz;
+property spritex;
+property spritey;
+property spritez;
 property chardir;
 property sprite;
-property hook;
 property active;
 
-    method lego_draggercontroller(param1, param2, param3) {
-        this.draggersprite();
-        this.dragger = new gs_lego_animatebigsprite(this.sprite, 0, 12, 1, param1, param2, param3, 1, 1);
+    method lego_draggercontroller() {
         return null;
     }
 
@@ -31,7 +31,11 @@ property active;
     
     method process(param1) {
         if (this.active == 1) {
+            this.spritex = (this.spritex + this.xtarget);
+            this.spritey = (this.spritey + this.ytarget);
+            this.spritez = (this.spritez + this.ztarget);
             this.dragger.process();
+            this.dragger.setpos(this.spritex, (this.spritey + 4), this.spritez);
         }
         return null;
     }
@@ -48,12 +52,13 @@ property active;
             if (this.active != 1) {
                 this.active = 1;
                 this.getcoords();
+                this.draggersprite();
+                this.dragger = new gs_lego_animatebigsprite(this.sprite, 0, 12, 1, this.charx, this.chary, this.charz, 1, 1);
                 this.dragger.initfull();
                 this.dragger.add();
                 this.dragger.show();
                 this.dragger.animloop(0, 1);
-                this.dragger.startanimate();
-                this.dragger.setpos(this.charx, (this.chary + 2), this.charz);                
+                this.dragger.startanimate();             
                 debug::print("Active = " + (__tostring(this.active)) + ". Spawning Dragger!");
             }
 
@@ -96,6 +101,11 @@ property active;
         this.chary = gccharacter::getpositiony(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
         this.charz = gccharacter::getpositionz(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
         this.chardir = gccharacter::getorientation(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")));
+
+        //Set initial sprite position values
+        this.spritex = (this.charx);
+        this.spritey = (this.chary);
+        this.spritez = (this.charz);
 
         //gccharacter::setvelocity(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1")), (90 * xtarget), (90 * ytarget), (90 * ztarget));
 
