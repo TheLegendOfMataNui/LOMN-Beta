@@ -1,6 +1,4 @@
 class lego_area_tura2 : gs_lego_area {
-    property crashbandicootwarped;
-    property warpsound;
     
     method lego_area_tura2(param1) {
         this.gs_lego_area("tura", param1, 0, 0);
@@ -9,8 +7,6 @@ class lego_area_tura2 : gs_lego_area {
     }
     
     method initfull() {
-        this.crashbandicootwarped = 0;
-        this.warpsound = new tablecopysound(1094);
         this.lego_area_show();
         var turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"));   
         gccharacter::setorientation(turaga, 0);
@@ -41,14 +37,7 @@ class lego_area_tura2 : gs_lego_area {
     }
     
     method onevent(param1) {
-        if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (gcsaver::portalactive() == 1)) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
-                this.warpsound.play(0);
-                this.crashbandicootwarped = 1;
-                debug::print("WOAH!");
-            }
-        }
-        else if (param1.eventid == 46) {
+        if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
@@ -62,8 +51,6 @@ class lego_area_tura2 : gs_lego_area {
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.warpsound.stopreset(0);
-        this.crashbandicootwarped = null;
         return null;
     }
     

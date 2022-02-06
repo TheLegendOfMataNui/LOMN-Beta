@@ -9,7 +9,6 @@ class shrn3_puzzle {
     property bossdoortext2;
     property bossdoortexttimer;
     property showbossdoor;
-    property crashbandicootwarped;
     
     method shrn3_puzzle(param1) {
         this.parent = param1;
@@ -21,7 +20,6 @@ class shrn3_puzzle {
         var onewa;
         var portal_trigger;
         var door_text;
-        this.crashbandicootwarped = 0;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
         globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
@@ -87,8 +85,7 @@ class shrn3_puzzle {
             this.bossdoortext2.cleanupfull();
             this.bossdoortext2 = null;
         }
-        gcstaticsoundsptrarray::stoptablesound(1094);
-        this.crashbandicootwarped = null;
+        this.portalactive = null;
         return null;
     }
     
@@ -112,7 +109,6 @@ class shrn3_puzzle {
         if (param1.eventid == 41) {
             if (this.portalactive == 0) {
                 portal_trigger = scslosifoundation::stringtoidentifier("tps9");
-                gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
                 gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/poha/village_ripple/p_prtl", 1);
                 this.portalactive = 1;
             }
@@ -162,13 +158,6 @@ class shrn3_puzzle {
                         this.bossdoortexttimer = 1.0;
                     }
                 }
-            }
-        }
-        else if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
-                gcstaticsoundsptrarray::playtablesound(1094);
-                this.crashbandicootwarped = 1;
-                debug::print("WOAH!");
             }
         }
         else if (param1.eventid == 46) {

@@ -31,6 +31,11 @@ class player {
     property equippedpeace;
     property equippedsurf;
     property equippedjoke;
+    property hittrigger;
+    property crashbandicootwarped;
+    property warpsound;
+    property toadied;
+    property spiraleffect;
     
     method player() {
         return null;
@@ -67,6 +72,9 @@ class player {
         this.equippedpeace = 0;
         this.equippedsurf = 0;
         this.equippedjoke = 0;
+        this.hittrigger = 0;
+        this.crashbandicootwarped = 0;      
+        this.toadied = 0;
         return null;
     }
     
@@ -110,6 +118,9 @@ class player {
             this.maskcontrol.cleanupfull();
             this.maskcontrol = null;
         }
+        this.hittrigger = null;
+        this.crashbandicootwarped = null;                        
+        this.toadied = null;
         return null;
     }
     
@@ -205,9 +216,10 @@ class player {
         var var1;
         var var2;
         var var3;
+        var toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
         if (this.actor != null) {
             this.actor.onevent(param1);
-            if (param1.eventid == 40) {
+            if ((param1.eventid == 40)  && (this.toadied == 0)) {
                 if (param1.args[1] != null) {
                     debug::print("ouch! by " + __tostring(param1.args[1]));
                     gcstaticsoundsptrarray::playtablesound(1098);
@@ -346,15 +358,21 @@ class player {
                     }
                 }
             }
+            //Player died evemt
             else if (param1.eventid == 46) {
-                var toa;
-                toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
                 if (this.maskcontrol.isactive()) {
                     this.maskcontrol.toggleactive();
                 }
             }
             else if (param1.eventid == 20) {
                 this.processequipment(1);
+                //Unload the warp sound, ensure actor is not hidden, and reset trigger property
+                if (this.warpsound != null) {
+                    this.warpsound.cleanupfull();
+                    this.warpsound = null;
+                }
+                globalclass.player.actor.show();
+                this.hittrigger = 0;
             }  
             else if (param1.eventid == 21) {
                 var areaid = (scslosifoundation::identifiertostring(gcareadirector::getcurrentarea()));
@@ -373,6 +391,99 @@ class player {
                 if (this.equiptype == 3) {
                     this.processequipment(3);
                 }
+                //Reinitialize the physics entirely to stop the landing noise when jumping into a trigger
+                globalclass.player.actor.initmotionsystem();
+                globalclass.player.actor.disableallraycollisions();
+                globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
+
+                //This is a temporary hack as gccollisionphysicsgroup::switchareawithtransition() doesnt take str and lok points as arguments
+                if (this.crashbandicootwarped == 2) {                
+                    globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str9"), scslosifoundation::stringtoidentifier("lok9"));
+                }
+            }
+            //Trigger plane collision event
+            else if (param1.eventid == 4) {
+                //TODO: Finish rigging this up for ALL door triggers in the game
+                var trigid1 = param1.args[0] == scslosifoundation::stringtoidentifier("tpb0");
+                var portal = param1.args[0] == scslosifoundation::stringtoidentifier("tps9");
+                //This if statement makes sure this code doesn't repeatedly run while intersecting a trigger plane
+                if (this.hittrigger == 0) {
+                    //Corresponding trigger has been entered, set player to idle and increment property to avoid this from firing continuously 
+                    if (trigid1) {
+                        debug::print("************* ENTERED TRIGGER PLANE, SETTING TO IDLE");
+                        //Check if the player jumped through the trigger, and if not, set idle state as normal
+                        if (globalclass.player.actor.isjumping() == 0) {
+                            debug::print("^^^^^^^^^^^^^ DIDN'T JUMP THROUGH TRIGGER PLANE, SETTING PLAYER TO IDLE");
+                            globalclass.player.actor.idle();
+                            globalclass.level.cam.setaimode(0);
+                        }
+                        else {
+                            debug::print("^^^^^^^^^^^^^ JUMPED THROUGH TRIGGER PLANE, NOT SETTING PLAYER TO IDLE");
+                            globalclass.level.cam.setaimode(7);                            
+                        }
+                        this.hittrigger = 1;
+                    }
+                    //Unique handling for portals, check trigger plane id and whether gcsaver::portalactive() returns true before proceeding
+                    if ((portal) && (gcsaver::portalactive() == 1) && (this.crashbandicootwarped == 0)) {
+                        debug::print("************* ENTERED PORTAL, DO THE DEW");
+                        //Check if the player jumped through the portal, and if not, set idle state as normal
+                        if (globalclass.player.actor.isjumping() == 0) {
+                            debug::print("$$$$$$$$$$ DIDN'T JUMP THROUGH PORTAL, SETTING PLAYER TO IDLE");
+                            globalclass.player.actor.idle();
+                        }
+                        else {
+                            debug::print("^^^^^^^^^^^^^ JUMPED THROUGH PORTAL, NOT SETTING PLAYER TO IDLE");
+                        }
+                        //Init then play the warp sound, create the particle effect, hide the hud, disable player input/physics, begin actor fadeout, set camera mode, and increment trigger properties
+                        this.warpsound = new tablecopysound(1094);
+                        this.warpsound.setvolume(100);
+                        this.warpsound.play(0);
+                        this.spiraleffect = gcareadirector::createemitter(19, gccharacter::getpositionx(toa), gccharacter::getpositiony(toa), gccharacter::getpositionz(toa));
+                        globalclass.hud.hide();
+                        globalclass.player.actor.physicson(0);
+                        globalclass.level.cam.setaimode(0);
+                        globalclass.player.actor.fadeout(1.5);
+                        this.hittrigger = 1;
+                        this.crashbandicootwarped = 1;                        
+                        debug::print("WOAH!");
+                    }
+                }
+            }        
+            //Player is respawning event
+            else if (param1.eventid == 27) {
+                //TODO: generic unkill, camera, start position, and possibly trigger box reset code
+            }
+            //Character and object fade event
+            else if (param1.eventid == 35) {
+                debug::print("GETTING FADE EVENT FOR: " + __tostring(scslosifoundation::identifiertostring(param1.args[0])));
+                //Once player fadeout ends, hide them to complete it properly, then check the area and perform appropriate warp
+                if ((param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) && (this.crashbandicootwarped == 1)) {
+                    globalclass.player.actor.hide();
+                    if (this.crashbandicootwarped == 1) {
+                        //Check whether the portal was in tura or shrn, and increment property for the last time before area transition
+                        if ((gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("tura"))) {
+                            //Area is tura, warp to shrn
+                            debug::print("switching area shrn");
+                            gccollisionphysicsgroup::switchareawithtransition(scslosifoundation::stringtoidentifier("shrn"));
+                        }
+                        if ((gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("shrn"))) {
+                            //Area is shrn, warp to tura
+                            debug::print("switching area to tura");
+                            gccollisionphysicsgroup::switchareawithtransition(scslosifoundation::stringtoidentifier("tura"));
+                        }
+                        //Releasing the emitter properly, first arg is unused so we just use null for the value
+                        gcareadirector::releaseemitter(null, this.spiraleffect);
+                        this.crashbandicootwarped = 2;
+                    }
+                }
+            }
+            //Transition in event
+            else if (param1.eventid == 29) {
+                debug::print("This seems to only fire with switchareawithtransition?");
+                //Probably don't need to use this event, but this code checks the areas and whether the warped property returns the necessary value and if so, set it back to default
+                if ((gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("tura")) || (gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("shrn")) && (this.crashbandicootwarped == 2)) {
+                    this.crashbandicootwarped = 0;
+                }   
             }
         }
         return null;
@@ -687,12 +798,15 @@ class player {
     
     method kill() {
         var var1;
-        this.actor.toamustdie();
-        gcstaticsoundsptrarray::playtablesound(1099);
-        var1 = new scriptevent(46);
-        var1.send();
-        globalclass.hud.hide();
-        this.removeequipment();
+        if (this.toadied == 0) {
+            this.toadied = 1;
+            this.actor.toamustdie();
+            gcstaticsoundsptrarray::playtablesound(1099);
+            var1 = new scriptevent(46);
+            var1.send();
+            globalclass.hud.hide();
+            this.removeequipment();
+        }
         return null;
     }
     
@@ -702,7 +816,6 @@ class player {
         this.addlife(this.maxlife);
         this.addenergy(this.maxenergy);
         this.addair(this.maxair);
-        globalclass.hud.show();
         this.underwater = 0;
         this.isswimming();
         if (this.equiptype == 1) {
@@ -718,6 +831,7 @@ class player {
             this.processequipment(4);
         }
         this.actor.setanimationscalar(1);
+        this.toadied = 0;
         return null;
     }
     

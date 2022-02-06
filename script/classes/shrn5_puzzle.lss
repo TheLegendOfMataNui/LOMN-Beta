@@ -7,7 +7,6 @@ class shrn5_puzzle {
     property bossdoortext2;
     property bossdoortexttimer;
     property showbossdoor;
-    property crashbandicootwarped;
     
     method shrn5_puzzle(param1) {
         this.parent = param1;
@@ -18,7 +17,6 @@ class shrn5_puzzle {
         var matau;
         var portal_trigger;
         var door_text;
-        this.crashbandicootwarped = 0;
         globalclass.player.processequipment(2);
         gcmodeldirector::setnearestmax(5);
         gcareadirector::setnearestmax(7);
@@ -83,8 +81,7 @@ class shrn5_puzzle {
             this.bossdoor = null;
         }
         this.cinema = null;
-        gcstaticsoundsptrarray::stoptablesound(1094);
-        this.crashbandicootwarped = null;
+        this.portalactive = null;
         return null;
     }
     
@@ -115,7 +112,6 @@ class shrn5_puzzle {
         else if (param1.eventid == 41) {
             if (this.portalactive == 0) {
                 portal_trigger = scslosifoundation::stringtoidentifier("tps9");
-                gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
                 gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/lewa/village_ripple/l_prtl", 1);
                 this.portalactive = 1;
             }
@@ -160,13 +156,6 @@ class shrn5_puzzle {
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("l000"));
             this.parent.level.cam.setaimode(11);
             globalclass.player.actor.setinputstate("ninp");
-        }
-        else if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
-                gcstaticsoundsptrarray::playtablesound(1094);
-                this.crashbandicootwarped = 1;
-                debug::print("WOAH!");
-            }
         }
         else if (param1.eventid == 46) {
             gccollisionphysicsgroup::spinmask(1.2);

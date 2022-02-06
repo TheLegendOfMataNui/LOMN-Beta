@@ -6,7 +6,6 @@ class shrn4_puzzle {
     property bossdoortext2;
     property bossdoortexttimer;
     property showbossdoor;
-    property crashbandicootwarped;
     
     method shrn4_puzzle(param1) {
         this.parent = param1;
@@ -17,7 +16,6 @@ class shrn4_puzzle {
         var nuju;
         var portal_trigger;
         var door_text;
-        this.crashbandicootwarped = 0;
         globalclass.player.processequipment(2);
         gcareadirector::setnearestmax(10);
         this.bossdoor = new lego_moveableobject("etdr", this.parent.name);
@@ -69,8 +67,7 @@ class shrn4_puzzle {
             this.bossdoortext2.cleanupfull();
             this.bossdoortext2 = null;
         }
-        gcstaticsoundsptrarray::stoptablesound(1094);
-        this.crashbandicootwarped = null;
+        this.portalactive = null;
         return null;
     }
     
@@ -79,7 +76,6 @@ class shrn4_puzzle {
         if (param1.eventid == 41) {
             if (this.portalactive == 0) {
                 portal_trigger = scslosifoundation::stringtoidentifier("tps9");
-                gccollisionphysicsgroup::turnonnextarea(portal_trigger, scslosifoundation::stringtoidentifier("tura"));
                 gccollisionphysicsgroup::setportal(portal_trigger, "root/data/art/portals/kopa/village_ripple/k_prtl", 1);
                 this.portalactive = 1;
             }
@@ -106,13 +102,6 @@ class shrn4_puzzle {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("etdr")) {
                 bettersaver::setbooleanvalue(68, 1);
                 this.bossdoor.hide();
-            }
-        }
-        else if ((param1.eventid == 4) && (this.crashbandicootwarped == 0) && (this.portalactive == 1)) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tps9")) {
-                gcstaticsoundsptrarray::playtablesound(1094);
-                this.crashbandicootwarped = 1;
-                debug::print("WOAH!");
             }
         }
         else if (param1.eventid == 46) {
