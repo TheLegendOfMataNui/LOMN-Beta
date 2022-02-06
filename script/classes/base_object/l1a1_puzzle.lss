@@ -10,6 +10,12 @@ class l1a1_puzzle : base_object {
     }
     
     method initfull() {
+        gcareadirector::setnearestmax(8);
+        gcmodeldirector::setnearestmax(8);
+        gcareadirector::setfog(-14803426, 0 - 85.0, 0 - 200.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
         this.hookbox = new lego_moveableobject("hot2");
         this.hookbox.initfull();
         this.hookbox.setmytargetingflags(1);
@@ -41,6 +47,17 @@ class l1a1_puzzle : base_object {
         if (this.hookbox != null) {
             this.hookbox.cleanupfull();
             this.hookbox = null;
+        }
+        return null;
+    }
+    
+    method onevent(param1) {
+        if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
+            globalclass.player.actor.setinputstate("ninp");
+            this.parent.level.cam.setaimode(11);
         }
         return null;
     }
