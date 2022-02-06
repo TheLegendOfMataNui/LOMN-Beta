@@ -3,40 +3,25 @@ class lego_area_l1a1 : gs_lego_area {
     
     method lego_area_l1a1(param1) {
         this.gs_lego_area("l1a1", param1, 0, 0);
-        this.lego_area_initfull();
         this.puzzle = new l1a1_puzzle(this);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
         this.lego_area_show();
-        gcareadirector::setnearestmax(5);
-        gcmodeldirector::setnearestmax(8);
-        gcareadirector::setfog(-14803426, 0 - 85.0, 0 - 200.0, 0.05);
-        gclightdirector::setcavelighting(1);
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
-        globalclass.bgmusic.play(1);
         this.puzzle.initfull();
-        return null;
-    }
-    
-    method onevent(param1) {
-        if (param1.eventid == 46) {
-            gccollisionphysicsgroup::spinmask(1.2);
-        }
-        else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
-            globalclass.player.actor.setinputstate("ninp");
-            this.level.cam.setaimode(11);
-        }
         return null;
     }
     
     method cleanupfull() {
         this.puzzle.cleanupfull();
         this.lego_area_hide();
+        return null;
+    }
+    
+    method onevent(param1) {
+        this.puzzle.onevent(param1);
         return null;
     }
     
