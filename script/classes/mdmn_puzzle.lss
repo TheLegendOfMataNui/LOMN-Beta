@@ -248,7 +248,7 @@ class mdmn_puzzle {
                 debug::print("MUD DIE");
             }
         }
-        else if (param1.eventid == 46) {
+        else if (param1.eventid == 27) {
             this.resetarea();
         }
         else if (param1.eventid == 35) {
@@ -269,7 +269,6 @@ class mdmn_puzzle {
     }
     
     method resetarea() {
-        gccollisionphysicsgroup::spinmask(1.2);
         this.initshort();
         globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
         globalclass.player.unkill();

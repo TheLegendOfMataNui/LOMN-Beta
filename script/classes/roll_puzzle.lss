@@ -49,19 +49,13 @@ class roll_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 46) {
-            gccollisionphysicsgroup::spinmask(1.2);
-        }
-        else if (param1.eventid == 3) {
+        if (param1.eventid == 3) {
             if (((((((((param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb01"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb02"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb03"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb04"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb05"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb06"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb07"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb08"))) {
                 globalclass.player.kill();
                 gcstaticsoundsptrarray::playtablesound(1048);
                 this.parent.level.cam.setaimode(7);
                 globalclass.player.actor.setinputstate("none");
             }
-        }
-        else if (param1.eventid == 46) {
-            gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);

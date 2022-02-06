@@ -37,7 +37,6 @@ class le02_puzzle {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
                 globalclass.level.cam.setaimode(7);
                 globalclass.player.kill();
-                gccollisionphysicsgroup::spinmask(1.2);
             }
         }
         else if (param1.eventid == 27) {
@@ -45,10 +44,6 @@ class le02_puzzle {
             globalclass.player.unkill();
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        }
-        else if (param1.eventid == 46) {
-            globalclass.level.cam.setaimode(7);
-            gccollisionphysicsgroup::spinmask(1.2);
         }
         return null;
     }
