@@ -96,8 +96,7 @@ class brd3_puzzle {
             debug::print("You hit a TRIGGERBOX: " + __tostring(param1.args[0]));
             if (((param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb01"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb02"))) {
                 debug::print("Collision with one of the 3 triggerboxes");
-                this.parent.level.cam.setaimode(7);
-                gccollisionphysicsgroup::spinmask(1.2);
+                globalclass.player.kill();
                 globalclass.player.actor.setinputstate("none");
             }
         }

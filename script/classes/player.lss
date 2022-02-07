@@ -371,6 +371,8 @@ class player {
                 }
                 //Performs a screenwipe whenever the player has died, instead of doing it on an area by area basis
                 gccollisionphysicsgroup::spinmask(1.2);
+                //Sets a generic camera follow upon death instead of doing it per-killbox in each area
+                globalclass.level.cam.setaimode(7);
             }
             else if (param1.eventid == 20) {
                 this.processequipment(1);
