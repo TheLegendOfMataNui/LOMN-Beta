@@ -18,10 +18,19 @@ property active;
     }
 
     method initfull() {       
+        this.active = 0;
+        debug::print("Active = " + (__tostring(this.active)) + ". Dragger Default State");
         return null;
     }
 
     method cleanupfull() {
+        if (this.dragger != null) {
+            this.dragger.hide();
+            this.dragger.remove();
+            this.dragger.cleanupfull();                
+            this.dragger = null;
+        }
+        this.active = null;
         return null;
     }
 
@@ -41,28 +50,39 @@ property active;
     }
 
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 231)) {
-            if (this.active == 1) {
-                this.active = 0;
-                this.dragger.hide();
-                this.dragger.remove();
-                this.dragger.cleanupfull();                
-                debug::print("Active = " + (__tostring(this.active)) + ". Removing Dragger!");
-            }
-            if (this.active != 1) {
-                this.active = 1;
-                this.getcoords();
-                this.draggersprite();
-                this.dragger = new gs_lego_animatebigsprite(this.sprite, 0, 12, 1, this.charx, this.chary, this.charz, 1, 1);
-                this.dragger.initfull();
-                this.dragger.add();
-                this.dragger.show();
-                this.dragger.animloop(0, 1);
-                this.dragger.startanimate();             
-                debug::print("Active = " + (__tostring(this.active)) + ". Spawning Dragger!");
-            }
+        return null;
+    }
 
+    method setupdragger() {
+        if (this.active == 0) {
+            this.getcoords();
+            this.draggersprite();
+            this.dragger = new gs_lego_animatebigsprite(this.sprite, 0, 12, 1, this.charx, this.chary, this.charz, 1, 1);
+            this.dragger.initfull();
+            this.dragger.add();
+            this.dragger.show();
+            this.dragger.animloop(0, 1);
+            this.dragger.startanimate();             
+            this.active = 1;
+            debug::print("Active = " + (__tostring(this.active)) + ". Spawning Dragger!");
         }
+        else if (this.active == 1) {
+            this.returndragger();
+        }
+        return null;
+    }
+
+    //Created this method for handling the returning of the grapple later, not sure if we want to handle this in the same method as the setup
+    method returndragger() {
+        if (this.dragger != null) {
+            this.dragger.hide();
+            this.dragger.remove();
+            this.dragger.cleanupfull();                
+            this.dragger = null;
+            this.active = 0;
+            debug::print("Active = " + (__tostring(this.active)) + ". Removing Dragger!");
+        }
+        return null;
     }
 
     method draggersprite() {

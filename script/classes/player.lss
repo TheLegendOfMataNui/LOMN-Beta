@@ -36,6 +36,7 @@ class player {
     property warpsound;
     property toadied;
     property spiraleffect;
+    property draggercontroller;
     
     method player() {
         return null;
@@ -75,6 +76,8 @@ class player {
         this.hittrigger = 0;
         this.crashbandicootwarped = 0;      
         this.toadied = 0;
+        this.draggercontroller = new lego_draggercontroller();        
+        this.draggercontroller.initfull();
         return null;
     }
     
@@ -117,6 +120,10 @@ class player {
         if (this.maskcontrol != null) {
             this.maskcontrol.cleanupfull();
             this.maskcontrol = null;
+        }
+        if (this.draggercontroller != null) {
+            this.draggercontroller.cleanupfull();
+            this.draggercontroller = null;
         }
         this.hittrigger = null;
         this.crashbandicootwarped = null;                        
@@ -185,6 +192,7 @@ class player {
                         debug::print("SORRY, YOU ARE IN THE TRIG BOX YOU CANNOT SHOOT YOUR DRAGGER");
                     }
                 }
+                this.draggercontroller.setupdragger();
             }
             else if (param1.button == 45) {
                 this.tweaktoggle();
@@ -193,9 +201,6 @@ class player {
         if (this.whichmaskonface() == 11) {
             this.maskcontrol.input(param1);
         }
-        if (this.actor != null) {
-            this.actor.input(param1);
-        }            
         return null;
     }
     
@@ -206,9 +211,9 @@ class player {
         if ((this.submerged == 1) || (this.drowningonland == 1)) {
             this.drainair(param1);
         }
-        if (this.actor != null) {
-            this.actor.process(param1);
-        }        
+        if (this.draggercontroller.active == 1) {
+            this.draggercontroller.process(param1);
+        }
         return null;
     }
     
@@ -360,9 +365,11 @@ class player {
             }
             //Player died evemt
             else if (param1.eventid == 46) {
+                //If a mask is being used, turn it off
                 if (this.maskcontrol.isactive()) {
                     this.maskcontrol.toggleactive();
                 }
+                //Performs a screenwipe whenever the player has died, instead of doing it on an area by area basis
                 gccollisionphysicsgroup::spinmask(1.2);
             }
             else if (param1.eventid == 20) {
