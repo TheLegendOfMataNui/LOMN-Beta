@@ -66,7 +66,7 @@ class player {
         this.energy = null;
         this.maxenergy = null;
         this.tokens = null;
-        if (!(this.actor == null)) {
+        if (this.actor != null) {
             this.actor.cleanupfull();
             this.actor = null;
         }
@@ -74,7 +74,7 @@ class player {
         this.draintimer = null;
         this.grapplinghooksetup = null;
         this.spritedamageamount = null;
-        if (!(this.maskcontrol == null)) {
+        if (this.maskcontrol != null) {
             this.maskcontrol.cleanupfull();
             this.maskcontrol = null;
         }
@@ -164,10 +164,10 @@ class player {
         var var1;
         var var2;
         var var3;
-        if (!(this.actor == null)) {
+        if (this.actor != null) {
             this.actor.onevent(param1);
             if ((param1.eventid == 40)   && (this.toadied == 0)) {
-                if (!(param1.args[1] == null)) {
+                if (param1.args[1] != null) {
                     debug::print("ouch! by " + __tostring(param1.args[1]));
                 }
                 else {
@@ -315,7 +315,7 @@ class player {
     
     method actorinitfull() {
         var var1;
-        if (!(this.actor == null)) {
+        if (this.actor != null) {
             this.actor.initfull();
             this.actor.setcodelife(this.life);
             this.actor.show();
@@ -539,7 +539,6 @@ class player {
         if (this.toadied == 0) {
             this.toadied = 1;
             this.actor.toamustdie();
-            gcstaticsoundsptrarray::playtablesound(1099);
             var1 = new scriptevent(46);
             var1.send();
             globalclass.hud.hide();
@@ -549,7 +548,6 @@ class player {
     
     method unkill() {
         this.actor.toaisalive();
-        gcstaticsoundsptrarray::playtablesound(1100);
         this.addlife(this.maxlife);
         this.addenergy(this.maxenergy);
         this.actor.setunderwater(0);
@@ -564,8 +562,8 @@ class player {
             this.life = this.maxlife;
         }
         globalclass.hud.thingy.setlife(this.life);
-        if (!(this.actor == null)) {
-            if (!(this.actor.toahandle == null)) {
+        if (this.actor != null) {
+            if (this.actor.toahandle != null) {
                 this.actor.setcodelife(this.life);
             }
         }
@@ -585,8 +583,8 @@ class player {
         else {
             globalclass.hud.thingy.setlife(this.life);
         }
-        if (!(this.actor == null)) {
-            if (!(this.actor.toahandle == null)) {
+        if (this.actor != null) {
+            if (this.actor.toahandle != null) {
                 this.actor.setcodelife(this.life);
             }
         }
