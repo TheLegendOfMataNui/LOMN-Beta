@@ -57,7 +57,6 @@ class cliffscale_class {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
                 globalclass.player.kill();
                 gcstaticsoundsptrarray::playtablesound(1048);
-                this.parent.level.cam.setaimode(7);
                 globalclass.player.actor.setinputstate("none");
             }
         }
@@ -67,7 +66,7 @@ class cliffscale_class {
             globalclass.player.unkill();
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
             this.parent.level.cam.setaimode(11);
-            //globalclass.player.actor.setinputstate("ninp");
+            globalclass.player.actor.setinputstate("ninp");
         }
         return null;
     }
