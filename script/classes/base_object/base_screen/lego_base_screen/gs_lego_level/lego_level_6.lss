@@ -1,6 +1,6 @@
 class lego_level_6 : gs_lego_level {
     property burnsound;
-    property burnsoundplayed;
+    property fellinlava;
     
     method lego_level_6() {
         var area;
@@ -87,7 +87,7 @@ class lego_level_6 : gs_lego_level {
         }
         this.burnsound = new tablecopysound(1097);
         this.burnsound.setvolume(50);
-        this.burnsoundplayed = 0;
+        this.fellinlava = 0;
         gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         globalclass.saverloaded = 0;
         globalclass.unlockdirector.save();
@@ -116,23 +116,21 @@ class lego_level_6 : gs_lego_level {
             this.burnsound.cleanupfull();
             this.burnsound = null;
         }
-        this.burnsoundplayed = null;
+        this.fellinlava = null;
         return null;
     }
 
     method onevent(param1) {
-        var var1;
         this.lego_level_onevent(param1);
         if (param1.eventid == 42) {
-            var1 = this.cam.getaimode();
-            if (this.burnsoundplayed == 0) {
-                this.burnsoundplayed = 1;
+            if (this.fellinlava == 0) {
+                this.fellinlava = 1;
                 globalclass.player.kill();
                 this.burnsound.play();
             }
         }
         else if (param1.eventid == 27) {
-            this.burnsoundplayed = 0;
+            this.fellinlava = 0;
         }
         return null;
     }
