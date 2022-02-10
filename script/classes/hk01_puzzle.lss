@@ -13,6 +13,12 @@ class hk01_puzzle {
     
     method initfull() {
         var var1;
+        gcareadirector::setfog(-15724528, 0 - 1.0, 0 - 200.0, 0.05);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setnearestmax(15);
+        gcmodeldirector::setnearestmax(8);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play(1);
         this.halfway = 0;
         this.exitdoor = new lego_moveableobject("dr02", this.parent.name);
         this.exitdoor.initfull();
@@ -117,7 +123,7 @@ class hk01_puzzle {
             globalclass.player.actor.setinputstate("none");
         }
         else if (param1.eventid == 4) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cp00")) {
                 this.halfway = 1;
             }
         }

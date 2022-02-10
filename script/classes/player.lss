@@ -414,12 +414,15 @@ class player {
             //Trigger plane collision event
             else if (param1.eventid == 4) {
                 //TODO: Finish rigging this up for ALL door triggers in the game
-                var trigid1 = param1.args[0] == scslosifoundation::stringtoidentifier("tpb0");
+                var trig_plane_id0 = param1.args[0] == scslosifoundation::stringtoidentifier("tp00");
+                var trig_plane_id1 = param1.args[0] == scslosifoundation::stringtoidentifier("tp01");
+                var trig_plane_id2 = param1.args[0] == scslosifoundation::stringtoidentifier("tp02");
+                var trig_plane_id3 = param1.args[0] == scslosifoundation::stringtoidentifier("tp03");
                 var portal = param1.args[0] == scslosifoundation::stringtoidentifier("tps9");
                 //This if statement makes sure this code doesn't repeatedly run while intersecting a trigger plane
                 if (this.hittrigger == 0) {
                     //Corresponding trigger has been entered, set player to idle and increment property to avoid this from firing continuously 
-                    if (trigid1) {
+                    if ((trig_plane_id0) || (trig_plane_id1) || (trig_plane_id2) || (trig_plane_id3)) {
                         debug::print("************* ENTERED TRIGGER PLANE, SETTING TO IDLE");
                         //Check if the player jumped through the trigger, and if not, set idle state as normal
                         if (globalclass.player.actor.isjumping() == 0) {
@@ -459,7 +462,7 @@ class player {
                     }
                 }
             }        
-            //Player is respawning event
+            //Screen black event
             else if (param1.eventid == 27) {
                 //TODO: generic unkill, camera, start position, and possibly trigger box reset code
             }

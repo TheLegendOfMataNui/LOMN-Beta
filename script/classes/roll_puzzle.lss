@@ -75,7 +75,7 @@ class roll_puzzle {
             this.callsurfonce = 1;
         }
         else if (param1.eventid == 4) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("rol0")) {
                 if (this.callsurfonce) {
                     this.startsurf();
                     this.callsurfonce = 0;
@@ -85,13 +85,14 @@ class roll_puzzle {
                     }
                 }
             }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp03")) {
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("rol1")) {
                 if (this.callunsurfonce) {
                     this.stopsurf();
                     this.callunsurfonce = 0;
                 }
             }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp04")) {
+            //Duplicate trigger ids used for this?
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("rol2")) {
                 globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("o010"));
             }
         }

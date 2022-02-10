@@ -26,7 +26,7 @@ class bugpitpuzzle_class {
         gcmodeldirector::setnearestmax(15);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
         globalclass.bgmusic.play(1);
-        this.trapdoortimer = new lego_timer("trap", 2.0, 0);
+        this.trapdoortimer = new lego_timer("trip", 2.0, 0);
         this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
         gchive::setmaxcreatures(this.hive1handle, 0);
         gchive::setcreaturetype(this.hive1handle, scslosifoundation::stringtoidentifier("bugz"));
@@ -119,7 +119,7 @@ class bugpitpuzzle_class {
         var var2;
         if (param1.eventid == 4) {
             var1 = param1.args[0];
-            if (var1 == scslosifoundation::stringtoidentifier("tp00")) {
+            if (var1 == scslosifoundation::stringtoidentifier("trap")) {
                 if (this.trapdoorshut == 0) {
                     this.trapdooraction();
                 }
@@ -127,7 +127,7 @@ class bugpitpuzzle_class {
         }
         else if (param1.eventid == 8) {
             var2 = param1.args[0];
-            if (var2 == scslosifoundation::stringtoidentifier("trap")) {
+            if (var2 == scslosifoundation::stringtoidentifier("trip")) {
                 this.parent.level.cam.setaimode(11);
                 globalclass.player.actor.setinputstate("ninp");
                 globalclass.player.actor.idle();
