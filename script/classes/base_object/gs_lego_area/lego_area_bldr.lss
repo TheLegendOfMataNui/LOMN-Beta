@@ -5,10 +5,6 @@ class lego_area_bldr : gs_lego_area {
         this.gs_lego_area("bldr", param1, 0, 0);
         this.puzzle = new bldrpuzzle(this);
         this.lego_area_initfull();
-        this.startingarea = [ 180, 
-            -356, 
-            0 - 51.4, 
-            689 ];
         return null;
     }
     
@@ -41,7 +37,11 @@ class lego_area_bldr : gs_lego_area {
     }
     
     method exit() {
-        this.puzzle = null;
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

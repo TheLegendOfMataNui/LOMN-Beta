@@ -5,16 +5,12 @@ class lego_area_bkik : gs_lego_area {
         this.gs_lego_area("bkik", param1, 0, 0);
         this.puzzle = new bkik_puzzle(this);
         this.lego_area_initfull();
-        this.startingarea = [ 180, 
-            -356, 
-            0 - 51.4, 
-            689 ];
         return null;
     }
     
     method initfull() {
+        this.lego_area_show();
         this.puzzle.initfull();
-        this.puzzle.show();
         globalclass.enemy.killheight = -52;
         return null;
     }
@@ -35,12 +31,17 @@ class lego_area_bkik : gs_lego_area {
     }
     
     method cleanupfull() {
+        this.lego_area_hide();
         this.puzzle.cleanupfull();
         return null;
     }
     
     method exit() {
-        this.puzzle = null;
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

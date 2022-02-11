@@ -1,84 +1,46 @@
 class lego_area_gly1 : gs_lego_area {
-    property racepuzzle;
     property puzzle;
-    property parent;
-    property hammerpickup;
-    property clawpickup;
     
     method lego_area_gly1(param1) {
-        this.parent = param1;
         this.gs_lego_area("gly1", param1, 0, 0);
-        this.racepuzzle = new racepuzzle_class(this);
+        this.puzzle = new racepuzzle_class(this);
         this.lego_area_initfull();
-        this.startingarea = [ 180, 
-            279, 
-            -60, 
-            -193 ];
         return null;
     }
     
     method initfull() {
-        var var1;
         this.lego_area_show();
-        this.racepuzzle.initfull();
-        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("hamm"));
-        if (var1 == 0) {
-            this.hammerpickup = new lego_pickup("hamm", 0, 5, "item", 5, 1);
-            this.hammerpickup.initfull();
-            this.hammerpickup.show();
-            this.hammerpickup.setcondition(131072);
-            this.hammerpickup.setquest(2);
-        }
-        else {
-            this.hammerpickup = new lego_moveableobject("hamm");
-            this.hammerpickup.initfull();
-            this.hammerpickup.hide();
-        }
-        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("hook")) == 0) {
-            this.clawpickup = new lego_pickup("hook", 0, 3, "item", 9, 1);
-            this.clawpickup.initfull();
-            this.clawpickup.show();
-        }
-        else {
-            this.clawpickup = new lego_moveableobject("hook");
-            this.clawpickup.initfull();
-            this.clawpickup.hide();
-        }
+        this.puzzle.initfull();
         return null;
     }
     
     method process(param1) {
-        this.racepuzzle.process(param1);
+        this.puzzle.process(param1);
         return null;
     }
     
     method input(param1) {
-        this.racepuzzle.input(param1);
+        this.puzzle.input(param1);
         return null;
     }
     
     method onevent(param1) {
-        this.racepuzzle.onevent(param1);
+        this.puzzle.onevent(param1);
         return null;
     }
     
     method cleanupfull() {
         this.lego_area_hide();
-        this.racepuzzle.cleanupfull();
-        if (!(this.hammerpickup == null)) {
-            this.hammerpickup.cleanupfull();
-            this.hammerpickup = null;
-        }
-        if (!(this.clawpickup == null)) {
-            this.clawpickup.cleanupfull();
-            this.clawpickup = null;
-        }
+        this.puzzle.cleanupfull();
         return null;
     }
     
     method exit() {
-        this.racepuzzle.exit();
-        this.racepuzzle = null;
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }

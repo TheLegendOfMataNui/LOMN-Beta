@@ -70,9 +70,14 @@ class bldr_boulder {
         this.vy = null;
         this.vz = null;
         this.shakeonce = null;
-        this.boulder.cleanupfull();
-        this.boulder = null;
-        this.parent = null;
+        if (this.boulder != null) {
+            this.boulder.cleanupfull();
+            this.boulder = null;
+        }
+        if (this.hitgroundsound != null) {
+            this.hitgroundsound.cleanupfull();
+            this.hitgroundsound = null;
+        }
         return null;
     }
     
