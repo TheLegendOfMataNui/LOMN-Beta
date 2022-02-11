@@ -11,10 +11,6 @@ class lego_area_takv2 : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        gcmodeldirector::setnearestmax(7);
-        gcareadirector::setnearestmax(7);
-        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
-        gclightdirector::setcavelighting(1);
         return null;
     }
     
@@ -41,7 +37,7 @@ class lego_area_takv2 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        if (!(this.puzzle == null)) {
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }

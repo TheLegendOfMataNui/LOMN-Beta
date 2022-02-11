@@ -13,9 +13,13 @@ class vtnl2_puzzle {
         var var1;
         var var2;
         var hive1handle;
-        this.passedtrigplane = 0;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(10);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(1);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
         globalclass.bgmusic.play();
+        this.passedtrigplane = 0;
         this.randomnumber = new slosi_random(0);
         this.caveplatforms = [ new lego_moveableobject("pf01"), 
             new lego_moveableobject("pf03"), 
@@ -71,7 +75,7 @@ class vtnl2_puzzle {
     
     method onevent(param1) {
         if (param1.eventid == 4) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("chk0")) {
                 debug::print("**************************** TRIGGERPLANE COLLISION");
                 if (param1.args[1] == 1) {
                     debug::print("******************** TRUE");
@@ -101,7 +105,6 @@ class vtnl2_puzzle {
             globalclass.player.actor.setinputstate("ninp");
             this.parent.level.cam.setaimode(11);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
             globalclass.player.unkill();
         }
         return null;

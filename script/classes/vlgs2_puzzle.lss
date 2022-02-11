@@ -10,9 +10,13 @@ class vlgs2_puzzle {
     
     method initfull() {
         var hivehandle;
-        this.firstsplit = 1;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(1);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
         globalclass.bgmusic.play();
+        this.firstsplit = 1;
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("hook")) == 0) {
             this.hook = new lego_pickup("hook", 0, 3, "item", 1, 1);
             this.hook.initfull();
@@ -35,6 +39,8 @@ class vlgs2_puzzle {
             this.hook.cleanupfull();
             this.hook = null;
         }
+        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g000"));
+        globalclass.player.actor.setsurfingability(0.0, 0.0);
         return null;
     }
     
@@ -46,31 +52,24 @@ class vlgs2_puzzle {
             globalclass.player.actor.setsurfingability(0.0, 0.0);
         }
         else if (param1.eventid == 4) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp04")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("srf1")) {
                 debug::print("*****START SURFING");
                 globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g032"));
                 globalclass.player.actor.setsurfingability(0.3, 0.8);
                 this.firstsplit = 1;
             }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("end0")) {
                 if (this.firstsplit == 1) {
                     globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g000"));
                     globalclass.player.actor.setsurfingability(0.0, 0.0);
                     this.firstsplit = 0;
                 }
             }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp03")) {
+            else if (param1.args[0] == scslosifoundation::stringtoidentifier("srf0")) {
                 debug::print("*****START SURFING");
                 globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g032"));
                 globalclass.player.actor.setsurfingability(0.3, 0.8);
                 this.firstsplit = 1;
-            }
-            else if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {
-                if (this.firstsplit == 1) {
-                    globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g000"));
-                    globalclass.player.actor.setsurfingability(0.0, 0.0);
-                    this.firstsplit = 0;
-                }
             }
         }
         return null;

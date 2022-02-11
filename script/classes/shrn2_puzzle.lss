@@ -26,6 +26,12 @@ class shrn2_puzzle {
         var portal_trigger;
         var door_text;
 		var tohunga;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+        globalclass.bgmusic.play();
         this.inwater = 1;
         this.doors = [ new lego_moveableobject("dor1"), 
             new lego_moveableobject("dor3"), 

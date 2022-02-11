@@ -9,6 +9,10 @@ class gl3s_puzzle {
     
     method initfull() {
         var var1;
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboard");
+        globalclass.bgmusic.play();
         globalclass.player.actor.setunderwater(1);
 /*        this.spirtarray = [ new spirt("spr0"), 
             new spirt("spr1"), 
@@ -120,7 +124,7 @@ class gl3s_puzzle {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) {	
                 screenlist.screens[2].screen.areas[9].puzzle.switchit(2);	
             }
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("surf")) {
                 this.startsurf();
             }
         }

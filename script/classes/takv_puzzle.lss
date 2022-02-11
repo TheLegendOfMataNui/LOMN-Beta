@@ -15,6 +15,10 @@ class takv_puzzle {
     
     method initfull() {
         var bosstext;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(1);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
         globalclass.bgmusic.play();
         this.killedcharacters = 0;
@@ -49,19 +53,19 @@ class takv_puzzle {
     }
     
     method cleanupfull() {
-        if (!(this.door1 == null)) {
+        if (this.door1 != null) {
             this.door1.cleanupfull();
             this.door1 = null;
         }
-        if (!(this.door2 == null)) {
+        if (this.door2 != null) {
             this.door2.cleanupfull();
             this.door2 = null;
         }
-        if (!(this.desctext == null)) {
+        if (this.desctext != null) {
             this.desctext.cleanupfull();
             this.desctext = null;
         }
-        if (!(this.howtotext == null)) {
+        if (this.howtotext != null) {
             this.howtotext.cleanupfull();
             this.howtotext = null;
         }
@@ -87,13 +91,13 @@ class takv_puzzle {
             if (this.killedcharacters == 3) {
                 globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
                 globalclass.bgmusic.play();
-                if (!(this.door2 == null)) {
+                if (this.door2 != null) {
                     this.opendoor2();
                 }
             }
         }
         else if (param1.eventid == 4) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tp02")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("door")) {
                 debug::print("****** COLLIDING WITH TP02 CLOSING DOORS");
                 this.closedoors();
                 if (this.showintro) {

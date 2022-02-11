@@ -9,6 +9,12 @@ class ttun2_puzzle {
     }
     
     method initfull() {
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(50);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play();
         this.call_ev_safe_time_once = 1;
         this.enteredbackdoor = 1;
         return null;

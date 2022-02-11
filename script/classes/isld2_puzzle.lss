@@ -18,9 +18,12 @@ class isld2_puzzle {
     }
     
     method initfull() {
-        var var1;
         var gearpickup_text;
-        var1 = 0;
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setnearestmax(50);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
+        globalclass.bgmusic.play();
         this.call_ev_safe_time_once = 1;
         this.entered_underwater = 1;
         this.wirlpool = new lego_moveableobject("wpbm");
@@ -57,7 +60,7 @@ class isld2_puzzle {
     
     method onevent(param1) {
         if (param1.eventid == 4) {
-            if ((param1.args[0] == scslosifoundation::stringtoidentifier("tp07")) && (this.divetrigger == 0)) {
+            if ((param1.args[0] == scslosifoundation::stringtoidentifier("dive")) && (this.divetrigger == 0)) {
                 globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g044"));
                 gccharacter::setforwardvelocity(this.toa, 15.0);
                 this.divetrigger = 1;
