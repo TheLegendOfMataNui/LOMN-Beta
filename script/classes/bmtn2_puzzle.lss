@@ -16,7 +16,6 @@ class bmtn2_puzzle {
         var x;
         var y;
         var z;
-        var tohunga;
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
         gclightdirector::setcavelighting(0);
         gcareadirector::setnearestmax(20);
@@ -64,9 +63,13 @@ class bmtn2_puzzle {
             this.door.cleanupfull();
             this.door = null;
         }
+        if (this.gatestone != null) {
+            this.gatestone.cleanupfull();
+            this.gatestone = null;
+        }
         this.amaya = null;
         this.kapura = null;
-        this.gatestone = null;
+        this.upgradefruit3_shown = null;
         return null;
     }
     
