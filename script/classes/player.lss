@@ -413,7 +413,7 @@ class player {
             }
             //Trigger plane collision event
             else if (param1.eventid == 4) {
-                //TODO: Finish rigging this up for levels 3-7
+                //TODO: Finish rigging this up for levels 5-7
                 var trig_plane_id0 = param1.args[0] == scslosifoundation::stringtoidentifier("tp00");
                 var trig_plane_id1 = param1.args[0] == scslosifoundation::stringtoidentifier("tp01");
                 var trig_plane_id2 = param1.args[0] == scslosifoundation::stringtoidentifier("tp02");
@@ -429,7 +429,7 @@ class player {
                         debug::print("************* ENTERED TRIGGER PLANE, SETTING TO IDLE");
                         //Check if the player jumped or swam through the trigger, and if not, set idle state as normal
                         if ((globalclass.player.actor.isjumping() == 0) && (this.submerged == 0)) {
-                            debug::print("^^^^^^^^^^^^^ DIDN'T JUMP THROUGH TRIGGER PLANE, SETTING PLAYER TO IDLE");
+                            debug::print("^^^^^^^^^^^^^ DIDN'T JUMP OR SWIM THROUGH TRIGGER PLANE, SETTING PLAYER TO IDLE");
                             globalclass.player.actor.idle();
                             globalclass.level.cam.setaimode(0);
                         }
