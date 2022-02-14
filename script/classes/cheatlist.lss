@@ -23,6 +23,7 @@ class cheatlist {
     property audiodebugnames;
     property jukeboxnames;
     property boolindex;
+    property hiddenids;
     
     method cheatlist() {
         this.activemenu = [  ];
@@ -1104,6 +1105,36 @@ class cheatlist {
             this.curidx = this.curidx + 1;
             this.activemenu[this.curidx].setactive();
         }
+        //This wraps to the top of the list when the current ID is the same as the end of the array, and the first item in the array returns 0
+        else if (this.curidx == (this.activemenu.__length - 1) && (this.minidx == 0)) {
+                this.activemenu[this.curidx].setinactive();
+                this.curidx = this.minidx;
+                this.activemenu[this.curidx].setactive();
+        }
+        //If the current max id is the same as the final array value - 1, and the currently displayed min id is not 0, fire this wrapping code
+        else if (((this.maxidx) == (this.activemenu.__length - 1)) && (this.minidx != 0)) {        
+                //This calculates the difference between the length of the activemenu array and the number of items that can be shown at once (showidx)
+                this.hiddenids = ((this.activemenu.__length - 1) - (this.showidx));
+                this.activemenu[this.curidx].setinactive();
+                //Setting the currently selected item to the min id - the value hidden ids returns.  This ensures the selected item wraps back to the beginning of the array 
+                this.curidx = this.minidx - this.hiddenids;
+                this.activemenu[this.curidx].setactive();                    
+                //Loop for showing all the hidden items at the start of the array until it reaches the current id, which was just set to the start of the array
+                while (this.minidx != this.curidx) {
+                    this.minidx = this.minidx - 1;
+                    this.activemenu[this.minidx].show();
+                }
+                //Loop for hiding the max id until it returns the same location in the array as the length - 1 - hiddenids value
+                while (this.maxidx > ((this.activemenu.__length - 1) - this.hiddenids)) {
+                    this.activemenu[this.maxidx].hide();
+                    this.maxidx = this.maxidx - 1;
+                }
+                var1 = 0;
+                while (this.showidx >= var1) {
+                    this.activemenu[this.minidx + var1].setpos(this.x, this.y + (var1 * 12), 0);
+                    var1 = var1 + 1;
+                }
+        }
         else if (this.curidx < (this.activemenu.__length - 1)) {
             this.activemenu[this.curidx].setinactive();
             this.curidx = this.curidx + 1;
@@ -1127,6 +1158,38 @@ class cheatlist {
             this.activemenu[this.curidx].setinactive();
             this.curidx = this.curidx - 1;
             this.activemenu[this.curidx].setactive();
+        }
+        else if (this.curidx == 0) {
+            //If the array length is smaller than the max items that can be shown, wrap current id to the max id
+            if ((this.activemenu.__length) < (this.showidx)) {
+                this.activemenu[this.curidx].setinactive();
+                this.curidx = this.maxidx;
+                this.activemenu[this.curidx].setactive();
+            }
+            //If the array length is greater than the max items can be shown and the min id on-screen is the start of the array, proceed with wrapping
+            else if (((this.activemenu.__length) > (this.showidx)) && (this.minidx == 0)) {        
+                this.activemenu[this.curidx].setinactive();
+                //Set the current id to the end of the array - 1 
+                this.curidx = (this.activemenu.__length - 1);
+                this.activemenu[this.curidx].setactive();                    
+                //This calculates the difference between the length of the activemenu array and the number of items that can be shown at once (showidx)
+                this.hiddenids = ((this.activemenu.__length - 1) - (this.showidx));
+                //Loop for hiding the items at the start of the array until the min id value returns the same as hiddenids 
+                while (this.minidx < this.hiddenids) {
+                    this.activemenu[this.minidx].hide();
+                    this.minidx = this.minidx + 1;
+                }
+                //Loop for showing items hiddin at the end of the array until the max id reaches the end of the array
+                while (this.maxidx < (this.activemenu.__length - 1)) {
+                    this.maxidx = this.maxidx + 1;
+                    this.activemenu[this.maxidx].show();
+                }
+                var1 = 0;
+                while (this.showidx >= var1) {
+                    this.activemenu[this.minidx + var1].setpos(this.x, this.y + (var1 * 12), 0);
+                    var1 = var1 + 1;
+                }
+            }
         }
         else if (this.curidx > 0) {
             this.activemenu[this.curidx].setinactive();
