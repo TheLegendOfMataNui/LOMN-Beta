@@ -21,6 +21,7 @@ class cheatlist {
     property levelnames;
     property levelareanames;
     property realdelta;
+    property hiddenids;
     
     method cheatlist() {
         this.activemenu = [  ];
@@ -213,6 +214,7 @@ class cheatlist {
         this.minidx = null;
         this.maxidx = null;
         this.showidx = null;
+        this.hiddenids = null;
         this.x = null;
         this.y = null;
         this.curidx = null;
@@ -442,7 +444,7 @@ class cheatlist {
                 }
                 else {
                     globalclass.player.actor.setunderwater(0);
-                    if (!(this.newlevel == null)) {
+                    if (this.newlevel != null) {
                         gcareadirector::setcurrentlevel(this.newlevel);
                         gcareadirector::setcurrentarea(scslosistringfuncs::tolower(this.activemenu[this.curidx].string));
                         globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
@@ -796,6 +798,30 @@ class cheatlist {
             this.curidx = this.curidx + 1;
             this.activemenu[this.curidx].setactive();
         }
+        else if (this.curidx == (this.activemenu.__length - 1) && (this.minidx == 0)) {
+                this.activemenu[this.curidx].setinactive();
+                this.curidx = this.minidx;
+                this.activemenu[this.curidx].setactive();
+        }
+        else if (((this.maxidx) == (this.activemenu.__length - 1)) && (this.minidx != 0)) {        
+                this.hiddenids = ((this.activemenu.__length - 1) - (this.showidx));
+                this.activemenu[this.curidx].setinactive();
+                this.curidx = this.minidx - this.hiddenids;
+                this.activemenu[this.curidx].setactive();                    
+                while (this.minidx != this.curidx) {
+                    this.minidx = this.minidx - 1;
+                    this.activemenu[this.minidx].show();
+                }
+                while (this.maxidx > ((this.activemenu.__length - 1) - this.hiddenids)) {
+                    this.activemenu[this.maxidx].hide();
+                    this.maxidx = this.maxidx - 1;
+                }
+                var1 = 0;
+                while (this.showidx >= var1) {
+                    this.activemenu[this.minidx + var1].setpos(this.x, this.y + (var1 * 12), 0);
+                    var1 = var1 + 1;
+                }
+        }
         else if (this.curidx < (this.activemenu.__length - 1)) {
             this.activemenu[this.curidx].setinactive();
             this.curidx = this.curidx + 1;
@@ -819,6 +845,32 @@ class cheatlist {
             this.activemenu[this.curidx].setinactive();
             this.curidx = this.curidx - 1;
             this.activemenu[this.curidx].setactive();
+        }
+        else if (this.curidx == 0) {
+            if ((this.activemenu.__length) < (this.showidx)) {
+                this.activemenu[this.curidx].setinactive();
+                this.curidx = this.maxidx;
+                this.activemenu[this.curidx].setactive();
+            }
+            else if (((this.activemenu.__length) > (this.showidx)) && (this.minidx == 0)) {        
+                this.activemenu[this.curidx].setinactive();
+                this.curidx = (this.activemenu.__length - 1);
+                this.activemenu[this.curidx].setactive();                    
+                this.hiddenids = ((this.activemenu.__length - 1) - (this.showidx));
+                while (this.minidx < this.hiddenids) {
+                    this.activemenu[this.minidx].hide();
+                    this.minidx = this.minidx + 1;
+                }
+                while (this.maxidx < (this.activemenu.__length - 1)) {
+                    this.maxidx = this.maxidx + 1;
+                    this.activemenu[this.maxidx].show();
+                }
+                var1 = 0;
+                while (this.showidx >= var1) {
+                    this.activemenu[this.minidx + var1].setpos(this.x, this.y + (var1 * 12), 0);
+                    var1 = var1 + 1;
+                }
+            }
         }
         else if (this.curidx > 0) {
             this.activemenu[this.curidx].setinactive();
