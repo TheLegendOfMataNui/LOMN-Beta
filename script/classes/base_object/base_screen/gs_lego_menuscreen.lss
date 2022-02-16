@@ -49,7 +49,7 @@ class gs_lego_menuscreen : base_screen {
             this.inputenabled = 1;
         }
         else {
-            if (!(this.nextscreen == 0)) {
+            if (this.nextscreen != 0) {
                 this.introscreens[this.nextscreen - 1].hide();
                 this.introscreens[this.nextscreen - 1].cleanupfull();
                 if (param1 == 1) {
@@ -130,15 +130,16 @@ class gs_lego_menuscreen : base_screen {
     }
     
     method cleanupfull() {
-        if (!(this.menu == null)) {
+        debug::print("when does this fire");
+        if (this.menu != null) {
             this.menu.cleanupfull();
             this.menu = null;
         }
-        if (!(this.menufader == null)) {
+        if (this.menufader != null) {
             this.menufader.cleanupfull();
             this.menufader = null;
         }
-        if (!(this.screentext == null)) {
+        if (this.screentext != null) {
             sctilefont::setcolor(this.screentext.font, 255, 255, 255, 255);
             this.screentext.hide();
             this.screentext.cleanupfull();
@@ -225,9 +226,9 @@ class gs_lego_menuscreen : base_screen {
         var var2;
         this.nextscreen = this.menu.destination;
         var1 = this.menu.argarray;
-        if (!(this.nextscreen == null)) {
+        if (this.nextscreen != null) {
             var2 = screenlist.getscreen(this.nextscreen);
-            if (!(var1 == null)) {
+            if (var1 != null) {
                 var2.screen.setargs(var1);
             }
             screenlist.forward(this.nextscreen);
@@ -287,6 +288,9 @@ class gs_lego_menuscreen : base_screen {
             else if (var2 == 7) {
                 this.menu.destination = 15;
             }
+            else if (var2 == 8) {
+                this.menu.destination = 16;
+            }
             else {
                 debug::print(("[][][] GcSaver returned an invalid level: '" + __tostring(var2)) + "'");
                 this.menu.destination = 9;
@@ -302,6 +306,11 @@ class gs_lego_menuscreen : base_screen {
             this.menu.hideall();
         }
         else if (var1 == 24) {
+            this.temptimer = 0;
+            this.selected = 1;
+            this.menu.hideall();
+        }
+        else if (var1 == 25) {
             this.temptimer = 0;
             this.selected = 1;
             this.menu.hideall();

@@ -1,0 +1,21 @@
+class lego_level_test : gs_lego_level {
+    
+    method lego_level_test() {
+        var area;
+        this.gs_lego_level("test", null, null);
+        area = new lego_area_tst1(this);
+        this.areas.__append(area);
+        return null;
+    }
+    
+    method initfull() {
+        this.lego_level_initfull();
+        globalclass.player.addmask("fake", 0);
+        return null;
+    }
+    
+    method initshort() {
+        this.lego_level_initshort();
+        return null;
+    }
+}

@@ -1,5 +1,4 @@
 class lego_level_1 : gs_lego_level {
-    property inwater;
     
     method lego_level_1() {
         var area;
@@ -46,8 +45,6 @@ class lego_level_1 : gs_lego_level {
         this.areas.__append(area);
         area = new lego_area_roll(this);
         this.areas.__append(area);
-        area = new lego_area_test(this);
-        this.areas.__append(area);
         area = new lego_area_nest1(this);
         this.areas.__append(area);
         return null;
@@ -74,7 +71,6 @@ class lego_level_1 : gs_lego_level {
         }
         globalclass.saverloaded = 0;
         globalclass.unlockdirector.save();
-        this.inwater = 0;
         return null;
     }
     
