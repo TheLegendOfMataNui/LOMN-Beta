@@ -81,17 +81,23 @@ class testlevelscreen : base_screen {
                 gcstaticsoundsptrarray::playtablesound(1073);
                 //Load TST1 (Onua)
                 if (this.activeidx == 0) {
+                    if (globalclass.shortinit) {
+                        globalclass.initshort();
+                    }
+                    this.cleanupfull();
                     screenlist.forward(8);
                     screenlist.screens[9].screen.toa = "onua";	
                     screenlist.screens[9].screen.startingarea = "tst1";	
-                    this.cleanupfull();
                 }
                 //Load TST5 (Lewa)
                 else if (this.activeidx == 1) {
+                    if (globalclass.shortinit) {
+                        globalclass.initshort();
+                    }
+                    this.cleanupfull();
                     screenlist.forward(8);
                     screenlist.screens[9].screen.toa = "lewa";	
                     screenlist.screens[9].screen.startingarea = "tst5";	
-                    this.cleanupfull();
                 }
                 //Load TST6 (Tahu)
                 else if (this.activeidx == 2) {
