@@ -101,10 +101,13 @@ class testlevelscreen : base_screen {
                 }
                 //Load TST6 (Tahu)
                 else if (this.activeidx == 2) {
-                    //screenlist.forward(8);
-                    //screenlist.screens[9].screen.toa = "onua";	
-                    //screenlist.screens[9].screen.startingarea = "tst6";	
-                    //this.cleanupfull();
+                    if (globalclass.shortinit) {
+                        globalclass.initshort();
+                    }
+                    this.cleanupfull();
+                    screenlist.forward(8);
+                    screenlist.screens[9].screen.toa = "onua";	
+                    screenlist.screens[9].screen.startingarea = "tst6";	
                 }
                 //Go back to the root test menu
                 else if (this.activeidx == 3) {
