@@ -11,8 +11,6 @@ class lego_area_tst5 : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        gcareadirector::setnearestmax(50);
-        gcmodeldirector::setnearestmax(50);
         return null;
     }
     
@@ -24,7 +22,7 @@ class lego_area_tst5 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        if (!(this.puzzle == null)) {
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }
