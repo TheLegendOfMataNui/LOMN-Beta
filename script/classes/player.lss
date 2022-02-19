@@ -500,6 +500,8 @@ class player {
                 if ((gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("tura")) || (gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("shrn")) && (this.crashbandicootwarped == 2)) {
                     this.crashbandicootwarped = 0;
                 }   
+                //Reenable player collisions with characters now that the screenwipe and respawn are finished, ending invincibility period
+                globalclass.player.actor.enablecollisions();
             }
         }
         return null;
@@ -822,6 +824,8 @@ class player {
             var1.send();
             globalclass.hud.hide();
             this.removeequipment();
+            //Disable player collision with other characters to create an invincibility period during respawn
+            globalclass.player.actor.disablecollisions();
         }
         return null;
     }
