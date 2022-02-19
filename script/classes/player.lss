@@ -251,6 +251,9 @@ class player {
                 gccollisionphysicsgroup::spinmask(1.2);
                 globalclass.level.cam.setaimode(7);
             }
+            else if (param1.eventid == 29) {
+                globalclass.player.actor.enablecollisions();
+            }
         }
         return null;
     }
@@ -542,6 +545,7 @@ class player {
             var1 = new scriptevent(46);
             var1.send();
             globalclass.hud.hide();
+            globalclass.player.actor.disablecollisions();
         }
         return null;
     }
