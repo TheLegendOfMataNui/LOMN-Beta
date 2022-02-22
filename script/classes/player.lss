@@ -411,6 +411,34 @@ class player {
                     globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str9"), scslosifoundation::stringtoidentifier("lok9"));
                 }
             }
+            //Trigger box collision event
+            else if (param1.eventid == 3) {
+                //Normal killbox IDs
+                var trig_box_id0 = param1.args[0] == scslosifoundation::stringtoidentifier("tb00");
+                //Surfing & sliding killboxes, need to have different IDs per respawn code changes later
+                var trig_box_surf0 = param1.args[0] == scslosifoundation::stringtoidentifier("sb00");
+                var trig_box_surf1 = param1.args[0] == scslosifoundation::stringtoidentifier("sb01");
+                var trig_box_surf2 = param1.args[0] == scslosifoundation::stringtoidentifier("sb02");
+                var trig_box_surf3 = param1.args[0] == scslosifoundation::stringtoidentifier("sb03");
+                var trig_box_surf4 = param1.args[0] == scslosifoundation::stringtoidentifier("sb04");
+                var trig_box_surf5 = param1.args[0] == scslosifoundation::stringtoidentifier("sb05");
+                var trig_box_surf6 = param1.args[0] == scslosifoundation::stringtoidentifier("sb06");
+                var trig_box_surf7 = param1.args[0] == scslosifoundation::stringtoidentifier("sb07");
+                var trig_box_surf8 = param1.args[0] == scslosifoundation::stringtoidentifier("sb08");
+                //Set up the specified trigger box IDs to be used as killboxes
+                if (trig_box_id0) {
+                    globalclass.player.kill();
+                    gcstaticsoundsptrarray::playtablesound(1048);
+                    globalclass.player.actor.setinputstate("none");
+                }
+                //Set up the specified trigger box IDs to be used as surfing/sliding killboxes and ignore certain respawn code
+                else if ((trig_box_surf0) || (trig_box_surf1) || (trig_box_surf2) || (trig_box_surf3) || (trig_box_surf4) || (trig_box_surf5) || (trig_box_surf6) || (trig_box_surf7) || (trig_box_surf8)) {
+                    //TODO: probably make a tiny method to store this code in, hell move all of this handling to a new class maybe?
+                    globalclass.player.kill();
+                    gcstaticsoundsptrarray::playtablesound(1048);
+                    globalclass.player.actor.setinputstate("none");
+                }
+            }
             //Trigger plane collision event
             else if (param1.eventid == 4) {
                 var trig_plane_id0 = param1.args[0] == scslosifoundation::stringtoidentifier("tp00");
@@ -493,9 +521,9 @@ class player {
                     }
                 }
             }
-            //Transition in event
+            //Screen fadein finished event
             else if (param1.eventid == 29) {
-                debug::print("This seems to only fire with switchareawithtransition?");
+                debug::print("SCREEN_FADEIN_FINISHED EVENT FIRING");
                 //Probably don't need to use this event, but this code checks the areas and whether the warped property returns the necessary value and if so, set it back to default
                 if ((gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("tura")) || (gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("shrn")) && (this.crashbandicootwarped == 2)) {
                     this.crashbandicootwarped = 0;
