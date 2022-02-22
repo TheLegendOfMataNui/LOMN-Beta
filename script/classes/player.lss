@@ -386,25 +386,29 @@ class player {
             }  
             else if (param1.eventid == 21) {
                 var areaid = (scslosifoundation::identifiertostring(gcareadirector::getcurrentarea()));
+                //Reinitialize the physics entirely to stop the landing noise when jumping into a trigger
+                globalclass.player.actor.initmotionsystem();
+                globalclass.player.actor.disableallraycollisions();
+                globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
+                //If gcareadirector returns the current area as one of the following areas, disable grapple.  Else, grapple should be enabled
                 if ((areaid == "vllg") || (areaid == "tura") || (areaid == "shrn") || (areaid == "mosh")) {
                     this.canshootdragger(0);
                 }
                 else {
                     this.canshootdragger(1);
                 }
+                //If equiptype returns 1, set up equipment for combat
                 if (this.equiptype == 1) {
                     this.processequipment(1);
                 }
+                //If equiptype returns 2, set up equipment for peace
                 if (this.equiptype == 2) {
                     this.processequipment(2);
                 }
+                //If equiptype returns 3, set up equipment for surfing
                 if (this.equiptype == 3) {
                     this.processequipment(3);
                 }
-                //Reinitialize the physics entirely to stop the landing noise when jumping into a trigger
-                globalclass.player.actor.initmotionsystem();
-                globalclass.player.actor.disableallraycollisions();
-                globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
 
                 //This is a temporary hack as gccollisionphysicsgroup::switchareawithtransition() doesnt take str and lok points as arguments
                 if (this.crashbandicootwarped == 2) {                
