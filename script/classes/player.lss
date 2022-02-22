@@ -415,6 +415,10 @@ class player {
             else if (param1.eventid == 3) {
                 //Normal killbox IDs
                 var trig_box_id0 = param1.args[0] == scslosifoundation::stringtoidentifier("tb00");
+                var trig_box_id1 = param1.args[0] == scslosifoundation::stringtoidentifier("tb01");
+                var trig_box_id2 = param1.args[0] == scslosifoundation::stringtoidentifier("tb02");
+                var trig_box_id3 = param1.args[0] == scslosifoundation::stringtoidentifier("tb03");
+                var trig_box_id4 = param1.args[0] == scslosifoundation::stringtoidentifier("tb04");
                 //Surfing & sliding killboxes, need to have different IDs per respawn code changes later
                 var trig_box_surf0 = param1.args[0] == scslosifoundation::stringtoidentifier("sb00");
                 var trig_box_surf1 = param1.args[0] == scslosifoundation::stringtoidentifier("sb01");
@@ -426,7 +430,7 @@ class player {
                 var trig_box_surf7 = param1.args[0] == scslosifoundation::stringtoidentifier("sb07");
                 var trig_box_surf8 = param1.args[0] == scslosifoundation::stringtoidentifier("sb08");
                 //Set up the specified trigger box IDs to be used as killboxes
-                if (trig_box_id0) {
+                if ((trig_box_id0) || (trig_box_id1) || (trig_box_id2) || (trig_box_id3) || (trig_box_id4)) {
                     globalclass.player.kill();
                     gcstaticsoundsptrarray::playtablesound(1048);
                     globalclass.player.actor.setinputstate("none");
