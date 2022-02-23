@@ -132,50 +132,50 @@ class global_class : base_object {
     
     method cleanupfull() {
         var var1;
-        if (!(this.hud == null)) {
+        if (this.hud != null) {
             this.hud.cleanupfull();
             this.hud = null;
         }
-        if (!(this.player == null)) {
+        if (this.player != null) {
             this.player.cleanupfull();
             this.player = null;
         }
-        if (!(this.enemy == null)) {
+        if (this.enemy != null) {
             this.enemy.cleanupfull();
             this.enemy = null;
         }
-        if (!(this.tweak == null)) {
+        if (this.tweak != null) {
             this.tweak.cleanupfull();
             this.tweak = null;
         }
-        if (!(this.pause == null)) {
+        if (this.pause != null) {
             this.pause.cleanupfull();
             this.pause = null;
         }
-        if (!(this.inventoryscreen == null)) {
+        if (this.inventoryscreen != null) {
             this.inventoryscreen.cleanupfull();
             this.inventoryscreen = null;
         }
-        if (!(this.helpscreen == null)) {
+        if (this.helpscreen != null) {
             this.helpscreen.cleanupfull();
             this.helpscreen = null;
         }
-        if (!(this.render == null)) {
+        if (this.render != null) {
             this.render.cleanupfull();
             this.render = null;
         }
-        if (!(this.cheats == null)) {
+        if (this.cheats != null) {
             this.cheats.cleanupfull();
             this.cheats = null;
         }
         this.level = null;
         this.randnum = null;
         this.language = null;
-        if (!(this.debugstring == null)) {
+        if (this.debugstring != null) {
             this.debugstring.cleanupfull();
             this.debugstring = null;
         }
-        if (!(this.debugtimer == null)) {
+        if (this.debugtimer != null) {
             this.debugtimer.cleanupfull();
             this.debugtimer = null;
         }
@@ -189,7 +189,7 @@ class global_class : base_object {
         this.whatsnext = null;
         this.testforlavacollisions = null;
         this.saverloaded = null;
-        if (!(this.bgmusic == null)) {
+        if (this.bgmusic != null) {
             this.bgmusic.stop();
             this.bgmusic = null;
         }
@@ -228,7 +228,7 @@ class global_class : base_object {
     
     method cleanupshort() {
         this.shortinit = 1;
-        if (!(this.level == null)) {
+        if (this.level != null) {
             this.level.cleanupfull();
             this.level = null;
         }
@@ -242,7 +242,7 @@ class global_class : base_object {
     }
     
     method exit() {
-        if (!(this.level == null)) {
+        if (this.level != null) {
             this.level.exit();
             this.level = null;
             debug::print("[][][] level clean");
@@ -288,7 +288,7 @@ class global_class : base_object {
     
     method process(param1) {
         var var1;
-        if (!(this.level == null)) {
+        if (this.level != null) {
             var1 = 0;
             while ((this.processlist.__length - 1) >= var1) {
                 if (this.shortinit) {
@@ -307,12 +307,11 @@ class global_class : base_object {
     
     method input(param1) {
         var var1;
-        if (!(this.level == null)) {
+        if (this.level != null) {
             if (param1.event == 2) {
                 if (param1.button == 145) {
                     this.toggleinput();
                 }
-                param1.button;
             }
             if (this.inputenabled) {
                 var1 = 0;
@@ -338,7 +337,7 @@ class global_class : base_object {
     }
     
     method toggleinput(param1) {
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.inputenabled = param1;
         }
         else if (this.inputenabled == 1) {
@@ -352,7 +351,7 @@ class global_class : base_object {
     
     method onevent(param1) {
         var var1;
-        if (!(this.level == null)) {
+        if (this.level != null) {
             var1 = 0;
             while ((this.eventlist.__length - 1) >= var1) {
                 if (this.shortinit) {
