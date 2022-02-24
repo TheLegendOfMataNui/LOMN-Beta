@@ -94,7 +94,7 @@ class base_screenlist {
         var1 = 0;
         var2 = 0;
         while ((this.currentscreen.__length - 1) >= var2) {
-            if (!(this.currentscreen[var2].state == 0)) {
+            if (this.currentscreen[var2].state != 0) {
                 var1 = var1 + 1;
             }
             var2 = var2 + 1;
@@ -115,7 +115,7 @@ class base_screenlist {
         var1 = 0;
         var2 = 0;
         while ((this.currentscreen.__length - 1) >= var2) {
-            if (!(this.currentscreen[var2].state == 0)) {
+            if (this.currentscreen[var2].state != 0) {
                 var1 = var1 + 1;
             }
             var2 = var2 + 1;
@@ -206,7 +206,7 @@ class base_screenlist {
     method setactive(param1) {
         var var1;
         var1 = this.getscreen(param1);
-        if (!(var1 == null)) {
+        if (var1 != null) {
             var1.setstate(var1.state | 1);
             this.currentscreen.__append(var1);
             return null;
@@ -238,7 +238,7 @@ class base_screenlist {
                 this.appendstack();
             }
         }
-        if (!(param3 == null)) {
+        if (param3 != null) {
             if (__isinstance(param3)) {
                 var2 = new base_screencontainer(param3, 99999999);
             }
@@ -246,7 +246,7 @@ class base_screenlist {
         else {
             var2 = this.getscreen(param1);
         }
-        if (!(var2 == null)) {
+        if (var2 != null) {
             var2.setstate((var2.state | 1) | 8192);
             this.currentscreen.__append(var2);
             return null;
@@ -269,7 +269,7 @@ class base_screenlist {
                 this.currentscreen[var1].setstate((this.currentscreen[var1].state | 2) | 512);
                 var1 = var1 + 1;
             }
-            if (!(param1 == null)) {
+            if (param1 != null) {
                 var2 = this.backstack.__length - 1;
                 //var3 = [  ];
                 var4 = this.backstack.__length - 1;
@@ -294,7 +294,7 @@ class base_screenlist {
                 var5 = this.backstack[this.backstack.__length - 1];
             }
             var7 = this.getscreen(var5);
-            if (!(var7 == null)) {
+            if (var7 != null) {
                 var7.state = (var7.state | 1) | 4096;
                 this.currentscreen.__append(var7);
                 this.backstack.__removeat(this.backstack.__length - 1);
