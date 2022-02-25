@@ -2,7 +2,6 @@ class astroypuzzle {
     property boulderarray;
     property brgpartarray;
     property parent;
-    property areaid;
     property entrancedoora;
     property entrancedoorb;
     property exitdoora;
@@ -39,7 +38,6 @@ class astroypuzzle {
     
     method astroypuzzle(param1) {
         this.parent = param1;
-        this.areaid = scslosifoundation::stringtoidentifier(param1.name);
         this.started = 0;
         this.numofplatformshit = 0;
         return null;
@@ -101,9 +99,9 @@ class astroypuzzle {
             var1 = var1 + 1;
         }
         this.boulderubound = this.boulderarray.__length - 1;
-        this.parent.parent.cam.makespline("Root/Data/Levels/lev3/rkfl/rkfl_CAM.slb");
-        this.parent.parent.cam.setspline(0, 4.0, 1);
-        this.parent.parent.cam.settargetspline(3, 1);
+        this.parent.level.cam.makespline("Root/Data/Levels/lev3/rkfl/rkfl_CAM.slb");
+        this.parent.level.cam.setspline(0, 4.0, 1);
+        this.parent.level.cam.settargetspline(3, 1);
         this.switchx = this.swtch.getx();
         this.switchy = this.swtch.gety();
         this.switchz = this.swtch.getz();
@@ -134,35 +132,52 @@ class astroypuzzle {
     
     method cleanupfull() {
         var var1;
-        this.switchinterptimer.cleanupfull();
-        this.switchinterptimer = null;
-        var1 = 0;
-        while ((this.boulderarray.__length - 1) >= var1) {
-            this.boulderarray[var1].cleanupfull();
-            this.boulderarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.switchinterptimer != null) {
+            this.switchinterptimer.cleanupfull();
+            this.switchinterptimer = null;
         }
-        this.boulderarray = null;
-        var1 = 0;
-        while ((this.brgpartarray.__length - 1) >= var1) {
-            this.brgpartarray[var1].cleanupfull();
-            this.brgpartarray[var1] = null;
-            var1 = var1 + 1;
+        if (this.boulderarray != null) {
+            var1 = 0;
+            while ((this.boulderarray.__length - 1) >= var1) {
+                this.boulderarray[var1].cleanupfull();
+                this.boulderarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.boulderarray = null;
         }
-        this.brgpartarray = null;
-        this.areaid = null;
-        this.entrancedoora.cleanupfull();
-        this.entrancedoora = null;
-        this.entrancedoorb.cleanupfull();
-        this.entrancedoorb = null;
-        this.exitdoora.cleanupfull();
-        this.exitdoora = null;
-        this.exitdoorb.cleanupfull();
-        this.exitdoorb = null;
-        this.thering.cleanupfull();
-        this.thering = null;
-        this.swtch.cleanupfull();
-        this.swtch = null;
+        if (this.brgpartarray != null) {
+            var1 = 0;
+            while ((this.brgpartarray.__length - 1) >= var1) {
+                this.brgpartarray[var1].cleanupfull();
+                this.brgpartarray[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.brgpartarray = null;
+        }
+        if (this.entrancedoora != null) {
+            this.entrancedoora.cleanupfull();
+            this.entrancedoora = null;
+        }
+        if (this.entrancedoorb != null) {
+            this.entrancedoorb.cleanupfull();
+            this.entrancedoorb = null;
+        }
+        if (this.exitdoora != null) {
+            this.exitdoora.cleanupfull();
+            this.exitdoora = null;
+        }
+        if (this.exitdoorb != null) {
+            this.exitdoorb.cleanupfull();
+            this.exitdoorb = null;
+        }
+        if (this.thering != null) {
+            this.thering.cleanupfull();
+            this.thering = null;
+        }
+        if (this.swtch != null) {
+            this.swtch.cleanupfull();
+            this.swtch = null;
+        }
         this.started = null;
         this.numofplatformshit = null;
         this.musichasstarted = null;
@@ -186,8 +201,10 @@ class astroypuzzle {
         this.ringz = null;
         this.boulderubound = null;
         this.bridgeubound = null;
-        this.boulderintervaltimer.cleanupfull();
-        this.boulderintervaltimer = null;
+        if (this.boulderintervaltimer != null) {
+            this.boulderintervaltimer.cleanupfull();
+            this.boulderintervaltimer = null;
+        }
         this.currentboulder = null;
         this.hitswitchonce = null;
         return null;
@@ -236,9 +253,6 @@ class astroypuzzle {
     
     method onevent(param1) {
         var var1;
-        var var2;
-        var var3;
-        var var4;
         if (this.started) {
             var1 = 0;
             while (this.boulderubound >= var1) {
@@ -254,7 +268,7 @@ class astroypuzzle {
         if (param1.eventid == 8) {
             if (scslosifoundation::identifiertostring(param1.args[0]) == "sint") {
                 globalclass.hud.hide();
-                this.parent.parent.cam.setaimode(3);
+                this.parent.level.cam.setaimode(3);
             }
             else if (scslosifoundation::identifiertostring(param1.args[0]) == "bint") {
                 if (this.currentboulder <= 2) {
@@ -265,22 +279,13 @@ class astroypuzzle {
                     this.boulderintervaltimer.start();
                 }
             }
-            scslosifoundation::identifiertostring(param1.args[0]);
         }
         else if (param1.eventid == 1) {
-            var2 = param1.args[0];
-            var3 = param1.args[1];
-            if (var2 == scslosifoundation::stringtoidentifier("cnt1")) {
-                if (var3 == scslosifoundation::stringtoidentifier("swch")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("swch")) {
                     this.hitswitch();
                     return 0;
                 }
-            }
-        }
-        else if (param1.eventid == 3) {
-            var4 = param1.args[0];
-            if (var4 == scslosifoundation::stringtoidentifier("tb00")) {
-                this.reseta();
             }
         }
         else if (param1.eventid == 27) {
@@ -288,7 +293,7 @@ class astroypuzzle {
         }
         else if (param1.eventid == 6) {
             globalclass.player.actor.setorientation(90);
-            this.parent.parent.cam.setaimode(11);
+            this.parent.level.cam.setaimode(11);
             globalclass.hud.show();
             globalclass.player.actor.setinputstate("ninp");
             this.boulderintervaltimer.reset(0);
@@ -298,23 +303,15 @@ class astroypuzzle {
         return null;
     }
     
-    method reseta() {
-        this.parent.parent.cam.setspline(0, 4.0, 1);
-        this.parent.parent.cam.settargetspline(3, 1);
-        globalclass.player.kill();
-        gcstaticsoundsptrarray::playtablesound(1048);
-        return null;
-    }
-    
     method resetb() {
-        this.parent.parent.cam.setspline(0, 4.0, 1);
-        this.parent.parent.cam.settargetspline(3, 1);
+        this.parent.level.cam.setspline(0, 4.0, 1);
+        this.parent.level.cam.settargetspline(3, 1);
         globalclass.player.actor.setpos(0 - 139.6, 0.9, -81);
         globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
         globalclass.player.unkill();
         globalclass.player.actor.setorientation(180);
         gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        this.parent.parent.cam.setaimode(11);
+        this.parent.level.cam.setaimode(11);
         this.reset();
         this.hitswitchonce = 1;
         this.currentboulder = 0;

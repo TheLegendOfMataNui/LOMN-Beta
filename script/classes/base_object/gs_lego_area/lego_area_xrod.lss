@@ -5,11 +5,12 @@ class lego_area_xrod : gs_lego_area {
     
     method lego_area_xrod(param1) {
         this.gs_lego_area("xrod", param1, 0, 0);
+        this.lego_area_initfull();
         return null;
     }
     
     method initfull() {
-        var var1;
+        this.lego_area_show();
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
         globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
@@ -18,8 +19,7 @@ class lego_area_xrod : gs_lego_area {
         gclightdirector::setcavelighting(0);
         this.door = new lego_moveableobject("door");
         this.door.initfull();
-        var1 = gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc3"));
-        if (var1 == 0) {
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("dsc3")) == 0) {
             this.discpickup = new lego_pickup("dsc3", 0, 5, "item", 7, 1);
             this.discpickup.initfull();
             this.discpickup.show();
@@ -43,41 +43,28 @@ class lego_area_xrod : gs_lego_area {
     }
     
     method onevent(param1) {
-        var var1;
-        if (param1.eventid == 3) {
-            if ((((param1.args[0] == scslosifoundation::stringtoidentifier("tp00")) || (param1.args[0] == scslosifoundation::stringtoidentifier("tp01"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tp02"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tp03"))) {
-                globalclass.player.kill();
-            }
-        }
-        else if (param1.eventid == 27) {
+        if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
             globalclass.player.unkill();
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
             globalclass.player.actor.setinputstate("ninp");
             this.level.cam.setaimode(11);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tp00"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tp01"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tp02"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tp03"), 0);
-        }
-        else if (param1.eventid == 21) {
-            var1 = this.level.getbull();
-            if (!(var1 == null)) {
-                this.level.destroybull();
-                var1 = null;
-                debug::print("************************************ destroying bully....");
-            }
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb02"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb03"), 0);
         }
         return null;
     }
     
     method cleanupfull() {
-        if (!(this.discpickup == null)) {
+        this.lego_area_hide();       
+        if (this.discpickup != null) {
             this.discpickup.cleanupfull();
             this.discpickup = null;
         }
         this.hive1handle = null;
-        if (!(this.door == null)) {
+        if (this.door != null) {
             this.door.cleanupfull();
             this.door = null;
         }
@@ -85,6 +72,7 @@ class lego_area_xrod : gs_lego_area {
     }
     
     method exit() {
+        this.lego_area_cleanupfull();
         return null;
     }
 }

@@ -423,6 +423,13 @@ class player {
                 var trig_box_id2 = param1.args[0] == scslosifoundation::stringtoidentifier("tb02");
                 var trig_box_id3 = param1.args[0] == scslosifoundation::stringtoidentifier("tb03");
                 var trig_box_id4 = param1.args[0] == scslosifoundation::stringtoidentifier("tb04");
+                var trig_box_id5 = param1.args[0] == scslosifoundation::stringtoidentifier("tb05");
+                var trig_box_id6 = param1.args[0] == scslosifoundation::stringtoidentifier("tb06");
+                var trig_box_id7 = param1.args[0] == scslosifoundation::stringtoidentifier("tb07");
+                var trig_box_id8 = param1.args[0] == scslosifoundation::stringtoidentifier("tb08");
+                var trig_box_id9 = param1.args[0] == scslosifoundation::stringtoidentifier("tb09");
+                var trig_box_id10 = param1.args[0] == scslosifoundation::stringtoidentifier("tb10");
+                var trig_box_id11 = param1.args[0] == scslosifoundation::stringtoidentifier("tb11");
                 //Surfing & sliding killboxes, need to have different IDs per respawn code changes later
                 var trig_box_surf0 = param1.args[0] == scslosifoundation::stringtoidentifier("sb00");
                 var trig_box_surf1 = param1.args[0] == scslosifoundation::stringtoidentifier("sb01");
@@ -434,7 +441,8 @@ class player {
                 var trig_box_surf7 = param1.args[0] == scslosifoundation::stringtoidentifier("sb07");
                 var trig_box_surf8 = param1.args[0] == scslosifoundation::stringtoidentifier("sb08");
                 //Set up the specified trigger box IDs to be used as killboxes
-                if ((trig_box_id0) || (trig_box_id1) || (trig_box_id2) || (trig_box_id3) || (trig_box_id4)) {
+                debug::print("You hit triggerbox: " + scslosifoundation::identifiertostring(param1.args[0]));
+                if ((trig_box_id0) || (trig_box_id1) || (trig_box_id2) || (trig_box_id3) || (trig_box_id4) || (trig_box_id5) || (trig_box_id6) || (trig_box_id7) || (trig_box_id8) || (trig_box_id9) || (trig_box_id10) || (trig_box_id11)) {
                     globalclass.player.kill();
                     gcstaticsoundsptrarray::playtablesound(1048);
                     globalclass.player.actor.setinputstate("none");
@@ -531,7 +539,7 @@ class player {
             }
             //Screen fadein finished event
             else if (param1.eventid == 29) {
-                debug::print("SCREEN_FADEIN_FINISHED EVENT FIRING");
+                debug::print("GETTING SCREEN_FADEIN_FINISHED EVENT");
                 //Probably don't need to use this event, but this code checks the areas and whether the warped property returns the necessary value and if so, set it back to default
                 if ((gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("tura")) || (gcareadirector::getcurrentarea() == scslosifoundation::stringtoidentifier("shrn")) && (this.crashbandicootwarped == 2)) {
                     this.crashbandicootwarped = 0;

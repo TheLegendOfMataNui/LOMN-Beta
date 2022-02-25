@@ -4,44 +4,43 @@ class target_class {
     property timername;
     property parent;
     property turnedin;
-    property inflag;
     property rotating;
-    property temp;
     property rotatetargetsound;
     
-    method target_class(param1, param2, param3, param4, param5, param6, param7, param8) {
-        this.timername = param2;
-        this.parent = param8;
-        this.obj = new lego_moveableobject(param1, param4);
-        this.timer = new lego_timer(this.timername, param3, 0);
+    method target_class(obj_id, timer_name, timer_length, area_id, unused_x_pos, unused_y_pos, unused_z_pos, parent) {
+        this.timername = timer_name;
+        this.parent = parent;
+        this.obj = new lego_moveableobject(obj_id, area_id);
+        this.timer = new lego_timer(this.timername, timer_length, 0);
         return null;
     }
     
-    method initfull(param1, param2, param3) {
+    method initfull(unused1, unused2, unused3) {
         this.obj.initfull();
         this.timer.initfull();
         this.turnedin = 0;
-        this.inflag = 0;
         this.rotating = 0;
-        this.temp = 0;
         this.rotatetargetsound = new tablecopysound(1038);
         this.rotatetargetsound.synctoobject(this.obj.id);
         return null;
     }
     
-    method show() {
-        return null;
-    }
-    
-    method hide() {
-        this.obj.cleanupfull();
-        this.obj = null;
-        this.timer.cleanupfull();
-        this.timer = null;
+    method cleanupfull() {
+        if (this.obj != null) {
+            this.obj.cleanupfull();
+            this.obj = null;
+        }
+        if (this.timer != null) {
+            this.timer.cleanupfull();
+            this.timer = null;
+        }
+        if (this.rotatetargetsound != null) {
+            this.rotatetargetsound.cleanupfull();
+            this.rotatetargetsound = null;
+        }
         this.timername = null;
         this.parent = null;
         this.turnedin = null;
-        this.inflag = null;
         this.rotating = null;
         return null;
     }

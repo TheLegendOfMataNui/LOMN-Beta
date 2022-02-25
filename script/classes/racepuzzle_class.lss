@@ -2,7 +2,6 @@ class racepuzzle_class {
     property roadrunner;
     property rider;
     property parent;
-    property tiggerboxid;
     property areaid;
     property roadrunnerwon;
     property switchai;
@@ -103,7 +102,6 @@ class racepuzzle_class {
             this.rider = null;
         }
         this.playerhasfinished = null;
-        this.tiggerboxid = null;
         this.areaid = null;
         this.roadrunnerwon = null;
         this.switchai = null;
@@ -174,16 +172,6 @@ class racepuzzle_class {
                     this.startrace();
                     this.startraceonce = 0;
                 }
-            }
-        }
-        else if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                this.reseta();
-                this.tiggerboxid = scslosifoundation::stringtoidentifier("tb00");
-            }
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
-                this.reseta();
-                this.tiggerboxid = scslosifoundation::stringtoidentifier("tb01");
             }
         }
         else if (param1.eventid == 27) {

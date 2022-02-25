@@ -192,14 +192,7 @@ class acmaskpuzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                globalclass.player.kill();
-                gcstaticsoundsptrarray::playtablesound(1048);
-                globalclass.player.actor.setinputstate("none");
-            }
-        }
-        else if (param1.eventid == 11) {
+        if (param1.eventid == 11) {
 			if ((scslosifoundation::identifiertostring(param1.args[1]) == "p047") && (gcsaver::findmask(scslosifoundation::stringtoidentifier("mska"))) && (this.cinema1_shown == 0)) {
                 gccinemaengine::play(this.cinema1);
                 this.cinema1_shown = 1;

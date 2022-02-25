@@ -6,7 +6,6 @@ class ptos_puzzle {
     
     method ptos_puzzle(param1) {
         this.parent = param1;
-        this.mask = null;
         return null;
     }
     
@@ -23,6 +22,7 @@ class ptos_puzzle {
         if (gcsaver::findmask(scslosifoundation::stringtoidentifier("msks")) == 0) {
             this.mask = new lego_pickup("msks", 2, 1, "item", 2, 2);
             this.mask.initfull();
+            this.mask.show();
         }
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("kbll")) == 0) {
             this.ballpickup = new lego_pickup("kbll", 0, 5, "item", 6, 1);
@@ -30,6 +30,11 @@ class ptos_puzzle {
             this.ballpickup.show();
             this.ballpickup.setcondition(131072);
             this.ballpickup.setquest(3);
+        }
+        else {
+            this.ballpickup = new lego_moveableobject("kbll");
+            this.ballpickup.initfull();
+            this.ballpickup.hide();
         }
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin4")) == 0) {
             this.cinema = gccinemaengine::create();
@@ -69,14 +74,7 @@ class ptos_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                globalclass.player.kill();
-                gcstaticsoundsptrarray::playtablesound(1048);
-                globalclass.player.actor.setinputstate("none");
-            }
-        }
-        else if (param1.eventid == 30) {
+        if (param1.eventid == 30) {
             globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
             globalclass.bgmusic.play(1);
         }

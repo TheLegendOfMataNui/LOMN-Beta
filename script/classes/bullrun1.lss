@@ -114,10 +114,7 @@ class bullrun1 {
             }
         }
         else if (param1.eventid == 3) {
-            debug::print("****************I HIT TRIGGERBOX***********************" + scslosifoundation::identifiertostring(param1.args[0]));
-            globalclass.player.kill();
-            gcstaticsoundsptrarray::playtablesound(1048);
-            globalclass.player.actor.setinputstate("none");
+            globalclass.player.actor.unride();
             this.bully.hide();
             this.bullmovesound.stop();
         }
@@ -132,6 +129,7 @@ class bullrun1 {
                 this.bully.gotostartpos(scslosifoundation::stringtoidentifier("str2"), scslosifoundation::stringtoidentifier("lok2"));
             }
             this.bully.show();
+            globalclass.player.actor.ride(scslosifoundation::stringtoidentifier(this.bully.contstring), scslosifoundation::stringtoidentifier(this.bully.area), 2063160497);
             this.bully.setsplitanimation(scslosifoundation::stringtoidentifier("bl00"));
             this.bully.setbullrunmode(0.0);
             globalclass.player.unkill();
