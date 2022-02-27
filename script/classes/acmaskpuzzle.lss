@@ -67,6 +67,7 @@ class acmaskpuzzle {
         if (this.cinema2_shown == 0) {
             this.cinema2 = gccinemaengine::create();
             gccinemaengine::load(this.cinema2, "cin3");
+            gccinemaengine::setnextarea(this.cinema2, scslosifoundation::stringtoidentifier("blr1"));
         }
         this.wallchunks = [ new lego_moveableobject("brk1"), 
             new lego_moveableobject("brk2"), 
@@ -221,6 +222,9 @@ class acmaskpuzzle {
                 this.bully.setpos(79.0, 0.15, 161.0);
                 globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICpohatutheme");
                 globalclass.bgmusic.play(1);
+            }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cin3")) {
+                globalclass.hud.hide();
             }
         }
         else if (param1.eventid == 6) {
