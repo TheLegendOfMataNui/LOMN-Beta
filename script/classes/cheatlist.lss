@@ -117,7 +117,8 @@ class cheatlist {
             "Village", 
             "Bionicle Age" ]; 
             //"Green Hill Zone" ];
-        this.levelnames = [ "Lev1 - Onua", 
+        this.levelnames = [ "Test Level",
+            "Lev1 - Onua", 
             "Lev2 - Gali", 
             "Lev3 - Pohatu", 
             "Lev4 - Kopaka", 
@@ -125,7 +126,10 @@ class cheatlist {
             "Lev6 - Tahu", 
             "Lev7 - Makuta",
             "Lev8 - Nobua" ];
-        this.levelareanames = [ [ "bech", 
+        this.levelareanames = [ [ "tst1", 
+                "tst5", 
+                "tst6" ], 
+            [ "bech", 
                 "ptv1", 
                 "vllg", 
                 "tura", 
@@ -507,8 +511,13 @@ class cheatlist {
         if (param1.event == 2) {
             if (param1.button == 36) {
                 if (this.curidx == 0) {
-                    var1 = scslosistringfuncs::right(globalclass.level.name, 1);
-                    this.areamenusetup(__toint(var1) - 1);
+                    if (globalclass.level.name == "test") {
+                        this.areamenusetup(0);
+                    }
+                    else {
+                        var1 = scslosistringfuncs::right(globalclass.level.name, 1);
+                        this.areamenusetup(__toint(var1));
+                    }
                 }
                 else if (this.curidx == 1) {
                     this.gotomenusetup();
