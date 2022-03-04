@@ -4,7 +4,6 @@ class lego_area_maz14 : gs_lego_area {
     property discpickup;
     
     method lego_area_maz14(param1) {
-        this.parent = param1;
         this.gs_lego_area("maz1", param1, 0, 0);
         this.puzzle = new l4_maz1_puzzle(this);
         this.lego_area_initfull();
@@ -39,7 +38,7 @@ class lego_area_maz14 : gs_lego_area {
         this.lego_area_hide();
         this.puzzle.hide();
         this.puzzle.cleanupfull();
-        if (!(this.discpickup == null)) {
+        if (this.discpickup != null) {
             this.discpickup.cleanupfull();
             this.discpickup = null;
         }
@@ -62,11 +61,11 @@ class lego_area_maz14 : gs_lego_area {
     }
     
     method exit() {
-        if (!(this.puzzle == null)) {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }
-        this.parent = null;
         return null;
     }
 }

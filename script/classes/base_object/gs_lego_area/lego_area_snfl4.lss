@@ -3,7 +3,6 @@ class lego_area_snfl4 : gs_lego_area {
     property puzzle;
     
     method lego_area_snfl4(param1) {
-        this.parent = param1;
         this.gs_lego_area("snfl", param1, 0, 0);
         this.puzzle = new snowfallpuzzle(this);
         this.lego_area_initfull();
@@ -38,11 +37,11 @@ class lego_area_snfl4 : gs_lego_area {
     }
     
     method exit() {
-        if (!(this.puzzle == null)) {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }
-        this.parent = null;
         return null;
     }
 }

@@ -35,7 +35,7 @@ class l4_maz2_puzzle {
     }
     
     method cleanupfull() {
-        if (!(this.swordhook == null)) {
+        if (this.swordhook != null) {
             this.swordhook.cleanupfull();
             this.swordhook = null;
         }
@@ -43,14 +43,7 @@ class l4_maz2_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                globalclass.player.kill();
-                gcstaticsoundsptrarray::playtablesound(1048);
-                globalclass.player.actor.setinputstate("none");
-            }
-        }
-        else if (param1.eventid == 27) {
+        if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             globalclass.player.unkill();

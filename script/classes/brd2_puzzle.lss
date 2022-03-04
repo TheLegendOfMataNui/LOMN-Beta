@@ -9,6 +9,8 @@ class brd2_puzzle {
     method initfull() {
         globalclass.player.processequipment(3);
         gcareadirector::setnearestmax(5);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
+        globalclass.bgmusic.play(1);
         globalclass.player.actor.setclimb(5);
         globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0);
         globalclass.player.actor.setsurfingability(1.0, 0.8);
@@ -34,17 +36,7 @@ class brd2_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                globalclass.player.kill();
-                globalclass.player.actor.setinputstate("none");
-            }
-            else {
-                globalclass.player.kill();
-                globalclass.player.actor.setinputstate("none");
-            }
-        }
-        else if (param1.eventid == 29) {
+        if (param1.eventid == 29) {
             this.initshort();
         }
         else if (param1.eventid == 7) {

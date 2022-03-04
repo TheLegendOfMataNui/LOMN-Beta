@@ -12,6 +12,8 @@ class brd4_puzzle {
         var var1;
         globalclass.player.processequipment(3);
         gcareadirector::setnearestmax(50);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboardPart2");
+        globalclass.bgmusic.play(1);
         globalclass.player.actor.setclimb(5);
         globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0);
         globalclass.player.actor.setsurfingability(1.0, 0.8);
@@ -89,17 +91,7 @@ class brd4_puzzle {
     
     method onevent(param1) {
         var var1;
-        if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
-                globalclass.player.kill();
-                globalclass.player.actor.setinputstate("none");
-            }
-            else {
-                globalclass.player.kill();
-                globalclass.player.actor.setinputstate("none");
-            }
-        }
-        else if (param1.eventid == 18) {
+        if (param1.eventid == 18) {
             var1 = new slosi_string(scslosifoundation::identifiertostring(param1.args[0]));
             var1.truncateleft(2);
             if (var1.string == "ic") {

@@ -263,7 +263,6 @@ class snowfallpuzzle {
                     this.boulderintervaltimer.start();
                 }
             }
-            scslosifoundation::identifiertostring(param1.args[0]);
         }
         else if (param1.eventid == 1) {
             var2 = param1.args[0];
@@ -273,12 +272,6 @@ class snowfallpuzzle {
                     this.hitswitch();
                     return 0;
                 }
-            }
-        }
-        else if (param1.eventid == 3) {
-            var4 = param1.args[0];
-            if (var4 == scslosifoundation::stringtoidentifier("tb00")) {
-                this.reseta();
             }
         }
         else if (param1.eventid == 27) {
@@ -293,14 +286,6 @@ class snowfallpuzzle {
             this.boulderintervaltimer.start();
             this.started = 1;
         }
-        return null;
-    }
-    
-    method reseta() {
-        this.parent.parent.cam.setspline(0, 4.0, 1);
-        this.parent.parent.cam.settargetspline(3, 1);
-        globalclass.player.kill();
-        gcstaticsoundsptrarray::playtablesound(1048);
         return null;
     }
     

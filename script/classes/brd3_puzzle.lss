@@ -12,6 +12,8 @@ class brd3_puzzle {
         var var1;
         globalclass.player.processequipment(3);
         gcareadirector::setnearestmax(50);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicTechnoSnowboardPart2");
+        globalclass.bgmusic.play(1);
         globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0);
         globalclass.player.actor.setsurfingability(1.0, 0.8);
         globalclass.player.actor.setsurfminspeed(50.0);
@@ -92,15 +94,7 @@ class brd3_puzzle {
     
     method onevent(param1) {
         var var1;
-        if (param1.eventid == 3) {
-            debug::print("You hit a TRIGGERBOX: " + __tostring(param1.args[0]));
-            if (((param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb01"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb02"))) {
-                debug::print("Collision with one of the 3 triggerboxes");
-                globalclass.player.kill();
-                globalclass.player.actor.setinputstate("none");
-            }
-        }
-        else if (param1.eventid == 18) {
+        if (param1.eventid == 18) {
             var1 = new slosi_string(scslosifoundation::identifiertostring(param1.args[0]));
             var1.truncateleft(2);
             if (var1.string == "ic") {
@@ -169,6 +163,11 @@ class brd3_puzzle {
     }
     
     method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
         return null;
     }
 }
