@@ -440,6 +440,7 @@ class player {
                 var trig_box_surf6 = param1.args[0] == scslosifoundation::stringtoidentifier("sb06");
                 var trig_box_surf7 = param1.args[0] == scslosifoundation::stringtoidentifier("sb07");
                 var trig_box_surf8 = param1.args[0] == scslosifoundation::stringtoidentifier("sb08");
+                var trig_box_surf9 = param1.args[0] == scslosifoundation::stringtoidentifier("sb09");
                 //Set up the specified trigger box IDs to be used as killboxes
                 debug::print("You hit triggerbox: " + scslosifoundation::identifiertostring(param1.args[0]));
                 if ((trig_box_id0) || (trig_box_id1) || (trig_box_id2) || (trig_box_id3) || (trig_box_id4) || (trig_box_id5) || (trig_box_id6) || (trig_box_id7) || (trig_box_id8) || (trig_box_id9) || (trig_box_id10) || (trig_box_id11)) {
@@ -448,7 +449,7 @@ class player {
                     globalclass.player.actor.setinputstate("none");
                 }
                 //Set up the specified trigger box IDs to be used as surfing/sliding killboxes and ignore certain respawn code
-                else if ((trig_box_surf0) || (trig_box_surf1) || (trig_box_surf2) || (trig_box_surf3) || (trig_box_surf4) || (trig_box_surf5) || (trig_box_surf6) || (trig_box_surf7) || (trig_box_surf8)) {
+                else if ((trig_box_surf0) || (trig_box_surf1) || (trig_box_surf2) || (trig_box_surf3) || (trig_box_surf4) || (trig_box_surf5) || (trig_box_surf6) || (trig_box_surf7) || (trig_box_surf8) || (trig_box_surf9)) {
                     //TODO: probably make a tiny method to store this code in, hell move all of this handling to a new class maybe?
                     globalclass.player.kill();
                     gcstaticsoundsptrarray::playtablesound(1048);
