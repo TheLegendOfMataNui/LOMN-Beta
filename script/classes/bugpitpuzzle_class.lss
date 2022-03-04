@@ -22,7 +22,7 @@ class bugpitpuzzle_class {
     method initfull() {
         gcareadirector::setfog(-15066598, 0 - 1.0, 0 - 400.0, 0.05);
         gclightdirector::setcavelighting(1);
-        gcareadirector::setnearestmax(5);
+        gcareadirector::setnearestmax(15);
         gcmodeldirector::setnearestmax(15);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
         globalclass.bgmusic.play(1);
@@ -87,11 +87,28 @@ class bugpitpuzzle_class {
             this.trapdoortimer.cleanupfull();
             this.trapdoortimer = null;
         }
+        if (this.door_trap_original != null) {
+            this.door_trap_original.cleanupfull();
+            this.door_trap_original = null;
+        }
+        if (this.door_goal_a_original != null) {
+            this.door_goal_a_original.cleanupfull();
+            this.door_goal_a_original = null;
+        }
+        if (this.door_goal_b_original != null) {
+            this.door_goal_b_original.cleanupfull();
+            this.door_goal_b_original = null;
+        }
+        if (this.trapdoortimer != null) {
+            this.trapdoortimer.cleanupfull();
+            this.trapdoortimer = null;
+        }
         this.hive1handle = null;
         this.hive2handle = null;
         this.hive3handle = null;
         this.hive4handle = null;
         this.deadhives = null;
+        this.trapdoorshut = null;
         return null;
     }
     
