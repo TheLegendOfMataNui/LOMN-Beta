@@ -9,8 +9,6 @@ class lego_area_icmn : gs_lego_area {
     }
     
     method initfull() {
-        globalclass.bgmusic.changefilename("Root/Data/Sounds/MUSICKopakaTheme");
-        globalclass.bgmusic.play(1);
         this.lego_area_show();
         this.puzzle.initfull();
         return null;
@@ -39,7 +37,7 @@ class lego_area_icmn : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        if (!(this.puzzle == null)) {
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }
