@@ -22,10 +22,8 @@ class bugpitpuzzle_class {
     method initfull() {
         gcareadirector::setfog(-15066598, 0 - 1.0, 0 - 400.0, 0.05);
         gclightdirector::setcavelighting(1);
-        gcareadirector::setnearestmax(5);
+        gcareadirector::setnearestmax(15);
         gcmodeldirector::setnearestmax(15);
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
-        globalclass.bgmusic.play(1);
         this.trapdoortimer = new lego_timer("trip", 2.0, 0);
         this.hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv1"));
         gchive::setmaxcreatures(this.hive1handle, 0);
@@ -60,8 +58,19 @@ class bugpitpuzzle_class {
         this.door_trap.setresponse(3, 3, 3);
         this.door_goal_a.setresponse(3, 3, 3);
         this.door_goal_b.setresponse(3, 3, 3);
-        gcstaticsoundsptrarray::playtablesound(1042);
-        bettersaver::setbooleanvalue(72, 1);
+        if (bettersaver::getbooleanvalue(72) == 0) {
+            gcstaticsoundsptrarray::playtablesound(1042);
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+            globalclass.bgmusic.play(1);
+        }
+        else {
+            this.deadthings = 8;
+            this.killedahive();
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv1"), scslosifoundation::stringtoidentifier("bugs"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv2"), scslosifoundation::stringtoidentifier("bugs"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv3"), scslosifoundation::stringtoidentifier("bugs"));
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghv4"), scslosifoundation::stringtoidentifier("bugs"));
+        }
         return null;
     }
     
@@ -83,6 +92,18 @@ class bugpitpuzzle_class {
             this.door_goal_b.cleanupfull();
             this.door_goal_b = null;
         }
+        if (this.door_trap_original != null) {
+            this.door_trap_original.cleanupfull();
+            this.door_trap_original = null;
+        }
+        if (this.door_goal_a_original != null) {
+            this.door_goal_a_original.cleanupfull();
+            this.door_goal_a_original = null;
+        }
+        if (this.door_goal_b_original != null) {
+            this.door_goal_b_original.cleanupfull();
+            this.door_goal_b_original = null;
+        }
         if (this.trapdoortimer != null) {
             this.trapdoortimer.cleanupfull();
             this.trapdoortimer = null;
@@ -92,6 +113,7 @@ class bugpitpuzzle_class {
         this.hive3handle = null;
         this.hive4handle = null;
         this.deadthings = null;
+        this.trapdoorshut = null;
         return null;
     }
     
@@ -115,19 +137,15 @@ class bugpitpuzzle_class {
     }
     
     method onevent(param1) {
-        var var1;
-        var var2;
         if (param1.eventid == 4) {
-            var1 = param1.args[0];
-            if (var1 == scslosifoundation::stringtoidentifier("trap")) {
-                if (this.trapdoorshut == 0) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("trap")) {
+                if ((this.trapdoorshut == 0) && (bettersaver::getbooleanvalue(72) == 0))  {
                     this.trapdooraction();
                 }
             }
         }
         else if (param1.eventid == 8) {
-            var2 = param1.args[0];
-            if (var2 == scslosifoundation::stringtoidentifier("trip")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("trip")) {
                 this.parent.level.cam.setaimode(11);
                 globalclass.player.actor.setinputstate("ninp");
                 globalclass.player.actor.idle();
@@ -187,6 +205,9 @@ class bugpitpuzzle_class {
             var1 = 5.5;
             globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
             globalclass.bgmusic.play(1);
+            if (bettersaver::getbooleanvalue(72) == 0) {
+                bettersaver::setbooleanvalue(72, 1);
+            }
         }
         else {
             var1 = this.deadthings * 0.25;
