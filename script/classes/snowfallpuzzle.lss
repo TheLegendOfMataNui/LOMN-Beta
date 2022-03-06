@@ -88,9 +88,9 @@ class snowfallpuzzle {
             this.snowballarray[var1].obj.setignoreallcollisions(0);
             var1 = var1 + 1;
         }
-        this.parent.parent.cam.makespline("Root/Data/Levels/lev4/snfl/snfl_CAM.slb");
-        this.parent.parent.cam.setspline(0, 4.0, 1, 1);
-        this.parent.parent.cam.settargetspline(3, 1, 1);
+        this.parent.level.cam.makespline("Root/Data/Levels/lev4/snfl/snfl_CAM.slb");
+        this.parent.level.cam.setspline(0, 4.0, 1, 1);
+        this.parent.level.cam.settargetspline(3, 1, 1);
         this.switchinterptimer = new lego_timer("sint", 2.0, 0);
         this.switchinterptimer.initfull();
         this.boulderintervaltimer = new lego_timer("bint", 1.0, 0);
@@ -252,7 +252,7 @@ class snowfallpuzzle {
         if (param1.eventid == 8) {
             if (scslosifoundation::identifiertostring(param1.args[0]) == "sint") {
                 globalclass.hud.hide();
-                this.parent.parent.cam.setaimode(3);
+                this.parent.level.cam.setaimode(3);
             }
             else if (scslosifoundation::identifiertostring(param1.args[0]) == "bint") {
                 if (this.currentboulder <= 2) {
@@ -279,7 +279,7 @@ class snowfallpuzzle {
         }
         else if (param1.eventid == 6) {
             globalclass.player.actor.setorientation(90);
-            this.parent.parent.cam.setaimode(11);
+            this.parent.level.cam.setaimode(11);
             globalclass.hud.show();
             globalclass.player.actor.setinputstate("ninp");
             this.boulderintervaltimer.reset(0);
@@ -290,14 +290,14 @@ class snowfallpuzzle {
     }
     
     method resetb() {
-        this.parent.parent.cam.setspline(0, 4.0, 1);
-        this.parent.parent.cam.settargetspline(3, 1);
+        this.parent.level.cam.setspline(0, 4.0, 1);
+        this.parent.level.cam.settargetspline(3, 1);
         globalclass.player.actor.setpos(0 - 139.6, 0.9, -81);
         globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("k000"));
         globalclass.player.unkill();
         globalclass.player.actor.setorientation(180);
         gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        this.parent.parent.cam.setaimode(11);
+        this.parent.level.cam.setaimode(11);
         this.reset();
         this.hitswitchonce = 1;
         this.currentboulder = 0;
