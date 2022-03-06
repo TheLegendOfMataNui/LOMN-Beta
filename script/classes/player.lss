@@ -449,9 +449,12 @@ class player {
                 //Set up the specified trigger box IDs to be used as killboxes
                 debug::print("You hit triggerbox: " + scslosifoundation::identifiertostring(param1.args[0]));
                 if ((trig_box_id0) || (trig_box_id1) || (trig_box_id2) || (trig_box_id3) || (trig_box_id4) || (trig_box_id5) || (trig_box_id6) || (trig_box_id7) || (trig_box_id8) || (trig_box_id9) || (trig_box_id10) || (trig_box_id11)) {
-                    globalclass.player.kill();
-                    gcstaticsoundsptrarray::playtablesound(1048);
-                    globalclass.player.actor.setinputstate("none");
+                    //This is a temporary check to make sure this doesn't fire in wdmn due to tb01 being a hardcoded ID there
+                    if (gcareadirector::getcurrentarea() != scslosifoundation::stringtoidentifier("wdmn")) {
+                        globalclass.player.kill();
+                        gcstaticsoundsptrarray::playtablesound(1048);
+                        globalclass.player.actor.setinputstate("none");
+                    }
                 }
                 //Set up the specified trigger box IDs to be used as surfing/sliding killboxes and ignore certain respawn code
                 else if ((trig_box_surf0) || (trig_box_surf1) || (trig_box_surf2) || (trig_box_surf3) || (trig_box_surf4) || (trig_box_surf5) || (trig_box_surf6) || (trig_box_surf7) || (trig_box_surf8) || (trig_box_surf9)) {
