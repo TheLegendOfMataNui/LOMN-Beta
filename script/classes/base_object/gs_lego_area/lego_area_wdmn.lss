@@ -11,8 +11,6 @@ class lego_area_wdmn : gs_lego_area {
     method initfull() {
         this.lego_area_show();
         this.puzzle.initfull();
-        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
-        gclightdirector::setcavelighting(0);
         return null;
     }
     
@@ -39,7 +37,7 @@ class lego_area_wdmn : gs_lego_area {
 
     method exit() {
         this.lego_area_cleanupfull();
-        if (!(this.puzzle == null)) {
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }

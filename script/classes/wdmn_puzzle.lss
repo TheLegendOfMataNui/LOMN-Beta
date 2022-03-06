@@ -13,14 +13,14 @@ class wdmn_puzzle {
     }
     
     method initfull() {
-        var var1;
         var var2;
-        var1 = scslosifoundation::stringtoidentifier("ston");
-        if (gcsaver::finditem(var1) == 0) {
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("ston")) == 0) {
             this.stone = new lego_pickup("ston", 0, 4, "item", 8, 0);
             this.stone.initfull();
             this.stone.show();
-            gcareadirector::hide(var1, var1);
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ston"), scslosifoundation::stringtoidentifier("wdmn"));
         }
         this.hasstone = 0;
         var2 = scslosifoundation::stringtoidentifier("wind");
@@ -36,10 +36,12 @@ class wdmn_puzzle {
     method reset() {
         globalclass.player.actor.gotopos(this.mparent.enterstartid, this.mparent.enterlookid);
         globalclass.player.unkill();
-        gcwindboss::reset(this.mwindy);
+        if (this.isdead == 0) {
+            gcwindboss::reset(this.mwindy);
+        }
         globalclass.player.actor.setinputstate("ninp");
         this.mparent.level.cam.setaimode(11);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("wb00"), 0);
         this.playing = 0;
         return null;
     }
@@ -62,11 +64,10 @@ class wdmn_puzzle {
             var1 = scslosifoundation::stringtoidentifier("wind");
             gcmodeldirector::remove(var1, var1);
         }
-        if (!(this.stone == null)) {
+        if (this.stone != null) {
             this.stone.cleanupfull();
             this.stone = null;
         }
-        globalclass.player.maskcontrol.usemasks(1);
         return null;
     }
     
@@ -76,7 +77,7 @@ class wdmn_puzzle {
     
     method onevent(param1) {
         if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) {
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("wb00")) {
                 if (this.isdead == 1) {
                     if (this.hasstone == 1) {
                         globalclass.setnextlevel("lev6", 1);

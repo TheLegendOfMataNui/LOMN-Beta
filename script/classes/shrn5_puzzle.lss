@@ -134,13 +134,6 @@ class shrn5_puzzle {
                 }
             }
         }
-        else if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
-                globalclass.player.kill();
-                gcstaticsoundsptrarray::playtablesound(1048);
-                globalclass.player.actor.setinputstate("none");
-            }
-        }
         else if (param1.eventid == 30) {
             globalclass.player.maskcontrol.changemask(10);
 		    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
@@ -148,7 +141,7 @@ class shrn5_puzzle {
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             globalclass.player.unkill();
             globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("l000"));
             this.parent.level.cam.setaimode(11);

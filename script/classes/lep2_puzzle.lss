@@ -163,14 +163,6 @@ class lep2_puzzle {
                 this.firethestingofdeathtimer.start();
             }
         }
-        else if (param1.eventid == 3) {
-            debug::print("You hit triggerbox: " + scslosifoundation::identifiertostring(param1.args[0]));
-            if (scslosifoundation::identifiertostring(param1.args[0]) != "hrny") {
-                globalclass.player.kill();
-                globalclass.player.actor.setinputstate("none");
-                gcstaticsoundsptrarray::playtablesound(1048);
-            }
-        }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             globalclass.player.unkill();
