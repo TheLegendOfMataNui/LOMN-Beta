@@ -22,9 +22,11 @@ class ta026_puzzle {
     
     method initfull() {
         var var1;
-        var var2;
+        gcareadirector::setfog(-11197901, 0 - 1.0, 0 - 900.0, 0.15);
         gcareadirector::setnearestmaxdist(1000);
         gcareadirector::setnearestmax(50);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.play();
         this.secretdoorshow = 0;
         this.ded = 0;
         this.platformarray = [ new bounceyplatform("pl00"), 
@@ -67,9 +69,11 @@ class ta026_puzzle {
         var1 = 0;
         while ((this.hotobjarray.__length - 1) >= var1) {
             this.hotobjarray[var1].initfull();
-            this.hotobjarray[var1].setresponse(4, 4, 4);
             var1 = var1 + 1;
         }
+        this.hotobjarray[0].setresponse(4, 4, 4);
+        this.hotobjarray[1].setresponse(0, 0, 0);
+        this.hotobjarray[1].setcrushflags(1, 1, 1, 1, 1, 1);
         this.coldobjarray = [ new lego_moveableobject("add2"), 
             new lego_moveableobject("bldr"), 
             new lego_moveableobject("adon") ];
@@ -113,28 +117,25 @@ class ta026_puzzle {
             this.state = 0;
         }
         this.setup_hot_or_cold();
-        var2 = gcsaver::finditem(scslosifoundation::stringtoidentifier("sled"));
-        if (var2 == 0) {
+        if (gcsaver::finditem(scslosifoundation::stringtoidentifier("sled")) == 0) {
             this.boardpickup = new lego_pickup("sled", 0, 5, "item", 6, 1);
             this.boardpickup.initfull();
             this.boardpickup.show();
             this.boardpickup.setcondition(131072);
             this.boardpickup.setquest(3);
         }
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicMakutaTheme");
-        globalclass.bgmusic.play(1);
+        else {
+            this.boardpickup = new lego_moveableobject("sled");
+            this.boardpickup.initfull();
+            this.boardpickup.hide();
+        }
         if (this.state == 1) {
             if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin5")) == 0) {
                 this.cinema = gccinemaengine::create();
                 gccinemaengine::load(this.cinema, "cin5");
-                globalclass.hud.hide();
-                if (globalclass.player.maskcontrol.isactive() == 1) {
-                    globalclass.player.maskcontrol.toggleactive();
-                }
                 this.cinemadone = 0;
                 gccinemaengine::play(this.cinema);
-                globalclass.bgmusic.stop();
-                debug::print("play cinema cin5 for ta02");
+                debug::print("play cinema cin5 for ta02");               
             }
         }
         return null;
@@ -142,7 +143,7 @@ class ta026_puzzle {
     
     method cleanupfull() {
         var var1;
-        if (!(this.boardpickup == null)) {
+        if (this.boardpickup != null) {
             this.boardpickup.cleanupfull();
             this.boardpickup = null;
         }
@@ -194,7 +195,7 @@ class ta026_puzzle {
         this.parent.level.cam.setaimode(11);
         return null;
     }
-        
+    
     method exit() {
         this.parent = null;
         return null;
@@ -253,15 +254,21 @@ class ta026_puzzle {
             this.ded = 0;
         }
         else if (param1.eventid == 30) {
-            globalclass.hud.show();
             globalclass.player.actor.setpos(0 - 261.3, 222.3, 470.6);
             globalclass.player.actor.setorientation(31.9);
             this.cinemadone = 1;
-            globalclass.bgmusic.play(1);
+            this.ded = 0;
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+            globalclass.bgmusic.play();
             globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("????"));
         }
         else if (param1.eventid == 44) {
-            
+            if (this.cinemadone == 0) {
+                this.ded = 1;
+            }
+        }
+        else if (param1.eventid == 46) {
+            globalclass.level.cam.setaimode(7);
         }
         return null;
     }
@@ -269,11 +276,10 @@ class ta026_puzzle {
     method input(param1) {
         if (param1.event == 2) {
             if (param1.button == 251) {
-                if (!(this.cinema == null)) {
+                if (this.cinema != null) {
                     gccinemaengine::stop(this.cinema);
                 }
             }
-            param1.button;
         }
         if (param1.button == 89) {
             if (param1.event == 2) {
@@ -337,17 +343,6 @@ class ta026_puzzle {
                 var1 = var1 + 1;
             }
             this.coldlava.show();
-        }
-        return null;
-    }
-    
-    method setstate(param1) {
-        this.state = param1;
-        if (this.state == 0) {
-            gcsaver::setcondition(4194304, 0);
-        }
-        else {
-            gcsaver::setcondition(4194304, 1);
         }
         return null;
     }
