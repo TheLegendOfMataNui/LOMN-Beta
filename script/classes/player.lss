@@ -227,7 +227,12 @@ class player {
             if ((param1.eventid == 40)  && (this.toadied == 0)) {
                 if (param1.args[1] != null) {
                     debug::print("ouch! by " + __tostring(param1.args[1]));
-                    gcstaticsoundsptrarray::playtablesound(1098);
+                    if ((param1.args[1] == scslosifoundation::stringtoidentifier("crsh")) || (param1.args[1] == scslosifoundation::stringtoidentifier("hell"))) {
+                        debug::print("Damaged by " + scslosifoundation::identifiertostring(param1.args[1]) + ", not playing damage sound");
+                    }
+                    else {
+                        gcstaticsoundsptrarray::playtablesound(1098);
+                    }
                 }
                 else {
                     debug::print("ARGS 1 = NOTHING");
