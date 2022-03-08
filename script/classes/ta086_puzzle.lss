@@ -2,7 +2,6 @@ class ta086_puzzle {
     property parent;
     property checkifsurfingabilityneedstobeset;
     property setsurfing;
-    property tiggerboxid;
     
     method ta086_puzzle(param1) {
         this.parent = param1;
@@ -13,7 +12,6 @@ class ta086_puzzle {
         globalclass.settestforlavacollisions(0);
         this.checkifsurfingabilityneedstobeset = 1;
         this.setsurfing = 0;
-        this.tiggerboxid = null;
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicSurfAndSnowboard");
         globalclass.bgmusic.play(1);
         this.setsurfmode(1);
@@ -22,7 +20,8 @@ class ta086_puzzle {
     
     method initshort() {
         globalclass.player.unkill();
-        gccollisionphysicsgroup::toggletriggerboxentered(this.tiggerboxid, 0);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb00"), 0);
+        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb01"), 0);
         this.parent.level.cam.setaimode(11);
         this.setsurfmode(1);
         return null;
@@ -71,7 +70,6 @@ class ta086_puzzle {
     }
     
     method onevent(param1) {
-        var var1;
         if (param1.eventid == 1) {
             
         }
@@ -84,19 +82,6 @@ class ta086_puzzle {
             this.parent.level.cam.setaimode(11);
             this.cleanupshort();
             this.initshort();
-        }
-        else if (param1.eventid == 3) {
-            var1 = param1.args[0];
-            if (var1 == scslosifoundation::stringtoidentifier("tb00")) {
-                globalclass.player.kill();
-                this.tiggerboxid = scslosifoundation::stringtoidentifier("tb00");
-                debug::print("hit 1st trigerBox");
-            }
-            if (var1 == scslosifoundation::stringtoidentifier("tb01")) {
-                globalclass.player.kill();
-                this.tiggerboxid = scslosifoundation::stringtoidentifier("tb01");
-                debug::print("hit 2nd trigerBox");
-            }
         }
         return null;
     }
