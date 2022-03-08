@@ -1,5 +1,6 @@
 class tst2_puzzle {
     property parent;
+    property locky;
     
     method tst2_puzzle(param1) {
         this.parent = param1;
@@ -7,10 +8,20 @@ class tst2_puzzle {
     }
     
     method initfull() {
+        this.locky = new gs_lego_character("hydr", "hydr", "fake", -80, 50.1, 3.9, -47.7, "none");
+        this.locky.initfull();
+        this.locky.add(0);
+        this.locky.show();
+        this.locky.settweakable();
+        this.locky.morphmidcharacter(1, 2, 3, 6, 1);
         return null;
     }
     
     method cleanupfull() {
+        if (this.locky != null) {
+            this.locky.cleanupfull();
+            this.locky = null;
+        }
         return null;
     }
     
@@ -19,6 +30,11 @@ class tst2_puzzle {
     }
 
     method onevent(param1) {
+        if (param1.eventid == 27) {
+            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.idle();
+        }
         return null;
     }
     
