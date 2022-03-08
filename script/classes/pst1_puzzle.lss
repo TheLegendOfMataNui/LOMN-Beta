@@ -105,14 +105,7 @@ class pst1_puzzle {
     }
 
     method onevent(param1) {
-        if (param1.eventid == 3) {
-            if (param1.args[0] == scslosifoundation::stringtoidentifier("tb01")) {
-                globalclass.player.kill();
-                gcstaticsoundsptrarray::playtablesound(1048);
-                globalclass.player.actor.setinputstate("none");
-            }
-        }
-        else if (param1.eventid == 1) {
+        if (param1.eventid == 1) {
             if (param1.args[0] == this.platforms[3].obj.id) {
                 this.platforms[3].activate();
             }
@@ -122,7 +115,7 @@ class pst1_puzzle {
             globalclass.player.unkill();
             globalclass.player.actor.setinputstate("ninp");
             this.parent.level.cam.setaimode(11);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
+            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             this.reset();
         }
         return null;
