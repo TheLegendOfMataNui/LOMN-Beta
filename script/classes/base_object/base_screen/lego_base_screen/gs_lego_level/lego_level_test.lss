@@ -29,6 +29,10 @@ class lego_level_test : gs_lego_level {
         globalclass.player.addmask("fake", 10);
         globalclass.player.addmask("fake", 11);
         globalclass.player.addmask("fake", 12);
+        if (globalclass.saverloaded) {
+            globalclass.player.initfromsaver();
+        }
+        globalclass.saverloaded = 0;
         return null;
     }
     
