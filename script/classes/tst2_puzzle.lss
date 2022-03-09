@@ -1,6 +1,8 @@
 class tst2_puzzle {
     property parent;
     property locky;
+    property platform1;
+    property platform2;
     
     method tst2_puzzle(param1) {
         this.parent = param1;
@@ -8,12 +10,23 @@ class tst2_puzzle {
     }
     
     method initfull() {
+        //hydr test
         this.locky = new gs_lego_character("hydr", "hydr", "fake", -80, 50.1, 3.9, -47.7, "none");
         this.locky.initfull();
         this.locky.add(0);
         this.locky.show();
         this.locky.settweakable();
         this.locky.morphmidcharacter(1, 2, 3, 6, 1);
+
+        //plt1 for water bcl testing
+        this.platform1 = new lego_moveableobject("plt1");
+        this.platform1.initfull();
+        this.platform1.settweakable();
+
+        //plt2 for water bcl testing
+        this.platform2 = new lego_moveableobject("plt2");
+        this.platform2.initfull();
+        this.platform2.settweakable();
         return null;
     }
     
@@ -21,6 +34,14 @@ class tst2_puzzle {
         if (this.locky != null) {
             this.locky.cleanupfull();
             this.locky = null;
+        }
+        if (this.platform1 != null) {
+            this.platform1.cleanupfull();
+            this.platform1 = null;
+        }
+        if (this.platform2 != null) {
+            this.platform2.cleanupfull();
+            this.platform2 = null;
         }
         return null;
     }
@@ -39,6 +60,23 @@ class tst2_puzzle {
     }
     
     method input(param1) {
+        if (param1.event == 2) {
+            if (param1.button == 231) {
+                debug::print("Interpolating platforms!"); 
+                if (this.platform1.gety() == 0) { 
+                    this.platform1.interpolate(this.platform1.getx(), this.platform1.gety() + 17.6, this.platform1.getz(), 4.0);            
+                }
+                else if (this.platform1.gety() == 17.6) { 
+                    this.platform1.interpolate(this.platform1.getx(), this.platform1.gety() - 17.6, this.platform1.getz(), 4.0);            
+                }
+                if (this.platform2.gety() == 0) { 
+                    this.platform2.interpolate(this.platform2.getx(), this.platform2.gety() + 34.4, this.platform2.getz(), 4.0);            
+                }
+                else if (this.platform2.gety() == 34.4) { 
+                    this.platform2.interpolate(this.platform2.getx(), this.platform2.gety() - 34.4, this.platform2.getz(), 4.0);            
+                }                
+            }
+        }
         return null;
     }
     
