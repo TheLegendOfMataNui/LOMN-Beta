@@ -63,20 +63,25 @@ class tst2_puzzle {
         if (param1.event == 2) {
             if (param1.button == 231) {
                 debug::print("Interpolating platforms!"); 
-                if (this.platform1.gety() == 0) { 
-                    this.platform1.interpolate(this.platform1.getx(), this.platform1.gety() + 17.6, this.platform1.getz(), 4.0);            
-                }
-                else if (this.platform1.gety() == 17.6) { 
-                    this.platform1.interpolate(this.platform1.getx(), this.platform1.gety() - 17.6, this.platform1.getz(), 4.0);            
-                }
-                if (this.platform2.gety() == 0) { 
-                    this.platform2.interpolate(this.platform2.getx(), this.platform2.gety() + 34.4, this.platform2.getz(), 4.0);            
-                }
-                else if (this.platform2.gety() == 34.4) { 
-                    this.platform2.interpolate(this.platform2.getx(), this.platform2.gety() - 34.4, this.platform2.getz(), 4.0);            
-                }                
+                this.interpolate_platforms();
             }
         }
+        return null;
+    }
+    
+    method interpolate_platforms(param1) {
+        if (this.platform1.gety() == 0) { 
+            this.platform1.interpolate(this.platform1.getx(), this.platform1.gety() + 17.6, this.platform1.getz(), 4.0);            
+        }
+        else if (this.platform1.gety() == 17.6) { 
+            this.platform1.interpolate(this.platform1.getx(), this.platform1.gety() - 17.6, this.platform1.getz(), 4.0);            
+        }
+        if (this.platform2.gety() == 0) { 
+            this.platform2.interpolate(this.platform2.getx(), this.platform2.gety() + 34.4, this.platform2.getz(), 4.0);            
+        }
+        else if (this.platform2.gety() == 34.4) { 
+            this.platform2.interpolate(this.platform2.getx(), this.platform2.gety() - 34.4, this.platform2.getz(), 4.0);            
+        }                
         return null;
     }
     
