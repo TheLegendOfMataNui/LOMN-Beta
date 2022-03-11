@@ -114,10 +114,13 @@ class acmaskpuzzle {
                     var2 = globalclass.player.actor.getpos();
                     if (((((var1.x1 - var2.x1) < 10) && ((var1.x1 - var2.x1) > -10)) && ((var1.z - var2.z) < 10)) && ((var1.z - var2.z) > -10)) {
                         globalclass.hud.hide();
-                        gccinemaengine::play(this.cinema2);
-                        this.cinema2_shown = 1;
-                        globalclass.player.maskcontrol.toggleactive();
-                        globalclass.hud.mask.hide();
+                        globalclass.player.actor.deactivatedragger();
+                        if (globalclass.player.actor.isdraggeractive() == 0) {
+                            gccinemaengine::play(this.cinema2);
+                            this.cinema2_shown = 1;
+                            globalclass.player.maskcontrol.toggleactive();
+                            globalclass.hud.mask.hide();
+                        }
                     }
                 }
             }
@@ -150,17 +153,19 @@ class acmaskpuzzle {
         }
         else if (param1.eventid == 11) {
             if (scslosifoundation::identifiertostring(param1.args[1]) == "p047") {
-                globalclass.hud.hide();
-                gccinemaengine::play(this.cinema1);
-                this.cinema1_shown = 1;
-                this.bully.aiidle();
-                this.bully.setpos(79.0, 0.15, 161.0);
-                this.bully.disableanim(scslosifoundation::stringtoidentifier("bl08"));
-                this.bully.disableanim(scslosifoundation::stringtoidentifier("bl09"));
-                this.bully.aipatrol();
-                if (globalclass.player.maskcontrol.isactive()) {
-                    globalclass.player.maskcontrol.toggleactive();
-                    globalclass.hud.mask.hide();
+                globalclass.player.actor.deactivatedragger();
+                if (globalclass.player.actor.isdraggeractive() == 0) {
+                    gccinemaengine::play(this.cinema1);
+                    this.cinema1_shown = 1;
+                    this.bully.aiidle();
+                    this.bully.setpos(79.0, 0.15, 161.0);
+                    this.bully.disableanim(scslosifoundation::stringtoidentifier("bl08"));
+                    this.bully.disableanim(scslosifoundation::stringtoidentifier("bl09"));
+                    this.bully.aipatrol();
+                    if (globalclass.player.maskcontrol.isactive()) {
+                        globalclass.player.maskcontrol.toggleactive();
+                        globalclass.hud.mask.hide();
+                    }
                 }
             }
         }
