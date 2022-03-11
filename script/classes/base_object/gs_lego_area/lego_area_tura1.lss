@@ -1,4 +1,5 @@
 class lego_area_tura1 : gs_lego_area {
+    property legendplayed;
     
     method lego_area_tura1(param1) {
         this.gs_lego_area("tura", param1, 0, 0);
@@ -39,7 +40,10 @@ class lego_area_tura1 : gs_lego_area {
     
     method onevent(param1) {
         if (param1.eventid == 29) {
-            globalclass.hud.hide();
+            if (this.legendplayed == 1) {
+                globalclass.hud.hide();
+                this.legendplayed = null;
+            }
         }
         return null;
     }
@@ -57,6 +61,7 @@ class lego_area_tura1 : gs_lego_area {
     method playlegend() {
         var var1;
         if (bettersaver::getbooleanvalue(50) == 0) {
+            this.legendplayed = 1;
             if (gcareadirector::getlanguage() == 0) {
                 gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVEn.bik", 1);
             }
