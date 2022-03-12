@@ -877,8 +877,11 @@ class player {
             var1.send();
             globalclass.hud.hide();
             this.removeequipment();
-            //Disable player collision with other characters to create an invincibility period during respawn
-            globalclass.player.actor.disablecollisions();
+            //Don't run this in drgn since it breaks collision with the platforms on respawn
+            if (gcareadirector::getcurrentarea() != scslosifoundation::stringtoidentifier("drgn")) {
+                //Disable player collision with other characters to create an invincibility period during respawn
+                globalclass.player.actor.disablecollisions();
+            }
         }
         return null;
     }
