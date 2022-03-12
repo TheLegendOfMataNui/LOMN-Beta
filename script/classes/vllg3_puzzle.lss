@@ -46,7 +46,6 @@ class vllg3_puzzle {
     }
     
     method initfull() {
-        var door_text;
         this.golyo = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
         this.hafu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
         this.huki = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
@@ -335,11 +334,6 @@ class vllg3_puzzle {
         return null;
     }
     
-    method exit() {
-        this.parent = null;
-        return null;
-    }
-    
     method process(param1) {
         this.rotatecrystal();
         if (this.coindoortexttimer > 0) {
@@ -459,11 +453,18 @@ class vllg3_puzzle {
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema != null) {
-                gccinemaengine::stop(this.cinema);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
             }
         }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
         return null;
     }
     

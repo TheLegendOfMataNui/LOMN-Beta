@@ -4,8 +4,8 @@ class lego_area_vllg1 : gs_lego_area {
     
     method lego_area_vllg1(param1) {
         this.gs_lego_area("vllg", param1, 0, 0);
-        this.lego_area_initfull();
         this.puzzle = new vllg1_puzzle(this);
+        this.lego_area_initfull();
         return null;
     }
     
@@ -30,13 +30,15 @@ class lego_area_vllg1 : gs_lego_area {
         return null;
     }
     
-    method input(param1) {
-        this.puzzle.input(param1);
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema != null) {
-                gccinemaengine::stop(this.cinema);
-            }
-        }
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        this.cinema = null;
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
         return null;
     }
     
@@ -62,15 +64,15 @@ class lego_area_vllg1 : gs_lego_area {
         return null;
     }
     
-    method process(param1) {
-        this.puzzle.process(param1);
-        return null;
-    }
-    
-    method cleanupfull() {
-        this.lego_area_hide();
-        this.puzzle.cleanupfull();
-        this.cinema = null;
+    method input(param1) {
+        this.puzzle.input(param1);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
+            }
+        }
         return null;
     }
     

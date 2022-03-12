@@ -342,11 +342,6 @@ class vllg5_puzzle {
         return null;
     }
     
-    method exit() {
-        this.parent = null;
-        return null;
-    }
-    
     method process(param1) {
         this.rotatecrystal();
         if (this.coindoortexttimer > 0) {
@@ -373,7 +368,7 @@ class vllg5_puzzle {
                 this.taskcomplete = 1;
             }
         }
-        if (param1.eventid == 1) {
+        else if (param1.eventid == 1) {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("door")) {
                 if (this.showcoindoor == 1) {
                     if ((globalclass.player.tokens >= 8) && (gcsaver::isconditionset(4194304))) {
@@ -469,6 +464,11 @@ class vllg5_puzzle {
                 gccinemaengine::stop(this.cinema);
             }
         }
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
         return null;
     }
     
