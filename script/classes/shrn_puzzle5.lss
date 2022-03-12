@@ -29,10 +29,13 @@ class shrn_puzzle5 {
         this.doorz = this.bossdoor.getz();
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2"))) {
             if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
-                this.cinema = gccinemaengine::create();
-                gccinemaengine::load(this.cinema, "cin3");
-                gccinemaengine::startatframe(this.cinema, 544);
-                gccinemaengine::play(this.cinema);
+                globalclass.player.actor.deactivatedragger();
+                if (globalclass.player.actor.isdraggeractive() == 0) {
+                    this.cinema = gccinemaengine::create();
+                    gccinemaengine::load(this.cinema, "cin3");
+                    gccinemaengine::startatframe(this.cinema, 544);
+                    gccinemaengine::play(this.cinema);
+                }
             }
         }
         matau = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"), 0);

@@ -232,9 +232,12 @@ class ta056_puzzle {
     
     method startcinematic() {
         globalclass.hud.hide();
-        gccinemaengine::play(this.mcinema);
-        if (globalclass.player.maskcontrol.isactive() == 1) {
-            globalclass.player.maskcontrol.toggleactive();
+        globalclass.player.actor.deactivatedragger();
+        if (globalclass.player.actor.isdraggeractive() == 0) {
+            gccinemaengine::play(this.mcinema);
+            if (globalclass.player.maskcontrol.isactive() == 1) {
+                globalclass.player.maskcontrol.toggleactive();
+            }
         }
         return null;
     }

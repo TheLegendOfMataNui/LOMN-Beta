@@ -43,13 +43,16 @@ class shrn6_puzzle {
         }
         if (globalclass.player.actor.getposx() > 50) {
             if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
-                this.cinema = gccinemaengine::create();
-                gccinemaengine::load(this.cinema, "cin3");
-                globalclass.hud.hide();
-                if (globalclass.player.maskcontrol.isactive() == 1) {
-                    globalclass.player.maskcontrol.toggleactive();
+                globalclass.player.actor.deactivatedragger();
+                if (globalclass.player.actor.isdraggeractive() == 0) {
+                    this.cinema = gccinemaengine::create();
+                    gccinemaengine::load(this.cinema, "cin3");
+                    globalclass.hud.hide();
+                    if (globalclass.player.maskcontrol.isactive() == 1) {
+                        globalclass.player.maskcontrol.toggleactive();
+                    }
+                    gccinemaengine::play(this.cinema);
                 }
-                gccinemaengine::play(this.cinema);
             }
         }
         return null;

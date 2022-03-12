@@ -131,11 +131,14 @@ class ta026_puzzle {
         }
         if (this.state == 1) {
             if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin5")) == 0) {
-                this.cinema = gccinemaengine::create();
-                gccinemaengine::load(this.cinema, "cin5");
-                this.cinemadone = 0;
-                gccinemaengine::play(this.cinema);
-                debug::print("play cinema cin5 for ta02");               
+                globalclass.player.actor.deactivatedragger();
+                if (globalclass.player.actor.isdraggeractive() == 0) {
+                    this.cinema = gccinemaengine::create();
+                    gccinemaengine::load(this.cinema, "cin5");
+                    this.cinemadone = 0;
+                    gccinemaengine::play(this.cinema);
+                    debug::print("play cinema cin5 for ta02");               
+                }
             }
         }
         return null;
