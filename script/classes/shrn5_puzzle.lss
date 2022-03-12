@@ -44,11 +44,15 @@ class shrn5_puzzle {
         this.bossdoortext2.add();
         this.bossdoortexttimer = 0.0;
 
+        //Load and play cinematic if cin2 played and cin3 hasn't been played
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2"))) {
             if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
-                this.cinema = gccinemaengine::create();
-                gccinemaengine::load(this.cinema, "cin3");
-                gccinemaengine::play(this.cinema);
+                globalclass.player.actor.deactivatedragger();
+                if (globalclass.player.actor.isdraggeractive() == 0) {
+                    this.cinema = gccinemaengine::create();
+                    gccinemaengine::load(this.cinema, "cin3");
+                    gccinemaengine::play(this.cinema);
+                }
             }
         }
         matau = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"), 0);

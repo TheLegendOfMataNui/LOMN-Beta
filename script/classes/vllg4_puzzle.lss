@@ -455,22 +455,25 @@ class vllg4_puzzle {
         else if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin3")) && (this.cinema_shown == 0)) {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
-                    gccinemaengine::play(this.cinema);
-                    //Remove Tohunga hand/foot items
-                    if (this.skateactive == 1) {
-                        gccharacter::removepart(this.kokkan, 1);
-                    }
-                    if (this.elementactive == 1) {
-                        gccharacter::removepart(this.jaatikko, 1);
-                    }
-                    gccharacter::removepart(this.zaskra, 2);
-                    gccharacter::removepart(this.toudo, 2);
-                    gccharacter::removepart(this.pakastaa, 2);
-                    gccharacter::removepart(this.talvi, 2);
-                    this.cinema_shown = 1;
-                    if (globalclass.player.maskcontrol.isactive()) {
+                    globalclass.player.actor.deactivatedragger();
+                    if (globalclass.player.actor.isdraggeractive() == 0) {
+                        gccinemaengine::play(this.cinema);
+                        //Remove Tohunga hand/foot items
+                        if (this.skateactive == 1) {
+                            gccharacter::removepart(this.kokkan, 1);
+                        }
+                        if (this.elementactive == 1) {
+                            gccharacter::removepart(this.jaatikko, 1);
+                        }
+                        gccharacter::removepart(this.zaskra, 2);
+                        gccharacter::removepart(this.toudo, 2);
+                        gccharacter::removepart(this.pakastaa, 2);
+                        gccharacter::removepart(this.talvi, 2);
+                        this.cinema_shown = 1;
+                        if (globalclass.player.maskcontrol.isactive()) {
                             globalclass.player.maskcontrol.toggleactive();
                             globalclass.hud.mask.hide();
+                        }
                     }
                 }
             }

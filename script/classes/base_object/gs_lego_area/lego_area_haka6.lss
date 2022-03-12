@@ -33,10 +33,13 @@ class lego_area_haka6 : gs_lego_area {
         globalclass.bgmusic.play(1);
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 0) {
             if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
-                this.cinema = gccinemaengine::create();
-                gccinemaengine::load(this.cinema, "cin2");
-                gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("tura"));
-                gccinemaengine::play(this.cinema);
+                globalclass.player.actor.deactivatedragger();
+                if (globalclass.player.actor.isdraggeractive() == 0) {
+                    this.cinema = gccinemaengine::create();
+                    gccinemaengine::load(this.cinema, "cin2");
+                    gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("tura"));
+                    gccinemaengine::play(this.cinema);
+                }
             }
         }
         this.safecount = 0;

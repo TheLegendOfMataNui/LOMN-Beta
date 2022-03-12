@@ -64,12 +64,15 @@ class shrn6_puzzle {
             gccollisionphysicsgroup::turnoffnextarea(portal_trigger);
         }
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
-            this.cinema = gccinemaengine::create();
-            gccinemaengine::load(this.cinema, "cin3");
-            if (globalclass.player.maskcontrol.isactive() == 1) {
-                globalclass.player.maskcontrol.toggleactive();
+            globalclass.player.actor.deactivatedragger();
+            if (globalclass.player.actor.isdraggeractive() == 0) {
+                this.cinema = gccinemaengine::create();
+                gccinemaengine::load(this.cinema, "cin3");
+                if (globalclass.player.maskcontrol.isactive() == 1) {
+                    globalclass.player.maskcontrol.toggleactive();
+                }
+                gccinemaengine::play(this.cinema);
             }
-            gccinemaengine::play(this.cinema);
         }
         else {
             globalclass.player.processequipment(2);

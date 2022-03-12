@@ -73,10 +73,13 @@ class hive_puzzle {
     }
     
     method playcinema() {
-        gccinemaengine::play(this.cinema);
-        if (globalclass.player.maskcontrol.isactive()) {
-            globalclass.player.maskcontrol.toggleactive();
-            globalclass.hud.mask.hide();
+        globalclass.player.actor.deactivatedragger();
+        if (globalclass.player.actor.isdraggeractive() == 0) {
+            gccinemaengine::play(this.cinema);
+            if (globalclass.player.maskcontrol.isactive()) {
+                globalclass.player.maskcontrol.toggleactive();
+                globalclass.hud.mask.hide();
+            }
         }
         return null;
     }

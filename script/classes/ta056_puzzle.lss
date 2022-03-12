@@ -161,10 +161,13 @@ class ta056_puzzle {
             if ((param1.args[1] == this.msurfboards[0].id) && (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1"))) {
                 if (this.mmaskon && this.cinema != null) {
                     debug::print("Playing cinematic of Tahu jumping on the surfoard");
-                    gccinemaengine::play(this.cinema);
-                    if (globalclass.player.maskcontrol.isactive() == 1) {
-                        globalclass.player.maskcontrol.toggleactive();
-                        globalclass.hud.mask.hide();
+                    globalclass.player.actor.deactivatedragger();
+                    if (globalclass.player.actor.isdraggeractive() == 0) {
+                        gccinemaengine::play(this.cinema);
+                        if (globalclass.player.maskcontrol.isactive() == 1) {
+                            globalclass.player.maskcontrol.toggleactive();
+                            globalclass.hud.mask.hide();
+                        }
                     }
                 }
                 else {

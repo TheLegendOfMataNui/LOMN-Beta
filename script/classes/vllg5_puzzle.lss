@@ -433,15 +433,18 @@ class vllg5_puzzle {
         else if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin4")) && (this.cinema_shown == 0)) {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
-                    gccinemaengine::play(this.cinema);
-                    //Remove Tohunga hand items
-                    if (bettersaver::getbooleanvalue(45) == 1) {
-                        gccharacter::removepart(this.vira, 1);
-                    }
-                    this.cinema_shown = 1;
-                    if (globalclass.player.maskcontrol.isactive()) {
+                    globalclass.player.actor.deactivatedragger();
+                    if (globalclass.player.actor.isdraggeractive() == 0) {
+                        gccinemaengine::play(this.cinema);
+                        //Remove Tohunga hand items
+                        if (bettersaver::getbooleanvalue(45) == 1) {
+                            gccharacter::removepart(this.vira, 1);
+                        }
+                        this.cinema_shown = 1;
+                        if (globalclass.player.maskcontrol.isactive()) {
                             globalclass.player.maskcontrol.toggleactive();
                             globalclass.hud.mask.hide();
+                        }
                     }
                 }
             }

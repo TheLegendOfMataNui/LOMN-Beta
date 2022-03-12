@@ -37,10 +37,13 @@ class ptos_puzzle {
             this.ballpickup.hide();
         }
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin4")) == 0) {
-            this.cinema = gccinemaengine::create();
-            gccinemaengine::load(this.cinema, "cin4");
-            globalclass.hud.hide();
-            gccinemaengine::play(this.cinema);
+            globalclass.player.actor.deactivatedragger();
+            if (globalclass.player.actor.isdraggeractive() == 0) {
+                this.cinema = gccinemaengine::create();
+                gccinemaengine::load(this.cinema, "cin4");
+                globalclass.hud.hide();
+                gccinemaengine::play(this.cinema);
+            }
         }
         return null;
     }
