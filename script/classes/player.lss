@@ -237,7 +237,7 @@ class player {
             else if (param1.eventid == 7) {
                 if ((this.gotglyph == 1) && (param1.args[2] == scslosifoundation::stringtoidentifier("glyp"))) {
                     if (gctoa::glyphdone(globalclass.player.actor.toahandle) == 1) {
-                        if (globalclass.player.energy > this.glyphpowerdrain) {
+                        if (globalclass.player.energy >= this.glyphpowerdrain) {
                             globalclass.player.removeenergy(this.glyphpowerdrain);
                             gctoa::startglyph(globalclass.player.actor.toahandle);
                         }
