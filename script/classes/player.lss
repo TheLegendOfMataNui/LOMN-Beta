@@ -121,13 +121,18 @@ class player {
             this.maskcontrol.cleanupfull();
             this.maskcontrol = null;
         }
+        this.hittrigger = null;
+        this.crashbandicootwarped = null;                        
+        if (this.warpsound != null) {
+            this.warpsound.cleanupfull();
+            this.warpsound = null;
+        }
+        this.toadied = null;
         if (this.draggercontroller != null) {
             this.draggercontroller.cleanupfull();
             this.draggercontroller = null;
         }
-        this.hittrigger = null;
-        this.crashbandicootwarped = null;                        
-        this.toadied = null;
+        this.spiraleffect = null;
         return null;
     }
     
@@ -252,7 +257,7 @@ class player {
                         this.showair(1);
                         this.airshown = 1;
                     }
-                    if ((this.splooshplayed == 0) && (this.actorid != "gali")) {                     
+                    if ((this.splooshplayed == 0) && (this.actorid != "gali") && (this.actorid != "tahu")) {                     
                         gcstaticsoundsptrarray::playtablesound(1092);
                         this.splooshplayed = 1;
                         debug::print("SPLOOSH!");
@@ -292,6 +297,19 @@ class player {
                     this.showair(0);
                     this.airshown = 0;
                     //debug::print("Done the do");
+                }
+                //Check if the toa is Gali before we continue
+                if (this.actorid == "gali") {
+                    //Set up variables for checking whether Gali is treading water or diving
+                    var tread_water_left = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g041"));
+                    var tread_water_right = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g042"));
+                    var tread_water = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g043"));
+                    var dive_underwater = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g047"));
+                    //If the current animation is Gali's diving or treading animations, disable grapple
+                    if ((tread_water_left) || (tread_water_right) || (tread_water) || (dive_underwater)) {
+                        //debug::print(__tostring(scslosifoundation::identifiertostring(this.actor.getcurrentanimationid())));
+                        this.canshootdragger(0);
+                    }
                 }
             }          
             else if (param1.eventid == 15) {
@@ -361,7 +379,7 @@ class player {
             else if (param1.eventid == 7) {
                 if ((this.gotglyph == 1) && (param1.args[2] == scslosifoundation::stringtoidentifier("glyp"))) {
                     if (gctoa::glyphdone(globalclass.player.actor.toahandle) == 1) {
-                        if (globalclass.player.energy > this.glyphpowerdrain) {
+                        if (globalclass.player.energy >= this.glyphpowerdrain) {
                             globalclass.player.removeenergy(this.glyphpowerdrain);
                             gctoa::startglyph(globalclass.player.actor.toahandle);
                         }
@@ -391,9 +409,7 @@ class player {
             }  
             else if (param1.eventid == 21) {
                 var areaid = (scslosifoundation::identifiertostring(gcareadirector::getcurrentarea()));
-                //Reinitialize the physics entirely to stop the landing noise when jumping into a trigger
-                globalclass.player.actor.initmotionsystem();
-                globalclass.player.actor.disableallraycollisions();
+                //Setup the physics again to stop the landing noise when jumping into a trigger
                 globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
                 //If gcareadirector returns the current area as one of the following areas, disable grapple.  Else, grapple should be enabled
                 if ((areaid == "vllg") || (areaid == "tura") || (areaid == "shrn") || (areaid == "mosh")) {
@@ -420,6 +436,7 @@ class player {
                     globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str9"), scslosifoundation::stringtoidentifier("lok9"));
                 }
             }
+
             //Trigger box collision event
             else if (param1.eventid == 3) {
                 //Normal killbox IDs
@@ -446,8 +463,9 @@ class player {
                 var trig_box_surf7 = param1.args[0] == scslosifoundation::stringtoidentifier("sb07");
                 var trig_box_surf8 = param1.args[0] == scslosifoundation::stringtoidentifier("sb08");
                 var trig_box_surf9 = param1.args[0] == scslosifoundation::stringtoidentifier("sb09");
-                //Set up the specified trigger box IDs to be used as killboxes
+                //Print which trigger box was entered
                 debug::print("You hit triggerbox: " + scslosifoundation::identifiertostring(param1.args[0]));
+                //Set up the specified trigger box IDs to be used as killboxes
                 if ((trig_box_id0) || (trig_box_id1) || (trig_box_id2) || (trig_box_id3) || (trig_box_id4) || (trig_box_id5) || (trig_box_id6) || (trig_box_id7) || (trig_box_id8) || (trig_box_id9) || (trig_box_id10) || (trig_box_id11)) {
                     //This is a temporary check to make sure this doesn't fire in wdmn due to tb01 being a hardcoded ID there
                     if (gcareadirector::getcurrentarea() != scslosifoundation::stringtoidentifier("wdmn")) {
@@ -464,6 +482,7 @@ class player {
                     globalclass.player.actor.setinputstate("none");
                 }
             }
+
             //Trigger plane collision event
             else if (param1.eventid == 4) {
                 var trig_plane_id0 = param1.args[0] == scslosifoundation::stringtoidentifier("tp00");
@@ -478,7 +497,7 @@ class player {
                 if (this.hittrigger == 0) {
                     //Corresponding trigger has been entered, set player to idle and increment property to avoid this from firing continuously 
                     if ((trig_plane_id0) || (trig_plane_id1) || (trig_plane_id2) || (trig_plane_id3) || (trig_plane_id4) || (trig_plane_id5) || (trig_plane_id6)) {
-                        debug::print("************* ENTERED TRIGGER PLANE, SETTING TO IDLE");
+                        debug::print("************* ENTERED TRIGGER PLANE");
                         //Check if the player jumped or swam through the trigger, and if not, set idle state as normal
                         if ((globalclass.player.actor.isjumping() == 0) && (this.submerged == 0)) {
                             debug::print("^^^^^^^^^^^^^ DIDN'T JUMP OR SWIM THROUGH TRIGGER PLANE, SETTING PLAYER TO IDLE");
@@ -486,7 +505,7 @@ class player {
                             globalclass.level.cam.setaimode(0);
                         }
                         else if ((globalclass.player.actor.isjumping() == 1) || (this.submerged == 1)) {
-                            debug::print("^^^^^^^^^^^^^ JUMPED OR SWAM THROUGH TRIGGER PLANE, NOT SETTING PLAYER TO IDLE");
+                            debug::print("############## JUMPED OR SWAM THROUGH TRIGGER PLANE, NOT SETTING PLAYER TO IDLE");
                             globalclass.level.cam.setaimode(7);                            
                         }
                         this.hittrigger = 1;
@@ -517,10 +536,12 @@ class player {
                     }
                 }
             }        
+
             //Screen black event
             else if (param1.eventid == 27) {
                 //TODO: generic unkill, camera, start position, and possibly trigger box reset code
             }
+
             //Character and object fade event
             else if (param1.eventid == 35) {
                 debug::print("GETTING FADE EVENT FOR: " + __tostring(scslosifoundation::identifiertostring(param1.args[0])));
@@ -546,6 +567,7 @@ class player {
                     }
                 }
             }
+
             //Screen fadein finished event
             else if (param1.eventid == 29) {
                 debug::print("GETTING SCREEN_FADEIN_FINISHED EVENT");
@@ -661,7 +683,6 @@ class player {
             this.actor.show();
             this.actor.settweakable();
             this.actor.initmotionsystem();
-            this.actor.disableallraycollisions();
             this.actor.setupphysics(1.5, 0.8, 1, 0, 0);
             this.isswimming();
         }
