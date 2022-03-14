@@ -1,23 +1,21 @@
 function input(param1, param2, param3, param4, param5) {
     var var1;
     var var2;
-    var var3;
-    if (!(screenlist == null)) {
+    if (screenlist != null) {
         var1 = 1;
-        if (!(globalclass == null)) {
-            if (!(globalclass.level == null)) {
-                if (!(globalclass.level.cam == null) && !(param2 == 251)) {
-                    var2 = globalclass.level.cam.getaimode();
-                    if (var2 == 9) {
+        if (globalclass != null) {
+            if (globalclass.level != null) {
+                if ((globalclass.level.cam != null) && (param2 != 251)) {
+                    if (globalclass.level.cam.getaimode() == 9) {
                         var1 = 0;
                     }
                 }
             }
         }
         if (var1) {
-            var3 = new base_standardinput(param1, param2, param3, param4, param5);
-            globalclass.input(var3);
-            screenlist.input(var3);
+            var2 = new base_standardinput(param1, param2, param3, param4, param5);
+            globalclass.input(var2);
+            screenlist.input(var2);
         }
     }
     return null;
