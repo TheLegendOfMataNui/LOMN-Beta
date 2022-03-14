@@ -17,18 +17,23 @@ class lego_area_bech : gs_lego_area {
         return null;
     }
     
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.puzzle.cleanupfull();
+        return null;
+    }
+    
+    method process(param1) {
+        this.puzzle.process(param1);
+        return null;
+    }        
+
     method onevent(param1) {
         if (this.saved == 0) {
             BetterSaver::Save();
             this.saved = 1;
         }
         this.puzzle.onevent(param1);
-        return null;
-    }
-    
-    method cleanupfull() {
-        this.lego_area_hide();
-        this.puzzle.cleanupfull();
         return null;
     }
     
