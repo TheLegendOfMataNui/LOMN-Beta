@@ -16,7 +16,7 @@ class vllg5_puzzle {
     property upgradefruit_shown;
     property upgradefruit2_shown;
     property upgradefruit3_shown;
-    property wirlpool;
+    property crystal;
     property orientation;
     property makani;
     property tuuli;
@@ -37,6 +37,8 @@ class vllg5_puzzle {
     property usuhuya;
     property gunactive;
     property diskactive;
+    property start_cinema;
+    property safety_timer;
     
     method vllg5_puzzle(param1) {
         this.parent = param1;
@@ -44,7 +46,10 @@ class vllg5_puzzle {
     }
     
     method initfull() {
-        var door_text;
+        gcmodeldirector::setnearestmax(5);
+        gcareadirector::setnearestmax(8);
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 1100.0, 0.01);
+        gclightdirector::setcavelighting(0);
         this.makani = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
         this.tuuli = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
         this.kongu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
@@ -64,10 +69,6 @@ class vllg5_puzzle {
         this.usuhuya = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
         this.gunactive = 0;
         this.diskactive = 0;
-        gcmodeldirector::setnearestmax(5);
-        gcareadirector::setnearestmax(8);
-        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 1100.0, 0.01);
-        gclightdirector::setcavelighting(0);
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin4"))) {
             this.cinema_shown = 1;
         }
@@ -282,10 +283,11 @@ class vllg5_puzzle {
             gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 0);
             gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
         }
-        this.wirlpool = new lego_moveableobject("vtcr");
-        this.wirlpool.initfull();
-        this.wirlpool.settweakable();
+        this.crystal = new lego_moveableobject("vtcr");
+        this.crystal.initfull();
+        this.crystal.settweakable();
         this.orientation = 1;
+        this.safety_timer = 0;
         return null;
     }
     
@@ -315,11 +317,21 @@ class vllg5_puzzle {
             this.upgradefruit3.cleanupfull();
             this.upgradefruit3 = null;
         }
-        if (this.wirlpool != null) {
-            this.wirlpool.cleanupfull();
-            this.wirlpool = null;
+        if (this.crystal != null) {
+            this.crystal.cleanupfull();
+            this.crystal = null;
         }
         this.cinema = null;
+        this.cinema_shown = null;
+        this.deadhives = null;
+        this.savedrahi = null;
+        this.taskcomplete = null;
+        this.coindoortexttimer = null;
+        this.showcoindoor = null;
+        this.upgradefruit_shown = null;
+        this.upgradefruit2_shown = null;
+        this.upgradefruit3_shown = null;
+        this.orientation = null;
         this.makani = null;
         this.tuuli = null;
         this.kongu = null;
@@ -339,6 +351,8 @@ class vllg5_puzzle {
         this.usuhuya = null;
         this.gunactive = null;
         this.diskactive = null;
+        this.start_cinema = null;
+        this.safety_timer = null;
         return null;
     }
     
@@ -349,6 +363,14 @@ class vllg5_puzzle {
         }
         else if (this.coindoortext.onscreen == 1) {
             this.coindoortext.hide();
+        }
+        if (this.start_cinema == 1) {
+            if (this.safety_timer > 0.01) {
+                this.start_cinema = 0;            
+            }
+            else {
+                this.safety_timer = this.safety_timer + param1.deltatime;
+            }
         }
         return null;
     }
@@ -428,8 +450,12 @@ class vllg5_puzzle {
         else if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin4")) && (this.cinema_shown == 0)) {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
+                    this.start_cinema = 1;                
+                    globalclass.level.cam.setaimode(0);
+                    globalclass.player.actor.physicson(0);
+                    globalclass.player.actor.idle();
                     globalclass.player.actor.deactivatedragger();
-                    if (globalclass.player.actor.isdraggeractive() == 0) {
+                    if ((globalclass.player.actor.isdraggeractive() == 0) && (this.safety_timer > 0.01)) {
                         gccinemaengine::play(this.cinema);
                         //Remove Tohunga hand items
                         if (bettersaver::getbooleanvalue(45) == 1) {
@@ -454,14 +480,17 @@ class vllg5_puzzle {
         }
         else if (param1.eventid == 30) {
             globalclass.bgmusic.stop();
+            globalclass.hud.hide();
         }
         return null;
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema != null) {
-                gccinemaengine::stop(this.cinema);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
             }
         }
         return null;
@@ -479,7 +508,7 @@ class vllg5_puzzle {
         else {
             this.orientation = this.orientation + 1;
         }
-        this.wirlpool.setorientation(0.0, this.orientation, 0.0);
+        this.crystal.setorientation(0.0, this.orientation, 0.0);
         return null;
     }
 }

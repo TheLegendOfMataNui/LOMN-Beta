@@ -9,7 +9,7 @@ class vllg2_puzzle {
     property canblow;
     property testplatforms;
     property testplatformsubound;
-    property door2;
+    property evacdoor;
     property puzzlesolved;
     property deadhives;
     property savedrahi;
@@ -23,7 +23,7 @@ class vllg2_puzzle {
     property coindoortext2;
     property coindoortexttimer;
     property showcoindoor;
-    property wirlpool;
+    property crystal;
     property orientation;
     property cinema;
     property cinema_shown;
@@ -48,6 +48,8 @@ class vllg2_puzzle {
     property gearactive;
     property diskactive;    
     property hutgear;
+    property start_cinema;
+    property safety_timer;
     
     method vllg2_puzzle(param1) {
         this.parent = param1;
@@ -56,6 +58,10 @@ class vllg2_puzzle {
     
     method initfull() {
         var var1;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(8);
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 50000.0, 0.01);
+        gclightdirector::setcavelighting(0);
         this.shasa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
         this.nixie = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
         this.maku = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
@@ -82,10 +88,6 @@ class vllg2_puzzle {
         this.hutgear = new lego_moveableobject("gea1");
         this.hutgear.initfull();
         this.hutgear.hide();
-        gcmodeldirector::setnearestmax(7);
-        gcareadirector::setnearestmax(8);
-        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 50000.0, 0.01);
-        gclightdirector::setcavelighting(0);
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"))) {
             this.cinema_shown = 1;
         }
@@ -118,8 +120,8 @@ class vllg2_puzzle {
         this.coindoortext2.add();
         this.coindoortexttimer = 0.0;
 
-        this.door2 = new lego_moveableobject("drs1");
-        this.door2.initfull();
+        this.evacdoor = new lego_moveableobject("drs1");
+        this.evacdoor.initfull();
         gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("g054"));
         this.testplatforms = [ new lego_moveableobject("pl01"), 
             new lego_moveableobject("pl02"), 
@@ -316,10 +318,11 @@ class vllg2_puzzle {
             gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 0);
             gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
         }
-        this.wirlpool = new lego_moveableobject("vtcr");
-        this.wirlpool.initfull();
-        this.wirlpool.settweakable();
+        this.crystal = new lego_moveableobject("vtcr");
+        this.crystal.initfull();
+        this.crystal.settweakable();
         this.orientation = 1;
+        this.safety_timer = 0;
         return null;
     }
     
@@ -328,8 +331,10 @@ class vllg2_puzzle {
         this.oldplatform = null;
         this.newplatform = null;
         this.puzinc = null;
+        this.printwhichplatformimon;
         this.currentlycollidingwith = null;
         this.tempplatform = null;
+        this.canblow = null;
         if (this.testplatforms != null) {
             var1 = 0;
             while ((this.testplatforms.__length - 1) >= var1) {
@@ -339,6 +344,15 @@ class vllg2_puzzle {
             }
             this.testplatforms = null;
         }
+        this.testplatformsubound = null;
+        if (this.evacdoor != null) {
+            this.evacdoor.cleanupfull();
+            this.evacdoor = null;
+        }
+        this.puzzlesolved = null;
+        this.deadhives = null;
+        this.savedrahi = null;
+        this.taskcomplete = null;
         if (this.upgradefruit != null) {
             this.upgradefruit.cleanupfull();
             this.upgradefruit = null;
@@ -347,6 +361,8 @@ class vllg2_puzzle {
             this.upgradefruit2.cleanupfull();
             this.upgradefruit2 = null;
         }
+        this.upgradefruit_shown = null;
+        this.upgradefruit2_shown = null;
         if (this.coindoortext1 != null) {
             this.coindoortext1.remove();
             this.coindoortext1.cleanupfull();
@@ -361,11 +377,15 @@ class vllg2_puzzle {
             this.coindoor.cleanupfull();
             this.coindoor = null;
         }
-        if (this.wirlpool != null) {
-            this.wirlpool.cleanupfull();
-            this.wirlpool = null;
+        this.coindoortexttimer = null;
+        this.showcoindoor = null;
+        if (this.crystal != null) {
+            this.crystal.cleanupfull();
+            this.crystal = null;
         }
+        this.orientation = null;
         this.cinema = null;
+        this.cinema_shown = null;
         this.shasa = null;
         this.nixie = null;
         this.maku = null;
@@ -387,6 +407,8 @@ class vllg2_puzzle {
         this.gearactive = null;
         this.diskactive = null;
         this.hutgear = null;
+        this.start_cinema = null;
+        this.safety_timer = null;
         return null;
     }
     
@@ -409,6 +431,14 @@ class vllg2_puzzle {
             this.coindoortext1.hide();
             this.coindoortext2.hide();
         }
+        if (this.start_cinema == 1) {
+            if (this.safety_timer > 0.01) {
+                this.start_cinema = 0;            
+            }
+            else {
+                this.safety_timer = this.safety_timer + param1.deltatime;
+            }
+        }
         return null;
     }
     
@@ -430,8 +460,12 @@ class vllg2_puzzle {
         else if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin3")) && (this.cinema_shown == 0)) {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
+                    this.start_cinema = 1;                
+                    globalclass.level.cam.setaimode(0);
+                    globalclass.player.actor.physicson(0);
+                    globalclass.player.actor.idle();
                     globalclass.player.actor.deactivatedragger();
-                    if (globalclass.player.actor.isdraggeractive() == 0) {
+                    if ((globalclass.player.actor.isdraggeractive() == 0) && (this.safety_timer > 0.01)){
                         gccinemaengine::play(this.cinema);
                         //Remove Tohunga hand items
                         if (this.gearactive == 1) {
@@ -449,6 +483,10 @@ class vllg2_puzzle {
                     }
                 }
             }
+        }
+        else if (param1.eventid == 30) {
+            globalclass.bgmusic.stop();
+            globalclass.hud.hide();
         }
         else if (param1.eventid == 8) {
 		    if (param1.args[0] == scslosifoundation::stringtoidentifier("dspt")) {
@@ -597,27 +635,19 @@ class vllg2_puzzle {
     }
     
     method input(param1) {
-        if (param1.button == 90) {
-            if (param1.event == 2) {
+        if (param1.event == 2) { 
+            if (param1.button == 90) {
                 this.cheat(1);
             }
-        }
-        if (param1.button == 231) {
-            if (param1.event == 2) {
-                this.blowtheconch();
-            }
-        }
-        if (param1.button == 88) {
-            if (param1.event == 2) {
+            if (param1.button == 88) {
                 this.cheat(2);
             }
-        }
-        if (param1.button == 67) {
-            if (param1.event == 2) {
+            if (param1.button == 67) {
                 this.cheat(3);
             }
-        }
-        if (param1.event == 2) { 
+            if (param1.button == 231) {
+                this.blowtheconch();
+            }
             if (param1.button == 251) {
                 if (this.cinema != null) {
                     gccinemaengine::stop(this.cinema);
@@ -740,15 +770,15 @@ class vllg2_puzzle {
         var var1;
         var var2;
         var var3;
-        var1 = this.door2.getx();
-        var2 = this.door2.gety();
-        var3 = this.door2.getz();
+        var1 = this.evacdoor.getx();
+        var2 = this.evacdoor.gety();
+        var3 = this.evacdoor.getz();
         globalclass.level.cam.setaimode(0);
         globalclass.level.cam.setpos(0 - 3.6, 96.4, 0 - 110.6);
         globalclass.level.cam.settargetpos(var1, var2, var3);
         globalclass.level.cam.shakecamera(2.45, 0.5);
         globalclass.player.actor.setinputstate("none");
-        this.door2.interpolate(var1, var2 + 9.5, var3, 2.5);
+        this.evacdoor.interpolate(var1, var2 + 9.5, var3, 2.5);
         return null;
     }
 
@@ -759,7 +789,7 @@ class vllg2_puzzle {
         else {
             this.orientation = this.orientation + 1;
         }
-        this.wirlpool.setorientation(0.0, this.orientation, 0.0);
+        this.crystal.setorientation(0.0, this.orientation, 0.0);
         return null;
     }
 }

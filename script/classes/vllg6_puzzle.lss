@@ -8,7 +8,7 @@ class vllg6_puzzle {
     property upgradefruit3;
     property upgradefruit2_shown;
     property upgradefruit3_shown;
-    property wirlpool;
+    property crystal;
     property orientation;
     property kapura;
     property keahi;
@@ -255,14 +255,17 @@ class vllg6_puzzle {
             gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 0);
             gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
         }
-        this.wirlpool = new lego_moveableobject("vtcr");
-        this.wirlpool.initfull();
-        this.wirlpool.settweakable();
+        this.crystal = new lego_moveableobject("vtcr");
+        this.crystal.initfull();
+        this.crystal.settweakable();
         this.orientation = 1;
         return null;
     }
     
     method cleanupfull() {
+        this.deadhives = null;
+        this.savedrahi = null;
+        this.taskcomplete = null;
         if (this.swrd != null) {
             this.swrd.cleanupfull();
             this.swrd = null;
@@ -275,10 +278,13 @@ class vllg6_puzzle {
             this.upgradefruit3.cleanupfull();
             this.upgradefruit3 = null;
         }
-        if (this.wirlpool != null) {
-            this.wirlpool.cleanupfull();
-            this.wirlpool = null;
+        this.upgradefruit2_shown = null;
+        this.upgradefruit3_shown = null;
+        if (this.crystal != null) {
+            this.crystal.cleanupfull();
+            this.crystal = null;
         }
+        this.orientation = null;
         this.kapura = null;
         this.keahi = null;
         this.vohon = null;
@@ -376,7 +382,7 @@ class vllg6_puzzle {
         else {
             this.orientation = this.orientation + 1;
         }
-        this.wirlpool.setorientation(0.0, this.orientation, 0.0);
+        this.crystal.setorientation(0.0, this.orientation, 0.0);
         return null;
     }
 }
