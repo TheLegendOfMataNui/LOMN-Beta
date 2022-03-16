@@ -51,25 +51,18 @@ class endgm_puzzle {
         return null;
     }
     
-    method exit() {
-        this.parent = null;
-        return null;
-    }
-    
     method onevent(param1) {
         var var1;
         if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin3")) && (this.cinema_shown == 0)) {
-                globalclass.hud.hide();
                 gccinemaengine::play(this.cinema);
                 this.cinema_shown = 1;
                 this.safecount = 0;
             }
         }
         else if (param1.eventid == 30) {
-            globalclass.hud.show();
-            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
-            globalclass.bgmusic.play(1);
+            this.parent.level.cam.setaimode(9);
+            globalclass.hud.hide();
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
@@ -79,7 +72,7 @@ class endgm_puzzle {
             gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
         }
         else if (param1.eventid == 44) {
-            if (!(this.cinema == null) && (this.safecount < 3)) {
+            if ((this.cinema != null) && (this.safecount < 3)) {
                 this.safecount = this.safecount + 1;
                 if (this.safecount == 2) {
                     
@@ -90,11 +83,18 @@ class endgm_puzzle {
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (!(this.cinema == null)) {
-                gccinemaengine::stop(this.cinema);
+        if (param1.event == 2) { 
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
             }
         }
         return null;
     }
+
+    method exit() {
+        this.parent = null;
+        return null;
+    }    
 }
