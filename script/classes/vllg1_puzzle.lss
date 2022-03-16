@@ -46,6 +46,8 @@ class vllg1_puzzle {
     }
     
     method initfull() {
+        gcareadirector::setnearestmax(15);
+        gcmodeldirector::setnearestmax(5);
         gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
         gclightdirector::setcavelighting(1);
         this.zemya = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
@@ -75,7 +77,6 @@ class vllg1_puzzle {
         if (this.cinema_intro_shown == 0) {
             globalclass.player.actor.deactivatedragger();
             if (globalclass.player.actor.isdraggeractive() == 0) {
-                gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
                 gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
                 this.cinema_intro = gccinemaengine::create();
                 gccinemaengine::load(this.cinema_intro, "cin2");
@@ -227,7 +228,7 @@ class vllg1_puzzle {
             globalclass.bgmusic.play(1);
         }
         else {
-            //Hiding Characters
+            //Hiding Characters and Waypoint
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("bbug"), 0);  
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl01"), 0);
@@ -245,6 +246,8 @@ class vllg1_puzzle {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl13"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl14"), 0);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vl15"), 0);
+            gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 0);
+            gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
             if (bettersaver::getbooleanvalue(50) == 1) {
                 globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
                 globalclass.bgmusic.play(1);
@@ -282,6 +285,10 @@ class vllg1_puzzle {
         if (bettersaver::getbooleanvalue(58) == 1) {
             gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 0);
             gcnolightdirector::hide(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
+        }
+        else if ((bettersaver::getbooleanvalue(58) == 0) && (gcsaver::isconditionset(4194304) == 1)) {
+            gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 1);
+            gcnolightdirector::show(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
         }
         this.crystal = new lego_moveableobject("vtcr");
         this.crystal.initfull();
@@ -407,6 +414,8 @@ class vllg1_puzzle {
             if ((this.deadhives == 4) && (this.savedrahi == 4) && (this.taskcomplete == 0)) {
                 gcsaver::setcondition(4194304, 1);
                 gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
+                gccollisionphysicsgroup::togglepickuponoff(scslosifoundation::stringtoidentifier("ar00"), 1);
+                gcnolightdirector::show(scslosifoundation::stringtoidentifier("ar00"), gcareadirector::getcurrentarea());
                 globalclass.bgmusic.stop();
                 this.taskcomplete = 1;
             }
