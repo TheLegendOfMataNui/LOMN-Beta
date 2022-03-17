@@ -86,7 +86,7 @@ class vllg6_puzzle {
         this.deadhives = 0;
         this.savedrahi = 0;
         this.taskcomplete = 0;
-        if (gcsaver::isconditionset(1073741824)) {
+        if (gcsaver::isconditionset(1073741824) == 1) {
             globalclass.player.processequipment(2);       
             //Set Kapura (VLGR)
             gccharacter::setkapura(this.kapura);
@@ -206,7 +206,6 @@ class vllg6_puzzle {
             gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0), rgba(255, 247, 0, 255), rgba(255, 247, 0, 255), rgba(255, 247, 0, 255));
 
             //Set Rahi: Blue Hoto
-            gcmodeldirector::show(scslosifoundation::stringtoidentifier("bfly"), 0);
             gccharacter::setgroundoffset(this.hoto, 2);
             gccharacter::setinputstate(this.hoto, scslosifoundation::stringtoidentifier("none"));
             gccharacter::setorientation(this.hoto, 89);

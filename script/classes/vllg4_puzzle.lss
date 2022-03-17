@@ -36,6 +36,7 @@ class vllg4_puzzle {
     property monadri;
     property odda;
     property volma;
+    property bluebat;
     property skateactive;
     property elementactive;
     property diskactive;
@@ -72,6 +73,7 @@ class vllg4_puzzle {
         this.monadri = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl16"), 0);
         this.odda = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl17"), 0);
         this.volma = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl18"), 0);
+        this.bluebat = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("bbat"), 0);
         this.skateactive = 0;
         this.elementactive = 0;
         this.diskactive = 0;
@@ -229,9 +231,8 @@ class vllg4_puzzle {
             gccharacter::settohunga(this.volma, rgba(255, 255, 255, 255), rgba(122, 254, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
 
             //Set Rahi: Blue Bat
-			gcmodeldirector::show(scslosifoundation::stringtoidentifier("bbat"), 0);
-            gccharacter::setgroundoffset(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("bbat")), 2);
-            gccharacter::aidisabledefault(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("bbat")));
+            gccharacter::setgroundoffset(this.bluebat, 2);
+            gccharacter::setinputstate(this.bluebat, scslosifoundation::stringtoidentifier("none"));
 
             //Hiding hives & Turaga door
             gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
@@ -370,6 +371,7 @@ class vllg4_puzzle {
         this.monadri = null;
         this.odda = null;
         this.volma = null;
+        this.bluebat = null;
         this.skateactive = null;
         this.elementactive = null;
         this.diskactive = null;
