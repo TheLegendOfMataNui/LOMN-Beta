@@ -32,7 +32,9 @@ class lego_area_haka6 : gs_lego_area {
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
         globalclass.bgmusic.play(1);
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 0) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
             if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
+                globalclass.bgmusic.stop();
                 globalclass.player.actor.deactivatedragger();
                 if (globalclass.player.actor.isdraggeractive() == 0) {
                     this.cinema = gccinemaengine::create();
@@ -41,6 +43,15 @@ class lego_area_haka6 : gs_lego_area {
                     gccinemaengine::play(this.cinema);
                 }
             }
+        }
+        else {
+            debug::print("TAKARA DONE: SPAWN 'KAPURA'");
+            //Set Tohunga: "Kapura" (VLGR)
+            var notkapura = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::setorientation(notkapura, 180);
+            gccharacter::settohunga(notkapura, rgba(247, 219, 41, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk0a"));
+            gccharacter::setinputstate(notkapura, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(notkapura, scslosifoundation::stringtoidentifier("d000"), -1);
         }
         this.safecount = 0;
         return null;
