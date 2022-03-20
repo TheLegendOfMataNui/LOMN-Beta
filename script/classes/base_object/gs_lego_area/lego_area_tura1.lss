@@ -27,6 +27,16 @@ class lego_area_tura1 : gs_lego_area {
         }
         globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
         globalclass.bgmusic.play(1);
+
+        //Set Tohunga: Blorpo (VLGR)
+        var blorpo = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::setorientation(blorpo, 40);
+        gccharacter::setupstationary(blorpo);
+        gccharacter::setanimationscalar(blorpo, 999);
+        gccharacter::settohunga(blorpo, rgba(0, 125, 99, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk0a"));
+        gccharacter::setcolors(blorpo, rgba(0, 125, 99, 255), rgba(102, 0, 102, 255), rgba(255, 255, 255, 255));
+        gccharacter::setinputstate(blorpo, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(blorpo, scslosifoundation::stringtoidentifier("d000"), -1);
         return null;
     }
     
