@@ -1,6 +1,7 @@
 class tp036_puzzle {
 	property mmosquitoes;
 	property mparent;
+	property swinnerton;
     
 	method tp036_puzzle(param1) {
 		this.mparent = param1;
@@ -9,12 +10,11 @@ class tp036_puzzle {
     
 	method initfull() {
 		var var1;
-		var tohunga;
-		tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-		gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk0a"));
-		gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0), rgba(162, 81, 0, 0), rgba(228, 128, 30, 0), rgba(41, 41, 41, 255));
-		gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-		gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+		this.swinnerton = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+		gccharacter::settohunga(this.swinnerton, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk0a"));
+		gccharacter::setcolors(this.swinnerton, rgba(162, 81, 0, 0), rgba(228, 128, 30, 0), rgba(41, 41, 41, 255));
+		gccharacter::setinputstate(this.swinnerton, scslosifoundation::stringtoidentifier("none"));
+		gccharacter::switchanimation(this.swinnerton, scslosifoundation::stringtoidentifier("d000"), -1);
 		this.mmosquitoes = [ new gs_lego_character("bill", "msqt", "fake", 0, 27.18, 22.7, 2.26, "aiin"), 
 			new gs_lego_character("mike", "msqt", "fake", 0, 27.18, 22.7, 2.26, "aiin"), 
 			new gs_lego_character("earl", "msqt", "fake", 0, 27.18, 22.7, 2.26, "aiin") ];
@@ -38,6 +38,7 @@ class tp036_puzzle {
 			this.mmosquitoes[var1].cleanupfull();
 			var1 = var1 + 1;
 		}
+		this.swinnerton = null;
 		return null;
 	}
     

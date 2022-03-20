@@ -11,6 +11,11 @@ class shrn2_puzzle {
     property bossdoortexttimer;
     property showbossdoor;
     property inwater;
+    property nokama;
+    property unasa;
+    property amtapi;
+    property apefi;
+    property yala;
     
     method shrn2_puzzle(param1) {
         this.parent = param1;
@@ -22,10 +27,7 @@ class shrn2_puzzle {
     
     method initfull() {
         var var1;
-        var nokama;
         var portal_trigger;
-        var door_text;
-		var tohunga;
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
@@ -48,31 +50,42 @@ class shrn2_puzzle {
         this.waterfall2.initfull();
         this.waterfall3 = new lego_moveableobject("swf3");
         this.waterfall3.initfull();
-        nokama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"), 0);
-        gccharacter::setinputstate(nokama, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(nokama, scslosifoundation::stringtoidentifier("no00"), -1);
-        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
-        gccharacter::settohunga(tohunga, rgba(25, 134, 189, 255), rgba(25, 134, 189, 255), scslosifoundation::stringtoidentifier("mkca"));
-		gccharacter::setorientation(tohunga, 0);
-        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
-        gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
-		gccharacter::setorientation(tohunga, 270);
-        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0), rgba(0, 73, 90, 255), rgba(0, 73, 90, 255), rgba(16, 81, 173, 255));
-        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
-        gccharacter::settohunga(tohunga, rgba(0, 73, 90, 255), rgba(16, 81, 173, 255), scslosifoundation::stringtoidentifier("mk0a"));
-		gccharacter::setorientation(tohunga, 0);
-        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
-        tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
-        gccharacter::settohunga(tohunga, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
-		gccharacter::setorientation(tohunga, 90);
-        gccharacter::setcolors(gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0), rgba(25, 134, 189, 255), rgba(0, 73, 90, 255), rgba(16, 81, 173, 255));
-        gccharacter::setinputstate(tohunga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(tohunga, scslosifoundation::stringtoidentifier("d000"), -1);
+
+        //Set Nokama
+        this.nokama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"), 0);
+        gccharacter::setinputstate(this.nokama, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(this.nokama, scslosifoundation::stringtoidentifier("no00"), -1);
+
+        //Set Tohunga: Unasa
+        this.unasa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        gccharacter::settohunga(this.unasa, rgba(25, 134, 189, 255), rgba(25, 134, 189, 255), scslosifoundation::stringtoidentifier("mkca"));
+		gccharacter::setorientation(this.unasa, 0);
+        gccharacter::setinputstate(this.unasa, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(this.unasa, scslosifoundation::stringtoidentifier("d000"), -1);
+
+        //Set Tohunga: Amtapi
+        this.amtapi = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
+        gccharacter::settohunga(this.amtapi, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
+        gccharacter::setcolors(this.amtapi, rgba(0, 73, 90, 255), rgba(0, 73, 90, 255), rgba(16, 81, 173, 255));
+		gccharacter::setorientation(this.amtapi, 270);
+        gccharacter::setinputstate(this.amtapi, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(this.amtapi, scslosifoundation::stringtoidentifier("d000"), -1);
+
+        //Set Tohunga: Apefi
+        this.apefi = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);
+        gccharacter::settohunga(this.apefi, rgba(0, 73, 90, 255), rgba(16, 81, 173, 255), scslosifoundation::stringtoidentifier("mk0a"));
+		gccharacter::setorientation(this.apefi, 0);
+        gccharacter::setinputstate(this.apefi, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(this.apefi, scslosifoundation::stringtoidentifier("d000"), -1);
+
+        //Set Tohunga: Yala
+        this.yala = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+        gccharacter::settohunga(this.yala, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk9a"));
+        gccharacter::setcolors(this.yala, rgba(25, 134, 189, 255), rgba(0, 73, 90, 255), rgba(16, 81, 173, 255));
+		gccharacter::setorientation(this.yala, 90);
+        gccharacter::setinputstate(this.yala, scslosifoundation::stringtoidentifier("none"));
+        gccharacter::switchanimation(this.yala, scslosifoundation::stringtoidentifier("d000"), -1);
+
         portal_trigger = scslosifoundation::stringtoidentifier("tps9");
         this.portalactive = gcsaver::portalactive();
         if (this.portalactive == 1) {
@@ -155,6 +168,11 @@ class shrn2_puzzle {
         }
         this.inwater = null;
         this.portalactive = null;
+        this.nokama = null;
+        this.unasa = null;
+        this.amtapi = null;
+        this.apefi = null;
+        this.yala = null;
         return null;
     }
     
