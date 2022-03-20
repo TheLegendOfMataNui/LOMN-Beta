@@ -34,6 +34,7 @@ class lego_area_haka6 : gs_lego_area {
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 0) {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
             if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
+                gcmodeldirector::show(scslosifoundation::stringtoidentifier("vlgr"), 0);
                 globalclass.bgmusic.stop();
                 globalclass.player.actor.deactivatedragger();
                 if (globalclass.player.actor.isdraggeractive() == 0) {
@@ -48,8 +49,8 @@ class lego_area_haka6 : gs_lego_area {
             debug::print("TAKARA DONE: SPAWN 'KAPURA'");
             //Set Tohunga: "Kapura" (VLGR)
             var notkapura = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
+            gccharacter::settohunga(notkapura, rgba(247, 219, 41, 255), rgba(173, 0, 0, 255), scslosifoundation::stringtoidentifier("mk0a"));
             gccharacter::setorientation(notkapura, 180);
-            gccharacter::settohunga(notkapura, rgba(247, 219, 41, 255), rgba(102, 0, 102, 255), scslosifoundation::stringtoidentifier("mk0a"));
             gccharacter::setinputstate(notkapura, scslosifoundation::stringtoidentifier("none"));
             gccharacter::switchanimation(notkapura, scslosifoundation::stringtoidentifier("d000"), -1);
         }
@@ -94,13 +95,13 @@ class lego_area_haka6 : gs_lego_area {
                     this.keahi = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
                     this.kapura = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl01"), 0);
                     this.vohon = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl02"), 0);                   
-                    this.nuri = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
+                    this.jala = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl03"), 0);
                     this.agni = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl04"), 0);
                     this.tiribomba = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl05"), 0);
                     this.aodhan = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl06"), 0);
                     this.aft = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl07"), 0);
                     this.maglya = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl08"), 0);
-                    this.jala = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
+                    this.nuri = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl09"), 0);
                     this.keeper = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl10"), 0);
                     this.nganiki = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl11"), 0);
                     this.klatuu = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vl12"), 0);
@@ -118,8 +119,8 @@ class lego_area_haka6 : gs_lego_area {
                     //Set Tohunga: Vohon (VL02)
                     gccharacter::settohunga(this.vohon, rgba(247, 219, 41, 255), rgba(247, 219, 41, 255), scslosifoundation::stringtoidentifier("mk2a"));             
             
-                    //Set Tohunga: Nuri (VL03)
-                    gccharacter::settohunga(this.nuri, rgba(41, 41, 41, 255), rgba(41, 41, 41, 255), scslosifoundation::stringtoidentifier("mk1a"));
+                    //Set Tohunga: Jala (VL03)
+                    gccharacter::settohunga(this.jala, rgba(247, 219, 41, 255), rgba(247, 219, 41, 255), scslosifoundation::stringtoidentifier("mk6a"));
             
                     //Set Tohunga: Agni (VL04)
                     gccharacter::settohunga(this.agni, rgba(173, 0, 0, 255), rgba(173, 0, 0, 255), scslosifoundation::stringtoidentifier("mk4a"));
@@ -142,8 +143,8 @@ class lego_area_haka6 : gs_lego_area {
                     //Set Tohunga: Maglya (VL08)
                     gccharacter::settohunga(this.maglya, rgba(173, 0, 0, 255), rgba(173, 0, 0, 255), scslosifoundation::stringtoidentifier("mk2a"));
             
-                    //Set Tohunga: Jala (VL09)
-                    gccharacter::settohunga(this.jala, rgba(247, 219, 41, 255), rgba(247, 219, 41, 255), scslosifoundation::stringtoidentifier("mk6a"));
+                    //Set Tohunga: Nuri (VL09)
+                    gccharacter::settohunga(this.nuri, rgba(41, 41, 41, 255), rgba(41, 41, 41, 255), scslosifoundation::stringtoidentifier("mk1a"));
             
                     //Set Tohunga: Treekeeper (VL10)
                     gccharacter::settohunga(this.keeper, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk4a"));
@@ -184,6 +185,9 @@ class lego_area_haka6 : gs_lego_area {
             globalclass.player.actor.setinputstate("ninp");
             globalclass.level.cam.setaimode(11);
         }
+        else if (param1.eventid == 41) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
+        }
         return null;
     }
     
@@ -192,6 +196,7 @@ class lego_area_haka6 : gs_lego_area {
             if (param1.button == 251) {
                 if (this.cinema != null) {
                     gccinemaengine::stop(this.cinema);
+                    globalclass.bgmusic.stop();
                 }
             }
         }
