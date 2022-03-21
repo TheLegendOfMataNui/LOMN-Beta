@@ -83,7 +83,8 @@ class enemy {
                 while ((this.landarray.__length - 1) >= instance) {
                     //Out of Bounds Check
                     if (this.killheight != null) {
-                        if (gccharacter::getpositiony(this.landarray[instance]) < this.killheight) {                        
+                        if (gccharacter::getpositiony(this.landarray[instance]) < this.killheight) {
+                            gccharacter::setshadowtype(this.landarray[instance], 0);
                             gccharacter::aidie(this.landarray[instance]);
                             this.landarray.__removeat(instance);
                             debug::print("Rahi is out of bounds! Removing...");
@@ -106,7 +107,8 @@ class enemy {
                 while ((this.waterarray.__length - 1) >= instance) {
                     //Out of Bounds Check
                     if (this.killheight != null) {
-                        if (gccharacter::getpositiony(this.waterarray[instance]) < this.killheight) {                        
+                        if (gccharacter::getpositiony(this.waterarray[instance]) < this.killheight) {         
+                            gccharacter::setshadowtype(this.waterarray[instance], 0);
                             gccharacter::aidie(this.waterarray[instance]);
                             this.waterarray.__removeat(instance);
                             debug::print("Rahi is out of bounds! Removing...");
@@ -129,6 +131,7 @@ class enemy {
         //Character Spawned Check
         //EventID 100 = GcModelDirector::AddCharacter. Passes CharID, ([1]) InstanceID, ([2]) and AreaID. ([3])       
         else if (param1.eventid == 100) {
+            gccharacter::setshadowtype(gcmodeldirector::getcharacter(param1.args[2]), 2);
             if ((param1.args[1] ==  scslosifoundation::stringtoidentifier("pira")) || (param1.args[1] ==  scslosifoundation::stringtoidentifier("shrk")) || (param1.args[1] ==  scslosifoundation::stringtoidentifier("sfsh")) || (param1.args[1] ==  scslosifoundation::stringtoidentifier("tfsh"))) {
                 this.waterarray.__append(gcmodeldirector::getcharacter(param1.args[2]));
                 debug::print("Spawned " + (scslosifoundation::identifiertostring(param1.args[2]) + " and added to fish handler!"));
