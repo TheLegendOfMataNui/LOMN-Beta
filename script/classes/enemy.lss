@@ -20,15 +20,19 @@ class enemy {
     }
 
     method cleanupfull() {
+        var instance = 0;
+        while ((this.infmask.__length - 1) >= instance) {
+            if (this.infmask[instance] != null) {
+                this.infmask[instance].cleanupfull();
+            }
+            instance = instance + 1;
+        }
         if (this.landarray != null) {
             this.landarray = null;
         }            
         if (this.waterarray != null) {
             this.waterarray = null;
-        }               
-        if (this.infmask != null) {
-            this.infmask = null;
-        }        
+        }                    
         return null;
     }
 

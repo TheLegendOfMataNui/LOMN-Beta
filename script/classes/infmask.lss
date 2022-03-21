@@ -41,4 +41,18 @@ class infmask : enemy {
         }
         return null;
     }
+    method cleanupfull() {
+        if (this.mask != null) {
+            this.mask.hide();
+            this.mask.remove();
+            this.mask.cleanupfull();                
+            this.mask = null;
+        }
+        this.active = null;
+        this.timer = null;
+        this.x = null;
+        this.y = null;
+        this.z = null;
+        return null;
+    }
 }
