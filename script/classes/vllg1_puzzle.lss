@@ -77,7 +77,11 @@ class vllg1_puzzle {
         if (this.cinema_intro_shown == 0) {
             globalclass.player.actor.deactivatedragger();
             if (globalclass.player.actor.isdraggeractive() == 0) {
-                gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), scslosifoundation::stringtoidentifier("vllg"));
+                gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), 0);
+                gcareadirector::hide(scslosifoundation::stringtoidentifier("fhvb"), 0);
+                gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb0"), 0);
+                gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb1"), 0);
+                gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb2"), 0);
                 this.cinema_intro = gccinemaengine::create();
                 gccinemaengine::load(this.cinema_intro, "cin2");
                 gccinemaengine::setnextarea(this.cinema_intro, scslosifoundation::stringtoidentifier("tura"));
@@ -90,7 +94,7 @@ class vllg1_puzzle {
         else {
             this.cinema_dance_shown = 0;
         }
-        if (this.cinema_dance_shown == 0) {
+        if ((this.cinema_dance_shown == 0) && (this.cinema_intro_shown == 1)) {
             this.cinema_dance = gccinemaengine::create();
             gccinemaengine::load(this.cinema_dance, "cin3");
             gccinemaengine::setnextarea(this.cinema_dance, scslosifoundation::stringtoidentifier("tura"));
