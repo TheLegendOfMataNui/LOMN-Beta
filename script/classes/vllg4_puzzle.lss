@@ -403,9 +403,11 @@ class vllg4_puzzle {
     method onevent(param1) {
         if (param1.eventid == 51) {
             this.deadhives = this.deadhives + 1;
+            debug::print(("***************** HIVE DESTROYED! TOTAL OF HIVES DESTROYED: " + __tostring(this.deadhives)));
         }
         else if (param1.eventid == 101) {
             this.savedrahi = this.savedrahi + 1;
+            debug::print(("***************** RAHI SAVED! TOTAL RAHI FREED: " + __tostring(this.savedrahi)));
         }        
         else if (param1.eventid == 44) {
             if ((this.deadhives == 4) && (this.savedrahi == 4) && (this.taskcomplete == 0)) {
@@ -506,6 +508,7 @@ class vllg4_puzzle {
                             globalclass.player.maskcontrol.toggleactive();
                             globalclass.hud.mask.hide();
                         }
+                        bettersaver::setbooleanvalue(85, 1);
                     }
                 }
             }
