@@ -115,19 +115,21 @@ class fvil6_puzzle {
     
     method onevent(param1) {
         if (param1.eventid == 1) {
-            if (param1.args[1] == scslosifoundation::stringtoidentifier("door")) {
-                if (this.showcoindoor == 1) {
-                    if ((globalclass.player.tokens >= 8) && (globalclass.player.actor.ishookenabled) && (gcsaver::isconditionset(1073741824))) {
-                        this.coindoor.fadeout(1.5);
-                        gcstaticsoundsptrarray::playtablesound(1084);
-                        this.showcoindoor = 0;
-                        this.coindoortext1.hide();
-                        this.coindoortext2.hide();
-                    }
-                    else {
-                        this.coindoortext1.show();
-                        this.coindoortext2.show();
-                        this.coindoortexttimer = 1.0;
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("door")) {
+                    if (this.showcoindoor == 1) {
+                        if ((globalclass.player.tokens >= 8) && (globalclass.player.actor.ishookenabled) && (gcsaver::isconditionset(1073741824))) {
+                            this.coindoor.fadeout(1.5);
+                            gcstaticsoundsptrarray::playtablesound(1084);
+                            this.showcoindoor = 0;
+                            this.coindoortext1.hide();
+                            this.coindoortext2.hide();
+                        }
+                        else {
+                            this.coindoortext1.show();
+                            this.coindoortext2.show();
+                            this.coindoortexttimer = 1.0;
+                        }
                     }
                 }
             }

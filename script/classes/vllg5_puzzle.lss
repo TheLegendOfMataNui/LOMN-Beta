@@ -399,17 +399,19 @@ class vllg5_puzzle {
             }
         }
         else if (param1.eventid == 1) {
-            if (param1.args[1] == scslosifoundation::stringtoidentifier("door")) {
-                if (this.showcoindoor == 1) {
-                    if ((globalclass.player.tokens >= 8) && (gcsaver::isconditionset(4194304))) {
-                        this.coindoor.fadeout(1.5);
-                        gcstaticsoundsptrarray::playtablesound(1084);
-                        this.showcoindoor = 0;
-                        this.coindoortext.hide();
-                    }
-                    else {
-                        this.coindoortext.show();
-                        this.coindoortexttimer = 1.0;
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {
+                if (param1.args[1] == scslosifoundation::stringtoidentifier("door")) {
+                    if (this.showcoindoor == 1) {
+                        if ((globalclass.player.tokens >= 8) && (gcsaver::isconditionset(4194304))) {
+                            this.coindoor.fadeout(1.5);
+                            gcstaticsoundsptrarray::playtablesound(1084);
+                            this.showcoindoor = 0;
+                            this.coindoortext.hide();
+                        }
+                        else {
+                            this.coindoortext.show();
+                            this.coindoortexttimer = 1.0;
+                        }
                     }
                 }
             }
