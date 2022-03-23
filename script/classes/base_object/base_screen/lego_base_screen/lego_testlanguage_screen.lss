@@ -2,105 +2,166 @@ class lego_testlanguage_screen : lego_base_screen {
     property currentitem;
     property stringtable;
     property examplestring;
+    property go_back;
+    property stringid;
     
     method lego_testlanguage_screen() {
-        this.items = [ "ENGLISH", 
-            "GERMAN", 
-            "FRENCH" ];
+        this.go_back = 0;
         return null;
     }
     
     method initfull() {
         var var1;
-        var var2;
-        var var3;
-        var var4;
-        var var5;
-        var var6;
-        var var7;
-        var var8;
-        var1 = 360;
-        var2 = 200;
-        var3 = var1;
-        var4 = var2;
-        var5 = 0;
-        var6 = 30;
-        var7 = 0;
-        while ((this.items.__length - 1) >= var7) {
-            var8 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", this.items[var7], var3, var4, 0, 1, 0, 4, 0);
-            this.items[var7] = var8;
-            this.items[var7].initfull();
-            this.items[var7].add();
-            this.items[var7].show();
-            var3 = var3 + var5;
-            var4 = var4 + var6;
-            var7 = var7 + 1;
+        this.items = [ new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "BionicleFont", screenx * 0.05, screeny * 0.25, 0, 1.0, 0, 4, 0, 1), 
+            new gs_legotext("Root/Data/Art/Fonts/BionicleFontshad", "BionicleFontshad", screenx * 0.05, (screeny * 0.25) + 40, 0, 1.0, 0, 4, 0, 1), 
+            new gs_legotext("Root/Data/Art/Fonts/tech_font_01", "TECH FONT", screenx * 0.05, (screeny * 0.25) + 80, 0, 1.0, 0, 4, 0, 1),
+            new gs_legotext("Root/Data/Art/Fonts/tech_font_01_hilight", "TECH FONT HILIGHTED", screenx * 0.05, (screeny * 0.25) + 120, 0, 1.0, 0, 4, 0, 1),
+            new gs_legotext("Root/Data/Art/Fonts/BionicleFontMat", "MATORAN", screenx * 0.05, (screeny * 0.25) + 160, 0, 1.0, 0, 4, 0, 1) ];
+        var1 = 0;
+        while ((this.items.__length - 1) >= var1) {
+            this.items[var1].initfull();
+            this.items[var1].add();
+            this.items[var1].show();
+            var1 = var1 + 1;
         }
         this.stringtable = new gs_lego_stringtable("Strings");
         this.examplestring = null;
         this.currentitem = 0;
-        this.items[this.currentitem].setactive();
+        sctilefont::setcolor(this.items[this.currentitem].font, 0, 255, 0, 255);
         this.newlanguage();
         return null;
     }
     
+    method cleanupfull() {
+        var var1;
+        if (this.items != null) {
+            var1 = 0;
+            while ((this.items.__length - 1) >= var1) {
+                this.items[var1].remove();
+                this.items[var1].cleanupfull();
+                this.items[var1] = null;
+                var1 = var1 + 1;
+            }
+            this.items = null;
+        }
+        this.currentitem = null;
+        if (this.examplestring != null) {
+            this.examplestring.remove();
+            this.examplestring.cleanupfull();
+            this.examplestring = null;
+        }
+        if (this.stringtable != null) {
+            this.stringtable.cleanupfull();
+            this.stringtable = null;
+        }
+        return null;
+    }
+    
+    method process(param1) {
+        if (this.go_back) {
+            screenlist.backward();
+            this.go_back = 0;
+        }
+        return null;
+    }
+
     method input(param1) {
-        if (param1.button == 9) {
-            if (param1.event == 2) {
+        if (param1.event == 2) {
+            if (param1.button == 9) {
                 this.setpointer(-1);
             }
-        }
-        if (param1.button == 12) {
-            if (param1.event == 2) {
+            if (param1.button == 12) {
                 this.setpointer(1);
             }
-        }
-        if (param1.button == 38) {
-            if (param1.event == 2) {
+            if (param1.button == 38) {
                 this.setpointer(-1);
             }
-        }
-        if (param1.button == 40) {
-            if (param1.event == 2) {
+            if (param1.button == 40) {
                 this.setpointer(1);
+            }
+            if (param1.button == 13) {
+                globalclass.bgmusic.changefilename("Root/Data/sounds/MusicBionicleAge");
+                globalclass.bgmusic.play(1);
+            }
+            if (param1.button == 251) {
+                this.go_back = 1;
+            }
+            if (param1.button == 37) {
+                this.newlanguage(-1);
+            }
+            if (param1.button == 39) {
+                this.newlanguage(1);
             }
         }
         return null;
     }
     
-    method setpointer(param1) {
-        this.items[this.currentitem].setinactive();
-        this.currentitem = this.currentitem + param1;
+    method setpointer(item_increment) {
+        sctilefont::setcolor(this.items[this.currentitem].font, 255, 255, 255, 255);
+        this.currentitem = this.currentitem + item_increment;
         if (this.currentitem < 0) {
             this.currentitem = this.items.__length - 1;
         }
         if (this.currentitem > (this.items.__length - 1)) {
             this.currentitem = 0;
         }
-        this.items[this.currentitem].setactive();
+        sctilefont::setcolor(this.items[this.currentitem].font, 0, 255, 0, 255);
         this.newlanguage();
         return null;
     }
     
-    method newlanguage() {
+    method newlanguage(string_index_increment) {
+        var font;
+        if ((this.examplestring != null) && (string_index_increment == null)) {
+            this.examplestring.remove();
+            this.examplestring.cleanupfull();
+            this.examplestring = null;
+        }
         if (this.currentitem == 0) {
             globalclass.setlanguage(0);
+            font = "Root/Data/Art/Fonts/BionicleFont";
+            debug::print("Font 1");
         }
         else if (this.currentitem == 1) {
-            globalclass.setlanguage(2);
+            globalclass.setlanguage(1);
+            font = "Root/Data/Art/Fonts/BionicleFontshad";
+            debug::print("Font 2");
         }
         else if (this.currentitem == 2) {
-            globalclass.setlanguage(1);
+            globalclass.setlanguage(2);
+            font = "Root/Data/Art/Fonts/tech_font_01";
+            debug::print("Font 3");
+        }
+        else if (this.currentitem == 3) {
+            globalclass.setlanguage(3);
+            font = "Root/Data/Art/Fonts/tech_font_01_hilight";
+            debug::print("Font 4");
+        }
+        else if (this.currentitem == 4) {
+            globalclass.setlanguage(4);
+            font = "Root/Data/Art/Fonts/BionicleFontMat";
+            debug::print("Font 5");
         }
         this.stringtable.initfull();
         if (this.examplestring == null) {
-            this.examplestring = new gs_lego_languagetext("Root/Data/Art/Fonts/BionicleFont", 0, this.stringtable, 320, 460, 0, 1, 256, 2, 0);
+            debug::print(__tostring(font));
+            this.examplestring = new gs_lego_languagetext(font, 0, this.stringtable, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 2, 0);
             this.examplestring.initfull();
             this.examplestring.add();
             this.examplestring.show();
+            this.stringid = 0;
         }
         else {
-            this.examplestring.setstring(0, this.stringtable);
+            if (string_index_increment != null) {
+                this.stringid = this.stringid + string_index_increment;
+                if (this.stringid < 0) {
+                    this.stringid = this.examplestring.stringtable.languagearray.__length - 1;
+                }
+                if (this.stringid > (this.examplestring.stringtable.languagearray.__length - 1)) {
+                    this.stringid = 0;
+                }
+            }            
+            this.examplestring.setstring(this.stringid, this.stringtable);
         }
         return null;
     }

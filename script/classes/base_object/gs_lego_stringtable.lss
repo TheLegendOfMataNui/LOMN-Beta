@@ -2,8 +2,8 @@ class gs_lego_stringtable : base_object {
     property tablename;
     property languagearray;
     
-    method gs_lego_stringtable(param1) {
-        this.tablename = param1;
+    method gs_lego_stringtable(table_name) {
+        this.tablename = table_name;
         return null;
     }
     
@@ -11,19 +11,19 @@ class gs_lego_stringtable : base_object {
         var var1;
         this.languagearray = null;
         if (globalclass.language == 0) {
-            var1 = ("Root/Data/Strings/" + this.tablename) + "English.slb";
-        }
-        else if (globalclass.language == 2) {
-            var1 = ("Root/Data/Strings/" + this.tablename) + "German.slb";
+            var1 = ("Root/Data/Strings/" + this.tablename) + "BionicleFont.slb";
         }
         else if (globalclass.language == 1) {
-            var1 = ("Root/Data/Strings/" + this.tablename) + "French.slb";
+            var1 = ("Root/Data/Strings/" + this.tablename) + "BionicleFontshad.slb";
+        }
+        else if (globalclass.language == 2) {
+            var1 = ("Root/Data/Strings/" + this.tablename) + "tech_font_01.slb";
         }
         else if (globalclass.language == 3) {
-            var1 = ("Root/Data/Strings/" + this.tablename) + "Danish.slb";
+            var1 = ("Root/Data/Strings/" + this.tablename) + "tech_font_01_hilight.slb";
         }
         else if (globalclass.language == 4) {
-            var1 = ("Root/Data/Strings/" + this.tablename) + "Swedish.slb";
+            var1 = ("Root/Data/Strings/" + this.tablename) + "BionicleFontMat.slb";
         }
         else if (globalclass.language == 5) {
             var1 = ("Root/Data/Strings/" + this.tablename) + "Norwegian.slb";
@@ -43,11 +43,14 @@ class gs_lego_stringtable : base_object {
         else if (globalclass.language == 10) {
             var1 = ("Root/Data/Strings/" + this.tablename) + "Japanese.slb";
         }
-        else {
-            var1 = ("Root/Data/Strings/" + this.tablename) + "lang7.slb";
-        }
         globalclass.language;
         this.languagearray = scslosistringfuncs::getstringtable(var1);
         return null;
     }
+
+    method cleanupfull() {
+        this.tablename = null;
+        this.languagearray = null;
+        return null;
+    }    
 }

@@ -5,16 +5,16 @@ class gs_legoactivetext : gs_legotext {
     property basex;
     property pad;
     
-    method gs_legoactivetext(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
-        this.gs_legotext(param1, param3, param4, param5, param6, param7, param8, param9, param11);
-        this.string = param3;
-        this.fontname2 = param2;
+    method gs_legoactivetext(font1_name, font2_name, string, x_pos, y_pos, z_pos, scale, horizontal_alignment, vertical_alignment, padding1, padding2) {
+        this.gs_legotext(font1_name, string, x_pos, y_pos, z_pos, scale, horizontal_alignment, vertical_alignment, padding2);
+        this.string = string;
+        this.fontname2 = font2_name;
         this.curfont = 0;
-        if (param10 == null) {
+        if (padding1 == null) {
             this.pad = -11;
         }
         else {
-            this.pad = param10;
+            this.pad = padding1;
         }
         return null;
     }
@@ -64,7 +64,7 @@ class gs_legoactivetext : gs_legotext {
     }
     
     method setactive(param1) {
-        if (!(this.curfont == 1)) {
+        if (this.curfont != 1) {
             sctextobject::setfont(this.text, this.font2);
             this.setpos(this.x1 + (this.pad * this.scale), this.y1 - this.padadjustment, this.z);
             this.curfont = 1;
@@ -73,7 +73,7 @@ class gs_legoactivetext : gs_legotext {
     }
     
     method setinactive() {
-        if (!(this.curfont == 0)) {
+        if (this.curfont != 0) {
             sctextobject::setfont(this.text, this.font);
             this.curfont = 0;
             this.setpos(this.x1 - (this.pad * this.scale), this.y1 - this.padadjustment, this.z);
