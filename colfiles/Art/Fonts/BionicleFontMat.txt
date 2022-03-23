@@ -1,0 +1,72 @@
+// This is a recreation of Nicholas N. Pakidko's BionicleFont.info file, remade with new information for use with TiffSplitter-DX
+// FIRST: your comments can now be more than 256 characters long
+// SECOND: The file is backwards compatible with the original info files because of course it is
+// THIRD: The name became a misnomer - TiffSplitter splits .tgas, not .tifs - this streamlines the process
+// 
+// DIRECTIONS FOR GETTING A FONT READY FOR THE GAME
+//1. Get the font sheet in TGA format. 
+//   The font should have each character within its own cell in a grid
+//
+//2. Know the following information about the font
+//   Width of a tile
+//   Height of a tile
+//   Kerning
+//   Baseline
+//   Space size
+//   The ordering of the characters, and the values they map to
+//
+//3. Write a file like this one - at the end the information is displayed
+//   This is also a valid file
+//
+//4. Run tiffsplitter-dx as follows:
+//   python tiffsplitter-dx.py <image>.tga <fontinfofile>
+//
+//5. Put all the tga files and the .fnt file (created by tiffsplitter-dx) into your font directory
+//
+//6. Run colfile.py with the directory as your argument
+//   If your font is a bit big, you can also pass the '--full-compression' argument
+//
+// THE FOLLOWING PARAMETERS MUST COME IN THIS ORDER, AND MUST BE ON THE LINES BY THEMSELVES
+// This is to ensure backwards compatibility with the old tiffsplitter files
+// This is the WIDTH of each tile
+256
+// This is the HEIGHT of each tile
+256
+// if the program can't divide the font into these pieces, then it WILL return an error
+// This is the number (in pixels) for the KERNING. This value can be negative
+16
+// This is the number (in pixels) from the bottom of the file to the BASELINE of the font
+// It only appears to be used in the loading bar. Higher number means the loading bar periods are LOWER
+// THIS IS UNAFFECTED BY THE RESCALE FACTOR
+10
+// This is the number (in pixels) for the SIZE OF A SPACE
+112
+// This line is used for the RESCALE FACTOR of the font
+// In the old TiffSplitter, it would have been the background color for the characters in the font. This is now implied to be anything 
+// that is transparent. 
+// Putting in any value which isn't "0 0 0 0" will cause the font to be SHRUNK DOWN by the specified amount
+// KEEP THIS IN MIND WHEN PUTTING IN THE PREVIOUS INFO
+8
+// This line is all the characters in the font, in order, from left to right
+// Follow the same syntax as old tiffsplitter: Use escape characters for things outside of the ASCII range - start with '\x' and put in 
+// anything (\xFF might still be reserved for a callback function, so please try to avoid using it)
+// This MUST be one single line, with NO spaces between the characters and NO newlines between the characters
+0123456789!?.:;,"()&ABCDEFGHIJKLMNOPQRSTUVWXYZ-/%#<>+abcdefghijklmnopqrstuvwxyz'\xA0\xA1\xA2\xA3\xA4\xA5\xA6\xA7\xA8\xA9\xAA\xAB\xAC\xAD\xAE\xAF\xB0\xB1\xB2\xB3\xB4\xB5\xB6\xB7\xB8\xB9\xBA\xBB\xBC\xBD\xBE\xBF\xC0\xC1\xC2\xC3\xC4\xC5\xC6\xC7\xC8\xC9\xCA\xCB\xCC\xCD\xCE\xCF\xD0\xD1\xD2\xD3\xD4\xD5\xD6\xD7\xD8\xD9\xDA\xDB\xDC\xDD\xDE\xDF\xE0\xE1\xE2
+// This line is for the MANUAL KERNING TABLE     
+// It can be entered in two formats
+// The first one is simple, but it CAN NOT handle any number which is not 0-9
+// It is simply zeroes until you get to a new character you need to adjust, where you then write the adjustment offset
+// All the characters are on the line below for ease of selecting
+// This line now also starts with 3 spaces, so it's even easier to select
+// 0123456789!?.:;,"()&ABCDEFGHIJKLMNOPQRSTUVWXYZ-/%#<>+abcdefghijklmnopqrstuvwxyz'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛŨÜÝþßṡàáâāäåæçèéêëìíîïðñòóôõöøùúûũüý¿¡Œœ
+   000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+// The second format is more complicated, but allows for offsetting by any signed 32-bit int                                    
+// First we have the CODE FOR THE CHARACTER - this can be a hex code (indicated with \x) or a character code (indicated with \c)
+// so "A" can be input as \x41 or as \cA
+// The next thing, whatever it is, must be a BASE 10 NUMBER (can be positive or negative) showing the MANUAL KERNING OFFSET
+// Then you can input the next character
+// The end of the table is signalled by two backslashes
+// YOU MUST INCLUDE THEM OTHERWISE THE PROGRAM WILL FLIP OUT
+// The following lines are for demonstration, they just show how this works
+// \xA0-100\xA150\cA4\\
+// this would offset character A0 (À) by -100, character A1 (Á) by 50 and A by 4
