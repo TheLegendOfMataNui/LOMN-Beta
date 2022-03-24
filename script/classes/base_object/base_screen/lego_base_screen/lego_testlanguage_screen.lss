@@ -13,10 +13,10 @@ class lego_testlanguage_screen : lego_base_screen {
     method initfull() {
         var var1;
         this.items = [ new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "BionicleFont", screenx * 0.05, screeny * 0.05, 0, 1.25, 0, 4, 0, 1), 
-            new gs_legotext("Root/Data/Art/Fonts/BionicleFontshad", "BionicleFontshad", screenx * 0.05, (screeny * 0.05) + 30, 0, 0.75, 0, 4, 0, 1), 
-            new gs_legotext("Root/Data/Art/Fonts/tech_font_01", "TECH FONT", screenx * 0.05, (screeny * 0.05) + 60, 0, 0.75, 0, 4, 0, 1),
-            new gs_legotext("Root/Data/Art/Fonts/tech_font_01_hilight", "TECH FONT HILIGHTED", screenx * 0.05, (screeny * 0.05) + 90, 0, 0.75, 0, 4, 0, 1),
-            new gs_legotext("Root/Data/Art/Fonts/BionicleFontMat", "MATORAN", screenx * 0.05, (screeny * 0.05) + 120, 0, 0.75, 0, 4, 0, 1) ];
+            new gs_legotext("Root/Data/Art/Fonts/BionicleFontshad", "BionicleFontshad", screenx * 0.05, (screeny * 0.05) + 30, 0, 1.25, 0, 4, 0, 1), 
+            new gs_legotext("Root/Data/Art/Fonts/tech_font_01", "TECH FONT", screenx * 0.05, (screeny * 0.05) + 60, 0, 1.0, 0, 4, 0, 1),
+            new gs_legotext("Root/Data/Art/Fonts/tech_font_01_hilight", "TECH FONT HILIGHTED", screenx * 0.05, (screeny * 0.05) + 90, 0, 1.0, 0, 4, 0, 1),
+            new gs_legotext("Root/Data/Art/Fonts/BionicleFontMat", "MATORAN", screenx * 0.05, (screeny * 0.05) + 120, 0, 1.25, 0, 4, 0, 1) ];
         var1 = 0;
         while ((this.items.__length - 1) >= var1) {
             this.items[var1].initfull();
@@ -133,22 +133,22 @@ class lego_testlanguage_screen : lego_base_screen {
         else if (this.currentitem == 1) {
             globalclass.setlanguage(1);
             font = "Root/Data/Art/Fonts/BionicleFontshad";
-            scaling = 0.65;
+            scaling = 1.0;
         }
         else if (this.currentitem == 2) {
             globalclass.setlanguage(2);
             font = "Root/Data/Art/Fonts/tech_font_01";
-            scaling = 0.45;
+            scaling = 0.6;
         }
         else if (this.currentitem == 3) {
             globalclass.setlanguage(3);
             font = "Root/Data/Art/Fonts/tech_font_01_hilight";
-            scaling = 0.45;
+            scaling = 0.6;
         }
         else if (this.currentitem == 4) {
             globalclass.setlanguage(4);
             font = "Root/Data/Art/Fonts/BionicleFontMat";
-            scaling = 0.5;
+            scaling = 1.0;
         }
         this.stringtable.initfull();
         if (this.examplestring == null) {
