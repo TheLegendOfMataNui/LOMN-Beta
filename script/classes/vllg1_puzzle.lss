@@ -39,6 +39,7 @@ class vllg1_puzzle {
     property diskactive;
     property start_cinema;
     property safety_timer;
+    property summon_blorpo_timer;
 
     method vllg1_puzzle(param1) {
         this.parent = param1;
@@ -299,6 +300,7 @@ class vllg1_puzzle {
         this.crystal.settweakable();
         this.orientation = 1;
         this.safety_timer = 0;
+        this.summon_blorpo_timer = 37;
         return null;
     }
     
@@ -360,6 +362,7 @@ class vllg1_puzzle {
         this.diskactive = null;
         this.start_cinema = null;
         this.safety_timer = null;
+        this.summon_blorpo_timer = null;
         return null;
     }
     
@@ -377,6 +380,14 @@ class vllg1_puzzle {
             }
             else {
                 this.safety_timer = this.safety_timer + param1.deltatime;
+            }
+        }
+        if (bettersaver::getbooleanvalue(88) == 0) {
+            if (this.summon_blorpo_timer > 0) {
+                this.summon_blorpo_timer = this.summon_blorpo_timer - param1.deltatime;
+            }
+            if ((this.deadhives == 4) && (this.savedrahi == 4) && (this.summon_blorpo_timer > 0)) {
+                bettersaver::setbooleanvalue(88, 1);
             }
         }
         return null;
