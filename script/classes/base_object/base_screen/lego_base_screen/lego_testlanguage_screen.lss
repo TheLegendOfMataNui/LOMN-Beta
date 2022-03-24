@@ -12,11 +12,11 @@ class lego_testlanguage_screen : lego_base_screen {
     
     method initfull() {
         var var1;
-        this.items = [ new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "BionicleFont", screenx * 0.05, screeny * 0.25, 0, 1.0, 0, 4, 0, 1), 
-            new gs_legotext("Root/Data/Art/Fonts/BionicleFontshad", "BionicleFontshad", screenx * 0.05, (screeny * 0.25) + 40, 0, 1.0, 0, 4, 0, 1), 
-            new gs_legotext("Root/Data/Art/Fonts/tech_font_01", "TECH FONT", screenx * 0.05, (screeny * 0.25) + 80, 0, 1.0, 0, 4, 0, 1),
-            new gs_legotext("Root/Data/Art/Fonts/tech_font_01_hilight", "TECH FONT HILIGHTED", screenx * 0.05, (screeny * 0.25) + 120, 0, 1.0, 0, 4, 0, 1),
-            new gs_legotext("Root/Data/Art/Fonts/BionicleFontMat", "MATORAN", screenx * 0.05, (screeny * 0.25) + 160, 0, 1.0, 0, 4, 0, 1) ];
+        this.items = [ new gs_legotext("Root/Data/Art/Fonts/BionicleFont", "BionicleFont", screenx * 0.05, screeny * 0.05, 0, 1.25, 0, 4, 0, 1), 
+            new gs_legotext("Root/Data/Art/Fonts/BionicleFontshad", "BionicleFontshad", screenx * 0.05, (screeny * 0.05) + 30, 0, 0.75, 0, 4, 0, 1), 
+            new gs_legotext("Root/Data/Art/Fonts/tech_font_01", "TECH FONT", screenx * 0.05, (screeny * 0.05) + 60, 0, 0.75, 0, 4, 0, 1),
+            new gs_legotext("Root/Data/Art/Fonts/tech_font_01_hilight", "TECH FONT HILIGHTED", screenx * 0.05, (screeny * 0.05) + 90, 0, 0.75, 0, 4, 0, 1),
+            new gs_legotext("Root/Data/Art/Fonts/BionicleFontMat", "MATORAN", screenx * 0.05, (screeny * 0.05) + 120, 0, 0.75, 0, 4, 0, 1) ];
         var1 = 0;
         while ((this.items.__length - 1) >= var1) {
             this.items[var1].initfull();
@@ -46,8 +46,13 @@ class lego_testlanguage_screen : lego_base_screen {
         }
         this.currentitem = null;
         if (this.examplestring != null) {
-            this.examplestring.remove();
-            this.examplestring.cleanupfull();
+            var1 = 0;
+            while ((this.examplestring.__length - 1) >= var1) {
+                this.examplestring[var1].remove();
+                this.examplestring[var1].cleanupfull();
+                this.examplestring[var1] = null;
+                var1 = var1 + 1;
+            }
             this.examplestring = null;
         }
         if (this.stringtable != null) {
@@ -82,12 +87,12 @@ class lego_testlanguage_screen : lego_base_screen {
             if (param1.button == 251) {
                 this.go_back = 1;
             }
-            if (param1.button == 37) {
-                this.newlanguage(-1);
-            }
-            if (param1.button == 39) {
-                this.newlanguage(1);
-            }
+            //if (param1.button == 37) {
+            //    this.newlanguage(-1);
+            //}
+            //if (param1.button == 39) {
+            //    this.newlanguage(1);
+            //}
         }
         return null;
     }
@@ -106,58 +111,76 @@ class lego_testlanguage_screen : lego_base_screen {
         return null;
     }
     
-    method newlanguage(string_index_increment) {
+    method newlanguage() {
         var font;
-        if ((this.examplestring != null) && (string_index_increment == null)) {
-            this.examplestring.remove();
-            this.examplestring.cleanupfull();
+        var strings;
+        var scaling;
+        if (this.examplestring != null) {
+            strings = 0;
+            while ((this.examplestring.__length - 1) >= strings) {
+                this.examplestring[strings].remove();
+                this.examplestring[strings].cleanupfull();
+                this.examplestring[strings] = null;
+                strings = strings + 1;
+            }
             this.examplestring = null;
         }
         if (this.currentitem == 0) {
             globalclass.setlanguage(0);
             font = "Root/Data/Art/Fonts/BionicleFont";
-            debug::print("Font 1");
+            scaling = 1.0;
         }
         else if (this.currentitem == 1) {
             globalclass.setlanguage(1);
             font = "Root/Data/Art/Fonts/BionicleFontshad";
-            debug::print("Font 2");
+            scaling = 0.65;
         }
         else if (this.currentitem == 2) {
             globalclass.setlanguage(2);
             font = "Root/Data/Art/Fonts/tech_font_01";
-            debug::print("Font 3");
+            scaling = 0.45;
         }
         else if (this.currentitem == 3) {
             globalclass.setlanguage(3);
             font = "Root/Data/Art/Fonts/tech_font_01_hilight";
-            debug::print("Font 4");
+            scaling = 0.45;
         }
         else if (this.currentitem == 4) {
             globalclass.setlanguage(4);
             font = "Root/Data/Art/Fonts/BionicleFontMat";
-            debug::print("Font 5");
+            scaling = 0.5;
         }
         this.stringtable.initfull();
         if (this.examplestring == null) {
-            debug::print(__tostring(font));
-            this.examplestring = new gs_lego_languagetext(font, 0, this.stringtable, screenx * 0.5, (screeny - 100) + 20, 0, 1, 256, 2, 0);
-            this.examplestring.initfull();
-            this.examplestring.add();
-            this.examplestring.show();
-            this.stringid = 0;
-        }
-        else {
-            if (string_index_increment != null) {
-                this.stringid = this.stringid + string_index_increment;
-                if (this.stringid < 0) {
-                    this.stringid = this.examplestring.stringtable.languagearray.__length - 1;
-                }
-                if (this.stringid > (this.examplestring.stringtable.languagearray.__length - 1)) {
-                    this.stringid = 0;
-                }
-            }            
-            this.examplestring.setstring(this.stringid, this.stringtable);
+            var x_pos = (screenx * 0.5);
+            var y_pos = (screeny - 300);
+            this.examplestring = [ new gs_lego_languagetext(font, 0, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 1, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 2, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 3, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 4, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 5, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 6, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 7, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 8, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 9, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 10, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 11, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 12, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 13, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 14, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 15, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 16, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0),
+                new gs_lego_languagetext(font, 17, this.stringtable, x_pos, y_pos, 0, scaling, 256, 2, 0) ];
+            strings = 0;
+            while ((this.examplestring.__length - 1) >= strings) {
+                this.examplestring[strings].initfull();
+                this.examplestring[strings].add();
+                this.examplestring[strings].show();
+                y_pos = y_pos + 15;
+                this.examplestring[strings].setpos(x_pos, y_pos, 0);
+                strings = strings + 1;
+            }
         }
         return null;
     }
