@@ -22,8 +22,6 @@ class mbch2_puzzle {
     property apefi;
     property yala;
     property switchai;
-    property start_cinema;
-    property safety_timer;
         
     method mbch2_puzzle(param1) {
         this.parent = param1;
@@ -41,10 +39,6 @@ class mbch2_puzzle {
         gcmodeldirector::setnearestmax(7);
         gcmodeldirector::setnearestmaxdist(1000.0);
         gcareadirector::setnearestmaxdist(1000.0);
-
-        //Typical music loading
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGODrumAndBassPart1");
-        globalclass.bgmusic.play();		
 
         this.droplandonce = 1;
         this.callonce = 1;
@@ -129,6 +123,10 @@ class mbch2_puzzle {
                 this.lizard.aisetbenign(1);
             }
         }
+        else {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGODrumAndBassPart1");
+            globalclass.bgmusic.play();		
+        }
 
         //Set up Unasa (vlgr)
         this.unasa = new gs_lego_character("vlgr", "vlgr", "fake", 0, 273.6912, 350.7369, 60.25493, "aiin");
@@ -166,9 +164,6 @@ class mbch2_puzzle {
 
         //Set AI switch flag 
         this.switchai = 1;
-
-        //Setting the cinematic buffer timer to 0 initially
-        this.safety_timer = 0;
         return null;
     }
     
@@ -242,8 +237,6 @@ class mbch2_puzzle {
             this.yala.cleanupfull();
             this.yala = null;
         }
-        this.start_cinema = null;
-        this.safety_timer = null;
         return null;
     }
     
@@ -280,22 +273,14 @@ class mbch2_puzzle {
             debug::print("^^^^^^^^^^^^^^^^^^^^^^TOHUNGA SHOULD STAY STILL FOR NOW...AI WAS CHANGED");
         }
 
-        //Once start_cinema is set to true, start running the timer ticks until the timer value exceeds set value, then execute cinematic code
-        if (this.start_cinema == 1) {
-            if (this.safety_timer > 0.01) {
-                this.start_cinema = 0;            
-                if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin4")) == 0) {
-                    globalclass.player.actor.deactivatedragger();
-                    if ((globalclass.player.actor.isdraggeractive() == 0) && (this.safety_timer > 0.01)) {
-                        this.cinema = gccinemaengine::create();
-                        gccinemaengine::load(this.cinema, "cin4");
-                        gccinemaengine::play(this.cinema);
-                    }
-                }
-            }
-            else {
-                this.safety_timer = this.safety_timer + param1.deltatime;
-            }
+        //Once the cinematic delay timer in player reaches the specified value, load and start the cinematic
+        if (globalclass.player.cinematic_delay > 0.01) {
+            if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin4")) == 0) {
+                this.cinema = gccinemaengine::create();
+                gccinemaengine::load(this.cinema, "cin4");
+                gccinemaengine::play(this.cinema);
+                        
+             }
         }
         return null;
     }
@@ -344,10 +329,8 @@ class mbch2_puzzle {
                             this.boulder.setmoveableflags(1, 1, 0, 1);
                             this.boulder.setfriction(0.1);
                             this.callonce = 0;
-                            this.start_cinema = 1;                
-                            globalclass.level.cam.setaimode(0);
-                            globalclass.player.actor.physicson(0);
-                            globalclass.player.actor.idle();
+                            //Telling player class a cinematic is starting
+                            globalclass.player.cinematic_start = 1;                
                         }
                     }
                     else if (this.callonce == 0) {
@@ -359,7 +342,14 @@ class mbch2_puzzle {
             }
         }
         else if (param1.eventid == 30) {
-            globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
+            if (bettersaver::getbooleanvalue(81) == 1) {
+			    globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICGALIambience");
+			    globalclass.bgmusic.play(1);
+            }
+            else {
+                globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGODrumAndBassPart1");
+                globalclass.bgmusic.play();		
+            }
         }
         else if (param1.eventid == 101) {
 			globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICGALIambience");

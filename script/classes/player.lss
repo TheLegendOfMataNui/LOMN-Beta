@@ -37,6 +37,8 @@ class player {
     property toadied;
     property spiraleffect;
     property draggercontroller;
+    property cinematic_delay;
+    property cinematic_start;
     
     method player() {
         return null;
@@ -78,6 +80,7 @@ class player {
         this.toadied = 0;
         this.draggercontroller = new lego_draggercontroller();        
         this.draggercontroller.initfull();
+        this.cinematic_delay = 0;
         return null;
     }
     
@@ -133,6 +136,8 @@ class player {
             this.draggercontroller = null;
         }
         this.spiraleffect = null;
+        this.cinematic_delay = null;
+        this.cinematic_start = null;
         return null;
     }
     
@@ -218,6 +223,23 @@ class player {
         }
         if (this.draggercontroller.active == 1) {
             this.draggercontroller.process(param1);
+        }
+
+        //If a class sets this to true, begin timer and run code for removing the movement sounds at the start of a cutscene
+        if (this.cinematic_start == 1) {
+            if (this.cinematic_delay == 0) {
+                globalclass.level.cam.setaimode(0);
+                globalclass.player.actor.physicson(0);
+                globalclass.player.actor.idle();
+            }
+            //Timer reached end point, reset it and stop this code from firing until reactivated again
+            if (this.cinematic_delay > 0.01) {
+                this.cinematic_start = null;            
+                this.cinematic_delay = 0;
+            }
+            else {
+                this.cinematic_delay = this.cinematic_delay + param1.deltatime;
+            }
         }
         return null;
     }
@@ -577,6 +599,25 @@ class player {
                 }   
                 //Reenable player collisions with characters now that the screenwipe and respawn are finished, ending invincibility period
                 globalclass.player.actor.enablecollisions();
+            }
+
+            //Cinema Play and Conversation Start event
+            else if (param1.eventid == 32) {
+                //Checking to make sure the grapple isn't active and if it is, return it instantly
+                if (this.actor.isdraggeractive() == 1) {
+                    this.actor.deactivatedragger();                
+                }
+                //Checking if a mask is in use and if so, turn it off and hide the hud mask element again
+                if (this.maskcontrol.isactive()) {
+                    this.maskcontrol.toggleactive();
+                    globalclass.hud.mask.hide();
+                }
+            }
+
+            //Cinema Stop event
+            else if (param1.eventid == 30) {
+                //Reset the player physics and the delay timer
+                globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
             }
         }
         return null;

@@ -11,8 +11,6 @@ class lego_area_mtup2 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicGaliAmbience");
-        globalclass.bgmusic.play();
         gcmodeldirector::setnearestmax(7);
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 50000.0, 0.01);
@@ -38,7 +36,6 @@ class lego_area_mtup2 : gs_lego_area {
         if (param1.eventid == 30) {
             this.level.cam.setaimode(9);
             globalclass.hud.hide();
-            globalclass.bgmusic.stop();
             globalclass.player.maskcontrol.changemask(0);
         }
         return null;
@@ -49,6 +46,7 @@ class lego_area_mtup2 : gs_lego_area {
             if (param1.button == 251) {
                 if (this.cinema != null) {
                     gccinemaengine::stop(this.cinema);
+                    globalclass.bgmusic.stop();
                 }
             }
         }

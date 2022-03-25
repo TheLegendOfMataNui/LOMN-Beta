@@ -64,15 +64,9 @@ class shrn6_puzzle {
             gccollisionphysicsgroup::turnoffnextarea(portal_trigger);
         }
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
-            globalclass.player.actor.deactivatedragger();
-            if (globalclass.player.actor.isdraggeractive() == 0) {
-                this.cinema = gccinemaengine::create();
-                gccinemaengine::load(this.cinema, "cin3");
-                if (globalclass.player.maskcontrol.isactive() == 1) {
-                    globalclass.player.maskcontrol.toggleactive();
-                }
-                gccinemaengine::play(this.cinema);
-            }
+            this.cinema = gccinemaengine::create();
+            gccinemaengine::load(this.cinema, "cin3");
+            gccinemaengine::play(this.cinema);
         }
         else {
             globalclass.player.processequipment(2);
@@ -179,9 +173,11 @@ class shrn6_puzzle {
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema != null) {
-                gccinemaengine::stop(this.cinema);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
             }
         }
         return null;

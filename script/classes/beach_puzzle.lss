@@ -3,8 +3,6 @@ class beach_puzzle {
     property cinema;
     property cinema_shown;
     property safecount;
-    property start_cinema;
-    property safety_timer;
     
     method beach_puzzle(param1) {
         this.parent = param1;
@@ -30,7 +28,6 @@ class beach_puzzle {
             gccinemaengine::load(this.cinema, "cin1");
         }
         this.safecount = 3;
-        this.safety_timer = 0;
         crab1 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("crb1"));
         crab2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cr01"));
         gccharacter::setscale(crab1, 2.0);
@@ -42,20 +39,10 @@ class beach_puzzle {
         this.cinema = null;
         this.cinema_shown = null;
         this.safecount = null;
-        this.start_cinema = null;
-        this.safety_timer = null;
         return null;
     }
     
     method process(param1) {
-        if (this.start_cinema == 1) {
-            if (this.safety_timer > 0.01) {
-                this.start_cinema = 0;            
-            }
-            else {
-                this.safety_timer = this.safety_timer + param1.deltatime;
-            }
-        }
         return null;
     }
     
@@ -63,24 +50,15 @@ class beach_puzzle {
         var tohunga;
         if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin1")) && (this.cinema_shown == 0)) {
-                this.start_cinema = 1;                
-                globalclass.level.cam.setaimode(0);
-                globalclass.player.actor.physicson(0);
-                globalclass.player.actor.idle();
-                globalclass.player.actor.deactivatedragger();
-                if ((globalclass.player.actor.isdraggeractive() == 0) && (this.safety_timer > 0.01)) {
+                globalclass.player.cinematic_start = 1;                
+                if ((globalclass.player.cinematic_delay > 0.01)) {
                     gccinemaengine::play(this.cinema);
                     this.cinema_shown = 1;
                     this.safecount = 0;
-                    if (globalclass.player.maskcontrol.isactive()) {
-                        globalclass.player.maskcontrol.toggleactive();
-                        globalclass.hud.mask.hide();
-                    }
                 }
             }
         }
         else if (param1.eventid == 30) {
-            globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
             globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
             globalclass.bgmusic.play(1);
         }

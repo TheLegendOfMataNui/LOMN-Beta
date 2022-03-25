@@ -37,8 +37,6 @@ class vllg1_puzzle {
     property chadea;
     property pickactive;
     property diskactive;
-    property start_cinema;
-    property safety_timer;
     property summon_blorpo_timer;
 
     method vllg1_puzzle(param1) {
@@ -76,18 +74,15 @@ class vllg1_puzzle {
             this.cinema_intro_shown = 0;
         }
         if (this.cinema_intro_shown == 0) {
-            globalclass.player.actor.deactivatedragger();
-            if (globalclass.player.actor.isdraggeractive() == 0) {
-                gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), 0);
-                gcareadirector::hide(scslosifoundation::stringtoidentifier("fhvb"), 0);
-                gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb0"), 0);
-                gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb1"), 0);
-                gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb2"), 0);
-                this.cinema_intro = gccinemaengine::create();
-                gccinemaengine::load(this.cinema_intro, "cin2");
-                gccinemaengine::setnextarea(this.cinema_intro, scslosifoundation::stringtoidentifier("tura"));
-                gccinemaengine::play(this.cinema_intro);
-            }
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("dor2"), 0);
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("fhvb"), 0);
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb0"), 0);
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb1"), 0);
+            gcareadirector::hide(scslosifoundation::stringtoidentifier("ghb2"), 0);
+            this.cinema_intro = gccinemaengine::create();
+            gccinemaengine::load(this.cinema_intro, "cin2");
+            gccinemaengine::setnextarea(this.cinema_intro, scslosifoundation::stringtoidentifier("tura"));
+            gccinemaengine::play(this.cinema_intro);
         }
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3"))) {
             this.cinema_dance_shown = 1;
@@ -299,7 +294,6 @@ class vllg1_puzzle {
         this.crystal.initfull();
         this.crystal.settweakable();
         this.orientation = 1;
-        this.safety_timer = 0;
         this.summon_blorpo_timer = 37;
         return null;
     }
@@ -360,8 +354,6 @@ class vllg1_puzzle {
         this.chadea = null;
         this.pickactive = null;
         this.diskactive = null;
-        this.start_cinema = null;
-        this.safety_timer = null;
         this.summon_blorpo_timer = null;
         return null;
     }
@@ -373,14 +365,6 @@ class vllg1_puzzle {
         }
         else if (this.coindoortext.onscreen == 1) {
             this.coindoortext.hide();
-        }
-        if (this.start_cinema == 1) {
-            if (this.safety_timer > 0.01) {
-                this.start_cinema = 0;            
-            }
-            else {
-                this.safety_timer = this.safety_timer + param1.deltatime;
-            }
         }
         if (bettersaver::getbooleanvalue(88) == 0) {
             if (this.summon_blorpo_timer > 0) {
@@ -479,12 +463,8 @@ class vllg1_puzzle {
         else if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin3")) && (this.cinema_dance_shown == 0)) {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
-                    this.start_cinema = 1;                
-                    globalclass.level.cam.setaimode(0);
-                    globalclass.player.actor.physicson(0);
-                    globalclass.player.actor.idle();
-                    globalclass.player.actor.deactivatedragger();
-                    if ((globalclass.player.actor.isdraggeractive() == 0) && (this.safety_timer > 0.01)) {
+                    globalclass.player.cinematic_start = 1;                
+                    if (globalclass.player.cinematic_delay > 0.01) {
                         gccinemaengine::play(this.cinema_dance);
                         //Remove Tohunga hand items
                         if (bettersaver::getbooleanvalue(32) == 1) {
@@ -496,10 +476,6 @@ class vllg1_puzzle {
                         gccharacter::removepart(this.dosne, 2);
                         gccharacter::removepart(this.chadea, 2);
                         this.cinema_dance_shown = 1;
-                        if (globalclass.player.maskcontrol.isactive()) {
-                            globalclass.player.maskcontrol.toggleactive();
-                            globalclass.hud.mask.hide();
-                        }
                         bettersaver::setbooleanvalue(82, 1);
                     }
                 }
@@ -507,7 +483,6 @@ class vllg1_puzzle {
         }
         else if (param1.eventid == 30) {
             this.parent.level.cam.setaimode(9);
-            globalclass.bgmusic.stop();
             globalclass.hud.hide();
         }
         else if (param1.eventid == 1) {
@@ -536,9 +511,13 @@ class vllg1_puzzle {
             if (param1.button == 251) {
                 if (this.cinema_intro != null) {
                     gccinemaengine::stop(this.cinema_intro);
+                    globalclass.bgmusic.stop();
                 }
                 if (this.cinema_dance != null) {
                     gccinemaengine::stop(this.cinema_dance);
+                    if (this.cinema_dance_shown == 1) {
+                        globalclass.bgmusic.stop();
+                    }
                 }
             }
         }

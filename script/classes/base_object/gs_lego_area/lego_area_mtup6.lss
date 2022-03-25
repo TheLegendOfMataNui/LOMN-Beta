@@ -30,9 +30,11 @@ class lego_area_mtup6 : gs_lego_area {
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema != null) {
-                gccinemaengine::stop(this.cinema);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
             }
         }
         return null;

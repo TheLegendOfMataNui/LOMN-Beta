@@ -39,8 +39,6 @@ class vllg3_puzzle {
     property diskactive;
     property hutball;
     property ball;
-    property start_cinema;
-    property safety_timer;
     
     method vllg3_puzzle(param1) {
         this.parent = param1;
@@ -287,7 +285,6 @@ class vllg3_puzzle {
         this.crystal.initfull();
         this.crystal.settweakable();
         this.orientation = 1;
-        this.safety_timer = 0;
         return null;
     }
     
@@ -350,8 +347,6 @@ class vllg3_puzzle {
         this.ballactive = null;
         this.hutball = null;
         this.ball = null;
-        this.start_cinema = null;
-        this.safety_timer = null;
         return null;
     }
     
@@ -362,14 +357,6 @@ class vllg3_puzzle {
         }
         else if (this.coindoortext.onscreen == 1) {
             this.coindoortext.hide();
-        }
-        if (this.start_cinema == 1) {
-            if (this.safety_timer > 0.01) {
-                this.start_cinema = 0;            
-            }
-            else {
-                this.safety_timer = this.safety_timer + param1.deltatime;
-            }
         }
         return null;
     }
@@ -445,22 +432,14 @@ class vllg3_puzzle {
         else if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin5")) && (this.cinema_shown == 0)) {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
-                    this.start_cinema = 1;                
-                    globalclass.level.cam.setaimode(0);
-                    globalclass.player.actor.physicson(0);
-                    globalclass.player.actor.idle();
-                    globalclass.player.actor.deactivatedragger();
-                    if ((globalclass.player.actor.isdraggeractive() == 0) && (this.safety_timer > 0.01)) {
+                    globalclass.player.cinematic_start = 1;                
+                    if (globalclass.player.cinematic_delay > 0.01) {
                         gccinemaengine::play(this.cinema);
                         //Remove Tohunga hand items
                         if (this.hammeractive == 1) {
                             gccharacter::removepart(this.epena, 1);
                         }
                         this.cinema_shown = 1;
-                        if (globalclass.player.maskcontrol.isactive()) {
-                            globalclass.player.maskcontrol.toggleactive();
-                            globalclass.hud.mask.hide();
-                        }
                         bettersaver::setbooleanvalue(84, 1);
                     }
                 }
@@ -468,7 +447,6 @@ class vllg3_puzzle {
         }
         else if (param1.eventid == 30) {
             this.parent.level.cam.setaimode(9);
-            globalclass.bgmusic.stop();
             globalclass.hud.hide();
         }
         else if (param1.eventid == 1) {
@@ -497,6 +475,9 @@ class vllg3_puzzle {
             if (param1.button == 251) {
                 if (this.cinema != null) {
                     gccinemaengine::stop(this.cinema);
+                    if (this.cinema_shown == 1) {
+                        globalclass.bgmusic.stop();
+                    }
                 }
             }
         }

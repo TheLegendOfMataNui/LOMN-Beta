@@ -16,7 +16,6 @@ class hive_puzzle {
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
         globalclass.bgmusic.play(1);
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 0) {
-            globalclass.hud.hide();
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin2");
             gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("shrn"));
@@ -54,32 +53,22 @@ class hive_puzzle {
             globalclass.player.unkill();
         }
         else if (param1.eventid == 39) {
-            this.playcinema();
+            gccinemaengine::play(this.cinema);
         }
         else if (param1.eventid == 30) {
             this.parent.level.cam.setaimode(9);
             globalclass.hud.hide();
-            globalclass.bgmusic.stop();
         }
         return null;
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema != null) {
-                gccinemaengine::stop(this.cinema);
-            }
-        }
-        return null;
-    }
-    
-    method playcinema() {
-        globalclass.player.actor.deactivatedragger();
-        if (globalclass.player.actor.isdraggeractive() == 0) {
-            gccinemaengine::play(this.cinema);
-            if (globalclass.player.maskcontrol.isactive()) {
-                globalclass.player.maskcontrol.toggleactive();
-                globalclass.hud.mask.hide();
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                    globalclass.bgmusic.stop();
+                }
             }
         }
         return null;

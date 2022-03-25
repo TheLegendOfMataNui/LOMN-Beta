@@ -47,12 +47,9 @@ class shrn5_puzzle {
         //Load and play cinematic if cin2 played and cin3 hasn't been played
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2"))) {
             if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin3")) == 0) {
-                globalclass.player.actor.deactivatedragger();
-                if (globalclass.player.actor.isdraggeractive() == 0) {
-                    this.cinema = gccinemaengine::create();
-                    gccinemaengine::load(this.cinema, "cin3");
-                    gccinemaengine::play(this.cinema);
-                }
+                this.cinema = gccinemaengine::create();
+                gccinemaengine::load(this.cinema, "cin3");
+                gccinemaengine::play(this.cinema);
             }
         }
         matau = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"), 0);
@@ -155,9 +152,11 @@ class shrn5_puzzle {
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema != null) {
-                gccinemaengine::stop(this.cinema);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
             }
         }
         return null;

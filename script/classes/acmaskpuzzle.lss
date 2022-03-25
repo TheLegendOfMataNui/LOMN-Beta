@@ -165,14 +165,10 @@ class acmaskpuzzle {
                     var1 = this.bully.getpos();
                     var2 = globalclass.player.actor.getpos();
                     if (((((var1.x1 - var2.x1) < 10) && ((var1.x1 - var2.x1) > -10)) && ((var1.z - var2.z) < 10)) && ((var1.z - var2.z) > -10)) {
-                        globalclass.hud.hide();
-                        globalclass.player.actor.deactivatedragger();
-                        if (globalclass.player.actor.isdraggeractive() == 0) {
-                            globalclass.player.actor.deactivatedragger();
+                        globalclass.player.cinematic_start = 1;                
+                        if ((globalclass.player.cinematic_delay > 0.01)) {
                             gccinemaengine::play(this.cinema2);
                             this.cinema2_shown = 1;
-                            globalclass.player.maskcontrol.toggleactive();
-                            globalclass.hud.mask.hide();
                         }
                     }
                 }
@@ -182,14 +178,16 @@ class acmaskpuzzle {
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema1 != null) {
-                gccinemaengine::stop(this.cinema1);
-            }
-            if (this.cinema2 != null) {
-                gccinemaengine::stop(this.cinema2);
-                if (this.cinema2_shown == 1) {
-                    globalclass.bgmusic.stop();
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema1 != null) {
+                    gccinemaengine::stop(this.cinema1);
+                }
+                if (this.cinema2 != null) {
+                    gccinemaengine::stop(this.cinema2);
+                    if (this.cinema2_shown == 1) {
+                        globalclass.bgmusic.stop();
+                    }
                 }
             }
         }
@@ -199,20 +197,13 @@ class acmaskpuzzle {
     method onevent(param1) {
         if (param1.eventid == 11) {
 			if ((scslosifoundation::identifiertostring(param1.args[1]) == "p047") && (gcsaver::findmask(scslosifoundation::stringtoidentifier("mska"))) && (this.cinema1_shown == 0)) {
-                globalclass.player.actor.deactivatedragger();
-                if (globalclass.player.actor.isdraggeractive() == 0) {
-                    gccinemaengine::play(this.cinema1);
-                    this.cinema1_shown = 1;
-                    this.bully.aiidle();
-                    this.bully.setpos(79.0, 0.15, 161.0);
-                    this.bully.disableanim(scslosifoundation::stringtoidentifier("bl08"));
-                    this.bully.disableanim(scslosifoundation::stringtoidentifier("bl09"));
-                    this.bully.aipatrol();
-                    if (globalclass.player.maskcontrol.isactive()) {
-                        globalclass.player.maskcontrol.toggleactive();
-                        globalclass.hud.mask.hide();
-                    }
-                }
+                gccinemaengine::play(this.cinema1);
+                this.cinema1_shown = 1;
+                this.bully.aiidle();
+                this.bully.setpos(79.0, 0.15, 161.0);
+                this.bully.disableanim(scslosifoundation::stringtoidentifier("bl08"));
+                this.bully.disableanim(scslosifoundation::stringtoidentifier("bl09"));
+                this.bully.aipatrol();
             }
         }
         else if (param1.eventid == 27) {
