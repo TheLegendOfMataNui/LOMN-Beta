@@ -13,6 +13,10 @@ class mtup3_class {
     
     method initfull() {
         var villager;
+        gcareadirector::setnearestmax(50);
+        gcmodeldirector::setnearestmax(10);
+        gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
+        gclightdirector::setcavelighting(0);
         if (gcsaver::isconditionset(4194304) == 0) {
             villager = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gccharacter::settohunga(villager, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), scslosifoundation::stringtoidentifier("mk8a"));
@@ -28,6 +32,10 @@ class mtup3_class {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin1");
             gccinemaengine::play(this.cinema);
+        }
+        else { 
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicPohatuAmbience");
+            globalclass.bgmusic.play(1);
         }
         this.door = new lego_moveableobject("door");
         this.door.initfull();

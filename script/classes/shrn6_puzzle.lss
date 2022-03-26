@@ -20,8 +20,6 @@ class shrn6_puzzle {
         var portal_trigger;
         var door_text;
         gcareadirector::setnearestmax(15);
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
-        globalclass.bgmusic.play(1);
         this.doorarray = [ new lego_moveableobject("drs2"), 
             new lego_moveableobject("drs3"), 
             new lego_moveableobject("drs4") ];
@@ -70,6 +68,8 @@ class shrn6_puzzle {
         }
         else {
             globalclass.player.processequipment(2);
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+            globalclass.bgmusic.play(1);
         }
         return null;
     }

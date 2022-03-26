@@ -25,8 +25,10 @@ class ta026_puzzle {
         gcareadirector::setfog(-11197901, 0 - 1.0, 0 - 900.0, 0.15);
         gcareadirector::setnearestmaxdist(1000);
         gcareadirector::setnearestmax(50);
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
-        globalclass.bgmusic.play();
+        if (gcsaver::getstart() != scslosifoundation::stringtoidentifier("str3")) {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+            globalclass.bgmusic.play();
+        }
         this.secretdoorshow = 0;
         this.ded = 0;
         this.platformarray = [ new bounceyplatform("pl00"), 
@@ -189,10 +191,11 @@ class ta026_puzzle {
             this.platformarray[var1].initshort();
             var1 = var1 + 1;
         }
-        globalclass.player.actor.setpos(0 - 261.3, 222.3, 470.6);
+        globalclass.player.actor.gotopos(this.enterstartid, scslosifoundation::stringtoidentifier("lok4"));
         globalclass.player.actor.setorientation(31.9);
         globalclass.player.unkill();
         this.parent.level.cam.setaimode(11);
+        globalclass.player.savetosaver();
         return null;
     }
     
@@ -254,13 +257,14 @@ class ta026_puzzle {
             this.ded = 0;
         }
         else if (param1.eventid == 30) {
-            globalclass.player.actor.setpos(0 - 261.3, 222.3, 470.6);
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str4"), scslosifoundation::stringtoidentifier("lok4"));
             globalclass.player.actor.setorientation(31.9);
             this.cinemadone = 1;
             this.ded = 0;
             globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
             globalclass.bgmusic.play();
             globalclass.player.actor.switchsecondmask(scslosifoundation::stringtoidentifier("????"));
+            globalclass.player.savetosaver();
         }
         else if (param1.eventid == 44) {
             if (this.cinemadone == 0) {

@@ -12,13 +12,16 @@ class lego_area_mtup6 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
+        gcareadirector::setfog(-4513246, 0 - 1.0, 0 - 900.0, 0.05);
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin1");
             gccinemaengine::play(this.cinema);
         }
-        globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
-        globalclass.bgmusic.play();
+        else {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/spiderwebambience");
+            globalclass.bgmusic.play();
+        }
         this.safecount = 0;
         return null;
     }
@@ -26,6 +29,7 @@ class lego_area_mtup6 : gs_lego_area {
     method cleanupfull() {
         this.lego_area_hide();
         this.cinema = null;
+        this.safecount = null;
         return null;
     }
     
@@ -46,12 +50,14 @@ class lego_area_mtup6 : gs_lego_area {
             BetterSaver::Save();
             this.saved = 1;
         }
-        if ((param1.eventid == 44) && (this.cinema != null)) {
-            if (this.safecount < 3) {
-                this.safecount = this.safecount + 1;
-                if (this.safecount == 2) {
-                    lewa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("lewa"), 0);    
-                    gccharacter::addpart(lewa, "lewa/haxe", 1);
+        if (param1.eventid == 44) {
+            if (this.cinema != null) {
+                if (this.safecount < 3) {
+                    this.safecount = this.safecount + 1;
+                    if (this.safecount == 2) {
+                        lewa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("lewa"), 0);    
+                        gccharacter::addpart(lewa, "lewa/haxe", 1);
+                    }
                 }
             }
         }

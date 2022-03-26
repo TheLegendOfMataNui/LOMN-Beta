@@ -21,6 +21,8 @@ class strt4_puzzle {
         var hive1handle;
         var hive2handle;
         var tohunga;
+        gcareadirector::setfog(-16777200, 0 - 1.0, 0 - 900.0, 0.15);
+        gcareadirector::setnearestmax(15);
         if (gcsaver::isconditionset(4194304) == 0) {
             tohunga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
             gccharacter::settohunga(tohunga, rgba(255, 255, 255, 255), rgba(122, 254, 255, 255), scslosifoundation::stringtoidentifier("mk0a"));
@@ -54,6 +56,10 @@ class strt4_puzzle {
             gccinemaengine::load(this.cinema, "cin1");
             gccinemaengine::play(this.cinema);
         }
+        else {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicKopakaAmbience");
+            globalclass.bgmusic.play(1);
+        }
         return null;
     }
     
@@ -79,9 +85,11 @@ class strt4_puzzle {
     }
     
     method input(param1) {
-        if ((param1.event == 2) && (param1.button == 251)) {
-            if (this.cinema != null) {
-                gccinemaengine::stop(this.cinema);
+        if (param1.event == 2) {
+            if (param1.button == 251) {
+                if (this.cinema != null) {
+                    gccinemaengine::stop(this.cinema);
+                }
             }
         }
         return null;

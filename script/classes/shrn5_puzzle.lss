@@ -22,8 +22,6 @@ class shrn5_puzzle {
         gcareadirector::setnearestmax(7);
         gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
         gclightdirector::setcavelighting(0);
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
-        globalclass.bgmusic.play();
         this.bossdoor = new lego_moveableobject("dor1", "shrn");
         this.bossdoor.initfull();
         if (bettersaver::getbooleanvalue(69) == 0) {
@@ -51,6 +49,11 @@ class shrn5_puzzle {
                 gccinemaengine::load(this.cinema, "cin3");
                 gccinemaengine::play(this.cinema);
             }
+        }
+        //Makes sure the music gets handled by event 30 the first time, afterwards load it normally on subsequent area entries
+        else {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicShrine");
+            globalclass.bgmusic.play();
         }
         matau = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("mata"), 0);
         gccharacter::setinputstate(matau, scslosifoundation::stringtoidentifier("none"));

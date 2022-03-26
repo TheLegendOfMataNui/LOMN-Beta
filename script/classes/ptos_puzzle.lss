@@ -11,8 +11,6 @@ class ptos_puzzle {
     
     method initfull() {
         var var1;
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
-        globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
         gcmodeldirector::setnearestmax(10);
         gcareadirector::setfog(-1, 0 - 20.0, 0 - 600.0, 0.05);
@@ -41,6 +39,10 @@ class ptos_puzzle {
             gccinemaengine::load(this.cinema, "cin4");
             globalclass.hud.hide();
             gccinemaengine::play(this.cinema);
+        }
+        else {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+            globalclass.bgmusic.play(1);
         }
         return null;
     }

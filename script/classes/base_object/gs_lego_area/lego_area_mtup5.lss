@@ -1,6 +1,5 @@
 class lego_area_mtup5 : gs_lego_area {
     property cinema;
-    property music_stopped;
     property saved;
     property safecount;
     
@@ -15,12 +14,14 @@ class lego_area_mtup5 : gs_lego_area {
         var var1;
         var var2;
         this.lego_area_show();
-        globalclass.bgmusic.stop();
-        this.music_stopped = 1;
         if (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin1")) == 0) {
             this.cinema = gccinemaengine::create();
             gccinemaengine::load(this.cinema, "cin1");
             gccinemaengine::play(this.cinema);
+        }
+        else {
+            globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaAmbience");
+            globalclass.bgmusic.play();
         }
         gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
         gclightdirector::setcavelighting(0);
@@ -43,6 +44,7 @@ class lego_area_mtup5 : gs_lego_area {
     method cleanupfull() {
         this.lego_area_hide();
         this.cinema = null;
+        this.safecount = null;
         return null;
     }
     
@@ -62,14 +64,7 @@ class lego_area_mtup5 : gs_lego_area {
             this.saved = 1;
         }
         if (param1.eventid == 44) {
-            if (this.music_stopped) {
-                if (this.enterstartid == scslosifoundation::stringtoidentifier("str1")) {
-                    globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLewaAmbience");
-                    globalclass.bgmusic.play();
-                }
-                this.music_stopped = 0;
-            }
-            else if (this.cinema != null) {
+            if (this.cinema != null) {
                 if (this.safecount < 3) {
                     this.safecount = this.safecount + 1;
                     if (this.safecount == 2) {
