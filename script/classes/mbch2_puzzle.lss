@@ -84,7 +84,7 @@ class mbch2_puzzle {
             this.discpickup = new lego_pickup("dsc2", 0, 5, "item", 8, 1);
             this.discpickup.initfull();
             this.discpickup.show();
-            this.discpickup.setcondition(32768);
+            this.discpickup.setcondition(16384);
             this.discpickup.setquest(1);
         }
         else {
@@ -102,7 +102,7 @@ class mbch2_puzzle {
         this.lizard.setscale(2.0);
 
         //Check if Tarakava intro has been played
-        if (bettersaver::getbooleanvalue(80)) {
+        if (gcsaver::isconditionset(536870912)) {
             this.showintro = 0;
         }
         else {
@@ -454,7 +454,6 @@ class mbch2_puzzle {
         this.howtotext.add();
         this.howtotext.show();
         this.showintro = 0;
-        bettersaver::setbooleanvalue(80, 1);
         return null;
     }
 
