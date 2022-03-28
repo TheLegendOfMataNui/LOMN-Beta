@@ -10,6 +10,7 @@ class hud_class {
     property hidden;
     property added;
     property cdtimer;
+    property cutscene_warp;
     
     method hud_class() {
         this.hidden = 0;
@@ -44,6 +45,7 @@ class hud_class {
         this.debuginfo.initfull();
         this.screenfader.initfull();
         this.hide();
+        this.cutscene_warp = 0;
         return null;
     }
     
@@ -88,6 +90,7 @@ class hud_class {
         this.tokens = null;
         this.ammo = null;
         this.thingy = null;
+        this.cutscene_warp = null;
         return null;
     }
     
@@ -158,7 +161,13 @@ class hud_class {
                 this.hide();
             }
             else if (param1.eventid == 33) {
-                this.show();
+                if (this.cutscene_warp == 1) {
+                    debug::print("Cutscene is switching areas, don't show the HUD!");
+                    this.cutscene_warp = 0;
+                }
+                else {
+                    this.show();
+                }
             }
             else if (param1.eventid == 50) {
                 this.ammo.setammo(param1.args[0]);

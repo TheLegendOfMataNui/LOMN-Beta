@@ -40,6 +40,7 @@ class lego_area_haka6 : gs_lego_area {
                 gccinemaengine::load(this.cinema, "cin2");
                 gccinemaengine::setnextarea(this.cinema, scslosifoundation::stringtoidentifier("tura"));
                 gccinemaengine::play(this.cinema);
+                globalclass.hud.cutscene_warp = 1;
                 bettersaver::setbooleanvalue(87, 1);
             }
         }
@@ -174,7 +175,6 @@ class lego_area_haka6 : gs_lego_area {
         }
         else if (param1.eventid == 30) {
             this.level.cam.setaimode(9);
-            globalclass.hud.hide();
         }
         else if (param1.eventid == 27) {
             globalclass.player.unkill();

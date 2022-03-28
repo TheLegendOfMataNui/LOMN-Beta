@@ -166,6 +166,7 @@ class acmaskpuzzle {
                     var2 = globalclass.player.actor.getpos();
                     if (((((var1.x1 - var2.x1) < 10) && ((var1.x1 - var2.x1) > -10)) && ((var1.z - var2.z) < 10)) && ((var1.z - var2.z) > -10)) {
                         globalclass.player.cinematic_start = 1;                
+                        globalclass.hud.cutscene_warp = 1;
                         if ((globalclass.player.cinematic_delay > 0.01)) {
                             gccinemaengine::play(this.cinema2);
                             this.cinema2_shown = 1;
@@ -223,7 +224,6 @@ class acmaskpuzzle {
             }
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cin3")) {
                 this.parent.level.cam.setaimode(9);
-                globalclass.hud.hide();
             }
         }
         else if (param1.eventid == 6) {

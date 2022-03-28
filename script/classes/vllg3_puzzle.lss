@@ -433,6 +433,7 @@ class vllg3_puzzle {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin5")) && (this.cinema_shown == 0)) {
                 if (((gcsaver::isconditionset(1) && gcsaver::isconditionset(2)) && gcsaver::isconditionset(4)) && gcsaver::isconditionset(8)) {
                     globalclass.player.cinematic_start = 1;                
+                    globalclass.hud.cutscene_warp = 1;
                     if (globalclass.player.cinematic_delay > 0.01) {
                         gccinemaengine::play(this.cinema);
                         //Remove Tohunga hand items
@@ -447,7 +448,6 @@ class vllg3_puzzle {
         }
         else if (param1.eventid == 30) {
             this.parent.level.cam.setaimode(9);
-            globalclass.hud.hide();
         }
         else if (param1.eventid == 1) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("cnt1")) {

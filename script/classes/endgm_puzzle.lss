@@ -55,6 +55,7 @@ class endgm_puzzle {
         var var1;
         if (param1.eventid == 4) {
             if ((param1.args[0] == scslosifoundation::stringtoidentifier("cin3")) && (this.cinema_shown == 0)) {
+                globalclass.hud.cutscene_warp = 1;
                 gccinemaengine::play(this.cinema);
                 this.cinema_shown = 1;
                 this.safecount = 0;
@@ -62,7 +63,6 @@ class endgm_puzzle {
         }
         else if (param1.eventid == 30) {
             this.parent.level.cam.setaimode(9);
-            globalclass.hud.hide();
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
