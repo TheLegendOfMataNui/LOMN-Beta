@@ -194,15 +194,33 @@ class player {
                 }
             }
             else if (param1.button == 231) {
-                if (this.grapplinghooksetup) {
-                    if (this.bshootdragger) {
-                        this.actor.shootdragger();
+                //Set up variables for checking whether Gali is treading water or diving, and for checking the current area
+                var tread_water_left = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g041"));
+                var tread_water_right = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g042"));
+                var tread_water = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g043"));
+                var dive_underwater = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g047"));                
+                var areaid = (scslosifoundation::identifiertostring(gcareadirector::getcurrentarea()));
+                //If gcareadirector returns the current area as one of the following areas, disable grapple.  Else, oroceed to the next check
+                if ((areaid == "vllg") || (areaid == "tura") || (areaid == "shrn") || (areaid == "mosh")) {
+                    debug::print("YOU ARE IN A PEACEFUL AREA, CANNOT SHOOT DRAGGER!");
+                }
+                else {
+                    //If the current animation is Gali's diving or treading animations, disable grapple
+                    if ((tread_water_left) || (tread_water_right) || (tread_water) || (dive_underwater)) {
+                        debug::print("YOU ARE TREADING WATER OR DIVING, CANNOT SHOOT DRAGGER!");
                     }
                     else {
-                        debug::print("SORRY, YOU ARE IN THE TRIG BOX YOU CANNOT SHOOT YOUR DRAGGER");
+                        if (this.grapplinghooksetup) {
+                            if (this.bshootdragger) {
+                                this.actor.shootdragger();
+                            }
+                            else {
+                                debug::print("SORRY, YOU CANNOT SHOOT YOUR DRAGGER");
+                            }
+                        }
+                        this.draggercontroller.setupdragger();
                     }
                 }
-                this.draggercontroller.setupdragger();
             }
             else if (param1.button == 45) {
                 this.tweaktoggle();
@@ -320,19 +338,6 @@ class player {
                     this.airshown = 0;
                     //debug::print("Done the do");
                 }
-                //Check if the toa is Gali before we continue
-                if (this.actorid == "gali") {
-                    //Set up variables for checking whether Gali is treading water or diving
-                    var tread_water_left = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g041"));
-                    var tread_water_right = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g042"));
-                    var tread_water = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g043"));
-                    var dive_underwater = (this.actor.getcurrentanimationid() == scslosifoundation::stringtoidentifier("g047"));
-                    //If the current animation is Gali's diving or treading animations, disable grapple
-                    if ((tread_water_left) || (tread_water_right) || (tread_water) || (dive_underwater)) {
-                        //debug::print(__tostring(scslosifoundation::identifiertostring(this.actor.getcurrentanimationid())));
-                        this.canshootdragger(0);
-                    }
-                }
             }          
             else if (param1.eventid == 15) {
                 if (param1.args[0] == scslosifoundation::stringtoidentifier("watr")) {
@@ -430,16 +435,8 @@ class player {
                 this.hittrigger = 0;
             }  
             else if (param1.eventid == 21) {
-                var areaid = (scslosifoundation::identifiertostring(gcareadirector::getcurrentarea()));
                 //Setup the physics again to stop the landing noise when jumping into a trigger
                 globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
-                //If gcareadirector returns the current area as one of the following areas, disable grapple.  Else, grapple should be enabled
-                if ((areaid == "vllg") || (areaid == "tura") || (areaid == "shrn") || (areaid == "mosh")) {
-                    this.canshootdragger(0);
-                }
-                else {
-                    this.canshootdragger(1);
-                }
                 //If equiptype returns 1, set up equipment for combat
                 if (this.equiptype == 1) {
                     this.processequipment(1);
