@@ -1,6 +1,8 @@
 class lego_area_tura1 : gs_lego_area {
-    property legendplayed;
+    property hidehud;
     property blorpo;
+    property whenua;
+    property whenua2;
     
     method lego_area_tura1(param1) {
         this.gs_lego_area("tura", param1, 0, 0);
@@ -11,23 +13,40 @@ class lego_area_tura1 : gs_lego_area {
     method initfull() {
         this.playlegend();
         this.lego_area_show();
-        var turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("when"));   
-        gccharacter::setorientation(turaga, 0);
-        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(turaga, scslosifoundation::stringtoidentifier("wh00"), -1);
         gcareadirector::setfog(-402183, 0 - 40.0, 0 - 1200.0, 0.05);
         gclightdirector::setcavelighting(1);
         gcareadirector::setnearestmax(3);
         gcmodeldirector::setnearestmax(3);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+        globalclass.bgmusic.play(1);
+
+        //Setting up two Whenuas to bypass conversation issue by splitting it into 2 instances
+        if (gcsaver::isconditionset(8) == 0) {
+            //Set the first Whenua
+            this.whenua = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("when"));   
+            gccharacter::setorientation(this.whenua, 0);
+            gccharacter::setinputstate(this.whenua, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.whenua, scslosifoundation::stringtoidentifier("wh00"), -1);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("wh01"), 0);
+        }
+        else {
+            //Condition met, set second Whenua
+            this.whenua2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("wh01"));   
+            gccharacter::setorientation(this.whenua2, 0);
+            gccharacter::setinputstate(this.whenua2, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.whenua2, scslosifoundation::stringtoidentifier("wh00"), -1);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("when"), 0);
+        }
+
+        //Check if gcsaver returns true on portalactive and if so, enable portal.  Else, disable trigger
         if (gcsaver::portalactive() == 1) {
             gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/onua/shrine_ripple/o_shrn_ptl", 1);
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("when"), 0);  
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("wh01"), 0);  
         }
         else {
             gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tps9"));
         }
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
-        globalclass.bgmusic.play(1);
 
         //Set Tohunga: Blorpo (VLGR)
         if (bettersaver::getbooleanvalue(88) == 1) {
@@ -42,6 +61,20 @@ class lego_area_tura1 : gs_lego_area {
         else {
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
         }
+
+        //Warped in from the Takara, force conversation with secondary Whenua instance
+        if ((bettersaver::getbooleanvalue(82) == 1) && (bettersaver::getbooleanvalue(89) == 0)) {
+            this.hidehud = 1;
+            gcconversationengine::forceconversation(gcconversationengine::getconversationengine(), scslosifoundation::stringtoidentifier("wh01"));
+            bettersaver::togglebooleanvalue(89); 
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();       
+        this.whenua = null;
+        this.whenua2= null;
         return null;
     }
     
@@ -49,15 +82,11 @@ class lego_area_tura1 : gs_lego_area {
         return null;
     }
     
-    method input(param1) {
-        return null;
-    }
-    
     method onevent(param1) {
         if (param1.eventid == 29) {
-            if (this.legendplayed == 1) {
+            if (this.hidehud == 1) {
                 globalclass.hud.hide();
-                this.legendplayed = null;
+                this.hidehud = null;
             }
         }
         else if (param1.eventid == 3) {
@@ -75,11 +104,8 @@ class lego_area_tura1 : gs_lego_area {
         return null;
     }
     
-    method cleanupfull() {
-        if (this.legendplayed != null) {
-            this.legendplayed = null;
-        }
-        this.lego_area_hide();       
+    
+    method input(param1) {
         return null;
     }
     
@@ -91,7 +117,7 @@ class lego_area_tura1 : gs_lego_area {
     method playlegend() {
         var var1;
         if (bettersaver::getbooleanvalue(50) == 0) {
-            this.legendplayed = 1;
+            this.hidehud = 1;
             if (gcareadirector::getlanguage() == 0) {
                 gchuddirector::playcinematic("Root/Data/cinematics/LegendFMVEn.bik", 1);
             }

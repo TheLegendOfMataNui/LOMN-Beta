@@ -1,5 +1,8 @@
 class lego_area_tura2 : gs_lego_area {
-    
+    property nokama;
+    property nokama2;
+    property hidehud;
+
     method lego_area_tura2(param1) {
         this.gs_lego_area("tura", param1, 0, 0);
         this.lego_area_initfull();
@@ -8,23 +11,54 @@ class lego_area_tura2 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        var turaga = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"));   
-        gccharacter::setorientation(turaga, 0);
-        gccharacter::setinputstate(turaga, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::switchanimation(turaga, scslosifoundation::stringtoidentifier("no00"), -1);
         gcmodeldirector::setnearestmax(3);
         gcareadirector::setnearestmax(3);
         gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
         gclightdirector::setcavelighting(1);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
+        globalclass.bgmusic.play(1);
+
+        //Setting up two Nokamas to bypass conversation issue by splitting it into 2 instances
+        if (gcsaver::isconditionset(8) == 0) {
+            //Set the first Nokama
+            this.nokama = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("noka"));   
+            gccharacter::setorientation(this.nokama, 0);
+            gccharacter::setinputstate(this.nokama, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.nokama, scslosifoundation::stringtoidentifier("no00"), -1);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("no01"), 0);
+        }
+        else {
+            //Condition met, set second Nokama
+            this.nokama2 = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("no01"));   
+            gccharacter::setorientation(this.nokama2, 0);
+            gccharacter::setinputstate(this.nokama2, scslosifoundation::stringtoidentifier("none"));
+            gccharacter::switchanimation(this.nokama2, scslosifoundation::stringtoidentifier("no00"), -1);
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("noka"), 0);
+        }
+
+        //Check if gcsaver returns true on portalactive and if so, enable portal.  Else, disable trigger
         if (gcsaver::portalactive() == 1) {
             gccollisionphysicsgroup::setportal(scslosifoundation::stringtoidentifier("tps9"), "root/data/art/portals/gali/shrine_ripple/g_shrn_ptl", 1);        
             gcmodeldirector::hide(scslosifoundation::stringtoidentifier("noka"), 0);  
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("no01"), 0);  
         }
         else {
             gccollisionphysicsgroup::turnoffnextarea(scslosifoundation::stringtoidentifier("tps9"));
         }
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicVillage");
-        globalclass.bgmusic.play(1);
+
+        //Warped in from the Takara, force conversation with secondary Nokama instance
+        if ((bettersaver::getbooleanvalue(83) == 1) && (bettersaver::getbooleanvalue(90) == 0)) {
+            this.hidehud = 1;
+            gcconversationengine::forceconversation(gcconversationengine::getconversationengine(), scslosifoundation::stringtoidentifier("no01"));
+            bettersaver::togglebooleanvalue(90); 
+        }
+        return null;
+    }
+    
+    method cleanupfull() {
+        this.lego_area_hide();
+        this.nokama = null;
+        this.nokama2 = null;
         return null;
     }
     
@@ -32,12 +66,14 @@ class lego_area_tura2 : gs_lego_area {
         return null;
     }
     
-    method input(param1) {
-        return null;
-    }
-    
     method onevent(param1) {
-        if (param1.eventid == 27) {
+        if (param1.eventid == 29) {
+            if (this.hidehud == 1) {
+                globalclass.hud.hide();
+                this.hidehud = null;
+            }
+        }
+        else if (param1.eventid == 27) {
             globalclass.player.unkill();
             globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
             globalclass.player.actor.setinputstate("ninp");
@@ -46,8 +82,7 @@ class lego_area_tura2 : gs_lego_area {
         return null;
     }
     
-    method cleanupfull() {
-        this.lego_area_hide();
+    method input(param1) {
         return null;
     }
     
