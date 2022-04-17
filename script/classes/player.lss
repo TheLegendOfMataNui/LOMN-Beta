@@ -700,7 +700,7 @@ class player {
                 }
         }
         else if (this.actorid == "viki") {
-            this.actor = new tahuclass(char_id, orientation, x_pos, y_pos, z_pos);
+            this.actor = new vorikiclass(char_id, orientation, x_pos, y_pos, z_pos);
             var1 = 0;
             while (7 >= var1) {
                 this.addmaxlife(20);
@@ -1196,6 +1196,14 @@ class player {
                 GcToa::CycleEmitters(1);
                 debug::print("Equipped Tahu For Combat");
             }
+            if (this.actorid == "viki") {
+                //Apply Combat Equipment
+                gccharacter::addpart(toa, "cnt1/hstf", 1);
+                this.equiptype = 1;
+                this.equippedcombat = 1;
+                GcToa::SetElementSprites(2);
+                debug::print("Equipped Voriki For Combat");
+            }
         }
         if ((param1 == 2) && (this.equippedpeace == 0)) {
             if (this.actorid == "kopa") {
@@ -1221,6 +1229,14 @@ class player {
                 GcToa::SetElementSprites(6);
                 GcToa::CycleEmitters(0);
                 debug::print("Equipped Tahu For Peace");
+            }
+            if (this.actorid == "viki") {
+                //Apply Peace Equipment
+                gccharacter::addpart(toa, "cnt1/bstf", 3);
+                this.equiptype = 2;
+                this.equippedpeace = 1;
+                GcToa::SetElementSprites(2);
+                debug::print("Equipped Voriki For Peace");
             }
         }        
         if ((param1 == 3) && (this.equippedsurf == 0)) {
