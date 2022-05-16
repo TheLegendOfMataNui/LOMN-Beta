@@ -10,6 +10,10 @@ class ptv1_puzzle {
         var nobua;
         var hivehandle;
         var digging_wall;
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(5);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
         hivehandle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
         gchive::setmaxcreatures(hivehandle, 3);
         gchive::setcreaturetype(hivehandle, scslosifoundation::stringtoidentifier("lsrp"));
@@ -31,13 +35,6 @@ class ptv1_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
-        }
         return null;
     }
     

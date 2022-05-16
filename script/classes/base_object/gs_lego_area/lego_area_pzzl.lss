@@ -10,12 +10,6 @@ class lego_area_pzzl : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        gcareadirector::setnearestmax(5);
-        gcmodeldirector::setnearestmax(10);
-        gclightdirector::setcavelighting(1);
-        gcareadirector::setfog(-16777216, 0 - 30.0, 0 - 80.0, 0.05);
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
-        globalclass.bgmusic.play(1);
         this.puzzle.initfull();
         return null;
     }
@@ -43,7 +37,7 @@ class lego_area_pzzl : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        if (!(this.puzzle == null)) {
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }

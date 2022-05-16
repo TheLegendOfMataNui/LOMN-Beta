@@ -10,13 +10,7 @@ class lego_area_clf2 : gs_lego_area {
     
     method initfull() {
         this.lego_area_show();
-        gcareadirector::setnearestmax(20);
-        gcmodeldirector::setnearestmax(20);
-        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
-        gclightdirector::setcavelighting(0);
         this.puzzle.initfull();
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
-        globalclass.bgmusic.play(1);
         globalclass.enemy.killheight = -76;
         return null;
     }
@@ -34,7 +28,7 @@ class lego_area_clf2 : gs_lego_area {
     
     method exit() {
         this.lego_area_cleanupfull();
-        if (!(this.puzzle == null)) {
+        if (this.puzzle != null) {
             this.puzzle.exit();
             this.puzzle = null;
         }

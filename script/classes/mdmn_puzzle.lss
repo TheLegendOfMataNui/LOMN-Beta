@@ -20,6 +20,10 @@ class mdmn_puzzle {
     }
     
     method initfull() {
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setfog(-14145496, 0 - 20.0, 0 - 175.0, 0.05);
+        gcareadirector::setnearestmax(15);
+        gcmodeldirector::setnearestmax(5);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICONUATHEME");
         this.mudmonster = new mudmonster(this);
         this.mudmonster.init();
@@ -270,10 +274,6 @@ class mdmn_puzzle {
     
     method resetarea() {
         this.initshort();
-        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-        globalclass.player.unkill();
-        globalclass.player.actor.idle();
-        globalclass.player.actor.setinputstate("ninp");
         gcmudboss::reset(this.mudmonster.mudman, 995, 0, 212, -90);
         return null;
     }

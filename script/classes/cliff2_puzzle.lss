@@ -8,17 +8,23 @@ class cliff2_puzzle {
     }
     
     method initfull() {
-        var var1;
-        var var2;
+        var hive1handle;
+        var hive2handle;
         var var3;
-        var1 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
-        gchive::setmaxcreatures(var1, 5);
-        gchive::setcreaturetype(var1, scslosifoundation::stringtoidentifier("crb1"));
-        gchive::setspawnrate(var1, 5);
-        var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
-        gchive::setmaxcreatures(var2, 2);
-        gchive::setcreaturetype(var2, scslosifoundation::stringtoidentifier("bats"));
-        gchive::setspawnrate(var2, 2);
+        gcareadirector::setnearestmax(20);
+        gcmodeldirector::setnearestmax(20);
+        gcareadirector::setfog(-402183, 0 - 30.0, 0 - 1200.0, 0.05);
+        gclightdirector::setcavelighting(0);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicOnuaAmbience");
+        globalclass.bgmusic.play(1);
+        hive1handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
+        gchive::setmaxcreatures(hive1handle, 5);
+        gchive::setcreaturetype(hive1handle, scslosifoundation::stringtoidentifier("crb1"));
+        gchive::setspawnrate(hive1handle, 5);
+        hive2handle = gcareadirector::gethive(scslosifoundation::stringtoidentifier("fhv0"));
+        gchive::setmaxcreatures(hive2handle, 2);
+        gchive::setcreaturetype(hive2handle, scslosifoundation::stringtoidentifier("bats"));
+        gchive::setspawnrate(hive2handle, 2);
         this.targetarray = [ new lego_moveableobject("hot1", this.parent.name), 
             new lego_moveableobject("hot2", this.parent.name), 
             new lego_moveableobject("hot3", this.parent.name), 
@@ -53,14 +59,6 @@ class cliff2_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        }
         return null;
     }
 }

@@ -99,15 +99,7 @@ class cliff1_puzzle : base_object {
     
     method onevent(param1) {
         var var1;
-        if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        }
-        else if (param1.eventid == 3) {
+        if (param1.eventid == 3) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("swch")) {
                 if (this.buttonpressed == 0) {
                     this.buttonpressed = 1;

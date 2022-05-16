@@ -10,6 +10,12 @@ class pizza_puzzlep : base_object {
     method initfull() {
         var digging_wall1;
         var digging_wall2;
+        gcareadirector::setnearestmax(5);
+        gcmodeldirector::setnearestmax(10);
+        gclightdirector::setcavelighting(1);
+        gcareadirector::setfog(-16777216, 0 - 30.0, 0 - 80.0, 0.05);
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
+        globalclass.bgmusic.play(1);
         if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mskv")) == 0) {
             this.mask = new lego_pickup("mskv", 8, 1, "item", 4, 1);
             this.mask.initfull();
@@ -25,26 +31,14 @@ class pizza_puzzlep : base_object {
     }
     
     method cleanupfull() {
-        if (!(this.mask == null)) {
+        if (this.mask != null) {
             this.mask.cleanupfull();
             this.mask = null;
         }
         return null;
     }
     
-    method exit() {
-        this.parent = null;
-        return null;
-    }
-    
     method onevent(param1) {
-        if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
-        }
         return null;
     }
     
@@ -55,4 +49,9 @@ class pizza_puzzlep : base_object {
     method input(param1) {
         return null;
     }
+    
+    method exit() {
+        this.parent = null;
+        return null;
+    }    
 }

@@ -158,11 +158,6 @@ class l1a8_puzzlep : base_object {
             }
         }
         else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
             var1 = 0;
             while ((this.plataarray.__length - 1) >= var1) {
                 this.plataarray[var1].reset();
@@ -170,7 +165,6 @@ class l1a8_puzzlep : base_object {
                 this.platcarray[var1].reset();
                 var1 = var1 + 1;
             }
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
         }
         return null;
     }

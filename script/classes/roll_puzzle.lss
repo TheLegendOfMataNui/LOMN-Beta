@@ -50,22 +50,7 @@ class roll_puzzle {
     
     method onevent(param1) {
         if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("o000"));
-            globalclass.player.actor.setsurfingability(0.0, 0.0);
-            this.parent.level.cam.setaimode(11);
-            globalclass.player.actor.setinputstate("ninp");
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb00"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb01"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb02"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb03"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb04"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb05"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb06"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb07"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb08"), 0);
-            this.callsurfonce = 1;
+            this.stopsurf();
         }
         else if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("rol0")) {
@@ -104,6 +89,7 @@ class roll_puzzle {
     }
     
     method stopsurf() {
+        this.callsurfonce = 1;
         globalclass.player.actor.setsurfingability(0.0, 0.0);
         return null;
     }

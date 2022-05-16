@@ -39,6 +39,8 @@ class player {
     property draggercontroller;
     property cinematic_delay;
     property cinematic_start;
+    property triggerboxid;
+    property usecheckpoints;
     
     method player() {
         return null;
@@ -138,6 +140,8 @@ class player {
         this.spiraleffect = null;
         this.cinematic_delay = null;
         this.cinematic_start = null;
+        this.triggerboxid = null;
+        this.usecheckpoints = null;
         return null;
     }
     
@@ -487,6 +491,8 @@ class player {
                 var trig_box_surf9 = param1.args[0] == scslosifoundation::stringtoidentifier("sb09");
                 //Print which trigger box was entered
                 debug::print("You hit triggerbox: " + scslosifoundation::identifiertostring(param1.args[0]));
+                //Store which trigger box was entered in a property
+                this.triggerboxid = param1.args[0];
                 //Set up the specified trigger box IDs to be used as killboxes
                 if ((trig_box_id0) || (trig_box_id1) || (trig_box_id2) || (trig_box_id3) || (trig_box_id4) || (trig_box_id5) || (trig_box_id6) || (trig_box_id7) || (trig_box_id8) || (trig_box_id9) || (trig_box_id10) || (trig_box_id11)) {
                     //This is a temporary check to make sure this doesn't fire in wdmn due to tb01 being a hardcoded ID there
@@ -561,7 +567,23 @@ class player {
 
             //Screen black event
             else if (param1.eventid == 27) {
-                //TODO: generic unkill, camera, start position, and possibly trigger box reset code
+                //This if/else is for handing off player positioning back to the area's code in the case of a checkpoint system being present.  Otherwise, use the generic setup
+                if (this.usecheckpoints == 1) {
+                    debug::print("Handing off respawn position to area checkpoint handler");
+                    this.usecheckpoints = null;
+                }
+                else {
+                    globalclass.player.actor.gotopos(gcsaver::getstart(), gcsaver::getlook());
+                }
+                //Normal respawn code
+                globalclass.player.unkill();
+                globalclass.level.cam.setaimode(11);
+                globalclass.player.actor.idle();
+                //Generic handling for resetting triggerboxes dynamically instead of hard scripting it
+                if (this.triggerboxid != null) {
+                    gccollisionphysicsgroup::toggletriggerboxentered(this.triggerboxid, 0);
+                    this.triggerboxid = null;
+                }
             }
 
             //Character and object fade event

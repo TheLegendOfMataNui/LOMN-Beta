@@ -20,15 +20,6 @@ class lego_area_roll : gs_lego_area {
         return null;
     }
     
-    method exit() {
-        this.lego_area_cleanupfull();
-        if (this.puzzle != null) {
-            this.puzzle.exit();
-            this.puzzle = null;
-        }
-        return null;
-    }
-    
     method process(param1) {
         this.puzzle.process(param1);
         return null;
@@ -41,6 +32,15 @@ class lego_area_roll : gs_lego_area {
     
     method input(param1) {
         this.puzzle.input(param1);
+        return null;
+    }
+    
+    method exit() {
+        this.lego_area_cleanupfull();
+        if (this.puzzle != null) {
+            this.puzzle.exit();
+            this.puzzle = null;
+        }
         return null;
     }
 }
