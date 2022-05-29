@@ -44,7 +44,7 @@ class lego_area_haka6 : gs_lego_area {
                 bettersaver::setbooleanvalue(87, 1);
             }
         }
-        else {
+        else if ((bettersaver::getbooleanvalue(80) == 0) && (gcsaver::findcinema(scslosifoundation::stringtoidentifier("cin2")) == 1)) {
             debug::print("TAKARA DONE: SPAWN 'KAPURA'");
             //Set Tohunga: "Kapura" (VLGR)
             var notkapura = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("vlgr"), 0);
@@ -52,6 +52,9 @@ class lego_area_haka6 : gs_lego_area {
             gccharacter::setorientation(notkapura, 180);
             gccharacter::setinputstate(notkapura, scslosifoundation::stringtoidentifier("none"));
             gccharacter::switchanimation(notkapura, scslosifoundation::stringtoidentifier("d000"), -1);
+        }
+        else if (bettersaver::getbooleanvalue(80) == 1) {
+            gcmodeldirector::hide(scslosifoundation::stringtoidentifier("vlgr"), 0);
         }
         this.safecount = 0;
         return null;
