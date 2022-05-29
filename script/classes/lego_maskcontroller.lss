@@ -23,7 +23,7 @@ class lego_maskcontroller {
     method cleanupfull() {
         var var1;
         var var2;
-        if (!(this.masks == null)) {
+        if (this.masks != null) {
             var1 = this.masks.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -45,7 +45,7 @@ class lego_maskcontroller {
     
     method cleanupshort() {
         var var1;
-        if (!(this.masks == null)) {
+        if (this.masks != null) {
             var1 = 0;
             while ((this.masks.__length - 1) >= var1) {
                 this.masks[var1].setselectable(0);
@@ -178,7 +178,7 @@ class lego_maskcontroller {
     }
     
     method getdrainrate() {
-        if (!(this.currentmask == null)) {
+        if (this.currentmask != null) {
             return this.masks[this.currentidx].powerdrainrate;
         }
         else {
@@ -192,7 +192,7 @@ class lego_maskcontroller {
     }
     
     method toggleactive() {
-        if (!(this.currentidx == null) && (this.disabled == 0)) {
+        if ((this.currentidx != null) && (this.disabled == 0)) {
             if (this.active == 0) {
                 this.masks[this.currentidx].activate();
                 this.active = 1;
@@ -257,17 +257,17 @@ class lego_maskcontroller {
     
     method changemask(param1) {
         var var1;
-        if ((this.masks.__length - 1) >= 0) {
+        if (((this.masks.__length - 1) >= 0) && (this.disabled == 0)) {
             var1 = 0;
             while ((this.masks.__length - 1) >= var1) {
                 if (this.masks[var1].maskname == param1) {
                     if (this.masks[var1].selectable == 1) {
-                        if (!(this.currentidx == null) && (this.active == 1)) {
+                        if ((this.currentidx != null) && (this.active == 1)) {
                             this.masks[this.currentidx].deactivate();
                         }
                         this.active = 0;
                         this.currentidx = var1;
-                        if (!(this.currentmask == param1)) {
+                        if (this.currentmask != param1) {
                             this.currentmask = param1;
                         }
                         globalclass.hud.mask.selectmask(this.currentidx);
@@ -292,7 +292,7 @@ class lego_maskcontroller {
         if (param1 == null) {
             var1 = 1;
         }
-        if (!(this.currentidx == null)) {
+        if (this.currentidx != null) {
             var2 = this.currentidx;
             var3 = 0;
             do {
