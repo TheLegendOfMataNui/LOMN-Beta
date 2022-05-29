@@ -2,6 +2,7 @@ class ss_base3dcharacter : ss_base3dobject {
     property numanimations;
     property gepetto;
     property currentanimation;
+    property boneindex;
     
     method ss_base3dcharacter(assigned_id, char_id, orientation, x_pos, y_pos, z_pos, input_state) {
         this.charstring = char_id;
@@ -150,23 +151,30 @@ class ss_base3dcharacter : ss_base3dobject {
         return null;
     }
     
-    method getbonepos(param1) {
-        var var1;
-        var var2;
-        var var3;
-        var var4;
-        var1 = scslosifoundation::hashstring(param1);
-        var2 = gccharacter::getbonex(this.handle, var1);
-        var3 = gccharacter::getboney(this.handle, var1);
-        var4 = gccharacter::getbonez(this.handle, var1);
-        return new ss_point(var2, var3, var4);
+    //Takes the raw string name of the bone, such as Dummy21, Bip01_L_Clavicle, etc.
+    //Note that this currently crashes with non-bipeds for unknown reasons
+    method getbonepos(bone_name_string) {
+        var bone_name = scslosifoundation::hashstring(bone_name_string);
+        var bone_x = gccharacter::getbonex(this.handle, bone_name);
+        var bone_y = gccharacter::getboney(this.handle, bone_name);
+        var bone_z = gccharacter::getbonez(this.handle, bone_name);
+        return new ss_point(bone_x, bone_y, bone_z);
     }
     
+    method getboneindex(bone_name_string) {
+        var bone = scslosifoundation::hashstring(bone_name_string);
+        this.boneindex = gccharacter::getboneindex(this.handle, bone);
+        debug::print("Index of specified bone: " + __tostring(this.boneindex));
+        return this.boneindex;
+    }
+    
+    //Function no longer exists
     method setteamid(param1) {
         gccharacter::setteamid(this.handle, param1);
         return null;
     }
     
+    //Function no longer exists
     method getteamid() {
         return gccharacter::getteamid(this.handle);
     }
