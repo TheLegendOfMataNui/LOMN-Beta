@@ -31,6 +31,9 @@ class bech2_puzzle {
         var var7;
         var var8;
         var var10;
+        gcareadirector::setfog(-9143565, 0 - 1000.0, 0 - 2400.0, 0.01);
+        gclightdirector::setcavelighting(0);
+        gcareadirector::setnearestmax(50);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICGALIAmbience");
         globalclass.bgmusic.play();
         this.grapplingpivot = new lego_moveableobject("hk01");
@@ -289,14 +292,6 @@ class bech2_puzzle {
                 this.timerarray[7].reset(0);
                 this.timerarray[7].start();
             }
-        }
-        else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.setunderwater(0);
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
         }
         return null;
     }

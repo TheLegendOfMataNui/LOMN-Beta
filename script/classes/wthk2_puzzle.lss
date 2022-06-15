@@ -35,24 +35,9 @@ class wthk2_puzzle {
             }
         }
         else if (param1.eventid == 27) {
-            this.initshort();
+            this.endsurf();
+            this.callsurfonce = 1;
         }
-        return null;
-    }
-    
-    method initshort() {
-        this.endsurf();
-        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-        globalclass.player.unkill();
-        globalclass.player.actor.setinputstate("ninp");
-        this.parent.level.cam.setaimode(11);
-        //globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("g000"));
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb02"), 0);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb03"), 0);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb04"), 0);
-        this.callsurfonce = 1;
         return null;
     }
     

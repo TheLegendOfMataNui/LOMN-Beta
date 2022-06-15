@@ -45,13 +45,6 @@ class takv_puzzle {
         return null;
     }
     
-    method initshort() {
-        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-        globalclass.player.unkill();
-        this.opendoors();
-        return null;
-    }
-    
     method cleanupfull() {
         if (this.door1 != null) {
             this.door1.cleanupfull();
@@ -108,7 +101,7 @@ class takv_puzzle {
             }
         }
         else if (param1.eventid == 27) {
-            this.initshort();
+            this.opendoors();
         }
         else if (param1.eventid == 6) {
             this.parent.level.cam.setaimode(11);
