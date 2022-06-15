@@ -68,7 +68,7 @@ class theaterscreen {
         this.trailer = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 86), "", this.optarray.__length);
         this.trailer.initfull();
         this.optarray.__append(this.trailer);
-        this.animations = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 89), "", this.optarray.__length);
+        this.animations = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 91), "", this.optarray.__length);
         this.animations.initfull();
         this.optarray.__append(this.animations);
         this.backoption = new menuoption(gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 3), "", this.optarray.__length);
@@ -79,7 +79,7 @@ class theaterscreen {
     }
     
     method cleanupfull() {
-        if (!(this.optarray == null)) {
+        if (this.optarray != null) {
             this.cleanupshort();
         }
         this.parent = null;
@@ -89,7 +89,7 @@ class theaterscreen {
     method cleanupshort() {
         var var1;
         var var2;
-        if (!(this.optarray == null)) {
+        if (this.optarray != null) {
             var1 = this.optarray.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -151,7 +151,7 @@ class theaterscreen {
             }
             var2 = var2 + 1;
         }
-        if (!(var1 == -1)) {
+        if (var1 != -1) {
             this.curoption = var1;
         }
         return null;
@@ -230,7 +230,7 @@ class theaterscreen {
         var var1;
         var var2;
         this.curscreen = param2;
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.maxidx = param1.__length - 1;
             var1 = 0;
             while (this.maxidx >= var1) {
