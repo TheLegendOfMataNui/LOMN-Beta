@@ -567,6 +567,7 @@ class player {
 
             //Screen black event
             else if (param1.eventid == 27) {
+                globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
                 //This if/else is for handing off player positioning back to the area's code in the case of a checkpoint system being present.  Otherwise, use the generic setup
                 if (this.usecheckpoints == 1) {
                     debug::print("Handing off respawn position to area checkpoint handler");
@@ -965,6 +966,9 @@ class player {
             if (gcareadirector::getcurrentarea() != scslosifoundation::stringtoidentifier("drgn")) {
                 //Disable player collision with other characters to create an invincibility period during respawn
                 globalclass.player.actor.disablecollisions();
+            }
+            if (this.actor.isdraggeractive() == 1) {
+                this.actor.deactivatedragger();                
             }
         }
         return null;
