@@ -55,25 +55,25 @@ class gs_lego_screenfrontend {
     
     method setupmainscreen() {
         this.mainmenutext = [ [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 58), 
-                400, 
+                350, 
                 320, 
                 32, 
                 639, 
                 359 ], 
             [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 35), 
-                400, 
+                350, 
                 360, 
                 33, 
                 639, 
                 399 ], 
             [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 94),  
-                400, 
+                350, 
                 400, 
                 34, 
                 639, 
                 439 ],
             [ gcareadirector::getscriptfluffstring(scslosifoundation::stringtoidentifier("fend"), 1, 41), 
-                400, 
+                350, 
                 440, 
                 35, 
                 639, 
@@ -377,7 +377,7 @@ class gs_lego_screenfrontend {
     method cleanupfull() {
         var var1;
         var var2;
-        if (!(this.argarray == null)) {
+        if (this.argarray != null) {
             var1 = this.argarray.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -386,19 +386,19 @@ class gs_lego_screenfrontend {
             }
             this.argarray = null;
         }
-        if (!(this.point == null)) {
+        if (this.point != null) {
             this.point.hide();
             this.point.remove();
             this.point.cleanupfull();
             this.point = null;
         }
-        if (!(this.click == null)) {
+        if (this.click != null) {
             this.click.hide();
             this.click.remove();
             this.click.cleanupfull();
             this.click = null;
         }
-        if (!(this.activemenu == null)) {
+        if (this.activemenu != null) {
             var1 = this.activemenu.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -410,7 +410,7 @@ class gs_lego_screenfrontend {
             }
             this.activemenu = null;
         }
-        if (!(this.backmenu == null)) {
+        if (this.backmenu != null) {
             var1 = this.backmenu.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -423,7 +423,7 @@ class gs_lego_screenfrontend {
             this.backmenu = null;
         }
         this.activebutton = null;
-        if (!(this.mainmenutext == null)) {
+        if (this.mainmenutext != null) {
             var1 = this.mainmenutext.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -432,7 +432,7 @@ class gs_lego_screenfrontend {
             }
             this.mainmenutext = null;
         }
-        if (!(this.optiontext == null)) {
+        if (this.optiontext != null) {
             var1 = this.optiontext.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -441,7 +441,7 @@ class gs_lego_screenfrontend {
             }
             this.optiontext = null;
         }
-        if (!(this.languagetext == null)) {
+        if (this.languagetext != null) {
             var1 = this.languagetext.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -450,7 +450,7 @@ class gs_lego_screenfrontend {
             }
             this.languagetext = null;
         }
-        if (!(this.controlstext == null)) {
+        if (this.controlstext != null) {
             var1 = this.controlstext.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -459,15 +459,15 @@ class gs_lego_screenfrontend {
             }
             this.controlstext = null;
         }
-        if (!(this.options_graphics == null)) {
+        if (this.options_graphics != null) {
             this.options_graphics.cleanupfull();
             this.options_graphics = null;
         }
-        if (!(this.options_sound == null)) {
+        if (this.options_sound != null) {
             this.options_sound.cleanupfull();
             this.options_sound = null;
         }
-        if (!(this.playgame == null)) {
+        if (this.playgame != null) {
             this.playgame.cleanupfull();
             this.playgame = null;
         }
@@ -475,7 +475,7 @@ class gs_lego_screenfrontend {
             this.titleimage.cleanupfull();
             this.titleimage = null;
         }
-        if (!(this.extras == null)) {
+        if (this.extras != null) {
             this.extras.cleanupfull();
             this.extras = null;
         }
@@ -592,12 +592,12 @@ class gs_lego_screenfrontend {
                 this.forward();
             }
             else if (param1.button == 27) {
-                if (!(this.curscreen == -1) && !(this.curscreen == 10)) {
+                if ((this.curscreen != -1) && (this.curscreen != 10)) {
                     this.back();
                 }
             }
             else if (param1.button == 8) {
-                if (!(this.curscreen == -1) && !(this.curscreen == 10)) {
+                if ((this.curscreen != -1) && (this.curscreen != 10)) {
                     this.back();
                 }
             }
@@ -734,7 +734,7 @@ class gs_lego_screenfrontend {
                     }
                 }
             }
-            else if (((param1 == 2) && !(this.curscreen == -1)) && !(this.curscreen == 11)) {
+            else if (((param1 == 2) && (this.curscreen != -1)) && (this.curscreen != 11)) {
                 gcstaticsoundsptrarray::playtablesound(1073);
                 this.back();
             }
@@ -1076,7 +1076,7 @@ class gs_lego_screenfrontend {
         var var1;
         var var2;
         this.curscreen = param2;
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.maxidx = param1.__length - 1;
             var1 = 0;
             while (this.maxidx >= var1) {
