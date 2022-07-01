@@ -27,10 +27,13 @@ class bmtn2_puzzle {
         //Set Tohunga: Amaya (VLGR)
         gccharacter::settohunga(this.amaya, rgba(16, 81, 173, 255), rgba(16, 81, 173, 255), scslosifoundation::stringtoidentifier("mkaa"));
         gccharacter::setinputstate(this.amaya, scslosifoundation::stringtoidentifier("none"));
-        gccharacter::setsplitanimation(this.amaya, scslosifoundation::stringtoidentifier("d003"), -1);
+        gccharacter::switchanimation(this.amaya, scslosifoundation::stringtoidentifier("d003"), -1);
         gccharacter::setorientation(this.amaya, 35);
         gccharacter::addpart(this.amaya, "vlgr/sash", 1);
         gccharacter::addpart(this.amaya, "vlgr/staf", 2);
+        if (bettersaver::getbooleanvalue(37)) {
+            gccharacter::switchanimation(this.amaya, scslosifoundation::stringtoidentifier("d000"), -1);
+        }
         this.door = new lego_moveableobject("door");
         this.door.initfull();
         this.door.settweakable();
