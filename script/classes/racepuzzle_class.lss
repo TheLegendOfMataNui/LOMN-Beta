@@ -175,24 +175,13 @@ class racepuzzle_class {
             }
         }
         else if (param1.eventid == 27) {
-            this.resetc();
+            this.initshort();
         }
         return null;
     }
     
     method reseta() {
         globalclass.player.kill();
-        return null;
-    }
-    
-    method resetc() {
-        globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-        globalclass.player.unkill();
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
-        globalclass.player.actor.setinputstate("ninp");
-        this.parent.level.cam.setaimode(11);
-        this.initshort();
         return null;
     }
     

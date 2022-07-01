@@ -43,17 +43,6 @@ class lego_area_xrod : gs_lego_area {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.enterstartid, this.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("p000"));
-            globalclass.player.actor.setinputstate("ninp");
-            this.level.cam.setaimode(11);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb01"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb02"), 0);
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb03"), 0);
-        }
         return null;
     }
     
