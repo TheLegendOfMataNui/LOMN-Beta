@@ -126,11 +126,18 @@ class gl3s_puzzle {
             }
             if (param1.args[0] == scslosifoundation::stringtoidentifier("surf")) {
                 this.startsurf();
+                globalclass.player.usecheckpoints = 1;
             }
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.setsurfingability(0.0, 1);
-            globalclass.player.actor.setpos(0 - 18.2, 11.0, 0 - 114.0);
+            if (globalclass.player.usecheckpoints == 1) {
+                globalclass.player.actor.setpos(-21.016275, 10.851161, -112.240814);
+                globalclass.player.actor.setorientation(24);
+            }
+            else {
+                globalclass.player.actor.setwaterlevel(1000);
+            }
         }
         return null;
     }

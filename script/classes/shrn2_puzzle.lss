@@ -179,6 +179,7 @@ class shrn2_puzzle {
     method onevent(param1) {
         var portal_trigger;
         if (param1.eventid == 27) {
+            debug::print(scslosifoundation::identifiertostring(gcsaver::getstart()));
             this.inwater = 1;
         }
         else if (param1.eventid == 1) {
@@ -238,7 +239,7 @@ class shrn2_puzzle {
                 bettersaver::setbooleanvalue(78, 1);
             }
             else if (this.inwater == 1) {
-                if ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str1")) || (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str7")) || (this.parent.enterstartid == scslosifoundation::stringtoidentifier("str9")) || ((this.parent.enterstartid == scslosifoundation::stringtoidentifier("str0")) && (globalclass.player.crashbandicootwarped == 2))) {
+                if ((gcsaver::getstart() == scslosifoundation::stringtoidentifier("str1")) || (gcsaver::getstart() == scslosifoundation::stringtoidentifier("str7")) || (gcsaver::getstart() == scslosifoundation::stringtoidentifier("str9")) || (globalclass.player.crashbandicootwarped == 2)) {
                     //SHOULD NOT SPAWN IN WATER
                     globalclass.player.underwater = 0;
                     globalclass.player.isswimming();              

@@ -3,9 +3,6 @@ class isld2_puzzle {
     property entered_underwater;
     property call_ev_safe_time_once;
     property gearpickup;
-    property displaytexttimer;
-    property desctext;
-    property howtotext;
     property wirlpool;
     property orientation;
     property whirlcone;
@@ -33,11 +30,6 @@ class isld2_puzzle {
         this.whirlcone = new lego_moveableobject("wpcl");
         this.whirlcone.initfull();
         this.whirlcone.hide();
-        this.divetrigger = 0;
-        this.toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
-        gccharacter::setvelocity(this.toa, 0.0, 150.0, 0.0);
-        globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g055"));
-        gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("g048"));
         if (gcsaver::finditem(scslosifoundation::stringtoidentifier("gear")) == 0) {
             this.gearpickup = new lego_pickup("gear", 0, 5, "item", 6, 1);
             this.gearpickup.initfull();
@@ -50,6 +42,27 @@ class isld2_puzzle {
             this.gearpickup.initfull();
             this.gearpickup.hide();
         }
+        return null;
+    }
+
+    method cleanupfull() {
+        if (this.wirlpool != null) {
+            this.wirlpool.cleanupfull();
+            this.wirlpool = null;
+        }
+        if (this.whirlcone != null) {
+            this.whirlcone.cleanupfull();
+            this.whirlcone = null;
+        }
+        if (this.gearpickup != null) {
+            this.gearpickup.cleanupfull();
+            this.gearpickup = null;
+        }
+        this.call_ev_safe_time_once = null;
+        this.entered_underwater = null;
+        this.orientation = null;
+        this.divetrigger = null;
+        this.toa = null;
         return null;
     }
 
@@ -68,14 +81,7 @@ class isld2_puzzle {
             }
         }
         else if (param1.eventid == 27) {
-            if (this.entered_underwater == 0) {
-                globalclass.player.actor.setunderwater(0);
-                debug::print("******************************** OUT OF WATER");
-            }
-            else {
-                debug::print("******************************** IN WATER");
-                globalclass.player.actor.setwaterlevel(1000);
-            }
+            globalclass.player.actor.setwaterlevel(1000);
         }
         else if (param1.eventid == 44) {
             if (this.call_ev_safe_time_once) {
@@ -83,6 +89,11 @@ class isld2_puzzle {
                     this.entered_underwater = 0;
                     debug::print("*******************************1 OUT OF WATER");
                     globalclass.player.actor.setunderwater(0);
+                    this.divetrigger = 0;
+                    this.toa = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier("cnt1"), 0);
+                    gccharacter::setvelocity(this.toa, 0.0, 150.0, 0.0);
+                    globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("g055"));
+                    gccharactermoveinterpreter::checkanimdone(scslosifoundation::stringtoidentifier("g048"));
                 }
                 else {
                     this.entered_underwater = 1;
@@ -95,18 +106,6 @@ class isld2_puzzle {
         return null;
     }
     
-    method cleanupfull() {
-        if (this.wirlpool != null) {
-            this.wirlpool.cleanupfull();
-            this.wirlpool = null;
-        }
-        if (this.gearpickup != null) {
-            this.gearpickup.cleanupfull();
-            this.gearpickup = null;
-        }
-        return null;
-    }
-
     method rotatewirlpool() {
         if (this.orientation > 359) {
             this.orientation = 0;
