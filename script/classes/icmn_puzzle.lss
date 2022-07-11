@@ -31,6 +31,7 @@ class icmn_puzzle {
         gcmodeldirector::show(var3, var3);
         this.icey = gciceboss::geticeboss();
         this.isdead = 0;
+        globalclass.player.actor.usecheckpoints = 1;
         return null;
     }
     
@@ -55,7 +56,6 @@ class icmn_puzzle {
     
     method resetplayer() {
         globalclass.player.processequipment(3);
-        globalclass.player.unkill();
         globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str1"), scslosifoundation::stringtoidentifier("lok1"));
         globalclass.player.actor.setsurfingability(0.8, 1.0);
         globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0.1);
@@ -63,8 +63,6 @@ class icmn_puzzle {
             gciceboss::reset(this.icey);
         }
         globalclass.player.actor.setinputstate("ninp");
-        this.parent.level.cam.setaimode(11);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
         gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("ib01"), 0);
         return null;
     }
