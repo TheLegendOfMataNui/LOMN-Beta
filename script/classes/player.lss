@@ -41,6 +41,7 @@ class player {
     property cinematic_start;
     property triggerboxid;
     property usecheckpoints;
+    property spawnedunderwater;
     
     method player() {
         return null;
@@ -142,6 +143,7 @@ class player {
         this.cinematic_start = null;
         this.triggerboxid = null;
         this.usecheckpoints = null;
+        this.spawnedunderwater = null;
         return null;
     }
     
@@ -440,6 +442,8 @@ class player {
                 }
                 globalclass.player.actor.show();
                 this.hittrigger = 0;
+                this.usecheckpoints = null;
+                this.spawnedunderwater = null;
             }  
             else if (param1.eventid == 21) {
                 //Setup the physics again to stop the landing noise when jumping into a trigger
@@ -460,6 +464,14 @@ class player {
                 //This is a temporary hack as gccollisionphysicsgroup::switchareawithtransition() doesnt take str and lok points as arguments
                 if (this.crashbandicootwarped == 2) {                
                     globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str9"), scslosifoundation::stringtoidentifier("lok9"));
+                }
+                if (this.submerged == 1) {
+                    debug::print("SPAWNED IN WOTOR");
+                    this.spawnedunderwater = 1;
+                }
+                else {
+                    debug::print("SPAWNED ON LAND");
+                    this.spawnedunderwater = 0;
                 }
             }
 
@@ -567,11 +579,13 @@ class player {
 
             //Screen black event
             else if (param1.eventid == 27) {
-                globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
+                //If the player is not swimming, reset physics
+                if (this.spawnedunderwater == 0) {
+                    globalclass.player.actor.setupphysics(1.5, 0.8, 1, 0, 0);
+                }
                 //This if/else is for handing off player positioning back to the area's code in the case of a checkpoint system being present.  Otherwise, use the generic setup
                 if (this.usecheckpoints == 1) {
                     debug::print("Handing off respawn position to area checkpoint handler");
-                    this.usecheckpoints = null;
                 }
                 else {
                     globalclass.player.actor.gotopos(gcsaver::getstart(), gcsaver::getlook());
