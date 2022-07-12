@@ -71,12 +71,6 @@ class onua7_puzzle {
     
     method onevent(param1) {
         if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
-            globalclass.player.actor.switchanimation(scslosifoundation::stringtoidentifier("o000"));
-            gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("tb00"), 0);
             globalclass.hud.cdtimer.reset();
         }
         return null;
