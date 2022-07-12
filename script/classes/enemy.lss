@@ -100,49 +100,66 @@ class enemy {
             //Land Character Handler
             if (this.landarray != null) {
                 while ((this.landarray.__length - 1) >= instance) {
-                    //Out of Bounds Check
-                    if (this.killheight != null) {
-                        if (gccharacter::getpositiony(this.landarray[instance]) < this.killheight) {
-                            gccharacter::setshadowtype(this.landarray[instance], 0);
-                            gccharacter::aidie(this.landarray[instance]);
-                            this.landarray.__removeat(instance);
-                            debug::print("Rahi is out of bounds! Removing...");
+                    var removed = false;
+                    var land_character = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier(this.landarray[instance]));
+                    //Does the land Rahi pointer exist?
+                    if (land_character != null) {
+                        //Out of Bounds Check
+                        if (this.killheight != null) {
+                            if (gccharacter::getpositiony(land_character) < this.killheight) {
+                                gccharacter::setshadowtype(land_character, 0);
+                                gccharacter::aidie(land_character);
+                                this.landarray.__removeat(instance);
+                                debug::print("Rahi is out of bounds! Removing...");
+                                removed = true;
+                            }
+                        }
+                        //Underwater Check
+                        if (!removed) {
+                            if (this.waterlevel != null) {
+                                if (gccharacter::getpositiony(land_character) < this.waterlevel) {
+                                    gccharacter::setvelocity(land_character, 0, 10, 0);
+                                }
+                                else {
+                                   gccharacter::setvelocity(land_character, 0, 0, 0);
+                                }
+                            }
+                            instance = instance + 1;
                         }
                     }
-                    //Underwater Check
-                    if (this.waterlevel != null) {
-                        if (gccharacter::getpositiony(this.landarray[instance]) < this.waterlevel) {
-                            gccharacter::setvelocity(this.landarray[instance], 0, 10, 0);
-                        }
-                        else {
-                            gccharacter::setvelocity(this.landarray[instance], 0, 0, 0);
-                        }
+                    else {
+                        debug::print("Bad character pointer, removing from array!");                        
+                        this.landarray.__removeat(instance);
                     }
-                    instance = instance + 1;
                 }
             }
             //Fish Handler
             if (this.waterarray != null) {
                 while ((this.waterarray.__length - 1) >= instance) {
+                    var removed2 = false;
+                    var aquatic_character = gcmodeldirector::getcharacter(scslosifoundation::stringtoidentifier(this.waterarray[instance]));
                     //Out of Bounds Check
                     if (this.killheight != null) {
-                        if (gccharacter::getpositiony(this.waterarray[instance]) < this.killheight) {         
-                            gccharacter::setshadowtype(this.waterarray[instance], 0);
-                            gccharacter::aidie(this.waterarray[instance]);
+                        if (gccharacter::getpositiony(aquatic_character) < this.killheight) {         
+                            gccharacter::setshadowtype(aquatic_character, 0);
+                            gccharacter::aidie(aquatic_character);
                             this.waterarray.__removeat(instance);
                             debug::print("Rahi is out of bounds! Removing...");
+                            removed2 = true;
                         }
                     }
                     //Underwater Check
-                    if (this.waterlevel != null) {
-                        if (gccharacter::getpositiony(this.waterarray[instance]) > this.waterlevel) {
-                            gccharacter::setvelocity(this.waterarray[instance], 0, -10, 0);
+                    if (!removed2) {
+                        if (this.waterlevel != null) {
+                            if (gccharacter::getpositiony(aquatic_character) > this.waterlevel) {
+                                gccharacter::setvelocity(aquatic_character, 0, -10, 0);
+                            }
+                            else {
+                                gccharacter::setvelocity(aquatic_character, 0, 0, 0);
+                            }
                         }
-                        else {
-                            gccharacter::setvelocity(this.waterarray[instance], 0, 0, 0);
-                        }
+                        instance = instance + 1;
                     }
-                    instance = instance + 1;
                 }
             }
         }
@@ -152,11 +169,11 @@ class enemy {
         else if (param1.eventid == 100) {
             gccharacter::setshadowtype(gcmodeldirector::getcharacter(param1.args[2]), 2);
             if ((param1.args[1] ==  scslosifoundation::stringtoidentifier("pira")) || (param1.args[1] ==  scslosifoundation::stringtoidentifier("shrk")) || (param1.args[1] ==  scslosifoundation::stringtoidentifier("sfsh")) || (param1.args[1] ==  scslosifoundation::stringtoidentifier("tfsh"))) {
-                this.waterarray.__append(gcmodeldirector::getcharacter(param1.args[2]));
+                this.waterarray.__append(scslosifoundation::identifiertostring(param1.args[2]));
                 debug::print("Spawned " + (scslosifoundation::identifiertostring(param1.args[2]) + " and added to fish handler!"));
             }
             else {
-                this.landarray.__append(gcmodeldirector::getcharacter(param1.args[2]));
+                this.landarray.__append(scslosifoundation::identifiertostring(param1.args[2]));
                 debug::print("Spawned " + (scslosifoundation::identifiertostring(param1.args[2])));
             }
         }
