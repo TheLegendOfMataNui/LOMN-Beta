@@ -1,7 +1,6 @@
 class cave_puzzle {
     property parent;
-    property showmask;
-    property maskx;
+    property mask;
     
     method cave_puzzle(param1) {
         this.parent = param1;
@@ -9,20 +8,18 @@ class cave_puzzle {
     }
     
     method initfull() {
-        var var1;
         var var2;
         var var3;
+        gcmodeldirector::setnearestmax(7);
+        gcareadirector::setnearestmax(7);
+        gcareadirector::setfog(-10381892, 0 - 5.0, 0 - 600.0, 0.01);
+        gclightdirector::setcavelighting(0);
         globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICPart2LegoUNDERGROUND");
         globalclass.bgmusic.play();
-        this.showmask = 1;
-        var1 = gcsaver::findmask(scslosifoundation::stringtoidentifier("mski"));
-        if (var1) {
-            this.showmask = 0;
-        }
-        if (this.showmask) {
-            this.maskx = new lego_pickup("mski", 12, 1, "item", 2, 2);
-            this.maskx.initfull();
-            this.maskx.show();
+        if (gcsaver::findmask(scslosifoundation::stringtoidentifier("mski")) == 0) {
+            this.mask = new lego_pickup("mski", 12, 1, "item", 2, 2);
+            this.mask.initfull();
+            this.mask.show();
         }
         var2 = gcareadirector::gethive(scslosifoundation::stringtoidentifier("ghv0"));
         gchive::setmaxcreatures(var2, 2);
@@ -36,19 +33,10 @@ class cave_puzzle {
     }
     
     method cleanupfull() {
-        var var1;
-        var var2;
-        var1 = null;
-        var2 = null;
-        if (!(this.maskx == null)) {
-            this.maskx.cleanupfull();
-            this.maskx = null;
+        if (this.mask != null) {
+            this.mask.cleanupfull();
+            this.mask = null;
         }
-        return null;
-    }
-    
-    method exit() {
-        this.parent = null;
         return null;
     }
     
@@ -57,15 +45,15 @@ class cave_puzzle {
     }
     
     method onevent(param1) {
-        if (param1.eventid == 27) {
-            globalclass.level.cam.setaimode(11);
-            globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
-            globalclass.player.unkill();
-        }
         return null;
     }
     
     method input(param1) {
+        return null;
+    }
+    
+    method exit() {
+        this.parent = null;
         return null;
     }
 }

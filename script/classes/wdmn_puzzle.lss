@@ -34,13 +34,9 @@ class wdmn_puzzle {
     }
     
     method reset() {
-        globalclass.player.actor.gotopos(this.mparent.enterstartid, this.mparent.enterlookid);
-        globalclass.player.unkill();
         if (this.isdead == 0) {
             gcwindboss::reset(this.mwindy);
         }
-        globalclass.player.actor.setinputstate("ninp");
-        this.mparent.level.cam.setaimode(11);
         gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("wb00"), 0);
         this.playing = 0;
         return null;
