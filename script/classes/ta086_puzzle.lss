@@ -19,10 +19,6 @@ class ta086_puzzle {
     }
     
     method initshort() {
-        globalclass.player.unkill();
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb00"), 0);
-        gccollisionphysicsgroup::toggletriggerboxentered(scslosifoundation::stringtoidentifier("sb01"), 0);
-        this.parent.level.cam.setaimode(11);
         this.setsurfmode(1);
         return null;
     }
@@ -77,9 +73,6 @@ class ta086_puzzle {
             
         }
         else if (param1.eventid == 27) {
-            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
             this.cleanupshort();
             this.initshort();
         }

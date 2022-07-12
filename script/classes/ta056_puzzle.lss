@@ -116,18 +116,13 @@ class ta056_puzzle {
         if (param1.eventid == 46) {
             globalclass.player.actor.setinputstate("none");
             this.hitbyboulder = 1;
+            globalclass.player.usecheckpoints == 1;
         }
         else if (param1.eventid == 27) {
-            globalclass.player.unkill();
-            globalclass.player.actor.setinputstate("ninp");
-            this.parent.level.cam.setaimode(11);
             if (this.surfing) {
                 this.firesound.stop();
                 this.endcinematic();
                 this.hitbyboulder = 0;
-            }
-            else {
-                globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
             }
         }
         else if (param1.eventid == 1002) {

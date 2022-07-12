@@ -130,6 +130,7 @@ class ta136_puzzle {
             this.hookarray[var1].settweakable();
             var1 = var1 + 1;
         }
+        globalclass.player.usecheckpoints == 1;
         return null;
     }
     
@@ -256,11 +257,9 @@ class ta136_puzzle {
             this.hide();
             this.initfull();
             this.show();
-            globalclass.player.unkill();
             globalclass.player.actor.setpos(this.resetpoint.x, this.resetpoint.y, this.resetpoint.z);
             globalclass.player.actor.setorientation(this.resetorent);
             debug::print((((("** set to X:" + __tostring(this.resetpoint.x)) + " Y:") + __tostring(this.resetpoint.y)) + " Z:") + __tostring(this.resetpoint.z));
-            globalclass.level.cam.setaimode(11);
         }
         else if (param1.eventid == 4) {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("ch00")) {

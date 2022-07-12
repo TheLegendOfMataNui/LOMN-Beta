@@ -29,6 +29,7 @@ class drgn_puzzle {
         gcmodeldirector::show(var2, var2);
         this.dragon = gcfireboss::getfireboss();
         this.isdead = 0;
+        globalclass.player.usecheckpoints == 1;
         return null;
     }
     
@@ -50,10 +51,7 @@ class drgn_puzzle {
     
     method reset() {
         gccharacter::setposition(globalclass.player.actor.handle, 2, -20, -4);
-        globalclass.player.unkill();
         gcfireboss::reset(this.dragon);
-        globalclass.player.actor.setinputstate("ninp");
-        this.parent.level.cam.setaimode(11);
         return null;
     }
     
