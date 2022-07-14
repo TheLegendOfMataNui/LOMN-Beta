@@ -4,6 +4,7 @@ class icmn_puzzle {
     property isdead;
     property stone;
     property hasstone;
+    property started_fight;
     
     method icmn_puzzle(param1) {
         this.parent = param1;
@@ -31,7 +32,8 @@ class icmn_puzzle {
         gcmodeldirector::show(var3, var3);
         this.icey = gciceboss::geticeboss();
         this.isdead = 0;
-        globalclass.player.actor.usecheckpoints = 1;
+        this.started_fight = 0;
+        globalclass.player.usecheckpoints = 1;
         return null;
     }
     
@@ -46,6 +48,8 @@ class icmn_puzzle {
             this.stone.cleanupfull();
             this.stone = null;
         }
+        this.hasstone = null;
+        this.started_fight = null;
         return null;
     }
     
@@ -56,7 +60,12 @@ class icmn_puzzle {
     
     method resetplayer() {
         globalclass.player.processequipment(3);
-        globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str1"), scslosifoundation::stringtoidentifier("lok1"));
+        if (this.started_fight == 1) {
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str1"), scslosifoundation::stringtoidentifier("lok1"));
+        }
+        else {
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str0"), scslosifoundation::stringtoidentifier("lok0"));
+        }
         globalclass.player.actor.setsurfingability(0.8, 1.0);
         globalclass.player.actor.setsplitanimation(scslosifoundation::stringtoidentifier("k033"), 0.1);
         if (this.isdead == 0) {
@@ -85,6 +94,7 @@ class icmn_puzzle {
                 globalclass.player.actor.idle();
                 globalclass.player.processequipment(1);
                 gciceboss::start(this.icey);
+                this.started_fight = 1;
             }
             var2 = param1.args[0] - scslosifoundation::stringtoidentifier("ib01");
             if ((var2 >= 1) && (var2 <= 5)) {
