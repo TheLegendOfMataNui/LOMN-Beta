@@ -29,7 +29,6 @@ class drgn_puzzle {
         gcmodeldirector::show(var2, var2);
         this.dragon = gcfireboss::getfireboss();
         this.isdead = 0;
-        globalclass.player.usecheckpoints == 1;
         return null;
     }
     
@@ -66,6 +65,7 @@ class drgn_puzzle {
         }
         else if (param1.eventid == 11) {
             if (param1.args[1] == scslosifoundation::stringtoidentifier("t036")) {
+                globalclass.player.usecheckpoints = 1;
                 gcfireboss::drop(this.dragon);
             }
         }

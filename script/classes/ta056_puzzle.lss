@@ -116,7 +116,6 @@ class ta056_puzzle {
         if (param1.eventid == 46) {
             globalclass.player.actor.setinputstate("none");
             this.hitbyboulder = 1;
-            globalclass.player.usecheckpoints == 1;
         }
         else if (param1.eventid == 27) {
             if (this.surfing) {
@@ -235,6 +234,7 @@ class ta056_puzzle {
     }
     
     method endcinematic() {
+        globalclass.player.usecheckpoints = 1;
         this.parent.level.cam.shakecamera(0.13, 0.4);
         globalclass.player.actor.setpos(15, -74, 32);
         globalclass.player.actor.setorientation(0);
