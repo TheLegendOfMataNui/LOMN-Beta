@@ -137,16 +137,16 @@ class strt4_puzzle {
     
     method resetcharacterposition() {
         if (globalclass.player.triggerboxid == scslosifoundation::stringtoidentifier("tb00")) {
-            globalclass.player.actor.setpos(146.3, -346, 1683.7);
-            globalclass.player.actor.setorientation(-106);
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str2"), scslosifoundation::stringtoidentifier("lok2"));
         }
         else if (globalclass.player.triggerboxid == scslosifoundation::stringtoidentifier("tb01")) {
-            globalclass.player.actor.setpos(203.5, -402, 1887.9);
-            globalclass.player.actor.setorientation(-146);
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str3"), scslosifoundation::stringtoidentifier("lok3"));
         }
         else if (globalclass.player.triggerboxid == scslosifoundation::stringtoidentifier("tb02")) {
-            globalclass.player.actor.setpos(176.1, 0 - 336.1, 1601.4);
-            globalclass.player.actor.setorientation(0 - 174.3);
+            globalclass.player.actor.gotopos(scslosifoundation::stringtoidentifier("str4"), scslosifoundation::stringtoidentifier("lok4"));
+        }
+        else {
+            globalclass.player.actor.gotopos(gcsaver::getstart(), gcsaver::getlook());
         }
         return null;
     }
