@@ -11,7 +11,7 @@ class bldrpuzzle {
     
     method initfull() {
         var var1;
-        globalclass.bgmusic.changefilename("Root/Data/sounds/MUSICLEGOUNDERGROUND");
+        globalclass.bgmusic.changefilename("Root/Data/sounds/MusicLegoUnderground");
         globalclass.bgmusic.play(1);
         gcareadirector::setnearestmax(50);
         gcmodeldirector::setnearestmax(10);
@@ -63,8 +63,12 @@ class bldrpuzzle {
         else if (param1.eventid == 3) {
             debug::print("****************You hit a triggerbox********************************");
             if ((((param1.args[0] == scslosifoundation::stringtoidentifier("tb00")) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb01"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb02"))) || (param1.args[0] == scslosifoundation::stringtoidentifier("tb03"))) {
+                this.parent.level.cam.setaimode(7);
                 globalclass.player.kill();
             }
+        }
+        else if (param1.eventid == 46) {
+            gccollisionphysicsgroup::spinmask(1.2);
         }
         else if (param1.eventid == 27) {
             globalclass.player.actor.gotopos(this.parent.enterstartid, this.parent.enterlookid);
