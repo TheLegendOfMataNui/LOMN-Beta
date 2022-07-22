@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
 SAGE BLK file tool
-Version: 2.2.0
+Version: 2.2.1
 
-Copyright (c) 2018 JrMasterModelBuilder
+Copyright (c) 2018-2022 JrMasterModelBuilder
 Licensed under the Mozilla Public License, v. 2.0
 
 LZSS code based on LZSS.C 4/6/1989 Haruhiko Okumura
@@ -271,7 +271,7 @@ class BLKLZSS():
 		outfile = io.BytesIO(bytearray(allocate))
 
 		for i in range(N - F):
-			text_buf[i] = 0x30
+			text_buf[i] = 0x20
 
 		r = N - F
 		flags = 0
@@ -845,10 +845,10 @@ def main():
 	parser = argparse.ArgumentParser(
 		description=os.linesep.join([
 			'SAGE BLK file tool',
-			'Version: 2.1.0'
+			'Version: 2.2.1'
 		]),
 		epilog=os.linesep.join([
-			'Copyright (c) 2018 JrMasterModelBuilder',
+			'Copyright (c) 2018-2022 JrMasterModelBuilder',
 			'Licensed under the Mozilla Public License, v. 2.0',
 			'',
 			'LZSS code based on LZSS.C 4/6/1989 Haruhiko Okumura'
