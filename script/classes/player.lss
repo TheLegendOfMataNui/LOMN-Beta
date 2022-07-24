@@ -166,7 +166,7 @@ class player {
         var var3;
         if (this.actor != null) {
             this.actor.onevent(param1);
-            if ((param1.eventid == 40)   && (this.toadied == 0)) {
+            if ((param1.eventid == 40) && (this.toadied == 0)) {
                 if (param1.args[1] != null) {
                     debug::print("ouch! by " + __tostring(param1.args[1]));
                 }
@@ -216,6 +216,8 @@ class player {
                     
                 }
                 else {
+                    gcnolightdirector::hide(var1, var3);
+                    gccollisionphysicsgroup::togglepickuponoff(var1, 0);
                     this.actor.replenishair();
                 }
                 if (scslosistringfuncs::find(var2, "am")) {
