@@ -47,6 +47,9 @@ class sprite_projectile {
     }
     
     method cleanupfull() {
+        if (this.hasdied() == 0) {
+            this.detonate();
+        }
         this.handle = null;
         this.id = null;
         this.name = null;
