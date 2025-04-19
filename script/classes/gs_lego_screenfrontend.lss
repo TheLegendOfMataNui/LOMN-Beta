@@ -281,7 +281,7 @@ class gs_lego_screenfrontend {
     method cleanupfull() {
         var var1;
         var var2;
-        if (!(this.argarray == null)) {
+        if (this.argarray != null) {
             var1 = this.argarray.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -290,13 +290,13 @@ class gs_lego_screenfrontend {
             }
             this.argarray = null;
         }
-        if (!(this.point == null)) {
+        if (this.point != null) {
             this.point.hide();
             this.point.remove();
             this.point.cleanupfull();
             this.point = null;
         }
-        if (!(this.activemenu == null)) {
+        if (this.activemenu != null) {
             var1 = this.activemenu.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -308,7 +308,7 @@ class gs_lego_screenfrontend {
             }
             this.activemenu = null;
         }
-        if (!(this.backmenu == null)) {
+        if (this.backmenu != null) {
             var1 = this.backmenu.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -321,7 +321,7 @@ class gs_lego_screenfrontend {
             this.backmenu = null;
         }
         this.activebutton = null;
-        if (!(this.mainmenutext == null)) {
+        if (this.mainmenutext != null) {
             var1 = this.mainmenutext.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -330,7 +330,7 @@ class gs_lego_screenfrontend {
             }
             this.mainmenutext = null;
         }
-        if (!(this.optiontext == null)) {
+        if (this.optiontext != null) {
             var1 = this.optiontext.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -339,7 +339,7 @@ class gs_lego_screenfrontend {
             }
             this.optiontext = null;
         }
-        if (!(this.languagetext == null)) {
+        if (this.languagetext != null) {
             var1 = this.languagetext.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -348,7 +348,7 @@ class gs_lego_screenfrontend {
             }
             this.languagetext = null;
         }
-        if (!(this.controlstext == null)) {
+        if (this.controlstext != null) {
             var1 = this.controlstext.__length - 1;
             var2 = 0;
             while (var1 >= var2) {
@@ -357,27 +357,27 @@ class gs_lego_screenfrontend {
             }
             this.controlstext = null;
         }
-        if (!(this.options_graphics == null)) {
+        if (this.options_graphics != null) {
             this.options_graphics.cleanupfull();
             this.options_graphics = null;
         }
-        if (!(this.options_sound == null)) {
+        if (this.options_sound != null) {
             this.options_sound.cleanupfull();
             this.options_sound = null;
         }
-        if (!(this.options_credits == null)) {
+        if (this.options_credits != null) {
             this.options_credits.cleanupfull();
             this.options_credits = null;
         }
-        if (!(this.playgame == null)) {
+        if (this.playgame != null) {
             this.playgame.cleanupfull();
             this.playgame = null;
         }
-        if (!(this.glossary == null)) {
+        if (this.glossary != null) {
             this.glossary.cleanupfull();
             this.glossary = null;
         }
-        if (!(this.printmenu == null)) {
+        if (this.printmenu != null) {
             this.printmenu.cleanupfull();
             this.printmenu = null;
         }
@@ -497,12 +497,12 @@ class gs_lego_screenfrontend {
                 this.forward();
             }
             else if (param1.button == 27) {
-                if (!(this.curscreen == -1) && !(this.curscreen == 10)) {
+                if ((this.curscreen != -1) && (this.curscreen != 10)) {
                     this.back();
                 }
             }
             else if (param1.button == 8) {
-                if (!(this.curscreen == -1) && !(this.curscreen == 10)) {
+                if ((this.curscreen != -1) && (this.curscreen != 10)) {
                     this.back();
                 }
             }
@@ -960,7 +960,7 @@ class gs_lego_screenfrontend {
         var var1;
         var var2;
         this.curscreen = param2;
-        if (!(param1 == null)) {
+        if (param1 != null) {
             this.maxidx = param1.__length - 1;
             var1 = 0;
             while (this.maxidx >= var1) {
@@ -969,6 +969,8 @@ class gs_lego_screenfrontend {
                 var2.add();
                 if (var1 <= this.showidx) {
                     var2.show();
+                    this.point.hide();
+                    this.point.show();
                 }
                 this.backmenu.__append(var2);
                 var2 = new gs_legoactivetext("Root/Data/Art/Fonts/BionicleFont", "Root/Data/Art/Fonts/BionicleFontHi", param1[var1][0], param1[var1][1], param1[var1][2], 0, 2.0, 0, 4, 0, 0);
@@ -976,15 +978,18 @@ class gs_lego_screenfrontend {
                 var2.add();
                 if (var1 <= this.showidx) {
                     var2.show();
+                    this.point.hide();
+                    this.point.show();
                 }
                 this.activemenu.__append(var2);
                 var1 = var1 + 1;
             }
-            //this.activemenu[0].setactive();
             this.menuactive = 1;
         }
         else {
             this.menuactive = 0;
+            this.point.hide();
+            this.point.show();
         }
         this.curidx = 0;
         return null;
