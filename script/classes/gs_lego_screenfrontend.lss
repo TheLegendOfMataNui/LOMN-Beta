@@ -1,15 +1,6 @@
 class gs_lego_screenfrontend {
     property parent;
-    property pointer;
-    property destination;
-    property argarray;
     property point;
-    property startx;
-    property starty;
-    property xchange;
-    property ychange;
-    property maxlines;
-    property lineposition;
     property activemenu;
     property backmenu;
     property activebutton;
@@ -17,18 +8,12 @@ class gs_lego_screenfrontend {
     property advancescreen;
     property backscreen;
     property curscreen;
-    property minidx;
-    property maxidx;
     property showidx;
-    property x;
-    property y;
     property curidx;
     property mainmenutext;
     property optiontext;
     property languagetext;
     property controlstext;
-    property tempmx;
-    property tempmy;
     property mousex;
     property mousey;
     property startnewscreen;
@@ -41,7 +26,6 @@ class gs_lego_screenfrontend {
     property playgame;
     property printmenu;
     property glossary;
-    property curspline;
     property cameramode;
     property rotateval;
     property rotatedir;
@@ -254,7 +238,6 @@ class gs_lego_screenfrontend {
         this.point.show();
         this.point.hide();
         this.point.enablealphachannel(1);
-        this.minidx = 0;
         this.showidx = 10;
         this.curidx = 0;
         this.screentimer = 0;
@@ -273,7 +256,6 @@ class gs_lego_screenfrontend {
         this.setupcontrolsscreen();
         this.setupoutsidescreens();
         globalclass.level.cam.makespline("Root/Data/Levels/lev0/frnt/frnt_CAM.slb");
-        this.curspline = 0;
         this.adjustcamera(0, 1, 1, 5.0);
         return null;
     }
@@ -281,15 +263,6 @@ class gs_lego_screenfrontend {
     method cleanupfull() {
         var var1;
         var var2;
-        if (this.argarray != null) {
-            var1 = this.argarray.__length - 1;
-            var2 = 0;
-            while (var1 >= var2) {
-                this.argarray[var1 - var2] = null;
-                var2 = var2 + 1;
-            }
-            this.argarray = null;
-        }
         if (this.point != null) {
             this.point.hide();
             this.point.remove();
@@ -952,7 +925,6 @@ class gs_lego_screenfrontend {
         }
         this.activebutton = null;
         this.activebutton = [  ];
-        this.minidx = 0;
         return null;
     }
     
@@ -961,9 +933,8 @@ class gs_lego_screenfrontend {
         var var2;
         this.curscreen = param2;
         if (param1 != null) {
-            this.maxidx = param1.__length - 1;
             var1 = 0;
-            while (this.maxidx >= var1) {
+            while ((param1.__length - 1) >= var1) {
                 var2 = new gs_legotext("Root/Data/Art/Fonts/BionicleFont", param1[var1][0], param1[var1][1], param1[var1][2], 0, 2.0, 0, 4, 0, 1);
                 var2.initfull();
                 var2.add();
