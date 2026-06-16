@@ -52,11 +52,9 @@ class hydr_lev2_puzzle {
     method cleanupfull() {
         var var1;
         this.hydr = null;
-        if (this.isdead == 0) {
-            var1 = scslosifoundation::stringtoidentifier("hydr");
-            gcmodeldirector::remove(var1, var1);
-        }
-        if (!(this.stone == null)) {
+        var1 = scslosifoundation::stringtoidentifier("hydr");
+        gcmodeldirector::remove(var1, var1);
+        if (this.stone != null) {
             this.stone.cleanupfull();
             this.stone = null;
         }
