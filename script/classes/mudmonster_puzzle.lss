@@ -227,7 +227,13 @@ class mudmonster_puzzle {
             }
         }
         else if (param1.eventid == 27) {
-            this.resetarea();
+            globalclass.player.actor.gotopos(this.parea.enterstartid, this.parea.enterlookid);
+            globalclass.player.unkill();
+            globalclass.player.actor.idle();
+            globalclass.player.actor.setinputstate("ninp");
+            if (this.mudmonster.mudstate != 10) {
+                this.resetarea();
+            }
         }
         else if (param1.eventid == 35) {
             if ((param1.args[0] == 2003330414) && (param1.args[1] == 1)) {
@@ -245,10 +251,6 @@ class mudmonster_puzzle {
     
     method resetarea() {
         this.initshort();
-        globalclass.player.actor.gotopos(this.parea.enterstartid, this.parea.enterlookid);
-        globalclass.player.unkill();
-        globalclass.player.actor.idle();
-        globalclass.player.actor.setinputstate("ninp");
         gcmudboss::reset(this.mudmonster.mudman, 995, 0, 212, -90);
         return null;
     }
