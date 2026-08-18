@@ -19,12 +19,15 @@ class global_class : base_object {
     property bgmusic;
     property language;
     property debugstring;
+    property debugstring2;
     property debugtimer;
+    property debugtimer2;
     property gamefont;
     property gamefont2;
     property gamefont3;
     property gamefont4;
     property hittoggletimer;
+    property hittoggletimer2;
     property whatsnext;
     property testforlavacollisions;
     property saverloaded;
@@ -46,6 +49,7 @@ class global_class : base_object {
         this.inputhandles = [  ];
         this.inputenabled = 1;
         this.hittoggletimer = 1;
+        this.hittoggletimer2 = 1;
         this.nextid = null;
         this.hud = new hud_class();
         this.player = new player();
@@ -58,6 +62,8 @@ class global_class : base_object {
         this.randnum = new slosi_random(0);
         this.debugtimer = new lego_timer("zzzz", 5.0, 0);
         this.debugstring = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", "TEMP", 320, 60, 0, 1, 0, 1, 0);
+        this.debugtimer2 = new lego_timer("zzz2", 5.0, 0);
+        this.debugstring2 = new gs_legotext("Root/Data/Art/Fonts/BionicleFontHi", "TEMP", 320, 60, 0, 1, 0, 1, 0);
         this.language = 0;
         this.gamefont = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
         this.gamefont2 = sctilefont::create("Root/Data/Art/Fonts/BionicleFont");
@@ -91,6 +97,7 @@ class global_class : base_object {
         this.inputlist.__append(this.cheats);
         this.processlist.__append(this.cheats);
         this.debugstring.initfull();
+        this.debugstring2.initfull();
         var1 = 0;
         while ((this.eventlist.__length - 1) >= var1) {
             this.eventhandles.__append(var1);
@@ -110,6 +117,7 @@ class global_class : base_object {
         this.initlevelok = 0;
         this.bgmusic = new legomp3player();
         this.debugtimer.initfull();
+        this.debugtimer2.initfull();
         return null;
     }
     
@@ -147,18 +155,35 @@ class global_class : base_object {
         this.randnum = null;
         this.language = null;
         if (!(this.debugstring == null)) {
+            //dumb hack
+            this.debugstring.add();
+            this.debugstring.hide();
+            this.debugstring.remove();
             this.debugstring.cleanupfull();
             this.debugstring = null;
+        }
+        if (!(this.debugstring2 == null)) {
+            //dumb hack
+            this.debugstring2.add();
+            this.debugstring2.hide();
+            this.debugstring2.remove();
+            this.debugstring2.cleanupfull();
+            this.debugstring2 = null;
         }
         if (!(this.debugtimer == null)) {
             this.debugtimer.cleanupfull();
             this.debugtimer = null;
+        }
+        if (!(this.debugtimer2 == null)) {
+            this.debugtimer2.cleanupfull();
+            this.debugtimer2 = null;
         }
         this.gamefont = null;
         this.gamefont2 = null;
         this.gamefont3 = null;
         this.gamefont4 = null;
         this.hittoggletimer = null;
+        this.hittoggletimer2 = null;
         this.whatsnext = null;
         this.testforlavacollisions = null;
         this.saverloaded = null;
@@ -206,6 +231,7 @@ class global_class : base_object {
         this.player.cleanupfull();
         this.hud.cleanupfull();
         this.hittoggletimer = 0;
+        this.hittoggletimer2 = 0;
         this.whatsnext = 0;
         this.testforlavacollisions = 0;
         return null;
@@ -340,7 +366,14 @@ class global_class : base_object {
             if (param1.args[0] == scslosifoundation::stringtoidentifier("zzzz")) {
                 this.debugstring.scalefont(1.0);
                 this.debugstring.hide();
+                this.debugstring.remove();
                 this.hittoggletimer = 1;
+            }
+            if (param1.args[0] == scslosifoundation::stringtoidentifier("zzz2")) {
+                this.debugstring2.scalefont(1.0);
+                this.debugstring2.hide();
+                this.debugstring2.remove();
+                this.hittoggletimer2 = 1;
             }
         }
         else if (param1.eventid == 44) {
@@ -407,36 +440,73 @@ class global_class : base_object {
         return null;
     }
     
-    method scriptmessage(param1, param2) {
+    method scriptmessage(param1, param2, param3) {
         var var1;
         var var2;
         var var3;
-        if (this.hittoggletimer) {
-            if (param2 == null) {
-                var1 = 5;
+        if (param3 == null) {
+            if (this.hittoggletimer) {
+                if (param2 == null) {
+                    var1 = 5;
+                }
+                else {
+                    var1 = param2;
+                }
+                var2 = new slosi_string(param1);
+                var3 = var2.getlength();
+                var3 = (var3 * 16) / 2;
+                this.debugstring.setstring(param1);
+                this.debugstring.setpos(320 - var3, 60, 0);
+                this.debugstring.add();
+                this.debugstring.show();
+                this.debugtimer.setduration(var1, 1);
+                this.debugtimer.reset(0);
+                this.debugtimer.start();
+                this.hittoggletimer = 0;
             }
             else {
-                var1 = param2;
+                this.debugstring.hide();
+                this.debugstring.remove();
+                var2 = new slosi_string(param1);
+                var3 = var2.getlength();
+                var3 = (var3 * 16) / 2;
+                this.debugstring.setstring(param1);
+                this.debugstring.setpos(320 - var3, 60, 0);
+                this.debugstring.add();
+                this.debugstring.show();
             }
-            var2 = new slosi_string(param1);
-            var3 = var2.getlength();
-            var3 = (var3 * 16) / 2;
-            this.debugstring.setstring(param1);
-            this.debugstring.setpos(320 - var3, 60, 0);
-            this.debugstring.add();
-            this.debugstring.show();
-            this.debugtimer.setduration(var1, 1);
-            this.debugtimer.reset(0);
-            this.debugtimer.start();
-            this.hittoggletimer = 0;
         }
         else {
-            var2 = new slosi_string(param1);
-            var3 = var2.getlength();
-            var3 = (var3 * 16) / 2;
-            this.debugstring.setstring(param1);
-            this.debugstring.setpos(320 - var3, 60, 0);
-            this.debugstring.show();
+            if (this.hittoggletimer2) {
+                if (param2 == null) {
+                    var1 = 5;
+                }
+                else {
+                    var1 = param2;
+                }
+                var2 = new slosi_string(param1);
+                var3 = var2.getlength();
+                var3 = (var3 * 16) / 2;
+                this.debugstring2.setstring(param1);
+                this.debugstring2.setpos(320 - var3, 60, 0);
+                this.debugstring2.add();
+                this.debugstring2.show();
+                this.debugtimer2.setduration(var1, 1);
+                this.debugtimer2.reset(0);
+                this.debugtimer2.start();
+                this.hittoggletimer2 = 0;
+            }
+            else {
+                this.debugstring2.hide();
+                this.debugstring2.remove();
+                var2 = new slosi_string(param1);
+                var3 = var2.getlength();
+                var3 = (var3 * 16) / 2;
+                this.debugstring2.setstring(param1);
+                this.debugstring2.setpos(320 - var3, 60, 0);
+                this.debugstring2.add();
+                this.debugstring2.show();
+            }
         }
         return null;
     }
