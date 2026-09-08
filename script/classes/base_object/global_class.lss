@@ -131,10 +131,7 @@ class global_class : base_object {
             this.player.cleanupfull();
             this.player = null;
         }
-        if (!(this.tweak == null)) {
-            this.tweak.cleanupfull();
-            this.tweak = null;
-        }
+        this.tweak = null;
         if (!(this.pause == null)) {
             this.pause.cleanupfull();
             this.pause = null;
@@ -218,6 +215,7 @@ class global_class : base_object {
     method initshort() {
         this.hud.initfull();
         this.player.initfull();
+        this.tweak.initfull();
         this.shortinit = 0;
         return null;
     }
@@ -230,6 +228,8 @@ class global_class : base_object {
         }
         this.player.cleanupfull();
         this.hud.cleanupfull();
+        this.tweak.cleanupfull();
+        this.cheats.hidecheatmenu();
         this.hittoggletimer = 0;
         this.hittoggletimer2 = 0;
         this.whatsnext = 0;
@@ -416,6 +416,7 @@ class global_class : base_object {
                 }
                 else {
                     debug::print("[][][] back to menu screen");
+                    screenlist.cleanupshort();
                     screenlist.backward(1);
                 }
             }
